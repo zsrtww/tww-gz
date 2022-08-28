@@ -23,7 +23,7 @@ PACKAGE_URL ?= github.com/zsrtww/tww-gz
 
 TARGET		:=	twwgz
 BUILD		:=	build
-SOURCES		:=	source source/utils
+SOURCES		:=	source source/utils source/menus
 EXTERNAL    :=  external
 DATA		:=	data 
 INCLUDES	:=	include external

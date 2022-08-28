@@ -1,4 +1,4 @@
-#include "addrs.h"
+#include "libtww/addrs.h"
 #include "utils/texture.h"
 #include "utils/disc.h"
 #include "gcn_c/include/dvd.h"

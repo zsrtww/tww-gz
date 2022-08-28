@@ -2,6 +2,8 @@
 #include "font.h"
 #include "utils/draw.h"
 #include "utils/hook.h"
+#include "menu.h"
+#include "controller.h"
 
 extern "C" {
 
@@ -20,10 +22,19 @@ void init() {
     *reinterpret_cast<u8*>(0x803f60e0) = 1;  // Enable debug crash screen
     Font::loadFont("twwgz/fonts/consola.fnt");
     Draw::init();
+    g_cursorColorType = 0;
 }
 
 void game_loop() {
-    
+    if (tww_mPadStatus.button == (CButton::L | CButton::R | CButton::DPAD_DOWN) && l_fopScnRq_IsUsingOfOverlap != 1) {
+        GZ_setMenu(GZ_MAIN_MENU);
+    }
+
+    if (l_fopScnRq_IsUsingOfOverlap) {
+        GZ_clearMenu();
+    }
+
+    GZ_setCursorColor();
 }
 
 void draw() {
@@ -53,5 +64,7 @@ void draw() {
             splash_time--;
         }
     }
+
+    GZ_drawMenu();
 }
 }

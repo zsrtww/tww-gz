@@ -1,7 +1,7 @@
 #pragma once
 
 #include <stdint.h>
-#include "addrs.h"
+#include "libtww/addrs.h"
 #include "gcn_c/include/gfx.h"
 
 enum TexCode {
