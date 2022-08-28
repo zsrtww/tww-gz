@@ -17,6 +17,10 @@ include $(DEVKITPPC)/gamecube_rules
 # SOURCES is a list of directories containing source code
 # INCLUDES is a list of directories containing extra header files
 #---------------------------------------------------------------------------------
+
+PACKAGE_NAME ?= $(TARGET)
+PACKAGE_URL ?= github.com/zsrtww/tww-gz
+
 TARGET		:=	twwgz
 BUILD		:=	build
 SOURCES		:=	source source/utils
@@ -30,7 +34,7 @@ MAKEFILES   :=  $(shell find . -mindepth 2 -name Makefile)
 #---------------------------------------------------------------------------------
 
 CFLAGS	= -g -c -O2 -Wall $(MACHDEP) $(INCLUDE)
-CXXFLAGS	=	$(CFLAGS)
+CXXFLAGS	= -DPACKAGE_NAME=$(PACKAGE_NAME) -DPACKAGE_URL=$(PACKAGE_URL) $(CFLAGS)
 
 #---------------------------------------------------------------------------------
 # list of directories containing libraries, this must be the top level containing

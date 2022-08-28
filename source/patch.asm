@@ -3,12 +3,11 @@
 0x802ff5d4:
 u32 0x3c608045 ; lis r3, 0x8045 (Use 804504A0 as ArenaLow)
 
-; replace cDyl_InitAsync call in main01 with our init function
-0x800063ec:
-bl init
+; replace fapGm_Execute call in main01 with our lib hooks
+0x80006338:
+b apply_lib_hooks 
 
-; replace fapGm_Execute call in main01 with our game_loop
-; replace mfspr r0, LR in cDyl_InitAsyncIsDone with fapGm_Execute call
-0x80006458:
-bl game_loop 
-bl 0x80022e74 ; fapGm_Execute
+; This is an unused section of the dol that we use to store the trampoline for the main function
+0x80336068:
+u32 0x9421fff0
+u32 0x4bcd02d0

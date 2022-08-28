@@ -14,7 +14,7 @@ map = "build/twwgz.map"
 iso = "build/twwgz.iso"
 
 [link]
-entries = ["init", "game_loop"]
+entries = ["apply_lib_hooks"]
 base = "0x8040_1000"
 libs = ["twwgz.a", "external/gcn_c/gcn_c.a"]
 
@@ -23,4 +23,4 @@ libs = ["twwgz.a", "external/gcn_c/gcn_c.a"]
 "twwgz/tex/blank.tex" = "res/tex/blank.tex"
 
 # fonts
-"twwgz/fonts" = "res/fonts"
+"twwgz/fonts/consola.fnt" = "res/fonts/consola.fnt"

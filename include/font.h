@@ -71,7 +71,7 @@ public:
                             float size = FONT_DEFAULT_SIZE);
     static void renderChars(const char* str, float x, float y, uint32_t color,
                             float size = FONT_DEFAULT_SIZE);
-    static void GZ_drawChar(char c, float x, float y, uint32_t color, bool drop_shawdows,
+    static void GZ_drawChar(char c, float x, float y, uint32_t color, bool drop_shadows,
                             float size = FONT_DEFAULT_SIZE);
     static void GZ_drawStr(const char* str, float x, float y, uint32_t color, bool drop_shadows,
                            float size = FONT_DEFAULT_SIZE);

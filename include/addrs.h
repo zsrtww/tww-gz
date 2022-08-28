@@ -10,23 +10,22 @@
 #define tww_snprintf ((_snprintf)0x803293e8)
 #define tww_strcat ((_strcat)0x8032b670)
 #define tww_strncpy ((_strncpy)0x8032b69c)
-#define cdyl_init_async ((_cdyl_init_async)0x80022a88)
 #define tww_strcpy ((_strcpy)0x8032b6e0)
 #define tww_free_addr 0x8023eac0
 #define tww_memset_addr 0x80250054
 #define tww_memalign_addr 0x8023ea88
 #define tww_memcpy_addr 0x80003490
-#define tww_draw_console_addr 0x802c8cd4
+#define tww_draw_console_addr 0x802c8278
+#define tww_cDyl_InitAsync_addr 0x80022a88
+#define tww_fapGm_Execute_addr 0x80022e74
 
 typedef char (*_strcpy)(char *dest, const char *source);
 typedef char (*_strcat)(char *dst, const char *src);
-typedef void (*_cdyl_init_async)();
 typedef size_t (*_strlen)(const char *str);
 typedef int (*_sprintf)(char *str, const char *string, ...);
 typedef int (*_printf)(const char *string, ...);
 typedef int (*_snprintf)(char *s, size_t n, const char *format, ...);
 typedef char (*_strncpy) (char *destination, const char *source, size_t num);
-
 typedef void (*tww_free_t)(void* memory);
 #define tww_free ((tww_free_t)tww_free_addr)
 
