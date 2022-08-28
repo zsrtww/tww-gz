@@ -1,0 +1,12 @@
+*.dmp
+*.o
+*.a
+*.iso
+*.map
+build/
+.vscode/
+!.vscode/c_cpp_properties.json
+Updater.log
+__pycache__
+RomHack.toml
+*.patch
