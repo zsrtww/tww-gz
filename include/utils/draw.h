@@ -1,6 +1,6 @@
 #pragma once
 
-#include "addrs.h"
+#include "libtww/addrs.h"
 #include "libtww/dolphin/mtx/vec.h"
 #include "utils/texture.h"
 #include "gcn_c/include/gfx.h"

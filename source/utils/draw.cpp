@@ -1,4 +1,4 @@
-#include "addrs.h"
+#include "libtww/addrs.h"
 #include "utils/draw.h"
 #include "utils/texture.h"
 #include "gcn_c/include/gfx.h"

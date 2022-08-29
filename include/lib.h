@@ -1,6 +1,6 @@
 #pragma once
 
-#include "addrs.h"
+#include "libtww/addrs.h"
 #include "gctypes.h"
 
 extern "C" {

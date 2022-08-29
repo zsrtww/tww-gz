@@ -24,3 +24,9 @@ libs = ["twwgz.a", "external/gcn_c/gcn_c.a"]
 
 # fonts
 "twwgz/fonts/consola.fnt" = "res/fonts/consola.fnt"
+"twwgz/fonts/calamity-bold.fnt" = "res/fonts/calamity-bold.fnt"
+"twwgz/fonts/lib-sans-bold.fnt" = "res/fonts/lib-sans-bold.fnt"
+"twwgz/fonts/lib-sans.fnt" = "res/fonts/lib-sans.fnt"
+"twwgz/fonts/lib-serif-bold.fnt" = "res/fonts/lib-serif-bold.fnt"
+"twwgz/fonts/lib-serif.fnt" = "res/fonts/lib-serif.fnt"
+"twwgz/fonts/press-start-2p.fnt" = "res/fonts/press-start-2p.fnt"
