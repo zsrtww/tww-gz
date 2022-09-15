@@ -20,6 +20,7 @@ include $(DEVKITPPC)/gamecube_rules
 
 PACKAGE_NAME ?= $(TARGET)
 PACKAGE_URL ?= github.com/zsrtww/tww-gz
+GZ_VERSION  ?=  0.0.1
 
 TARGET		:=	twwgz
 BUILD		:=	build
@@ -34,7 +35,7 @@ MAKEFILES   :=  $(shell find . -mindepth 2 -name Makefile)
 #---------------------------------------------------------------------------------
 
 CFLAGS	= -g -c -O2 -Wall $(MACHDEP) $(INCLUDE)
-CXXFLAGS	= -DPACKAGE_NAME=$(PACKAGE_NAME) -DPACKAGE_URL=$(PACKAGE_URL) $(CFLAGS)
+CXXFLAGS	= -DPACKAGE_NAME=$(PACKAGE_NAME) -DPACKAGE_URL=$(PACKAGE_URL) -DGZ_VERSION=$(GZ_VERSION) $(CFLAGS)
 
 #---------------------------------------------------------------------------------
 # list of directories containing libraries, this must be the top level containing
