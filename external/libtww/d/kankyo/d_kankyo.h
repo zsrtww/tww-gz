@@ -53,7 +53,7 @@ class dKankyo_wave__INFLUENCE;
 
 class dKy_tevstr_c {
 public:
-    uint8_t mLightObj[0x74];
+    u8 mLightObj[0x74];
     cXyz mLightPosWorld;
     GXColorS10 mColorC0;
     GXColor mColorK0;
@@ -62,15 +62,15 @@ public:
     float mFogStartZ;
     float mFogEndZ;
     float mColpatBlend;
-    uint8_t mInitTimer;
-    uint8_t mEnvrIdxCurr;
-    uint8_t mEnvrIdxPrev;
-    uint8_t mColpatCurr;
-    uint8_t mColpatPrev;
-    uint8_t mRoomNo;
-    uint8_t mEnvrIdxOverride;
-    uint8_t mLightMode;
-    uint8_t mInitType;
+    u8 mInitTimer;
+    u8 mEnvrIdxCurr;
+    u8 mEnvrIdxPrev;
+    u8 mColpatCurr;
+    u8 mColpatPrev;
+    u8 mRoomNo;
+    u8 mEnvrIdxOverride;
+    u8 mLightMode;
+    u8 mInitType;
 };
 
 class dScnKy_env_light_c {

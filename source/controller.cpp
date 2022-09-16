@@ -3,11 +3,11 @@
 #include "libtww/SSystem/SComponent/c_counter.h"
 #include "menu.h"
 
-void setGamepadButtons(uint32_t buttons) {
+void setGamepadButtons(u32 buttons) {
     tww_mPadButton.mButton = buttons;
 }
 
-void setGamepadTrig(uint32_t buttons) {
+void setGamepadTrig(u32 buttons) {
     tww_mPadButton.mTrigger = buttons;
 }
 
@@ -17,14 +17,14 @@ void setGamepadTrig(uint32_t buttons) {
 
 #define buttonStatus (tww_mPadStatus.button)
 
-static uint16_t sButtonsLastFrame = 0;
-static uint16_t sButtons = 0;
-static uint16_t sButtonsPressed = 0;
-static uint16_t sCursorEnableDelay = 0;
+static u16 sButtonsLastFrame = 0;
+static u16 sButtons = 0;
+static u16 sButtonsPressed = 0;
+static u16 sCursorEnableDelay = 0;
 
 struct ButtonState {
-    uint16_t button;
-    uint32_t pressed_frame;
+    u16 button;
+    u32 pressed_frame;
     bool is_down;
 };
 
@@ -42,7 +42,7 @@ void GZ_readController() {
     sButtons = buttonStatus;
     sButtonsPressed = sButtons & (0xFFFF ^ sButtonsLastFrame);
 
-    for (uint8_t idx = 0; idx < BUTTON_STATES; idx++) {
+    for (u8 idx = 0; idx < BUTTON_STATES; idx++) {
         buttonStates[idx].is_down = (buttonStates[idx].button & sButtons) != 0;
         if ((buttonStates[idx].button & sButtonsPressed) != 0) {
             buttonStates[idx].pressed_frame = cCt_getFrameCount() + 1;
@@ -51,7 +51,7 @@ void GZ_readController() {
 
     // GZ_applyCheats();
     if (GZ_checkMenuOpen() == true) {
-        uint16_t current_input = GZ_getButtonStatus();
+        u16 current_input = GZ_getButtonStatus();
 
         // prevent accidentally moving cursor down when opening menu
         if (!g_cursorEnabled) {
@@ -87,7 +87,7 @@ bool GZ_getButtonPressed(int idx) {
     return buttonStates[idx].is_down;
 }
 
-bool GZ_getButtonRepeat(int idx, uint16_t repeat_time) {
+bool GZ_getButtonRepeat(int idx, u16 repeat_time) {
     auto delta = cCt_getFrameCount() - buttonStates[idx].pressed_frame;
     auto just_clicked = delta == 0;
     auto held_down_long_enough = delta > REPEAT_DELAY;
@@ -100,7 +100,7 @@ bool GZ_getButtonRepeat(int idx) {
     return GZ_getButtonRepeat(idx, REPEAT_TIME);
 }
 
-uint16_t GZ_getButtonStatus() {
+u16 GZ_getButtonStatus() {
     return buttonStatus;
 }
 
@@ -113,7 +113,7 @@ bool GZ_getButtonTrig(int idx) {
 }
 
 bool GZ_getButtonHold(int idx, int phase) {
-    uint32_t delta;
+    u32 delta;
     if (phase == /* POST_GAME_LOOP */ 1) {
         delta = cCt_getFrameCount() - buttonStates[idx].pressed_frame;
     } else {

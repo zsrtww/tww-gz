@@ -1,4 +1,5 @@
-#include "libtww/addrs.h"
+#include "libtww/SSystem/SComponent/c_malloc.h"
+#include "libtww/SSystem/SComponent/c_lib.h"
 #include "utils/texture.h"
 #include "utils/disc.h"
 #include "gcn_c/include/dvd.h"
@@ -14,7 +15,7 @@ enum TexFmt {
 extern "C" {
 #endif
 
-uint32_t get_size(uint32_t format, uint32_t width, uint32_t height) {
+u32 get_size(u32 format, u32 width, u32 height) {
     switch (format) {
     case TexFmt::CMPR: {
         return width * height / 2;
@@ -33,9 +34,9 @@ TexCode load_texture(const char* path, Texture* tex) {
     return load_texture_offset(path, tex, 0);
 }
 
-TexCode load_texture_offset(const char* path, Texture* tex, uint32_t offset) {
+TexCode load_texture_offset(const char* path, Texture* tex, u32 offset) {
     DVDFileInfo fileInfo;
-    int32_t readsize;
+    s32 readsize;
     if (tex->loadCode == TexCode::TEX_OK) {
         free_texture(tex);
     }
@@ -45,13 +46,13 @@ TexCode load_texture_offset(const char* path, Texture* tex, uint32_t offset) {
         return tex->loadCode;
     }
     readsize = dvd_read(&fileInfo, &tex->header, sizeof(TexHeader), offset);
-    if (readsize < (int32_t)sizeof(TexHeader)) {
+    if (readsize < (s32)sizeof(TexHeader)) {
         DVDClose(&fileInfo);
         tex->loadCode = TexCode::TEX_ERR_READ;
         return tex->loadCode;
     }
 
-    uint8_t fmt = GX_TF_I8;
+    u8 fmt = GX_TF_I8;
     switch (tex->header.format) {
     case TexFmt::RGB8: {
         fmt = GX_TF_RGBA8;
@@ -72,15 +73,15 @@ TexCode load_texture_offset(const char* path, Texture* tex, uint32_t offset) {
     }
     }
 
-    uint32_t size = get_size(tex->header.format, tex->header.width, tex->header.height);
-    tex->data = (uint8_t*)tww_memalign(-32, size);
+    u32 size = get_size(tex->header.format, tex->header.width, tex->header.height);
+    tex->data = (u8*)tww_memalign(-32, size);
     if (tex->data == nullptr) {
         DVDClose(&fileInfo);
         tex->loadCode = TexCode::TEX_ERR_MEM;
         return tex->loadCode;
     }
 
-    if (DVDReadPrio(&fileInfo, tex->data, size, offset + sizeof(tex->header), 2) < (int32_t)size) {
+    if (DVDReadPrio(&fileInfo, tex->data, size, offset + sizeof(tex->header), 2) < (s32)size) {
         tww_free(tex->data);
         DVDClose(&fileInfo);
         tex->loadCode = TexCode::TEX_ERR_READ;
@@ -118,7 +119,7 @@ void setupRendering() {
     GX_SetVtxAttrFmt(GX_VTXFMT0, GX_VA_TEX0, GX_TEX_ST, GX_F32, 0);
 
     GX_SetNumTexGens(1);
-    GX_SetTexCoordGen2((uint16_t)GX_TEXCOORD0, GX_TG_MTX2x4, GX_TG_TEX0, GX_IDENTITY, GX_FALSE,
+    GX_SetTexCoordGen2((u16)GX_TEXCOORD0, GX_TG_MTX2x4, GX_TG_TEX0, GX_IDENTITY, GX_FALSE,
                        GX_DTTIDENTITY);
 
     GX_SetTevColorIn(GX_TEVSTAGE0, GX_CC_ZERO, GX_CC_RASC, GX_CC_TEXC, GX_CC_ZERO);

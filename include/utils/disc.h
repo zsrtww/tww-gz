@@ -1,4 +1,5 @@
 #include "gcn_c/include/dvd.h"
+#include "libtww/dolphin/gctypes.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -7,7 +8,7 @@ extern "C" {
 /**
  * @brief Like DVDReadPrio, but allows for arbitrary sizes and offsets.
  */
-int32_t dvd_read(DVDFileInfo* file_info, void* data, int32_t size, int32_t offset);
+s32 dvd_read(DVDFileInfo* file_info, void* data, s32 size, s32 offset);
 
 #ifdef __cplusplus
 }

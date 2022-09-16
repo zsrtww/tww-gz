@@ -1,8 +1,6 @@
 #ifndef D_D_DRAWLIST_H
 #define D_D_DRAWLIST_H
 
-#include <stdint.h>
-
 class dDlst_window_c {
 public:
     /* 0x00 */ float mXOrig;

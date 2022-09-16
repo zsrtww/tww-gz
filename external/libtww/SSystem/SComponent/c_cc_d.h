@@ -36,7 +36,7 @@ class cCcD_TriAttr {};
 
 class cCcD_DivideInfo {
 public:
-    /* 0x00 */ uint32_t field_0x0;
+    /* 0x00 */ u32 field_0x0;
     /* 0x04 */ void* vtable;
 };
 
@@ -73,9 +73,9 @@ public:
     /* 0x00 */ cXyz field_0x00;
     /* 0x0C */ fopAc_ac_c* mActor;
     /* 0x10 */ int mApid;
-    /* 0x14 */ uint8_t mWeight;
-    /* 0x15 */ uint8_t field_0x15;
-    /* 0x16 */ uint8_t mTg;
+    /* 0x14 */ u8 mWeight;
+    /* 0x15 */ u8 field_0x15;
+    /* 0x16 */ u8 mTg;
     /* 0x18 */ void* vtable;
 };  // Size = 0x1C
 
@@ -92,7 +92,7 @@ class cCcD_Obj;
 class cCcD_ObjAt : cCcD_ObjCommonBase {
 public:
     /* 0x10 */ int mType;
-    /* 0x14 */ uint8_t mAtp;
+    /* 0x14 */ u8 mAtp;
 };
 #pragma pack(pop)
 
@@ -108,7 +108,7 @@ public:
 class cCcD_ObjHitInf {
 public:
     /* 0x000 */ cCcD_ObjAt mObjAt;
-    /* 0x015 */ uint8_t field_0x15[3];  // padding?
+    /* 0x015 */ u8 field_0x15[3];  // padding?
     /* 0x018 */ cCcD_ObjTg mObjTg;
     /* 0x02C */ cCcD_ObjCo mObjCo;
     /* 0x03C */ void* vtable;

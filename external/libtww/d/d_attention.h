@@ -7,27 +7,27 @@
 
 class dAttHint_c {
 public:
-    uint32_t mHintActorBsPcID;
-    uint32_t mBestPriority;
-    uint32_t field_0x8;
+    u32 mHintActorBsPcID;
+    u32 mBestPriority;
+    u32 field_0x8;
 };
 
 class dAttCatch_c {
 public:
     void* field_0x0;
-    uint32_t field_0x4;
+    u32 field_0x4;
     float field_0x8;
-    uint8_t field_0xc;
-    uint8_t field_0xd;
-    uint8_t field_0xe;
-    uint8_t field_0xf;
-    uint32_t field_0x10;
-    uint8_t mChangeItem;
+    u8 field_0xc;
+    u8 field_0xd;
+    u8 field_0xe;
+    u8 field_0xf;
+    u32 field_0x10;
+    u8 mChangeItem;
 };  // Size = 0x18
 
 class dAttParam_c {
 public:
-    /* 0x00 */ uint16_t mFlag;
+    /* 0x00 */ u16 mFlag;
     /* 0x04 */ float field_0x4;
     /* 0x08 */ float field_0x8;
     /* 0x0C */ float field_0xc;
@@ -39,10 +39,10 @@ public:
 
 class dAttLook_c {
 public:
-    uint32_t field_0x0;
-    uint32_t field_0x4;
+    u32 field_0x0;
+    u32 field_0x4;
     float field_0x8;
-    uint32_t field_0xc;
+    u32 field_0xc;
 };  // Size = 0x10
 
 class dAttList_c {
@@ -59,19 +59,19 @@ class JKRHeap;
 class dAttention_c {
 public:
     /* 0x000 */ fopAc_ac_c* mpPlayer;
-    /* 0x004 */ uint32_t mLockOnTargetBsPcID;
-    /* 0x008 */ uint8_t field_0x8[4];
+    /* 0x004 */ u32 mLockOnTargetBsPcID;
+    /* 0x008 */ u8 field_0x8[4];
     /* 0x00C */ int mPlayerNo;
-    /* 0x010 */ uint32_t mFlagMask;
-    /* 0x014 */ uint8_t field_0x14[4];
-    /* 0x018 */ uint8_t mLockOnState;
-    /* 0x018 */ uint8_t field_0x19;
-    /* 0x01A */ uint8_t field_0x1a;
-    /* 0x01B */ uint8_t field_0x1b;
-    /* 0x01C */ uint16_t field_0x1c;
-    /* 0x020 */ uint32_t mFlags;
+    /* 0x010 */ u32 mFlagMask;
+    /* 0x014 */ u8 field_0x14[4];
+    /* 0x018 */ u8 mLockOnState;
+    /* 0x018 */ u8 field_0x19;
+    /* 0x01A */ u8 field_0x1a;
+    /* 0x01B */ u8 field_0x1b;
+    /* 0x01C */ u16 field_0x1c;
+    /* 0x020 */ u32 mFlags;
     /* 0x024 */ JKRHeap* mpHeap;
-    /* 0x028 */ uint8_t field_0x28[0x54 - 0x28];
+    /* 0x028 */ u8 field_0x28[0x54 - 0x28];
     /* 0x054 */ dAttList_c mLockOnList[8];
     /* 0x0D4 */ int mLockonCount;
     /* 0x0D8 */ int mLockOnOffs;

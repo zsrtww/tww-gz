@@ -3,12 +3,12 @@
 
 #include "../../SSystem/SComponent/c_cc_d.h"
 
-typedef void (*dCcMassS_ObjCallback)(fopAc_ac_c*, cXyz*, uint32_t);
+typedef void (*dCcMassS_ObjCallback)(fopAc_ac_c*, cXyz*, u32);
 
 class dCcMassS_Obj {
 public:
     /* 0x00 */ cCcD_Obj* mpObj;
-    /* 0x04 */ uint8_t mPriority;
+    /* 0x04 */ u8 mPriority;
     /* 0x08 */ dCcMassS_ObjCallback mpCallback;
     /* 0x0C */ cCcD_DivideInfo mDivideInfo;
     /* 0x14 */ void* vtable;
@@ -19,15 +19,15 @@ static_assert(sizeof(dCcMassS_Obj) == 0x18);
 class dCcMassS_Mng {
 public:
     /* 0x0000 */ cCcD_DivideArea mDivideArea;
-    /* 0x0040 */ int32_t mMassObjCount;
+    /* 0x0040 */ s32 mMassObjCount;
     /* 0x0044 */ dCcMassS_Obj mMassObjs[5];
-    /* 0x00BC */ int32_t mMassAreaCount;
+    /* 0x00BC */ s32 mMassAreaCount;
     /* 0x00C0 */ dCcMassS_Obj mMassAreas[2];
     /* 0x00F0 */ cCcD_CylAttr mCylAttr;
-    /* 0x0128 */ uint8_t mChkFlag;
-    /* 0x0129 */ uint8_t mResultCamBit;
-    /* 0x012C */ uint32_t field_0x12c;
-    /* 0x0130 */ uint32_t mResultCam;
+    /* 0x0128 */ u8 mChkFlag;
+    /* 0x0129 */ u8 mResultCamBit;
+    /* 0x012C */ u32 field_0x12c;
+    /* 0x0130 */ u32 mResultCam;
     /* 0x0134 */ Vec mCamTopPos;
     /* 0x0140 */ float mCamTopDist;
     /* 0x0144 */ Vec mCamBottomPos;

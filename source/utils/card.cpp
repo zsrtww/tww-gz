@@ -2,23 +2,26 @@
 #include "math.h"
 #include "menus/settings_menu.h"
 #include "libtww/MSL_C/math/s_ceil.h"
+#include "libtww/MSL_C/string.h"
+#include "libtww/SSystem/SComponent/c_malloc.h"
+#include "libtww/SSystem/SComponent/c_counter.h"
 
 /**
  * @brief Like CARDWrite, but allows for arbitrary sizes and offsets.
  */
-int32_t GZ_storageWrite(Storage* storage, void* data, int32_t size, int32_t offset,
-                        int32_t sector_size) {
-    uint8_t* buf = (uint8_t*)tww_memalign(-32, sector_size);
-    int32_t result = Ready;
-    int32_t read_bytes = 0;
+s32 GZ_storageWrite(Storage* storage, void* data, s32 size, s32 offset,
+                        s32 sector_size) {
+    u8* buf = (u8*)tww_memalign(-32, sector_size);
+    s32 result = Ready;
+    s32 read_bytes = 0;
 
     while (result == Ready && size > 0) {
         StorageRead(*storage, buf, sector_size, (offset & ~(sector_size - 1)));
         if (result != Ready) {
             break;
         }
-        int32_t rem_size = sector_size - (offset & (sector_size - 1));
-        tww_memcpy(buf + (offset & (sector_size - 1)), (void*)((uint32_t)data + read_bytes),
+        s32 rem_size = sector_size - (offset & (sector_size - 1));
+        tww_memcpy(buf + (offset & (sector_size - 1)), (void*)((u32)data + read_bytes),
                   MIN(rem_size, size));
         StorageWrite(*storage, buf, sector_size, (offset & ~(sector_size - 1)));
         read_bytes += MIN(rem_size, size);
@@ -32,19 +35,19 @@ int32_t GZ_storageWrite(Storage* storage, void* data, int32_t size, int32_t offs
 /**
  * @brief Like CARDRead, but allows for arbitrary sizes and offsets.
  */
-int32_t GZ_storageRead(Storage* storage, void* data, int32_t size, int32_t offset,
-                       int32_t sector_size) {
-    uint8_t* buf = (uint8_t*)tww_memalign(-32, sector_size);
-    int32_t result = Ready;
-    int32_t read_bytes = 0;
+s32 GZ_storageRead(Storage* storage, void* data, s32 size, s32 offset,
+                       s32 sector_size) {
+    u8* buf = (u8*)tww_memalign(-32, sector_size);
+    s32 result = Ready;
+    s32 read_bytes = 0;
 
     while (result == Ready && size > 0) {
         StorageRead(*storage, buf, sector_size, (offset & ~(sector_size - 1)));
         if (result != Ready) {
             break;
         }
-        int32_t rem_size = sector_size - (offset & (sector_size - 1));
-        tww_memcpy((void*)((uint32_t)data + read_bytes), buf + (offset & (sector_size - 1)),
+        s32 rem_size = sector_size - (offset & (sector_size - 1));
+        tww_memcpy((void*)((u32)data + read_bytes), buf + (offset & (sector_size - 1)),
                   MIN(rem_size, size));
         read_bytes += MIN(rem_size, size);
         size -= rem_size;
@@ -81,14 +84,14 @@ void GZ_setupSaveFile(GZSaveFile& save_file) {
 #undef set_entry
 }
 
-int32_t GZ_readSaveFile(Storage* storage, GZSaveFile& save_file, int32_t sector_size) {
-    int32_t result = Ready;
+s32 GZ_readSaveFile(Storage* storage, GZSaveFile& save_file, s32 sector_size) {
+    s32 result = Ready;
 #define assert_result(stmt)                                                                        \
     if ((result = (stmt)) != Ready) {                                                              \
         return result;                                                                             \
     }
 
-    uint32_t pos = 0;
+    u32 pos = 0;
     assert_result(
         GZ_storageRead(storage, &save_file.header, sizeof(save_file.header), pos, sector_size));
     pos += sizeof(save_file.header);
@@ -124,7 +127,7 @@ void GZ_storeMemCard(Storage& storage) {
     GZ_setupSaveFile(save_file);
     GZ_storeSaveLayout(save_file.data);
 
-    uint32_t file_size = (uint32_t)(
+    u32 file_size = (u32)(
         ceil((double)sizeof(save_file) / (double)storage.sector_size) * storage.sector_size);
 
     storage.result = StorageDelete(0, storage.file_name_buffer);
@@ -141,42 +144,6 @@ void GZ_storeMemCard(Storage& storage) {
         }
     }
 }
-
-/* void GZ_storeMemfile(Storage& storage) {
-    PositionData posData;
-    posData.link = dComIfGp_getPlayer()->mCurrent.mPosition;
-    posData.cam.target = tp_matrixInfo.matrix_info->target;
-    posData.cam.pos = tp_matrixInfo.matrix_info->pos;
-    posData.angle = dComIfGp_getPlayer()->mCollisionRot.mY;
-    uint32_t file_size = (uint32_t)(
-        tp_ceil((double)sizeof(dSv_info_c) / (double)storage.sector_size) * storage.sector_size);
-
-    storage.result = StorageDelete(0, storage.file_name_buffer);
-    storage.result = StorageCreate(0, storage.file_name_buffer, file_size, &storage.info);
-
-    if (storage.result == Ready || storage.result == Exist) {
-        storage.result = StorageOpen(0, storage.file_name_buffer, &storage.info, OPEN_MODE_RW);
-        if (storage.result == Ready) {
-            dComIfGs_putSave(g_dComIfG_gameInfo.info.mDan.mStageNo);
-
-            setReturnPlace(g_dComIfG_gameInfo.play.mStartStage.mStage,
-                           g_dComIfG_gameInfo.play.mEvent.field_0x12c, 0);
-
-            storage.result = GZ_storageWrite(&storage, &g_dComIfG_gameInfo, sizeof(dSv_info_c), 0,
-                                             storage.sector_size);
-            storage.result = GZ_storageWrite(&storage, &posData, sizeof(posData),
-                                             sizeof(dSv_info_c) + 1, storage.sector_size);
-            if (storage.result == Ready) {
-                FIFOQueue::push("saved memfile!", Queue);
-            } else {
-                char buff[32];
-                tp_sprintf(buff, "failed to save: %d", storage.result);
-                FIFOQueue::push(buff, Queue);
-            }
-            storage.result = StorageClose(&storage.info);
-        }
-    }
-} */
 
 void GZ_deleteMemCard(Storage& storage) {
     storage.result = StorageDelete(0, storage.file_name_buffer);
@@ -199,39 +166,11 @@ void GZ_loadMemCard(Storage& storage) {
     }
 }
 
-/* void GZ_loadMemfile(Storage& storage) {
-    storage.result = StorageOpen(0, storage.file_name_buffer, &storage.info, OPEN_MODE_RW);
-
-    if (storage.result == Ready) {
-        PositionData posData;
-        storage.result = GZ_readMemfile(&storage, posData, storage.sector_size);
-        if (storage.result == Ready) {
-            FIFOQueue::push("loaded memfile!", Queue);
-            g_injectMemfile = true;
-            SaveManager::injectDefault_before();
-            SaveManager::injectMemfile((void*)sTmpBuf);
-            SaveManager::injectDefault_during();
-            SaveManager::injectDefault_after();
-            GZ_loadPositionData(posData);
-            set_position_data = true;
-            g_injectSave = true;
-            g_fifoVisible = true;
-            GZ_setMenu(MN_NONE_INDEX);
-        } else {
-            char buff[32];
-            tp_sprintf(buff, "failed to load: %d", storage.result);
-            FIFOQueue::push(buff, Queue);
-        }
-        storage.result = StorageClose(&storage.info);
-    }
-} */
-
 #define FRAME_COUNT 200
 #define FILE_NAME "twwgz01"
 
 void GZ_loadGZSave(bool& card_load) {
-    // uint8_t frame_count = cCt_getFrameCount();
-    static uint8_t frame_count = 0;
+    u8 frame_count = cCt_getFrameCount();
 
     if (card_load && frame_count > FRAME_COUNT) {
         static Storage storage;
@@ -244,7 +183,5 @@ void GZ_loadGZSave(bool& card_load) {
         }
 
         card_load = false;
-    } else {
-        frame_count++;
     }
 }

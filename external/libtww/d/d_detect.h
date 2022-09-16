@@ -1,7 +1,6 @@
 #ifndef D_D_DETECT_H
 #define D_D_DETECT_H
 
-#include <stdint.h>
 #include "../SSystem/SComponent/c_xyz.h"
 
 class dDetectPlace_c {

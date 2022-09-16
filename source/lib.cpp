@@ -7,8 +7,9 @@
 #include "controller.h"
 #include "menus/settings_menu.h"
 #include "libtww/d/kankyo/d_kankyo.h"
-
 #include "libtww/d/com/d_com_inf_game.h"
+#include "libtww/f_op/f_op_scene_req.h"
+#include "libtww/m_Do/m_Do_main.h"
 
 bool l_loadCard = true;
 
@@ -34,7 +35,6 @@ void apply_lib_hooks() {
 }
 
 void init() {
-    // *reinterpret_cast<u8*>(0x803f60e0) = 1;  // Enable debug crash screen
     Font::loadFont("twwgz/fonts/consola.fnt");
     Draw::init();
 }
@@ -62,7 +62,7 @@ void game_loop() {
 
 void displaySplash() {
     // Create and render a splash screen once the game has launched using the supplied address
-    extern uint32_t* mDoExt_font0;
+    extern u32* mDoExt_font0;
     static int splash_time = 256;
 
     if (splash_time > 0) {

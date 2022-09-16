@@ -1,11 +1,11 @@
 #ifndef OSCACHE_H
 #define OSCACHE_H
 
-#include <stdint.h>
+#include "../gctypes.h"
 
 extern "C" {
-void DCFlushRange(void* startAddr, uint32_t nBytes);
-void ICInvalidateRange(void* startAddr, uint32_t nBytes);
+void DCFlushRange(void* startAddr, u32 nBytes);
+void ICInvalidateRange(void* startAddr, u32 nBytes);
 }
 
 #endif /* OSCACHE_H */

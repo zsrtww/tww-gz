@@ -2,7 +2,7 @@
 #define D_SAVE_D_SAVE_H
 
 #include "../../SSystem/SComponent/c_xyz.h"
-#include <stdint.h>
+#include "../../dolphin/gctypes.h"
 
 enum ItemSlots {
     /* 0x00 */ SLOT_TELESCOPE,
@@ -286,28 +286,28 @@ enum ItemTable {
 
 class dSv_player_status_a_c {
 public:
-    uint16_t& getMaxLife() { return mMaxLife; }
-    uint16_t& getLife() { return mLife; }
-    uint16_t& getRupee() { return mRupee; }
-    uint8_t getSelectEquip(int item) const { return mSelectEquip[item]; }
+    u16& getMaxLife() { return mMaxLife; }
+    u16& getLife() { return mLife; }
+    u16& getRupee() { return mRupee; }
+    u8 getSelectEquip(int item) const { return mSelectEquip[item]; }
 
-    void setMagic(uint8_t magic) { mMagic = magic; }
-    void setMaxMagic(uint8_t max) { mMaxMagic = max; }
-    void setRupee(uint16_t rupees) { mRupee = rupees; }
-    void setLife(uint16_t life) { mLife = life; }
-    void setMaxLife(uint8_t max) { mMaxLife = max; }
-    void setSelectEquip(int item_index, uint8_t item) { mSelectEquip[item_index] = item; }
+    void setMagic(u8 magic) { mMagic = magic; }
+    void setMaxMagic(u8 max) { mMaxMagic = max; }
+    void setRupee(u16 rupees) { mRupee = rupees; }
+    void setLife(u16 life) { mLife = life; }
+    void setMaxLife(u8 max) { mMaxLife = max; }
+    void setSelectEquip(int item_index, u8 item) { mSelectEquip[item_index] = item; }
 
-    /* 0x00 */ uint16_t mMaxLife;
-    /* 0x02 */ uint16_t mLife;
-    /* 0x04 */ uint16_t mRupee;
-    /* 0x06 */ uint8_t field_0x6[3];
-    /* 0x09 */ uint8_t mSelectItem[3];
-    /* 0x0C */ uint8_t field_0xc[2];
-    /* 0x0E */ uint8_t mSelectEquip[4];
-    /* 0x12 */ uint8_t mWalletSize;
-    /* 0x13 */ uint8_t mMaxMagic;
-    /* 0x14 */ uint8_t mMagic;
+    /* 0x00 */ u16 mMaxLife;
+    /* 0x02 */ u16 mLife;
+    /* 0x04 */ u16 mRupee;
+    /* 0x06 */ u8 field_0x6[3];
+    /* 0x09 */ u8 mSelectItem[3];
+    /* 0x0C */ u8 field_0xc[2];
+    /* 0x0E */ u8 mSelectEquip[4];
+    /* 0x12 */ u8 mWalletSize;
+    /* 0x13 */ u8 mMaxMagic;
+    /* 0x14 */ u8 mMagic;
 };  // Size: 0x18
 
 class dSv_player_status_b_c {
@@ -316,104 +316,104 @@ public:
     float getTime() const { return mTime; }
 
     /* 0x00 */ int64_t mDateIpl;
-    /* 0x08 */ uint8_t field_0x8[4];
+    /* 0x08 */ u8 field_0x8[4];
     /* 0x0C */ float mTime;
-    /* 0x10 */ uint16_t mDate;
-    /* 0x12 */ int16_t mTactWindAngleX;
-    /* 0x14 */ int16_t mTactWindAngleY;
+    /* 0x10 */ u16 mDate;
+    /* 0x12 */ s16 mTactWindAngleX;
+    /* 0x14 */ s16 mTactWindAngleY;
 };  // Size: 0x18
 
 class dSv_player_return_place_c {
 public:
     /* 0x00 */ char mName[8];
-    /* 0x08 */ int8_t mRoomNo;
-    /* 0x09 */ uint8_t mPlayerStatus;
-    /* 0x0A */ uint8_t unk10;
-    /* 0x0B */ uint8_t unk11;
+    /* 0x08 */ s8 mRoomNo;
+    /* 0x09 */ u8 mPlayerStatus;
+    /* 0x0A */ u8 unk10;
+    /* 0x0B */ u8 unk11;
 };  // Size: 0xC
 
 class dSv_player_item_c {
 public:
-    /* 0x0 */ uint8_t mItemSlots[21];
+    /* 0x0 */ u8 mItemSlots[21];
 };  // Size: 0x15
 
 class dSv_player_get_item_c {
 public:
-    /* 0x0 */ uint8_t mItemFlags[21];
+    /* 0x0 */ u8 mItemFlags[21];
 };  // Size: 0x15
 
 class dSv_player_item_record_c {
 public:
-    void setArrowNum(uint8_t amount) { mArrowNum = amount; }
-    uint8_t getArrowNum() { return mArrowNum; }
+    void setArrowNum(u8 amount) { mArrowNum = amount; }
+    u8 getArrowNum() { return mArrowNum; }
 
-    /* 0x0 */ uint16_t mTimer;
-    /* 0x2 */ uint8_t field_0x2;
-    /* 0x3 */ uint8_t mArrowNum;
-    /* 0x4 */ uint8_t mBombNum;
-    /* 0x5 */ uint8_t field_0x5;
-    /* 0x6 */ uint8_t mBottleNum;
+    /* 0x0 */ u16 mTimer;
+    /* 0x2 */ u8 field_0x2;
+    /* 0x3 */ u8 mArrowNum;
+    /* 0x4 */ u8 mBombNum;
+    /* 0x5 */ u8 field_0x5;
+    /* 0x6 */ u8 mBottleNum;
 };  // Size: 0x8
 
 class dSv_player_item_max_c {
 public:
-    /* 0x0 */ uint8_t mItemMax[8];
+    /* 0x0 */ u8 mItemMax[8];
 };  // Size: 0x8
 
 class dSv_player_bag_item_c {
 public:
-    /* 0x0 */ uint8_t field_0x0[24];
+    /* 0x0 */ u8 field_0x0[24];
 };  // Size: 0x1A
 
 class dSv_player_get_bag_item_c {
 public:
-    /* 0x0 */ uint8_t field_0x0[12];
+    /* 0x0 */ u8 field_0x0[12];
 };  // Size: 0xC
 
 class dSv_player_bag_item_record_c {
 public:
-    /* 0x0 */ uint8_t field_0x0[24];
+    /* 0x0 */ u8 field_0x0[24];
 };  // Size: 0x18
 
 class dSv_player_collect_c {
 public:
-    /* 0x0 */ uint8_t mItem[8];
-    /* 0x8 */ uint8_t unk8;
-    /* 0x9 */ uint8_t mTact;
-    /* 0xA */ uint8_t mTriforce;
-    /* 0xB */ uint8_t mSymbol;
-    /* 0xC */ uint8_t field_0xc;
-    /* 0xD */ uint8_t padding[3];
+    /* 0x0 */ u8 mItem[8];
+    /* 0x8 */ u8 unk8;
+    /* 0x9 */ u8 mTact;
+    /* 0xA */ u8 mTriforce;
+    /* 0xB */ u8 mSymbol;
+    /* 0xC */ u8 field_0xc;
+    /* 0xD */ u8 padding[3];
 };  // Size: 0x10
 
 class dSv_player_map_c {
 public:
-    /* 0x0 */ uint8_t field_0x0[0x84];
+    /* 0x0 */ u8 field_0x0[0x84];
 };  // Size: 0x84
 
 class dSv_player_info_c {
 public:
     char* getLinkName() { return (char*)mPlayerName; }
 
-    /* 0x00 */ uint8_t field_0x0[0x14];
-    /* 0x14 */ uint8_t mPlayerName[16];
-    /* 0x24 */ uint8_t field_0x24;
-    /* 0x25 */ uint8_t field_0x25[16];
-    /* 0x35 */ uint8_t field_0x35;
-    /* 0x36 */ uint8_t field_0x36[16];
-    /* 0x47 */ uint8_t field_0x47;
-    /* 0x48 */ uint8_t field_0x48[0x58 - 0x48];
-    /* 0x58 */ uint8_t mNumGamesCompleted;
-    /* 0x59 */ uint8_t mFmapIdx;
+    /* 0x00 */ u8 field_0x0[0x14];
+    /* 0x14 */ u8 mPlayerName[16];
+    /* 0x24 */ u8 field_0x24;
+    /* 0x25 */ u8 field_0x25[16];
+    /* 0x35 */ u8 field_0x35;
+    /* 0x36 */ u8 field_0x36[16];
+    /* 0x47 */ u8 field_0x47;
+    /* 0x48 */ u8 field_0x48[0x58 - 0x48];
+    /* 0x58 */ u8 mNumGamesCompleted;
+    /* 0x59 */ u8 mFmapIdx;
 };  // Size: 0x5C
 
 class dSv_player_config_c {
 public:
-    /* 0x0 */ uint8_t unk0;
-    /* 0x1 */ uint8_t mSoundMode;
-    /* 0x2 */ uint8_t mAttentionType;  // Lock-On Type; 0 : hold, 1 : switch
-    /* 0x3 */ uint8_t mVibration;      // Rumble status
-    /* 0x4 */ uint8_t unk4;
+    /* 0x0 */ u8 unk0;
+    /* 0x1 */ u8 mSoundMode;
+    /* 0x2 */ u8 mAttentionType;  // Lock-On Type; 0 : hold, 1 : switch
+    /* 0x3 */ u8 mVibration;      // Rumble status
+    /* 0x4 */ u8 unk4;
 }; // Size: 0x5
 
 class dSv_player_priest_c {
@@ -426,7 +426,7 @@ public:
 
 class dSv_player_status_c_c {
 public:
-    /* 0x0 */ uint8_t field_0x0[0x18];
+    /* 0x0 */ u8 field_0x0[0x18];
 };  // Size: 0x18
 
 class dSv_player_c {
@@ -450,7 +450,7 @@ public:
     /* 0x066 */ dSv_player_item_record_c mItemRecord;
     /* 0x06E */ dSv_player_item_max_c mItemMax;
     /* 0x076 */ dSv_player_bag_item_c mBagItem;
-    /* 0x08E */ uint8_t field_0x8e[2];
+    /* 0x08E */ u8 field_0x8e[2];
     /* 0x090 */ dSv_player_get_bag_item_c mGetBagItem;
     /* 0x09C */ dSv_player_bag_item_record_c mBagItemRecord;
     /* 0x0B4 */ dSv_player_collect_c mCollect;
@@ -463,17 +463,17 @@ public:
 
 class dSv_memBit_c {
 public:
-    /* 0x00 */ uint32_t mTbox[1];
-    /* 0x04 */ uint32_t mSwitch[4];
-    /* 0x14 */ uint32_t mItem[1];
-    /* 0x18 */ uint32_t mVisitedRoom[2];
-    /* 0x20 */ uint8_t mKeyNum;
-    /* 0x21 */ uint8_t mDungeonItem;
+    /* 0x00 */ u32 mTbox[1];
+    /* 0x04 */ u32 mSwitch[4];
+    /* 0x14 */ u32 mItem[1];
+    /* 0x18 */ u32 mVisitedRoom[2];
+    /* 0x20 */ u8 mKeyNum;
+    /* 0x21 */ u8 mDungeonItem;
 };  // Size: 0x24
 
 class dSv_event_c {
 public:
-    /* 0x0 */ uint8_t mEvent[256];
+    /* 0x0 */ u8 mEvent[256];
 };  // Size: 0x100
 
 class dSv_memory_c {
@@ -486,20 +486,20 @@ public:
 
 class dSv_danBit_c {
 public:
-    /* 0x00 */ int8_t mStageNo;
-    /* 0x04 */ uint32_t mSwitch[2];
+    /* 0x00 */ s8 mStageNo;
+    /* 0x04 */ u32 mSwitch[2];
 };  // Size: 0xC
 
 class dSv_zoneBit_c {
 public:
-    /* 0x00 */ uint16_t mSwitch[2];
-    /* 0x04 */ uint16_t mRoomSwitch;
-    /* 0x06 */ uint16_t mItem;
+    /* 0x00 */ u16 mSwitch[2];
+    /* 0x04 */ u16 mRoomSwitch;
+    /* 0x06 */ u16 mItem;
 };  // Size: 0x8
 
 class dSv_zoneActor_c {
 public:
-    /* 0x00 */ uint32_t mActorFlags[16];
+    /* 0x00 */ u32 mActorFlags[16];
 };  // Size: 0x10
 
 class dSv_zone_c {
@@ -509,41 +509,41 @@ public:
     dSv_zoneActor_c& getActor() { return mActor; }
     const dSv_zoneActor_c& getActor() const { return mActor; }
 
-    int8_t& getRoomNo() { return mRoomNo; }
+    s8& getRoomNo() { return mRoomNo; }
 
-    /* 0x0 */ int8_t mRoomNo;
-    /* 0x1 */ uint8_t unk1;
+    /* 0x0 */ s8 mRoomNo;
+    /* 0x1 */ u8 unk1;
     /* 0x2 */ dSv_zoneBit_c mBit;
     /* 0xC */ dSv_zoneActor_c mActor;
 };  // Size: 0x4C
 
 class dSv_restart_c {
 public:
-    /* 0x00 */ uint8_t mRestartCode;
-    /* 0x01 */ uint8_t field_0x1;
-    /* 0x02 */ int8_t mRoomNo;
-    /* 0x06 */ int16_t mRoomAngleY;
+    /* 0x00 */ u8 mRestartCode;
+    /* 0x01 */ u8 field_0x1;
+    /* 0x02 */ s8 mRoomNo;
+    /* 0x06 */ s16 mRoomAngleY;
     /* 0x08 */ cXyz mRoomPos;
-    /* 0x14 */ uint32_t mRoomParam;
+    /* 0x14 */ u32 mRoomParam;
     /* 0x18 */ cXyz mLinkRestartPos;
-    /* 0x24 */ uint32_t mLinkRestartParam;
+    /* 0x24 */ u32 mLinkRestartParam;
 };  // Size: 0x28
 
 class dSv_turnRestart_c {
 public:
     /* 0x00 */ cXyz mPosition;
-    /* 0x0C */ uint32_t mParam;
-    /* 0x10 */ int16_t mAngleY;
-    /* 0x12 */ int8_t mRoomNo;
-    /* 0x14 */ uint8_t field_0x14[0x24 - 0x14];
+    /* 0x0C */ u32 mParam;
+    /* 0x10 */ s16 mAngleY;
+    /* 0x12 */ s8 mRoomNo;
+    /* 0x14 */ u8 field_0x14[0x24 - 0x14];
     /* 0x24 */ cXyz field_0x24;
-    /* 0x30 */ int16_t field_0x30;
+    /* 0x30 */ s16 field_0x30;
     /* 0x34 */ float field_0x34;
 };  // Size: 0x38
 
 class dSv_ocean_c {
 public:
-    /* 0x0 */ uint16_t mBits[50];
+    /* 0x0 */ u16 mBits[50];
 };  // Size: 0x64
 
 class dSv_save_c {
@@ -556,7 +556,7 @@ public:
     static const int STAGE_MAX = 16;
 
     /* 0x000 */ dSv_player_c mPlayer;
-    /* 0x1D4 */ uint8_t field_0x1d4[0x380 - 0x1D4];
+    /* 0x1D4 */ u8 field_0x1d4[0x380 - 0x1D4];
     /* 0x380 */ dSv_memory_c mSave[STAGE_MAX];
     /* 0x5C0 */ dSv_ocean_c mOcean;
     /* 0x624 */ dSv_event_c mEvent;
@@ -570,15 +570,15 @@ public:
     dSv_event_c& getTmp() { return mTmp; }
 
     /* 0x0000 */ dSv_save_c mSavedata;
-    /* 0x0778 */ uint8_t field_0x724[0x778 - 0x724];
+    /* 0x0778 */ u8 field_0x724[0x778 - 0x724];
     /* 0x0778 */ dSv_memory_c mMemory;
     /* 0x079C */ dSv_danBit_c mDan;
     /* 0x07A8 */ dSv_zone_c mZone[32];
     /* 0x1128 */ dSv_restart_c mRestart;
-    /* 0x1150 */ uint8_t field_0x1150[0x1158 - 0x1150];
+    /* 0x1150 */ u8 field_0x1150[0x1158 - 0x1150];
     /* 0x1158 */ dSv_event_c mTmp;
     /* 0x1258 */ dSv_turnRestart_c mTurnRestart;
-    /* 0x1290 */ uint8_t field_0x1290[0x10];
+    /* 0x1290 */ u8 field_0x1290[0x10];
 };  // Size: 0x12A0
 
 static_assert(sizeof(dSv_info_c) == 0x12A0);

@@ -17,12 +17,12 @@ enum GZPad {
     START = 11,
 };
 
-void setGamepadButtons(uint32_t buttons);
-void setGamepadTrig(uint32_t buttons);
+void setGamepadButtons(u32 buttons);
+void setGamepadTrig(u32 buttons);
 bool GZ_getButtonRepeat(int idx);
-bool GZ_getButtonRepeat(int idx, uint16_t repeat_time);
+bool GZ_getButtonRepeat(int idx, u16 repeat_time);
 bool GZ_getButtonPressed(int idx);
 bool GZ_getButtonHold(int idx, int phase = 0);
-uint16_t GZ_getButtonStatus();
+u16 GZ_getButtonStatus();
 void GZ_readController();
 bool GZ_getButtonTrig(int idx);

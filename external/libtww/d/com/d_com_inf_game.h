@@ -20,10 +20,10 @@ struct J2DGrafContext;
 class __d_timer_info_c {
 public:
     dTimer_c* mTimerPtr;
-    int32_t mTimerNowTimeMs;
-    int32_t mTimerLimitTimeMs;
-    int32_t mTimerMode;
-    uint8_t mTimerType;
+    s32 mTimerNowTimeMs;
+    s32 mTimerLimitTimeMs;
+    s32 mTimerMode;
+    u8 mTimerType;
 };
 
 struct camera_class;
@@ -31,9 +31,9 @@ struct camera_class;
 class dComIfG_camera_info_class {
 public:
     /* 0x00 */ camera_class* mCamera;
-    /* 0x04 */ uint8_t mDlstWindowIdx;
-    /* 0x05 */ uint8_t mCamIdx;
-    /* 0x08 */ uint32_t mCameraAttentionStatus;
+    /* 0x04 */ u8 mDlstWindowIdx;
+    /* 0x05 */ u8 mCamIdx;
+    /* 0x08 */ u32 mCameraAttentionStatus;
     /* 0x0C */ float mCameraZoomScale;
     /* 0x10 */ float mCameraZoomForcus;
     /* 0x14 */ char* mCameraParamFileName;
@@ -74,7 +74,7 @@ public:
     /* 0x03F38 */ dEvt_control_c mEvent;
     /* 0x0402C */ dEvent_manager_c mEvtManager;
     /* 0x04568 */ dAttention_c mAttention;
-    /* 0x046F8 */ uint8_t field_0x46f8[0x4700 - 0x46F8];
+    /* 0x046F8 */ u8 field_0x46f8[0x4700 - 0x46F8];
     /* 0x04700 */ dVibration_c mVibration;
     /* 0x04784 */ dDetect_c mDetect;
     /* 0x04798 */ JKRArchive* mMsgArchive;
@@ -109,11 +109,11 @@ public:
     /* 0x047FC */ JKRArchive* mpHyruleTextArchive;
 
     #ifdef NTSCU
-    /* 0x04800 */ uint8_t field_0x4800[0x4824 - 0x4800];
+    /* 0x04800 */ u8 field_0x4800[0x4824 - 0x4800];
     #endif
 
     #ifdef NTSCJ
-    /* 0x04800 */ uint8_t field_0x47fc[0x4818 - 0x47FC];
+    /* 0x04800 */ u8 field_0x47fc[0x4818 - 0x47FC];
     #endif
 
     /* 0x04824 */ dPa_control_c* mParticle;
@@ -123,27 +123,27 @@ public:
     /* 0x04834 */ dTree_packet_c* mpTreePacket;
     /* 0x04838 */ Packet_c* mpWoodPacket;
     /* 0x0483C */ dFlower_packet_c* mpFlowerPacket;
-    /* 0x04840 */ uint8_t mLkDArcIdx;
-    /* 0x04841 */ uint8_t field_0x4841;
-    /* 0x04842 */ uint16_t mVrboxFlags;
+    /* 0x04840 */ u8 mLkDArcIdx;
+    /* 0x04841 */ u8 field_0x4841;
+    /* 0x04842 */ u16 mVrboxFlags;
     /* 0x04844 */ dDlst_window_c mWindow[1];
-    /* 0x0486C */ uint8_t mCurCameraInfo;
+    /* 0x0486C */ u8 mCurCameraInfo;
     /* 0x04870 */ dComIfG_camera_info_class mCameraInfo[1];
     /* 0x048A4 */ daPy_py_c* mPlayer[1];
-    /* 0x048A8 */ int8_t mCurCamera;
+    /* 0x048A8 */ s8 mCurCamera;
     /* 0x048AC */ daPy_lk_c* mPlayerPtr;
     /* 0x048B0 */ daPy_npc_c* mpPlayerPartnerActor;
     /* 0x048B4 */ daShip_c* mpShip;
-    /* 0x048B8 */ uint8_t field_0x48b8[4];
+    /* 0x048B8 */ u8 field_0x48b8[4];
     /* 0x048BC */ int mItemLifeCount;
     /* 0x048C0 */ int mItemRupeeCount;
     /* 0x048C4 */ int mOxygen;
     /* 0x048C8 */ int field_0x48c8;
     /* 0x048CC */ int mNpcNameMessageID;
     /* 0x048D0 */ int mItemNameMessageID;
-    /* 0x048D4 */ uint16_t field_0x48d4;
-    /* 0x048D6 */ uint16_t mCollectHeartPieceCount;
-    /* 0x048D8 */ uint8_t field_0x48d8[0x4A7C - 0x48D8];
+    /* 0x048D4 */ u16 field_0x48d4;
+    /* 0x048D6 */ u16 mCollectHeartPieceCount;
+    /* 0x048D8 */ u8 field_0x48d8[0x4A7C - 0x48D8];
 };
 
 #ifdef NTSCJ
@@ -158,7 +158,7 @@ class dComIfG_inf_c {
 public:
     /* 0x00000 */ dSv_info_c info;
     /* 0x012A0 */ dComIfG_play_c play;
-    /* 0x05D20 */ uint8_t field_0x5D20[0x174A8];
+    /* 0x05D20 */ u8 field_0x5D20[0x174A8];
 };
 
 #ifdef NTSCJ

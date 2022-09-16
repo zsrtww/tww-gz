@@ -1,15 +1,15 @@
 #ifndef D_BG_D_BG_S_H
 #define D_BG_D_BG_S_H
 
-#include <stdint.h>
+#include "../../dolphin/gctypes.h"
 
 class dBgW;
 class fopAc_ac_c;
 
 class cBgS_ChkElm {
     /* 0x00 */ dBgW* mpBgW;
-    /* 0x04 */ uint32_t mFlags;
-    /* 0x08 */ uint32_t mProcID;
+    /* 0x04 */ u32 mFlags;
+    /* 0x08 */ u32 mProcID;
     /* 0x0C */ fopAc_ac_c* mpActorPtr;
     /* 0x10 */ void* vtable;
 };  // Size = 0x14

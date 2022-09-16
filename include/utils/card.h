@@ -2,10 +2,10 @@
 #include "gcn_c/include/storage.h"
 #include "menu.h"
 
-int32_t GZ_storageWrite(Storage* info, void* data, int32_t size, int32_t offset,
-                        int32_t sector_size);
-int32_t GZ_storageRead(Storage* info, void* data, int32_t size, int32_t offset,
-                       int32_t sector_size);
+s32 GZ_storageWrite(Storage* info, void* data, s32 size, s32 offset,
+                        s32 sector_size);
+s32 GZ_storageRead(Storage* info, void* data, s32 size, s32 offset,
+                       s32 sector_size);
 void GZ_storeMemCard(Storage& card);
 void GZ_storeMemfile(Storage& card);
 void GZ_deleteMemCard(Storage& card);
@@ -26,10 +26,10 @@ enum GZSaveIndex {
 };
 
 struct GZSaveHeader {
-    uint32_t version;
-    uint32_t entries;
-    uint32_t offsetsLoc;
-    uint32_t sizesLoc;
+    u32 version;
+    u32 entries;
+    u32 offsetsLoc;
+    u32 sizesLoc;
 };
 
 struct GZSaveLayout {
@@ -40,7 +40,7 @@ struct GZSaveLayout {
 
 struct GZSaveFile {
     GZSaveHeader header;
-    uint32_t offsets[GZ_SAVE_ENTRIES_AMNT];
-    uint32_t sizes[GZ_SAVE_ENTRIES_AMNT];
+    u32 offsets[GZ_SAVE_ENTRIES_AMNT];
+    u32 sizes[GZ_SAVE_ENTRIES_AMNT];
     GZSaveLayout data;
 };

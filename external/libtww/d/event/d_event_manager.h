@@ -5,19 +5,19 @@
 
 class dEvent_exception_c {
 public:
-    uint32_t mEventInfoIdx;
-    uint8_t field_0x4;
-    uint8_t field_0x5;
-    uint8_t field_0x6;
-    uint8_t field_0x7;
-    uint32_t mState;
+    u32 mEventInfoIdx;
+    u8 field_0x4;
+    u8 field_0x5;
+    u8 field_0x6;
+    u8 field_0x7;
+    u32 mState;
 };
 static_assert(sizeof(dEvent_exception_c) == 0xC);
 
 class dEvent_manager_c {
 public:
     /* 0x00 */ dEvDtBase_c mEventBase;
-    /* 0x20 */ int32_t mCameraPlay;
+    /* 0x20 */ s32 mCameraPlay;
     /* 0x24 */ dEvent_exception_c mEventException;
     /* 0x30 */ cXyz mGoal;
     /* 0x3C */ dEvDtFlag_c mFlags;

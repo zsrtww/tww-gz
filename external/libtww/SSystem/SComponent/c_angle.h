@@ -2,16 +2,16 @@
 #define C_ANGLE_H
 
 #include "c_xyz.h"
-#include <stdint.h>
+#include "../../dolphin/gctypes.h"
 
 class cSAngle {
 public:
-    int16_t mAngle;
+    s16 mAngle;
 
-    int16_t Val() const { return this->mAngle; }
+    s16 Val() const { return this->mAngle; }
     bool operator<(const cSAngle& other) const { return mAngle < other.mAngle; }
     bool operator>(const cSAngle& other) const { return mAngle > other.mAngle; }
-    operator int16_t(void) const { return mAngle; }
+    operator s16(void) const { return mAngle; }
     void operator=(const cSAngle& other) { mAngle = other.mAngle; }
 };
 

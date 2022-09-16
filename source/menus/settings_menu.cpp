@@ -1,5 +1,6 @@
 #include "menus/settings_menu.h"
 #include "utils/card.h"
+#include "libtww/MSL_C/string.h"
 
 #define LINE_NUM 6
 #define MAX_CURSOR_COLOR_OPTIONS 6
@@ -10,22 +11,19 @@ bool g_dropShadows;
 int g_fontType = 0;
 
 Line lines[LINE_NUM] = {
-    {"cursor color:", CURSOR_COLOR_INDEX, "Change cursor color", false, nullptr, MAX_CURSOR_COLOR_OPTIONS},
+    {"cursor color:", CURSOR_COLOR_INDEX, "Change cursor color", false, nullptr,
+     MAX_CURSOR_COLOR_OPTIONS},
     {"font:", FONT_INDEX, "Change font", false, nullptr, MAX_FONT_OPTIONS},
-    {"drop shadows", DROP_SHADOWS_INDEX, "Adds shadows to all font characters", true, &g_dropShadows},
+    {"drop shadows", DROP_SHADOWS_INDEX, "Adds shadows to all font characters", true,
+     &g_dropShadows},
     {"save card", SAVE_CARD_INDEX, "Save settings to memory card"},
     {"load card", LOAD_CARD_INDEX, "Load settings from memory card"},
     {"delete card", DELETE_CARD_INDEX, "Delete settings on memory card"},
 };
 
 ListMember font_opt[MAX_FONT_OPTIONS] = {
-    "consola",
-    "calamity-bold",
-    "lib-sans",
-    "lib-sans-bold",
-    "lib-serif",
-    "lib-serif-bold",
-    "press-start-2p",
+    "consola",   "calamity-bold",  "lib-sans",       "lib-sans-bold",
+    "lib-serif", "lib-serif-bold", "press-start-2p",
 };
 
 void SettingsMenu::draw() {
@@ -117,8 +115,7 @@ void SettingsMenu::draw() {
     }
 
     ListMember cursorCol_opt[MAX_CURSOR_COLOR_OPTIONS] = {
-        "green",  "blue",   "red",
-        "orange", "yellow", "purple",
+        "green", "blue", "red", "orange", "yellow", "purple",
     };
 
     tww_sprintf(lines[CURSOR_COLOR_INDEX].value, " <%s>", cursorCol_opt[g_cursorColorType].member);
