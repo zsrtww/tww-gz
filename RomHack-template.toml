@@ -5,17 +5,17 @@ developer-name = "The Wind Waker / Twilight Princess Community"
 full-developer-name = "The Wind Waker / Twilight Princess Community"
 
 [src]
-iso = "GZLJ01.iso"
+iso = "@srcIso"
 patch = "regional-patch.asm"
-map = "maps/framework.map"
+map = "@srcMap"
 
 [build]
-map = "build/GZLJ01.map"
-iso = "build/twwgz.iso"
+map = "@bldMap"
+iso = "@bldIso"
 
 [link]
 entries = ["apply_lib_hooks"]
-base = "0x8040_1000"
+base = "@linkBase"
 libs = ["twwgz.a", "external/gcn_c/gcn_c.a"]
 
 [files]

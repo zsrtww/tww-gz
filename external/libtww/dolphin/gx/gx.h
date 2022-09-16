@@ -4,6 +4,10 @@
 #include "../mtx/mtx.h"
 #include "gcn_c/include/gfx.h"
 
+struct GXFogAdjTable {
+    u16 r[10];
+};
+
 extern "C" {
 #define GFX_FIFO(T) (*(volatile T*)0xCC008000)
 

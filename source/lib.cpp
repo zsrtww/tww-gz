@@ -6,6 +6,9 @@
 #include "menu.h"
 #include "controller.h"
 #include "menus/settings_menu.h"
+#include "libtww/d/kankyo/d_kankyo.h"
+
+#include "libtww/d/com/d_com_inf_game.h"
 
 bool l_loadCard = true;
 
@@ -17,7 +20,13 @@ extern "C" {
 
 #define INTERNAL_GZ_VERSION MAKESTRING(GZ_VERSION)
 
+#if (NTSCJ)
 #define main_trampoline ((void (*)(void))0x80336068)
+#endif
+
+#if (NTSCU)
+#define main_trampoline ((void (*)(void))0x80338668)
+#endif
 
 void apply_lib_hooks() {
     Hook::applyHooks();
@@ -25,7 +34,7 @@ void apply_lib_hooks() {
 }
 
 void init() {
-    *reinterpret_cast<u8*>(0x803f60e0) = 1;  // Enable debug crash screen
+    // *reinterpret_cast<u8*>(0x803f60e0) = 1;  // Enable debug crash screen
     Font::loadFont("twwgz/fonts/consola.fnt");
     Draw::init();
 }
@@ -33,6 +42,12 @@ void init() {
 void game_loop() {
     // check and load gz settings card if found
     GZ_loadGZSave(l_loadCard);
+
+    // Make title screen / file select endless night
+    if (!tww_strcmp(g_dComIfG_gameInfo.play.mStartStage.mStage, "Name") || !tww_strcmp(g_dComIfG_gameInfo.play.mStartStage.mStage, "sea_T")) {
+        g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusB().mTime = 0.0f;
+        g_env_light.mCurTime = 0.0f;
+    }
 
     if (tww_mPadStatus.button == (CButton::L | CButton::R | CButton::DPAD_DOWN) && l_fopScnRq_IsUsingOfOverlap != 1) {
         GZ_setMenu(GZ_MAIN_MENU);
@@ -70,6 +85,30 @@ void displaySplash() {
     }
 }
 
+// just using this for testing, move to an actual tool later
+void GZ_displayLinkInfo() {
+    if (g_dComIfG_gameInfo.play.mPlayerPtr != nullptr) {
+        fopAc_ac_c* playerAc = (fopAc_ac_c*)g_dComIfG_gameInfo.play.mPlayerPtr;
+        char link_angle[20];
+        char link_speed[20];
+        char link_x[20];
+        char link_y[20];
+        char link_z[20];
+
+        tww_sprintf(link_angle, "angle: %d", playerAc->mCollisionRot.mY);
+        tww_sprintf(link_speed, "speed: %.4f", playerAc->mSpeedF);
+        tww_sprintf(link_x, "x-pos: %.4f", playerAc->mCurrent.mPosition.x);
+        tww_sprintf(link_y, "y-pos: %.4f", playerAc->mCurrent.mPosition.y);
+        tww_sprintf(link_z, "z-pos: %.4f", playerAc->mCurrent.mPosition.z);
+
+        Font::GZ_drawStr(link_angle, 450.f, 200.f, 0xFFFFFFFF, g_dropShadows);
+        Font::GZ_drawStr(link_speed, 450.f, 220.f, 0xFFFFFFFF, g_dropShadows);
+        Font::GZ_drawStr(link_x, 450.f, 240.f, 0xFFFFFFFF, g_dropShadows);
+        Font::GZ_drawStr(link_y, 450.f, 260.f, 0xFFFFFFFF, g_dropShadows);
+        Font::GZ_drawStr(link_z, 450.f, 280.f, 0xFFFFFFFF, g_dropShadows);
+    }
+}
+
 void draw() {
     // Setup rendering so we can display things on screen
     setupRendering();
@@ -79,6 +118,7 @@ void draw() {
         Font::GZ_drawStr("twwgz v" INTERNAL_GZ_VERSION, 10.0f, 25.0f, g_cursorColor, g_dropShadows);
     }
 
+    GZ_displayLinkInfo(); // just using this for testing, move to an actual tool later
     GZ_drawMenu();
 }
 }
