@@ -12,6 +12,7 @@
 #include "libtww/m_Do/m_Do_main.h"
 
 bool l_loadCard = true;
+Texture l_twwgzIconTex;
 
 extern "C" {
 
@@ -37,6 +38,9 @@ void apply_lib_hooks() {
 void init() {
     Font::loadFont("twwgz/fonts/consola.fnt");
     Draw::init();
+    if (l_twwgzIconTex.loadCode == TexCode::TEX_UNLOADED) {
+        load_texture("twwgz/tex/twwgz.tex", &l_twwgzIconTex);
+    }
 }
 
 void game_loop() {
@@ -76,12 +80,23 @@ void displaySplash() {
         float splash_x = 200.0f;
         float splash_y = 440.0f;
 
-        // Finally draw the string
+        Vec2 icon_pos = {splash_x - 48.0f, splash_y - 8.0f};
+        Vec2 icon_scale = {32, 32};
+
+        // Draw the string
         Font::GZ_drawStr(name, splash_x, splash_y, 0xFFFFFFFF, true, 18.0f);
         Font::GZ_drawStr(url, splash_x, splash_y + 25.0f, 0xFFFFFFFF, true, 18.0f);
+        
+        // Draw twwgz's logo
+        if (l_twwgzIconTex.loadCode == TexCode::TEX_OK) {
+            Draw::drawRect(0xFFFFFFFF, icon_pos, icon_scale, &l_twwgzIconTex._texObj);
+        }
 
-        // Then when splash_time hits < 1, it won't display the string anymore
+        // Then when splash_time hits < 1, it won't display the string or logo anymore
         splash_time--;
+        if (splash_time == 0 && l_twwgzIconTex.loadCode == TexCode::TEX_OK) {
+            free_texture(&l_twwgzIconTex);
+        }
     }
 }
 
