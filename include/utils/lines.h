@@ -19,7 +19,7 @@ struct Line {
     char description[MAX_DESCRIPTION_LENGTH];
     bool toggleable = false;
     bool* activation_flag;
-    uint8_t max_y_cursor_options;
+    u8 max_y_cursor_options;
     char value[MAX_LINE_LENGTH] = {0};
 };
 

@@ -6,11 +6,11 @@ full-developer-name = "The Wind Waker / Twilight Princess Community"
 
 [src]
 iso = "GZLJ01.iso"
-patch = "source/patch.asm"
+patch = "regional-patch.asm"
 map = "maps/framework.map"
 
 [build]
-map = "build/twwgz.map"
+map = "build/GZLJ01.map"
 iso = "build/twwgz.iso"
 
 [link]

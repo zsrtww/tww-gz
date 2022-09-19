@@ -2,6 +2,7 @@
 #include "utils/draw.h"
 #include "utils/texture.h"
 #include "utils/cursor.h"
+#include "menus/settings_menu.h"
 #include "math.h"
 
 int min_line = 0;
@@ -12,7 +13,7 @@ float maxF(float a, float b) {
 }
 
 void GZ_drawMenuLines(Line input_lines[], int cursor, int LINES) {
-    float x_offset = 25.0f;
+    float x_offset = 10.0f;
     float y_offset = 0.0f;
 
     float max_line_width = 0.0f;
@@ -55,23 +56,23 @@ void GZ_drawMenuLines(Line input_lines[], int cursor, int LINES) {
         if (input_lines[i].toggleable) {
             if (*input_lines[i].activation_flag) {
                 Font::GZ_drawStr(" [X]", x_offset + max_line_width, y_offset, cursor_color,
-                                 true);
+                                 g_dropShadows);
             } else {
                 Font::GZ_drawStr(" [ ]", x_offset + max_line_width, y_offset, cursor_color,
-                                 true);
+                                 g_dropShadows);
             }
 
-            Font::GZ_drawStr(input_lines[i].line, x_offset, y_offset, cursor_color, true);
+            Font::GZ_drawStr(input_lines[i].line, x_offset, y_offset, cursor_color, g_dropShadows);
         } else {
-            Font::GZ_drawStr(input_lines[i].line, x_offset, y_offset, cursor_color, true);
+            Font::GZ_drawStr(input_lines[i].line, x_offset, y_offset, cursor_color, g_dropShadows);
             Font::GZ_drawStr(input_lines[i].value, x_offset + max_line_width, y_offset,
-                             cursor_color, true);
+                             cursor_color, g_dropShadows);
         }
 
         // render line descriptions
         if (input_lines[i].idx == cursor) {
-            Font::GZ_drawStr(input_lines[i].description, x_offset, 440.f, 0x00000000, true);
+            Font::GZ_drawStr(input_lines[i].description, x_offset, 465.f, 0x00000000, true);
         }
-        Font::GZ_drawStr(input_lines[i].description, x_offset, 440.f, description_color, false);
+        Font::GZ_drawStr(input_lines[i].description, x_offset, 465.f, description_color, false);
     }
 }

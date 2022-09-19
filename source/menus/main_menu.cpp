@@ -46,7 +46,7 @@ void MainMenu::draw() {
             //GZ_setMenu(GZ_SCENE_MENU);
             return;
         case SETTINGS_INDEX:
-            //GZ_setMenu(GZ_SETTINGS_MENU);
+            GZ_setMenu(GZ_SETTINGS_MENU);
             return;
         case TOOLS_INDEX:
             //GZ_setMenu(GZ_TOOLS_MENU);

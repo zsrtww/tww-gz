@@ -1,6 +1,6 @@
 #pragma once
 
-#include <stdint.h>
+
 #include "controller.h"
 
 enum CURSOR_COLORS {
@@ -49,11 +49,11 @@ struct Cursor {
         lock_y = y;
     }
 
-    void setMode(uint8_t m) { mode = m; }
+    void setMode(u8 m) { mode = m; }
 
     int x = 0;
     int y = 0;
-    uint8_t mode = 0;
+    u8 mode = 0;
     bool lock_x = false;
     bool lock_y = false;
 };

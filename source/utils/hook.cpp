@@ -9,12 +9,12 @@
     tww_##name##_t name##Trampoline;
 
 HOOK_DEF(void, draw, (void*));
-HOOK_DEF(uint32_t, PADRead, (uint16_t*));
+HOOK_DEF(u32, PADRead, (u16*));
 HOOK_DEF(void, cDyl_InitAsync, (void*, void*, void*));
 HOOK_DEF(void, fapGm_Execute, (void));
 
 struct {
-    uint32_t a[2];
+    u32 a[2];
 } trampolines[HOOK_AMNT];
 
 namespace Hook {
@@ -34,7 +34,7 @@ void gameLoopHook(void) {
     fapGm_ExecuteTrampoline();
 }
 
-uint32_t readControllerHook(uint16_t* p1) {
+u32 readControllerHook(u16* p1) {
     auto returnValue = PADReadTrampoline(p1);
     GZ_readController();
     return returnValue;

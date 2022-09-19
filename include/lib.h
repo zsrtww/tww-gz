@@ -1,7 +1,7 @@
 #pragma once
 
-#include "libtww/addrs.h"
-#include "gctypes.h"
+#include "libtww/MSL_C/string.h"
+#include "libtww/dolphin/gctypes.h"
 
 extern "C" {
 

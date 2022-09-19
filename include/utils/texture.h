@@ -1,7 +1,7 @@
 #pragma once
 
-#include <stdint.h>
-#include "libtww/addrs.h"
+
+#include "libtww/dolphin/gctypes.h"
 #include "gcn_c/include/gfx.h"
 
 enum TexCode {
@@ -14,15 +14,15 @@ enum TexCode {
 };
 
 struct TexHeader {
-    uint32_t magic;
-    uint32_t format;
-    uint32_t width;
-    uint32_t height;
+    u32 magic;
+    u32 format;
+    u32 width;
+    u32 height;
 } __attribute__((packed));
 
 struct Texture {
     TexHeader header;
-    uint8_t* data;
+    u8* data;
     GXTexObj _texObj;
     TexCode loadCode;
 };
@@ -47,7 +47,7 @@ TexCode load_texture(const char* path, Texture* tex);
  * @param[in] offset Offset in the file to start loading the texture from.
  * @returns A TexCode code signaling the success/failure of the loading.
  */
-TexCode load_texture_offset(const char* path, Texture* tex, uint32_t offset);
+TexCode load_texture_offset(const char* path, Texture* tex, u32 offset);
 void free_texture(Texture* tex);
 
 void setupRendering();

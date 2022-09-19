@@ -7,7 +7,7 @@ ifeq ($(strip $(DEVKITPPC)),)
 $(error "Please set DEVKITPPC in your environment. export DEVKITPPC=<path to>devkitPro/devkitPPC")
 endif
 
-REGION		:=  $(if $(REGION),$(REGION),NTSCU)
+REGION		:=  $(if $(REGION),$(REGION),NTSCJ)
 
 include $(DEVKITPPC)/gamecube_rules
 
@@ -20,6 +20,7 @@ include $(DEVKITPPC)/gamecube_rules
 
 PACKAGE_NAME ?= $(TARGET)
 PACKAGE_URL ?= github.com/zsrtww/tww-gz
+GZ_VERSION  ?=  0.0.1
 
 TARGET		:=	twwgz
 BUILD		:=	build
@@ -34,7 +35,7 @@ MAKEFILES   :=  $(shell find . -mindepth 2 -name Makefile)
 #---------------------------------------------------------------------------------
 
 CFLAGS	= -g -c -O2 -Wall $(MACHDEP) $(INCLUDE)
-CXXFLAGS	= -DPACKAGE_NAME=$(PACKAGE_NAME) -DPACKAGE_URL=$(PACKAGE_URL) $(CFLAGS)
+CXXFLAGS	= -DPACKAGE_NAME=$(PACKAGE_NAME) -DPACKAGE_URL=$(PACKAGE_URL) -DGZ_VERSION=$(GZ_VERSION) -D $(REGION) $(CFLAGS)
 
 #---------------------------------------------------------------------------------
 # list of directories containing libraries, this must be the top level containing
@@ -97,6 +98,8 @@ export OUTPUT	:=	$(CURDIR)/$(TARGET)
 
 #---------------------------------------------------------------------------------
 $(BUILD):
+	@bash external/misc/asm-inject.sh $(REGION)
+	@bash external/misc/toml-inject.sh $(REGION)
 	@[ -d $@ ] || mkdir -p $@
 	@$(MAKE) --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile
 	@for i in $(MAKEFILES); do $(MAKE) --no-print-directory -C `dirname $$i` || exit 1; done;
@@ -104,6 +107,7 @@ $(BUILD):
 #---------------------------------------------------------------------------------
 clean:
 	@echo clean ...
+	@rm -f regional-patch.asm
 	@rm -fr $(BUILD) $(OUTPUT).o $(OUTPUT).a
 	@for i in $(MAKEFILES); do $(MAKE) --no-print-directory -C `dirname $$i` clean || exit 1; done;
 
