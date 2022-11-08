@@ -49,8 +49,11 @@ void game_loop() {
 
     // Make title screen / file select endless night
     if (!tww_strcmp(g_dComIfG_gameInfo.play.mStartStage.mStage, "Name") || !tww_strcmp(g_dComIfG_gameInfo.play.mStartStage.mStage, "sea_T")) {
-        g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusB().mTime = 0.0f;
-        g_env_light.mCurTime = 0.0f;
+        g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusB().mTime = 1.0f;
+        g_env_light.mCurTime = 1.0f;
+        g_env_light.mColPatCurr = 1;
+        g_env_light.mbThunderActive = 1;
+        g_env_light.mRainCount = 250;
     }
 
     if (tww_mPadStatus.button == (CButton::L | CButton::R | CButton::DPAD_DOWN) && l_fopScnRq_IsUsingOfOverlap != 1) {
