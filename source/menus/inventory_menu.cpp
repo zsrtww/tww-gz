@@ -14,6 +14,7 @@ Line lines[LINE_NUM] = {
 
 void InventoryMenu::draw() {
     cursor.move(0, LINE_NUM);
+    
 
     if (GZ_getButtonTrig(GZPad::B)) {
         GZ_setMenu(GZ_MAIN_MENU);

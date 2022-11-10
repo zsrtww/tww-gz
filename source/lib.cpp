@@ -10,6 +10,7 @@
 #include "libtww/d/com/d_com_inf_game.h"
 #include "libtww/f_op/f_op_scene_req.h"
 #include "libtww/m_Do/m_Do_main.h"
+#include "menus/tools_menu.h"
 
 bool l_loadCard = true;
 Texture l_twwgzIconTex;
@@ -63,8 +64,33 @@ void game_loop() {
     if (l_fopScnRq_IsUsingOfOverlap) {
         GZ_clearMenu();
     }
-
+    
     GZ_setCursorColor();
+   
+}
+
+void GZ_displayLinkInfo() {
+    //Generates Link position and angle data.
+    if (g_dComIfG_gameInfo.play.mPlayerPtr != nullptr) {
+        fopAc_ac_c* playerAc = (fopAc_ac_c*)g_dComIfG_gameInfo.play.mPlayerPtr;
+        char link_angle[20];
+        char link_speed[20];
+        char link_x[20];
+        char link_y[20];
+        char link_z[20];
+
+        tww_sprintf(link_angle, "angle: %d", playerAc->mCollisionRot.mY);
+        tww_sprintf(link_speed, "speed: %.4f", playerAc->mSpeedF);
+        tww_sprintf(link_x, "x-pos: %.4f", playerAc->mCurrent.mPosition.x);
+        tww_sprintf(link_y, "y-pos: %.4f", playerAc->mCurrent.mPosition.y);
+        tww_sprintf(link_z, "z-pos: %.4f", playerAc->mCurrent.mPosition.z);
+
+        Font::GZ_drawStr(link_angle, 450.f, 200.f, 0xFFFFFFFF, g_dropShadows);
+        Font::GZ_drawStr(link_speed, 450.f, 220.f, 0xFFFFFFFF, g_dropShadows);
+        Font::GZ_drawStr(link_x, 450.f, 240.f, 0xFFFFFFFF, g_dropShadows);
+        Font::GZ_drawStr(link_y, 450.f, 260.f, 0xFFFFFFFF, g_dropShadows);
+        Font::GZ_drawStr(link_z, 450.f, 280.f, 0xFFFFFFFF, g_dropShadows);
+    }
 }
 
 void displaySplash() {
@@ -103,29 +129,7 @@ void displaySplash() {
     }
 }
 
-// just using this for testing, move to an actual tool later
-void GZ_displayLinkInfo() {
-    if (g_dComIfG_gameInfo.play.mPlayerPtr != nullptr) {
-        fopAc_ac_c* playerAc = (fopAc_ac_c*)g_dComIfG_gameInfo.play.mPlayerPtr;
-        char link_angle[20];
-        char link_speed[20];
-        char link_x[20];
-        char link_y[20];
-        char link_z[20];
 
-        tww_sprintf(link_angle, "angle: %d", playerAc->mCollisionRot.mY);
-        tww_sprintf(link_speed, "speed: %.4f", playerAc->mSpeedF);
-        tww_sprintf(link_x, "x-pos: %.4f", playerAc->mCurrent.mPosition.x);
-        tww_sprintf(link_y, "y-pos: %.4f", playerAc->mCurrent.mPosition.y);
-        tww_sprintf(link_z, "z-pos: %.4f", playerAc->mCurrent.mPosition.z);
-
-        Font::GZ_drawStr(link_angle, 450.f, 200.f, 0xFFFFFFFF, g_dropShadows);
-        Font::GZ_drawStr(link_speed, 450.f, 220.f, 0xFFFFFFFF, g_dropShadows);
-        Font::GZ_drawStr(link_x, 450.f, 240.f, 0xFFFFFFFF, g_dropShadows);
-        Font::GZ_drawStr(link_y, 450.f, 260.f, 0xFFFFFFFF, g_dropShadows);
-        Font::GZ_drawStr(link_z, 450.f, 280.f, 0xFFFFFFFF, g_dropShadows);
-    }
-}
 
 void draw() {
     // Setup rendering so we can display things on screen
@@ -136,7 +140,9 @@ void draw() {
         Font::GZ_drawStr("twwgz v" INTERNAL_GZ_VERSION, 10.0f, 25.0f, g_cursorColor, g_dropShadows);
     }
 
-    GZ_displayLinkInfo(); // just using this for testing, move to an actual tool later
+    if(g_debugInfo){
+        GZ_displayLinkInfo();
+    }
     GZ_drawMenu();
 }
 }

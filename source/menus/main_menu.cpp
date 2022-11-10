@@ -49,7 +49,7 @@ void MainMenu::draw() {
             GZ_setMenu(GZ_SETTINGS_MENU);
             return;
         case TOOLS_INDEX:
-            //GZ_setMenu(GZ_TOOLS_MENU);
+            GZ_setMenu(GZ_TOOLS_MENU);
             return;
         case WARPING_INDEX:
             //GZ_setMenu(GZ_WARP_MENU);
