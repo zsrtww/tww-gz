@@ -9,19 +9,20 @@
 #include "utils/draw.h"
 #include "utils/hook.h"
 
-#define LINE_NUM 3
+#define LINE_NUM 4
 Cursor ToolsMenu::cursor;
 
 bool g_debugInfo = false;
 bool g_areaReload;
 bool g_teleport;
+bool g_zombieHoverInfo;
 bool g_inputViewer;
 
 Line lines[LINE_NUM] = {
     {"Link Debug Info", DEBUG_INDEX, "Display position and angle data for Link.", true, &g_debugInfo},
     {"Teleport", TELEPORT_INDEX, "Set and load saved positions. Set with R + D-pad up and load with R + D-pad down.", true, &g_teleport},
-    {"Area Reload", AREA_RELOAD_INDEX, "Reloads the current room by pressing L + R + A + Start", true,
-     &g_areaReload},
+    {"Area Reload", AREA_RELOAD_INDEX, "Reloads the current room by pressing L + R + A + Start", true, &g_areaReload},
+    {"Zombie Hover Info", ZH_INDEX, "Display A and B button presses per second.", true, &g_zombieHoverInfo},
 };
 
 void ToolsMenu::draw(){
@@ -49,6 +50,10 @@ void ToolsMenu::draw(){
                     //load position info
                     }
                 }                
+                return;
+
+            case ZH_INDEX:
+                g_zombieHoverInfo =! g_zombieHoverInfo;
                 return;
 
             case AREA_RELOAD_INDEX:

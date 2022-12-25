@@ -93,6 +93,18 @@ void GZ_displayLinkInfo() {
     }
 }
 
+void GZ_displayZombieHoverInfo() {
+    //Generates A and B button presses per second
+    char a_presses_str[8];
+    char b_presses_str[8];
+
+    tww_sprintf(a_presses_str, "A: %d", GZ_getAPressesPerWindow());
+    tww_sprintf(b_presses_str, "B: %d", GZ_getBPressesPerWindow());
+
+    Font::GZ_drawStr(a_presses_str, 454.f, 320.f, 0x00CC00FF, g_dropShadows);
+    Font::GZ_drawStr(b_presses_str, 454.f, 340.f, 0xCC0000FF, g_dropShadows);
+}
+
 void displaySplash() {
     // Create and render a splash screen once the game has launched using the supplied address
     extern u32* mDoExt_font0;
@@ -138,6 +150,10 @@ void draw() {
 
     if (GZ_checkMenuOpen()) {
         Font::GZ_drawStr("twwgz v" INTERNAL_GZ_VERSION, 10.0f, 25.0f, g_cursorColor, g_dropShadows);
+    }
+
+    if (g_zombieHoverInfo) {
+        GZ_displayZombieHoverInfo();
     }
 
     if(g_debugInfo){

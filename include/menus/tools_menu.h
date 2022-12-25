@@ -11,10 +11,12 @@ enum ToolsMenuIndex {
     DEBUG_INDEX,
     TELEPORT_INDEX,
     AREA_RELOAD_INDEX,
+    ZH_INDEX,
     INPUT_VIEWER_INDEX,
 };
 
 extern bool g_debugInfo;
+extern bool g_zombieHoverInfo;
 
 class ToolsMenu : public Menu {
 public:

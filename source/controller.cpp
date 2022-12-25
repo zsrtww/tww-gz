@@ -22,6 +22,11 @@ static u16 sButtons = 0;
 static u16 sButtonsPressed = 0;
 static u16 sCursorEnableDelay = 0;
 
+u8 a_presses_per_window = 0;
+u8 b_presses_per_window = 0;
+u8 a_presses = 0;
+u8 b_presses = 0;
+
 struct ButtonState {
     u16 button;
     u32 pressed_frame;
@@ -81,6 +86,8 @@ void GZ_readController() {
         sCursorEnableDelay = 0;
         // GZCmd_processInputs();
     }
+
+    GZ_readZombieHoverInputs();
 }
 
 bool GZ_getButtonPressed(int idx) {
@@ -125,4 +132,28 @@ bool GZ_getButtonHold(int idx, int phase) {
     } else {
         return false;
     }
+}
+
+void GZ_readZombieHoverInputs() {
+    u32 zh_window_length = 30;
+    u16 current_input = GZ_getButtonStatus();
+
+    if (cCt_getFrameCount() % zh_window_length == 0) {
+        a_presses_per_window = a_presses;
+        b_presses_per_window = b_presses;
+
+        a_presses = 0;
+        b_presses = 0;
+    }
+
+    if ((current_input & CButton::A) && (buttonStates[GZPad::A].button & sButtonsPressed) != 0) a_presses += 1;
+    if ((current_input & CButton::B) && (buttonStates[GZPad::B].button & sButtonsPressed) != 0) b_presses += 1;
+}
+
+u8 GZ_getAPressesPerWindow() {
+    return a_presses_per_window;
+}
+
+u8 GZ_getBPressesPerWindow() {
+    return b_presses_per_window;
 }

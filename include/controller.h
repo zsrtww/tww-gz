@@ -26,3 +26,6 @@ bool GZ_getButtonHold(int idx, int phase = 0);
 u16 GZ_getButtonStatus();
 void GZ_readController();
 bool GZ_getButtonTrig(int idx);
+void GZ_readZombieHoverInputs();
+u8 GZ_getAPressesPerWindow();
+u8 GZ_getBPressesPerWindow();
