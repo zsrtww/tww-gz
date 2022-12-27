@@ -101,8 +101,8 @@ void GZ_displayZombieHoverInfo() {
     tww_sprintf(a_presses_str, "A: %d", GZ_getAPressesPerWindow());
     tww_sprintf(b_presses_str, "B: %d", GZ_getBPressesPerWindow());
 
-    Font::GZ_drawStr(a_presses_str, 454.f, 320.f, 0x00CC00FF, g_dropShadows);
-    Font::GZ_drawStr(b_presses_str, 454.f, 340.f, 0xCC0000FF, g_dropShadows);
+    Font::GZ_drawStr(a_presses_str, 450.f, 320.f, 0x00CC00FF, g_dropShadows);
+    Font::GZ_drawStr(b_presses_str, 450.f, 340.f, 0xCC0000FF, g_dropShadows);
 }
 
 void displaySplash() {
