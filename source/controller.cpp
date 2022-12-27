@@ -14,6 +14,7 @@ void setGamepadTrig(u32 buttons) {
 #define BUTTON_STATES 12
 #define REPEAT_TIME 4
 #define REPEAT_DELAY 5
+#define WINDOW_LENGTH 30
 
 #define buttonStatus (tww_mPadStatus.button)
 
@@ -21,6 +22,11 @@ static u16 sButtonsLastFrame = 0;
 static u16 sButtons = 0;
 static u16 sButtonsPressed = 0;
 static u16 sCursorEnableDelay = 0;
+
+u8 a_presses_per_window = 0;
+u8 b_presses_per_window = 0;
+u8 a_presses[WINDOW_LENGTH] = {0};
+u8 b_presses[WINDOW_LENGTH] = {0};
 
 struct ButtonState {
     u16 button;
@@ -81,6 +87,8 @@ void GZ_readController() {
         sCursorEnableDelay = 0;
         // GZCmd_processInputs();
     }
+
+    GZ_readZombieHoverInputs();
 }
 
 bool GZ_getButtonPressed(int idx) {
@@ -125,4 +133,44 @@ bool GZ_getButtonHold(int idx, int phase) {
     } else {
         return false;
     }
+}
+
+u8 arraySum(const u8 (&myArray)[WINDOW_LENGTH]) {
+    u8 myArraySum = 0;
+    for (int i = 0; i < WINDOW_LENGTH; i++) {
+        myArraySum += myArray[i];
+    }
+
+    return myArraySum;
+}
+
+void updateButtonPressesInWindow(u8 (&buttonPressesInWindow)[WINDOW_LENGTH], const u32& current_frame, const u16& cButton, const int& gzButton) {
+    u16 current_input = GZ_getButtonStatus();
+
+    if ((current_input & cButton) && (buttonStates[gzButton].button & sButtonsPressed) != 0) {
+        buttonPressesInWindow[current_frame % WINDOW_LENGTH] = 1;
+    } else {
+        buttonPressesInWindow[current_frame % WINDOW_LENGTH] = 0;
+    }
+}
+
+void GZ_readZombieHoverInputs() {
+    u32 zh_window_update_rate = 6;
+    u32 current_frame = cCt_getFrameCount();
+
+    if (current_frame % zh_window_update_rate == 0) {
+        a_presses_per_window = arraySum(a_presses);
+        b_presses_per_window = arraySum(b_presses);
+    }
+
+    updateButtonPressesInWindow(a_presses, current_frame, CButton::A, GZPad::A);
+    updateButtonPressesInWindow(b_presses, current_frame, CButton::B, GZPad::B);
+}
+
+u8 GZ_getAPressesPerWindow() {
+    return a_presses_per_window;
+}
+
+u8 GZ_getBPressesPerWindow() {
+    return b_presses_per_window;
 }
