@@ -1,5 +1,6 @@
 #include "utils/cursor.h"
 #include "controller.h"
+#include "color.h"
 
 int g_cursorColor;
 int g_cursorColorType;
@@ -58,22 +59,22 @@ void Cursor::move(int max_x, int max_y) {
 void GZ_setCursorColor() {
     switch (g_cursorColorType) {
     case CURSOR_GREEN:
-        g_cursorColor = 0x00CC00FF;
+        g_cursorColor = ColorPalette::GREEN;
         break;
     case CURSOR_BLUE:
-        g_cursorColor = 0x0080FFFF;
+        g_cursorColor = ColorPalette::BLUE;
         break;
     case CURSOR_RED:
-        g_cursorColor = 0xCC0000FF;
+        g_cursorColor = ColorPalette::RED;
         break;
     case CURSOR_ORANGE:
-        g_cursorColor = 0xEE8000FF;
+        g_cursorColor = ColorPalette::ORANGE;
         break;
     case CURSOR_YELLOW:
-        g_cursorColor = 0xFFCC00FF;
+        g_cursorColor = ColorPalette::YELLOW;
         break;
     case CURSOR_PURPLE:
-        g_cursorColor = 0x6600CCFF;
+        g_cursorColor = ColorPalette::PURPLE;
         break;
     }
 }
