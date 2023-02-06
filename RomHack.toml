@@ -6,21 +6,28 @@ full-developer-name = "The Wind Waker / Twilight Princess Community"
 
 [src]
 iso = "GZLJ01.iso"
-patch = "source/patch.asm"
+patch = "regional-patch.asm"
 map = "maps/framework.map"
 
 [build]
-map = "build/twwgz.map"
+map = "build/GZLJ01.map"
 iso = "build/twwgz.iso"
 
 [link]
-entries = ["init", "game_loop"]
+entries = ["apply_lib_hooks"]
 base = "0x8040_1000"
 libs = ["twwgz.a", "external/gcn_c/gcn_c.a"]
 
 [files]
 # textures
 "twwgz/tex/blank.tex" = "res/tex/blank.tex"
+"twwgz/tex/twwgz.tex" = "res/tex/twwgz.tex"
 
 # fonts
-"twwgz/fonts" = "res/fonts"
+"twwgz/fonts/consola.fnt" = "res/fonts/consola.fnt"
+"twwgz/fonts/calamity-bold.fnt" = "res/fonts/calamity-bold.fnt"
+"twwgz/fonts/lib-sans-bold.fnt" = "res/fonts/lib-sans-bold.fnt"
+"twwgz/fonts/lib-sans.fnt" = "res/fonts/lib-sans.fnt"
+"twwgz/fonts/lib-serif-bold.fnt" = "res/fonts/lib-serif-bold.fnt"
+"twwgz/fonts/lib-serif.fnt" = "res/fonts/lib-serif.fnt"
+"twwgz/fonts/press-start-2p.fnt" = "res/fonts/press-start-2p.fnt"

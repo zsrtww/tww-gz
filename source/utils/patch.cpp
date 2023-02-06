@@ -1,26 +1,26 @@
 // Taken from https://github.com/zsrtp/GC-Randomizer/blob/stable/source/patch.cpp
 #include "utils/patch.h"
 #include "libtww/dolphin/os/OSCache.h"
-#include <stdint.h>
+
 
 void writeBranch(void* ptr, void* destination) {
-    uint32_t branch = 0x48000000;  // b
+    u32 branch = 0x48000000;  // b
     writeBranchMain(ptr, destination, branch);
 }
 
 void writeBranchLR(void* ptr, void* destination) {
-    uint32_t branch = 0x48000001;  // bl
+    u32 branch = 0x48000001;  // bl
     writeBranchMain(ptr, destination, branch);
 }
 
-void writeBranchMain(void* ptr, void* destination, uint32_t branch) {
-    uint32_t delta = reinterpret_cast<uint32_t>(destination) - reinterpret_cast<uint32_t>(ptr);
+void writeBranchMain(void* ptr, void* destination, u32 branch) {
+    u32 delta = reinterpret_cast<u32>(destination) - reinterpret_cast<u32>(ptr);
 
     branch |= (delta & 0x03FFFFFC);
 
-    uint32_t* p = reinterpret_cast<uint32_t*>(ptr);
+    u32* p = reinterpret_cast<u32*>(ptr);
     *p = branch;
 
-    DCFlushRange(ptr, sizeof(uint32_t));
-    ICInvalidateRange(ptr, sizeof(uint32_t));
+    DCFlushRange(ptr, sizeof(u32));
+    ICInvalidateRange(ptr, sizeof(u32));
 }

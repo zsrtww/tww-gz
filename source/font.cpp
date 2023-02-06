@@ -1,5 +1,7 @@
 #include "font.h"
-#include "addrs.h"
+#include "libtww/SSystem/SComponent/c_malloc.h"
+#include "libtww/SSystem/SComponent/c_lib.h"
+#include "libtww/MSL_C/string.h"
 #include "utils/disc.h"
 #include "utils/draw.h"
 
@@ -7,7 +9,7 @@ _Font Font::font;
 
 FontCode Font::loadFont(const char* path) {
     DVDFileInfo fileInfo;
-    int32_t readsize;
+    s32 readsize;
     if (font.loadCode == FontCode::FNT_OK) {
         free_font();
     }
@@ -17,13 +19,13 @@ FontCode Font::loadFont(const char* path) {
         return font.loadCode;
     }
     readsize = dvd_read(&fileInfo, &font.header, sizeof(_FontHeader), 0);
-    if (readsize < (int32_t)sizeof(_FontHeader)) {
+    if (readsize < (s32)sizeof(_FontHeader)) {
         DVDClose(&fileInfo);
         font.loadCode = FontCode::FNT_ERR_READ;
         return font.loadCode;
     }
 
-    uint32_t size = font.header.glyph_count * sizeof(_Glyph);
+    u32 size = font.header.glyph_count * sizeof(_Glyph);
     font.glyphs = (_Glyph*)tww_memalign(-32, size);
     if (font.glyphs == nullptr) {
         DVDClose(&fileInfo);
@@ -31,7 +33,7 @@ FontCode Font::loadFont(const char* path) {
         return font.loadCode;
     }
 
-    if (DVDReadPrio(&fileInfo, font.glyphs, size, sizeof(font.header), 2) < (int32_t)size) {
+    if (DVDReadPrio(&fileInfo, font.glyphs, size, sizeof(font.header), 2) < (s32)size) {
         tww_free(font.glyphs);
         DVDClose(&fileInfo);
         font.loadCode = FontCode::FNT_ERR_READ;
@@ -61,7 +63,7 @@ void Font::free_font() {
     font.loadCode = FontCode::FNT_UNLOADED;
 }
 
-void PositionedGlyph::render(uint32_t color, Texture* texture) {
+void PositionedGlyph::render(u32 color, Texture* texture) {
     Draw::drawQuad(color, vertices, tex_coords, &texture->_texObj);
 }
 
@@ -82,7 +84,7 @@ PositionedGlyph DecodedGlyph::position(float _x, float _y, float factor) {
 }
 
 bool Font::lookupGlyph(char c, DecodedGlyph& glyph) {
-    uint8_t idx = c;
+    u8 idx = c;
     if (idx < 0 || idx >= font.header.glyph_count) {
         return false;
     }
@@ -93,7 +95,7 @@ bool Font::lookupGlyph(char c, DecodedGlyph& glyph) {
     return true;
 }
 
-float Font::renderChar(char c, float x, float y, uint32_t color, float size) {
+float Font::renderChar(char c, float x, float y, u32 color, float size) {
     DecodedGlyph glyph;
     if (lookupGlyph(c, glyph)) {
         auto positioned = glyph.position(x, y, size / font.header.base_size);
@@ -104,21 +106,21 @@ float Font::renderChar(char c, float x, float y, uint32_t color, float size) {
     }
 }
 
-void Font::renderChars(const char* str, float x, float y, uint32_t color, float size) {
+void Font::renderChars(const char* str, float x, float y, u32 color, float size) {
     int len = tww_strlen(str);
     for (int i = 0; i < len; i++) {
         x = renderChar(str[i], x, y, color, size);
     }
 }
 
-void Font::GZ_drawChar(char c, float x, float y, uint32_t color, bool drop_shadows, float size) {
+void Font::GZ_drawChar(char c, float x, float y, u32 color, bool drop_shadows, float size) {
     if (drop_shadows) {
         renderChar(c, x + 1.0f, y + 1.0f, DROP_SHADOWS_RGBA, size);
     }
     renderChar(c, x, y, color, size);
 }
 
-void Font::GZ_drawStr(const char* str, float x, float y, uint32_t color, bool drop_shadows,
+void Font::GZ_drawStr(const char* str, float x, float y, u32 color, bool drop_shadows,
                       float size) {
     if (drop_shadows) {
         renderChars(str, x + 1.0f, y + 1.0f, DROP_SHADOWS_RGBA, size);
@@ -146,7 +148,7 @@ float Font::getStrWidth(const char* str, float size) {
 
 // returns the width of the rendered string
 float GZ_drawSelectChar(const char* str, float x, float y, size_t char_idx, size_t max_char,
-                        uint32_t color) {
+                        u32 color) {
     float pos = 0.0f;
     for (size_t i = 0; i <= max_char; ++i) {
         Font::GZ_drawChar(str[i], x + pos, y, char_idx == i ? 0xFFFFFFFF : color,

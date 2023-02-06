@@ -10,3 +10,4 @@ Updater.log
 __pycache__
 RomHack.toml
 *.patch
+regional-patch.asm

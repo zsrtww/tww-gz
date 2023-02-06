@@ -1,7 +1,7 @@
 #pragma once
 
 #include "libtww/dolphin/mtx/vec.h"
-#include "addrs.h"
+#include "libtww/addrs.h"
 #include "utils/texture.h"
 #include "gcn_c/include/gfx.h"
 #include <cstdarg>
@@ -31,7 +31,7 @@ struct _FontHeader {
     char magic[0x4];
     float base_size;  // in points
     _Metrics metrics;
-    uint32_t glyph_count;
+    u32 glyph_count;
 };
 
 struct _Font {
@@ -46,7 +46,7 @@ public:
     Vec2 vertices[4];
     Vec2 tex_coords[4];
     float next_x;
-    void render(uint32_t color, Texture* texture);
+    void render(u32 color, Texture* texture);
 };
 
 class DecodedGlyph {
@@ -67,17 +67,17 @@ public:
     static FontCode loadFont(const char* path);
     static void free_font();
     static bool lookupGlyph(char c, DecodedGlyph& glyph);
-    static float renderChar(char c, float x, float y, uint32_t color,
+    static float renderChar(char c, float x, float y, u32 color,
                             float size = FONT_DEFAULT_SIZE);
-    static void renderChars(const char* str, float x, float y, uint32_t color,
+    static void renderChars(const char* str, float x, float y, u32 color,
                             float size = FONT_DEFAULT_SIZE);
-    static void GZ_drawChar(char c, float x, float y, uint32_t color, bool drop_shawdows,
+    static void GZ_drawChar(char c, float x, float y, u32 color, bool drop_shadows,
                             float size = FONT_DEFAULT_SIZE);
-    static void GZ_drawStr(const char* str, float x, float y, uint32_t color, bool drop_shadows,
+    static void GZ_drawStr(const char* str, float x, float y, u32 color, bool drop_shadows,
                            float size = FONT_DEFAULT_SIZE);
     static float getCharWidth(char c, float size = FONT_DEFAULT_SIZE);
     static float getStrWidth(const char* str, float size = FONT_DEFAULT_SIZE);
 };
 
 float GZ_drawSelectChar(const char* str, float x, float y, size_t char_idx, size_t max_char,
-                        uint32_t color);
+                        u32 color);
