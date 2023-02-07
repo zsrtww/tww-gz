@@ -28,7 +28,7 @@ void MainMenu::draw() {
     if (GZ_getButtonTrig(GZPad::A)) {
         switch (cursor.y) {
         case CHEAT_INDEX:
-            //GZ_setMenu(GZ_CHEAT_MENU);
+            GZ_setMenu(GZ_CHEAT_MENU);
             return;
         case FLAGS_INDEX:
             //GZ_setMenu(GZ_FLAGS_MENU);

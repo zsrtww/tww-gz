@@ -19,16 +19,15 @@ GZTool g_tools[TOOL_AMNT] = {
 };
 
 Line lines[LINE_NUM] = {
-    {"Link Debug Info", DEBUG_INDEX, "Display position and angle data for Link", true,
+    {"link debug info", DEBUG_INDEX, "Display position and angle data for Link", true,
      &g_tools[DEBUG_INDEX].active},
-    {"Teleport", TELEPORT_INDEX,
-     "Set and load saved positions. Set with R + D-pad up and load with R + D-pad down", true,
+    {"teleport", TELEPORT_INDEX, "R+D-pad up to save position. R+D-pad down to load", true,
      &g_tools[TELEPORT_INDEX].active},
-    {"Area Reload", AREA_RELOAD_INDEX, "Reloads the current room by pressing L + R + A + Start",
+    {"area reload", AREA_RELOAD_INDEX, "Reloads the current room by pressing L + R + A + Start",
      true, &g_tools[AREA_RELOAD_INDEX].active},
-    {"Zombie Hover Info", ZH_INDEX, "Display A and B button presses per second", true,
+    {"zombie hover info", ZH_INDEX, "Display A and B button presses per second", true,
      &g_tools[ZH_INDEX].active},
-    {"Input Viewer", INPUT_VIEWER_INDEX, "Show current inputs", true,
+    {"input viewer", INPUT_VIEWER_INDEX, "Show current inputs", true,
      &g_tools[INPUT_VIEWER_INDEX].active},
 };
 

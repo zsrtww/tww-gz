@@ -1,3 +1,5 @@
+#pragma once
+
 #include "menu.h"
 #include "libtww/d/kankyo/d_kankyo.h"
 #include "libtww/d/com/d_com_inf_game.h"

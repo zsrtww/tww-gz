@@ -1,6 +1,11 @@
+#pragma once
+
 #include "font.h"
 #include "gcn_c/include/storage.h"
 #include "menu.h"
+#include "menus/tools_menu.h"
+#include "menus/cheat_menu.h"
+#include "commands.h"
 
 s32 GZ_storageWrite(Storage* info, void* data, s32 size, s32 offset,
                         s32 sector_size);
@@ -15,7 +20,7 @@ void GZ_loadMemfile(Storage& card);
 void GZ_loadGZSave(bool& card_load);
 
 #define GZ_SAVE_VERSION_NUMBER 0
-#define GZ_SAVE_ENTRIES_AMNT 3
+#define GZ_SAVE_ENTRIES_AMNT 6
 
 // These numbers can only change when we change the GZ_SAVE_VERSION_NUMBER,
 // otherwise, only new entries can be added.
@@ -23,6 +28,9 @@ enum GZSaveIndex {
     SV_CURSOR_COLOR_INDEX = 0,
     SV_FONT_INDEX = 1,
     SV_DROP_SHADOW_INDEX = 2,
+    SV_CHEATS_INDEX = 3,
+    SV_TOOLS_INDEX = 4,
+    SV_COMMANDS_INDEX = 5,
 };
 
 struct GZSaveHeader {
@@ -33,6 +41,9 @@ struct GZSaveHeader {
 };
 
 struct GZSaveLayout {
+    GZCheat mCheats[CHEAT_AMNT];
+    GZTool mTools[TOOL_AMNT];
+    bool mCommandStates[COMMANDS_AMNT];
     bool mDropShadows;
     int mCursorColType;
     int mFontType;

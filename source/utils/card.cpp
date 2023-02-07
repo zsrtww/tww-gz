@@ -58,12 +58,20 @@ s32 GZ_storageRead(Storage* storage, void* data, s32 size, s32 offset,
 }
 
 void GZ_storeSaveLayout(GZSaveLayout& save_layout) {
+    tww_memcpy(save_layout.mCheats, g_cheats, sizeof(g_cheats));
+    tww_memcpy(save_layout.mTools, g_tools, sizeof(g_tools));
+    tww_memcpy(save_layout.mCommandStates, g_commandStates, sizeof(g_commandStates));
+
     save_layout.mDropShadows = g_dropShadows;
     save_layout.mCursorColType = g_cursorColorType;
     save_layout.mFontType = g_fontType;
 }
 
 void GZ_loadSaveLayout(GZSaveLayout& save_layout) {
+    tww_memcpy(g_cheats, save_layout.mCheats, sizeof(g_cheats));
+    tww_memcpy(g_tools, save_layout.mTools, sizeof(g_tools));
+    tww_memcpy(g_commandStates, save_layout.mCommandStates, sizeof(g_commandStates));
+
     g_dropShadows = save_layout.mDropShadows;
     g_cursorColorType = save_layout.mCursorColType;
     g_fontType = save_layout.mFontType;
@@ -78,6 +86,9 @@ void GZ_setupSaveFile(GZSaveFile& save_file) {
     save_file.offsets[idx] = offsetof(GZSaveFile, data) + offsetof(GZSaveLayout, attr);            \
     save_file.sizes[idx] = sizeof(save_file.data.attr)
 
+    set_entry(SV_CHEATS_INDEX, mCheats);
+    set_entry(SV_TOOLS_INDEX, mTools);
+    set_entry(SV_COMMANDS_INDEX, mCommandStates);
     set_entry(SV_CURSOR_COLOR_INDEX, mCursorColType);
     set_entry(SV_FONT_INDEX, mFontType);
     set_entry(SV_DROP_SHADOW_INDEX, mDropShadows);
@@ -111,6 +122,10 @@ s32 GZ_readSaveFile(Storage* storage, GZSaveFile& save_file, s32 sector_size) {
                                      save_file.offsets[idx], sector_size));                        \
     }
 
+    assert_read_entry(SV_CHEATS_INDEX, save_file.data.mCheats, sizeof(save_file.data.mCheats));
+    assert_read_entry(SV_TOOLS_INDEX, save_file.data.mTools, sizeof(save_file.data.mTools));
+    assert_read_entry(SV_COMMANDS_INDEX, save_file.data.mCommandStates,
+                      sizeof(save_file.data.mCommandStates));
     assert_read_entry(SV_CURSOR_COLOR_INDEX, &save_file.data.mCursorColType,
                       sizeof(save_file.data.mCursorColType));
     assert_read_entry(SV_FONT_INDEX, &save_file.data.mFontType, sizeof(save_file.data.mFontType));
