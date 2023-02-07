@@ -11,6 +11,7 @@
 #include "libtww/f_op/f_op_scene_req.h"
 #include "libtww/m_Do/m_Do_main.h"
 #include "menus/tools_menu.h"
+#include "input_viewer.h"
 
 bool l_loadCard = true;
 Texture l_twwgzIconTex;
@@ -49,60 +50,26 @@ void game_loop() {
     GZ_loadGZSave(l_loadCard);
 
     // Make title screen / file select endless night
-    if (!tww_strcmp(g_dComIfG_gameInfo.play.mStartStage.mStage, "Name") || !tww_strcmp(g_dComIfG_gameInfo.play.mStartStage.mStage, "sea_T")) {
+    // disabled for now since this crashes new files
+    /* if (!tww_strcmp(g_dComIfG_gameInfo.play.mStartStage.mStage, "Name") ||
+    !tww_strcmp(g_dComIfG_gameInfo.play.mStartStage.mStage, "sea_T")) {
         g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusB().mTime = 1.0f;
         g_env_light.mCurTime = 1.0f;
         g_env_light.mColPatCurr = 1;
         g_env_light.mbThunderActive = 1;
         g_env_light.mRainCount = 250;
-    }
+    } */
 
-    if (tww_mPadStatus.button == (CButton::L | CButton::R | CButton::DPAD_DOWN) && l_fopScnRq_IsUsingOfOverlap != 1) {
+    if (tww_mPadStatus.button == (CButton::L | CButton::R | CButton::DPAD_DOWN) &&
+        l_fopScnRq_IsUsingOfOverlap != 1) {
         GZ_setMenu(GZ_MAIN_MENU);
     }
 
     if (l_fopScnRq_IsUsingOfOverlap) {
         GZ_clearMenu();
     }
-    
+
     GZ_setCursorColor();
-   
-}
-
-void GZ_displayLinkInfo() {
-    //Generates Link position and angle data.
-    if (g_dComIfG_gameInfo.play.mPlayerPtr != nullptr) {
-        fopAc_ac_c* playerAc = (fopAc_ac_c*)g_dComIfG_gameInfo.play.mPlayerPtr;
-        char link_angle[20];
-        char link_speed[20];
-        char link_x[20];
-        char link_y[20];
-        char link_z[20];
-
-        tww_sprintf(link_angle, "angle: %d", playerAc->mCollisionRot.mY);
-        tww_sprintf(link_speed, "speed: %.4f", playerAc->mSpeedF);
-        tww_sprintf(link_x, "x-pos: %.4f", playerAc->mCurrent.mPosition.x);
-        tww_sprintf(link_y, "y-pos: %.4f", playerAc->mCurrent.mPosition.y);
-        tww_sprintf(link_z, "z-pos: %.4f", playerAc->mCurrent.mPosition.z);
-
-        Font::GZ_drawStr(link_angle, 450.f, 200.f, 0xFFFFFFFF, g_dropShadows);
-        Font::GZ_drawStr(link_speed, 450.f, 220.f, 0xFFFFFFFF, g_dropShadows);
-        Font::GZ_drawStr(link_x, 450.f, 240.f, 0xFFFFFFFF, g_dropShadows);
-        Font::GZ_drawStr(link_y, 450.f, 260.f, 0xFFFFFFFF, g_dropShadows);
-        Font::GZ_drawStr(link_z, 450.f, 280.f, 0xFFFFFFFF, g_dropShadows);
-    }
-}
-
-void GZ_displayZombieHoverInfo() {
-    //Generates A and B button presses per second
-    char a_presses_str[8];
-    char b_presses_str[8];
-
-    tww_sprintf(a_presses_str, "A: %d", GZ_getAPressesPerWindow());
-    tww_sprintf(b_presses_str, "B: %d", GZ_getBPressesPerWindow());
-
-    Font::GZ_drawStr(a_presses_str, 450.f, 320.f, 0x00CC00FF, g_dropShadows);
-    Font::GZ_drawStr(b_presses_str, 450.f, 340.f, 0xCC0000FF, g_dropShadows);
 }
 
 void displaySplash() {
@@ -127,7 +94,7 @@ void displaySplash() {
         // Draw the string
         Font::GZ_drawStr(name, splash_x, splash_y, 0xFFFFFFFF, true, 18.0f);
         Font::GZ_drawStr(url, splash_x, splash_y + 25.0f, 0xFFFFFFFF, true, 18.0f);
-        
+
         // Draw twwgz's logo
         if (l_twwgzIconTex.loadCode == TexCode::TEX_OK) {
             Draw::drawRect(0xFFFFFFFF, icon_pos, icon_scale, &l_twwgzIconTex._texObj);
@@ -141,8 +108,6 @@ void displaySplash() {
     }
 }
 
-
-
 void draw() {
     // Setup rendering so we can display things on screen
     setupRendering();
@@ -152,13 +117,22 @@ void draw() {
         Font::GZ_drawStr("twwgz v" INTERNAL_GZ_VERSION, 10.0f, 25.0f, g_cursorColor, g_dropShadows);
     }
 
-    if (g_zombieHoverInfo) {
-        GZ_displayZombieHoverInfo();
+    if (g_tools[ZH_INDEX].active) {
+        ToolsMenu::displayZombieHoverInfo();
     }
 
-    if(g_debugInfo){
-        GZ_displayLinkInfo();
+    if (g_tools[DEBUG_INDEX].active) {
+        ToolsMenu::displayLinkInfo();
     }
+
+    if (g_tools[INPUT_VIEWER_INDEX].active) {
+        InputViewer::draw();
+    }
+
     GZ_drawMenu();
 }
+}
+
+void GZ_drawString(const char* string, f32 x_pos, f32 y_pos, u32 color) {
+    Font::GZ_drawStr(string, x_pos, y_pos, color, g_dropShadows);
 }
