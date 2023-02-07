@@ -105,6 +105,13 @@
 
 /* d_com_inf_game */
 #define g_dComIfG_gameInfo_addr 0x803b8108
+#define tww_dComIfGs_setGameStartStage_addr 0x80053054
+
+/* d_save */
+#define dSv_player_return_place_c__set_addr 0x800569c0
+
+/* d_stage */
+#define dStage_roomControl_c__mStayNo_addr 0x803e9f48
 
 /* d_a_player */
 #define l_debug_keep_pos_addr 0x803d78fc
@@ -217,6 +224,13 @@
 
 /* d_com_inf_game */
 #define g_dComIfG_gameInfo_addr 0x803c4c08
+#define tww_dComIfGs_setGameStartStage_addr 0x800548fc
+
+/* d_save */
+#define dSv_player_return_place_c__set_addr 0x80058bc8
+
+/* d_stage */
+#define dStage_roomControl_c__mStayNo_addr 0x803f6a78
 
 /* d_a_player */
 #define l_debug_keep_pos_addr 0x803e440c

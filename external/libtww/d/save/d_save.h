@@ -414,7 +414,7 @@ public:
     /* 0x2 */ u8 mAttentionType;  // Lock-On Type; 0 : hold, 1 : switch
     /* 0x3 */ u8 mVibration;      // Rumble status
     /* 0x4 */ u8 unk4;
-}; // Size: 0x5
+};  // Size: 0x5
 
 class dSv_player_priest_c {
 public:
@@ -582,5 +582,10 @@ public:
 };  // Size: 0x12A0
 
 static_assert(sizeof(dSv_info_c) == 0x12A0);
+
+typedef void (*dSv_player_return_place_c__set_t)(void* _this, char const* i_name, s8 roomNo,
+                                                 s8 pointNo);
+#define dSv_player_return_place_c__set                                                             \
+    ((dSv_player_return_place_c__set_t)dSv_player_return_place_c__set_addr)
 
 #endif /* D_SAVE_D_SAVE_H */
