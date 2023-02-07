@@ -12,6 +12,7 @@
 #include "../d_vibration.h"
 #include "../d_detect.h"
 #include "../d_drawlist.h"
+#include "../a/d_a_player.h"
 
 struct dTimer_c;
 
@@ -170,5 +171,9 @@ static_assert(sizeof(dComIfG_inf_c) == 0x1d1c8);
 #endif
 
 #define g_dComIfG_gameInfo (*(dComIfG_inf_c*)(g_dComIfG_gameInfo_addr))
+
+inline daPy_lk_c* dComIfGp_getPlayer() {
+    return g_dComIfG_gameInfo.play.mPlayerPtr;
+}
 
 #endif /* D_COM_D_COM_INF_GAME_H */

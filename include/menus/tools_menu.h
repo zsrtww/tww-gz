@@ -1,3 +1,5 @@
+#pragma once
+
 #include "menu.h"
 #include "libtww/d/kankyo/d_kankyo.h"
 #include "libtww/d/com/d_com_inf_game.h"
@@ -15,14 +17,21 @@ enum ToolsMenuIndex {
     INPUT_VIEWER_INDEX,
 };
 
-extern bool g_debugInfo;
-extern bool g_zombieHoverInfo;
+struct GZTool {
+    int index;
+    bool active;
+};
+
+#define TOOL_AMNT 5
+extern GZTool g_tools[TOOL_AMNT];
 
 class ToolsMenu : public Menu {
 public:
     ToolsMenu() : Menu() {}
     static void draw();
     static void initFont();
+    static void displayLinkInfo();
+    static void displayZombieHoverInfo();
 
     static Cursor cursor;
 };

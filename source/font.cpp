@@ -4,6 +4,7 @@
 #include "libtww/MSL_C/string.h"
 #include "utils/disc.h"
 #include "utils/draw.h"
+#include "menus/settings_menu.h"
 
 _Font Font::font;
 
@@ -151,8 +152,8 @@ float GZ_drawSelectChar(const char* str, float x, float y, size_t char_idx, size
                         u32 color) {
     float pos = 0.0f;
     for (size_t i = 0; i <= max_char; ++i) {
-        Font::GZ_drawChar(str[i], x + pos, y, char_idx == i ? 0xFFFFFFFF : color,
-                          true);
+        Font::GZ_drawChar(str[i], x + pos, y, char_idx == i ? CURSOR_RGBA : color,
+                          g_dropShadows);
         pos += Font::getCharWidth(str[i]);
     }
     return pos;

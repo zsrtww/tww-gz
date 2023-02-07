@@ -28,7 +28,7 @@ void MainMenu::draw() {
     if (GZ_getButtonTrig(GZPad::A)) {
         switch (cursor.y) {
         case CHEAT_INDEX:
-            //GZ_setMenu(GZ_CHEAT_MENU);
+            GZ_setMenu(GZ_CHEAT_MENU);
             return;
         case FLAGS_INDEX:
             //GZ_setMenu(GZ_FLAGS_MENU);
@@ -37,7 +37,7 @@ void MainMenu::draw() {
             GZ_setMenu(GZ_INVENTORY_MENU);
             return;
         case MEMORY_INDEX:
-            //GZ_setMenu(GZ_MEMORY_MENU);
+            GZ_setMenu(GZ_MEMORY_MENU);
             return;
         case PRACTICE_INDEX:
             //GZ_setMenu(GZ_PRACTICE_MENU);

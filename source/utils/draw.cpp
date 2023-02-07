@@ -1,6 +1,7 @@
 #include "libtww/addrs.h"
 #include "utils/draw.h"
 #include "utils/texture.h"
+#include "font.h"
 #include "gcn_c/include/gfx.h"
 
 #define DEFAULT_WIDTH 0x06
@@ -134,5 +135,4 @@ void drawRectOutline(u32 color, Vec2 pos, Vec2 dim, u8 width) {
                         {pos.x, pos.y + dim.y}};
     drawQuadOutline(color, vertices, width);
 }
-
 };  // namespace Draw

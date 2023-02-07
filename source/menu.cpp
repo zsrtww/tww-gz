@@ -3,14 +3,24 @@
 #include "menus/inventory_menu.h"
 #include "menus/settings_menu.h"
 #include "menus/tools_menu.h"
+#include "menus/cheat_menu.h"
+#include "menus/memory_menu.h"
+
+#include "menus/memory_editor_menu.h"
+#include "menus/watches_menu.h"
 
 typedef void (*menu_render_t)();
 
 menu_render_t l_menuDrawList[MENU_NUM] = {
     MainMenu::draw,
+    CheatMenu::draw,
     InventoryMenu::draw,
+    MemoryMenu::draw,
     SettingsMenu::draw,
     ToolsMenu::draw,
+
+    MemoryEditorMenu::draw,
+    WatchesMenu::draw,
 };
 
 menu_render_t l_currentMenu = nullptr;
