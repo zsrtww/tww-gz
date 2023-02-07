@@ -37,7 +37,7 @@ void MainMenu::draw() {
             GZ_setMenu(GZ_INVENTORY_MENU);
             return;
         case MEMORY_INDEX:
-            //GZ_setMenu(GZ_MEMORY_MENU);
+            GZ_setMenu(GZ_MEMORY_MENU);
             return;
         case PRACTICE_INDEX:
             //GZ_setMenu(GZ_PRACTICE_MENU);

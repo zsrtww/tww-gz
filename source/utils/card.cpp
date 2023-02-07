@@ -9,8 +9,7 @@
 /**
  * @brief Like CARDWrite, but allows for arbitrary sizes and offsets.
  */
-s32 GZ_storageWrite(Storage* storage, void* data, s32 size, s32 offset,
-                        s32 sector_size) {
+s32 GZ_storageWrite(Storage* storage, void* data, s32 size, s32 offset, s32 sector_size) {
     u8* buf = (u8*)tww_memalign(-32, sector_size);
     s32 result = Ready;
     s32 read_bytes = 0;
@@ -22,7 +21,7 @@ s32 GZ_storageWrite(Storage* storage, void* data, s32 size, s32 offset,
         }
         s32 rem_size = sector_size - (offset & (sector_size - 1));
         tww_memcpy(buf + (offset & (sector_size - 1)), (void*)((u32)data + read_bytes),
-                  MIN(rem_size, size));
+                   MIN(rem_size, size));
         StorageWrite(*storage, buf, sector_size, (offset & ~(sector_size - 1)));
         read_bytes += MIN(rem_size, size);
         size -= rem_size;
@@ -35,8 +34,7 @@ s32 GZ_storageWrite(Storage* storage, void* data, s32 size, s32 offset,
 /**
  * @brief Like CARDRead, but allows for arbitrary sizes and offsets.
  */
-s32 GZ_storageRead(Storage* storage, void* data, s32 size, s32 offset,
-                       s32 sector_size) {
+s32 GZ_storageRead(Storage* storage, void* data, s32 size, s32 offset, s32 sector_size) {
     u8* buf = (u8*)tww_memalign(-32, sector_size);
     s32 result = Ready;
     s32 read_bytes = 0;
@@ -48,7 +46,7 @@ s32 GZ_storageRead(Storage* storage, void* data, s32 size, s32 offset,
         }
         s32 rem_size = sector_size - (offset & (sector_size - 1));
         tww_memcpy((void*)((u32)data + read_bytes), buf + (offset & (sector_size - 1)),
-                  MIN(rem_size, size));
+                   MIN(rem_size, size));
         read_bytes += MIN(rem_size, size);
         size -= rem_size;
         offset += rem_size;
@@ -61,6 +59,7 @@ void GZ_storeSaveLayout(GZSaveLayout& save_layout) {
     tww_memcpy(save_layout.mCheats, g_cheats, sizeof(g_cheats));
     tww_memcpy(save_layout.mTools, g_tools, sizeof(g_tools));
     tww_memcpy(save_layout.mCommandStates, g_commandStates, sizeof(g_commandStates));
+    tww_memcpy(save_layout.mWatches, g_watches, sizeof(g_watches));
 
     save_layout.mDropShadows = g_dropShadows;
     save_layout.mCursorColType = g_cursorColorType;
@@ -71,6 +70,7 @@ void GZ_loadSaveLayout(GZSaveLayout& save_layout) {
     tww_memcpy(g_cheats, save_layout.mCheats, sizeof(g_cheats));
     tww_memcpy(g_tools, save_layout.mTools, sizeof(g_tools));
     tww_memcpy(g_commandStates, save_layout.mCommandStates, sizeof(g_commandStates));
+    tww_memcpy(g_watches, save_layout.mWatches, sizeof(g_watches));
 
     g_dropShadows = save_layout.mDropShadows;
     g_cursorColorType = save_layout.mCursorColType;
@@ -88,6 +88,7 @@ void GZ_setupSaveFile(GZSaveFile& save_file) {
 
     set_entry(SV_CHEATS_INDEX, mCheats);
     set_entry(SV_TOOLS_INDEX, mTools);
+    set_entry(SV_WATCHES_INDEX, mWatches);
     set_entry(SV_COMMANDS_INDEX, mCommandStates);
     set_entry(SV_CURSOR_COLOR_INDEX, mCursorColType);
     set_entry(SV_FONT_INDEX, mFontType);
@@ -124,6 +125,7 @@ s32 GZ_readSaveFile(Storage* storage, GZSaveFile& save_file, s32 sector_size) {
 
     assert_read_entry(SV_CHEATS_INDEX, save_file.data.mCheats, sizeof(save_file.data.mCheats));
     assert_read_entry(SV_TOOLS_INDEX, save_file.data.mTools, sizeof(save_file.data.mTools));
+    assert_read_entry(SV_WATCHES_INDEX, save_file.data.mWatches, sizeof(save_file.data.mWatches));
     assert_read_entry(SV_COMMANDS_INDEX, save_file.data.mCommandStates,
                       sizeof(save_file.data.mCommandStates));
     assert_read_entry(SV_CURSOR_COLOR_INDEX, &save_file.data.mCursorColType,
@@ -142,8 +144,8 @@ void GZ_storeMemCard(Storage& storage) {
     GZ_setupSaveFile(save_file);
     GZ_storeSaveLayout(save_file.data);
 
-    u32 file_size = (u32)(
-        ceil((double)sizeof(save_file) / (double)storage.sector_size) * storage.sector_size);
+    u32 file_size =
+        (u32)(ceil((double)sizeof(save_file) / (double)storage.sector_size) * storage.sector_size);
 
     storage.result = StorageDelete(0, storage.file_name_buffer);
     storage.result = StorageCreate(0, storage.file_name_buffer, file_size, &storage.info);

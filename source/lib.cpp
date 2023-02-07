@@ -6,6 +6,7 @@
 #include "menu.h"
 #include "controller.h"
 #include "menus/settings_menu.h"
+#include "menus/watches_menu.h"
 #include "libtww/d/kankyo/d_kankyo.h"
 #include "libtww/d/com/d_com_inf_game.h"
 #include "libtww/f_op/f_op_scene_req.h"
@@ -50,7 +51,7 @@ void game_loop() {
     GZ_loadGZSave(l_loadCard);
 
     // Make title screen / file select endless night
-    // disabled for now since this crashes new files
+    // disabled until new file crash fix is implemented
     /* if (!tww_strcmp(g_dComIfG_gameInfo.play.mStartStage.mStage, "Name") ||
     !tww_strcmp(g_dComIfG_gameInfo.play.mStartStage.mStage, "sea_T")) {
         g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusB().mTime = 1.0f;
@@ -130,6 +131,7 @@ void draw() {
     }
 
     GZ_drawMenu();
+    WatchesMenu::drawWatches();
 }
 }
 

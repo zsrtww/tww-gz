@@ -83,3 +83,7 @@ float GZ_drawSelectChar(const char* str, float x, float y, size_t char_idx, size
                         u32 color);
 
 void GZ_drawString(const char* string, f32 x_pos, f32 y_pos, u32 color);
+
+inline float GZ_getTextWidth(const char* str, float size = FONT_DEFAULT_SIZE) {
+    return Font::getStrWidth(str, size);
+}
