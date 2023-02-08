@@ -10,6 +10,7 @@ enum ColorPalette {
 	BLUE   = 0x0080FFFF,
 	PURPLE = 0x6600CCFF,
 	WHITE  = 0xFFFFFFFF,
+	GRAY   = 0xBABABAFF,
 	BLACK  = 0x00000000
 };
 
