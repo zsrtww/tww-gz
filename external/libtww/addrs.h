@@ -116,6 +116,7 @@
 /* d_a_player */
 #define l_debug_keep_pos_addr 0x803d78fc
 #define l_debug_current_angle_addr 0x803ea3c8
+#define l_debug_shape_angle_addr 0x803ea3d0
 
 #endif
 
@@ -235,5 +236,6 @@
 /* d_a_player */
 #define l_debug_keep_pos_addr 0x803e440c
 #define l_debug_current_angle_addr 0x803f6f10
+#define l_debug_shape_angle_addr 0x803f6f18
 
 #endif

@@ -7,7 +7,7 @@
 bool g_commandStates[COMMANDS_AMNT];
 
 static Vec sSavePlayerPos = {0.0f, 0.0f, 0.0f};
-static s16 sSavePlayerAngle = 0;
+static SVec sSavePlayerAngle = {0, 0, 0};
 
 static int sLastInputs;
 static int sCurInputs;
@@ -28,16 +28,17 @@ bool GZCmd_checkTrig(int combo) {
 void GZCmd_storePosition() {
     if (dComIfGp_getPlayer()) {
         sSavePlayerPos = dComIfGp_getPlayer()->mCurrent.mPosition;
-        sSavePlayerAngle = dComIfGp_getPlayer()->mCollisionRot.sy;
+        sSavePlayerAngle = dComIfGp_getPlayer()->mCurrent.mAngle;
     }
 }
 
 void GZCmd_loadPosition() {
     if (dComIfGp_getPlayer()) {
         dComIfGp_getPlayer()->mCurrent.mPosition = sSavePlayerPos;
-        dComIfGp_getPlayer()->mCollisionRot.sy = sSavePlayerAngle;
+        dComIfGp_getPlayer()->mCurrent.mAngle = sSavePlayerAngle;
         l_debug_keep_pos = sSavePlayerPos;
-        l_debug_current_angle.sy = sSavePlayerAngle;
+        l_debug_current_angle = sSavePlayerAngle;
+        l_debug_shape_angle = sSavePlayerAngle;
     }
 }
 
