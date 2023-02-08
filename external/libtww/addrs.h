@@ -94,6 +94,9 @@
 /* f_op_scene_req */
 #define l_fopScnRq_IsUsingOfOverlap_addr 0x803e9ec0
 
+/* f_op_scene_mng */
+#define fopScnM_ChangeReq_addr 0x80029afc
+
 /* m_Do_controller_pad */
 #define g_mDoCPd_cpadInfo_addr 0x80398308
 
@@ -112,6 +115,9 @@
 
 /* d_stage */
 #define dStage_roomControl_c__mStayNo_addr 0x803e9f48
+
+/* d_s_play */
+#define tww_dScnPly_Draw_addr 0x8023218c
 
 /* d_a_player */
 #define l_debug_keep_pos_addr 0x803d78fc
@@ -214,6 +220,9 @@
 /* f_op_scene_req */
 #define l_fopScnRq_IsUsingOfOverlap_addr 0x803f69e0
 
+/* f_op_scene_mng */
+#define fopScnM_ChangeReq_addr 0x80029e6c
+
 /* m_Do_controller_pad */
 #define g_mDoCPd_cpadInfo_addr 0x803a4df0
 
@@ -232,6 +241,9 @@
 
 /* d_stage */
 #define dStage_roomControl_c__mStayNo_addr 0x803f6a78
+
+/* d_s_play */
+#define tww_dScnPly_Draw_addr 0x80234b9c
 
 /* d_a_player */
 #define l_debug_keep_pos_addr 0x803e440c
