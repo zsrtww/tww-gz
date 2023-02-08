@@ -1,7 +1,8 @@
 #include "libtww/JSystem/JUtility/JUTGamePad.h"
-#include "controller.h"
 #include "libtww/SSystem/SComponent/c_counter.h"
+#include "controller.h"
 #include "menu.h"
+#include "commands.h"
 
 void setGamepadButtons(u32 buttons) {
     tww_mPadButton.mButton = buttons;
@@ -85,7 +86,7 @@ void GZ_readController() {
     } else {
         g_cursorEnabled = false;
         sCursorEnableDelay = 0;
-        // GZCmd_processInputs();
+        GZCmd_processInputs();
     }
 
     GZ_readZombieHoverInputs();

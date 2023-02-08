@@ -8,26 +8,34 @@
 #include "font.h"
 #include "utils/draw.h"
 #include "utils/hook.h"
+#include "commands.h"
 
-#define LINE_NUM 4
+#define LINE_NUM 6
 Cursor ToolsMenu::cursor;
 
-bool g_debugInfo = false;
-bool g_areaReload;
-bool g_teleport;
-bool g_zombieHoverInfo;
-bool g_inputViewer;
-
-Line lines[LINE_NUM] = {
-    {"Link Debug Info", DEBUG_INDEX, "Display position and angle data for Link.", true, &g_debugInfo},
-    {"Teleport", TELEPORT_INDEX, "Set and load saved positions. Set with R + D-pad up and load with R + D-pad down.", true, &g_teleport},
-    {"Area Reload", AREA_RELOAD_INDEX, "Reloads the current room by pressing L + R + A + Start", true, &g_areaReload},
-    {"Zombie Hover Info", ZH_INDEX, "Display A and B button presses per second.", true, &g_zombieHoverInfo},
+GZTool g_tools[TOOL_AMNT] = {
+    {DEBUG_INDEX, false}, {TELEPORT_INDEX, false},     {AREA_RELOAD_INDEX, false},
+    {ZH_INDEX, false},    {INPUT_VIEWER_INDEX, false}, {DISABLE_SVCHECK_INDEX, false},
 };
 
-void ToolsMenu::draw(){
- cursor.setMode(Cursor::MODE_LIST);
- cursor.move(0, LINE_NUM);
+Line lines[LINE_NUM] = {
+    {"link debug info", DEBUG_INDEX, "Display position and angle data for Link", true,
+     &g_tools[DEBUG_INDEX].active},
+    {"teleport", TELEPORT_INDEX, "R+D-pad up to save position. R+D-pad down to load", true,
+     &g_tools[TELEPORT_INDEX].active},
+    {"area reload", AREA_RELOAD_INDEX, "Reloads the current room by pressing L + R + A + Start",
+     true, &g_tools[AREA_RELOAD_INDEX].active},
+    {"zombie hover info", ZH_INDEX, "Display A and B button presses per second", true,
+     &g_tools[ZH_INDEX].active},
+    {"input viewer", INPUT_VIEWER_INDEX, "Show current inputs", true,
+     &g_tools[INPUT_VIEWER_INDEX].active},
+    {"disable save checks", DISABLE_SVCHECK_INDEX, "Disables save location safety checks", true,
+     &g_tools[DISABLE_SVCHECK_INDEX].active},
+};
+
+void ToolsMenu::draw() {
+    cursor.setMode(Cursor::MODE_LIST);
+    cursor.move(0, LINE_NUM);
 
     if (GZ_getButtonTrig(GZPad::B)) {
         GZ_setMenu(GZ_MAIN_MENU);
@@ -35,38 +43,60 @@ void ToolsMenu::draw(){
     }
 
     if (GZ_getButtonTrig(GZPad::A)) {
-        switch (cursor.y){
-            case DEBUG_INDEX:
-                g_debugInfo =! g_debugInfo;
-                return;
+        g_tools[cursor.y].active = !g_tools[cursor.y].active;
 
+        if (g_tools[cursor.y].active) {
+            switch (cursor.y) {
             case TELEPORT_INDEX:
-                g_teleport =! g_teleport;
-                if (g_teleport == true){
-                    if (tww_mPadStatus.button == (CButton::R | CButton::DPAD_DOWN) && l_fopScnRq_IsUsingOfOverlap != 1) {
-                    //store position info;
-                    }
-                    if (tww_mPadStatus.button == (CButton::R | CButton::DPAD_UP) && l_fopScnRq_IsUsingOfOverlap != 1) {
-                    //load position info
-                    }
-                }                
-                return;
-
-            case ZH_INDEX:
-                g_zombieHoverInfo =! g_zombieHoverInfo;
-                return;
-
-            case AREA_RELOAD_INDEX:
-                g_areaReload =! g_areaReload;
-                if (g_areaReload == true && tww_mPadStatus.button == (CButton :: L | CButton::R | CButton::A | CButton::START) && l_fopScnRq_IsUsingOfOverlap != 1){
-                    //reload the room
-                }
-                return;
+                GZCmd_enable(Commands::CMD_STORE_POSITION);
+                GZCmd_enable(Commands::CMD_LOAD_POSITION);
+                break;
+            }
+        } else {
+            switch (cursor.y) {
+            case TELEPORT_INDEX:
+                GZCmd_disable(Commands::CMD_STORE_POSITION);
+                GZCmd_disable(Commands::CMD_LOAD_POSITION);
+                break;
+            }
         }
     }
 
- GZ_drawMenuLines(lines, cursor.y, LINE_NUM);
+    GZ_drawMenuLines(lines, cursor.y, LINE_NUM);
 }
 
+void ToolsMenu::displayLinkInfo() {
+    // Generates Link position and angle data.
+    if (g_dComIfG_gameInfo.play.mPlayerPtr != nullptr) {
+        fopAc_ac_c* playerAc = (fopAc_ac_c*)g_dComIfG_gameInfo.play.mPlayerPtr;
+        char link_angle[20];
+        char link_speed[20];
+        char link_x[20];
+        char link_y[20];
+        char link_z[20];
 
+        tww_sprintf(link_angle, "angle: %d", playerAc->mCollisionRot.sy);
+        tww_sprintf(link_speed, "speed: %.4f", playerAc->mSpeedF);
+        tww_sprintf(link_x, "x-pos: %.4f", playerAc->mCurrent.mPosition.x);
+        tww_sprintf(link_y, "y-pos: %.4f", playerAc->mCurrent.mPosition.y);
+        tww_sprintf(link_z, "z-pos: %.4f", playerAc->mCurrent.mPosition.z);
 
+        Font::GZ_drawStr(link_angle, 450.f, 200.f, 0xFFFFFFFF, g_dropShadows);
+        Font::GZ_drawStr(link_speed, 450.f, 220.f, 0xFFFFFFFF, g_dropShadows);
+        Font::GZ_drawStr(link_x, 450.f, 240.f, 0xFFFFFFFF, g_dropShadows);
+        Font::GZ_drawStr(link_y, 450.f, 260.f, 0xFFFFFFFF, g_dropShadows);
+        Font::GZ_drawStr(link_z, 450.f, 280.f, 0xFFFFFFFF, g_dropShadows);
+    }
+}
+
+void ToolsMenu::displayZombieHoverInfo() {
+    // Generates A and B button presses per second
+    char a_presses_str[8];
+    char b_presses_str[8];
+
+    tww_sprintf(a_presses_str, "A: %d", GZ_getAPressesPerWindow());
+    tww_sprintf(b_presses_str, "B: %d", GZ_getBPressesPerWindow());
+
+    Font::GZ_drawStr(a_presses_str, 450.f, 320.f, 0x00CC00FF, g_dropShadows);
+    Font::GZ_drawStr(b_presses_str, 450.f, 340.f, 0xCC0000FF, g_dropShadows);
+}

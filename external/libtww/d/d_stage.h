@@ -142,4 +142,6 @@ struct dStage_objectNameInf {
     s8 mSubtype;
 };  // Size: 0xC
 
+#define dStage_roomControl_c__mStayNo (*(s8*)(dStage_roomControl_c__mStayNo_addr))
+
 #endif /* D_D_STAGE_H */

@@ -4,6 +4,13 @@
 #include "../../dolphin/gctypes.h"
 #include "../../dolphin/mtx/vec.h"
 
-class cXyz : public Vec {};
+class cXyz : public Vec {
+public:
+    void operator=(Vec& other) {
+        x = other.x;
+        y = other.y;
+        z = other.z;
+    }
+};
 
 #endif

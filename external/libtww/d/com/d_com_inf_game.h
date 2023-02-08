@@ -12,6 +12,7 @@
 #include "../d_vibration.h"
 #include "../d_detect.h"
 #include "../d_drawlist.h"
+#include "../a/d_a_player.h"
 
 struct dTimer_c;
 
@@ -102,19 +103,19 @@ public:
     /* 0x047F0 */ JKRArchive* mpSwimResArchive;
     /* 0x047F4 */ JKRArchive* mpWindResArchive;
 
-    #ifdef NTSCU
+#ifdef NTSCU
     /* 0x047F8 */ JKRArchive* mpEnglishTextArchive;
-    #endif
+#endif
 
     /* 0x047FC */ JKRArchive* mpHyruleTextArchive;
 
-    #ifdef NTSCU
+#ifdef NTSCU
     /* 0x04800 */ u8 field_0x4800[0x4824 - 0x4800];
-    #endif
+#endif
 
-    #ifdef NTSCJ
+#ifdef NTSCJ
     /* 0x04800 */ u8 field_0x47fc[0x4818 - 0x47FC];
-    #endif
+#endif
 
     /* 0x04824 */ dPa_control_c* mParticle;
     /* 0x04828 */ dDemo_manager_c* mpDemoMgr;
@@ -170,5 +171,30 @@ static_assert(sizeof(dComIfG_inf_c) == 0x1d1c8);
 #endif
 
 #define g_dComIfG_gameInfo (*(dComIfG_inf_c*)(g_dComIfG_gameInfo_addr))
+
+inline daPy_lk_c* dComIfGp_getPlayer() {
+    return g_dComIfG_gameInfo.play.mPlayerPtr;
+}
+
+inline void dComIfGs_setReturnPlace(const char* stage, s8 roomNo, s8 point) {
+    dSv_player_return_place_c__set(&g_dComIfG_gameInfo.info.mSavedata.mPlayer.mPlayerReturnPlace,
+                                   stage, roomNo, point);
+}
+
+inline const char* dComIfGp_getStartStageName() {
+    return g_dComIfG_gameInfo.play.mStartStage.getName();
+}
+
+inline s8 dComIfGp_getStartStageRoom() {
+    return g_dComIfG_gameInfo.play.mStartStage.mRoomNo;
+}
+
+inline s8 dComIfGp_getStartStagePoint() {
+    return g_dComIfG_gameInfo.play.mStartStage.mPoint & 0xFF;
+}
+
+inline s32 dComIfGp_roomControl_getStayNo() {
+    return dStage_roomControl_c__mStayNo;
+}
 
 #endif /* D_COM_D_COM_INF_GAME_H */

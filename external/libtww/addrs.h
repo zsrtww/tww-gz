@@ -15,6 +15,19 @@
 #define tww_strcpy_addr 0x8032b6e0
 #define tww_strcmp_addr 0x8032b548
 
+#define tww_atan_addr 0x8032def8
+#define tww_copysign_addr 0x8032e0f8
+#define tww_cos_addr 0x8032e120
+#define tww_floor_addr 0x8032e1f4
+#define tww_frexp_addr 0x8032e33c
+#define tww_ldexp_addr 0x8032e3c8
+#define tww_sin_addr 0x8032e688
+#define tww_tan_addr 0x8032e760
+#define tww_acos_addr 0x8032e7d8
+#define tww_asin_addr 0x8032e7f8
+#define tww_atan2_addr 0x8032e818
+#define tww_fmod_addr 0x8032e838
+
 /* pad */
 #define tww_PADRead_addr 0x80313768
 
@@ -92,6 +105,18 @@
 
 /* d_com_inf_game */
 #define g_dComIfG_gameInfo_addr 0x803b8108
+#define tww_dComIfGs_setGameStartStage_addr 0x80053054
+
+/* d_save */
+#define dSv_player_return_place_c__set_addr 0x800569c0
+
+/* d_stage */
+#define dStage_roomControl_c__mStayNo_addr 0x803e9f48
+
+/* d_a_player */
+#define l_debug_keep_pos_addr 0x803d78fc
+#define l_debug_current_angle_addr 0x803ea3c8
+#define l_debug_shape_angle_addr 0x803ea3d0
 
 #endif
 
@@ -109,6 +134,19 @@
 #define tww_strncpy_addr 0x8032dc98
 #define tww_strcpy_addr 0x8032dcdc
 #define tww_strcmp_addr 0x8032db44
+
+#define tww_atan_addr 0x803304f4
+#define tww_copysign_addr 0x803306f4
+#define tww_cos_addr 0x8033071c
+#define tww_floor_addr 0x803307f0
+#define tww_frexp_addr 0x80330938
+#define tww_ldexp_addr 0x803309c4
+#define tww_sin_addr 0x80330c84
+#define tww_tan_addr 0x80330d5c
+#define tww_acos_addr 0x80330dd4
+#define tww_asin_addr 0x80330df4
+#define tww_atan2_addr 0x80330e14
+#define tww_fmod_addr 0x80330e34
 
 /* pad */
 #define tww_PADRead_addr 0x80315a20
@@ -187,5 +225,17 @@
 
 /* d_com_inf_game */
 #define g_dComIfG_gameInfo_addr 0x803c4c08
+#define tww_dComIfGs_setGameStartStage_addr 0x800548fc
+
+/* d_save */
+#define dSv_player_return_place_c__set_addr 0x80058bc8
+
+/* d_stage */
+#define dStage_roomControl_c__mStayNo_addr 0x803f6a78
+
+/* d_a_player */
+#define l_debug_keep_pos_addr 0x803e440c
+#define l_debug_current_angle_addr 0x803f6f10
+#define l_debug_shape_angle_addr 0x803f6f18
 
 #endif
