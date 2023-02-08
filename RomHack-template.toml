@@ -31,3 +31,6 @@ libs = ["twwgz.a", "external/gcn_c/gcn_c.a"]
 "twwgz/fonts/lib-serif-bold.fnt" = "res/fonts/lib-serif-bold.fnt"
 "twwgz/fonts/lib-serif.fnt" = "res/fonts/lib-serif.fnt"
 "twwgz/fonts/press-start-2p.fnt" = "res/fonts/press-start-2p.fnt"
+
+# menu
+"twwgz/mn/Menu1.dat" = "res/menu/EN_Menu1.dat"
