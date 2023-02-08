@@ -10,12 +10,12 @@
 #include "utils/hook.h"
 #include "commands.h"
 
-#define LINE_NUM 5
+#define LINE_NUM 6
 Cursor ToolsMenu::cursor;
 
 GZTool g_tools[TOOL_AMNT] = {
     {DEBUG_INDEX, false}, {TELEPORT_INDEX, false},     {AREA_RELOAD_INDEX, false},
-    {ZH_INDEX, false},    {INPUT_VIEWER_INDEX, false},
+    {ZH_INDEX, false},    {INPUT_VIEWER_INDEX, false}, {DISABLE_SVCHECK_INDEX, false},
 };
 
 Line lines[LINE_NUM] = {
@@ -29,6 +29,8 @@ Line lines[LINE_NUM] = {
      &g_tools[ZH_INDEX].active},
     {"input viewer", INPUT_VIEWER_INDEX, "Show current inputs", true,
      &g_tools[INPUT_VIEWER_INDEX].active},
+    {"disable save checks", DISABLE_SVCHECK_INDEX, "Disables save location safety checks", true,
+     &g_tools[DISABLE_SVCHECK_INDEX].active},
 };
 
 void ToolsMenu::draw() {

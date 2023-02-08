@@ -17,6 +17,12 @@ public:
         sy = y;
         sz = z;
     }
+
+    void operator=(const SVec& other) {
+        sx = other.sx;
+        sy = other.sy;
+        sz = other.sz;
+    }
 };
 
 #endif /* C_SXYZ_H */
