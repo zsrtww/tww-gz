@@ -6,6 +6,7 @@
 #include "libtww/MSL_C/string.h"
 #include "lib.h"
 #include "font.h"
+#include "color.h"
 #include "utils/draw.h"
 #include "utils/hook.h"
 #include "commands.h"
@@ -81,11 +82,11 @@ void ToolsMenu::displayLinkInfo() {
         tww_sprintf(link_y, "y-pos: %.4f", playerAc->mCurrent.mPosition.y);
         tww_sprintf(link_z, "z-pos: %.4f", playerAc->mCurrent.mPosition.z);
 
-        Font::GZ_drawStr(link_angle, 450.f, 200.f, 0xFFFFFFFF, g_dropShadows);
-        Font::GZ_drawStr(link_speed, 450.f, 220.f, 0xFFFFFFFF, g_dropShadows);
-        Font::GZ_drawStr(link_x, 450.f, 240.f, 0xFFFFFFFF, g_dropShadows);
-        Font::GZ_drawStr(link_y, 450.f, 260.f, 0xFFFFFFFF, g_dropShadows);
-        Font::GZ_drawStr(link_z, 450.f, 280.f, 0xFFFFFFFF, g_dropShadows);
+        Font::GZ_drawStr(link_angle, 450.f, 200.f, ColorPalette::WHITE, g_dropShadows);
+        Font::GZ_drawStr(link_speed, 450.f, 220.f, ColorPalette::WHITE, g_dropShadows);
+        Font::GZ_drawStr(link_x, 450.f, 240.f, ColorPalette::WHITE, g_dropShadows);
+        Font::GZ_drawStr(link_y, 450.f, 260.f, ColorPalette::WHITE, g_dropShadows);
+        Font::GZ_drawStr(link_z, 450.f, 280.f, ColorPalette::WHITE, g_dropShadows);
     }
 }
 
@@ -97,6 +98,6 @@ void ToolsMenu::displayZombieHoverInfo() {
     tww_sprintf(a_presses_str, "A: %d", GZ_getAPressesPerWindow());
     tww_sprintf(b_presses_str, "B: %d", GZ_getBPressesPerWindow());
 
-    Font::GZ_drawStr(a_presses_str, 450.f, 320.f, 0x00CC00FF, g_dropShadows);
-    Font::GZ_drawStr(b_presses_str, 450.f, 340.f, 0xCC0000FF, g_dropShadows);
+    Font::GZ_drawStr(a_presses_str, 450.f, 320.f, ColorPalette::GREEN, g_dropShadows);
+    Font::GZ_drawStr(b_presses_str, 450.f, 340.f, ColorPalette::RED, g_dropShadows);
 }

@@ -96,7 +96,7 @@ void displaySplash() {
         // Draw the string
         Font::GZ_drawStr(name, splash_x, splash_y, ColorPalette::WHITE, true, 18.0f);
         Font::GZ_drawStr(url, splash_x, splash_y + 25.0f, ColorPalette::WHITE, true, 18.0f);
-        
+
         // Draw twwgz's logo
         if (l_twwgzIconTex.loadCode == TexCode::TEX_OK) {
             Draw::drawRect(ColorPalette::WHITE, icon_pos, icon_scale, &l_twwgzIconTex._texObj);
