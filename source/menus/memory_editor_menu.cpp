@@ -1,10 +1,11 @@
 #include "menus/memory_editor_menu.h"
 #include "menus/settings_menu.h"
 #include "libtww/MSL_C/string.h"
+#include "color.h"
 
 #define MAX_DISPLAY_LINES 15
-#define WHITE_RGBA 0xFFFFFFFF
-#define ADDRESS_RGBA 0xBABABAFF
+#define WHITE_RGBA ColorPalette::WHITE
+#define ADDRESS_RGBA ColorPalette::GRAY
 #define LINE_X_OFFSET 20.0f
 #define LINE_BYTE_OFFSET 100.0f
 
