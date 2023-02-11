@@ -1,5 +1,6 @@
 #include "lib.h"
 #include "font.h"
+#include "color.h"
 #include "utils/draw.h"
 #include "utils/hook.h"
 #include "utils/card.h"
@@ -93,12 +94,12 @@ void displaySplash() {
         Vec2 icon_scale = {32, 32};
 
         // Draw the string
-        Font::GZ_drawStr(name, splash_x, splash_y, 0xFFFFFFFF, true, 18.0f);
-        Font::GZ_drawStr(url, splash_x, splash_y + 25.0f, 0xFFFFFFFF, true, 18.0f);
+        Font::GZ_drawStr(name, splash_x, splash_y, ColorPalette::WHITE, true, 18.0f);
+        Font::GZ_drawStr(url, splash_x, splash_y + 25.0f, ColorPalette::WHITE, true, 18.0f);
 
         // Draw twwgz's logo
         if (l_twwgzIconTex.loadCode == TexCode::TEX_OK) {
-            Draw::drawRect(0xFFFFFFFF, icon_pos, icon_scale, &l_twwgzIconTex._texObj);
+            Draw::drawRect(ColorPalette::WHITE, icon_pos, icon_scale, &l_twwgzIconTex._texObj);
         }
 
         // Then when splash_time hits < 1, it won't display the string or logo anymore
