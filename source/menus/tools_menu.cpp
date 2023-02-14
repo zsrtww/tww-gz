@@ -90,14 +90,25 @@ void ToolsMenu::displayLinkInfo() {
     }
 }
 
+int zombieHoverColor(u8 buttonPressesPerWindow) {
+    if (buttonPressesPerWindow == 15) return rainbow();
+    if (buttonPressesPerWindow >= 11) return ColorPalette::GREEN;
+    if (buttonPressesPerWindow >= 9) return ColorPalette::YELLOW;
+    if (buttonPressesPerWindow >= 1) return ColorPalette::RED;
+    return ColorPalette::WHITE;
+}
+
 void ToolsMenu::displayZombieHoverInfo() {
     // Generates A and B button presses per second
     char a_presses_str[8];
     char b_presses_str[8];
 
-    tww_sprintf(a_presses_str, "A: %d", GZ_getAPressesPerWindow());
-    tww_sprintf(b_presses_str, "B: %d", GZ_getBPressesPerWindow());
+    u8 numAPressesPerWindow = GZ_getAPressesPerWindow();
+    u8 numBPressesPerWindow = GZ_getBPressesPerWindow();
 
-    Font::GZ_drawStr(a_presses_str, 450.f, 320.f, ColorPalette::GREEN, g_dropShadows);
-    Font::GZ_drawStr(b_presses_str, 450.f, 340.f, ColorPalette::RED, g_dropShadows);
+    tww_sprintf(a_presses_str, "A: %d", numAPressesPerWindow);
+    tww_sprintf(b_presses_str, "B: %d", numBPressesPerWindow);
+
+    Font::GZ_drawStr(a_presses_str, 450.f, 320.f, zombieHoverColor(numAPressesPerWindow), g_dropShadows);
+    Font::GZ_drawStr(b_presses_str, 450.f, 340.f, zombieHoverColor(numBPressesPerWindow), g_dropShadows);
 }
