@@ -65,6 +65,9 @@ struct dADM {
 
 class dComIfG_play_c {
 public:
+    void setOxygen(int oxygen) { mOxygen = oxygen; }
+
+public:
     /* 0x00000 */ dBgS mBgS;
     /* 0x01404 */ dCcS mCcS;
     /* 0x03DF8 */ dADM mADM;
@@ -174,6 +177,46 @@ static_assert(sizeof(dComIfG_inf_c) == 0x1d1c8);
 
 inline daPy_lk_c* dComIfGp_getPlayer() {
     return g_dComIfG_gameInfo.play.mPlayerPtr;
+}
+
+inline void dComIfGs_setOxygen(int amount) {
+    g_dComIfG_gameInfo.play.setOxygen(amount);
+}
+
+inline uint16_t dComIfGs_getMaxLife() {
+    return g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusA().getMaxLife();
+}
+
+inline void dComIfGs_setMaxLife(uint16_t amount) {
+    g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusA().setMaxLife(amount);
+}
+
+inline void dComIfGs_setLife(uint16_t amount) {
+    g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusA().setLife(amount);
+}
+
+inline uint8_t dComIfGs_getMaxMagic() {
+    return g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusA().getMaxMagic();
+}
+
+inline void dComIfGs_setMaxMagic(uint8_t amount) {
+    g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusA().setMaxMagic(amount);
+}
+
+inline void dComIfGs_setMagic(uint8_t amount) {
+    g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusA().setMagic(amount);
+}
+
+inline void dComIfGs_setRupee(uint16_t amount) {
+    g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusA().setRupee(amount);
+}
+
+inline void dComIfGs_setArrowNum(uint8_t amount) {
+    g_dComIfG_gameInfo.info.getPlayer().getItemRecord().setArrowNum(amount);
+}
+
+inline void dComIfGs_setBombNum(uint8_t amount) {
+    g_dComIfG_gameInfo.info.getPlayer().getItemRecord().setBombNum(amount);
 }
 
 inline void dComIfGs_setReturnPlace(const char* stage, s8 roomNo, s8 point) {

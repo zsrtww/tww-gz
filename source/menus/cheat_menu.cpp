@@ -5,17 +5,28 @@
 #include "lib.h"
 #include "font.h"
 #include "commands.h"
+#include "cheats.h"
 
-#define LINE_NUM 1
+#define LINE_NUM 8
 Cursor CheatMenu::cursor;
 
-GZCheat g_cheats[CHEAT_AMNT] = {
-    {MOON_JUMP_INDEX, false},
-};
-
 Line lines[LINE_NUM] = {
-    {"moon jump", MOON_JUMP_INDEX, "Hold R+A to moon jump", true,
-     &g_cheats[MOON_JUMP_INDEX].active},
+    {"infinite air", InfiniteAir, "Gives infinite air", true,
+        &g_cheats[InfiniteAir].active},
+    {"infinite arrows", InfiniteArrows, "Always have max arrows", true,
+        &g_cheats[InfiniteArrows].active},
+    {"infinite bombs", InfiniteBombs, "Always have max bombs", true,
+        &g_cheats[InfiniteBombs].active},
+    {"infinite hearts", InfiniteHearts, "Always have full hearts", true,
+        &g_cheats[InfiniteHearts].active},
+    {"infinite magic", InfiniteMagic, "Always have full magic", true,
+        &g_cheats[InfiniteMagic].active},
+    {"infinite rupees", InfiniteRupees, "Gives infinite rupees", true,
+        &g_cheats[InfiniteRupees].active},
+    {"moon jump", MoonJump, "Hold R+A to moon jump", true,
+        &g_cheats[MoonJump].active},
+    {"quarter heart", QuarterHeart, "Hold R+D-pad left to reduce health to quarter heart", true,
+        &g_cheats[QuarterHeart].active}
 };
 
 void CheatMenu::draw() {
@@ -29,20 +40,6 @@ void CheatMenu::draw() {
 
     if (GZ_getButtonTrig(GZPad::A)) {
         g_cheats[cursor.y].active = !g_cheats[cursor.y].active;
-
-        if (g_cheats[cursor.y].active) {
-            switch (cursor.y) {
-            case MOON_JUMP_INDEX:
-                GZCmd_enable(CMD_MOON_JUMP);
-                break;
-            }
-        } else {
-            switch (cursor.y) {
-            case MOON_JUMP_INDEX:
-                GZCmd_disable(CMD_MOON_JUMP);
-                break;
-            }
-        }
     }
 
     GZ_drawMenuLines(lines, cursor.y, LINE_NUM);
