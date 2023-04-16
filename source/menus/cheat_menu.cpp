@@ -25,7 +25,7 @@ Line lines[LINE_NUM] = {
         &g_cheats[InfiniteRupees].active},
     {"moon jump", MoonJump, "Hold R+A to moon jump", true,
         &g_cheats[MoonJump].active},
-    {"quarter heart", QuarterHeart, "Hold R+Dpad Left to reduce health to quarter heart", true,
+    {"quarter heart", QuarterHeart, "Hold R+D-pad left to reduce health to quarter heart", true,
         &g_cheats[QuarterHeart].active}
 };
 
