@@ -287,6 +287,7 @@ enum ItemTable {
 class dSv_player_status_a_c {
 public:
     u16& getMaxLife() { return mMaxLife; }
+    u8& getMaxMagic() { return mMaxMagic; }
     u16& getLife() { return mLife; }
     u16& getRupee() { return mRupee; }
     u8 getSelectEquip(int item) const { return mSelectEquip[item]; }
@@ -295,7 +296,7 @@ public:
     void setMaxMagic(u8 max) { mMaxMagic = max; }
     void setRupee(u16 rupees) { mRupee = rupees; }
     void setLife(u16 life) { mLife = life; }
-    void setMaxLife(u8 max) { mMaxLife = max; }
+    void setMaxLife(u16 max) { mMaxLife = max; }
     void setSelectEquip(int item_index, u8 item) { mSelectEquip[item_index] = item; }
 
     /* 0x00 */ u16 mMaxLife;
@@ -344,8 +345,11 @@ public:
 
 class dSv_player_item_record_c {
 public:
-    void setArrowNum(u8 amount) { mArrowNum = amount; }
     u8 getArrowNum() { return mArrowNum; }
+    u8 getBombNum() { return mBombNum; }
+
+    void setArrowNum(u8 amount) { mArrowNum = amount; }
+    void setBombNum(u8 amount) { mBombNum = amount; }
 
     /* 0x0 */ u16 mTimer;
     /* 0x2 */ u8 field_0x2;

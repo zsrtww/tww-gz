@@ -3,6 +3,7 @@
 #include "controller.h"
 #include "menu.h"
 #include "commands.h"
+#include "cheats.h"
 
 void setGamepadButtons(u32 buttons) {
     tww_mPadButton.mButton = buttons;
@@ -56,7 +57,7 @@ void GZ_readController() {
         }
     }
 
-    // GZ_applyCheats();
+    GZ_applyCheats();
     if (GZ_checkMenuOpen() == true) {
         u16 current_input = GZ_getButtonStatus();
 
