@@ -6,7 +6,7 @@
 Cheat g_cheats[CHEAT_AMNT] = {
     {InfiniteAir, false},       {InfiniteArrows, false},    {InfiniteBombs, false},
     {InfiniteHearts, false},    {InfiniteMagic, false},     {InfiniteRupees, false},
-    {MoonJump, false}
+    {MoonJump, false},          {QuarterHeart, false}
 };
 
 inline bool GZ_checkCheat(int cheatIdx) {
@@ -23,6 +23,12 @@ void GZ_applyCheats() {
     if (GZ_checkCheat(InfiniteHearts)) {
         uint16_t max_life = dComIfGs_getMaxLife();
         dComIfGs_setLife(max_life);
+    }
+
+    if (GZ_checkCheat(QuarterHeart)) {
+        GZCmd_enable(CMD_QUARTER_HEART);
+    } else {
+        GZCmd_disable(CMD_QUARTER_HEART);
     }
 
     if (GZ_checkCheat(InfiniteMagic)) {

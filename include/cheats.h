@@ -1,7 +1,7 @@
 #ifndef LIB_TWW_CHEATS
 #define LIB_TWW_CHEATS
 
-#define CHEAT_AMNT 7
+#define CHEAT_AMNT 8
 
 enum CheatId {
     InfiniteAir,
@@ -10,7 +10,8 @@ enum CheatId {
     InfiniteHearts,
     InfiniteMagic,
     InfiniteRupees,
-    MoonJump
+    MoonJump,
+    QuarterHeart
 };
 
 struct Cheat {

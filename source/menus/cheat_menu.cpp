@@ -7,7 +7,7 @@
 #include "commands.h"
 #include "cheats.h"
 
-#define LINE_NUM 7
+#define LINE_NUM 8
 Cursor CheatMenu::cursor;
 
 Line lines[LINE_NUM] = {
@@ -24,7 +24,9 @@ Line lines[LINE_NUM] = {
     {"infinite rupees", InfiniteRupees, "Gives infinite rupees", true,
         &g_cheats[InfiniteRupees].active},
     {"moon jump", MoonJump, "Hold R+A to moon jump", true,
-        &g_cheats[MoonJump].active}
+        &g_cheats[MoonJump].active},
+    {"quarter heart", QuarterHeart, "Hold R+Dpad Left to reduce health to quarter heart", true,
+        &g_cheats[QuarterHeart].active}
 };
 
 void CheatMenu::draw() {
