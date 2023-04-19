@@ -20,12 +20,12 @@ Line lines[LINE_NUM] = {
 void AmountMenu::draw() {
     cursor.setMode(Cursor::MODE_LIST);
 
-    u8 g_healthNum = g_dComIfG_gameInfo.info.getSavedata().getPlayer().getPlayerStatusA().getLife();
-    u8 g_bombNum = g_dComIfG_gameInfo.info.getSavedata().getPlayer().getItemRecord().getBombNum();
-    u8 g_arrowNum = g_dComIfG_gameInfo.info.getSavedata().getPlayer().getItemRecord().getArrowNum();
-    u16 g_rupeeNum = g_dComIfG_gameInfo.info.getSavedata().getPlayer().getPlayerStatusA().getRupee();
-    u8 g_magicNum = g_dComIfG_gameInfo.info.getSavedata().getPlayer().getPlayerStatusA().getMagic();
-    u8 g_heartNum = g_dComIfG_gameInfo.info.getSavedata().getPlayer().getPlayerStatusA().getMaxLife();
+    u16 g_healthNum = dComIfGs_getLife();
+    u8 g_bombNum = dComIfGs_getBombNum();
+    u8 g_arrowNum = dComIfGs_getArrowNum();
+    u16 g_rupeeNum = dComIfGs_getRupee();
+    u8 g_magicNum = dComIfGs_getMagic();
+    u16 g_heartNum = dComIfGs_getMaxLife();
 
     if (GZ_getButtonTrig(GZPad::B)) {
         GZ_setMenu(GZ_INVENTORY_MENU);
@@ -44,26 +44,26 @@ void AmountMenu::draw() {
             g_healthNum = 1; //Quarter heart health
         }
         if (GZ_getButtonTrig(GZPad::R)) {
-            g_healthNum = (g_heartNum / 4) * 4; //Maximum available health
+            g_healthNum = g_heartNum; //Maximum available health
         }
         if (g_healthNum < 1) {
             g_healthNum = 1; //Don't allow the player to go under 1 quarter heart
         }
-        g_dComIfG_gameInfo.info.getSavedata().getPlayer().getPlayerStatusA().setLife(g_healthNum);
+        dComIfGs_setLife(g_healthNum);
         break;
     case BOMB_INDEX:
         Cursor::moveList(g_bombNum);
         if (g_bombNum > 99) {
             g_bombNum = 0;
         }
-        g_dComIfG_gameInfo.info.getSavedata().getPlayer().getItemRecord().setBombNum(g_bombNum);
+        dComIfGs_setBombNum(g_bombNum);
         break;
     case ARROW_INDEX:
         Cursor::moveList(g_arrowNum);
         if (g_arrowNum > 99) {
             g_arrowNum = 0;
         }
-        g_dComIfG_gameInfo.info.getSavedata().getPlayer().getItemRecord().setArrowNum(g_arrowNum);
+        dComIfGs_setArrowNum(g_arrowNum);
         break;
     case RUPEE_INDEX:
         Cursor::moveList(g_rupeeNum);
@@ -73,7 +73,7 @@ void AmountMenu::draw() {
         if (g_rupeeNum > 5000) {
             g_rupeeNum = 0;
         }
-        g_dComIfG_gameInfo.info.getSavedata().getPlayer().getPlayerStatusA().setRupee(g_rupeeNum);
+        dComIfGs_setRupee(g_rupeeNum);
         break;
     case MAGIC_INDEX:
         Cursor::moveList(g_magicNum);
@@ -83,11 +83,11 @@ void AmountMenu::draw() {
         if (g_magicNum > 32) {
             g_magicNum = 0;
         }
-        g_dComIfG_gameInfo.info.getSavedata().getPlayer().getPlayerStatusA().setMagic(g_magicNum);
+        dComIfGs_setMagic(g_magicNum);
         break;
     case HEART_PIECE_INDEX:
         Cursor::moveList(g_heartNum);
-        g_dComIfG_gameInfo.info.getSavedata().getPlayer().getPlayerStatusA().setMaxLife(g_heartNum);
+        dComIfGs_setMaxLife(g_heartNum);
         break;
     }
 

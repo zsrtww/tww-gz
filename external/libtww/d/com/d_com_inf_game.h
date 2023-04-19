@@ -191,6 +191,10 @@ inline void dComIfGs_setMaxLife(uint16_t amount) {
     g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusA().setMaxLife(amount);
 }
 
+inline uint16_t dComIfGs_getLife() {
+    return g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusA().getLife();
+}
+
 inline void dComIfGs_setLife(uint16_t amount) {
     g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusA().setLife(amount);
 }
@@ -203,16 +207,32 @@ inline void dComIfGs_setMaxMagic(uint8_t amount) {
     g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusA().setMaxMagic(amount);
 }
 
+inline uint8_t dComIfGs_getMagic() {
+    return g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusA().getMagic();
+}
+
 inline void dComIfGs_setMagic(uint8_t amount) {
     g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusA().setMagic(amount);
+}
+
+inline uint16_t dComIfGs_getRupee() {
+    return g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusA().getRupee();
 }
 
 inline void dComIfGs_setRupee(uint16_t amount) {
     g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusA().setRupee(amount);
 }
 
+inline uint8_t dComIfGs_getArrowNum() {
+    return g_dComIfG_gameInfo.info.getPlayer().getItemRecord().getArrowNum();
+}
+
 inline void dComIfGs_setArrowNum(uint8_t amount) {
     g_dComIfG_gameInfo.info.getPlayer().getItemRecord().setArrowNum(amount);
+}
+
+inline uint8_t dComIfGs_getBombNum() {
+    return g_dComIfG_gameInfo.info.getPlayer().getItemRecord().getBombNum();
 }
 
 inline void dComIfGs_setBombNum(uint8_t amount) {
