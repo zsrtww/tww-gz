@@ -1,6 +1,7 @@
 #include "menu.h"
 #include "menus/main_menu.h"
 #include "menus/inventory_menu.h"
+#include "menus/amount_menu.h"
 #include "menus/settings_menu.h"
 #include "menus/tools_menu.h"
 #include "menus/cheat_menu.h"
@@ -21,6 +22,8 @@ menu_render_t l_menuDrawList[MENU_NUM] = {
 
     MemoryEditorMenu::draw,
     WatchesMenu::draw,
+
+    AmountMenu::draw
 };
 
 menu_render_t l_currentMenu = nullptr;

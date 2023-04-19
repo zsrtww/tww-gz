@@ -289,6 +289,7 @@ public:
     u16& getMaxLife() { return mMaxLife; }
     u8& getMaxMagic() { return mMaxMagic; }
     u16& getLife() { return mLife; }
+    u8& getMagic() { return mMagic; }
     u16& getRupee() { return mRupee; }
     u8 getSelectEquip(int item) const { return mSelectEquip[item]; }
 
