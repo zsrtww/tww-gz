@@ -53,6 +53,9 @@ void AmountMenu::draw() {
         break;
     case BOMB_INDEX:
         Cursor::moveList(g_bombNum);
+        if (g_bombNum == 0xFF) {
+            g_bombNum = 99;
+        }
         if (g_bombNum > 99) {
             g_bombNum = 0;
         }
@@ -60,6 +63,9 @@ void AmountMenu::draw() {
         break;
     case ARROW_INDEX:
         Cursor::moveList(g_arrowNum);
+        if (g_arrowNum == 0xFF) {
+            g_arrowNum = 99;
+        }
         if (g_arrowNum > 99) {
             g_arrowNum = 0;
         }
@@ -87,6 +93,9 @@ void AmountMenu::draw() {
         break;
     case HEART_PIECE_INDEX:
         Cursor::moveList(g_heartNum);
+        if (g_heartNum < 12) {
+            g_heartNum = 12;
+        }
         dComIfGs_setMaxLife(g_heartNum);
         break;
     }
