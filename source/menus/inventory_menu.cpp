@@ -27,7 +27,7 @@ void InventoryMenu::draw() {
             GZ_setMenu(GZ_AMOUNT_MENU);
             return;
         case PAUSE_INDEX:
-            //GZ_setMenu(GZ_PAUSE_MENU);
+            GZ_setMenu(GZ_PAUSE_MENU);
             return;
         case SPOILS_INDEX:
             //GZ_setMenu(GZ_SPOILS_MENU);

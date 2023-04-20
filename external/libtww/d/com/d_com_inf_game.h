@@ -239,6 +239,14 @@ inline void dComIfGs_setBombNum(uint8_t amount) {
     g_dComIfG_gameInfo.info.getPlayer().getItemRecord().setBombNum(amount);
 }
 
+inline u8 dComIfGs_getItemSlot(u8 index) {
+    return g_dComIfG_gameInfo.info.getPlayer().getItem().getItemSlot(index);
+}
+
+inline void dComIfGs_setItemSlot(u8 index, u8 item_id) {
+    g_dComIfG_gameInfo.info.getPlayer().getItem().setItemSlot(index, item_id);
+}
+
 inline void dComIfGs_setReturnPlace(const char* stage, s8 roomNo, s8 point) {
     dSv_player_return_place_c__set(&g_dComIfG_gameInfo.info.mSavedata.mPlayer.mPlayerReturnPlace,
                                    stage, roomNo, point);

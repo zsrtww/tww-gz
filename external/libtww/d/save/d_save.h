@@ -186,6 +186,9 @@ public:
 
 class dSv_player_item_c {
 public:
+    u8 getItemSlot(u8 index) { return mItemSlots[index]; }
+    void setItemSlot(u8 index, u8 item_id) { mItemSlots[index] = item_id; }
+
     /* 0x0 */ u8 mItemSlots[21];
 };  // Size: 0x15
 
