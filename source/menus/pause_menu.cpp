@@ -278,6 +278,10 @@ void updateBottle(u8 slot) {
         new_item_id = EMPTY_BOTTLE;
     } else if (new_item_id == EMPTY_BOTTLE - 1) {
         new_item_id = NO_ITEM;
+    } else if (new_item_id == FOREST_FIREFLY + 1) {
+        dComIfGs_setForestWaterTimer(36000);
+    } else if (new_item_id == FOREST_WATER - 1) {
+        dComIfGs_setForestWaterTimer(0);
     } else if (new_item_id == FOREST_WATER + 1) {
         new_item_id = FOREST_WATER;
     }

@@ -204,6 +204,7 @@ public:
 
     void setArrowNum(u8 amount) { mArrowNum = amount; }
     void setBombNum(u8 amount) { mBombNum = amount; }
+    void setForestWaterTimer(u16 frames) { mTimer = frames; }
 
     /* 0x0 */ u16 mTimer;
     /* 0x2 */ u8 field_0x2;

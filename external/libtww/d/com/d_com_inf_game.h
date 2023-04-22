@@ -223,6 +223,10 @@ inline void dComIfGs_setRupee(uint16_t amount) {
     g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusA().setRupee(amount);
 }
 
+inline void dComIfGs_setForestWaterTimer(uint16_t frames) {
+    g_dComIfG_gameInfo.info.getPlayer().getItemRecord().setForestWaterTimer(frames);
+}
+
 inline uint8_t dComIfGs_getArrowNum() {
     return g_dComIfG_gameInfo.info.getPlayer().getItemRecord().getArrowNum();
 }
