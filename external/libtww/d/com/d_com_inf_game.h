@@ -179,6 +179,10 @@ inline daPy_lk_c* dComIfGp_getPlayer() {
     return g_dComIfG_gameInfo.play.mPlayerPtr;
 }
 
+inline void dComIfGs_setStorage() {
+    g_dComIfG_gameInfo.play.mEvent.setStorage();
+}
+
 inline void dComIfGs_setOxygen(int amount) {
     g_dComIfG_gameInfo.play.setOxygen(amount);
 }
