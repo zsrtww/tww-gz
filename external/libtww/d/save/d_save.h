@@ -4,6 +4,11 @@
 #include "../../SSystem/SComponent/c_xyz.h"
 #include "../../dolphin/gctypes.h"
 
+enum ItemCapacityIndex {
+    ARROW_CAPACITY_INDEX = 1,
+    BOMB_CAPACITY_INDEX = 2
+};
+
 enum ItemSlots {
     /* 0x00 */ SLOT_TELESCOPE,
     /* 0x01 */ SLOT_SAIL,
@@ -194,6 +199,9 @@ public:
 
 class dSv_player_get_item_c {
 public:
+    u8 getItemFlag(u8 index) { return mItemFlags[index]; }
+    void setItemFlag(u8 index, u8 has_item) { mItemFlags[index] = has_item; }
+
     /* 0x0 */ u8 mItemFlags[21];
 };  // Size: 0x15
 
@@ -216,6 +224,12 @@ public:
 
 class dSv_player_item_max_c {
 public:
+    u8 getArrowCapacity() { return mItemMax[ARROW_CAPACITY_INDEX]; }
+    u8 getBombCapacity() { return mItemMax[BOMB_CAPACITY_INDEX]; }
+
+    void setArrowCapacity(u8 amount) { mItemMax[ARROW_CAPACITY_INDEX] = amount; }
+    void setBombCapacity(u8 amount) { mItemMax[BOMB_CAPACITY_INDEX] = amount; }
+
     /* 0x0 */ u8 mItemMax[8];
 };  // Size: 0x8
 

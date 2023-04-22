@@ -7,6 +7,9 @@
 
 #define NUM_ITEM_SLOTS 21
 
+#define DEFAULT_ARROW_CAPACITY 30
+#define DEFAULT_BOMB_CAPACITY 30
+
 Cursor PauseMenu::cursor;
 
 Line lines[NUM_ITEM_SLOTS] = {
@@ -252,6 +255,16 @@ const char* item_id_to_str(u8 item_id) {
     };
 }
 
+void updateItemFlag(u8 slot, u8 item_id) {
+    u8 has_item = item_id == NO_ITEM ? 0 : 1;
+    dComIfGs_setItemFlag(slot, has_item);
+}
+
+void updateItem(u8 slot, u8 item_id) {
+    dComIfGs_setItemSlot(slot, item_id);
+    updateItemFlag(slot, item_id);
+}
+
 void updateSingleItem(u8 slot, u8 item_id) {
     u8 new_item_id = dComIfGs_getItemSlot(slot);
     Cursor::moveListSimple(new_item_id);
@@ -266,7 +279,7 @@ void updateSingleItem(u8 slot, u8 item_id) {
     } else {
         new_item_id = dComIfGs_getItemSlot(slot);
     }
-    dComIfGs_setItemSlot(slot, new_item_id);
+    updateItem(slot, new_item_id);
 }
 
 void updateBottle(u8 slot) {
@@ -285,7 +298,7 @@ void updateBottle(u8 slot) {
     } else if (new_item_id == FOREST_WATER + 1) {
         new_item_id = FOREST_WATER;
     }
-    dComIfGs_setItemSlot(slot, new_item_id);
+    updateItem(slot, new_item_id);
 }
 
 void PauseMenu::draw() {
@@ -341,7 +354,7 @@ void PauseMenu::draw() {
         } else {
             new_item_id = dComIfGs_getItemSlot(SLOT_CAMERA);
         }
-        dComIfGs_setItemSlot(SLOT_CAMERA, new_item_id);
+        updateItem(SLOT_CAMERA, new_item_id);
         break;
     case SLOT_IRON_BOOTS:
         updateSingleItem(SLOT_IRON_BOOTS, IRON_BOOTS);
@@ -368,10 +381,18 @@ void PauseMenu::draw() {
         } else if (new_item_id == BOW_WITH_LIGHT_ARROWS + 1) {
             new_item_id = BOW_WITH_LIGHT_ARROWS;        
         }
-        dComIfGs_setItemSlot(SLOT_BOW, new_item_id);
+        updateItem(SLOT_BOW, new_item_id);
+        if (dComIfGs_getArrowCapacity() == 0) {
+            dComIfGs_setArrowCapacity(DEFAULT_ARROW_CAPACITY);
+            dComIfGs_setArrowNum(DEFAULT_ARROW_CAPACITY);
+        }
         break;
     case SLOT_BOMB:
         updateSingleItem(SLOT_BOMB, BOMBS);
+        if (dComIfGs_getBombCapacity() == 0) {
+            dComIfGs_setBombCapacity(DEFAULT_BOMB_CAPACITY);
+            dComIfGs_setBombNum(DEFAULT_BOMB_CAPACITY);
+        }
         break;
     case SLOT_BOTTLE_1:
         updateBottle(SLOT_BOTTLE_1);
