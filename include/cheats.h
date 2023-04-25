@@ -1,7 +1,7 @@
 #ifndef LIB_TWW_CHEATS
 #define LIB_TWW_CHEATS
 
-#define CHEAT_AMNT 11
+#define CHEAT_AMNT 12
 
 enum CheatId {
     InfiniteAir,
@@ -12,6 +12,7 @@ enum CheatId {
     InfiniteRupees,
     MoonJump,
     StorageCheat,
+    NormalCollision,
     ChestStorage,
     DoorCancel,
     QuarterHeart
