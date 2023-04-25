@@ -35,7 +35,7 @@ From here you should have a .iso file in your `build` folder labeled twwgz.iso
 
 
 CREDITS:
-Credits to everyone involved in the making of tww-gz, this includes CGF95, Glubbers_, and TakaRikka.
+Credits to everyone involved in the making of tww-gz, this includes PK_Slam, CGF95, Glubbers_, and TakaRikka.
 
 Taka deserves a special congratulations for the work done, providing us with the entire framework ported over from [Twilight Princess' Practice Rom](https://tpgz.io). Without Taka's help, this project would likely have never gotten off the ground.
 
