@@ -72,7 +72,7 @@ static Command sCommands[COMMANDS_AMNT] = {
     {g_commandStates[CMD_MOON_JUMP], (CButton::R | CButton::A), GZCmd_moonJump},
     {g_commandStates[CMD_STORAGE], (CButton::DPAD_RIGHT), GZCmd_storage},
     {g_commandStates[CMD_CHEST_STORAGE], (CButton::L | CButton::DPAD_RIGHT), GZCmd_chestStorage},
-    {g_commandStates[CMD_DOOR_CANCEL], (CButton::DPAD_LEFT), GZCmd_doorCancel},
+    {g_commandStates[CMD_DOOR_CANCEL], (CButton::L | CButton::DPAD_LEFT), GZCmd_doorCancel},
     {g_commandStates[CMD_QUARTER_HEART], (CButton::R | CButton::DPAD_LEFT), GZCmd_quarterHeart}
 };
 
