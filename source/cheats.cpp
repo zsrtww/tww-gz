@@ -6,8 +6,8 @@
 Cheat g_cheats[CHEAT_AMNT] = {
     {InfiniteAir, false},       {InfiniteArrows, false},    {InfiniteBombs, false},
     {InfiniteHearts, false},    {InfiniteMagic, false},     {InfiniteRupees, false},
-    {MoonJump, false},          {StorageCheat, false},      {DoorCancel, false},
-    {QuarterHeart, false}
+    {MoonJump, false},          {StorageCheat, false},      {ChestStorage, false},
+    {DoorCancel, false},        {QuarterHeart, false}
 };
 
 inline bool GZ_checkCheat(int cheatIdx) {
@@ -25,6 +25,12 @@ void GZ_applyCheats() {
         GZCmd_enable(CMD_STORAGE);
     } else {
         GZCmd_disable(CMD_STORAGE);
+    }
+
+    if (GZ_checkCheat(ChestStorage)) {
+        GZCmd_enable(CMD_CHEST_STORAGE);
+    } else {
+        GZCmd_disable(CMD_CHEST_STORAGE);
     }
 
     if (GZ_checkCheat(DoorCancel)) {
