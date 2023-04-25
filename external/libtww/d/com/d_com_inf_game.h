@@ -180,7 +180,9 @@ inline daPy_lk_c* dComIfGp_getPlayer() {
 }
 
 inline u16* dComIfGs_getCollision() {
-    return (u16*) (*((u16**) &g_dComIfG_gameInfo.play.mCameraInfo->mCameraTarget + 4) + 0x24B);
+    u16** collision_base_address_ptr = (u16**) &g_dComIfG_gameInfo.play.mCameraInfo->mCameraTarget + 4;
+    u16* collision_base_address = *collision_base_address_ptr;
+    return &collision_base_address[0x24B];
 }
 
 inline void dComIfGs_setStorage() {
