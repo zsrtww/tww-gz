@@ -123,6 +123,7 @@
 #define l_debug_keep_pos_addr 0x803d78fc
 #define l_debug_current_angle_addr 0x803ea3c8
 #define l_debug_shape_angle_addr 0x803ea3d0
+#define l_pointer_addr 0x803ad860
 
 #endif
 
