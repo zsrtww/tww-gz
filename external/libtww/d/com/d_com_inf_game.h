@@ -223,6 +223,10 @@ inline void dComIfGs_setRupee(uint16_t amount) {
     g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusA().setRupee(amount);
 }
 
+inline void dComIfGs_setForestWaterTimer(uint16_t frames) {
+    g_dComIfG_gameInfo.info.getPlayer().getItemRecord().setForestWaterTimer(frames);
+}
+
 inline uint8_t dComIfGs_getArrowNum() {
     return g_dComIfG_gameInfo.info.getPlayer().getItemRecord().getArrowNum();
 }
@@ -237,6 +241,38 @@ inline uint8_t dComIfGs_getBombNum() {
 
 inline void dComIfGs_setBombNum(uint8_t amount) {
     g_dComIfG_gameInfo.info.getPlayer().getItemRecord().setBombNum(amount);
+}
+
+inline uint8_t dComIfGs_getArrowCapacity() {
+    return g_dComIfG_gameInfo.info.getPlayer().getItemMax().getArrowCapacity();
+}
+
+inline void dComIfGs_setArrowCapacity(uint8_t amount) {
+    g_dComIfG_gameInfo.info.getPlayer().getItemMax().setArrowCapacity(amount);
+}
+
+inline uint8_t dComIfGs_getBombCapacity() {
+    return g_dComIfG_gameInfo.info.getPlayer().getItemMax().getBombCapacity();
+}
+
+inline void dComIfGs_setBombCapacity(uint8_t amount) {
+    g_dComIfG_gameInfo.info.getPlayer().getItemMax().setBombCapacity(amount);
+}
+
+inline u8 dComIfGs_getItemSlot(u8 index) {
+    return g_dComIfG_gameInfo.info.getPlayer().getItem().getItemSlot(index);
+}
+
+inline void dComIfGs_setItemSlot(u8 index, u8 item_id) {
+    g_dComIfG_gameInfo.info.getPlayer().getItem().setItemSlot(index, item_id);
+}
+
+inline u8 dComIfGs_getItemFlag(u8 index) {
+    return g_dComIfG_gameInfo.info.getPlayer().getGetItem().getItemFlag(index);
+}
+
+inline void dComIfGs_setItemFlag(u8 index, u8 has_item) {
+    g_dComIfG_gameInfo.info.getPlayer().getGetItem().setItemFlag(index, has_item);
 }
 
 inline void dComIfGs_setReturnPlace(const char* stage, s8 roomNo, s8 point) {
