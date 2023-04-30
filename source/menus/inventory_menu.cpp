@@ -7,7 +7,7 @@ Cursor InventoryMenu::cursor;
 
 Line lines[LINE_NUM] = {
     {"amounts", AMOUNT_INDEX, "Modify bomb bag, quiver, wallet"},
-    {"pause menu", PAUSE_INDEX, "Modify pause menu items"},
+    {"item inventory", ITEM_INVENTORY_INDEX, "Modify item inventory menu"},
     {"spoils", SPOILS_INDEX, "Modify Spoils Bag items/amounts"},
     {"delivery bag", DELIVERY_BAG_INDEX, "Modify Delivery Bag items/amounts"}, 
 };
@@ -26,8 +26,8 @@ void InventoryMenu::draw() {
         case AMOUNT_INDEX:
             GZ_setMenu(GZ_AMOUNT_MENU);
             return;
-        case PAUSE_INDEX:
-            GZ_setMenu(GZ_PAUSE_MENU);
+        case ITEM_INVENTORY_INDEX:
+            GZ_setMenu(GZ_ITEM_INVENTORY_MENU);
             return;
         case SPOILS_INDEX:
             //GZ_setMenu(GZ_SPOILS_MENU);

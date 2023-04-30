@@ -2,7 +2,7 @@
 
 enum InventoryMenuIndex {
     AMOUNT_INDEX,
-    PAUSE_INDEX,
+    ITEM_INVENTORY_INDEX,
     SPOILS_INDEX,
     DELIVERY_BAG_INDEX,
 };

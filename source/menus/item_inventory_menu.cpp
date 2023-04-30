@@ -1,6 +1,6 @@
 #include "controller.h"
 #include "menus/main_menu.h"
-#include "menus/pause_menu.h"
+#include "menus/item_inventory_menu.h"
 #include "libtww/MSL_C/string.h"
 #include "libtww/d/com/d_com_inf_game.h"
 #include "libtww/d/save/d_save.h"
@@ -10,7 +10,7 @@
 #define DEFAULT_ARROW_CAPACITY 30
 #define DEFAULT_BOMB_CAPACITY 30
 
-Cursor PauseMenu::cursor;
+Cursor ItemInventoryMenu::cursor;
 
 Line lines[NUM_ITEM_SLOTS] = {
     {"Telescope:", SLOT_TELESCOPE, "Add/remove Telescope to/from inventory"},
@@ -301,7 +301,7 @@ void updateBottle(u8 slot) {
     updateItem(slot, new_item_id);
 }
 
-void PauseMenu::draw() {
+void ItemInventoryMenu::draw() {
     cursor.setMode(Cursor::MODE_LIST);
 
     if (GZ_getButtonTrig(GZPad::B)) {

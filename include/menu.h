@@ -22,7 +22,7 @@ enum {
 
     /* Inventory Sub-Menus */
     GZ_AMOUNT_MENU,
-    GZ_PAUSE_MENU,
+    GZ_ITEM_INVENTORY_MENU,
     GZ_SPOILS_MENU,
     GZ_DELIVERY_MENU,
 };
