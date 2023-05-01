@@ -9,6 +9,20 @@ enum ItemCapacityIndex {
     BOMB_CAPACITY_INDEX = 2
 };
 
+enum SelectEquipIndex {
+    SWORD_INDEX = 0,
+    SHIELD_INDEX = 1,
+    POWER_BRACELETS_INDEX = 2
+};
+
+enum CollectItemIndex {
+    SWORD_OWNED_INDEX = 0,
+    SHIELD_OWNED_INDEX = 1,
+    POWER_BRACELETS_OWNED_INDEX = 2,
+    PIRATES_CHARM_OWNED_INDEX = 3,
+    HEROS_CHARM_OWNED_INDEX = 4
+};
+
 enum ItemSlots {
     /* 0x00 */ SLOT_TELESCOPE,
     /* 0x01 */ SLOT_SAIL,
@@ -250,6 +264,16 @@ public:
 
 class dSv_player_collect_c {
 public:
+    u8 getItemOwned(u8 index) { return mItem[index]; }
+    u8 getSongsOwned() { return mTact; }
+    u8 getTriforceOwned() { return mTriforce; }
+    u8 getPearlsOwned() { return mSymbol; }
+
+    void setItemOwned(u8 index, u8 has_item) { mItem[index] = has_item; }
+    void setSongsOwned(u8 songs_owned) { mTact = songs_owned; }
+    void setTriforceOwned(u8 triforce_owned) { mTriforce = triforce_owned; }
+    void setPearlsOwned(u8 pearls_owned) { mSymbol = pearls_owned; }
+
     /* 0x0 */ u8 mItem[8];
     /* 0x8 */ u8 unk8;
     /* 0x9 */ u8 mTact;

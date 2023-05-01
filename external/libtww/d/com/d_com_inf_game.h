@@ -193,6 +193,82 @@ inline void dComIfGs_setOxygen(int amount) {
     g_dComIfG_gameInfo.play.setOxygen(amount);
 }
 
+inline uint8_t dComIfGs_getSword() {
+    return g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusA().getSelectEquip(SWORD_INDEX);
+}
+
+inline void dComIfGs_setSword(u8 item_id) {
+    g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusA().setSelectEquip(SWORD_INDEX, item_id);
+}
+
+inline void dComIfGs_setSwordOwned(u8 has_item) {
+    g_dComIfG_gameInfo.info.getPlayer().getCollect().setItemOwned(SWORD_OWNED_INDEX, has_item);
+}
+
+inline uint8_t dComIfGs_getShield() {
+    return g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusA().getSelectEquip(SHIELD_INDEX);
+}
+
+inline void dComIfGs_setShield(u8 item_id) {
+    g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusA().setSelectEquip(SHIELD_INDEX, item_id);
+}
+
+inline void dComIfGs_setShieldOwned(u8 has_item) {
+    g_dComIfG_gameInfo.info.getPlayer().getCollect().setItemOwned(SHIELD_OWNED_INDEX, has_item);
+}
+
+inline uint8_t dComIfGs_getPowerBracelets() {
+    return g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusA().getSelectEquip(POWER_BRACELETS_INDEX);
+}
+
+inline void dComIfGs_setPowerBracelets(u8 item_id) {
+    g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusA().setSelectEquip(POWER_BRACELETS_INDEX, item_id);
+}
+
+inline void dComIfGs_setPowerBraceletsOwned(u8 has_item) {
+    g_dComIfG_gameInfo.info.getPlayer().getCollect().setItemOwned(POWER_BRACELETS_OWNED_INDEX, has_item);
+}
+
+inline uint8_t dComIfGs_getPiratesCharmOwned() {
+    return g_dComIfG_gameInfo.info.getPlayer().getCollect().getItemOwned(PIRATES_CHARM_OWNED_INDEX);
+}
+
+inline void dComIfGs_setPiratesCharmOwned(u8 has_item) {
+    g_dComIfG_gameInfo.info.getPlayer().getCollect().setItemOwned(PIRATES_CHARM_OWNED_INDEX, has_item);
+}
+
+inline uint8_t dComIfGs_getHerosCharmOwned() {
+    return g_dComIfG_gameInfo.info.getPlayer().getCollect().getItemOwned(HEROS_CHARM_OWNED_INDEX);
+}
+
+inline void dComIfGs_setHerosCharmOwned(u8 has_item) {
+    g_dComIfG_gameInfo.info.getPlayer().getCollect().setItemOwned(HEROS_CHARM_OWNED_INDEX, has_item);
+}
+
+inline uint8_t dComIfGs_getSongsOwned() {
+    return g_dComIfG_gameInfo.info.getPlayer().getCollect().getSongsOwned();
+}
+
+inline void dComIfGs_setSongsOwned(u8 songs_owned) {
+    g_dComIfG_gameInfo.info.getPlayer().getCollect().setSongsOwned(songs_owned);
+}
+
+inline uint8_t dComIfGs_getTriforceOwned() {
+    return g_dComIfG_gameInfo.info.getPlayer().getCollect().getTriforceOwned();
+}
+
+inline void dComIfGs_setTriforceOwned(u8 triforce_owned) {
+    g_dComIfG_gameInfo.info.getPlayer().getCollect().setTriforceOwned(triforce_owned);
+}
+
+inline uint8_t dComIfGs_getPearlsOwned() {
+    return g_dComIfG_gameInfo.info.getPlayer().getCollect().getPearlsOwned();
+}
+
+inline void dComIfGs_setPearlsOwned(u8 pearls_owned) {
+    g_dComIfG_gameInfo.info.getPlayer().getCollect().setPearlsOwned(pearls_owned);
+}
+
 inline uint16_t dComIfGs_getMaxLife() {
     return g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusA().getMaxLife();
 }
