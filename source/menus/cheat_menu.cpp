@@ -7,7 +7,7 @@
 #include "commands.h"
 #include "cheats.h"
 
-#define LINE_NUM 8
+#define LINE_NUM 9
 Cursor CheatMenu::cursor;
 
 Line lines[LINE_NUM] = {
@@ -25,6 +25,8 @@ Line lines[LINE_NUM] = {
         &g_cheats[InfiniteRupees].active},
     {"moon jump", MoonJump, "Hold R+A to moon jump", true,
         &g_cheats[MoonJump].active},
+    {"storage", StorageCheat, "Press D-pad right to get storage", true,
+        &g_cheats[StorageCheat].active},
     {"quarter heart", QuarterHeart, "Hold R+D-pad left to reduce health to quarter heart", true,
         &g_cheats[QuarterHeart].active}
 };

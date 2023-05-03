@@ -2,7 +2,7 @@
 #include "libtww/dolphin/gctypes.h"
 #include "libtww/SSystem/SComponent/c_xyz.h"
 
-#define COMMANDS_AMNT 4
+#define COMMANDS_AMNT 5
 
 extern bool g_commandStates[COMMANDS_AMNT];
 
@@ -10,6 +10,7 @@ enum Commands {
     CMD_STORE_POSITION,
     CMD_LOAD_POSITION,
     CMD_MOON_JUMP,
+    CMD_STORAGE,
     CMD_QUARTER_HEART
 };
 

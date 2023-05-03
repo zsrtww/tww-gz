@@ -1,7 +1,7 @@
 #ifndef LIB_TWW_CHEATS
 #define LIB_TWW_CHEATS
 
-#define CHEAT_AMNT 8
+#define CHEAT_AMNT 9
 
 enum CheatId {
     InfiniteAir,
@@ -11,6 +11,7 @@ enum CheatId {
     InfiniteMagic,
     InfiniteRupees,
     MoonJump,
+    StorageCheat,
     QuarterHeart
 };
 
