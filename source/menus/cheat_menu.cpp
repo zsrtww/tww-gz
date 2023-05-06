@@ -7,7 +7,7 @@
 #include "commands.h"
 #include "cheats.h"
 
-#define LINE_NUM 9
+#define LINE_NUM 12
 Cursor CheatMenu::cursor;
 
 Line lines[LINE_NUM] = {
@@ -27,6 +27,12 @@ Line lines[LINE_NUM] = {
         &g_cheats[MoonJump].active},
     {"storage", StorageCheat, "Press D-pad right to get storage", true,
         &g_cheats[StorageCheat].active},
+    {"normal collision", NormalCollision, "Hold L+D-pad down to get normal collision", true,
+        &g_cheats[NormalCollision].active},
+    {"chest storage", ChestStorage, "Hold L+D-pad right to get chest storage", true,
+        &g_cheats[ChestStorage].active},
+    {"door cancel", DoorCancel, "Hold L+D-pad left to get door cancel", true,
+        &g_cheats[DoorCancel].active},
     {"quarter heart", QuarterHeart, "Hold R+D-pad left to reduce health to quarter heart", true,
         &g_cheats[QuarterHeart].active}
 };
