@@ -7,9 +7,9 @@ enum BottleSlotIndex {
     SLOT_BOTTLE_4 = 17
 };
 
-class PauseMenu : public Menu {
+class ItemInventoryMenu : public Menu {
 public:
-    PauseMenu() : Menu() {}
+    ItemInventoryMenu() : Menu() {}
     static void draw();
 
     static Cursor cursor;
