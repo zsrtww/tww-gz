@@ -4,6 +4,7 @@
 #include "../addrs.h"
 #include "save/d_save.h"
 #include "../f_op/f_op_actor.h"
+#include <string.h>
 
 struct stage_vrboxcol_info_class {};
 
@@ -116,10 +117,14 @@ public:
 class dStage_startStage_c {
 public:
     inline char* getName() { return mStage; }
+    s16 getPoint() { return mPoint; }
+    s8 getRoomNo() { return mRoomNo; }
     s8 getLayer() { return mLayer; }
-    void setLayer(s8 layer) { mLayer = layer; }
+
+    void setName(char* name) { strcpy(mStage, name); }
     void setPoint(s16 point) { mPoint = point; }
     void setRoomNo(s8 room) { mRoomNo = room; }
+    void setLayer(s8 layer) { mLayer = layer; }
 
     /* 0x0 */ char mStage[8];
     /* 0x8 */ s16 mPoint;
@@ -130,6 +135,9 @@ static_assert(sizeof(dStage_startStage_c) == 0xC);
 
 class dStage_nextStage_c : public dStage_startStage_c {
 public:
+    void setEnabled(s8 is_enabled) { enabled = is_enabled; }
+    void setWipe(u8 wipe_type) { wipe = wipe_type; }
+
     s8 enabled;
     u8 wipe;
     u8 wipe_speed;
