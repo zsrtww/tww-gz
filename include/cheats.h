@@ -1,7 +1,7 @@
 #ifndef LIB_TWW_CHEATS
 #define LIB_TWW_CHEATS
 
-#define CHEAT_AMNT 13
+#define CHEAT_AMNT 14
 
 enum CheatId {
     InfiniteAir,
@@ -16,7 +16,8 @@ enum CheatId {
     ChestStorage,
     DoorCancel,
     QuarterHeart,
-    FastMovement
+    FastMovement,
+    Upcharge,
 };
 
 struct Cheat {

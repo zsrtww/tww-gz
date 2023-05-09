@@ -8,7 +8,7 @@ Cheat g_cheats[CHEAT_AMNT] = {
     {InfiniteHearts, false},    {InfiniteMagic, false},     {InfiniteRupees, false},
     {MoonJump, false},          {StorageCheat, false},      {NormalCollision, false},
     {ChestStorage, false},      {DoorCancel, false},        {QuarterHeart, false},
-    {FastMovement, false}
+    {FastMovement, false},      {Upcharge, false}
 };
 
 inline bool GZ_checkCheat(int cheatIdx) {
@@ -56,6 +56,12 @@ void GZ_applyCheats() {
         GZCmd_enable(CMD_FAST_MOVEMENT);
     } else {
         GZCmd_disable(CMD_FAST_MOVEMENT);
+    }
+
+    if (GZ_checkCheat(Upcharge)) {
+        GZCmd_enable(CMD_UPCHARGE);
+    } else {
+        GZCmd_disable(CMD_UPCHARGE);
     }
 
     if (GZ_checkCheat(InfiniteHearts)) {

@@ -2,7 +2,7 @@
 #include "libtww/dolphin/gctypes.h"
 #include "libtww/SSystem/SComponent/c_xyz.h"
 
-#define COMMANDS_AMNT 9
+#define COMMANDS_AMNT 10
 
 extern bool g_commandStates[COMMANDS_AMNT];
 
@@ -15,7 +15,8 @@ enum Commands {
     CMD_CHEST_STORAGE,
     CMD_DOOR_CANCEL,
     CMD_QUARTER_HEART,
-    CMD_FAST_MOVEMENT
+    CMD_FAST_MOVEMENT,
+    CMD_UPCHARGE
 };
 
 struct Command {

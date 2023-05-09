@@ -77,6 +77,10 @@ void GZCmd_fastMovement() {
     else dComIfGs_setSpeed(150);
 }
 
+void GZCmd_upcharge() {
+    dComIfGs_setSpeed(-550);
+}
+
 static Command sCommands[COMMANDS_AMNT] = {
     {g_commandStates[CMD_STORE_POSITION], (CButton::DPAD_UP | CButton::R), GZCmd_storePosition},
     {g_commandStates[CMD_LOAD_POSITION], (CButton::DPAD_DOWN | CButton::R), GZCmd_loadPosition},
@@ -86,7 +90,8 @@ static Command sCommands[COMMANDS_AMNT] = {
     {g_commandStates[CMD_CHEST_STORAGE], (CButton::L | CButton::DPAD_RIGHT), GZCmd_chestStorage},
     {g_commandStates[CMD_DOOR_CANCEL], (CButton::L | CButton::DPAD_LEFT), GZCmd_doorCancel},
     {g_commandStates[CMD_QUARTER_HEART], (CButton::R | CButton::DPAD_LEFT), GZCmd_quarterHeart},
-    {g_commandStates[CMD_FAST_MOVEMENT], (CButton::DPAD_LEFT), GZCmd_fastMovement}
+    {g_commandStates[CMD_FAST_MOVEMENT], (CButton::DPAD_LEFT), GZCmd_fastMovement},
+    {g_commandStates[CMD_UPCHARGE], (CButton::X | CButton::Z), GZCmd_upcharge}
 };
 
 void GZCmd_processInputs() {
