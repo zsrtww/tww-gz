@@ -6,13 +6,14 @@
 #include "libtww/d/com/d_com_inf_game.h"
 #include "libtww/d/save/d_save.h"
 
-#define NUM_QUEST_ITEMS 22
+#define NUM_QUEST_ITEMS 23
 
 Cursor QuestStatusMenu::cursor;
 
 Line lines[NUM_QUEST_ITEMS] = {
     {"Sword:", MENU_ITEM_SWORD, "Add/remove/upgrade sword"},
     {"Shield:", MENU_ITEM_SHIELD, "Add/remove/upgrade shield"},
+    {"Magic:", MENU_ITEM_MAGIC, "Add/remove/upgrade magic"},
     {"Power Bracelets:", MENU_ITEM_POWER_BRACELETS, "Add/remove power bracelets from inventory"},
     {"Pirate\'s Charm:", MENU_ITEM_PIRATES_CHARM, "Add/remove pirate\'s charm from inventory"},
     {"Hero\'s Charm:", MENU_ITEM_HEROS_CHARM, "Add/remove hero\'s charm from inventory"},
@@ -99,6 +100,21 @@ const char* get_pearl_string(u8 pearls_owned, u8 pearl) {
     }
 }
 
+const char* get_magic_string(u8 magic_value ) {
+   if ((magic_value) == 0) {
+        return "Empty";
+    } else {
+        switch (magic_value) {
+        case SINGLE_MAGIC:
+            return "Single Magic";
+        case DOUBLE_MAGIC:
+            return "Double Magic";
+        default:
+            return "unknow";          
+        };
+    }
+}
+
 const char* get_triforce_string(u8 triforce_owned, u8 triforce_piece) {
     if ((triforce_owned & triforce_piece) == 0) {
         return "Empty";
@@ -156,6 +172,8 @@ u8 shieldIdToShieldOwned(u8 shield_item_id) {
     };
 }
 
+
+
 u8 powerBraceletsIdToPowerBraceletsOwned(u8 power_bracelets_item_id) {
     switch (power_bracelets_item_id) {
     case NO_ITEM:
@@ -211,7 +229,7 @@ void QuestStatusMenu::draw() {
         return;
     }
 
-    u8 new_sword_item_id, new_shield_item_id, new_power_bracelets_item_id, is_pirates_charm_owned, heros_charm_flag;
+    u8 new_sword_item_id, new_shield_item_id, new_max_magic_value, new_power_bracelets_item_id, is_pirates_charm_owned, heros_charm_flag;
 
     switch (cursor.y) {
     case MENU_ITEM_SWORD:
@@ -263,6 +281,29 @@ void QuestStatusMenu::draw() {
         }
         dComIfGs_setShield(new_shield_item_id);
         dComIfGs_setShieldOwned(shieldIdToShieldOwned(new_shield_item_id));
+        break;
+     case MENU_ITEM_MAGIC:
+        new_max_magic_value = dComIfGs_getMaxMagic();
+        Cursor::moveListSimple(new_max_magic_value);
+        if (new_max_magic_value == NO_MAGIC - 1) {
+            new_max_magic_value = NO_MAGIC;
+        } else if (new_max_magic_value == NO_MAGIC) {
+            new_max_magic_value = NO_MAGIC;
+        } else if (new_max_magic_value == NO_MAGIC + 1) {
+            new_max_magic_value = SINGLE_MAGIC;
+        } else if (new_max_magic_value == SINGLE_MAGIC - 1) {
+            new_max_magic_value = NO_MAGIC;
+        } else if (new_max_magic_value == SINGLE_MAGIC + 1) {
+            new_max_magic_value = DOUBLE_MAGIC;
+        } else if (new_max_magic_value == DOUBLE_MAGIC - 1) {
+            new_max_magic_value = SINGLE_MAGIC;
+        } else if (new_max_magic_value == DOUBLE_MAGIC + 1) {
+            new_max_magic_value = DOUBLE_MAGIC;
+        } else {
+            new_max_magic_value = dComIfGs_getMaxMagic();
+        }
+        dComIfGs_setMagic(new_max_magic_value);
+        dComIfGs_setMaxMagic(new_max_magic_value);
         break;
     case MENU_ITEM_POWER_BRACELETS:
         new_power_bracelets_item_id = dComIfGs_getPowerBracelets();
@@ -356,6 +397,7 @@ void QuestStatusMenu::draw() {
 
     tww_sprintf(lines[MENU_ITEM_SWORD].value, " <%s>", item_id_to_str(dComIfGs_getSword()));
     tww_sprintf(lines[MENU_ITEM_SHIELD].value, " <%s>", item_id_to_str(dComIfGs_getShield()));
+    tww_sprintf(lines[MENU_ITEM_MAGIC].value, " <%s>", get_magic_string(dComIfGs_getMaxMagic()));
     tww_sprintf(lines[MENU_ITEM_POWER_BRACELETS].value, " <%s>", item_id_to_str(dComIfGs_getPowerBracelets()));
     tww_sprintf(lines[MENU_ITEM_PIRATES_CHARM].value, " <%s>", get_pirates_charm_string(dComIfGs_getPiratesCharmOwned()));
     tww_sprintf(lines[MENU_ITEM_HEROS_CHARM].value, " <%s>", get_heros_charm_string(dComIfGs_getHerosCharmOwned()));

@@ -7,6 +7,7 @@ enum AmountMenuIndex {
     RUPEE_INDEX,
     MAGIC_INDEX,
     HEART_PIECE_INDEX,
+    MAX_MAGIC_INDEX
 };
 
 class AmountMenu : public Menu {
