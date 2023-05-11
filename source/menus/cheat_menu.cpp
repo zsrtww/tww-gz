@@ -7,7 +7,7 @@
 #include "commands.h"
 #include "cheats.h"
 
-#define LINE_NUM 12
+#define LINE_NUM 14
 Cursor CheatMenu::cursor;
 
 Line lines[LINE_NUM] = {
@@ -34,7 +34,11 @@ Line lines[LINE_NUM] = {
     {"door cancel", DoorCancel, "Hold L+D-pad left to get door cancel", true,
         &g_cheats[DoorCancel].active},
     {"quarter heart", QuarterHeart, "Hold R+D-pad left to reduce health to quarter heart", true,
-        &g_cheats[QuarterHeart].active}
+        &g_cheats[QuarterHeart].active},
+    {"fast movement", FastMovement, "Hold D-pad left to get super speed", true,
+        &g_cheats[FastMovement].active},
+    {"upcharge", Upcharge, "Hold X + Z to get negative speed for upcharge", true,
+        &g_cheats[Upcharge].active}
 };
 
 void CheatMenu::draw() {

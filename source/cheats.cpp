@@ -7,7 +7,8 @@ Cheat g_cheats[CHEAT_AMNT] = {
     {InfiniteAir, false},       {InfiniteArrows, false},    {InfiniteBombs, false},
     {InfiniteHearts, false},    {InfiniteMagic, false},     {InfiniteRupees, false},
     {MoonJump, false},          {StorageCheat, false},      {NormalCollision, false},
-    {ChestStorage, false},      {DoorCancel, false},        {QuarterHeart, false}
+    {ChestStorage, false},      {DoorCancel, false},        {QuarterHeart, false},
+    {FastMovement, false},      {Upcharge, false}
 };
 
 inline bool GZ_checkCheat(int cheatIdx) {
@@ -45,15 +46,27 @@ void GZ_applyCheats() {
         GZCmd_disable(CMD_DOOR_CANCEL);
     }
 
-    if (GZ_checkCheat(InfiniteHearts)) {
-        uint16_t max_life = dComIfGs_getMaxLife();
-        dComIfGs_setLife(max_life);
-    }
-
     if (GZ_checkCheat(QuarterHeart)) {
         GZCmd_enable(CMD_QUARTER_HEART);
     } else {
         GZCmd_disable(CMD_QUARTER_HEART);
+    }
+
+    if (GZ_checkCheat(FastMovement)) {
+        GZCmd_enable(CMD_FAST_MOVEMENT);
+    } else {
+        GZCmd_disable(CMD_FAST_MOVEMENT);
+    }
+
+    if (GZ_checkCheat(Upcharge)) {
+        GZCmd_enable(CMD_UPCHARGE);
+    } else {
+        GZCmd_disable(CMD_UPCHARGE);
+    }
+
+    if (GZ_checkCheat(InfiniteHearts)) {
+        uint16_t max_life = dComIfGs_getMaxLife();
+        dComIfGs_setLife(max_life);
     }
 
     if (GZ_checkCheat(InfiniteMagic)) {
@@ -63,7 +76,7 @@ void GZ_applyCheats() {
     }
 
     if (GZ_checkCheat(InfiniteAir)) {
-        dComIfGs_setOxygen(850);
+        dComIfGs_setOxygen(900);
     }
 
     if (GZ_checkCheat(InfiniteBombs)) {

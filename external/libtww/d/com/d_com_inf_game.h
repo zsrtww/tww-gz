@@ -179,6 +179,14 @@ inline daPy_lk_c* dComIfGp_getPlayer() {
     return g_dComIfG_gameInfo.play.mPlayerPtr;
 }
 
+inline u32 dComIfGs_getLinkState() {
+    return l_pointer_base_address[0xC40];
+}
+
+inline void dComIfGs_setSpeed(float speed) {
+    ((float*) l_pointer_base_address)[0xD39] = speed;
+}
+
 inline u16* dComIfGs_getCollision() {
     u16** collision_base_address_ptr = (u16**) &g_dComIfG_gameInfo.play.mCameraInfo->mCameraTarget + 4;
     u16* collision_base_address = *collision_base_address_ptr;
