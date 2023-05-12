@@ -6,7 +6,7 @@
 #include "libtww/d/com/d_com_inf_game.h"
 #include "libtww/d/save/d_save.h"
 
-#define NUM_QUEST_ITEMS 23
+#define NUM_QUEST_ITEMS 25
 
 Cursor QuestStatusMenu::cursor;
 
@@ -14,6 +14,8 @@ Line lines[NUM_QUEST_ITEMS] = {
     {"Sword:", MENU_ITEM_SWORD, "Add/remove/upgrade sword"},
     {"Shield:", MENU_ITEM_SHIELD, "Add/remove/upgrade shield"},
     {"Magic:", MENU_ITEM_MAGIC, "Add/remove/upgrade magic"},
+    {"Quiver:", MENU_ITEM_QUIVER, "Add/remove/upgrade Quiver"},
+    {"Bombs Bags :", MENU_ITEM_BOMBAG, "Add/remove/upgrade Quiver"},
     {"Power Bracelets:", MENU_ITEM_POWER_BRACELETS, "Add/remove power bracelets from inventory"},
     {"Pirate\'s Charm:", MENU_ITEM_PIRATES_CHARM, "Add/remove pirate\'s charm from inventory"},
     {"Hero\'s Charm:", MENU_ITEM_HEROS_CHARM, "Add/remove hero\'s charm from inventory"},
@@ -99,6 +101,7 @@ const char* get_pearl_string(u8 pearls_owned, u8 pearl) {
     }
 }
 
+
 const char* get_magic_string(u8 magic_value) {
     if (magic_value == 0) {
         return "Empty";
@@ -106,6 +109,40 @@ const char* get_magic_string(u8 magic_value) {
         return "Double Magic";
     } else
         return "Single Magic";
+}
+
+const char* get_quiver_string(u8 arrows_capacity) {
+    if (arrows_capacity == 0) {
+        return "Empty";
+    } else {
+        switch (arrows_capacity) {
+        case ARROWS_30:
+            return "Quiver 30";
+        case ARROWS_60:
+            return "Quiver 60";
+        case ARROWS_99:
+            return "Quiver 99";
+        default:
+            return "Empty";
+        };
+    }
+}
+
+const char* get_bombags_string(u8 max_bombs_owned) {
+    if (max_bombs_owned == 0) {
+        return "Empty";
+    } else {
+        switch (max_bombs_owned) {
+        case BOMBS_30:
+            return "Bomb Bag 30";
+        case BOMBS_60:
+            return "Bomb Bag 60";
+        case BOMBS_99:
+            return "Bomb Bag 99";
+        default:
+            return "Empty";
+        };
+    }
 }
 
 const char* get_triforce_string(u8 triforce_owned, u8 triforce_piece) {
@@ -222,7 +259,7 @@ void QuestStatusMenu::draw() {
         return;
     }
 
-    u8 new_sword_item_id, new_shield_item_id, new_max_magic_value, new_power_bracelets_item_id,
+    u8 new_sword_item_id, new_shield_item_id, new_max_magic_value, new_arrows_capacity,new_bombs_capacity,new_power_bracelets_item_id,
 is_pirates_charm_owned, heros_charm_flag;
 
     switch (cursor.y) {
@@ -316,6 +353,54 @@ is_pirates_charm_owned, heros_charm_flag;
         dComIfGs_setPowerBracelets(new_power_bracelets_item_id);
         dComIfGs_setPowerBraceletsOwned(powerBraceletsIdToPowerBraceletsOwned(new_power_bracelets_item_id));
         break;
+    case MENU_ITEM_QUIVER:
+        new_arrows_capacity = dComIfGs_getArrowCapacity();
+        Cursor::moveListSimple(new_arrows_capacity);
+        if (new_arrows_capacity == ARROWS_30 - 1) {
+            new_arrows_capacity = ARROWS_30;
+        } else if (new_arrows_capacity == 0) {
+            new_arrows_capacity = ARROWS_30;
+        } else if (new_arrows_capacity == ARROWS_30 + 1) {
+            new_arrows_capacity = ARROWS_60;
+         } else if (new_arrows_capacity == ARROWS_60 - 1) {
+            new_arrows_capacity = ARROWS_30;
+        } else if (new_arrows_capacity == ARROWS_60 + 1) {
+            new_arrows_capacity = ARROWS_99;
+        } else if (new_arrows_capacity == ARROWS_99 - 1) {
+            new_arrows_capacity = ARROWS_60;
+        } else if (new_arrows_capacity == ARROWS_99 + 1) {
+            new_arrows_capacity = ARROWS_99;
+            
+        } else {
+            new_arrows_capacity = dComIfGs_getArrowCapacity();
+        }
+        dComIfGs_setArrowNum(new_arrows_capacity);
+        dComIfGs_setArrowCapacity(new_arrows_capacity);
+        break;
+    case MENU_ITEM_BOMBAG:
+        new_bombs_capacity = dComIfGs_getBombCapacity();
+        Cursor::moveListSimple(new_bombs_capacity);
+        if (new_bombs_capacity == BOMBS_30 - 1) {
+            new_bombs_capacity = BOMBS_30;
+        } else if (new_bombs_capacity == 0) {
+            new_bombs_capacity = BOMBS_30;
+        } else if (new_bombs_capacity == BOMBS_30 + 1) {
+            new_bombs_capacity = BOMBS_60;
+         } else if (new_bombs_capacity == BOMBS_60 - 1) {
+            new_bombs_capacity = BOMBS_30;
+        } else if (new_bombs_capacity == BOMBS_60 + 1) {
+            new_bombs_capacity = BOMBS_99;
+        } else if (new_bombs_capacity == BOMBS_99 - 1) {
+            new_bombs_capacity = BOMBS_60;
+        } else if (new_bombs_capacity == BOMBS_99 + 1) {
+            new_bombs_capacity = BOMBS_99;
+            
+        } else {
+            new_bombs_capacity = dComIfGs_getBombCapacity();
+        }
+        dComIfGs_setBombNum(new_bombs_capacity);
+        dComIfGs_setBombCapacity(new_bombs_capacity);
+        break;
     case MENU_ITEM_PIRATES_CHARM:
         is_pirates_charm_owned = dComIfGs_getPiratesCharmOwned();
         Cursor::moveListSimple(is_pirates_charm_owned);
@@ -392,6 +477,8 @@ is_pirates_charm_owned, heros_charm_flag;
     tww_sprintf(lines[MENU_ITEM_SWORD].value, " <%s>", item_id_to_str(dComIfGs_getSword()));
     tww_sprintf(lines[MENU_ITEM_SHIELD].value, " <%s>", item_id_to_str(dComIfGs_getShield()));
     tww_sprintf(lines[MENU_ITEM_MAGIC].value, " <%s>", get_magic_string(dComIfGs_getMaxMagic()));
+    tww_sprintf(lines[MENU_ITEM_QUIVER].value, " <%s>", get_quiver_string(dComIfGs_getArrowCapacity()));
+    tww_sprintf(lines[MENU_ITEM_BOMBAG].value, " <%s>", get_bombags_string(dComIfGs_getBombCapacity()));
     tww_sprintf(lines[MENU_ITEM_POWER_BRACELETS].value, " <%s>",
                 item_id_to_str(dComIfGs_getPowerBracelets()));
     tww_sprintf(lines[MENU_ITEM_PIRATES_CHARM].value, " <%s>",
