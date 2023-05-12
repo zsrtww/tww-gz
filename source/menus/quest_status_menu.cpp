@@ -363,7 +363,7 @@ is_pirates_charm_owned, heros_charm_flag;
         } else if (new_arrows_capacity == NO_QUIVER) {
             new_arrows_capacity = NO_QUIVER;
              } else if (new_arrows_capacity == ARROWS_30 - 1) {
-            new_arrows_capacity = ARROWS_30;
+            new_arrows_capacity = NO_BOMBBAG;
         } else if (new_arrows_capacity == ARROWS_30 + 1) {
             new_arrows_capacity = ARROWS_60;
          } else if (new_arrows_capacity == ARROWS_60 - 1) {
@@ -391,7 +391,7 @@ is_pirates_charm_owned, heros_charm_flag;
         } else if (new_bombs_capacity == NO_BOMBBAG) {
             new_bombs_capacity = NO_BOMBBAG;
               } else if (new_bombs_capacity == BOMBS_30 - 1) {
-            new_bombs_capacity = BOMBS_30;
+            new_bombs_capacity = NO_BOMBBAG;
         } else if (new_bombs_capacity == BOMBS_30 + 1) {
             new_bombs_capacity = BOMBS_60;
          } else if (new_bombs_capacity == BOMBS_60 - 1) {
