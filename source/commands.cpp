@@ -81,6 +81,20 @@ void GZCmd_upcharge() {
     dComIfGs_setSpeed(-550);
 }
 
+void GZCmd_areaReload() {
+    char* stage = g_dComIfG_gameInfo.play.mStartStage.getName();
+    s16 entrance = g_dComIfG_gameInfo.play.mStartStage.getPoint();
+    s8 room = g_dComIfG_gameInfo.play.mStartStage.getRoomNo();
+    s8 layer = g_dComIfG_gameInfo.play.mStartStage.getLayer();
+
+    g_dComIfG_gameInfo.play.mNextStage.setName(stage);
+    g_dComIfG_gameInfo.play.mNextStage.setPoint(entrance);
+    g_dComIfG_gameInfo.play.mNextStage.setRoomNo(room);
+    g_dComIfG_gameInfo.play.mNextStage.setLayer(layer);
+    g_dComIfG_gameInfo.play.mNextStage.setEnabled(true);
+    g_dComIfG_gameInfo.play.mNextStage.setWipe(0);
+}
+
 static Command sCommands[COMMANDS_AMNT] = {
     {g_commandStates[CMD_STORE_POSITION], (CButton::DPAD_UP | CButton::R), GZCmd_storePosition},
     {g_commandStates[CMD_LOAD_POSITION], (CButton::DPAD_DOWN | CButton::R), GZCmd_loadPosition},
@@ -91,7 +105,8 @@ static Command sCommands[COMMANDS_AMNT] = {
     {g_commandStates[CMD_DOOR_CANCEL], (CButton::L | CButton::DPAD_LEFT), GZCmd_doorCancel},
     {g_commandStates[CMD_QUARTER_HEART], (CButton::R | CButton::DPAD_LEFT), GZCmd_quarterHeart},
     {g_commandStates[CMD_FAST_MOVEMENT], (CButton::DPAD_LEFT), GZCmd_fastMovement},
-    {g_commandStates[CMD_UPCHARGE], (CButton::X | CButton::Z), GZCmd_upcharge}
+    {g_commandStates[CMD_UPCHARGE], (CButton::X | CButton::Z), GZCmd_upcharge},
+    {g_commandStates[CMD_AREA_RELOAD], (CButton::L | CButton::R | CButton::A | CButton::START), GZCmd_areaReload}
 };
 
 void GZCmd_processInputs() {

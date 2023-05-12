@@ -62,8 +62,8 @@ void dComIfGs_setGameStartStageHook() {
 #endif
 
 int dScnPly_DrawHook(void* _this) {
-    // if L + R + B is pressed, change scene to map select
-    if (tww_mPadStatus.button == (CButton::L | CButton::R | CButton::B)) {
+    // if DPAD_DOWN + Y + Z is pressed, change scene to map select
+    if (g_tools[MAP_SELECT_INDEX].active && tww_mPadStatus.button == (CButton::DPAD_DOWN | CButton::Y | CButton::Z)) {
         // overwrite original path with our custom path
         tww_strcpy(menu_data_path, "/twwgz/mn/Menu1.dat");
 

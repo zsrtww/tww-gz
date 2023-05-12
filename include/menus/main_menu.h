@@ -9,7 +9,6 @@ enum MainMenuIndex {
     SCENE_INDEX,
     SETTINGS_INDEX,
     TOOLS_INDEX,
-    WARPING_INDEX,
 };
 
 class MainMenu : public Menu {
