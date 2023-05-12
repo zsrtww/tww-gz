@@ -20,12 +20,14 @@ enum Magic {
     DOUBLE_MAGIC = 32
 };
 enum Quiver {
+    NO_QUIVER = 0,
     ARROWS_30 = 30,
     ARROWS_60 = 60,
     ARROWS_99 = 99
 };
 
 enum BombBag {
+ NO_BOMBBAG  = 0,
     BOMBS_30 = 30,
     BOMBS_60 = 60,
     BOMBS_99 = 99

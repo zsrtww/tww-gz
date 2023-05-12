@@ -113,7 +113,7 @@ const char* get_magic_string(u8 magic_value) {
 
 const char* get_quiver_string(u8 arrows_capacity) {
     if (arrows_capacity == 0) {
-        return "Empty";
+        return "No Quiver";
     } else {
         switch (arrows_capacity) {
         case ARROWS_30:
@@ -130,7 +130,7 @@ const char* get_quiver_string(u8 arrows_capacity) {
 
 const char* get_bombags_string(u8 max_bombs_owned) {
     if (max_bombs_owned == 0) {
-        return "Empty";
+        return "No Bomb Bag";
     } else {
         switch (max_bombs_owned) {
         case BOMBS_30:
@@ -356,9 +356,13 @@ is_pirates_charm_owned, heros_charm_flag;
     case MENU_ITEM_QUIVER:
         new_arrows_capacity = dComIfGs_getArrowCapacity();
         Cursor::moveListSimple(new_arrows_capacity);
-        if (new_arrows_capacity == ARROWS_30 - 1) {
-            new_arrows_capacity = ARROWS_30;
-        } else if (new_arrows_capacity == 0) {
+         if (new_arrows_capacity == NO_QUIVER - 1) {
+            new_arrows_capacity = NO_QUIVER;
+        } else if (new_arrows_capacity == NO_QUIVER + 1) {
+              new_arrows_capacity = ARROWS_30;
+        } else if (new_arrows_capacity == NO_QUIVER) {
+            new_arrows_capacity = NO_QUIVER;
+             } else if (new_arrows_capacity == ARROWS_30 - 1) {
             new_arrows_capacity = ARROWS_30;
         } else if (new_arrows_capacity == ARROWS_30 + 1) {
             new_arrows_capacity = ARROWS_60;
@@ -380,9 +384,13 @@ is_pirates_charm_owned, heros_charm_flag;
     case MENU_ITEM_BOMBAG:
         new_bombs_capacity = dComIfGs_getBombCapacity();
         Cursor::moveListSimple(new_bombs_capacity);
-        if (new_bombs_capacity == BOMBS_30 - 1) {
-            new_bombs_capacity = BOMBS_30;
-        } else if (new_bombs_capacity == 0) {
+         if (new_bombs_capacity == NO_BOMBBAG - 1) {
+            new_bombs_capacity = NO_BOMBBAG;
+        } else if (new_bombs_capacity == NO_BOMBBAG + 1) {
+              new_arrows_capacity = BOMBS_30;
+        } else if (new_bombs_capacity == NO_BOMBBAG) {
+            new_bombs_capacity = NO_BOMBBAG;
+              } else if (new_bombs_capacity == BOMBS_30 - 1) {
             new_bombs_capacity = BOMBS_30;
         } else if (new_bombs_capacity == BOMBS_30 + 1) {
             new_bombs_capacity = BOMBS_60;
