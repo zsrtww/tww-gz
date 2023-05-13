@@ -15,7 +15,7 @@ Line lines[NUM_QUEST_ITEMS] = {
     {"Shield:", MENU_ITEM_SHIELD, "Add/remove/upgrade shield"},
     {"Magic:", MENU_ITEM_MAGIC, "Add/remove/upgrade magic"},
     {"Quiver:", MENU_ITEM_QUIVER, "Add/remove/upgrade Quiver"},
-    {"Bombs Bags :", MENU_ITEM_BOMBAG, "Add/remove/upgrade Quiver"},
+    {"Bombs Bags :", MENU_ITEM_BOMBAG, "Add/remove/upgrade Bomb bag"},
     {"Power Bracelets:", MENU_ITEM_POWER_BRACELETS, "Add/remove power bracelets from inventory"},
     {"Pirate\'s Charm:", MENU_ITEM_PIRATES_CHARM, "Add/remove pirate\'s charm from inventory"},
     {"Hero\'s Charm:", MENU_ITEM_HEROS_CHARM, "Add/remove hero\'s charm from inventory"},
@@ -318,8 +318,6 @@ is_pirates_charm_owned, heros_charm_flag;
         Cursor::moveListSimple(new_max_magic_value);
         if (new_max_magic_value == NO_MAGIC - 1) {
             new_max_magic_value = NO_MAGIC;
-        } else if (new_max_magic_value == NO_MAGIC) {
-            new_max_magic_value = NO_MAGIC;
         } else if (new_max_magic_value == NO_MAGIC + 1) {
             new_max_magic_value = SINGLE_MAGIC;
         } else if (new_max_magic_value == SINGLE_MAGIC - 1) {
@@ -360,8 +358,6 @@ is_pirates_charm_owned, heros_charm_flag;
             new_arrows_capacity = NO_QUIVER;
         } else if (new_arrows_capacity == NO_QUIVER + 1) {
               new_arrows_capacity = ARROWS_30;
-        } else if (new_arrows_capacity == NO_QUIVER) {
-            new_arrows_capacity = NO_QUIVER;
              } else if (new_arrows_capacity == ARROWS_30 - 1) {
             new_arrows_capacity = NO_QUIVER;
         } else if (new_arrows_capacity == ARROWS_30 + 1) {
@@ -388,9 +384,7 @@ is_pirates_charm_owned, heros_charm_flag;
             new_bombs_capacity = NO_BOMBBAG;
         } else if (new_bombs_capacity == NO_BOMBBAG + 1) {
               new_bombs_capacity = BOMBS_30;
-        } else if (new_bombs_capacity == NO_BOMBBAG) {
-            new_bombs_capacity = NO_BOMBBAG;
-              } else if (new_bombs_capacity == BOMBS_30 - 1) {
+        } else if (new_bombs_capacity == BOMBS_30 - 1) {
             new_bombs_capacity = NO_BOMBBAG;
         } else if (new_bombs_capacity == BOMBS_30 + 1) {
             new_bombs_capacity = BOMBS_60;

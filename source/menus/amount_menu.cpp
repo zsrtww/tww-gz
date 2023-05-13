@@ -4,7 +4,7 @@
 #include "libtww/MSL_C/string.h"
 #include "libtww/d/com/d_com_inf_game.h"
 
-#define LINE_NUM 7
+#define LINE_NUM 6
 
 Cursor AmountMenu::cursor;
 
@@ -15,7 +15,6 @@ Line lines[LINE_NUM] = {
     {"rupee:", RUPEE_INDEX, "Current rupee count"},
     {"magic:", MAGIC_INDEX, "Modifies current magic amount"},
     {"heart piece:", HEART_PIECE_INDEX, "Current heart pieces collected"},
-    {"magic meter:", MAX_MAGIC_INDEX, "Modifies current magic meter"},
 };
 
 void AmountMenu::draw() {
@@ -27,7 +26,6 @@ void AmountMenu::draw() {
     u16 g_rupeeNum = dComIfGs_getRupee();
     u8 g_magicNum = dComIfGs_getMagic();
     u16 g_heartNum = dComIfGs_getMaxLife();
-    u16 g_maxmagicNum = dComIfGs_getMaxMagic();
 
     if (GZ_getButtonTrig(GZPad::B)) {
         GZ_setMenu(GZ_INVENTORY_MENU);
@@ -85,8 +83,8 @@ void AmountMenu::draw() {
         break;
     case MAGIC_INDEX:
         Cursor::moveList(g_magicNum);
-        if (g_magicNum > g_maxmagicNum) {
-            g_magicNum = g_maxmagicNum;
+        if (g_magicNum > 32) {
+            g_magicNum = 0;
         }
         dComIfGs_setMagic(g_magicNum);
         break;
@@ -97,16 +95,6 @@ void AmountMenu::draw() {
         }
         dComIfGs_setMaxLife(g_heartNum);
         break;
-    case MAX_MAGIC_INDEX:
-        Cursor::moveList(g_maxmagicNum);
-        if (g_maxmagicNum == 0xFF) {
-            g_maxmagicNum = 32;
-        }
-        if (g_maxmagicNum > 32) {
-            g_maxmagicNum = 0;
-        }
-        dComIfGs_setMaxMagic(g_maxmagicNum);
-        break;
     }
 
     tww_sprintf(lines[HEALTH_INDEX].value, " <%d>", g_healthNum);
@@ -115,7 +103,6 @@ void AmountMenu::draw() {
     tww_sprintf(lines[RUPEE_INDEX].value, " <%d>", g_rupeeNum);
     tww_sprintf(lines[MAGIC_INDEX].value, " <%d>", g_magicNum);
     tww_sprintf(lines[HEART_PIECE_INDEX].value, " <%d>", g_heartNum);
-    tww_sprintf(lines[MAX_MAGIC_INDEX].value, " <%d>", g_maxmagicNum);
 
     cursor.move(0, LINE_NUM);
     GZ_drawMenuLines(lines, cursor.y, LINE_NUM);
