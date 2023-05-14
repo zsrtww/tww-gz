@@ -14,6 +14,26 @@ enum Shield {
     MIRROR_SHIELD_OWNED = 2
 };
 
+enum Magic {
+    NO_MAGIC = 0,
+    SINGLE_MAGIC = 16,
+    DOUBLE_MAGIC = 32
+};
+enum Quiver {
+    NO_QUIVER = 0,
+    ARROWS_30 = 30,
+    ARROWS_60 = 60,
+    ARROWS_99 = 99
+};
+
+enum BombBag {
+ NO_BOMBBAG  = 0,
+    BOMBS_30 = 30,
+    BOMBS_60 = 60,
+    BOMBS_99 = 99
+};
+
+
 enum HerosCharm {
     NO_HEROS_CHARM = 0,
     HEROS_CHARM_DISABLED = 1,
@@ -49,6 +69,9 @@ enum TriforcePiece {
 enum QuestStatusMenuItems {
     MENU_ITEM_SWORD,
     MENU_ITEM_SHIELD,
+    MENU_ITEM_MAGIC,
+    MENU_ITEM_QUIVER,
+    MENU_ITEM_BOMBAG,
     MENU_ITEM_POWER_BRACELETS,
     MENU_ITEM_PIRATES_CHARM,
     MENU_ITEM_HEROS_CHARM,

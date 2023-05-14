@@ -6,20 +6,23 @@
 #include "libtww/d/com/d_com_inf_game.h"
 #include "libtww/d/save/d_save.h"
 
-#define NUM_QUEST_ITEMS 22
+#define NUM_QUEST_ITEMS 25
 
 Cursor QuestStatusMenu::cursor;
 
 Line lines[NUM_QUEST_ITEMS] = {
     {"Sword:", MENU_ITEM_SWORD, "Add/remove/upgrade sword"},
     {"Shield:", MENU_ITEM_SHIELD, "Add/remove/upgrade shield"},
+    {"Magic:", MENU_ITEM_MAGIC, "Add/remove/upgrade magic"},
+    {"Quiver:", MENU_ITEM_QUIVER, "Add/remove/upgrade Quiver"},
+    {"Bombs Bags :", MENU_ITEM_BOMBAG, "Add/remove/upgrade Bomb bag"},
     {"Power Bracelets:", MENU_ITEM_POWER_BRACELETS, "Add/remove power bracelets from inventory"},
     {"Pirate\'s Charm:", MENU_ITEM_PIRATES_CHARM, "Add/remove pirate\'s charm from inventory"},
     {"Hero\'s Charm:", MENU_ITEM_HEROS_CHARM, "Add/remove hero\'s charm from inventory"},
     {"Wind\'s Requiem:", MENU_ITEM_WINDS_REQUIEM, "Add/remove wind\'s requiem from songs list"},
     {"Ballad of Gales:", MENU_ITEM_BALLAD_OF_GALES, "Add/remove ballad of gales from songs list"},
     {"Command Melody:", MENU_ITEM_COMMAND_MELODY, "Add/remove command melody from songs list"},
-    {"Earth God\'s Lyric:", MENU_ITEM_EARTH_GODS_LYRIC, "Add/remove earth god's lyric from songs list"},
+    {"Earth God\'s Lyric:", MENU_ITEM_EARTH_GODS_LYRIC,"Add/remove earth god's lyric from songs list"},
     {"Wind God\'s Aria:", MENU_ITEM_WIND_GODS_ARIA, "Add/remove wind god\'s aria from songs list"},
     {"Song of Passing:", MENU_ITEM_SONG_OF_PASSING, "Add/remove song of passing from songs list"},
     {"Din\'s Pearl:", MENU_ITEM_DINS_PEARL, "Add/remove din\'s pearl from inventory"},
@@ -32,8 +35,7 @@ Line lines[NUM_QUEST_ITEMS] = {
     {"Triforce Piece 5:", MENU_ITEM_TRIFORCE_PIECE_5, "Add/remove triforce piece 5 from inventory"},
     {"Triforce Piece 6:", MENU_ITEM_TRIFORCE_PIECE_6, "Add/remove triforce piece 6 from inventory"},
     {"Triforce Piece 7:", MENU_ITEM_TRIFORCE_PIECE_7, "Add/remove triforce piece 7 from inventory"},
-    {"Triforce Piece 8:", MENU_ITEM_TRIFORCE_PIECE_8, "Add/remove triforce piece 8 from inventory"}
-};
+    {"Triforce Piece 8:", MENU_ITEM_TRIFORCE_PIECE_8,"Add/remove triforce piece 8 from inventory"}};
 
 const char* get_pirates_charm_string(u8 has_pirates_charm) {
     switch (has_pirates_charm) {
@@ -77,7 +79,7 @@ const char* get_song_string(u8 songs_owned, u8 song) {
         case SONG_OF_PASSING_VALUE:
             return "Song of Passing";
         default:
-            return "Empty";          
+            return "Empty";
         };
     }
 }
@@ -94,7 +96,51 @@ const char* get_pearl_string(u8 pearls_owned, u8 pearl) {
         case FARORES_PEARL_VALUE:
             return "Farore\'s Pearl";
         default:
-            return "Empty";          
+            return "Empty";
+        };
+    }
+}
+
+
+const char* get_magic_string(u8 magic_value) {
+    if (magic_value == 0) {
+        return "Empty";
+    } else if (magic_value > SINGLE_MAGIC) {
+        return "Double Magic";
+    } else
+        return "Single Magic";
+}
+
+const char* get_quiver_string(u8 arrows_capacity) {
+    if (arrows_capacity == 0) {
+        return "No Quiver";
+    } else {
+        switch (arrows_capacity) {
+        case ARROWS_30:
+            return "Quiver 30";
+        case ARROWS_60:
+            return "Quiver 60";
+        case ARROWS_99:
+            return "Quiver 99";
+        default:
+            return "Empty";
+        };
+    }
+}
+
+const char* get_bombags_string(u8 max_bombs_owned) {
+    if (max_bombs_owned == 0) {
+        return "No Bomb Bag";
+    } else {
+        switch (max_bombs_owned) {
+        case BOMBS_30:
+            return "Bomb Bag 30";
+        case BOMBS_60:
+            return "Bomb Bag 60";
+        case BOMBS_99:
+            return "Bomb Bag 99";
+        default:
+            return "Empty";
         };
     }
 }
@@ -121,7 +167,7 @@ const char* get_triforce_string(u8 triforce_owned, u8 triforce_piece) {
         case TRIFORCE_PIECE_8_VALUE:
             return "Triforce Piece 8";
         default:
-            return "Empty";          
+            return "Empty";
         };
     }
 }
@@ -170,7 +216,8 @@ u8 powerBraceletsIdToPowerBraceletsOwned(u8 power_bracelets_item_id) {
 void updateSongs(u8 song_value) {
     u8 songs_owned = dComIfGs_getSongsOwned();
     u8 has_song = songs_owned & song_value;
-    if (has_song == 0) has_song = 0xFE;
+    if (has_song == 0)
+        has_song = 0xFE;
     Cursor::moveListSimple(has_song);
     if (has_song == 0xFF) {
         dComIfGs_setSongsOwned(songs_owned + song_value);
@@ -182,7 +229,8 @@ void updateSongs(u8 song_value) {
 void updatePearls(u8 pearl_value) {
     u8 pearls_owned = dComIfGs_getPearlsOwned();
     u8 has_pearl = pearls_owned & pearl_value;
-    if (has_pearl == 0) has_pearl = 0xFE;
+    if (has_pearl == 0)
+        has_pearl = 0xFE;
     Cursor::moveListSimple(has_pearl);
     if (has_pearl == 0xFF) {
         dComIfGs_setPearlsOwned(pearls_owned + pearl_value);
@@ -211,7 +259,8 @@ void QuestStatusMenu::draw() {
         return;
     }
 
-    u8 new_sword_item_id, new_shield_item_id, new_power_bracelets_item_id, is_pirates_charm_owned, heros_charm_flag;
+    u8 new_sword_item_id, new_shield_item_id, new_max_magic_value, new_arrows_capacity,new_bombs_capacity,new_power_bracelets_item_id,
+is_pirates_charm_owned, heros_charm_flag;
 
     switch (cursor.y) {
     case MENU_ITEM_SWORD:
@@ -264,6 +313,27 @@ void QuestStatusMenu::draw() {
         dComIfGs_setShield(new_shield_item_id);
         dComIfGs_setShieldOwned(shieldIdToShieldOwned(new_shield_item_id));
         break;
+    case MENU_ITEM_MAGIC:
+        new_max_magic_value = dComIfGs_getMaxMagic();
+        Cursor::moveListSimple(new_max_magic_value);
+        if (new_max_magic_value == NO_MAGIC - 1) {
+            new_max_magic_value = NO_MAGIC;
+        } else if (new_max_magic_value == NO_MAGIC + 1) {
+            new_max_magic_value = SINGLE_MAGIC;
+        } else if (new_max_magic_value == SINGLE_MAGIC - 1) {
+            new_max_magic_value = NO_MAGIC;
+        } else if (new_max_magic_value == SINGLE_MAGIC + 1) {
+            new_max_magic_value = DOUBLE_MAGIC;
+        } else if (new_max_magic_value == DOUBLE_MAGIC - 1) {
+            new_max_magic_value = SINGLE_MAGIC;
+        } else if (new_max_magic_value == DOUBLE_MAGIC + 1) {
+            new_max_magic_value = DOUBLE_MAGIC;
+        } else {
+            new_max_magic_value = dComIfGs_getMaxMagic();
+        }
+        dComIfGs_setMagic(new_max_magic_value);
+        dComIfGs_setMaxMagic(new_max_magic_value);
+        break;
     case MENU_ITEM_POWER_BRACELETS:
         new_power_bracelets_item_id = dComIfGs_getPowerBracelets();
         Cursor::moveListSimple(new_power_bracelets_item_id);
@@ -280,6 +350,58 @@ void QuestStatusMenu::draw() {
         }
         dComIfGs_setPowerBracelets(new_power_bracelets_item_id);
         dComIfGs_setPowerBraceletsOwned(powerBraceletsIdToPowerBraceletsOwned(new_power_bracelets_item_id));
+        break;
+    case MENU_ITEM_QUIVER:
+        new_arrows_capacity = dComIfGs_getArrowCapacity();
+        Cursor::moveListSimple(new_arrows_capacity);
+         if (new_arrows_capacity == NO_QUIVER - 1) {
+            new_arrows_capacity = NO_QUIVER;
+        } else if (new_arrows_capacity == NO_QUIVER + 1) {
+              new_arrows_capacity = ARROWS_30;
+             } else if (new_arrows_capacity == ARROWS_30 - 1) {
+            new_arrows_capacity = NO_QUIVER;
+        } else if (new_arrows_capacity == ARROWS_30 + 1) {
+            new_arrows_capacity = ARROWS_60;
+         } else if (new_arrows_capacity == ARROWS_60 - 1) {
+            new_arrows_capacity = ARROWS_30;
+        } else if (new_arrows_capacity == ARROWS_60 + 1) {
+            new_arrows_capacity = ARROWS_99;
+        } else if (new_arrows_capacity == ARROWS_99 - 1) {
+            new_arrows_capacity = ARROWS_60;
+        } else if (new_arrows_capacity == ARROWS_99 + 1) {
+            new_arrows_capacity = ARROWS_99;
+            
+        } else {
+            new_arrows_capacity = dComIfGs_getArrowCapacity();
+        }
+        dComIfGs_setArrowNum(new_arrows_capacity);
+        dComIfGs_setArrowCapacity(new_arrows_capacity);
+        break;
+    case MENU_ITEM_BOMBAG:
+        new_bombs_capacity = dComIfGs_getBombCapacity();
+        Cursor::moveListSimple(new_bombs_capacity);
+         if (new_bombs_capacity == NO_BOMBBAG - 1) {
+            new_bombs_capacity = NO_BOMBBAG;
+        } else if (new_bombs_capacity == NO_BOMBBAG + 1) {
+              new_bombs_capacity = BOMBS_30;
+        } else if (new_bombs_capacity == BOMBS_30 - 1) {
+            new_bombs_capacity = NO_BOMBBAG;
+        } else if (new_bombs_capacity == BOMBS_30 + 1) {
+            new_bombs_capacity = BOMBS_60;
+         } else if (new_bombs_capacity == BOMBS_60 - 1) {
+            new_bombs_capacity = BOMBS_30;
+        } else if (new_bombs_capacity == BOMBS_60 + 1) {
+            new_bombs_capacity = BOMBS_99;
+        } else if (new_bombs_capacity == BOMBS_99 - 1) {
+            new_bombs_capacity = BOMBS_60;
+        } else if (new_bombs_capacity == BOMBS_99 + 1) {
+            new_bombs_capacity = BOMBS_99;
+            
+        } else {
+            new_bombs_capacity = dComIfGs_getBombCapacity();
+        }
+        dComIfGs_setBombNum(new_bombs_capacity);
+        dComIfGs_setBombCapacity(new_bombs_capacity);
         break;
     case MENU_ITEM_PIRATES_CHARM:
         is_pirates_charm_owned = dComIfGs_getPiratesCharmOwned();
@@ -356,26 +478,49 @@ void QuestStatusMenu::draw() {
 
     tww_sprintf(lines[MENU_ITEM_SWORD].value, " <%s>", item_id_to_str(dComIfGs_getSword()));
     tww_sprintf(lines[MENU_ITEM_SHIELD].value, " <%s>", item_id_to_str(dComIfGs_getShield()));
-    tww_sprintf(lines[MENU_ITEM_POWER_BRACELETS].value, " <%s>", item_id_to_str(dComIfGs_getPowerBracelets()));
-    tww_sprintf(lines[MENU_ITEM_PIRATES_CHARM].value, " <%s>", get_pirates_charm_string(dComIfGs_getPiratesCharmOwned()));
-    tww_sprintf(lines[MENU_ITEM_HEROS_CHARM].value, " <%s>", get_heros_charm_string(dComIfGs_getHerosCharmOwned()));
-    tww_sprintf(lines[MENU_ITEM_WINDS_REQUIEM].value, " <%s>", get_song_string(dComIfGs_getSongsOwned(), WINDS_REQUIEM_VALUE));
-    tww_sprintf(lines[MENU_ITEM_BALLAD_OF_GALES].value, " <%s>", get_song_string(dComIfGs_getSongsOwned(), BALLAD_OF_GALES_VALUE));
-    tww_sprintf(lines[MENU_ITEM_COMMAND_MELODY].value, " <%s>", get_song_string(dComIfGs_getSongsOwned(), COMMAND_MELODY_VALUE));
-    tww_sprintf(lines[MENU_ITEM_EARTH_GODS_LYRIC].value, " <%s>", get_song_string(dComIfGs_getSongsOwned(), EARTH_GODS_LYRIC_VALUE));
-    tww_sprintf(lines[MENU_ITEM_WIND_GODS_ARIA].value, " <%s>", get_song_string(dComIfGs_getSongsOwned(), WIND_GODS_ARIA_VALUE));
-    tww_sprintf(lines[MENU_ITEM_SONG_OF_PASSING].value, " <%s>", get_song_string(dComIfGs_getSongsOwned(), SONG_OF_PASSING_VALUE));
-    tww_sprintf(lines[MENU_ITEM_DINS_PEARL].value, " <%s>", get_pearl_string(dComIfGs_getPearlsOwned(), DINS_PEARL_VALUE));
-    tww_sprintf(lines[MENU_ITEM_FARORES_PEARL].value, " <%s>", get_pearl_string(dComIfGs_getPearlsOwned(), FARORES_PEARL_VALUE));
-    tww_sprintf(lines[MENU_ITEM_NAYRUS_PEARL].value, " <%s>", get_pearl_string(dComIfGs_getPearlsOwned(), NAYRUS_PEARL_VALUE));
-    tww_sprintf(lines[MENU_ITEM_TRIFORCE_PIECE_1].value, " <%s>", get_triforce_string(dComIfGs_getTriforceOwned(), TRIFORCE_PIECE_1_VALUE));
-    tww_sprintf(lines[MENU_ITEM_TRIFORCE_PIECE_2].value, " <%s>", get_triforce_string(dComIfGs_getTriforceOwned(), TRIFORCE_PIECE_2_VALUE));
-    tww_sprintf(lines[MENU_ITEM_TRIFORCE_PIECE_3].value, " <%s>", get_triforce_string(dComIfGs_getTriforceOwned(), TRIFORCE_PIECE_3_VALUE));
-    tww_sprintf(lines[MENU_ITEM_TRIFORCE_PIECE_4].value, " <%s>", get_triforce_string(dComIfGs_getTriforceOwned(), TRIFORCE_PIECE_4_VALUE));
-    tww_sprintf(lines[MENU_ITEM_TRIFORCE_PIECE_5].value, " <%s>", get_triforce_string(dComIfGs_getTriforceOwned(), TRIFORCE_PIECE_5_VALUE));
-    tww_sprintf(lines[MENU_ITEM_TRIFORCE_PIECE_6].value, " <%s>", get_triforce_string(dComIfGs_getTriforceOwned(), TRIFORCE_PIECE_6_VALUE));
-    tww_sprintf(lines[MENU_ITEM_TRIFORCE_PIECE_7].value, " <%s>", get_triforce_string(dComIfGs_getTriforceOwned(), TRIFORCE_PIECE_7_VALUE));
-    tww_sprintf(lines[MENU_ITEM_TRIFORCE_PIECE_8].value, " <%s>", get_triforce_string(dComIfGs_getTriforceOwned(), TRIFORCE_PIECE_8_VALUE));
+    tww_sprintf(lines[MENU_ITEM_MAGIC].value, " <%s>", get_magic_string(dComIfGs_getMaxMagic()));
+    tww_sprintf(lines[MENU_ITEM_QUIVER].value, " <%s>", get_quiver_string(dComIfGs_getArrowCapacity()));
+    tww_sprintf(lines[MENU_ITEM_BOMBAG].value, " <%s>", get_bombags_string(dComIfGs_getBombCapacity()));
+    tww_sprintf(lines[MENU_ITEM_POWER_BRACELETS].value, " <%s>",
+                item_id_to_str(dComIfGs_getPowerBracelets()));
+    tww_sprintf(lines[MENU_ITEM_PIRATES_CHARM].value, " <%s>",
+                get_pirates_charm_string(dComIfGs_getPiratesCharmOwned()));
+    tww_sprintf(lines[MENU_ITEM_HEROS_CHARM].value, " <%s>",
+                get_heros_charm_string(dComIfGs_getHerosCharmOwned()));
+    tww_sprintf(lines[MENU_ITEM_WINDS_REQUIEM].value, " <%s>",
+                get_song_string(dComIfGs_getSongsOwned(), WINDS_REQUIEM_VALUE));
+    tww_sprintf(lines[MENU_ITEM_BALLAD_OF_GALES].value, " <%s>",
+                get_song_string(dComIfGs_getSongsOwned(), BALLAD_OF_GALES_VALUE));
+    tww_sprintf(lines[MENU_ITEM_COMMAND_MELODY].value, " <%s>",
+                get_song_string(dComIfGs_getSongsOwned(), COMMAND_MELODY_VALUE));
+    tww_sprintf(lines[MENU_ITEM_EARTH_GODS_LYRIC].value, " <%s>",
+                get_song_string(dComIfGs_getSongsOwned(), EARTH_GODS_LYRIC_VALUE));
+    tww_sprintf(lines[MENU_ITEM_WIND_GODS_ARIA].value, " <%s>",
+                get_song_string(dComIfGs_getSongsOwned(), WIND_GODS_ARIA_VALUE));
+    tww_sprintf(lines[MENU_ITEM_SONG_OF_PASSING].value, " <%s>",
+                get_song_string(dComIfGs_getSongsOwned(), SONG_OF_PASSING_VALUE));
+    tww_sprintf(lines[MENU_ITEM_DINS_PEARL].value, " <%s>",
+                get_pearl_string(dComIfGs_getPearlsOwned(), DINS_PEARL_VALUE));
+    tww_sprintf(lines[MENU_ITEM_FARORES_PEARL].value, " <%s>",
+                get_pearl_string(dComIfGs_getPearlsOwned(), FARORES_PEARL_VALUE));
+    tww_sprintf(lines[MENU_ITEM_NAYRUS_PEARL].value, " <%s>",
+                get_pearl_string(dComIfGs_getPearlsOwned(), NAYRUS_PEARL_VALUE));
+    tww_sprintf(lines[MENU_ITEM_TRIFORCE_PIECE_1].value, " <%s>",
+                get_triforce_string(dComIfGs_getTriforceOwned(), TRIFORCE_PIECE_1_VALUE));
+    tww_sprintf(lines[MENU_ITEM_TRIFORCE_PIECE_2].value, " <%s>",
+                get_triforce_string(dComIfGs_getTriforceOwned(), TRIFORCE_PIECE_2_VALUE));
+    tww_sprintf(lines[MENU_ITEM_TRIFORCE_PIECE_3].value, " <%s>",
+                get_triforce_string(dComIfGs_getTriforceOwned(), TRIFORCE_PIECE_3_VALUE));
+    tww_sprintf(lines[MENU_ITEM_TRIFORCE_PIECE_4].value, " <%s>",
+                get_triforce_string(dComIfGs_getTriforceOwned(), TRIFORCE_PIECE_4_VALUE));
+    tww_sprintf(lines[MENU_ITEM_TRIFORCE_PIECE_5].value, " <%s>",
+                get_triforce_string(dComIfGs_getTriforceOwned(), TRIFORCE_PIECE_5_VALUE));
+    tww_sprintf(lines[MENU_ITEM_TRIFORCE_PIECE_6].value, " <%s>",
+                get_triforce_string(dComIfGs_getTriforceOwned(), TRIFORCE_PIECE_6_VALUE));
+    tww_sprintf(lines[MENU_ITEM_TRIFORCE_PIECE_7].value, " <%s>",
+                get_triforce_string(dComIfGs_getTriforceOwned(), TRIFORCE_PIECE_7_VALUE));
+    tww_sprintf(lines[MENU_ITEM_TRIFORCE_PIECE_8].value, " <%s>",
+                get_triforce_string(dComIfGs_getTriforceOwned(), TRIFORCE_PIECE_8_VALUE));
 
     cursor.move(0, NUM_QUEST_ITEMS);
     GZ_drawMenuLines(lines, cursor.y, NUM_QUEST_ITEMS);

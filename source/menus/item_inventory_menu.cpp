@@ -165,14 +165,14 @@ void ItemInventoryMenu::draw() {
             new_item_id = BOW_WITH_LIGHT_ARROWS;        
         }
         updateItem(SLOT_BOW, new_item_id);
-        if (dComIfGs_getArrowCapacity() == 0) {
+        if (GZ_getButtonTrig(GZPad::DPAD_RIGHT) && dComIfGs_getArrowCapacity() == 0) {
             dComIfGs_setArrowCapacity(DEFAULT_ARROW_CAPACITY);
             dComIfGs_setArrowNum(DEFAULT_ARROW_CAPACITY);
         }
         break;
     case SLOT_BOMB:
         updateSingleItem(SLOT_BOMB, BOMBS);
-        if (dComIfGs_getBombCapacity() == 0) {
+    if (GZ_getButtonTrig(GZPad::DPAD_RIGHT) && dComIfGs_getBombCapacity() == 0) {
             dComIfGs_setBombCapacity(DEFAULT_BOMB_CAPACITY);
             dComIfGs_setBombNum(DEFAULT_BOMB_CAPACITY);
         }

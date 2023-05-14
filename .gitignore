@@ -11,3 +11,4 @@ __pycache__
 RomHack.toml
 *.patch
 regional-patch.asm
+romhack.exe
