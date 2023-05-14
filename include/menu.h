@@ -4,13 +4,14 @@
 #include "utils/cursor.h"
 #include "utils/lines.h"
 
-#define MENU_NUM 11
+#define MENU_NUM 12
 
 enum {
     /* Main Menus */
     GZ_NO_MENU = -1,
     GZ_MAIN_MENU,
     GZ_CHEAT_MENU,
+    GZ_FLAGS_MENU,
     GZ_INVENTORY_MENU,
     GZ_MEMORY_MENU,
     GZ_SETTINGS_MENU,

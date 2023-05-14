@@ -6,7 +6,7 @@ Cursor MainMenu::cursor;
 
 Line lines[LINE_NUM] = {
     {"cheats", CHEAT_INDEX, "Toggle cheats", false},
-    {"flags", FLAGS_INDEX, "Toggle in-game flags (coming soon...)", false},
+    {"flags", FLAGS_INDEX, "Toggle in-game flags", false},
     {"inventory", INVENTORY_INDEX, "Set items and equipment", false},
     {"memory", MEMORY_INDEX, "View/edit memory, add watches, and save/load memfiles", false},
     {"practice", PRACTICE_INDEX, "Load practice files (coming soon...)", false},
@@ -30,7 +30,7 @@ void MainMenu::draw() {
             GZ_setMenu(GZ_CHEAT_MENU);
             return;
         case FLAGS_INDEX:
-            //GZ_setMenu(GZ_FLAGS_MENU);
+            GZ_setMenu(GZ_FLAGS_MENU);
             return;
         case INVENTORY_INDEX:
             GZ_setMenu(GZ_INVENTORY_MENU);
