@@ -26,28 +26,29 @@ void AmountMenu::draw() {
     u16 g_rupeeNum = dComIfGs_getRupee();
     u8 g_magicNum = dComIfGs_getMagic();
     u16 g_heartNum = dComIfGs_getMaxLife();
+    u8 g_maxMagicNum = dComIfGs_getMaxMagic();
 
     if (GZ_getButtonTrig(GZPad::B)) {
         GZ_setMenu(GZ_INVENTORY_MENU);
         return;
     }
-    
-    /* 
+
+    /*
      * Made it so if it's more than the maximum or if
      * the player sets it to less than 0, wrap to maximum
      * or back to 0 in some cases
-    */
+     */
     switch (cursor.y) {
     case HEALTH_INDEX:
         Cursor::moveList(g_healthNum);
         if (GZ_getButtonTrig(GZPad::A)) {
-            g_healthNum = 1; //Quarter heart health
+            g_healthNum = 1;  // Quarter heart health
         }
         if (GZ_getButtonTrig(GZPad::R)) {
-            g_healthNum = g_heartNum; //Maximum available health
+            g_healthNum = g_heartNum;  // Maximum available health
         }
         if (g_healthNum < 1) {
-            g_healthNum = 1; //Don't allow the player to go under 1 quarter heart
+            g_healthNum = 1;  // Don't allow the player to go under 1 quarter heart
         }
         dComIfGs_setLife(g_healthNum);
         break;
@@ -83,7 +84,10 @@ void AmountMenu::draw() {
         break;
     case MAGIC_INDEX:
         Cursor::moveList(g_magicNum);
-        if (g_magicNum > 32) {
+        if (g_magicNum == 0xFF) {
+            g_magicNum = g_maxMagicNum;
+        }
+        if (g_magicNum > g_maxMagicNum) {
             g_magicNum = 0;
         }
         dComIfGs_setMagic(g_magicNum);
