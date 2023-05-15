@@ -25,15 +25,15 @@ Line lines[LINE_NUM] = {
         &g_tools[DEBUG_INDEX].active},
     {"teleport", TELEPORT_INDEX, "R+D-pad up to save position. R+D-pad down to load", true,
         &g_tools[TELEPORT_INDEX].active},
-    {"area reload", AREA_RELOAD_INDEX, "Reloads the current room by pressing L + R + A + Start",
+    {"area reload", AREA_RELOAD_INDEX, "Reload the current room by pressing L + R + A + Start",
         true, &g_tools[AREA_RELOAD_INDEX].active},
-    {"map select", MAP_SELECT_INDEX, "Load Map Select by holding D-pad down + Y + Z",
+    {"map select", MAP_SELECT_INDEX, "Load map select by holding D-pad down + Y + Z",
         true, &g_tools[MAP_SELECT_INDEX].active},
     {"zombie hover info", ZH_INDEX, "Display A and B button presses per second", true,
         &g_tools[ZH_INDEX].active},
     {"input viewer", INPUT_VIEWER_INDEX, "Show current inputs", true,
         &g_tools[INPUT_VIEWER_INDEX].active},
-    {"disable save checks", DISABLE_SVCHECK_INDEX, "Disables save location safety checks", true,
+    {"disable save checks", DISABLE_SVCHECK_INDEX, "Disable save location safety checks", true,
         &g_tools[DISABLE_SVCHECK_INDEX].active},
 };
 

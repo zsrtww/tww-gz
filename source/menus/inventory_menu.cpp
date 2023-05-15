@@ -7,11 +7,11 @@
 Cursor InventoryMenu::cursor;
 
 Line lines[LINE_NUM] = {
-    {"amounts", AMOUNT_INDEX, "Modify bomb bag, quiver, wallet"},
+    {"amounts", AMOUNT_INDEX, "Modify amounts for health, magic, etc."},
     {"item inventory", ITEM_INVENTORY_INDEX, "Modify item inventory menu"},
     {"quest status", QUEST_STATUS_INDEX, "Modify quest status menu"},
-    {"spoils", SPOILS_INDEX, "Modify Spoils Bag items/amounts"},
-    {"delivery bag", DELIVERY_BAG_INDEX, "Modify Delivery Bag items/amounts"}, 
+    {"spoils", SPOILS_INDEX, "Modify spoils bag items/amounts (coming soon...)"},
+    {"delivery bag", DELIVERY_BAG_INDEX, "Modify delivery bag items/amounts (coming soon...)"},
 };
 
 const char* item_id_to_str(u8 item_id) {

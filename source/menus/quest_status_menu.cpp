@@ -14,8 +14,8 @@ Line lines[NUM_QUEST_ITEMS] = {
     {"Sword:", MENU_ITEM_SWORD, "Add/remove/upgrade sword"},
     {"Shield:", MENU_ITEM_SHIELD, "Add/remove/upgrade shield"},
     {"Magic:", MENU_ITEM_MAGIC, "Add/remove/upgrade magic"},
-    {"Quiver:", MENU_ITEM_QUIVER, "Add/remove/upgrade Quiver"},
-    {"Bombs Bags :", MENU_ITEM_BOMBAG, "Add/remove/upgrade Bomb bag"},
+    {"Quiver:", MENU_ITEM_QUIVER, "Add/remove/upgrade quiver"},
+    {"Bomb Bag:", MENU_ITEM_BOMBAG, "Add/remove/upgrade bomb bag"},
     {"Power Bracelets:", MENU_ITEM_POWER_BRACELETS, "Add/remove power bracelets from inventory"},
     {"Pirate\'s Charm:", MENU_ITEM_PIRATES_CHARM, "Add/remove pirate\'s charm from inventory"},
     {"Hero\'s Charm:", MENU_ITEM_HEROS_CHARM, "Add/remove hero\'s charm from inventory"},
@@ -35,7 +35,7 @@ Line lines[NUM_QUEST_ITEMS] = {
     {"Triforce Piece 5:", MENU_ITEM_TRIFORCE_PIECE_5, "Add/remove triforce piece 5 from inventory"},
     {"Triforce Piece 6:", MENU_ITEM_TRIFORCE_PIECE_6, "Add/remove triforce piece 6 from inventory"},
     {"Triforce Piece 7:", MENU_ITEM_TRIFORCE_PIECE_7, "Add/remove triforce piece 7 from inventory"},
-    {"Triforce Piece 8:", MENU_ITEM_TRIFORCE_PIECE_8,"Add/remove triforce piece 8 from inventory"}};
+    {"Triforce Piece 8:", MENU_ITEM_TRIFORCE_PIECE_8, "Add/remove triforce piece 8 from inventory"}};
 
 const char* get_pirates_charm_string(u8 has_pirates_charm) {
     switch (has_pirates_charm) {
