@@ -11,7 +11,7 @@
 Cursor CheatMenu::cursor;
 
 Line lines[LINE_NUM] = {
-    {"infinite air", InfiniteAir, "Gives infinite air", true,
+    {"infinite air", InfiniteAir, "Always have max air", true,
         &g_cheats[InfiniteAir].active},
     {"infinite arrows", InfiniteArrows, "Always have max arrows", true,
         &g_cheats[InfiniteArrows].active},
@@ -21,7 +21,7 @@ Line lines[LINE_NUM] = {
         &g_cheats[InfiniteHearts].active},
     {"infinite magic", InfiniteMagic, "Always have full magic", true,
         &g_cheats[InfiniteMagic].active},
-    {"infinite rupees", InfiniteRupees, "Gives infinite rupees", true,
+    {"infinite rupees", InfiniteRupees, "Always have infinite rupees", true,
         &g_cheats[InfiniteRupees].active},
     {"moon jump", MoonJump, "Hold R+A to moon jump", true,
         &g_cheats[MoonJump].active},

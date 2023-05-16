@@ -9,12 +9,12 @@
 Cursor AmountMenu::cursor;
 
 Line lines[LINE_NUM] = {
-    {"health:", HEALTH_INDEX, "Modifies the current health by quarter"},
-    {"bombs:", BOMB_INDEX, "Current bomb count"},
-    {"arrows:", ARROW_INDEX, "Current arrow count"},
-    {"rupee:", RUPEE_INDEX, "Current rupee count"},
-    {"magic:", MAGIC_INDEX, "Modifies current magic amount"},
-    {"heart piece:", HEART_PIECE_INDEX, "Current heart pieces collected"},
+    {"health:", HEALTH_INDEX, "Modify the current health by quarter"},
+    {"bombs:", BOMB_INDEX, "Modify the current bomb count"},
+    {"arrows:", ARROW_INDEX, "Modify the current arrow count"},
+    {"rupees:", RUPEE_INDEX, "Modify the current rupee count"},
+    {"magic:", MAGIC_INDEX, "Modify the current magic amount"},
+    {"heart pieces:", HEART_PIECE_INDEX, "Modify the current heart pieces collected"},
 };
 
 void AmountMenu::draw() {

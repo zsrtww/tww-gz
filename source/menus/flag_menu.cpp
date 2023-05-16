@@ -5,7 +5,7 @@
 Cursor FlagMenu::cursor;
 
 Line lines[LINE_NUM] = {
-    {"Watched FF2 Helmaroc Cutscene", WATCHED_FF2_HELMAROC_CUTSCENE, "Switches to Animation Set 2, among other things", true,
+    {"Watched FF2 Helmaroc Cutscene", WATCHED_FF2_HELMAROC_CUTSCENE, "Switches to animation set 2, among other things", true,
         &g_flags[WATCHED_FF2_HELMAROC_CUTSCENE].active},
 };
 
