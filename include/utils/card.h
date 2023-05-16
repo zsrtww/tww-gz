@@ -7,6 +7,7 @@
 #include "menus/cheat_menu.h"
 #include "menus/watches_menu.h"
 #include "commands.h"
+#include "cheats.h"
 
 s32 GZ_storageWrite(Storage* info, void* data, s32 size, s32 offset,
                         s32 sector_size);

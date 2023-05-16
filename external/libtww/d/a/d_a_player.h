@@ -11,5 +11,6 @@ public:
 #define l_debug_keep_pos (*(cXyz*)(l_debug_keep_pos_addr))
 #define l_debug_current_angle (*(csXyz*)(l_debug_current_angle_addr))
 #define l_debug_shape_angle (*(csXyz*)(l_debug_shape_angle_addr))
+#define l_pointer_base_address (*(u32**)(l_pointer_addr))
 
 #endif /* D_A_PLAYER */

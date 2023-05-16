@@ -22,6 +22,8 @@ typedef int (*SkipFunc)(void*, int);
 
 class dEvt_control_c {
 public:
+    void setStorage() { mHalt = 1; }
+
     /* 0x000 */ dEvt_order_c mOrder[8];
     /* 0x0C0 */ u8 mNum;
     /* 0x0C1 */ u8 mFirstOrderIdx;

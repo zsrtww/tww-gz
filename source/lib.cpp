@@ -85,7 +85,7 @@ void displaySplash() {
         }
 
         // Set up the splash properties
-        const char* name = MAKESTRING(PACKAGE_NAME);
+        const char* name = "twwgz v" INTERNAL_GZ_VERSION;//MAKESTRING(PACKAGE_NAME);
         const char* url = MAKESTRING(PACKAGE_URL);
         float splash_x = 200.0f;
         float splash_y = 440.0f;

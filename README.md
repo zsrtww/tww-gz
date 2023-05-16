@@ -1,41 +1,145 @@
 # tww-gz
-Name pending.
 The Wind Waker (SD) ROM hack to practice speedrunning.
 
-This Practice ROM is in very early development. If you've come across this page (somehow) prior to the first release and are looking for a workable practice ROM
-please use "tww.zip" pinned in the "Rom hacks" channel in the wind waker speedrun discord https://discord.gg/Sj5aehU
+Patch your ISO using the romhack-patcher application, which is included in our official releases.
 
-This practice rom requires the NTSC-J ISO to run (GZLJ-01)
+⚠️ tww-gz is still in early development.<br>
+If you have questions or need help, ask in the [#practice-rom-development](https://discord.com/channels/136347487710609409/830218819695673405) channel of the [Wind Waker Speedrunning Discord](https://discord.gg/Sj5aehU).
 
-You MUST name your iso GZLJ01.iso or the script will not work to read and patch your iso.
+## Features
 
-WHAT YOU NEED (aside from the code given here)
+Use L + R + D-pad down to open the main menu which contains the following options:
 
-Firstly, you'll need the iso for the game. This can be ripped from your disc (which you obviously have) by using CleanRip, a Wii Homebrew app. After you get the iso, place it into the root of your `tww-gz` folder.
+```
+cheats menu:
+- infinite air                  // Always have max air
+- infinite arrows               // Always have max arrows
+- infinite bombs                // Always have max bombs
+- infinite hearts               // Always have full hearts
+- infinite magic                // Always have full magic
+- infinite rupees               // Always have infinite rupees
+- moon jump                     // Hold R+A to moon jump
+- storage                       // Press D-pad right to get storage
+- normal collision              // Hold L+D-pad down to get normal collision
+- chest storage                 // Hold L+D-pad right to get chest storage
+- door cancel                   // Hold L+D-pad left to get door cancel
+- quarter heart                 // Hold R+D-pad left to reduce health to quarter heart
+- fast movement                 // Hold D-pad left to get super speed
+- upcharge                      // Hold X + Z to get negative speed for upcharge
 
-From there, you'll need DevKitPro which you can find on [windows here](https://github.com/devkitPro/installer/releases), or for mac/linux read [this guide](https://devkitpro.org/wiki/Getting_Started)
+flags menu:
+- Watched FF2 Helmaroc Cutscene // Switches to animation set 2, among other things
 
-Next, you'll need the latest version of the [Romhack Compiler](https://github.com/zsrtp/romhack-compiler/releases). Install the gc version, since wind waker is a gamecube game.
+inventory menu:
+- amounts menu                  // Modify amounts for health, magic, etc.
+- item inventory menu           // Modify item inventory menu
+- quest status menu             // Modify quest status menu
+- *spoils menu                  // Modify spoils bag items/amounts
+- *delivery bag menu            // Modify delivery bag
 
-You'll need to put the romhack compiler in the root of your `tww-gz` folder
+amounts menu:
+- health                        // Modify the current health by quarter
+- bombs                         // Modify the current bomb count
+- arrows                        // Modify the current arrow count
+- rupees                        // Modify the current rupee count
+- magic                         // Modify the current magic amount
+- heart pieces                  // Modify the current heart pieces collected
 
-BUILDING THE ROM
+item inventory menu:
+- Telescope                     // Add/remove telescope to/from inventory
+- Sail                          // Add/remove sail to/from inventory
+- Wind Waker                    // Add/remove wind waker to/from inventory
+- Grappling Hook                // Add/remove grappling hook to/from inventory
+- Spoils Bag                    // Add/remove spoils bag to/from inventory
+- Boomerang                     // Add/remove boomerang to/from inventory
+- Deku Leaf                     // Add/remove deku leaf to/from inventory
+- Tingle Tuner                  // Add/remove tingle tuner to/from inventory
+- Progressive Picto Box         // Add/remove/upgrade picto box
+- Iron Boots                    // Add/remove iron boots to/from inventory
+- Magic Armor                   // Add/remove magic armor to/from inventory
+- Bait Bag                      // Add/remove bait bag to/from inventory
+- Progressive Bow               // Add/remove/upgrade bow
+- Bombs                         // Add/remove bombs to/from inventory
+- Bottle 1                      // Add/remove bottle 1 to/from inventory
+- Bottle 2                      // Add/remove bottle 2 to/from inventory
+- Bottle 3                      // Add/remove bottle 3 to/from inventory
+- Bottle 4                      // Add/remove bottle 4 to/from inventory
+- Delivery Bag                  // Add/remove delivery bag to/from inventory
+- Hookshot                      // Add/remove hookshot to/from inventory
+- Skull Hammer                  // Add/remove skull hammer to/from inventory
 
-Currently, the rom will only work built with the command line, note: do NOT use powershell on windows, only the command prompt.
+quest status menu:
+- Sword                         // Add/remove/upgrade sword
+- Shield                        // Add/remove/upgrade shield
+- Magic                         // Add/remove/upgrade magic
+- Quiver                        // Add/remove/upgrade quiver
+- Bomb Bag                      // Add/remove/upgrade bomb bag
+- Power Bracelets               // Add/remove power bracelets from inventory
+- Pirate's Charm                // Add/remove pirate's charm from inventory
+- Hero's Charm                  // Add/remove hero's charm from inventory
+- Wind's Requiem                // Add/remove wind's requiem from songs list
+- Ballad of Gales               // Add/remove ballad of gales from songs list
+- Command Melody                // Add/remove command melody from songs list
+- Earth God's Lyric             // Add/remove earth god's lyric from songs list
+- Wind God's Aria               // Add/remove wind god's aria from songs list
+- Song of Passing               // Add/remove song of passing from songs list
+- Din's Pearl                   // Add/remove din's pearl from inventory
+- Farore's Pearl                // Add/remove farore's pearl from inventory
+- Nayru's Pearl                 // Add/remove nayru's pearl from inventory
+- Triforce Piece 1              // Add/remove triforce piece 1 from inventory
+- Triforce Piece 2              // Add/remove triforce piece 2 from inventory
+- Triforce Piece 3              // Add/remove triforce piece 3 from inventory
+- Triforce Piece 4              // Add/remove triforce piece 4 from inventory
+- Triforce Piece 5              // Add/remove triforce piece 5 from inventory
+- Triforce Piece 6              // Add/remove triforce piece 6 from inventory
+- Triforce Piece 7              // Add/remove triforce piece 7 from inventory
+- Triforce Piece 8              // Add/remove triforce piece 8 from inventory
 
-After launching the command prompt, make your way to the root directory of your GZ folder
+memory menu:
+- memory editor menu            // View/edit memory
+- watches menu                  // Manage memory watches
 
-`make`
+*practice menu:
 
-followed by
+*scene menu:
 
-`romhack build --raw`
+settings menu:
+- cursor color                  // Change cursor color
+- font                          // Change font
+- drop shadows                  // Add shadows to all font characters
+- save card                     // Save settings to memory card
+- load card                     // Load settings from memory card
+- delete card                   // Delete settings on memory card
 
-From here you should have a .iso file in your `build` folder labeled twwgz.iso
+tools menu:
+- link debug info               // Display position and angle data for Link
+- teleport                      // R+D-pad up to save position. R+D-pad down to load
+- area reload                   // Reload the current room by pressing L + R + A + Start
+- map select                    // Load Map Select by holding D-pad down + Y + Z
+- zombie hover info             // Display A and B button presses per second
+- input viewer                  // Show current inputs
+```
 
+\* - feature not implemented yet
 
-CREDITS:
-Credits to everyone involved in the making of tww-gz, this includes CGF95, Glubbers_, and TakaRikka.
+### Planned Features
+
+```
+- spoils menu
+- delivery bag menu
+- built-in practice saves for all major speedrun categories
+- more flags in the flags menu
+- modifiable wallet capacity
+- add/remove hurricane spin
+- full health cheat
+```
+
+## Building
+
+See [BUILDING.md](./BUILDING.md) to learn how to create local builds.
+
+## Acknowledgements
+Credits to everyone involved in the making of tww-gz, this includes PK_Slam, CGF95, Glubbers_, and TakaRikka.
 
 Taka deserves a special congratulations for the work done, providing us with the entire framework ported over from [Twilight Princess' Practice Rom](https://tpgz.io). Without Taka's help, this project would likely have never gotten off the ground.
 

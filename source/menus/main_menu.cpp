@@ -1,6 +1,6 @@
 #include "menus/main_menu.h"
 
-#define LINE_NUM 9
+#define LINE_NUM 8
 
 Cursor MainMenu::cursor;
 
@@ -9,11 +9,10 @@ Line lines[LINE_NUM] = {
     {"flags", FLAGS_INDEX, "Toggle in-game flags", false},
     {"inventory", INVENTORY_INDEX, "Set items and equipment", false},
     {"memory", MEMORY_INDEX, "View/edit memory, add watches, and save/load memfiles", false},
-    {"practice", PRACTICE_INDEX, "Load practice files", false},
-    {"scene", SCENE_INDEX, "Adjust current scene settings", false},
+    {"practice", PRACTICE_INDEX, "Load practice files (coming soon...)", false},
+    {"scene", SCENE_INDEX, "Adjust current scene settings (coming soon...)", false},
     {"settings", SETTINGS_INDEX, "Configure settings", false},
     {"tools", TOOLS_INDEX, "Use various tools for practice and testing", false},
-    {"warping", WARPING_INDEX, "Warp to any area", false},
 };
 
 void MainMenu::draw() {
@@ -31,7 +30,7 @@ void MainMenu::draw() {
             GZ_setMenu(GZ_CHEAT_MENU);
             return;
         case FLAGS_INDEX:
-            //GZ_setMenu(GZ_FLAGS_MENU);
+            GZ_setMenu(GZ_FLAGS_MENU);
             return;
         case INVENTORY_INDEX:
             GZ_setMenu(GZ_INVENTORY_MENU);
@@ -50,9 +49,6 @@ void MainMenu::draw() {
             return;
         case TOOLS_INDEX:
             GZ_setMenu(GZ_TOOLS_MENU);
-            return;
-        case WARPING_INDEX:
-            //GZ_setMenu(GZ_WARP_MENU);
             return;
         }
     }

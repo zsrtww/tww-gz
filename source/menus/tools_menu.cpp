@@ -15,23 +15,26 @@
 Cursor ToolsMenu::cursor;
 
 GZTool g_tools[TOOL_AMNT] = {
-    {DEBUG_INDEX, false}, {TELEPORT_INDEX, false},     {AREA_RELOAD_INDEX, false},
-    {ZH_INDEX, false},    {INPUT_VIEWER_INDEX, false}, {DISABLE_SVCHECK_INDEX, false},
+    {DEBUG_INDEX, false},       {TELEPORT_INDEX, false},    {AREA_RELOAD_INDEX, false},
+    {MAP_SELECT_INDEX, false},  {ZH_INDEX, false},          {INPUT_VIEWER_INDEX, false},
+    //{DISABLE_SVCHECK_INDEX, false}
 };
 
 Line lines[LINE_NUM] = {
     {"link debug info", DEBUG_INDEX, "Display position and angle data for Link", true,
-     &g_tools[DEBUG_INDEX].active},
+        &g_tools[DEBUG_INDEX].active},
     {"teleport", TELEPORT_INDEX, "R+D-pad up to save position. R+D-pad down to load", true,
-     &g_tools[TELEPORT_INDEX].active},
-    {"area reload", AREA_RELOAD_INDEX, "Reloads the current room by pressing L + R + A + Start",
-     true, &g_tools[AREA_RELOAD_INDEX].active},
+        &g_tools[TELEPORT_INDEX].active},
+    {"area reload", AREA_RELOAD_INDEX, "Reload the current room by pressing L + R + A + Start",
+        true, &g_tools[AREA_RELOAD_INDEX].active},
+    {"map select", MAP_SELECT_INDEX, "Load map select by holding D-pad down + Y + Z",
+        true, &g_tools[MAP_SELECT_INDEX].active},
     {"zombie hover info", ZH_INDEX, "Display A and B button presses per second", true,
-     &g_tools[ZH_INDEX].active},
+        &g_tools[ZH_INDEX].active},
     {"input viewer", INPUT_VIEWER_INDEX, "Show current inputs", true,
-     &g_tools[INPUT_VIEWER_INDEX].active},
-    {"disable save checks", DISABLE_SVCHECK_INDEX, "Disables save location safety checks", true,
-     &g_tools[DISABLE_SVCHECK_INDEX].active},
+        &g_tools[INPUT_VIEWER_INDEX].active},
+    //{"disable save checks", DISABLE_SVCHECK_INDEX, "Disables save location safety checks", true,
+    //    &g_tools[DISABLE_SVCHECK_INDEX].active},
 };
 
 void ToolsMenu::draw() {
@@ -52,12 +55,18 @@ void ToolsMenu::draw() {
                 GZCmd_enable(Commands::CMD_STORE_POSITION);
                 GZCmd_enable(Commands::CMD_LOAD_POSITION);
                 break;
+            case AREA_RELOAD_INDEX:
+                GZCmd_enable(Commands::CMD_AREA_RELOAD);
+                break;
             }
         } else {
             switch (cursor.y) {
             case TELEPORT_INDEX:
                 GZCmd_disable(Commands::CMD_STORE_POSITION);
                 GZCmd_disable(Commands::CMD_LOAD_POSITION);
+                break;
+            case AREA_RELOAD_INDEX:
+                GZCmd_disable(Commands::CMD_AREA_RELOAD);
                 break;
             }
         }
@@ -90,14 +99,25 @@ void ToolsMenu::displayLinkInfo() {
     }
 }
 
+int zombieHoverColor(u8 buttonPressesPerWindow) {
+    if (buttonPressesPerWindow == 15) return rainbow();
+    if (buttonPressesPerWindow >= 11) return ColorPalette::GREEN;
+    if (buttonPressesPerWindow >= 9) return ColorPalette::YELLOW;
+    if (buttonPressesPerWindow >= 1) return ColorPalette::RED;
+    return ColorPalette::WHITE;
+}
+
 void ToolsMenu::displayZombieHoverInfo() {
     // Generates A and B button presses per second
     char a_presses_str[8];
     char b_presses_str[8];
 
-    tww_sprintf(a_presses_str, "A: %d", GZ_getAPressesPerWindow());
-    tww_sprintf(b_presses_str, "B: %d", GZ_getBPressesPerWindow());
+    u8 numAPressesPerWindow = GZ_getAPressesPerWindow();
+    u8 numBPressesPerWindow = GZ_getBPressesPerWindow();
 
-    Font::GZ_drawStr(a_presses_str, 450.f, 320.f, ColorPalette::GREEN, g_dropShadows);
-    Font::GZ_drawStr(b_presses_str, 450.f, 340.f, ColorPalette::RED, g_dropShadows);
+    tww_sprintf(a_presses_str, "A: %d", numAPressesPerWindow);
+    tww_sprintf(b_presses_str, "B: %d", numBPressesPerWindow);
+
+    Font::GZ_drawStr(a_presses_str, 450.f, 320.f, zombieHoverColor(numAPressesPerWindow), g_dropShadows);
+    Font::GZ_drawStr(b_presses_str, 450.f, 340.f, zombieHoverColor(numBPressesPerWindow), g_dropShadows);
 }

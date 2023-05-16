@@ -14,7 +14,7 @@ Line lines[LINE_NUM] = {
     {"cursor color:", CURSOR_COLOR_INDEX, "Change cursor color", false, nullptr,
      MAX_CURSOR_COLOR_OPTIONS},
     {"font:", FONT_INDEX, "Change font", false, nullptr, MAX_FONT_OPTIONS},
-    {"drop shadows", DROP_SHADOWS_INDEX, "Adds shadows to all font characters", true,
+    {"drop shadows", DROP_SHADOWS_INDEX, "Add shadows to all font characters", true,
      &g_dropShadows},
     {"save card", SAVE_CARD_INDEX, "Save settings to memory card"},
     {"load card", LOAD_CARD_INDEX, "Load settings from memory card"},

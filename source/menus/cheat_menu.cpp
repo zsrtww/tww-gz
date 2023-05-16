@@ -5,17 +5,40 @@
 #include "lib.h"
 #include "font.h"
 #include "commands.h"
+#include "cheats.h"
 
-#define LINE_NUM 1
+#define LINE_NUM 14
 Cursor CheatMenu::cursor;
 
-GZCheat g_cheats[CHEAT_AMNT] = {
-    {MOON_JUMP_INDEX, false},
-};
-
 Line lines[LINE_NUM] = {
-    {"moon jump", MOON_JUMP_INDEX, "Hold R+A to moon jump", true,
-     &g_cheats[MOON_JUMP_INDEX].active},
+    {"infinite air", InfiniteAir, "Always have max air", true,
+        &g_cheats[InfiniteAir].active},
+    {"infinite arrows", InfiniteArrows, "Always have max arrows", true,
+        &g_cheats[InfiniteArrows].active},
+    {"infinite bombs", InfiniteBombs, "Always have max bombs", true,
+        &g_cheats[InfiniteBombs].active},
+    {"infinite hearts", InfiniteHearts, "Always have full hearts", true,
+        &g_cheats[InfiniteHearts].active},
+    {"infinite magic", InfiniteMagic, "Always have full magic", true,
+        &g_cheats[InfiniteMagic].active},
+    {"infinite rupees", InfiniteRupees, "Always have infinite rupees", true,
+        &g_cheats[InfiniteRupees].active},
+    {"moon jump", MoonJump, "Hold R+A to moon jump", true,
+        &g_cheats[MoonJump].active},
+    {"storage", StorageCheat, "Press D-pad right to get storage", true,
+        &g_cheats[StorageCheat].active},
+    {"normal collision", NormalCollision, "Hold L+D-pad down to get normal collision", true,
+        &g_cheats[NormalCollision].active},
+    {"chest storage", ChestStorage, "Hold L+D-pad right to get chest storage", true,
+        &g_cheats[ChestStorage].active},
+    {"door cancel", DoorCancel, "Hold L+D-pad left to get door cancel", true,
+        &g_cheats[DoorCancel].active},
+    {"quarter heart", QuarterHeart, "Hold R+D-pad left to reduce health to quarter heart", true,
+        &g_cheats[QuarterHeart].active},
+    {"fast movement", FastMovement, "Hold D-pad left to get super speed", true,
+        &g_cheats[FastMovement].active},
+    {"upcharge", Upcharge, "Hold X + Z to get negative speed for upcharge", true,
+        &g_cheats[Upcharge].active}
 };
 
 void CheatMenu::draw() {
@@ -29,20 +52,6 @@ void CheatMenu::draw() {
 
     if (GZ_getButtonTrig(GZPad::A)) {
         g_cheats[cursor.y].active = !g_cheats[cursor.y].active;
-
-        if (g_cheats[cursor.y].active) {
-            switch (cursor.y) {
-            case MOON_JUMP_INDEX:
-                GZCmd_enable(CMD_MOON_JUMP);
-                break;
-            }
-        } else {
-            switch (cursor.y) {
-            case MOON_JUMP_INDEX:
-                GZCmd_disable(CMD_MOON_JUMP);
-                break;
-            }
-        }
     }
 
     GZ_drawMenuLines(lines, cursor.y, LINE_NUM);

@@ -2,7 +2,8 @@
 
 enum InventoryMenuIndex {
     AMOUNT_INDEX,
-    PAUSE_INDEX,
+    ITEM_INVENTORY_INDEX,
+    QUEST_STATUS_INDEX,
     SPOILS_INDEX,
     DELIVERY_BAG_INDEX,
 };
@@ -14,3 +15,5 @@ public:
 
     static Cursor cursor;
 };
+
+const char* item_id_to_str(u8 item_id);
