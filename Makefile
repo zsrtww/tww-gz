@@ -20,7 +20,7 @@ include $(DEVKITPPC)/gamecube_rules
 
 PACKAGE_NAME ?= $(TARGET)
 PACKAGE_URL ?= github.com/zsrtww/tww-gz
-GZ_VERSION  ?=  0.0.1
+GZ_VERSION  ?=  0.1.1
 
 TARGET		:=	twwgz
 BUILD		:=	build

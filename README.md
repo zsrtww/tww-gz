@@ -12,12 +12,12 @@ Use L + R + D-pad down to open the main menu which contains the following option
 
 ```
 cheats menu:
-- infinite air                  // Gives infinite air
+- infinite air                  // Always have max air
 - infinite arrows               // Always have max arrows
 - infinite bombs                // Always have max bombs
 - infinite hearts               // Always have full hearts
 - infinite magic                // Always have full magic
-- infinite rupees               // Gives infinite rupees
+- infinite rupees               // Always have infinite rupees
 - moon jump                     // Hold R+A to moon jump
 - storage                       // Press D-pad right to get storage
 - normal collision              // Hold L+D-pad down to get normal collision
@@ -28,45 +28,45 @@ cheats menu:
 - upcharge                      // Hold X + Z to get negative speed for upcharge
 
 flags menu:
-- Watched FF2 Helmaroc Cutscene // Switches to Animation Set 2, among other things
+- Watched FF2 Helmaroc Cutscene // Switches to animation set 2, among other things
 
 inventory menu:
 - amounts menu                  // Modify amounts for health, magic, etc.
 - item inventory menu           // Modify item inventory menu
 - quest status menu             // Modify quest status menu
-- *spoils menu                  // Modify Spoils Bag items/amounts
-- *delivery bag menu            // Modify Delivery Bag
+- *spoils menu                  // Modify spoils bag items/amounts
+- *delivery bag menu            // Modify delivery bag
 
 amounts menu:
-- health                        // Modifies the current health by quarter
-- bombs                         // Modifies the current bomb count
-- arrows                        // Modifies the current arrow count
-- rupees                        // Modifies the current rupee count
-- magic                         // Modifies the current magic amount
-- heart pieces                  // Modifies the current heart pieces collected
+- health                        // Modify the current health by quarter
+- bombs                         // Modify the current bomb count
+- arrows                        // Modify the current arrow count
+- rupees                        // Modify the current rupee count
+- magic                         // Modify the current magic amount
+- heart pieces                  // Modify the current heart pieces collected
 
 item inventory menu:
-- Telescope                     // Add/remove Telescope to/from inventory
-- Sail                          // Add/remove Sail to/from inventory
-- Wind Waker                    // Add/remove Wind Waker to/from inventory
-- Grappling Hook                // Add/remove Grappling Hook to/from inventory
-- Spoils Bag                    // Add/remove Spoils Bag to/from inventory
-- Boomerang                     // Add/remove Boomerang to/from inventory
-- Deku Leaf                     // Add/remove Deku Leaf to/from inventory
-- Tingle Tuner                  // Add/remove Tingle Tuner to/from inventory
-- Progressive Picto Box         // Add/remove/upgrade Picto Box
-- Iron Boots                    // Add/remove Iron Boots to/from inventory
-- Magic Armor                   // Add/remove Magic Armor to/from inventory
-- Bait Bag                      // Add/remove Bait Bag to/from inventory
-- Progressive Bow               // Add/remove/upgrade Bow
-- Bombs                         // Add/remove Bombs to/from inventory
-- Bottle 1                      // Add/remove Bottle 1 to/from inventory
-- Bottle 2                      // Add/remove Bottle 2 to/from inventory
-- Bottle 3                      // Add/remove Bottle 3 to/from inventory
-- Bottle 4                      // Add/remove Bottle 4 to/from inventory
-- Delivery Bag                  // Add/remove Delivery Bag to/from inventory
-- Hookshot                      // Add/remove Hookshot to/from inventory
-- Skull Hammer                  // Add/remove Skull Hammer to/from inventory
+- Telescope                     // Add/remove telescope to/from inventory
+- Sail                          // Add/remove sail to/from inventory
+- Wind Waker                    // Add/remove wind waker to/from inventory
+- Grappling Hook                // Add/remove grappling hook to/from inventory
+- Spoils Bag                    // Add/remove spoils bag to/from inventory
+- Boomerang                     // Add/remove boomerang to/from inventory
+- Deku Leaf                     // Add/remove deku leaf to/from inventory
+- Tingle Tuner                  // Add/remove tingle tuner to/from inventory
+- Progressive Picto Box         // Add/remove/upgrade picto box
+- Iron Boots                    // Add/remove iron boots to/from inventory
+- Magic Armor                   // Add/remove magic armor to/from inventory
+- Bait Bag                      // Add/remove bait bag to/from inventory
+- Progressive Bow               // Add/remove/upgrade bow
+- Bombs                         // Add/remove bombs to/from inventory
+- Bottle 1                      // Add/remove bottle 1 to/from inventory
+- Bottle 2                      // Add/remove bottle 2 to/from inventory
+- Bottle 3                      // Add/remove bottle 3 to/from inventory
+- Bottle 4                      // Add/remove bottle 4 to/from inventory
+- Delivery Bag                  // Add/remove delivery bag to/from inventory
+- Hookshot                      // Add/remove hookshot to/from inventory
+- Skull Hammer                  // Add/remove skull hammer to/from inventory
 
 quest status menu:
 - Sword                         // Add/remove/upgrade sword
@@ -75,17 +75,17 @@ quest status menu:
 - Quiver                        // Add/remove/upgrade quiver
 - Bomb Bag                      // Add/remove/upgrade bomb bag
 - Power Bracelets               // Add/remove power bracelets from inventory
-- Pirate's Charm                // Add/remove pirate\'s charm from inventory
-- Hero's Charm                  // Add/remove hero\'s charm from inventory
-- Wind's Requiem                // Add/remove wind\'s requiem from songs list
+- Pirate's Charm                // Add/remove pirate's charm from inventory
+- Hero's Charm                  // Add/remove hero's charm from inventory
+- Wind's Requiem                // Add/remove wind's requiem from songs list
 - Ballad of Gales               // Add/remove ballad of gales from songs list
 - Command Melody                // Add/remove command melody from songs list
 - Earth God's Lyric             // Add/remove earth god's lyric from songs list
-- Wind God's Aria               // Add/remove wind god\'s aria from songs list
+- Wind God's Aria               // Add/remove wind god's aria from songs list
 - Song of Passing               // Add/remove song of passing from songs list
-- Din's Pearl                   // Add/remove din\'s pearl from inventory
-- Farore's Pearl                // Add/remove farore\'s pearl from inventory
-- Nayru's Pearl                 // Add/remove nayru\'s pearl from inventory
+- Din's Pearl                   // Add/remove din's pearl from inventory
+- Farore's Pearl                // Add/remove farore's pearl from inventory
+- Nayru's Pearl                 // Add/remove nayru's pearl from inventory
 - Triforce Piece 1              // Add/remove triforce piece 1 from inventory
 - Triforce Piece 2              // Add/remove triforce piece 2 from inventory
 - Triforce Piece 3              // Add/remove triforce piece 3 from inventory
@@ -106,7 +106,7 @@ memory menu:
 settings menu:
 - cursor color                  // Change cursor color
 - font                          // Change font
-- drop shadows                  // Adds shadows to all font characters
+- drop shadows                  // Add shadows to all font characters
 - save card                     // Save settings to memory card
 - load card                     // Load settings from memory card
 - delete card                   // Delete settings on memory card
@@ -129,6 +129,9 @@ tools menu:
 - delivery bag menu
 - built-in practice saves for all major speedrun categories
 - more flags in the flags menu
+- modifiable wallet capacity
+- add/remove hurricane spin
+- full health cheat
 ```
 
 ## Building
