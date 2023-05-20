@@ -14,8 +14,12 @@ enum {
     GZ_FLAGS_MENU,
     GZ_INVENTORY_MENU,
     GZ_MEMORY_MENU,
+    GZ_PRACTICE_MENU,
     GZ_SETTINGS_MENU,
     GZ_TOOLS_MENU,
+
+    /* Practice Sub-Menus */
+    GZ_ANY_NO_MSS_SAVES_MENU,
 
     /* Memory Sub-Menus */
     GZ_MEM_EDITOR_MENU,

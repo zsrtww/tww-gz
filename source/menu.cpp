@@ -13,11 +13,14 @@
 #include "menus/spoils_bag_menu.h"
 #include "menus/settings_menu.h"
 #include "menus/tools_menu.h"
+#include "menus/practice_menu.h"
 #include "menus/cheat_menu.h"
 #include "menus/memory_menu.h"
 
 #include "menus/memory_editor_menu.h"
 #include "menus/watches_menu.h"
+
+#include "menus/any_no_mss_saves_menu.h"
 
 typedef void (*menu_render_t)();
 
@@ -27,8 +30,11 @@ menu_render_t l_menuDrawList[MENU_NUM] = {
     FlagMenu::draw,
     InventoryMenu::draw,
     MemoryMenu::draw,
+    PracticeMenu::draw,
     SettingsMenu::draw,
     ToolsMenu::draw,
+
+    AnyNoMssSavesMenu::draw,
 
     MemoryEditorMenu::draw,
     WatchesMenu::draw,
