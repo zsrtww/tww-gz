@@ -4,6 +4,11 @@
 
 /* init */
 #define tww_memcpy_addr 0x80003490
+#define tww_getSave_addr 0x8005b6e8
+#define tww_putSave_addr 0x8005b7a8
+#define tww_drawScreenPlayer_addr 0x80232de0
+#define tww_getLayerNo_addr 0x80050960
+#define tww_os_report_addr 0x800068ec
 
 /* MSL_C */
 #define tww_strlen_addr 0x8032b798

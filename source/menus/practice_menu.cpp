@@ -1,4 +1,5 @@
 #include "menus/main_menu.h"
+#include "practice.h"
 #include "menus/practice_menu.h"
 
 #define LINE_NUM 1

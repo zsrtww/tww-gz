@@ -586,4 +586,10 @@ typedef void (*dSv_player_return_place_c__set_t)(void* _this, char const* i_name
 #define dSv_player_return_place_c__set                                                             \
     ((dSv_player_return_place_c__set_t)dSv_player_return_place_c__set_addr)
 
+typedef void (*tww_getSave)(void* addr, int32_t areaID);
+#define tww_getSave ((tww_getSave)tww_getSave_addr)
+
+typedef void (*tww_putSave)(void* addr, int32_t areaID);
+#define tww_putSave ((tww_putSave)tww_putSave_addr)
+
 #endif /* D_SAVE_D_SAVE_H */

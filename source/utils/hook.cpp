@@ -5,6 +5,7 @@
 #include "controller.h"
 #include "menus/tools_menu.h"
 #include "libtww/f_op/f_op_scene_req.h"
+#include "save_manager.h"
 
 #define HOOK_DEF(rettype, name, params)                                                            \
     typedef rettype(*tww_##name##_t) params;                                                       \
@@ -16,6 +17,8 @@ HOOK_DEF(void, cDyl_InitAsync, (void*, void*, void*));
 HOOK_DEF(void, fapGm_Execute, (void));
 HOOK_DEF(void, dComIfGs_setGameStartStage, (void));
 HOOK_DEF(int, dScnPly_Draw, (void*));
+HOOK_DEF(void, putSave, (void*, int));
+HOOK_DEF(int, dScnPly__phase_1, (void*));
 
 struct {
     u32 a[2];
@@ -57,6 +60,23 @@ void dComIfGs_setGameStartStageHook() {
     dComIfGs_setGameStartStageTrampoline();
 }
 
+// Stops temp flags from being stored to save when loading memfile
+void putSaveHook(void* addr, int stageNo) {
+    if (SaveManager::s_injectMemfile) {
+        return;
+    } else {
+        return putSaveTrampoline(addr, stageNo);
+    }
+}
+
+int saveInjectHook(void* i_scene) {
+    if (SaveManager::s_injectSave || SaveManager::s_injectMemfile) {
+        SaveManager::loadData();
+    }
+    
+    return dScnPly__phase_1Trampoline(i_scene);
+}
+
 #ifdef NTSCU
 #define menu_data_path (char*)0x80362DAA
 #endif
@@ -89,6 +109,8 @@ void applyHooks() {
     APPLY_HOOK(dComIfGs_setGameStartStage, tww_dComIfGs_setGameStartStage_addr,
                HK_LIB_SET_SAVE_LOC_INDEX, dComIfGs_setGameStartStageHook);
     APPLY_HOOK(dScnPly_Draw, tww_dScnPly_Draw_addr, HK_LIB_OPEN_WARP_MENU, dScnPly_DrawHook);
+    APPLY_HOOK(putSave, tww_putSave_addr, HK_LIB_PUT_SAVE_INDEX, putSaveHook);
+    APPLY_HOOK(dScnPly__phase_1, tww_drawScreenPlayer_addr, HK_LIB_DRAW_SCREEN_PLAYER_INDEX, saveInjectHook);
 
 #undef APPLY_HOOK
 }
