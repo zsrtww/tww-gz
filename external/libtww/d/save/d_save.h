@@ -148,6 +148,10 @@ enum ItemTable {
     NO_ITEM = 0xFF
 };
 
+enum Flags {
+    DEMO23 = 45,
+};
+
 class dSv_player_status_a_c {
 public:
     u16& getMaxLife() { return mMaxLife; }
@@ -434,6 +438,9 @@ static_assert(sizeof(dSv_memBit_c) == 0x24);
 
 class dSv_event_c {
 public:
+    u8 getFlag(int index) { return mEvent[index]; }
+    void setFlag(int index, u8 flag_setting) { mEvent[45] = flag_setting; }
+
     /* 0x0 */ u8 mEvent[256];
 };  // Size: 0x100
 

@@ -14,6 +14,7 @@
 
 #include "color.h"
 #include "libtww/MSL_C/string.h"
+#include "flags.h"
 
 static char l_filename[80];
 SaveManager gSaveManager;
@@ -21,8 +22,8 @@ SaveManager gSaveManager;
 bool SaveManager::s_injectSave = false;
 bool SaveManager::s_injectMemfile = false;
 
-void SaveManager::injectSave(void* buffer) {
-    memcpy(&g_dComIfG_gameInfo, buffer, 0x9F8);
+void SaveManager::injectSave(void* buffer) { // this function is corrupting save files somehow
+    memcpy(&g_dComIfG_gameInfo, buffer, 0xA8C/*0x9F8*/);  // no idea what the number should be
     dComIfGs_getSave(g_dComIfG_gameInfo.info.mDan.mStageNo);
 }
 
@@ -51,7 +52,7 @@ void SaveManager::loadSave(uint32_t id, const char* category, special i_specials
     SaveManager::injectDefault_before();
 
     // Load the corresponding file path and properties
-    snprintf(l_filename, sizeof(l_filename), "twwgz/save_files/%s.bin", "tww_any"); //category
+    snprintf(l_filename, sizeof(l_filename), "twwgz/save_files/%s.bin", category);
     loadFile(l_filename, &gSaveManager.mPracticeSaveInfo, sizeof(gSaveManager.mPracticeSaveInfo),
              id * sizeof(gSaveManager.mPracticeSaveInfo));
     
@@ -61,9 +62,8 @@ void SaveManager::loadSave(uint32_t id, const char* category, special i_specials
     //tww_sprintf(name, "name: %s", gSaveManager.mPracticeSaveInfo.filename);
     //Font::GZ_drawStr(name, 20.f, 230.f, ColorPalette::WHITE, g_dropShadows);
     
-    //snprintf(l_filename, sizeof(l_filename), "twwgz/save_files/any_no_mss/qlog1.bin", category,
-    //         "qlog1"); //gSaveManager.mPracticeSaveInfo.filename
-    snprintf(l_filename, sizeof(l_filename), "twwgz/save_files/any_no_mss/qlog1.bin");
+    snprintf(l_filename, sizeof(l_filename), "twwgz/save_files/%s/%s.bin", category,
+             gSaveManager.mPracticeSaveInfo.filename);
 
     // 0xFF is used to identify a call from file reload, which doesn't need to run the default load
     if (size != 0xFF) {
@@ -110,20 +110,25 @@ void SaveManager::loadSavefile(const char* l_filename) {
 void SaveManager::triggerLoad(uint32_t id, const char* category, special i_specials[],
                                         int size) {
     loadSave(id, category, i_specials, size);
+
     SaveManager::loadSavefile(l_filename);
     dSv_save_c* save = (dSv_save_c*) MEMFILE_BUF;
 
     int state = tww_getLayerNo(save->getPlayer().mPlayerReturnPlace.mName,
-                              save->getPlayer().mPlayerReturnPlace.mRoomNo, 0xFF); //this method might be broken, giving me wrong layer
+                              save->getPlayer().mPlayerReturnPlace.mRoomNo, 0xFF);
 
     g_dComIfG_gameInfo.play.mNextStage.mRoomNo = save->getPlayer().mPlayerReturnPlace.mRoomNo;
     g_dComIfG_gameInfo.play.mNextStage.mPoint = save->getPlayer().mPlayerReturnPlace.mPlayerStatus;
     strcpy(g_dComIfG_gameInfo.play.mNextStage.mStage, save->getPlayer().mPlayerReturnPlace.mName);
     g_dComIfG_gameInfo.play.mNextStage.mLayer = state;
 
+    // this is not setting the flag correctly
+    //u8 demo23_flag_setting = save->getEvent().getFlag(DEMO23);
+    //g_dComIfG_gameInfo.info.getSavedata().getEvent().setFlag(DEMO23, 1/*demo23_flag_setting*/);
+
     // inject options after initial stage set since some options change stage loc
     if (gSaveManager.mPracticeFileOpts.inject_options_during_load) {
-        gSaveManager.mPracticeFileOpts.inject_options_during_load();
+        gSaveManager.mPracticeFileOpts.inject_options_during_load(); // , 1
     }
 
     // for debugging
@@ -171,11 +176,14 @@ void SaveManager::loadData() {
     if (s_injectMemfile) {
         SaveManager::injectMemfile(MEMFILE_BUF);
     } else {
-        SaveManager::injectSave(MEMFILE_BUF);
+        SaveManager::injectSave(MEMFILE_BUF); // 0, 16
     }
 
+    GZ_activate(HAS_SEEN_HELMAROC_ARRIVING_AT_OUTSET); // 1
+    GZ_activate(WATCHED_FF2_HELMAROC_CUTSCENE); // 17
+
 /*
-    // swap equip logic
+    // from TP - swap equip logic
     if (g_swap_equips_flag) {
         uint8_t tmp = dComIfGs_getSelectItemIndex(SELECT_ITEM_X);
         uint8_t tmp_mix = dComIfGs_getMixItemIndex(SELECT_ITEM_X);

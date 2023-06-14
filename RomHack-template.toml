@@ -33,8 +33,25 @@ libs = ["twwgz.a", "external/gcn_c/gcn_c.a"]
 "twwgz/fonts/press-start-2p.fnt" = "res/fonts/press-start-2p.fnt"
 
 # save_files
-"twwgz/save_files/tww_any.bin" = "res/save_files/tww_any.bin"
-"twwgz/save_files/any_no_mss/qlog1.bin" = "res/save_files/any_no_mss/qlog1.bin"
+"twwgz/save_files/any_no_mss.bin" = "res/save_files/any_no_mss.bin"
+"twwgz/save_files/any_no_mss/after_intro.bin" = "res/save_files/any_no_mss/after_intro.bin"
+"twwgz/save_files/any_no_mss/orca.bin" = "res/save_files/any_no_mss/orca.bin"
+"twwgz/save_files/any_no_mss/forest_of_fairies.bin" = "res/save_files/any_no_mss/forest_of_fairies.bin"
+"twwgz/save_files/any_no_mss/ropes_1.bin" = "res/save_files/any_no_mss/ropes_1.bin"
+"twwgz/save_files/any_no_mss/ff1.bin" = "res/save_files/any_no_mss/ff1.bin"
+"twwgz/save_files/any_no_mss/windfall.bin" = "res/save_files/any_no_mss/windfall.bin"
+"twwgz/save_files/any_no_mss/bombs_swim.bin" = "res/save_files/any_no_mss/bombs_swim.bin"
+"twwgz/save_files/any_no_mss/ropes_2.bin" = "res/save_files/any_no_mss/ropes_2.bin"
+"twwgz/save_files/any_no_mss/forest_haven_swim.bin" = "res/save_files/any_no_mss/forest_haven_swim.bin"
+"twwgz/save_files/any_no_mss/deku_tree_cutscene_skip.bin" = "res/save_files/any_no_mss/deku_tree_cutscene_skip.bin"
+"twwgz/save_files/any_no_mss/quiver_swim.bin" = "res/save_files/any_no_mss/quiver_swim.bin"
+"twwgz/save_files/any_no_mss/ff2_swim.bin" = "res/save_files/any_no_mss/ff2_swim.bin"
+"twwgz/save_files/any_no_mss/helmaroc_skip.bin" = "res/save_files/any_no_mss/helmaroc_skip.bin"
+"twwgz/save_files/any_no_mss/barrier_skip.bin" = "res/save_files/any_no_mss/barrier_skip.bin"
+"twwgz/save_files/any_no_mss/trials_skip.bin" = "res/save_files/any_no_mss/trials_skip.bin"
+"twwgz/save_files/any_no_mss/puppet_ganon.bin" = "res/save_files/any_no_mss/puppet_ganon.bin"
+"twwgz/save_files/any_no_mss/morth_hover.bin" = "res/save_files/any_no_mss/morth_hover.bin"
+"twwgz/save_files/any_no_mss/ganondorf.bin" = "res/save_files/any_no_mss/ganondorf.bin"
 
 # menu
 "twwgz/mn/Menu1.dat" = "res/menu/EN_Menu1.dat"
