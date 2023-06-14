@@ -1,7 +1,7 @@
 #include "menus/flag_menu.h"
 #include "flags.h"
 
-#define LINE_NUM 1
+#define LINE_NUM 3
 Cursor FlagMenu::cursor;
 
 Line lines[LINE_NUM] = {

@@ -1,9 +1,9 @@
 #include "flags.h"
 
 GZFlag g_flags[FLAG_AMNT] = {
-    {WATCHED_FF2_HELMAROC_CUTSCENE, false, 0x803B8759, 0}
-    {HAVE_HURRICANE_SPIN,false,0x803B8737,5}
-    {ENDLESS_NIGHT,false,0x803B8736,1}
+    {WATCHED_FF2_HELMAROC_CUTSCENE, false, 0x803B8759, 0},
+    {HAVE_HURRICANE_SPIN,false,0x803B8737,5},
+    {ENDLESS_NIGHT,false,0x803B8736,1},
 };
 
 void GZ_activate(FlagId flag_index) {

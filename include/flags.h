@@ -3,10 +3,12 @@
 
 #include "libtww/dolphin/gctypes.h"
 
-#define FLAG_AMNT 1
+#define FLAG_AMNT 3
 
 enum FlagId {
-    WATCHED_FF2_HELMAROC_CUTSCENE
+    WATCHED_FF2_HELMAROC_CUTSCENE,
+    HAVE_HURRICANE_SPIN,
+    ENDLESS_NIGHT,
 };
 
 struct GZFlag {
