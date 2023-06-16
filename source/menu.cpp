@@ -1,6 +1,8 @@
 #include "menu.h"
 #include "menus/main_menu.h"
 #include "menus/flag_menu.h"
+#include "menus/important_flag_menu.h"
+#include "menus/cutscene_flag_menu.h"
 #include "menus/inventory_menu.h"
 #include "menus/amount_menu.h"
 #include "menus/item_inventory_menu.h"
@@ -29,7 +31,10 @@ menu_render_t l_menuDrawList[MENU_NUM] = {
 
     AmountMenu::draw,
     ItemInventoryMenu::draw,
-    QuestStatusMenu::draw
+    QuestStatusMenu::draw,
+
+    ImportantFlagMenu::draw,
+    CutsceneFlagMenu::draw
 };
 
 menu_render_t l_currentMenu = nullptr;

@@ -28,7 +28,14 @@ cheats menu:
 - upcharge                      // Hold X + Z to get negative speed for upcharge
 
 flags menu:
+- important flags menu		//Flags that are most relevant or important
+- cutscene flags menu		//Cutscene flags
+- *quest flags menu		//Flags related to certain sidequests and heart pieces
+
+important flags menu:
 - Watched FF2 Helmaroc Cutscene // Switches to animation set 2, among other things
+- Have Hurricane Spin		// Gives Hurricane Spin
+- Endless Night			// Activates Endless Night, incompatible with having Nayru's Pearl
 
 inventory menu:
 - amounts menu                  // Modify amounts for health, magic, etc.
@@ -130,7 +137,6 @@ tools menu:
 - built-in practice saves for all major speedrun categories
 - more flags in the flags menu
 - modifiable wallet capacity
-- add/remove hurricane spin
 - full health cheat
 ```
 

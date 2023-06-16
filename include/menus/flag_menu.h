@@ -3,6 +3,14 @@
 #include "menu.h"
 #include "flags.h"
 
+enum FlagMenuIndex {
+    IMPORTANT_FLAG_INDEX,
+    CUTSCENE_FLAG_INDEX,
+    QUEST_FLAG_INDEX,
+    PLACEHOLDER1_FLAG_INDEX,
+    PLACEHOLDER2_FLAG_INDEX,
+};
+
 class FlagMenu : public Menu {
 public:
     FlagMenu() : Menu() {}

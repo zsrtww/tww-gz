@@ -4,7 +4,7 @@
 #include "utils/cursor.h"
 #include "utils/lines.h"
 
-#define MENU_NUM 12
+#define MENU_NUM 14
 
 enum {
     /* Main Menus */
@@ -25,8 +25,16 @@ enum {
     GZ_AMOUNT_MENU,
     GZ_ITEM_INVENTORY_MENU,
     GZ_QUEST_STATUS_MENU,
-    GZ_SPOILS_MENU,
-    GZ_DELIVERY_MENU,
+  //  GZ_SPOILS_MENU,
+  //  GZ_DELIVERY_MENU,
+
+    /* Flag Sub-Menus */
+    GZ_IMPORTANT_FLAG_MENU,
+    GZ_CUTSCENE_FLAG_MENU,
+ //   GZ_QUEST_FLAG_MENU,
+ //   GZ_PLACEHOLDER1_MENU,
+ //   GZ_PLACEHOLDER2_MENU,
+
 };
 
 void GZ_drawMenu();

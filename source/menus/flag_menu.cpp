@@ -1,19 +1,21 @@
+#include "menus/main_menu.h"
 #include "menus/flag_menu.h"
-#include "flags.h"
 
-#define LINE_NUM 1
+#define LINE_NUM 5
+
 Cursor FlagMenu::cursor;
 
 Line lines[LINE_NUM] = {
-    {"Watched FF2 Helmaroc Cutscene", WATCHED_FF2_HELMAROC_CUTSCENE, "Switches to animation set 2, among other things", true,
-        &g_flags[WATCHED_FF2_HELMAROC_CUTSCENE].active},
+    {"important", IMPORTANT_FLAG_INDEX, "Important Flags"},
+    {"cutscenes", CUTSCENE_FLAG_INDEX, "Cutscene Flags (disabled)"},
+    {"quests", QUEST_FLAG_INDEX, "Quest Flags (disabled)"},
+    {"temp1", PLACEHOLDER1_FLAG_INDEX, "TEST (disabled)"},
+    {"temp2", PLACEHOLDER2_FLAG_INDEX, "TEST (disabled)"},
 };
 
 void FlagMenu::draw() {
-    GZ_updateFlags();
-
-    cursor.setMode(Cursor::MODE_LIST);
     cursor.move(0, LINE_NUM);
+
 
     if (GZ_getButtonTrig(GZPad::B)) {
         GZ_setMenu(GZ_MAIN_MENU);
@@ -21,10 +23,23 @@ void FlagMenu::draw() {
     }
 
     if (GZ_getButtonTrig(GZPad::A)) {
-        g_flags[cursor.y].active = !g_flags[cursor.y].active;
-
-        if (g_flags[cursor.y].active) GZ_activate((FlagId) cursor.y);
-        else GZ_deactivate((FlagId) cursor.y);
+        switch (cursor.y) {
+        case IMPORTANT_FLAG_INDEX:
+            GZ_setMenu(GZ_IMPORTANT_FLAG_MENU);
+            return;
+        case CUTSCENE_FLAG_INDEX:
+            GZ_setMenu(GZ_CUTSCENE_FLAG_MENU);
+            return;
+        case QUEST_FLAG_INDEX:
+            //GZ_setMenu(GZ_QUEST_FLAG_MENU);
+            return;
+        case PLACEHOLDER1_FLAG_INDEX:
+            //GZ_setMenu(GZ_PLACEHOLDER1_MENU);
+            return;
+        case PLACEHOLDER2_FLAG_INDEX:
+            //GZ_setMenu(GZ_PLACEHOLDER2_MENU);
+            return;
+        }
     }
 
     GZ_drawMenuLines(lines, cursor.y, LINE_NUM);
