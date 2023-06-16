@@ -32,5 +32,5 @@ void CutsceneFlagMenu::draw() {
         else GZ_deactivate((FlagId) cursorOffset);
     }
 
-    GZ_drawMenuLines(lines, cursor.y, LINE_NUM);
+    GZ_drawMenuLines(lines, cursorOffset, LINE_NUM);
 }
