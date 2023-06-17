@@ -167,7 +167,7 @@ void GZ_deleteMemCard(Storage& storage) {
 }
 
 void GZ_loadMemCard(Storage& storage) {
-    storage.result = StorageOpen(0, storage.file_name_buffer, &storage.info, OPEN_MODE_RW);
+    storage.result = StorageOpen(CARD_SLOT_A, storage.file_name_buffer, &storage.info, OPEN_MODE_RW);
 
     if (storage.result == Ready) {
         GZSaveFile save_file;
@@ -185,6 +185,7 @@ void GZ_loadMemCard(Storage& storage) {
 
 #define FRAME_COUNT 200
 #define FILE_NAME "twwgz01"
+#define MAX_ATTEMPTS 1000000
 
 void GZ_loadGZSave(bool& card_load) {
     u8 frame_count = cCt_getFrameCount();
@@ -194,7 +195,21 @@ void GZ_loadGZSave(bool& card_load) {
         storage.file_name = FILE_NAME;
         storage.sector_size = SECTOR_SIZE;
         tww_sprintf(storage.file_name_buffer, (char*)storage.file_name);
-        storage.result = CARDProbeEx(0, NULL, &storage.sector_size);
+
+        storage.result = StorageError::Busy;
+        int attempts = 0;
+        while (attempts < MAX_ATTEMPTS && storage.result == StorageError::Busy) {
+            storage.result = CARDProbeEx(CARD_SLOT_A, NULL, &storage.sector_size);
+            attempts += 1;
+        }
+
+        CARDUnmount(CARD_SLOT_A);
+
+        /* TODO - After unmounting in the previous step, use memset to set all of the work area to 0,
+        * and then clear the cache for it via DCFlushRange to insure that no previous cache values cause problems. */
+        //memset(void* workarea, 0, sizeof(workarea));
+        //DCFlushRange(void* startAddr, u32 nBytes);
+
         if (storage.result == Ready) {
             GZ_loadMemCard(storage);
         }

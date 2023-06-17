@@ -59,6 +59,8 @@ int32_t CARDGetStatus(int32_t channel, int32_t file_number, CARDStat* stat);
 int32_t CARDWrite(CardInfo* fileInfo, void* buf, int32_t length, int32_t offset);
 int32_t CARDDelete(int32_t chn, const char* fileName);
 int32_t CARDDeleteAsync(int32_t chn, const char* fileName, CARDCallback callback);
+int32_t CARDMount(int32_t chn, void *workarea, CARDCallback callback);
+int32_t CARDUnmount(int32_t chn);
 #ifdef __cplusplus
 }
 #endif  // __cplusplus
