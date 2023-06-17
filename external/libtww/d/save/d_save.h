@@ -480,6 +480,15 @@ public:
 
 static_assert(sizeof(dSv_info_c) == 0x12A0);
 
+typedef bool (*dSv_event_c__isEventBit)(void* addr, uint16_t flag);
+#define dSv_event_c__isEventBit ((dSv_event_c__isEventBit) dSv_event_c__isEventBit_addr)
+
+typedef void (*dSv_event_c__onEventBit)(void* addr, uint16_t flag);
+#define dSv_event_c__onEventBit ((dSv_event_c__onEventBit) dSv_event_c__onEventBit_addr)
+
+typedef void (*dSv_event_c__offEventBit)(void* addr, uint16_t flag);
+#define dSv_event_c__offEventBit ((dSv_event_c__offEventBit) dSv_event_c__offEventBit_addr)
+
 typedef void (*dSv_player_return_place_c__set_t)(void* _this, char const* i_name, s8 roomNo,
                                                  s8 pointNo);
 #define dSv_player_return_place_c__set                                                             \

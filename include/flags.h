@@ -11,14 +11,10 @@ enum FlagId {
 
 struct GZFlag {
     int index;
-    bool active;
-    u32 address;
-    u8 bit_position;
+    u32 flag;
 };
 
-void GZ_activate(FlagId flag_index);
-void GZ_deactivate(FlagId flag_index);
-void GZ_updateFlags();
+void setEventFlag(uint16_t flag);
 
 extern GZFlag g_flags[FLAG_AMNT];
 

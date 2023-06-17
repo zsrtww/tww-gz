@@ -390,4 +390,16 @@ inline s32 dComIfGp_roomControl_getStayNo() {
     return dStage_roomControl_c__mStayNo;
 }
 
+inline bool dComIfGs_isEventBit(uint16_t flag) {
+    return dSv_event_c__isEventBit(&g_dComIfG_gameInfo.info.mSavedata.mEvent, flag);
+}
+
+inline void dComIfGs_onEventBit(uint16_t flag) {
+    dSv_event_c__onEventBit(&g_dComIfG_gameInfo.info.mSavedata.mEvent, flag);
+}
+
+inline void dComIfGs_offEventBit(uint16_t flag) {
+    dSv_event_c__offEventBit(&g_dComIfG_gameInfo.info.mSavedata.mEvent, flag);
+}
+
 #endif /* D_COM_D_COM_INF_GAME_H */
