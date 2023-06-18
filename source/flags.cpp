@@ -12,5 +12,5 @@ void setEventFlag(uint16_t flag) {
 }
 
 void updateFlags() {
-    g_flags[WATCHED_FF2_HELMAROC_CUTSCENE] = dComIfGs_isEventBit(0x3101);
+    g_flags[WATCHED_FF2_HELMAROC_CUTSCENE] = dComIfGs_isEventBit(0x2D01);
 }

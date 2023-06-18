@@ -4,11 +4,6 @@
 #include "../../SSystem/SComponent/c_xyz.h"
 #include "../../dolphin/gctypes.h"
 
-enum ItemCapacityIndex {
-    ARROW_CAPACITY_INDEX = 1,
-    BOMB_CAPACITY_INDEX = 2
-};
-
 enum SelectEquipIndex {
     SWORD_INDEX = 0,
     SHIELD_INDEX = 1,
@@ -172,27 +167,33 @@ public:
     /* 0x00 */ u16 mMaxLife;
     /* 0x02 */ u16 mLife;
     /* 0x04 */ u16 mRupee;
-    /* 0x06 */ u8 field_0x6[3];
-    /* 0x09 */ u8 mSelectItem[3];
-    /* 0x0C */ u8 field_0xc[2];
+    /* 0x06 */ u16 field_0x6;
+    /* 0x08 */ u8 field_0x8;
+    /* 0x09 */ u8 mSelectItem[5];
     /* 0x0E */ u8 mSelectEquip[4];
     /* 0x12 */ u8 mWalletSize;
     /* 0x13 */ u8 mMaxMagic;
     /* 0x14 */ u8 mMagic;
+    /* 0x15 */ u8 field_0x15;
+    /* 0x16 */ u8 field_0x16;
 };  // Size: 0x18
+
+static_assert(sizeof(dSv_player_status_a_c) == 0x18);
 
 class dSv_player_status_b_c {
 public:
     void setTime(float pTime) { mTime = pTime; }
     float getTime() const { return mTime; }
 
-    /* 0x00 */ int64_t mDateIpl;
-    /* 0x08 */ u8 field_0x8[4];
-    /* 0x0C */ float mTime;
+    /* 0x00 */ u64 mDateIPL;
+    /* 0x08 */ f32 field_0x8;
+    /* 0x0C */ f32 mTime;
     /* 0x10 */ u16 mDate;
     /* 0x12 */ s16 mTactWindAngleX;
     /* 0x14 */ s16 mTactWindAngleY;
 };  // Size: 0x18
+
+static_assert(sizeof(dSv_player_status_b_c) == 0x18);
 
 class dSv_player_return_place_c {
 public:
@@ -203,6 +204,8 @@ public:
     /* 0x0B */ u8 unk11;
 };  // Size: 0xC
 
+static_assert(sizeof(dSv_player_return_place_c) == 0xC);
+
 class dSv_player_item_c {
 public:
     u8 getItemSlot(u8 index) { return mItemSlots[index]; }
@@ -211,6 +214,8 @@ public:
     /* 0x0 */ u8 mItemSlots[21];
 };  // Size: 0x15
 
+static_assert(sizeof(dSv_player_item_c) == 0x15);
+
 class dSv_player_get_item_c {
 public:
     u8 getItemFlag(u8 index) { return mItemFlags[index]; }
@@ -218,6 +223,8 @@ public:
 
     /* 0x0 */ u8 mItemFlags[21];
 };  // Size: 0x15
+
+static_assert(sizeof(dSv_player_get_item_c) == 0x15);
 
 class dSv_player_item_record_c {
 public:
@@ -232,35 +239,54 @@ public:
     /* 0x2 */ u8 field_0x2;
     /* 0x3 */ u8 mArrowNum;
     /* 0x4 */ u8 mBombNum;
-    /* 0x5 */ u8 field_0x5;
-    /* 0x6 */ u8 mBottleNum;
+    /* 0x5 */ u8 mBottleNum[3];
 };  // Size: 0x8
+
+static_assert(sizeof(dSv_player_item_record_c) == 0x8);
 
 class dSv_player_item_max_c {
 public:
-    u8 getArrowCapacity() { return mItemMax[ARROW_CAPACITY_INDEX]; }
-    u8 getBombCapacity() { return mItemMax[BOMB_CAPACITY_INDEX]; }
+    u8 getArrowCapacity() { return mArrowNum; }
+    u8 getBombCapacity() { return mBombNum; }
 
-    void setArrowCapacity(u8 amount) { mItemMax[ARROW_CAPACITY_INDEX] = amount; }
-    void setBombCapacity(u8 amount) { mItemMax[BOMB_CAPACITY_INDEX] = amount; }
+    void setArrowCapacity(u8 amount) { mArrowNum = amount; }
+    void setBombCapacity(u8 amount) { mBombNum = amount; }
 
-    /* 0x0 */ u8 mItemMax[8];
+    /* 0x0 */ u8 field_0x0;
+    /* 0x1 */ u8 mArrowNum;
+    /* 0x2 */ u8 mBombNum;
+    /* 0x3 */ u8 field_0x3[5];
 };  // Size: 0x8
+
+static_assert(sizeof(dSv_player_item_max_c) == 0x8);
 
 class dSv_player_bag_item_c {
 public:
-    /* 0x0 */ u8 field_0x0[24];
-};  // Size: 0x1A
+    /* 0x00 */ u8 field_0x0[8];
+    /* 0x08 */ u8 field_0x8[8];
+    /* 0x10 */ u8 field_0x10[8];
+};  // Size: 0x18
+
+static_assert(sizeof(dSv_player_bag_item_c) == 0x18);
 
 class dSv_player_get_bag_item_c {
 public:
-    /* 0x0 */ u8 field_0x0[12];
+    /* 0x0 */ u32 mReserveFlags;
+    /* 0x4 */ u8 mBeastFlags;
+    /* 0x5 */ u8 mBaitFlags;
+    /* 0x6 */ u8 unk_0x6[0xC - 0x6];
 };  // Size: 0xC
+
+static_assert(sizeof(dSv_player_get_bag_item_c) == 0xC);
 
 class dSv_player_bag_item_record_c {
 public:
-    /* 0x0 */ u8 field_0x0[24];
+    /* 0x00 */ u8 field_0x0[8];
+    /* 0x08 */ u8 field_0x8[8];
+    /* 0x10 */ u8 field_0x10[8];
 };  // Size: 0x18
+
+static_assert(sizeof(dSv_player_bag_item_record_c) == 0x18);
 
 class dSv_player_collect_c {
 public:
@@ -280,38 +306,49 @@ public:
     /* 0xA */ u8 mTriforce;
     /* 0xB */ u8 mSymbol;
     /* 0xC */ u8 field_0xc;
-    /* 0xD */ u8 padding[3];
-};  // Size: 0x10
+};  // Size: 0xD
+
+static_assert(sizeof(dSv_player_collect_c) == 0xD);
 
 class dSv_player_map_c {
 public:
-    /* 0x0 */ u8 field_0x0[0x84];
+    /* 0x00 */ u32 field_0x0[4][4];
+    /* 0x40 */ u8 field_0x40[49];
+    /* 0x71 */ u8 field_0x71[16];
+    /* 0x81 */ u8 field_0x81;
+    /* 0x82 */ u8 field_0x82[0x84 - 0x82];
 };  // Size: 0x84
+
+static_assert(sizeof(dSv_player_map_c) == 0x84);
 
 class dSv_player_info_c {
 public:
     char* getLinkName() { return (char*)mPlayerName; }
 
-    /* 0x00 */ u8 field_0x0[0x14];
-    /* 0x14 */ u8 mPlayerName[16];
-    /* 0x24 */ u8 field_0x24;
-    /* 0x25 */ u8 field_0x25[16];
-    /* 0x35 */ u8 field_0x35;
-    /* 0x36 */ u8 field_0x36[16];
-    /* 0x47 */ u8 field_0x47;
-    /* 0x48 */ u8 field_0x48[0x58 - 0x48];
-    /* 0x58 */ u8 mNumGamesCompleted;
+    /* 0x00 */ u8 field_0x0[0x10];
+    /* 0x10 */ u16 field_0x10;
+    /* 0x10 */ u16 field_0x12;
+    /* 0x14 */ char mPlayerName[17];
+    /* 0x25 */ char field_0x25[17];
+    /* 0x36 */ char field_0x36[17];
+    /* 0x47 */ char field_0x47[17];
+    /* 0x58 */ u8 mClearCount;
     /* 0x59 */ u8 mFmapIdx;
+    /* 0x5A */ u8 field_0x5a[0x5c - 0x5a];
 };  // Size: 0x5C
+
+static_assert(sizeof(dSv_player_info_c) == 0x5C);
 
 class dSv_player_config_c {
 public:
-    /* 0x0 */ u8 unk0;
+    /* 0x0 */ u8 field_0x0;
     /* 0x1 */ u8 mSoundMode;
-    /* 0x2 */ u8 mAttentionType;  // Lock-On Type; 0 : hold, 1 : switch
-    /* 0x3 */ u8 mVibration;      // Rumble status
-    /* 0x4 */ u8 unk4;
+    /* 0x2 */ u8 mAttentionType;
+    /* 0x3 */ u8 mVibration;
+    /* 0x4 */ u8 field_0x4;
 };  // Size: 0x5
+
+static_assert(sizeof(dSv_player_config_c) == 0x5);
 
 class dSv_player_priest_c {
 public:
@@ -321,17 +358,27 @@ public:
     /* 0xF */ u8 field_0xf;
 };  // Size: 0x10
 
+static_assert(sizeof(dSv_player_priest_c) == 0x10);
+
 class dSv_player_status_c_c {
 public:
-    /* 0x0 */ u8 field_0x0[0x18];
-};  // Size: 0x18
+    /* 0x00 */ dSv_player_status_a_c mRecollectStatusA;
+    /* 0x18 */ dSv_player_item_c mRecollectItem;
+    /* 0x2D */ u8 mRecollectItemRecord[3];
+    /* 0x30 */ u8 mRecollectItemMax[3];
+    /* 0x33 */ dSv_player_bag_item_c mRecollectBagItem;
+    /* 0x4B */ dSv_player_bag_item_record_c mRecollectBagItemRecord;
+    /* 0x63 */ u8 mRecollectCollect[13];
+};  // Size: 0x70
+
+static_assert(sizeof(dSv_player_status_c_c) == 0x70);
 
 class dSv_player_c {
 public:
-    dSv_player_info_c& getPlayerInfo() { return mPlayerInfo; }
+    dSv_player_info_c& getPlayerInfo() { return mInfo; }
     dSv_player_status_a_c& getPlayerStatusA() { return mPlayerStatusA; }
     dSv_player_status_b_c& getPlayerStatusB() { return mPlayerStatusB; }
-    dSv_player_item_c& getItem() { return mItem; }
+    dSv_player_item_c& getItem() { return mPlayerItem; }
     dSv_player_collect_c& getCollect() { return mCollect; }
     dSv_player_item_record_c& getItemRecord() { return mItemRecord; }
     dSv_player_item_max_c& getItemMax() { return mItemMax; }
@@ -342,36 +389,46 @@ public:
     /* 0x000 */ dSv_player_status_a_c mPlayerStatusA;
     /* 0x018 */ dSv_player_status_b_c mPlayerStatusB;
     /* 0x030 */ dSv_player_return_place_c mPlayerReturnPlace;
-    /* 0x03C */ dSv_player_item_c mItem;
+    /* 0x03C */ dSv_player_item_c mPlayerItem;
     /* 0x051 */ dSv_player_get_item_c mGetItem;
     /* 0x066 */ dSv_player_item_record_c mItemRecord;
     /* 0x06E */ dSv_player_item_max_c mItemMax;
     /* 0x076 */ dSv_player_bag_item_c mBagItem;
-    /* 0x08E */ u8 field_0x8e[2];
     /* 0x090 */ dSv_player_get_bag_item_c mGetBagItem;
     /* 0x09C */ dSv_player_bag_item_record_c mBagItemRecord;
     /* 0x0B4 */ dSv_player_collect_c mCollect;
     /* 0x0C4 */ dSv_player_map_c mMap;
-    /* 0x148 */ dSv_player_info_c mPlayerInfo;
+    /* 0x148 */ dSv_player_info_c mInfo;
     /* 0x1A4 */ dSv_player_config_c mConfig;
     /* 0x1AC */ dSv_player_priest_c mPriest;
-    /* 0x1BC */ dSv_player_status_c_c mPlayerStatusC;
-};  // Size: 0x1D4
+    /* 0x1BC */ dSv_player_status_c_c mStatusC[4];
+};  // Size: 0x380
+
+static_assert(sizeof(dSv_player_c) == 0x380);
 
 class dSv_memBit_c {
 public:
-    /* 0x00 */ u32 mTbox[1];
+    /* 0x00 */ u32 mTbox;
     /* 0x04 */ u32 mSwitch[4];
-    /* 0x14 */ u32 mItem[1];
+    /* 0x14 */ u32 mItem;
     /* 0x18 */ u32 mVisitedRoom[2];
-    /* 0x20 */ u8 mKeyNum;
+    /* 0x20 */ u8 field_0x20;
     /* 0x21 */ u8 mDungeonItem;
 };  // Size: 0x24
+
+static_assert(sizeof(dSv_memBit_c) == 0x24);
 
 class dSv_event_c {
 public:
     /* 0x0 */ u8 mEvent[256];
 };  // Size: 0x100
+
+static_assert(sizeof(dSv_event_c) == 0x100);
+
+class dSv_reserve_c {
+public:
+    /* 0x0 */ u8 field_0x0[0x50];
+};  // Size: 0x50
 
 class dSv_memory_c {
 public:
@@ -379,52 +436,73 @@ public:
     const dSv_memBit_c& getBit() const { return mBit; }
 
     /* 0x0 */ dSv_memBit_c mBit;
-};  // Size: 0x20
+};  // Size: 0x24
+
+static_assert(sizeof(dSv_memory_c) == 0x24);
 
 class dSv_danBit_c {
 public:
-    /* 0x00 */ s8 mStageNo;
-    /* 0x04 */ u32 mSwitch[2];
+    /* 0x0 */ s8 mStageNo;
+    /* 0x1 */ u8 field_0x1;
+    /* 0x4 */ int field_0x4;
+    /* 0x8 */ int field_0x8;
 };  // Size: 0xC
+
+static_assert(sizeof(dSv_danBit_c) == 0xC);
 
 class dSv_zoneBit_c {
 public:
-    /* 0x00 */ u16 mSwitch[2];
-    /* 0x04 */ u16 mRoomSwitch;
-    /* 0x06 */ u16 mItem;
+    /* 0x0 */ u16 mSwitch[3];
+    /* 0x6 */ u16 mItem;
 };  // Size: 0x8
+
+static_assert(sizeof(dSv_zoneBit_c) == 0x8);
 
 class dSv_zoneActor_c {
 public:
     /* 0x00 */ u32 mActorFlags[16];
-};  // Size: 0x10
+};  // Size: 0x40
+
+static_assert(sizeof(dSv_zoneActor_c) == 0x40);
 
 class dSv_zone_c {
 public:
-    dSv_zoneBit_c& getZoneBit() { return mBit; }
-    const dSv_zoneBit_c& getBit() const { return mBit; }
-    dSv_zoneActor_c& getActor() { return mActor; }
-    const dSv_zoneActor_c& getActor() const { return mActor; }
+    dSv_zoneBit_c& getZoneBit() { return mZoneBit; }
+    const dSv_zoneBit_c& getBit() const { return mZoneBit; }
+    dSv_zoneActor_c& getActor() { return mZoneActor; }
+    const dSv_zoneActor_c& getActor() const { return mZoneActor; }
 
     s8& getRoomNo() { return mRoomNo; }
 
-    /* 0x0 */ s8 mRoomNo;
-    /* 0x1 */ u8 unk1;
-    /* 0x2 */ dSv_zoneBit_c mBit;
-    /* 0xC */ dSv_zoneActor_c mActor;
+    /* 0x00 */ s8 mRoomNo;
+    /* 0x02 */ dSv_zoneBit_c mZoneBit;
+    /* 0x0C */ dSv_zoneActor_c mZoneActor;
 };  // Size: 0x4C
+
+static_assert(sizeof(dSv_zone_c) == 0x4C);
+
+class dSv_ocean_c {
+public:
+    /* 0x0 */ u16 mBits[50];
+};  // Size: 0x64
+
+static_assert(sizeof(dSv_ocean_c) == 0x64);
 
 class dSv_restart_c {
 public:
-    /* 0x00 */ u8 mRestartCode;
+    /* 0x00 */ s8 mRestartCode;
     /* 0x01 */ u8 field_0x1;
     /* 0x02 */ s8 mRoomNo;
+    /* 0x04 */ s16 field_0x4;
     /* 0x06 */ s16 mRoomAngleY;
     /* 0x08 */ cXyz mRoomPos;
-    /* 0x14 */ u32 mRoomParam;
-    /* 0x18 */ cXyz mLinkRestartPos;
-    /* 0x24 */ u32 mLinkRestartParam;
+    /* 0x14 */ u16 mStartCode;
+    /* 0x16 */ u16 mRoomParam;
+    /* 0x18 */ cXyz mRestartPos;
+    /* 0x24 */ u32 mRestartParam;
 };  // Size: 0x28
+
+static_assert(sizeof(dSv_restart_c) == 0x28);
 
 class dSv_turnRestart_c {
 public:
@@ -435,13 +513,10 @@ public:
     /* 0x14 */ u8 field_0x14[0x24 - 0x14];
     /* 0x24 */ cXyz field_0x24;
     /* 0x30 */ s16 field_0x30;
-    /* 0x34 */ float field_0x34;
+    /* 0x34 */ int field_0x34;
 };  // Size: 0x38
 
-class dSv_ocean_c {
-public:
-    /* 0x0 */ u16 mBits[50];
-};  // Size: 0x64
+static_assert(sizeof(dSv_turnRestart_c) == 0x38);
 
 class dSv_save_c {
 public:
@@ -453,7 +528,6 @@ public:
     static const int STAGE_MAX = 16;
 
     /* 0x000 */ dSv_player_c mPlayer;
-    /* 0x1D4 */ u8 field_0x1d4[0x380 - 0x1D4];
     /* 0x380 */ dSv_memory_c mSave[STAGE_MAX];
     /* 0x5C0 */ dSv_ocean_c mOcean;
     /* 0x624 */ dSv_event_c mEvent;
@@ -467,15 +541,19 @@ public:
     dSv_event_c& getTmp() { return mTmp; }
 
     /* 0x0000 */ dSv_save_c mSavedata;
-    /* 0x0778 */ u8 field_0x724[0x778 - 0x724];
+    /* 0x0724 */ u8 unk_0x724[0x50];
     /* 0x0778 */ dSv_memory_c mMemory;
     /* 0x079C */ dSv_danBit_c mDan;
     /* 0x07A8 */ dSv_zone_c mZone[32];
     /* 0x1128 */ dSv_restart_c mRestart;
-    /* 0x1150 */ u8 field_0x1150[0x1158 - 0x1150];
+    /* 0x1150 */ f32 field_0x1150;
+    /* 0x1154 */ int field_0x1154;
     /* 0x1158 */ dSv_event_c mTmp;
     /* 0x1258 */ dSv_turnRestart_c mTurnRestart;
-    /* 0x1290 */ u8 field_0x1290[0x10];
+    /* 0x1290 */ u8 field_0x1290;
+    /* 0x1291 */ u8 field_0x1291;
+    /* 0x1292 */ u8 field_0x1292;
+    /* 0x1298 */ s64 field_0x1298;
 };  // Size: 0x12A0
 
 static_assert(sizeof(dSv_info_c) == 0x12A0);

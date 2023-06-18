@@ -24,7 +24,7 @@ void FlagMenu::draw() {
     if (GZ_getButtonTrig(GZPad::A)) {
         switch (cursor.y) {
         case WATCHED_FF2_HELMAROC_CUTSCENE:
-            setEventFlag(0x3101);
+            setEventFlag(0x2D01);
             break;
         }
     }
