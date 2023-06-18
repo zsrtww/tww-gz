@@ -61,6 +61,8 @@ int32_t CARDDelete(int32_t chn, const char* fileName);
 int32_t CARDDeleteAsync(int32_t chn, const char* fileName, CARDCallback callback);
 int32_t CARDMount(int32_t chn, void *workarea, CARDCallback callback);
 int32_t CARDUnmount(int32_t chn);
+int32_t CARDCheck(int32_t chn);
+uint8_t MemCardWorkArea0[0xA000];
 #ifdef __cplusplus
 }
 #endif  // __cplusplus

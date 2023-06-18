@@ -5,6 +5,7 @@
 #include "libtww/MSL_C/string.h"
 #include "libtww/SSystem/SComponent/c_malloc.h"
 #include "libtww/SSystem/SComponent/c_counter.h"
+#include "libtww/dolphin/os/OSCache.h"
 
 /**
  * @brief Like CARDWrite, but allows for arbitrary sizes and offsets.
@@ -187,6 +188,32 @@ void GZ_loadMemCard(Storage& storage) {
 #define FILE_NAME "twwgz01"
 #define MAX_ATTEMPTS 1000000
 
+int32_t customMount() {
+    CARDUnmount(CARD_SLOT_A);
+
+    int32_t result;
+    for (uint32_t attempts = 0; attempts < MAX_ATTEMPTS; attempts++) {
+        result = CARDProbeEx(CARD_SLOT_A, nullptr, nullptr);
+        if (result != StorageError::Busy) {
+            break;
+        }
+    }
+
+    if (result == StorageError::Ready) {
+        void* workArea = MemCardWorkArea0;
+
+        memset(workArea, 0, sizeof(MemCardWorkArea0));
+        DCFlushRange(workArea, sizeof(MemCardWorkArea0));
+        result = CARDMount(CARD_SLOT_A, workArea, nullptr);
+
+        if ((result == StorageError::Ready) || (result == StorageError::Broken)) {
+            result = CARDCheck(CARD_SLOT_A);
+        }
+    }
+
+    return result;
+}
+
 void GZ_loadGZSave(bool& card_load) {
     u8 frame_count = cCt_getFrameCount();
 
@@ -196,21 +223,9 @@ void GZ_loadGZSave(bool& card_load) {
         storage.sector_size = SECTOR_SIZE;
         tww_sprintf(storage.file_name_buffer, (char*)storage.file_name);
 
-        storage.result = StorageError::Busy;
-        int attempts = 0;
-        while (attempts < MAX_ATTEMPTS && storage.result == StorageError::Busy) {
-            storage.result = CARDProbeEx(CARD_SLOT_A, NULL, &storage.sector_size);
-            attempts += 1;
-        }
+        storage.result = customMount();
 
-        CARDUnmount(CARD_SLOT_A);
-
-        /* TODO - After unmounting in the previous step, use memset to set all of the work area to 0,
-        * and then clear the cache for it via DCFlushRange to insure that no previous cache values cause problems. */
-        //memset(void* workarea, 0, sizeof(workarea));
-        //DCFlushRange(void* startAddr, u32 nBytes);
-
-        if (storage.result == Ready) {
+        if (storage.result == StorageError::Ready) {
             GZ_loadMemCard(storage);
         }
 
