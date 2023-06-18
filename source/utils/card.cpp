@@ -188,12 +188,12 @@ void GZ_loadMemCard(Storage& storage) {
 #define FILE_NAME "twwgz01"
 #define MAX_ATTEMPTS 1000000
 
-int32_t customMount() {
+int32_t customMount(int32_t& sector_size) {
     CARDUnmount(CARD_SLOT_A);
 
     int32_t result;
     for (uint32_t attempts = 0; attempts < MAX_ATTEMPTS; attempts++) {
-        result = CARDProbeEx(CARD_SLOT_A, nullptr, nullptr);
+        result = CARDProbeEx(CARD_SLOT_A, nullptr, &sector_size);
         if (result != StorageError::Busy) {
             break;
         }
@@ -223,7 +223,7 @@ void GZ_loadGZSave(bool& card_load) {
         storage.sector_size = SECTOR_SIZE;
         tww_sprintf(storage.file_name_buffer, (char*)storage.file_name);
 
-        storage.result = customMount();
+        storage.result = customMount(storage.sector_size);
 
         if (storage.result == StorageError::Ready) {
             GZ_loadMemCard(storage);
