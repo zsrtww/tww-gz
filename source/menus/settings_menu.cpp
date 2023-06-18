@@ -45,7 +45,7 @@ void SettingsMenu::draw() {
             storage.sector_size = SECTOR_SIZE;
             tww_sprintf(storage.file_name_buffer, storage.file_name);
 
-            storage.result = CARDProbeEx(0, nullptr, &storage.sector_size);
+            storage.result = customMount(storage.sector_size);
             if (storage.result == Ready) {
                 GZ_storeMemCard(storage);
                 tww_printf("save_card");
@@ -58,7 +58,7 @@ void SettingsMenu::draw() {
             storage.sector_size = SECTOR_SIZE;
             tww_sprintf(storage.file_name_buffer, storage.file_name);
 
-            storage.result = CARDProbeEx(0, NULL, &storage.sector_size);
+            storage.result = customMount(storage.sector_size);
             if (storage.result == Ready) {
                 GZ_loadMemCard(storage);
                 tww_printf("load_card");
@@ -71,7 +71,7 @@ void SettingsMenu::draw() {
             storage.sector_size = SECTOR_SIZE;
             tww_sprintf(storage.file_name_buffer, storage.file_name);
 
-            storage.result = CARDProbeEx(0, nullptr, &storage.sector_size);
+            storage.result = customMount(storage.sector_size);
             if (storage.result == Ready) {
                 GZ_deleteMemCard(storage);
                 tww_printf("delete_card");

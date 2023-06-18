@@ -20,6 +20,7 @@ void GZ_deleteMemfile(Storage& card);
 void GZ_loadMemCard(Storage& card);
 void GZ_loadMemfile(Storage& card);
 void GZ_loadGZSave(bool& card_load);
+int32_t customMount(int32_t& sector_size);
 
 #define GZ_SAVE_VERSION_NUMBER 0
 #define GZ_SAVE_ENTRIES_AMNT 7
