@@ -9,15 +9,9 @@ enum FlagId {
     WATCHED_FF2_HELMAROC_CUTSCENE
 };
 
-struct GZFlag {
-    int index;
-    bool active;
-    u32 flag;
-};
-
 void setEventFlag(uint16_t flag);
 void updateFlags();
 
-extern GZFlag g_flags[FLAG_AMNT];
+extern bool g_flags[FLAG_AMNT];
 
 #endif

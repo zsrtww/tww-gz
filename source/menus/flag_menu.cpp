@@ -7,7 +7,7 @@ Cursor FlagMenu::cursor;
 
 Line lines[LINE_NUM] = {
     {"Watched FF2 Helmaroc Cutscene", WATCHED_FF2_HELMAROC_CUTSCENE, "Switches to animation set 2, among other things", true,
-        &g_flags[WATCHED_FF2_HELMAROC_CUTSCENE].active},
+        &g_flags[WATCHED_FF2_HELMAROC_CUTSCENE]},
 };
 
 void FlagMenu::draw() {
@@ -22,7 +22,11 @@ void FlagMenu::draw() {
     }
 
     if (GZ_getButtonTrig(GZPad::A)) {
-        setEventFlag(g_flags[cursor.y].flag);
+        switch (cursor.y) {
+        case WATCHED_FF2_HELMAROC_CUTSCENE:
+            setEventFlag(0x3101);
+            break;
+        }
     }
 
     GZ_drawMenuLines(lines, cursor.y, LINE_NUM);
