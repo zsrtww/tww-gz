@@ -161,10 +161,13 @@ void GZ_storeMemCard(Storage& storage) {
             storage.result = StorageClose(&storage.info);
         }
     }
+
+    CARDUnmount(CARD_SLOT_A);
 }
 
 void GZ_deleteMemCard(Storage& storage) {
     storage.result = StorageDelete(0, storage.file_name_buffer);
+    CARDUnmount(CARD_SLOT_A);
 }
 
 void GZ_loadMemCard(Storage& storage) {
@@ -182,6 +185,8 @@ void GZ_loadMemCard(Storage& storage) {
 
         storage.result = StorageClose(&storage.info);
     }
+
+    CARDUnmount(CARD_SLOT_A);
 }
 
 #define FRAME_COUNT 200
@@ -215,9 +220,7 @@ int32_t customMount(int32_t& sector_size) {
 }
 
 void GZ_loadGZSave(bool& card_load) {
-    u8 frame_count = cCt_getFrameCount();
-
-    if (card_load && frame_count > FRAME_COUNT) {
+    if (card_load) {
         static Storage storage;
         storage.file_name = FILE_NAME;
         storage.sector_size = SECTOR_SIZE;

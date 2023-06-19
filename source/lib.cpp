@@ -45,12 +45,12 @@ void init() {
     if (l_twwgzIconTex.loadCode == TexCode::TEX_UNLOADED) {
         load_texture("twwgz/tex/twwgz.tex", &l_twwgzIconTex);
     }
+
+    // check and load gz settings card if found
+    GZ_loadGZSave(l_loadCard);
 }
 
 void game_loop() {
-    // check and load gz settings card if found
-    GZ_loadGZSave(l_loadCard);
-
     // Make title screen / file select endless night
     // disabled until new file crash fix is implemented
     /* if (!tww_strcmp(g_dComIfG_gameInfo.play.mStartStage.mStage, "Name") ||
