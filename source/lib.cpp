@@ -48,6 +48,12 @@ void init() {
 }
 
 void game_loop() {
+    // Button combo to bypass the automatic loading of the save file
+    // in case of crash caused by the load.
+    if (GZ_getButtonStatus() == CButton::B && l_loadCard) {
+        l_loadCard = false;
+    }
+
     // check and load gz settings card if found
     GZ_loadGZSave(l_loadCard);
 
