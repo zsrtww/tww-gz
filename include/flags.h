@@ -3,10 +3,22 @@
 
 #include "libtww/dolphin/gctypes.h"
 
-#define FLAG_AMNT 1
+#define FLAG_AMNT 6
+#define CUTSCENE_FLAG_OFFSET 3
+#define KORL_FLAG_OFFSET 5
 
 enum FlagId {
-    WATCHED_FF2_HELMAROC_CUTSCENE
+    /*Important Flags*/
+    WATCHED_FF2_HELMAROC_CUTSCENE,
+    HAVE_HURRICANE_SPIN,
+    ENDLESS_NIGHT,
+
+    /*Cutscene Flags */
+    ORCA_INTRO_CUTSCENE,
+    PUPPET_GANON_CUTSCENE,
+
+    /*Korl Flags*/
+    MEETING_KORL_CUTSCENE
 };
 
 void setEventFlag(uint16_t flag);
