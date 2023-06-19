@@ -3,8 +3,9 @@
 
 #include "libtww/dolphin/gctypes.h"
 
-#define FLAG_AMNT 5
+#define FLAG_AMNT 6
 #define CUTSCENE_FLAG_OFFSET 3
+#define KORL_FLAG_OFFSET 5
 
 enum FlagId {
     /*Important Flags*/
@@ -14,20 +15,15 @@ enum FlagId {
 
     /*Cutscene Flags */
     ORCA_INTRO_CUTSCENE,
-    PUPPET_GANON_CUTSCENE
+    PUPPET_GANON_CUTSCENE,
+
+    /*Korl Flags*/
+    MEETING_KORL_CUTSCENE
 };
 
-struct GZFlag {
-    int index;
-    bool active;
-    u32 address;
-    u8 bit_position;
-};
+void setEventFlag(uint16_t flag);
+void updateFlags();
 
-void GZ_activate(FlagId flag_index);
-void GZ_deactivate(FlagId flag_index);
-void GZ_updateFlags();
-
-extern GZFlag g_flags[FLAG_AMNT];
+extern bool g_flags[FLAG_AMNT];
 
 #endif

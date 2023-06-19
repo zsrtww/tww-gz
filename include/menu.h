@@ -4,7 +4,7 @@
 #include "utils/cursor.h"
 #include "utils/lines.h"
 
-#define MENU_NUM 14
+#define MENU_NUM 15
 
 enum {
     /* Main Menus */
@@ -31,7 +31,7 @@ enum {
     /* Flag Sub-Menus */
     GZ_IMPORTANT_FLAG_MENU,
     GZ_CUTSCENE_FLAG_MENU,
- //   GZ_QUEST_FLAG_MENU,
+    GZ_KORL_FLAG_MENU,
  //   GZ_PLACEHOLDER1_MENU,
  //   GZ_PLACEHOLDER2_MENU,
 

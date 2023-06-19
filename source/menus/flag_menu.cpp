@@ -1,5 +1,7 @@
 #include "menus/main_menu.h"
 #include "menus/flag_menu.h"
+#include "libtww/d/com/d_com_inf_game.h"
+#include "flags.h"
 
 #define LINE_NUM 5
 
@@ -7,13 +9,16 @@ Cursor FlagMenu::cursor;
 
 Line lines[LINE_NUM] = {
     {"important", IMPORTANT_FLAG_INDEX, "Important Flags"},
-    {"cutscenes", CUTSCENE_FLAG_INDEX, "Cutscene Flags (disabled)"},
+    {"cutscenes", CUTSCENE_FLAG_INDEX, "Cutscene Flags"},
+    {"korl", KORL_FLAG_INDEX, "KORL Flags"},
     {"quests", QUEST_FLAG_INDEX, "Quest Flags (disabled)"},
-    {"temp1", PLACEHOLDER1_FLAG_INDEX, "TEST (disabled)"},
-    {"temp2", PLACEHOLDER2_FLAG_INDEX, "TEST (disabled)"},
+    {"temp", PLACEHOLDER_FLAG_INDEX, "TEST (disabled)"},
 };
 
 void FlagMenu::draw() {
+    updateFlags();
+
+    cursor.setMode(Cursor::MODE_LIST);
     cursor.move(0, LINE_NUM);
 
 
@@ -30,13 +35,13 @@ void FlagMenu::draw() {
         case CUTSCENE_FLAG_INDEX:
             GZ_setMenu(GZ_CUTSCENE_FLAG_MENU);
             return;
-        case QUEST_FLAG_INDEX:
-            //GZ_setMenu(GZ_QUEST_FLAG_MENU);
+        case KORL_FLAG_INDEX:
+            GZ_setMenu(GZ_KORL_FLAG_MENU);
             return;
-        case PLACEHOLDER1_FLAG_INDEX:
+        case QUEST_FLAG_INDEX:
             //GZ_setMenu(GZ_PLACEHOLDER1_MENU);
             return;
-        case PLACEHOLDER2_FLAG_INDEX:
+        case PLACEHOLDER_FLAG_INDEX:
             //GZ_setMenu(GZ_PLACEHOLDER2_MENU);
             return;
         }

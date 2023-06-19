@@ -1,27 +1,21 @@
 #include "flags.h"
+#include "libtww/d/com/d_com_inf_game.h"
 
-GZFlag g_flags[FLAG_AMNT] = {
-    {WATCHED_FF2_HELMAROC_CUTSCENE, false, 0x803B8759, 0},
-    {HAVE_HURRICANE_SPIN,false,0x803B8737,5},
-    {ENDLESS_NIGHT,false,0x803B8736,1},
-    {ORCA_INTRO_CUTSCENE,false,0x803B8732,6},
-    {PUPPET_GANON_CUTSCENE,false,0x803B8767,1}
-};
+bool g_flags[FLAG_AMNT];
 
-void GZ_activate(FlagId flag_index) {
-    *(u8*)(g_flags[flag_index].address) |= 1 << g_flags[flag_index].bit_position;
-}
-
-void GZ_deactivate(FlagId flag_index) {
-    *(u8*)(g_flags[flag_index].address) &= 0xFF ^ (1 << g_flags[flag_index].bit_position);
-}
-
-bool GZ_isActive(FlagId flag_index) {
-    return ((*(u8*)(g_flags[flag_index].address)) & (1 << g_flags[flag_index].bit_position)) != 0;
-}
-
-void GZ_updateFlags() {
-    for (int i = 0; i < FLAG_AMNT; i++) {
-        g_flags[i].active = GZ_isActive((FlagId) i);
+void setEventFlag(uint16_t flag) {
+    if (dComIfGs_isEventBit(flag)) {
+        dComIfGs_offEventBit(flag);
+    } else {
+        dComIfGs_onEventBit(flag);
     }
+}
+
+void updateFlags() {
+    g_flags[WATCHED_FF2_HELMAROC_CUTSCENE] = dComIfGs_isEventBit(0x2D01);
+    g_flags[HAVE_HURRICANE_SPIN] = dComIfGs_isEventBit(0x0B20);
+    g_flags[ENDLESS_NIGHT] = dComIfGs_isEventBit(0x0A02);
+    g_flags[ORCA_INTRO_CUTSCENE] = dComIfGs_isEventBit(0x0640);
+    g_flags[PUPPET_GANON_CUTSCENE] = dComIfGs_isEventBit(0x3B02);
+    g_flags[MEETING_KORL_CUTSCENE] = dComIfGs_isEventBit(0x0F80);
 }

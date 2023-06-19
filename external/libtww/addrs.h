@@ -112,6 +112,9 @@
 
 /* d_save */
 #define dSv_player_return_place_c__set_addr 0x800569c0
+#define dSv_event_c__isEventBit_addr 0x8005a954
+#define dSv_event_c__onEventBit_addr 0x8005a924
+#define dSv_event_c__offEventBit_addr 0x8005a93c
 
 /* d_stage */
 #define dStage_roomControl_c__mStayNo_addr 0x803e9f48
