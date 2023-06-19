@@ -136,8 +136,6 @@ tools menu:
 - delivery bag menu
 - built-in practice saves for all major speedrun categories
 - more flags in the flags menu
-- modifiable wallet capacity
-- full health cheat
 ```
 
 ## Building
