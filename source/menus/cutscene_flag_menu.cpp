@@ -3,7 +3,7 @@
 #include "libtww/d/com/d_com_inf_game.h"
 #include "flags.h"
 
-#define LINE_NUM 2
+#define LINE_NUM 3
 Cursor CutsceneFlagMenu::cursor;
 int cursorOffset;
 Line lines[LINE_NUM] = {
@@ -11,6 +11,9 @@ Line lines[LINE_NUM] = {
         &g_flags[ORCA_INTRO_CUTSCENE]},
     {"Watched Puppet Ganon Cutscene", PUPPET_GANON_CUTSCENE, "Sets Puppet Ganon cutscene to seen", true,
      &g_flags[PUPPET_GANON_CUTSCENE]},
+    {"Courtyard Cutscene", COURTYARD_CUTSCENE, "Sets H1 courtyard cutscene to seen", true,
+        &g_flags[COURTYARD_CUTSCENE]},
+
 };
 
 void CutsceneFlagMenu::draw() {
@@ -33,6 +36,10 @@ void CutsceneFlagMenu::draw() {
         case PUPPET_GANON_CUTSCENE:
             setEventFlag(0x3B02);
             break;
+        case COURTYARD_CUTSCENE:
+            setEventFlag(0x3804);
+            break;
+
         }
     }
 

@@ -8,6 +8,8 @@
 #include "menus/amount_menu.h"
 #include "menus/item_inventory_menu.h"
 #include "menus/quest_status_menu.h"
+#include "menus/delivery_bag_menu.h"
+#include "menus/spoils_bag_menu.h"
 #include "menus/settings_menu.h"
 #include "menus/tools_menu.h"
 #include "menus/cheat_menu.h"
@@ -33,6 +35,8 @@ menu_render_t l_menuDrawList[MENU_NUM] = {
     AmountMenu::draw,
     ItemInventoryMenu::draw,
     QuestStatusMenu::draw,
+    DeliveryBagMenu::draw,
+    SpoilsBagMenu::draw,
 
     ImportantFlagMenu::draw,
     CutsceneFlagMenu::draw,

@@ -18,4 +18,6 @@ void updateFlags() {
     g_flags[ORCA_INTRO_CUTSCENE] = dComIfGs_isEventBit(0x0640);
     g_flags[PUPPET_GANON_CUTSCENE] = dComIfGs_isEventBit(0x3B02);
     g_flags[MEETING_KORL_CUTSCENE] = dComIfGs_isEventBit(0x0F80);
+    g_flags[COURTYARD_CUTSCENE] = dComIfGs_isEventBit(0x3804);
+
 }
