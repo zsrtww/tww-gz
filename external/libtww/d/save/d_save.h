@@ -262,15 +262,22 @@ static_assert(sizeof(dSv_player_item_max_c) == 0x8);
 
 class dSv_player_bag_item_c {
 public:
-    /* 0x00 */ u8 field_0x0[8];
-    /* 0x08 */ u8 field_0x8[8];
-    /* 0x10 */ u8 field_0x10[8];
+    u8 getDeliveryBagSlot(u8 index) { return mDeliveryBag[index]; }
+    void setDeliveryBagSlot(u8 index, u8 has_item) { mDeliveryBag[index] = has_item; }
+    u8 getSpoilsBagSlot(u8 index) { return mSpoilsBag[index]; }
+    void setSpoilsBagSlot(u8 index, u8 has_item) { mSpoilsBag[index] = has_item; }
+
+    /* 0x00 */ u8 mSpoilsBag[8];
+    /* 0x08 */ u8 mBaitBag[8];
+    /* 0x10 */ u8 mDeliveryBag[8];
 };  // Size: 0x18
 
 static_assert(sizeof(dSv_player_bag_item_c) == 0x18);
 
 class dSv_player_get_bag_item_c {
 public:
+    u8 getSpoilFlag(u8 index) { return mBeastFlags; }
+    void setSpoilFlag(u8 collected_item) { mBeastFlags |= (1 << collected_item); }
     /* 0x0 */ u32 mReserveFlags;
     /* 0x4 */ u8 mBeastFlags;
     /* 0x5 */ u8 mBaitFlags;
@@ -281,7 +288,11 @@ static_assert(sizeof(dSv_player_get_bag_item_c) == 0xC);
 
 class dSv_player_bag_item_record_c {
 public:
-    /* 0x00 */ u8 field_0x0[8];
+    u8 getSpoilsNum(u8 index) { return mSpoilsBagCounts[index]; }
+
+    void setSpoilsNum(u8 index, u8 amount) { mSpoilsBagCounts[index] = amount; }
+
+    /* 0x00 */ u8 mSpoilsBagCounts[8];
     /* 0x08 */ u8 field_0x8[8];
     /* 0x10 */ u8 field_0x10[8];
 };  // Size: 0x18
@@ -382,8 +393,11 @@ public:
     dSv_player_collect_c& getCollect() { return mCollect; }
     dSv_player_item_record_c& getItemRecord() { return mItemRecord; }
     dSv_player_item_max_c& getItemMax() { return mItemMax; }
+    dSv_player_bag_item_c& getBagItem() { return mBagItem; }
     dSv_player_return_place_c& getPlayerReturnPlace() { return mPlayerReturnPlace; }
     dSv_player_get_item_c& getGetItem() { return mGetItem; }
+    dSv_player_get_bag_item_c& getGetBagItem() { return mGetBagItem; }
+    dSv_player_bag_item_record_c& getBagItemRecord() { return mBagItemRecord; }
     dSv_player_config_c& getConfig() { return mConfig; }
 
     /* 0x000 */ dSv_player_status_a_c mPlayerStatusA;
