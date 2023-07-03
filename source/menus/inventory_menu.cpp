@@ -10,8 +10,8 @@ Line lines[LINE_NUM] = {
     {"amounts", AMOUNT_INDEX, "Modify amounts for health, magic, etc."},
     {"item inventory", ITEM_INVENTORY_INDEX, "Modify item inventory menu"},
     {"quest status", QUEST_STATUS_INDEX, "Modify quest status menu"},
-    {"delivery bag", DELIVERY_BAG_INDEX, "Modify delivery bag items/amounts (coming soon...)"},
-    {"spoils", SPOILS_INDEX, "Modify spoils bag items/amounts (coming soon...)"},
+    {"delivery bag", DELIVERY_BAG_INDEX, "Modify delivery bag items/amounts"},
+    {"spoils", SPOILS_INDEX, "Modify spoils bag items/amounts"},
 };
 
 const char* item_id_to_str(u8 item_id) {

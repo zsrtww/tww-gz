@@ -20,7 +20,6 @@ Line lines[LINE_NUM] = {
 };
 
 void updateSpoilsBagItemFlag(u8 item_id) {
-  //  u8 collected_item = item_id == NO_ITEM ? 0 : 1;
     if (item_id == JOY_PENDANT) {
         dComIfGs_setSpoilFlag(7);
     } else {

@@ -276,10 +276,10 @@ static_assert(sizeof(dSv_player_bag_item_c) == 0x18);
 
 class dSv_player_get_bag_item_c {
 public:
-    u8 getSpoilFlag(u8 index) { return mBeastFlags; }
-    void setSpoilFlag(u8 collected_item) { mBeastFlags |= (1 << collected_item); }
+    u8 getSpoilFlag(u8 index) { return mSpoilsFlags; }
+    void setSpoilFlag(u8 collected_item) { mSpoilsFlags |= (1 << collected_item); }
     /* 0x0 */ u32 mReserveFlags;
-    /* 0x4 */ u8 mBeastFlags;
+    /* 0x4 */ u8 mSpoilsFlags;
     /* 0x5 */ u8 mBaitFlags;
     /* 0x6 */ u8 unk_0x6[0xC - 0x6];
 };  // Size: 0xC
@@ -293,8 +293,8 @@ public:
     void setSpoilsNum(u8 index, u8 amount) { mSpoilsBagCounts[index] = amount; }
 
     /* 0x00 */ u8 mSpoilsBagCounts[8];
-    /* 0x08 */ u8 field_0x8[8];
-    /* 0x10 */ u8 field_0x10[8];
+    /* 0x08 */ u8 mBaitBagCounts[8];
+    /* 0x10 */ u8 mDeliveryBagCounts[8];
 };  // Size: 0x18
 
 static_assert(sizeof(dSv_player_bag_item_record_c) == 0x18);

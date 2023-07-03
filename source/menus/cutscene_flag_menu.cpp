@@ -11,7 +11,7 @@ Line lines[LINE_NUM] = {
         &g_flags[ORCA_INTRO_CUTSCENE]},
     {"Watched Puppet Ganon Cutscene", PUPPET_GANON_CUTSCENE, "Sets Puppet Ganon cutscene to seen", true,
      &g_flags[PUPPET_GANON_CUTSCENE]},
-    {"Courtyard Cutscene", COURTYARD_CUTSCENE, "Sets H1 courtyard cutscene to seen", true,
+    {"Courtyard Cutscene", COURTYARD_CUTSCENE, "Sets Hyrule 1 courtyard cutscene to seen", true,
         &g_flags[COURTYARD_CUTSCENE]},
 
 };

@@ -37,7 +37,7 @@ void ImportantFlagMenu::draw() {
             break;
         case ENDLESS_NIGHT:
             setEventFlag(0x0A02);
-
+            break;
         }
     }
 
