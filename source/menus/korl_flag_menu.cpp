@@ -3,7 +3,7 @@
 #include "libtww/d/com/d_com_inf_game.h"
 #include "flags.h"
 
-#define LINE_NUM 2
+#define LINE_NUM 1
 Cursor KorlFlagMenu::cursor;
 int cursorOffset;
 
