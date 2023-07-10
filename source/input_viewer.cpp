@@ -6,6 +6,7 @@
 #include "libtww/MSL_C/string.h"
 #include "libtww/MSL_C/math.h"
 #include "menus/tools_menu.h"
+#include "color.h"
 
 #define OUTLINE_WIDTH 0x10
 
@@ -146,22 +147,22 @@ void InputViewer::drawViewer(Vec2 pos, float scale, bool is_shadow) {
     stickMag = tww_mPadStatus.stick_x*tww_mPadStatus.stick_x + tww_mPadStatus.stick_y*tww_mPadStatus.stick_y;
     if ((g_tools[ESS_CHECKER_INDEX].active)) {
         if (stickInRectRange(-2, -2, 2, 2)) {
-            col = 0x000000FF;
+            col = BLACK;
         } else if (stickMag <= 81) {
-            col = 0x34DEEBFF;
+            col = BLUE;
         } else if (stickMag <= 324) {
-            col = 0x40EB34FF;
+            col = GREEN;
         } else if (stickMag <= 729) {
-            col = 0xF2E30FFF;
+            col = YELLOW;
         } else if (stickMag <= 1296) {
-            col = 0xDE9D12FF;
+            col = ORANGE;
         } else {
-            col = 0xB00E0EFF;
+            col = RED;
         }
     } else if (g_tools[DEADZONE_CHECKER_INDEX].active && stickInRectRange(-2, -2, 2, 2)) {
-        col = 0xFF0000FF;
+        col = RED;
     } else {
-        col = 0xFFFFFFFF;
+        col = WHITE;
     }
     drawStickOutline(is_shadow ? 0x00000060 : col,
                      {pos.x + 17.5f * scale, pos.y + 30.f * scale}, 35.0f * scale);
