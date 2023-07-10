@@ -11,13 +11,13 @@
 #include "utils/hook.h"
 #include "commands.h"
 
-#define LINE_NUM 6
+#define LINE_NUM 8
 Cursor ToolsMenu::cursor;
 
 GZTool g_tools[TOOL_AMNT] = {
     {DEBUG_INDEX, false},       {TELEPORT_INDEX, false},    {AREA_RELOAD_INDEX, false},
     {MAP_SELECT_INDEX, false},  {ZH_INDEX, false},          {INPUT_VIEWER_INDEX, false},
-    //{DISABLE_SVCHECK_INDEX, false}
+    {ESS_CHECKER_INDEX, false}, {DEADZONE_CHECKER_INDEX, false},  //{DISABLE_SVCHECK_INDEX, false}
 };
 
 Line lines[LINE_NUM] = {
@@ -33,6 +33,10 @@ Line lines[LINE_NUM] = {
         &g_tools[ZH_INDEX].active},
     {"input viewer", INPUT_VIEWER_INDEX, "Show current inputs", true,
         &g_tools[INPUT_VIEWER_INDEX].active},
+    {"ess checker", ESS_CHECKER_INDEX, "Change input stick color based on distance from ideal ESS", true,
+        &g_tools[ESS_CHECKER_INDEX].active},
+    {"deadzone checker", DEADZONE_CHECKER_INDEX, "Change input viewer stick color if stick is in deadzone", true,
+        &g_tools[DEADZONE_CHECKER_INDEX].active},
     //{"disable save checks", DISABLE_SVCHECK_INDEX, "Disables save location safety checks", true,
     //    &g_tools[DISABLE_SVCHECK_INDEX].active},
 };
