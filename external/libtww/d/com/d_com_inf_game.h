@@ -361,12 +361,44 @@ inline void dComIfGs_setItemSlot(u8 index, u8 item_id) {
     g_dComIfG_gameInfo.info.getPlayer().getItem().setItemSlot(index, item_id);
 }
 
+inline u8 dComIfGs_getDeliveryBagSlot(u8 index) {
+    return g_dComIfG_gameInfo.info.getPlayer().getBagItem().getDeliveryBagSlot(index);
+}
+
+inline void dComIfGs_setDeliveryBagSlot(u8 index, u8 item_id) {
+    g_dComIfG_gameInfo.info.getPlayer().getBagItem().setDeliveryBagSlot(index, item_id);
+}
+
+inline u8 dComIfGs_getSpoilsBagSlot(u8 index) {
+    return g_dComIfG_gameInfo.info.getPlayer().getBagItem().getSpoilsBagSlot(index);
+}
+
+inline void dComIfGs_setSpoilsBagSlot(u8 index, u8 item_id) {
+    g_dComIfG_gameInfo.info.getPlayer().getBagItem().setSpoilsBagSlot(index, item_id);
+}
+
+inline u8 dComIfGs_getSpoilsNum(u8 index) {
+    return g_dComIfG_gameInfo.info.getPlayer().getBagItemRecord().getSpoilsNum(index);
+}
+
+inline void dComIfGs_setSpoilsNum(u8 index, u8 amount) {
+    return g_dComIfG_gameInfo.info.getPlayer().getBagItemRecord().setSpoilsNum(index, amount);
+}
+
 inline u8 dComIfGs_getItemFlag(u8 index) {
     return g_dComIfG_gameInfo.info.getPlayer().getGetItem().getItemFlag(index);
 }
 
 inline void dComIfGs_setItemFlag(u8 index, u8 has_item) {
     g_dComIfG_gameInfo.info.getPlayer().getGetItem().setItemFlag(index, has_item);
+}
+
+inline u8 dComIfGs_getSpoilFlag(u8 index) {
+    return g_dComIfG_gameInfo.info.getPlayer().getGetBagItem().getSpoilFlag(index);
+}
+
+inline void dComIfGs_setSpoilFlag(u8 has_item) {
+    g_dComIfG_gameInfo.info.getPlayer().getGetBagItem().setSpoilFlag(has_item);
 }
 
 inline void dComIfGs_setReturnPlace(const char* stage, s8 roomNo, s8 point) {

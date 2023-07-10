@@ -3,7 +3,7 @@
 #include "libtww/d/com/d_com_inf_game.h"
 #include "flags.h"
 
-#define LINE_NUM 3
+#define LINE_NUM 4
 Cursor ImportantFlagMenu::cursor;
 
 Line lines[LINE_NUM] = {
@@ -13,6 +13,7 @@ Line lines[LINE_NUM] = {
         &g_flags[HAVE_HURRICANE_SPIN]},
     {"Endless Night", ENDLESS_NIGHT, "Activates Endless Night, incompatible with having Nayru's Pearl", true,
         &g_flags[ENDLESS_NIGHT]},
+
 };
 
 void ImportantFlagMenu::draw() {

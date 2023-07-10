@@ -4,7 +4,7 @@
 #include "libtww/MSL_C/string.h"
 #include "libtww/d/com/d_com_inf_game.h"
 
-#define LINE_NUM 6
+#define LINE_NUM 14
 
 Cursor AmountMenu::cursor;
 
@@ -15,7 +15,28 @@ Line lines[LINE_NUM] = {
     {"rupees:", RUPEE_INDEX, "Modify the current rupee count"},
     {"magic:", MAGIC_INDEX, "Modify the current magic amount"},
     {"heart pieces:", HEART_PIECE_INDEX, "Modify the current heart pieces collected"},
+    {"joy pendants:", JOY_PENDANT_INDEX, "Modify the current joy pendant count"},
+    {"skull necklaces:", SKULL_NECKLACE_INDEX, "Modify the current skull necklace count"},
+    {"boko baba seeds:", BOKO_BABA_SEED_INDEX, "Modify the current boko baba seed count"},
+    {"golden feathers:", GOLDEN_FEATHER_INDEX, "Modify the current golden feather count"},
+    {"knights crests:", KNIGHTS_CREST_INDEX, "Modify the current knights crest count"},
+    {"red chu jelly:", RED_CHU_JELLY_INDEX, "Modify the current red chu jelly count"},
+    {"green chu jelly:", GREEN_CHU_JELLY_INDEX, "Modify the current green chu jelly count"},
+    {"blue chu jelly:", BLUE_CHU_JELLY_INDEX, "Modify the current blue chu jelly count"},
+
 };
+
+void updateSpoilsBagAmount(u8 index) {
+    u8 amount = dComIfGs_getSpoilsNum(index);
+    Cursor::moveListSimple(amount);
+    if (amount == 0xFF) {
+        amount = 99;
+    }
+    if (amount > 99) {
+        amount = 0;    
+    }
+    dComIfGs_setSpoilsNum(index, amount);
+}
 
 void AmountMenu::draw() {
     cursor.setMode(Cursor::MODE_LIST);
@@ -99,6 +120,30 @@ void AmountMenu::draw() {
         }
         dComIfGs_setMaxLife(g_heartNum);
         break;
+    case JOY_PENDANT_INDEX:
+        updateSpoilsBagAmount(7);
+        break;
+    case SKULL_NECKLACE_INDEX:
+        updateSpoilsBagAmount(0);
+        break;
+    case BOKO_BABA_SEED_INDEX:
+        updateSpoilsBagAmount(1);
+        break;
+    case GOLDEN_FEATHER_INDEX:
+        updateSpoilsBagAmount(2);
+        break;
+    case KNIGHTS_CREST_INDEX:
+        updateSpoilsBagAmount(3);
+        break;
+    case RED_CHU_JELLY_INDEX:
+        updateSpoilsBagAmount(4);
+        break;
+    case GREEN_CHU_JELLY_INDEX:
+        updateSpoilsBagAmount(5);
+        break;
+    case BLUE_CHU_JELLY_INDEX:
+        updateSpoilsBagAmount(6);
+        break;
     }
 
     tww_sprintf(lines[HEALTH_INDEX].value, " <%d>", g_healthNum);
@@ -107,6 +152,14 @@ void AmountMenu::draw() {
     tww_sprintf(lines[RUPEE_INDEX].value, " <%d>", g_rupeeNum);
     tww_sprintf(lines[MAGIC_INDEX].value, " <%d>", g_magicNum);
     tww_sprintf(lines[HEART_PIECE_INDEX].value, " <%d>", g_heartNum);
+    tww_sprintf(lines[JOY_PENDANT_INDEX].value, " <%d>", dComIfGs_getSpoilsNum(7));
+    tww_sprintf(lines[SKULL_NECKLACE_INDEX].value, " <%d>", dComIfGs_getSpoilsNum(0));
+    tww_sprintf(lines[BOKO_BABA_SEED_INDEX].value, " <%d>", dComIfGs_getSpoilsNum(1));
+    tww_sprintf(lines[GOLDEN_FEATHER_INDEX].value, " <%d>", dComIfGs_getSpoilsNum(2));
+    tww_sprintf(lines[KNIGHTS_CREST_INDEX].value, " <%d>", dComIfGs_getSpoilsNum(3));
+    tww_sprintf(lines[RED_CHU_JELLY_INDEX].value, " <%d>", dComIfGs_getSpoilsNum(4));
+    tww_sprintf(lines[GREEN_CHU_JELLY_INDEX].value, " <%d>", dComIfGs_getSpoilsNum(5));
+    tww_sprintf(lines[BLUE_CHU_JELLY_INDEX].value, " <%d>", dComIfGs_getSpoilsNum(6));
 
     cursor.move(0, LINE_NUM);
     GZ_drawMenuLines(lines, cursor.y, LINE_NUM);

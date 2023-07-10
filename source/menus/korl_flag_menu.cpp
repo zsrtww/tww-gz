@@ -10,6 +10,7 @@ int cursorOffset;
 Line lines[LINE_NUM] = {
     {"Watched Meeting KORL Cutscene", MEETING_KORL_CUTSCENE, "Spawns KORL, modifies save flags", true,
         &g_flags[MEETING_KORL_CUTSCENE]},
+
 };
 
 void KorlFlagMenu::draw() {
@@ -29,8 +30,9 @@ void KorlFlagMenu::draw() {
         case MEETING_KORL_CUTSCENE:
             setEventFlag(0x0F80);
             break;
+
         }
     }
 
-        GZ_drawMenuLines(lines, cursorOffset, LINE_NUM);
+    GZ_drawMenuLines(lines, cursorOffset, LINE_NUM);
     }

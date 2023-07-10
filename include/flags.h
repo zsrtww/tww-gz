@@ -3,9 +3,9 @@
 
 #include "libtww/dolphin/gctypes.h"
 
-#define FLAG_AMNT 6
+#define FLAG_AMNT 7
 #define CUTSCENE_FLAG_OFFSET 3
-#define KORL_FLAG_OFFSET 5
+#define KORL_FLAG_OFFSET 6
 
 enum FlagId {
     /*Important Flags*/
@@ -16,9 +16,11 @@ enum FlagId {
     /*Cutscene Flags */
     ORCA_INTRO_CUTSCENE,
     PUPPET_GANON_CUTSCENE,
+    COURTYARD_CUTSCENE,
 
     /*Korl Flags*/
-    MEETING_KORL_CUTSCENE
+    MEETING_KORL_CUTSCENE,
+
 };
 
 void setEventFlag(uint16_t flag);
