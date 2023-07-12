@@ -8,7 +8,7 @@ Cursor KorlFlagMenu::cursor;
 int cursorOffset;
 
 Line lines[LINE_NUM] = {
-    {"Watched Meeting KORL Cutscene", MEETING_KORL_CUTSCENE, "Spawns KORL, modifies save flags", true,
+    {"Watched Post FF1 KoRL Cutscene", MEETING_KORL_CUTSCENE, "Spawns KoRL, sets savewarp to Windfall and FoF to layer 2", true,
         &g_flags[MEETING_KORL_CUTSCENE]},
 
 };

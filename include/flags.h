@@ -3,9 +3,10 @@
 
 #include "libtww/dolphin/gctypes.h"
 
-#define FLAG_AMNT 7
+#define FLAG_AMNT 12
 #define CUTSCENE_FLAG_OFFSET 3
 #define KORL_FLAG_OFFSET 6
+#define SAVEWARP_FLAG_OFFSET 7
 
 enum FlagId {
     /*Important Flags*/
@@ -20,6 +21,13 @@ enum FlagId {
 
     /*Korl Flags*/
     MEETING_KORL_CUTSCENE,
+
+    /*Savewarp Flags*/
+    LEAVING_OUTSET_CUTSCENE,
+    TETRA_SPOILS_BAG_TEXT,
+    BARREL_LAUNCH_CUTSCENE,
+    POST_FF1_KORL_CUTSCENE,
+    ENTER_KORL_FIRST_TIME,
 
 };
 
