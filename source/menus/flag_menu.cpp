@@ -11,8 +11,9 @@ Line lines[LINE_NUM] = {
     {"important", IMPORTANT_FLAG_INDEX, "Important Flags"},
     {"cutscenes", CUTSCENE_FLAG_INDEX, "Cutscene Flags"},
     {"korl", KORL_FLAG_INDEX, "KORL Flags"},
+    {"savewarp", SAVEWARP_FLAG_INDEX, "Savewarp Flags"},
     {"quests", QUEST_FLAG_INDEX, "Quest Flags (disabled)"},
-    {"temp", PLACEHOLDER_FLAG_INDEX, "TEST (disabled)"},
+    
 };
 
 void FlagMenu::draw() {
@@ -38,11 +39,11 @@ void FlagMenu::draw() {
         case KORL_FLAG_INDEX:
             GZ_setMenu(GZ_KORL_FLAG_MENU);
             return;
+        case SAVEWARP_FLAG_INDEX:
+            GZ_setMenu(GZ_SAVEWARP_FLAG_MENU);
+            return;
         case QUEST_FLAG_INDEX:
             //GZ_setMenu(GZ_PLACEHOLDER1_MENU);
-            return;
-        case PLACEHOLDER_FLAG_INDEX:
-            //GZ_setMenu(GZ_PLACEHOLDER2_MENU);
             return;
         }
     }

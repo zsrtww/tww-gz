@@ -3,7 +3,7 @@
 #include "libtww/d/com/d_com_inf_game.h"
 #include "flags.h"
 
-#define LINE_NUM 4
+#define LINE_NUM 3 
 Cursor ImportantFlagMenu::cursor;
 
 Line lines[LINE_NUM] = {

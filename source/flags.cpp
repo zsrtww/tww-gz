@@ -19,5 +19,10 @@ void updateFlags() {
     g_flags[PUPPET_GANON_CUTSCENE] = dComIfGs_isEventBit(0x3B02);
     g_flags[MEETING_KORL_CUTSCENE] = dComIfGs_isEventBit(0x0F80);
     g_flags[COURTYARD_CUTSCENE] = dComIfGs_isEventBit(0x3804);
+    g_flags[LEAVING_OUTSET_CUTSCENE] = dComIfGs_isEventBit(0x2401);
+    g_flags[TETRA_SPOILS_BAG_TEXT] = dComIfGs_isEventBit(0x0808);
+    g_flags[BARREL_LAUNCH_CUTSCENE] = dComIfGs_isEventBit(0x0801);
+    g_flags[ENTER_KORL_FIRST_TIME] = dComIfGs_isEventBit(0x2A08);
+    g_flags[POST_FF1_KORL_CUTSCENE] = dComIfGs_isEventBit(0x0F80);
 
 }
