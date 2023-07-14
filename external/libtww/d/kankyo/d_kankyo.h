@@ -265,4 +265,12 @@ static_assert(sizeof(dScnKy_env_light_c) == 0xC9C);
 
 #define g_env_light (*(dScnKy_env_light_c*)g_env_light_addr)
 
+inline s16 dkankyo_getWindDir() {
+    return g_env_light.mTactWindAngleY;
+}
+
+inline void dkankyo_setWindDir(s16 dir) {
+    g_env_light.mTactWindAngleY = dir;
+}
+
 #endif
