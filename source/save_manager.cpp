@@ -22,8 +22,8 @@ SaveManager gSaveManager;
 bool SaveManager::s_injectSave = false;
 bool SaveManager::s_injectMemfile = false;
 
-void SaveManager::injectSave(void* buffer) { // this function is corrupting save files somehow
-    memcpy(&g_dComIfG_gameInfo, buffer, 0xA8C/*0x9F8*/);  // no idea what the number should be
+void SaveManager::injectSave(void* buffer) { // this function is loading save data with wrong alignment?
+    memcpy(&g_dComIfG_gameInfo, buffer, sizeof(dSv_save_c));
     dComIfGs_getSave(g_dComIfG_gameInfo.info.mDan.mStageNo);
 }
 
@@ -104,7 +104,7 @@ void SaveManager::loadSave(uint32_t id, const char* category, special i_specials
 }
 
 void SaveManager::loadSavefile(const char* l_filename) {
-    loadFile(l_filename, MEMFILE_BUF, 1904, 0);
+    loadFile(l_filename, MEMFILE_BUF, sizeof(dSv_save_c), 0);
 }
 
 void SaveManager::triggerLoad(uint32_t id, const char* category, special i_specials[],
