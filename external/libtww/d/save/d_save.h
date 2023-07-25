@@ -152,6 +152,7 @@ class dSv_player_status_a_c {
 public:
     u16& getMaxLife() { return mMaxLife; }
     u8& getMaxMagic() { return mMaxMagic; }
+    u8& getWalletSize() { return mWalletSize; }
     u16& getLife() { return mLife; }
     u8& getMagic() { return mMagic; }
     u16& getRupee() { return mRupee; }
@@ -160,6 +161,7 @@ public:
     void setMagic(u8 magic) { mMagic = magic; }
     void setMaxMagic(u8 max) { mMaxMagic = max; }
     void setRupee(u16 rupees) { mRupee = rupees; }
+    void setWalletSize(u8 size) { mWalletSize = size; }
     void setLife(u16 life) { mLife = life; }
     void setMaxLife(u16 max) { mMaxLife = max; }
     void setSelectEquip(int item_index, u8 item) { mSelectEquip[item_index] = item; }

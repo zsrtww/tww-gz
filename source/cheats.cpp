@@ -84,7 +84,19 @@ void GZ_applyCheats() {
     }
 
     if (GZ_checkCheat(InfiniteRupees)) {
-        dComIfGs_setRupee(5000);
+        u8 wallet_size = g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusA().getWalletSize();
+
+        switch (wallet_size) {
+        case 0:
+            dComIfGs_setRupee(200);
+            break;
+        case 1:
+            dComIfGs_setRupee(1000);
+            break;
+        case 2:
+            dComIfGs_setRupee(5000);
+            break;
+        }
     }
 
     if (GZ_checkCheat(InfiniteArrows)) {
