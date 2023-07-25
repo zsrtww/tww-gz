@@ -1,5 +1,6 @@
 #include "cheats.h"
 #include "commands.h"
+#include "menus/quest_status_menu.h"
 #include "libtww/d/com/d_com_inf_game.h"
 
 
@@ -87,14 +88,14 @@ void GZ_applyCheats() {
         u8 wallet_size = g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusA().getWalletSize();
 
         switch (wallet_size) {
-        case 0:
-            dComIfGs_setRupee(200);
+        case WALLET_200:
+            g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusA().setRupee(200);
             break;
-        case 1:
-            dComIfGs_setRupee(1000);
+        case WALLET_1000:
+            g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusA().setRupee(1000);
             break;
-        case 2:
-            dComIfGs_setRupee(5000);
+        case WALLET_5000:
+            g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusA().setRupee(5000);
             break;
         }
     }
