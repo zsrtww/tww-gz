@@ -180,6 +180,7 @@ public:
     /* 0x14 */ u8 mMagic;
     /* 0x15 */ u8 field_0x15;
     /* 0x16 */ u8 field_0x16;
+    /* 0x17 */ u8 padding;
 };  // Size: 0x18
 
 static_assert(sizeof(dSv_player_status_a_c) == 0x18);
@@ -195,6 +196,7 @@ public:
     /* 0x10 */ u16 mDate;
     /* 0x12 */ s16 mTactWindAngleX;
     /* 0x14 */ s16 mTactWindAngleY;
+    /* 0x16 */ u8 padding[2];
 };  // Size: 0x18
 
 static_assert(sizeof(dSv_player_status_b_c) == 0x18);

@@ -22,8 +22,30 @@ SaveManager gSaveManager;
 bool SaveManager::s_injectSave = false;
 bool SaveManager::s_injectMemfile = false;
 
-void SaveManager::injectSave(void* buffer) { // this function is loading save data with wrong alignment?
-    memcpy(&g_dComIfG_gameInfo, buffer, sizeof(dSv_save_c));
+void SaveManager::injectSave(void* src) {
+    memcpy(&g_dComIfG_gameInfo.info.mSavedata.mPlayer.mPlayerStatusA, src, 0x18);
+    memcpy(&g_dComIfG_gameInfo.info.mSavedata.mPlayer.mPlayerStatusB, (char*) src + 0x18, 0x18);
+    memcpy(&g_dComIfG_gameInfo.info.mSavedata.mPlayer.mPlayerReturnPlace, (char*) src + 0x30, 0xc);
+    memcpy(&g_dComIfG_gameInfo.info.mSavedata.mPlayer.mPlayerItem, (char*) src + 0x3c, 0x15);
+    memcpy(&g_dComIfG_gameInfo.info.mSavedata.mPlayer.mGetItem, (char*) src + 0x51, 0x15);
+    memcpy(&g_dComIfG_gameInfo.info.mSavedata.mPlayer.mItemRecord, (char*) src + 0x66, 8);
+    memcpy(&g_dComIfG_gameInfo.info.mSavedata.mPlayer.mItemMax, (char*) src + 0x6e, 8);
+    memcpy(&g_dComIfG_gameInfo.info.mSavedata.mPlayer.mBagItem, (char*) src + 0x76, 0x18);
+    memcpy(&g_dComIfG_gameInfo.info.mSavedata.mPlayer.mGetBagItem, (char*) src + 0x8e, 0xc);
+    memcpy(&g_dComIfG_gameInfo.info.mSavedata.mPlayer.mBagItemRecord, (char*) src + 0x9a, 0x18);
+    memcpy(&g_dComIfG_gameInfo.info.mSavedata.mPlayer.mCollect, (char*) src + 0xb2, 0xd);
+    memcpy(&g_dComIfG_gameInfo.info.mSavedata.mPlayer.mMap, (char*) src + 0xbf, 0x84);
+    memcpy(&g_dComIfG_gameInfo.info.mSavedata.mPlayer.mInfo, (char*) src + 0x143, 0x5c);
+    memcpy(&g_dComIfG_gameInfo.info.mSavedata.mPlayer.mConfig, (char*) src + 0x19f, 5);
+    memcpy(&g_dComIfG_gameInfo.info.mSavedata.mPlayer.mPriest, (char*) src + 0x1a4, 0x10);
+    memcpy(&g_dComIfG_gameInfo.info.mSavedata.mPlayer.mStatusC, (char*) src + 0x1b4, 0x1c0);
+
+    memcpy(&g_dComIfG_gameInfo.info.mSavedata.mSave, (char*) src + 0x374, 0x240);
+
+    memcpy(&g_dComIfG_gameInfo.info.mSavedata.mOcean, (char*) src + 0x5b4, 0x64);
+
+    memcpy(&g_dComIfG_gameInfo.info.mSavedata.mEvent, (char*) src + 0x618, 0x100);
+
     dComIfGs_getSave(g_dComIfG_gameInfo.info.mDan.mStageNo);
 }
 
@@ -55,12 +77,6 @@ void SaveManager::loadSave(uint32_t id, const char* category, special i_specials
     snprintf(l_filename, sizeof(l_filename), "twwgz/save_files/%s.bin", category);
     loadFile(l_filename, &gSaveManager.mPracticeSaveInfo, sizeof(gSaveManager.mPracticeSaveInfo),
              id * sizeof(gSaveManager.mPracticeSaveInfo));
-    
-    //Font::GZ_drawStr(l_filename, 20.f, 200.f, ColorPalette::WHITE, g_dropShadows);
-
-    //char name[64];
-    //tww_sprintf(name, "name: %s", gSaveManager.mPracticeSaveInfo.filename);
-    //Font::GZ_drawStr(name, 20.f, 230.f, ColorPalette::WHITE, g_dropShadows);
     
     snprintf(l_filename, sizeof(l_filename), "twwgz/save_files/%s/%s.bin", category,
              gSaveManager.mPracticeSaveInfo.filename);
@@ -128,26 +144,8 @@ void SaveManager::triggerLoad(uint32_t id, const char* category, special i_speci
 
     // inject options after initial stage set since some options change stage loc
     if (gSaveManager.mPracticeFileOpts.inject_options_during_load) {
-        gSaveManager.mPracticeFileOpts.inject_options_during_load(); // , 1
+        gSaveManager.mPracticeFileOpts.inject_options_during_load();
     }
-
-    // for debugging
-    char return_name[64];
-    tww_sprintf(return_name, "return name: %s", save->getPlayer().mPlayerReturnPlace.mName);
-    Font::GZ_drawStr(return_name, 20.f, 230.f, ColorPalette::WHITE, g_dropShadows);
-
-    char return_room_no[32];
-    tww_sprintf(return_room_no, "return room_no: %d", save->getPlayer().mPlayerReturnPlace.mRoomNo);
-    Font::GZ_drawStr(return_room_no, 20.f, 250.f, ColorPalette::WHITE, g_dropShadows);
-
-    char player_status[32];
-    tww_sprintf(player_status, "player status: %u", save->getPlayer().mPlayerReturnPlace.mPlayerStatus);
-    Font::GZ_drawStr(player_status, 20.f, 270.f, ColorPalette::WHITE, g_dropShadows);
-
-    char layer[32];
-    tww_sprintf(layer, "layer: %d", state);
-    Font::GZ_drawStr(layer, 20.f, 290.f, ColorPalette::WHITE, g_dropShadows);
-    // debugging ended
 
     g_dComIfG_gameInfo.play.mNextStage.enabled = true;
     s_injectSave = true;
@@ -176,24 +174,8 @@ void SaveManager::loadData() {
     if (s_injectMemfile) {
         SaveManager::injectMemfile(MEMFILE_BUF);
     } else {
-        SaveManager::injectSave(MEMFILE_BUF); // 0, 16
+        SaveManager::injectSave(MEMFILE_BUF);
     }
-
-    GZ_activate(HAS_SEEN_HELMAROC_ARRIVING_AT_OUTSET); // 1
-    GZ_activate(WATCHED_FF2_HELMAROC_CUTSCENE); // 17
-
-/*
-    // from TP - swap equip logic
-    if (g_swap_equips_flag) {
-        uint8_t tmp = dComIfGs_getSelectItemIndex(SELECT_ITEM_X);
-        uint8_t tmp_mix = dComIfGs_getMixItemIndex(SELECT_ITEM_X);
-
-        dComIfGs_setSelectItemIndex(SELECT_ITEM_X, dComIfGs_getSelectItemIndex(SELECT_ITEM_Y));
-        dComIfGs_setSelectItemIndex(SELECT_ITEM_Y, tmp);
-        dComIfGs_setMixItemIndex(SELECT_ITEM_X, dComIfGs_getMixItemIndex(SELECT_ITEM_Y));
-        dComIfGs_setMixItemIndex(SELECT_ITEM_Y, tmp_mix);
-    }
-*/
 }
 
 void SaveManager::setLinkInfo() {
