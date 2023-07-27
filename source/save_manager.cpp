@@ -14,7 +14,7 @@
 #include "libtww/MSL_C/string.h"
 #include "flags.h"
 
-static char l_filename[80];
+static char l_filename[128];
 SaveManager gSaveManager;
 
 bool SaveManager::s_injectSave = false;
