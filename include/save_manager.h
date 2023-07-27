@@ -9,23 +9,13 @@
 #include "libtww/d/com/d_com_inf_game.h"
 
 #define GZ_SAVE_VERSION_NUMBER 0
-#define GZ_SAVE_ENTRIES_AMNT 7//10
+#define GZ_SAVE_ENTRIES_AMNT 7
 
 #ifdef NTSCJ
 #define sTmpBuf 0x803a8540
 #endif
 
 #define MEMFILE_BUF ((void*)sTmpBuf)
-
-// index into qlog where these exist
-#define SPAWN_INDEX 96
-#define ROOM_INDEX 97
-#define STAGE_INDEX 88
-
-struct AreaReload {
-    uint8_t temp_flags[0x20];
-    uint8_t tears[4];
-};
 
 typedef void (*LoadingCallback)(void);
 
@@ -67,30 +57,20 @@ class SaveManager {
 public:
     PracticeFileOpts mPracticeFileOpts;
     PracticeSaveInfo mPracticeSaveInfo __attribute__((aligned(32)));
-    AreaReload mAreaReloadOpts;
     special* mSpecials;
-    bool loading_initiated = false;
-    int repeat_count = 0;
-    bool repeat_during = false;
 
     static bool s_injectSave;
-    static bool s_injectMemfile;
 
 public:
     static void injectSave(void* buffer);
-    static void injectMemfile(void* buffer);
     static void injectDefault_before();
     static void injectDefault_during();
-    static void injectMemfile_during();
     static void injectDefault_after();
-    static void loadSave(uint32_t id, const char* category, special* i_specials = nullptr,
-                         int size = 0);
+    static void loadSave(uint32_t id, const char* category, special* i_specials = nullptr, int size = 0);
     static void loadSavefile(const char* fileName);
     static void triggerLoad(uint32_t id, const char* category, special i_specials[], int size);
-    static void triggerMemfileLoad();
     static void defaultLoad();
     static void setLinkInfo();
-    static void setPositionCamera();
 
     static void loadData();
 

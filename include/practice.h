@@ -10,6 +10,6 @@ enum SpeedrunCategories {
 #define REQ_CAM 2
 
 extern int last_save_index;
-extern char last_category[5];
+extern char last_category[16];
 extern special* last_special_ptr;
 extern int last_special_size;

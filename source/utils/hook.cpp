@@ -60,17 +60,12 @@ void dComIfGs_setGameStartStageHook() {
     dComIfGs_setGameStartStageTrampoline();
 }
 
-// Stops temp flags from being stored to save when loading memfile
 void putSaveHook(void* addr, int stageNo) {
-    if (SaveManager::s_injectMemfile) {
-        return;
-    } else {
-        return putSaveTrampoline(addr, stageNo);
-    }
+    return putSaveTrampoline(addr, stageNo);
 }
 
 int saveInjectHook(void* i_scene) {
-    if (SaveManager::s_injectSave || SaveManager::s_injectMemfile) {
+    if (SaveManager::s_injectSave) {
         SaveManager::loadData();
     }
     
