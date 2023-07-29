@@ -70,7 +70,6 @@ public:
     static void loadSavefile(const char* fileName);
     static void triggerLoad(uint32_t id, const char* category, special i_specials[], int size);
     static void defaultLoad();
-    static void setLinkInfo();
 
     static void loadData();
 

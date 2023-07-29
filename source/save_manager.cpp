@@ -10,10 +10,6 @@
 #include "libtww/d/com/d_com_inf_game.h"
 #include "libtww/f_op/f_op_scene_req.h"
 
-#include "color.h"
-#include "libtww/MSL_C/string.h"
-#include "flags.h"
-
 static char l_filename[128];
 SaveManager gSaveManager;
 
@@ -74,7 +70,6 @@ void SaveManager::loadSave(uint32_t id, const char* category, special i_specials
     SaveManager::defaultLoad();
 
     if (gSaveManager.mPracticeSaveInfo.requirements) {
-        gSaveManager.mPracticeFileOpts.inject_options_after_load = setLinkInfo;
         gSaveManager.mPracticeFileOpts.inject_options_after_counter = gSaveManager.mPracticeSaveInfo.counter;
     }
 
@@ -100,8 +95,7 @@ void SaveManager::loadSavefile(const char* l_filename) {
     loadFile(l_filename, MEMFILE_BUF, sizeof(dSv_save_c), 0);
 }
 
-void SaveManager::triggerLoad(uint32_t id, const char* category, special i_specials[],
-                                        int size) {
+void SaveManager::triggerLoad(uint32_t id, const char* category, special i_specials[], int size) {
     loadSave(id, category, i_specials, size);
 
     SaveManager::loadSavefile(l_filename);
@@ -124,20 +118,17 @@ void SaveManager::triggerLoad(uint32_t id, const char* category, special i_speci
     s_injectSave = true;
 }
 
-// runs at the beginning of phase_1 of dScnPly_c load sequence
+// runs at the beginning of phase_1 of dScnPly__phase_1 load sequence
 void SaveManager::loadData() {
     if (s_injectSave) {
         SaveManager::injectSave(MEMFILE_BUF);
-        s_injectSave = false;
-    }
-}
 
-void SaveManager::setLinkInfo() {
-    if (dComIfGp_getPlayer()) {
-        dComIfGp_getPlayer()->mCollisionRot.sy = gSaveManager.mPracticeSaveInfo.angle;
-        cXyz tmp(gSaveManager.mPracticeSaveInfo.position.x,
-                 gSaveManager.mPracticeSaveInfo.position.y,
-                 gSaveManager.mPracticeSaveInfo.position.z);
-        dComIfGp_getPlayer()->mCurrent.mPosition = tmp;
+        // This code block happens after the save data is loaded, but before the load sequence completes
+        //   so inject_options_after_load() is good for editing save data
+        //   but fails in other ways, like editing actor spawn location
+        if (gSaveManager.mPracticeFileOpts.inject_options_after_load) {
+            gSaveManager.mPracticeFileOpts.inject_options_after_load();
+        }
+        s_injectSave = false;
     }
 }

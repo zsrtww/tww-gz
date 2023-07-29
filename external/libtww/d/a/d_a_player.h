@@ -12,5 +12,6 @@ public:
 #define l_debug_current_angle (*(csXyz*)(l_debug_current_angle_addr))
 #define l_debug_shape_angle (*(csXyz*)(l_debug_shape_angle_addr))
 #define l_pointer_base_address (*(u32**)(l_pointer_addr))
+#define l_equipped_arrow_type (*(u8*)(l_equipped_arrow_type_addr))
 
 #endif /* D_A_PLAYER */

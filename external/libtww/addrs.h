@@ -132,6 +132,7 @@
 #define l_debug_current_angle_addr 0x803ea3c8
 #define l_debug_shape_angle_addr 0x803ea3d0
 #define l_pointer_addr 0x803ad860
+#define l_equipped_arrow_type_addr 0x803ea04c
 
 #endif
 
@@ -258,5 +259,6 @@
 #define l_debug_keep_pos_addr 0x803e440c
 #define l_debug_current_angle_addr 0x803f6f10
 #define l_debug_shape_angle_addr 0x803f6f18
+#define l_equipped_arrow_type_addr 0x803f6b7c
 
 #endif
