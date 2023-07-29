@@ -6,8 +6,8 @@
 Cursor AnyNoMssSavesMenu::cursor;
 
 Line lines[LINE_NUM] = {
-    {"after intro", AFTER_INTRO, "just after the intro, on top of watchtower"},
-    {"orca", ORCA, "inside orca\'s house before sword tutorial"},
+    {"after intro", AFTER_INTRO, "just after the intro, at bottom of watchtower"},
+    {"orca", ORCA, "inside orca\'s house, about to do sword tutorial"},
     {"forest of fairies", FOREST_OF_FAIRIES, "inside forest of fairies, about to rescue tetra"},
     {"ropes 1", ROPES_1, "inside pirate ship, about to play ropes 1 minigame"},
     {"forsaken fortress 1", FF1, "at start of ff1, before gossip stone cutscene"},
@@ -18,12 +18,12 @@ Line lines[LINE_NUM] = {
     {"deku tree cutscene skip", DTCS, "at forest haven, about to do dtcs"},
     {"quiver swim", QUIVER_SWIM, "at forest haven, about to swim to thorned fairy island"},
     {"ff2 swim", FF2_SWIM, "at thorned fairy island, about to swim to ff2"},
-    {"helmaroc skip", HELMAROC_SKIP, "inside ff2 tower, about to rescue aryll"},
-    {"barrier skip", BARRIER_SKIP, "outside hyrule castle, about to barrier skip"},
-    {"trials skip", TRIALS_SKIP, "inside ganon's tower, about to trials skip"},
-    {"puppet ganon fight", PG_FIGHT, "inside puppet ganon room, about to fight puppet ganon"},
-    {"morth hover", MORTH_HOVER, "inside puppet ganon room after fight, pot lid already open"},
-    {"ganondorf", GANONDORF, "on top of ganon\'s tower, about to fight ganondorf"},
+    {"helmaroc skip", HELMAROC_SKIP, "inside ff2 tower, at start of helmaroc king fight"},
+    {"barrier skip", BARRIER_SKIP, "outside hyrule castle, about to do barrier skip"},
+    {"trials skip", TRIALS_SKIP, "inside ganon's tower, about to do trials skip"},
+    {"puppet ganon fight", PG_FIGHT, "inside ganondorf\'s bedroom, at start of puppet ganon fight"},
+    {"morth hover", MORTH_HOVER, "inside ganondorf\'s bedroom after fight, at top of room"},
+    {"ganondorf", GANONDORF, "on top of ganondorf\'s tower, at start of ganondorf fight"},
 };
 
 void AnyNoMssSavesMenu::draw() {

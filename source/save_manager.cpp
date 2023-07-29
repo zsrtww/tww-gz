@@ -2,7 +2,6 @@
 #include "fs.h"
 #include "libtww/dolphin/os/OSCache.h"
 #include "menus/settings_menu.h"
-#include "memfiles.h"
 #include "save_manager.h"
 #include "menu.h"
 #include "utils/card.h"

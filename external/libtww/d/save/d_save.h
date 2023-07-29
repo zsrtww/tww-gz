@@ -148,10 +148,6 @@ enum ItemTable {
     NO_ITEM = 0xFF
 };
 
-enum Flags {
-    DEMO23 = 45,
-};
-
 class dSv_player_status_a_c {
 public:
     u16& getMaxLife() { return mMaxLife; }
@@ -406,22 +402,22 @@ public:
     dSv_player_bag_item_record_c& getBagItemRecord() { return mBagItemRecord; }
     dSv_player_config_c& getConfig() { return mConfig; }
 
-    /* 0x000 */ dSv_player_status_a_c mPlayerStatusA;               // 0x803b8108
-    /* 0x018 */ dSv_player_status_b_c mPlayerStatusB;               // 0x803b8120
-    /* 0x030 */ dSv_player_return_place_c mPlayerReturnPlace;       // 0x803b8138
-    /* 0x03C */ dSv_player_item_c mPlayerItem;                      // 0x803b8144
-    /* 0x051 */ dSv_player_get_item_c mGetItem;                     // 0x803b8159
-    /* 0x066 */ dSv_player_item_record_c mItemRecord;               // 0x803b816e
-    /* 0x06E */ dSv_player_item_max_c mItemMax;                     // 0x803b8176
-    /* 0x076 */ dSv_player_bag_item_c mBagItem;                     // 0x803b817e
-    /* 0x090 */ dSv_player_get_bag_item_c mGetBagItem;              // 0x803b8198
-    /* 0x09C */ dSv_player_bag_item_record_c mBagItemRecord;        // 0x803b81a4
-    /* 0x0B4 */ dSv_player_collect_c mCollect;                      // 0x803b81bc
-    /* 0x0C4 */ dSv_player_map_c mMap;                              // 0x803b81cc
-    /* 0x148 */ dSv_player_info_c mInfo;                            // 0x803b8250
-    /* 0x1A4 */ dSv_player_config_c mConfig;                        // 0x803b82ac
-    /* 0x1AC */ dSv_player_priest_c mPriest;                        // 0x803b82b4
-    /* 0x1BC */ dSv_player_status_c_c mStatusC[4];                  // 0x803b82c4
+    /* 0x000 */ dSv_player_status_a_c mPlayerStatusA;
+    /* 0x018 */ dSv_player_status_b_c mPlayerStatusB;
+    /* 0x030 */ dSv_player_return_place_c mPlayerReturnPlace;
+    /* 0x03C */ dSv_player_item_c mPlayerItem;
+    /* 0x051 */ dSv_player_get_item_c mGetItem;
+    /* 0x066 */ dSv_player_item_record_c mItemRecord;
+    /* 0x06E */ dSv_player_item_max_c mItemMax;
+    /* 0x076 */ dSv_player_bag_item_c mBagItem;
+    /* 0x090 */ dSv_player_get_bag_item_c mGetBagItem;
+    /* 0x09C */ dSv_player_bag_item_record_c mBagItemRecord;
+    /* 0x0B4 */ dSv_player_collect_c mCollect;
+    /* 0x0C4 */ dSv_player_map_c mMap;
+    /* 0x148 */ dSv_player_info_c mInfo;
+    /* 0x1A4 */ dSv_player_config_c mConfig;
+    /* 0x1AC */ dSv_player_priest_c mPriest;
+    /* 0x1BC */ dSv_player_status_c_c mStatusC[4];
 };  // Size: 0x380
 
 static_assert(sizeof(dSv_player_c) == 0x380);
@@ -440,9 +436,6 @@ static_assert(sizeof(dSv_memBit_c) == 0x24);
 
 class dSv_event_c {
 public:
-    u8 getFlag(int index) { return mEvent[index]; }
-    void setFlag(int index, u8 flag_setting) { mEvent[45] = flag_setting; }
-
     /* 0x0 */ u8 mEvent[256];
 };  // Size: 0x100
 
@@ -550,7 +543,7 @@ public:
 
     static const int STAGE_MAX = 16;
 
-    /* 0x000 */ dSv_player_c mPlayer;               // 0x803b8108
+    /* 0x000 */ dSv_player_c mPlayer;
     /* 0x380 */ dSv_memory_c mSave[STAGE_MAX];
     /* 0x5C0 */ dSv_ocean_c mOcean;
     /* 0x624 */ dSv_event_c mEvent;

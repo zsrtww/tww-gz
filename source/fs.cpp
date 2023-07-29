@@ -10,11 +10,9 @@ void loadFile(const char* filePath, void* buffer, signed long length, signed lon
         if (bytesRead > 0) {
             DVDClose(&fileInfo);
         } else {
-            //OSReport("no bytes read!");
-            Font::GZ_drawStr("no bytes read!", 20.f, 300.f, 0xFFFFFFFF, false);
+            OSReport("no bytes read!");
         }
     } else {
-        //OSReport("failed to open file %s", filePath);
-        Font::GZ_drawStr("failed to open file", 20.f, 300.f, 0xFFFFFFFF, false);
+        OSReport("failed to open file %s", filePath);
     }
 }
