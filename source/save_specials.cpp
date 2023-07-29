@@ -29,6 +29,16 @@ void SaveMngSpecial_Windfall_Day0() {
     g_dComIfG_gameInfo.play.mNextStage.setLayer(0);
 }
 
+void SaveMngSpecial_DTCS() {
+    gSaveManager.injectDefault_during();
+    g_dComIfG_gameInfo.play.mNextStage.setPoint(5);
+}
+
+void SaveMngSpecial_ExitThornedFairy() {
+    gSaveManager.injectDefault_during();
+    g_dComIfG_gameInfo.play.mNextStage.setPoint(1);
+}
+
 void SaveMngSpecial_HelmarocKing() {
     gSaveManager.injectDefault_during();
     g_dComIfG_gameInfo.play.mNextStage.setLayer(3);
@@ -36,9 +46,14 @@ void SaveMngSpecial_HelmarocKing() {
 
 void SaveMngSpecial_Hyrule2_BarrierSkip() {
     gSaveManager.injectDefault_during();
-    g_dComIfG_gameInfo.play.mNextStage.setName("Hyrule");
+    g_dComIfG_gameInfo.play.mNextStage.setName((char*) "Hyrule");
     g_dComIfG_gameInfo.play.mNextStage.setPoint(3);
     g_dComIfG_gameInfo.play.mNextStage.setLayer(2);
+}
+
+void SaveMngSpecial_TrialsSkip() {
+    gSaveManager.injectDefault_during();
+    g_dComIfG_gameInfo.play.mNextStage.setRoomNo(1);
 }
 
 void SaveMngSpecial_PuppetGanon() {
