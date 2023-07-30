@@ -178,6 +178,7 @@ public:
     /* 0x14 */ u8 mMagic;
     /* 0x15 */ u8 field_0x15;
     /* 0x16 */ u8 field_0x16;
+    /* 0x17 */ u8 padding;
 };  // Size: 0x18
 
 static_assert(sizeof(dSv_player_status_a_c) == 0x18);
@@ -193,6 +194,7 @@ public:
     /* 0x10 */ u16 mDate;
     /* 0x12 */ s16 mTactWindAngleX;
     /* 0x14 */ s16 mTactWindAngleY;
+    /* 0x16 */ u8 padding[2];
 };  // Size: 0x18
 
 static_assert(sizeof(dSv_player_status_b_c) == 0x18);
@@ -340,7 +342,7 @@ public:
 
     /* 0x00 */ u8 field_0x0[0x10];
     /* 0x10 */ u16 field_0x10;
-    /* 0x10 */ u16 field_0x12;
+    /* 0x12 */ u16 field_0x12;
     /* 0x14 */ char mPlayerName[17];
     /* 0x25 */ char field_0x25[17];
     /* 0x36 */ char field_0x36[17];
@@ -587,5 +589,11 @@ typedef void (*dSv_player_return_place_c__set_t)(void* _this, char const* i_name
                                                  s8 pointNo);
 #define dSv_player_return_place_c__set                                                             \
     ((dSv_player_return_place_c__set_t)dSv_player_return_place_c__set_addr)
+
+typedef void (*tww_getSave)(void* addr, int32_t areaID);
+#define tww_getSave ((tww_getSave)tww_getSave_addr)
+
+typedef void (*tww_putSave)(void* addr, int32_t areaID);
+#define tww_putSave ((tww_putSave)tww_putSave_addr)
 
 #endif /* D_SAVE_D_SAVE_H */

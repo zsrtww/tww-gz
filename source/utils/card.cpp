@@ -1,4 +1,5 @@
 #include "utils/card.h"
+#include "save_manager.h"
 #include "math.h"
 #include "menus/settings_menu.h"
 #include "libtww/MSL_C/math/s_ceil.h"

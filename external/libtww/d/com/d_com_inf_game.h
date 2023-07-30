@@ -175,6 +175,9 @@ static_assert(sizeof(dComIfG_inf_c) == 0x1d1c8);
 
 #define g_dComIfG_gameInfo (*(dComIfG_inf_c*)(g_dComIfG_gameInfo_addr))
 
+typedef int (*tww_getLayerNo)(const char* stageName, int roomId, int layerOverride);
+#define tww_getLayerNo ((tww_getLayerNo)tww_getLayerNo_addr)
+
 inline daPy_lk_c* dComIfGp_getPlayer() {
     return g_dComIfG_gameInfo.play.mPlayerPtr;
 }
@@ -424,6 +427,14 @@ inline void dComIfGs_onEventBit(uint16_t flag) {
 
 inline void dComIfGs_offEventBit(uint16_t flag) {
     dSv_event_c__offEventBit(&g_dComIfG_gameInfo.info.mSavedata.mEvent, flag);
+}
+
+inline void dComIfGs_getSave(int i_stageNo) {
+    tww_getSave(&g_dComIfG_gameInfo.info, i_stageNo);
+}
+
+inline void dComIfGs_putSave(int i_stageNo) {
+    tww_putSave(&g_dComIfG_gameInfo.info, i_stageNo);
 }
 
 #endif /* D_COM_D_COM_INF_GAME_H */

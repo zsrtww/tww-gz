@@ -4,6 +4,11 @@
 
 /* init */
 #define tww_memcpy_addr 0x80003490
+#define tww_getSave_addr 0x8005b6e8
+#define tww_putSave_addr 0x8005b7a8
+#define tww_drawScreenPlayer_addr 0x80232de0
+#define tww_getLayerNo_addr 0x80050960
+#define tww_os_report_addr 0x800068ec
 
 /* MSL_C */
 #define tww_strlen_addr 0x8032b798
@@ -127,6 +132,7 @@
 #define l_debug_current_angle_addr 0x803ea3c8
 #define l_debug_shape_angle_addr 0x803ea3d0
 #define l_pointer_addr 0x803ad860
+#define l_equipped_arrow_type_addr 0x803ea04c
 
 #endif
 
@@ -253,5 +259,6 @@
 #define l_debug_keep_pos_addr 0x803e440c
 #define l_debug_current_angle_addr 0x803f6f10
 #define l_debug_shape_angle_addr 0x803f6f18
+#define l_equipped_arrow_type_addr 0x803f6b7c
 
 #endif
