@@ -6,7 +6,7 @@
 #include "libtww/d/com/d_com_inf_game.h"
 #include "libtww/d/save/d_save.h"
 
-#define NUM_QUEST_ITEMS 25
+#define NUM_QUEST_ITEMS 26
 
 Cursor QuestStatusMenu::cursor;
 
@@ -14,6 +14,7 @@ Line lines[NUM_QUEST_ITEMS] = {
     {"Sword:", MENU_ITEM_SWORD, "Add/remove/upgrade sword"},
     {"Shield:", MENU_ITEM_SHIELD, "Add/remove/upgrade shield"},
     {"Magic:", MENU_ITEM_MAGIC, "Add/remove/upgrade magic"},
+    {"Wallet:", MENU_ITEM_WALLET, "Upgrade/downgrade wallet"},
     {"Quiver:", MENU_ITEM_QUIVER, "Add/remove/upgrade quiver"},
     {"Bomb Bag:", MENU_ITEM_BOMBAG, "Add/remove/upgrade bomb bag"},
     {"Power Bracelets:", MENU_ITEM_POWER_BRACELETS, "Add/remove power bracelets from inventory"},
@@ -101,7 +102,6 @@ const char* get_pearl_string(u8 pearls_owned, u8 pearl) {
     }
 }
 
-
 const char* get_magic_string(u8 magic_value) {
     if (magic_value == 0) {
         return "Empty";
@@ -109,6 +109,19 @@ const char* get_magic_string(u8 magic_value) {
         return "Double Magic";
     } else
         return "Single Magic";
+}
+
+const char* get_wallet_string(u8 wallet_size) {
+    switch (wallet_size) {
+    case WALLET_200:
+        return "Wallet 200";
+    case WALLET_1000:
+        return "Wallet 1000";
+    case WALLET_5000:
+        return "Wallet 5000";
+    default:
+        return "ERROR";
+    }
 }
 
 const char* get_quiver_string(u8 arrows_capacity) {
@@ -259,8 +272,9 @@ void QuestStatusMenu::draw() {
         return;
     }
 
-    u8 new_sword_item_id, new_shield_item_id, new_max_magic_value, new_arrows_capacity,new_bombs_capacity,new_power_bracelets_item_id,
-is_pirates_charm_owned, heros_charm_flag;
+    u8 new_sword_item_id, new_shield_item_id, new_max_magic_value, new_wallet_size,
+        new_arrows_capacity, new_bombs_capacity, new_power_bracelets_item_id,
+        is_pirates_charm_owned, heros_charm_flag;
 
     switch (cursor.y) {
     case MENU_ITEM_SWORD:
@@ -333,6 +347,26 @@ is_pirates_charm_owned, heros_charm_flag;
         }
         dComIfGs_setMagic(new_max_magic_value);
         dComIfGs_setMaxMagic(new_max_magic_value);
+        break;
+    case MENU_ITEM_WALLET:
+        new_wallet_size = g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusA().getWalletSize();
+        Cursor::moveListSimple(new_wallet_size);
+        if (new_wallet_size == WALLET_200 - 1) {
+            new_wallet_size = WALLET_200;
+        } else if (new_wallet_size == WALLET_200 + 1) {
+            new_wallet_size = WALLET_1000;
+        } else if (new_wallet_size == WALLET_1000 - 1) {
+            new_wallet_size = WALLET_200;
+        } else if (new_wallet_size == WALLET_1000 + 1) {
+            new_wallet_size = WALLET_5000;
+        } else if (new_wallet_size == WALLET_5000 - 1) {
+            new_wallet_size = WALLET_1000;
+        } else if (new_wallet_size == WALLET_5000 + 1) {
+            new_wallet_size = WALLET_5000;
+        } else {
+            new_wallet_size = g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusA().getWalletSize();
+        }
+        g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusA().setWalletSize(new_wallet_size);
         break;
     case MENU_ITEM_POWER_BRACELETS:
         new_power_bracelets_item_id = dComIfGs_getPowerBracelets();
@@ -479,6 +513,8 @@ is_pirates_charm_owned, heros_charm_flag;
     tww_sprintf(lines[MENU_ITEM_SWORD].value, " <%s>", item_id_to_str(dComIfGs_getSword()));
     tww_sprintf(lines[MENU_ITEM_SHIELD].value, " <%s>", item_id_to_str(dComIfGs_getShield()));
     tww_sprintf(lines[MENU_ITEM_MAGIC].value, " <%s>", get_magic_string(dComIfGs_getMaxMagic()));
+    tww_sprintf(lines[MENU_ITEM_WALLET].value, " <%s>",
+                get_wallet_string(g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusA().getWalletSize()));
     tww_sprintf(lines[MENU_ITEM_QUIVER].value, " <%s>", get_quiver_string(dComIfGs_getArrowCapacity()));
     tww_sprintf(lines[MENU_ITEM_BOMBAG].value, " <%s>", get_bombags_string(dComIfGs_getBombCapacity()));
     tww_sprintf(lines[MENU_ITEM_POWER_BRACELETS].value, " <%s>",

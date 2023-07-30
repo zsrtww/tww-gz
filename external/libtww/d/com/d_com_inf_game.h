@@ -309,14 +309,6 @@ inline void dComIfGs_setMagic(uint8_t amount) {
     g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusA().setMagic(amount);
 }
 
-inline uint16_t dComIfGs_getRupee() {
-    return g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusA().getRupee();
-}
-
-inline void dComIfGs_setRupee(uint16_t amount) {
-    g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusA().setRupee(amount);
-}
-
 inline void dComIfGs_setForestWaterTimer(uint16_t frames) {
     g_dComIfG_gameInfo.info.getPlayer().getItemRecord().setForestWaterTimer(frames);
 }
