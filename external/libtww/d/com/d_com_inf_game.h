@@ -317,6 +317,14 @@ inline void dComIfGs_setRupee(uint16_t amount) {
     g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusA().setRupee(amount);
 }
 
+inline float dComIfGs_getTime() {
+    return g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusB().getTime();
+}
+
+inline float dComIfGs_getDate() {
+    return g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusB().getDate();
+}
+
 inline void dComIfGs_setForestWaterTimer(uint16_t frames) {
     g_dComIfG_gameInfo.info.getPlayer().getItemRecord().setForestWaterTimer(frames);
 }
@@ -433,5 +441,30 @@ inline void dComIfGs_onEventBit(uint16_t flag) {
 inline void dComIfGs_offEventBit(uint16_t flag) {
     dSv_event_c__offEventBit(&g_dComIfG_gameInfo.info.mSavedata.mEvent, flag);
 }
+
+inline bool dComIfGs_isDungeonItem(int stage, int flag) {
+    return isDungeonItem__12dSv_memBit_cFi(&g_dComIfG_gameInfo.info.mSavedata.mSave[stage].mBit, flag);
+}
+
+inline void dComIfGs_onDungeonItem(int stage,int flag) {
+    onDungeonItem__12dSv_memBit_cFi(&g_dComIfG_gameInfo.info.mSavedata.mSave[stage].mBit, flag);
+}
+
+inline void dComIfGs_offDungeonItem(int stage, int flag) {
+    g_dComIfG_gameInfo.info.mSavedata.mSave[stage].mBit.offDungeonItem(flag);
+}
+
+inline u8 dComIfGs_getKeyNum(int stage) {
+    return g_dComIfG_gameInfo.info.mSavedata.mSave[stage].mBit.getKeyNum();
+}
+
+inline void dComIfGs_setKeyNum(int stage, int num) {
+    g_dComIfG_gameInfo.info.mSavedata.mSave[stage].mBit.setKeyNum(num);
+}
+
+inline void dComIfGs_getSave(int stage) {
+    getSave__10dSv_info_cFi(&g_dComIfG_gameInfo.info, stage);
+}
+
 
 #endif /* D_COM_D_COM_INF_GAME_H */

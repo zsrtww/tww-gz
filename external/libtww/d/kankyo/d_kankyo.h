@@ -265,6 +265,15 @@ static_assert(sizeof(dScnKy_env_light_c) == 0xC9C);
 
 #define g_env_light (*(dScnKy_env_light_c*)g_env_light_addr)
 
+typedef int (*dKy_getdaytime_minute)();
+#define dKy_getdaytime_minute ((dKy_getdaytime_minute) dKy_getdaytime_minute_addr)
+
+typedef int (*dKy_getdaytime_hour)();
+#define dKy_getdaytime_hour ((dKy_getdaytime_hour) dKy_getdaytime_hour_addr)
+
+typedef int (*dKy_moon_type_chk)();
+#define dKy_moon_type_chk ((dKy_moon_type_chk) dKy_moon_type_chk_addr)
+
 inline s16 dkankyo_getWindDir() {
     return g_env_light.mTactWindAngleY;
 }

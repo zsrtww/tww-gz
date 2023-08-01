@@ -5,24 +5,20 @@
 #include "libtww/m_Do/m_Do_main.h"
 #include "controller.h"
 
-enum SceneMenuIndex {
-    MODIFY_WIND_INDEX,
-    TIME_DISP_INDEX,
- //   DUNGEON_INDEX,
+enum DungeonMenuIndex {
+    PICK_DUNGEON_INDEX,
+    MODIFY_KEYS_INDEX,
+    BOSS_KEY_INDEX,
+    MAP_INDEX,
+    COMPASS_INDEX,
+    PARTNER_INDEX,
 };
 
-struct GZScene {
-    int index;
-    bool active;
-};
 
-extern GZScene g_scene[2];
-
-class SceneMenu : public Menu {
+class DungeonMenu : public Menu {
 public:
-    SceneMenu() : Menu() {}
+    DungeonMenu() : Menu() {}
     static void draw();
-    static void displayTimeInfo();
 
     static Cursor cursor;
 };

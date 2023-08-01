@@ -12,12 +12,17 @@
 #include "commands.h"
 #include "libtww/d/kankyo/d_kankyo.h"
 
-#define LINE_NUM 1
+#define LINE_NUM 2
 Cursor SceneMenu::cursor;
+
+GZScene g_scene[2] = {
+    {MODIFY_WIND_INDEX,false},{TIME_DISP_INDEX, false},
+};
 
 Line lines[LINE_NUM] = {
     {"modify wind direction", MODIFY_WIND_INDEX, "Change the current wind direction (currently broken)"},
-
+    {"display time info", TIME_DISP_INDEX, "Display current day, time and moon phase", true,
+     &g_scene[TIME_DISP_INDEX].active},
 };
 
 s16 windDirs[8] = { 0, 32, 64, 96, 128, 160, 192, 224 };
@@ -41,6 +46,8 @@ const char* get_wind_str() {
         return "North";
     case 224:
         return "North East";
+    default:
+        return "East";
     };
 }
 
@@ -60,6 +67,33 @@ void updateWindDir() {
     dkankyo_setWindDir(windDirs[wIndex]);
 }
 
+void SceneMenu::displayTimeInfo() {
+    int hour = dKy_getdaytime_hour();
+    int min = dKy_getdaytime_minute();
+    int moonid = dKy_moon_type_chk();
+    int date = dComIfGs_getDate();
+
+    char moonphases[7][20] = {"Full",
+                              "Waning Gibbous",
+                              "Last Quarter",
+                              "Waning Crescent",
+                              "Waxing Crescent",
+                              "First Quarter",
+                              "Waxing Gibbous"};
+
+    char Time[10];
+    char Date[10];
+    char Moon[20];
+
+    tww_sprintf(Time, "%02d:%02d", hour, min);
+    tww_sprintf(Date, "date: %d", date);
+    tww_sprintf(Moon, "Moon: %d", moonphases[0]);
+
+    Font::GZ_drawStr(Time, 450.f, 300.f, ColorPalette::WHITE, g_dropShadows);
+    Font::GZ_drawStr(Date, 450.f, 320.f, ColorPalette::WHITE, g_dropShadows);
+    Font::GZ_drawStr(moonphases[moonid], 450.f, 340.f, ColorPalette::WHITE, g_dropShadows);
+}
+
 void SceneMenu::draw() {
     cursor.setMode(Cursor::MODE_LIST);
 
@@ -72,8 +106,12 @@ void SceneMenu::draw() {
     case MODIFY_WIND_INDEX:
         updateWindDir();
         break;
+    case TIME_DISP_INDEX:
+        if (GZ_getButtonTrig(GZPad::A)) {
+            g_scene[cursor.y].active = !g_scene[cursor.y].active;
+        }
+        break;
 
-        GZ_drawMenuLines(lines, cursor.y, LINE_NUM);
     }
     tww_sprintf(lines[MODIFY_WIND_INDEX].value, " <%s>", get_wind_str());
     cursor.move(0, LINE_NUM);

@@ -184,6 +184,7 @@ class dSv_player_status_b_c {
 public:
     void setTime(float pTime) { mTime = pTime; }
     float getTime() const { return mTime; }
+    u16 getDate() const { return mDate; }
 
     /* 0x00 */ u64 mDateIPL;
     /* 0x08 */ f32 field_0x8;
@@ -422,11 +423,15 @@ static_assert(sizeof(dSv_player_c) == 0x380);
 
 class dSv_memBit_c {
 public:
+    void setKeyNum(int num) { mKeyNum = num; }
+    u8& getKeyNum() { return mKeyNum; }
+    void offDungeonItem(int flag) { mDungeonItem &= ~(1 << flag); }
+ //   void onDungeonSwitch(int flag) { mSwitch[flag >> 5] = mSwitch[flag >> 5] | 1 << (flag & 0x1F); }
     /* 0x00 */ u32 mTbox;
     /* 0x04 */ u32 mSwitch[4];
     /* 0x14 */ u32 mItem;
     /* 0x18 */ u32 mVisitedRoom[2];
-    /* 0x20 */ u8 field_0x20;
+    /* 0x20 */ u8 mKeyNum;
     /* 0x21 */ u8 mDungeonItem;
 };  // Size: 0x24
 
@@ -539,7 +544,7 @@ public:
     dSv_memory_c& getSave(int i_stageNo) { return mSave[i_stageNo]; }
     void putSave(int i_stageNo, dSv_memory_c mem) { mSave[i_stageNo] = mem; }
 
-    static const int STAGE_MAX = 16;
+    static const int STAGE_MAX = 16; 
 
     /* 0x000 */ dSv_player_c mPlayer;
     /* 0x380 */ dSv_memory_c mSave[STAGE_MAX];
@@ -585,5 +590,16 @@ typedef void (*dSv_player_return_place_c__set_t)(void* _this, char const* i_name
                                                  s8 pointNo);
 #define dSv_player_return_place_c__set                                                             \
     ((dSv_player_return_place_c__set_t)dSv_player_return_place_c__set_addr)
+
+typedef void (*onDungeonItem__12dSv_memBit_cFi)(void* addr, int flag);
+#define onDungeonItem__12dSv_memBit_cFi                                                            \
+    ((onDungeonItem__12dSv_memBit_cFi) onDungeonItem__12dSv_memBit_cFi_addr)
+
+typedef int (*isDungeonItem__12dSv_memBit_cFi)(void* addr, int flag);
+#define isDungeonItem__12dSv_memBit_cFi                                                            \
+    ((isDungeonItem__12dSv_memBit_cFi)isDungeonItem__12dSv_memBit_cFi_addr)
+
+typedef void (*getSave__10dSv_info_cFi)(void* addr, int flag);
+#define getSave__10dSv_info_cFi ((getSave__10dSv_info_cFi) getSave__10dSv_info_cFi_addr)
 
 #endif /* D_SAVE_D_SAVE_H */

@@ -16,6 +16,7 @@
 #include "menus/cheat_menu.h"
 #include "menus/memory_menu.h"
 #include "menus/scene_menu.h"
+#include "menus/dungeon_menu.h"
 
 #include "menus/memory_editor_menu.h"
 #include "menus/watches_menu.h"
@@ -44,7 +45,9 @@ menu_render_t l_menuDrawList[MENU_NUM] = {
     ImportantFlagMenu::draw,
     CutsceneFlagMenu::draw,
     KorlFlagMenu::draw,
-    SavewarpFlagMenu::draw
+    SavewarpFlagMenu::draw,
+
+    DungeonMenu::draw,
 };
 
 menu_render_t l_currentMenu = nullptr;

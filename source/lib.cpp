@@ -13,6 +13,7 @@
 #include "libtww/f_op/f_op_scene_req.h"
 #include "libtww/m_Do/m_Do_main.h"
 #include "menus/tools_menu.h"
+#include "menus/scene_menu.h"
 #include "input_viewer.h"
 
 bool l_loadCard = true;
@@ -135,6 +136,10 @@ void draw() {
 
     if (g_tools[INPUT_VIEWER_INDEX].active) {
         InputViewer::draw();
+    }
+
+    if (g_scene[TIME_DISP_INDEX].active) {
+        SceneMenu::displayTimeInfo();
     }
 
     GZ_drawMenu();
