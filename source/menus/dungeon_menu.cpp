@@ -135,7 +135,7 @@ void DungeonMenu::draw() {
     switch (cursor.y) {
     case PICK_DUNGEON_INDEX:
         cursor.x = l_selDun;
-        cursor.move(5, LINE_NUM);
+        cursor.move(5, MAX_MOVE);
 
         if (cursor.y == PICK_DUNGEON_INDEX) {
             l_selDun = cursor.x;
@@ -185,12 +185,10 @@ void DungeonMenu::draw() {
     if ((area_id != 6) && (area_id != 7)) {
         GZ_drawMenuLines(lines, cursor.y, LINE_NUM - 1);
         if (cursor.y != PICK_DUNGEON_INDEX) {
-         //   cursor.move(0, LINE_NUM - 1);
         }
     } else {
         GZ_drawMenuLines(lines, cursor.y, LINE_NUM);
         if (cursor.y != PICK_DUNGEON_INDEX) {
-      //      cursor.move(0, LINE_NUM);
         }
     }
 
