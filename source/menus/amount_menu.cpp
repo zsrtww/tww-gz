@@ -1,5 +1,6 @@
 #include "controller.h"
 #include "menus/main_menu.h"
+#include "menus/quest_status_menu.h"
 #include "menus/amount_menu.h"
 #include "libtww/MSL_C/string.h"
 #include "libtww/d/com/d_com_inf_game.h"
@@ -44,10 +45,27 @@ void AmountMenu::draw() {
     u16 g_healthNum = dComIfGs_getLife();
     u8 g_bombNum = dComIfGs_getBombNum();
     u8 g_arrowNum = dComIfGs_getArrowNum();
-    u16 g_rupeeNum = dComIfGs_getRupee();
+    u16 g_rupeeNum = g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusA().getRupee();
     u8 g_magicNum = dComIfGs_getMagic();
     u16 g_heartNum = dComIfGs_getMaxLife();
     u8 g_maxMagicNum = dComIfGs_getMaxMagic();
+    u8 g_walletSize = g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusA().getWalletSize();
+
+    u16 max_rupees;
+    switch (g_walletSize) {
+    case WALLET_200:
+        max_rupees = 200;
+        break;
+    case WALLET_1000:
+        max_rupees = 1000;
+        break;
+    case WALLET_5000:
+        max_rupees = 5000;
+        break;
+    default:
+        max_rupees = 200;
+        break;
+    }
 
     if (GZ_getButtonTrig(GZPad::B)) {
         GZ_setMenu(GZ_INVENTORY_MENU);
@@ -96,12 +114,12 @@ void AmountMenu::draw() {
     case RUPEE_INDEX:
         Cursor::moveList(g_rupeeNum);
         if (g_rupeeNum == 0xFFFF) {
-            g_rupeeNum = 5000;
+            g_rupeeNum = max_rupees;
         }
-        if (g_rupeeNum > 5000) {
+        if (g_rupeeNum > max_rupees) {
             g_rupeeNum = 0;
         }
-        dComIfGs_setRupee(g_rupeeNum);
+        g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusA().setRupee(g_rupeeNum);
         break;
     case MAGIC_INDEX:
         Cursor::moveList(g_magicNum);

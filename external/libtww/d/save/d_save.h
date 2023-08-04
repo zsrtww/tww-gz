@@ -152,6 +152,7 @@ class dSv_player_status_a_c {
 public:
     u16& getMaxLife() { return mMaxLife; }
     u8& getMaxMagic() { return mMaxMagic; }
+    u8& getWalletSize() { return mWalletSize; }
     u16& getLife() { return mLife; }
     u8& getMagic() { return mMagic; }
     u16& getRupee() { return mRupee; }
@@ -160,6 +161,7 @@ public:
     void setMagic(u8 magic) { mMagic = magic; }
     void setMaxMagic(u8 max) { mMaxMagic = max; }
     void setRupee(u16 rupees) { mRupee = rupees; }
+    void setWalletSize(u8 size) { mWalletSize = size; }
     void setLife(u16 life) { mLife = life; }
     void setMaxLife(u16 max) { mMaxLife = max; }
     void setSelectEquip(int item_index, u8 item) { mSelectEquip[item_index] = item; }
@@ -176,6 +178,7 @@ public:
     /* 0x14 */ u8 mMagic;
     /* 0x15 */ u8 field_0x15;
     /* 0x16 */ u8 field_0x16;
+    /* 0x17 */ u8 padding;
 };  // Size: 0x18
 
 static_assert(sizeof(dSv_player_status_a_c) == 0x18);
@@ -192,6 +195,7 @@ public:
     /* 0x10 */ u16 mDate;
     /* 0x12 */ s16 mTactWindAngleX;
     /* 0x14 */ s16 mTactWindAngleY;
+    /* 0x16 */ u8 padding[2];
 };  // Size: 0x18
 
 static_assert(sizeof(dSv_player_status_b_c) == 0x18);
@@ -339,7 +343,7 @@ public:
 
     /* 0x00 */ u8 field_0x0[0x10];
     /* 0x10 */ u16 field_0x10;
-    /* 0x10 */ u16 field_0x12;
+    /* 0x12 */ u16 field_0x12;
     /* 0x14 */ char mPlayerName[17];
     /* 0x25 */ char field_0x25[17];
     /* 0x36 */ char field_0x36[17];

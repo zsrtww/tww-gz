@@ -19,6 +19,9 @@ enum {
     GZ_SETTINGS_MENU,
     GZ_TOOLS_MENU,
 
+    /* Practice Sub-Menus */
+    GZ_ANY_NO_MSS_SAVES_MENU,
+
     /* Memory Sub-Menus */
     GZ_MEM_EDITOR_MENU,
     GZ_WATCHES_MENU,

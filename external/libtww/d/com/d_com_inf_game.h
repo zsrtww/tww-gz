@@ -175,6 +175,9 @@ static_assert(sizeof(dComIfG_inf_c) == 0x1d1c8);
 
 #define g_dComIfG_gameInfo (*(dComIfG_inf_c*)(g_dComIfG_gameInfo_addr))
 
+typedef int (*tww_getLayerNo)(const char* stageName, int roomId, int layerOverride);
+#define tww_getLayerNo ((tww_getLayerNo)tww_getLayerNo_addr)
+
 inline daPy_lk_c* dComIfGp_getPlayer() {
     return g_dComIfG_gameInfo.play.mPlayerPtr;
 }
