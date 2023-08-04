@@ -30,6 +30,7 @@ menu_render_t l_menuDrawList[MENU_NUM] = {
     InventoryMenu::draw,
     MemoryMenu::draw,
     SceneMenu::draw,
+    PracticeMenu::draw,
     SettingsMenu::draw,
     ToolsMenu::draw,
 

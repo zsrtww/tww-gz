@@ -462,9 +462,14 @@ inline void dComIfGs_setKeyNum(int stage, int num) {
     g_dComIfG_gameInfo.info.mSavedata.mSave[stage].mBit.setKeyNum(num);
 }
 
-inline void dComIfGs_getSave(int stage) {
-    getSave__10dSv_info_cFi(&g_dComIfG_gameInfo.info, stage);
+inline void dComIfGs_getSave(int i_stageNo) {
+    tww_getSave(&g_dComIfG_gameInfo.info, i_stageNo);
 }
+
+inline void dComIfGs_putSave(int i_stageNo) {
+    tww_putSave(&g_dComIfG_gameInfo.info, i_stageNo);
+}
+
 
 
 #endif /* D_COM_D_COM_INF_GAME_H */
