@@ -8,7 +8,6 @@
 enum SceneMenuIndex {
     MODIFY_WIND_INDEX,
     TIME_DISP_INDEX,
- //   DUNGEON_INDEX,
 };
 
 struct GZScene {

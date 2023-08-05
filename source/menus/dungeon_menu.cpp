@@ -144,7 +144,7 @@ void DungeonMenu::draw() {
         selectDungeon();
         break;
     case MODIFY_KEYS_INDEX:
-        cursor.move(0, LINE_NUM);
+        cursor.move(0, MAX_MOVE);
         modifyKeys(area_id);
         break;
     default:
@@ -184,12 +184,8 @@ void DungeonMenu::draw() {
 
     if ((area_id != 6) && (area_id != 7)) {
         GZ_drawMenuLines(lines, cursor.y, LINE_NUM - 1);
-        if (cursor.y != PICK_DUNGEON_INDEX) {
-        }
     } else {
         GZ_drawMenuLines(lines, cursor.y, LINE_NUM);
-        if (cursor.y != PICK_DUNGEON_INDEX) {
-        }
     }
 
 }
