@@ -110,6 +110,9 @@
 
 /* d_kankyo */
 #define g_env_light_addr 0x803d7fa4
+#define dKy_getdaytime_minute_addr 0x8018d584
+#define dKy_getdaytime_hour_addr 0x8018d558
+#define dKy_moon_type_chk_addr 0x80193cb4  
 
 /* d_com_inf_game */
 #define g_dComIfG_gameInfo_addr 0x803b8108
@@ -120,6 +123,9 @@
 #define dSv_event_c__isEventBit_addr 0x8005a954
 #define dSv_event_c__onEventBit_addr 0x8005a924
 #define dSv_event_c__offEventBit_addr 0x8005a93c
+#define onDungeonItem__12dSv_memBit_cFi_addr 0x8005a5c4
+#define isDungeonItem__12dSv_memBit_cFi_addr 0x8005a664
+#define getSave__10dSv_info_cFi_addr 0x8005b6e8
 
 /* d_stage */
 #define dStage_roomControl_c__mStayNo_addr 0x803e9f48

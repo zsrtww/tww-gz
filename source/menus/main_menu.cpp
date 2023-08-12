@@ -42,7 +42,7 @@ void MainMenu::draw() {
             GZ_setMenu(GZ_PRACTICE_MENU);
             return;
         case SCENE_INDEX:
-            //GZ_setMenu(GZ_SCENE_MENU);
+            GZ_setMenu(GZ_SCENE_MENU);
             return;
         case SETTINGS_INDEX:
             GZ_setMenu(GZ_SETTINGS_MENU);

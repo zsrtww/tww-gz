@@ -9,7 +9,7 @@ enum FlagMenuIndex {
     KORL_FLAG_INDEX,
     SAVEWARP_FLAG_INDEX,
     QUEST_FLAG_INDEX,
-    
+    DUNGEON_FLAG_INDEX,
 };
 
 class FlagMenu : public Menu {
