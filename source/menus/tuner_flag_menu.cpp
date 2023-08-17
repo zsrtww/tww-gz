@@ -10,7 +10,7 @@ int cursorOffset;
 
 
 Line lines[LINE_NUM] = {
-    {"Kooloo-Limpah Item", KOOLOO_LIMPAH, "Unlocks Kooloo-Limpah in tuner shop", true,
+    {"Kooloo-Limpah 10s Balloon+Shield", KOOLOO_LIMPAH, "Adds the 10s Balloon+Shield to the Kooloo-Limpah pool", true,
         &g_flags[KOOLOO_LIMPAH]},
     {"Tingle Balloon Discount", BALLOON_DISCOUNT, "Gives Tingle Balloon Discount from 30 to 20 rupees", true,
         &g_flags[BALLOON_DISCOUNT]},
