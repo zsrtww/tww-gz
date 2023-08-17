@@ -45,7 +45,9 @@ void SaveManager::injectDefault_before() {
     g_dComIfG_gameInfo.play.mNextStage.wipe = 0;
 }
 
-void SaveManager::injectDefault_during() {}
+void SaveManager::injectDefault_during() {
+    g_dComIfG_gameInfo.play.mNextStage.setLayer(-1);
+}
 
 void SaveManager::injectDefault_after() {}
 
