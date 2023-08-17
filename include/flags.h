@@ -3,24 +3,20 @@
 
 #include "libtww/dolphin/gctypes.h"
 
-#define FLAG_AMNT 12
-#define CUTSCENE_FLAG_OFFSET 3
-#define KORL_FLAG_OFFSET 6
-#define SAVEWARP_FLAG_OFFSET 7
+#define FLAG_AMNT 17
+#define SAVEWARP_FLAG_OFFSET 8
+#define TUNER_FLAG_OFFSET 13
 
 enum FlagId {
-    /*Important Flags*/
+    /*General Flags*/
     WATCHED_FF2_HELMAROC_CUTSCENE,
-    HAVE_HURRICANE_SPIN,
+    GENERAL_POST_FF1_KORL_CUTSCENE,
     ENDLESS_NIGHT,
-
-    /*Cutscene Flags */
-    ORCA_INTRO_CUTSCENE,
-    PUPPET_GANON_CUTSCENE,
-    COURTYARD_CUTSCENE,
-
-    /*Korl Flags*/
-    MEETING_KORL_CUTSCENE,
+    RAISE_TOTG,
+    LOAD_TOTG_AFTER_T2Z,
+    OPEN_HYRULE3_WARP,
+    DESTROY_HYRULE_BARRIER,
+    OPEN_DARK_PORTAL,
 
     /*Savewarp Flags*/
     LEAVING_OUTSET_CUTSCENE,
@@ -28,6 +24,12 @@ enum FlagId {
     BARREL_LAUNCH_CUTSCENE,
     POST_FF1_KORL_CUTSCENE,
     ENTER_KORL_FIRST_TIME,
+
+    /*Tuner Flags */
+    KOOLOO_LIMPAH,
+    BALLOON_DISCOUNT,
+    TINGS_DISCOUNT,
+    HAND_ME_DOWN_TUNER,
 
 };
 
