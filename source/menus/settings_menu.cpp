@@ -2,7 +2,7 @@
 #include "utils/card.h"
 #include "libtww/MSL_C/string.h"
 
-#define LINE_NUM 6
+#define LINE_NUM 7
 #define MAX_CURSOR_COLOR_OPTIONS 6
 #define MAX_FONT_OPTIONS 7
 
@@ -16,6 +16,7 @@ Line lines[LINE_NUM] = {
     {"font:", FONT_INDEX, "Change font", false, nullptr, MAX_FONT_OPTIONS},
     {"drop shadows", DROP_SHADOWS_INDEX, "Add shadows to all font characters", true,
      &g_dropShadows},
+    {"item equip priorities", ITEM_EQUIP_PRIORITY_INDEX, "Adjust priorities on item equips in practice saves", false},
     {"save card", SAVE_CARD_INDEX, "Save settings to memory card"},
     {"load card", LOAD_CARD_INDEX, "Load settings from memory card"},
     {"delete card", DELETE_CARD_INDEX, "Delete settings on memory card"},
@@ -39,6 +40,9 @@ void SettingsMenu::draw() {
         case DROP_SHADOWS_INDEX:
             g_dropShadows = !g_dropShadows;
             break;
+        case ITEM_EQUIP_PRIORITY_INDEX:
+            GZ_setMenu(GZ_ITEM_EQUIP_PRIORITY_MENU);
+            return;
         case SAVE_CARD_INDEX: {
             static Storage storage;
             storage.file_name = "twwgz01";

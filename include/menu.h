@@ -4,7 +4,7 @@
 #include "utils/cursor.h"
 #include "utils/lines.h"
 
-#define MENU_NUM 21
+#define MENU_NUM 22
 
 enum {
     /* Main Menus */
@@ -18,6 +18,9 @@ enum {
     GZ_PRACTICE_MENU,
     GZ_SETTINGS_MENU,
     GZ_TOOLS_MENU,
+
+    /* Settings Sub-Menus */
+    GZ_ITEM_EQUIP_PRIORITY_MENU,
 
     /* Practice Sub-Menus */
     GZ_ANY_NO_MSS_SAVES_MENU,
