@@ -156,7 +156,8 @@ public:
     u16& getLife() { return mLife; }
     u8& getMagic() { return mMagic; }
     u16& getRupee() { return mRupee; }
-    u8 getSelectEquip(int item) const { return mSelectEquip[item]; }
+    u8 getSelectItem(int item_index) const { return mSelectItem[item_index]; }
+    u8 getSelectEquip(int item_index) const { return mSelectEquip[item_index]; }
 
     void setMagic(u8 magic) { mMagic = magic; }
     void setMaxMagic(u8 max) { mMaxMagic = max; }
@@ -164,6 +165,7 @@ public:
     void setWalletSize(u8 size) { mWalletSize = size; }
     void setLife(u16 life) { mLife = life; }
     void setMaxLife(u16 max) { mMaxLife = max; }
+    void setSelectItem(int item_index, u8 item) { mSelectItem[item_index] = item; }
     void setSelectEquip(int item_index, u8 item) { mSelectEquip[item_index] = item; }
 
     /* 0x00 */ u16 mMaxLife;

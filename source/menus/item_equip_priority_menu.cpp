@@ -1,4 +1,5 @@
 #include "libtww/MSL_C/string.h"
+#include "libtww/d/save/d_save.h"
 #include "menus/item_equip_priority_menu.h"
 #include "menus/settings_menu.h"
 #include "color.h"
@@ -58,6 +59,43 @@ const char* item_enum_to_name(u8 item_enum) {
         return "Skull Hammer";
     default:
         return "No Item";
+    }
+}
+
+u8 item_enum_to_item_slot(u8 item_enum) {
+    switch (item_enum) {
+    case NO_ITEM_EQUIP:
+        return NO_ITEM;
+    case TELESCOPE_EQUIP:
+        return SLOT_TELESCOPE;
+    case SAIL_EQUIP:
+        return SLOT_SAIL;
+    case WIND_WAKER_EQUIP:
+        return SLOT_WIND_WAKER;
+    case GRAPPLING_HOOK_EQUIP:
+        return SLOT_ROPE;
+    case BOOMERANG_EQUIP:
+        return SLOT_BOOMERANG;
+    case DEKU_LEAF_EQUIP:
+        return SLOT_DEKU_LEAF;
+    case TINGLE_TUNER_EQUIP:
+        return SLOT_TUNER;
+    case PROGRESSIVE_PICTO_BOX_EQUIP:
+        return SLOT_CAMERA;
+    case IRON_BOOTS_EQUIP:
+        return SLOT_IRON_BOOTS;
+    case MAGIC_ARMOR_EQUIP:
+        return SLOT_MAGIC_ARMOR;
+    case PROGRESSIVE_BOW_EQUIP:
+        return SLOT_BOW;
+    case BOMBS_EQUIP:
+        return SLOT_BOMB;
+    case HOOKSHOT_EQUIP:
+        return SLOT_HOOKSHOT;
+    case SKULL_HAMMER_EQUIP:
+        return SLOT_HAMMER;
+    default:
+        return NO_ITEM;
     }
 }
 
