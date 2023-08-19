@@ -11,7 +11,7 @@ Cursor GeneralFlagMenu::cursor;
 Line lines[LINE_NUM] = {
     {"FF2 Helmaroc Cutscene", WATCHED_FF2_HELMAROC_CUTSCENE, "Switches to animation set 2, among other things", true,
         &g_flags[WATCHED_FF2_HELMAROC_CUTSCENE]},
-    {"FF1 Gossip Stone Trigger", GOSSIP_STONE_TRIGGER, "Sets Pirate Ship to layer 2 (Ropes 2) and Outset tol layer 4", true,
+    {"FF1 Gossip Stone Trigger", GOSSIP_STONE_TRIGGER, "Sets Pirate Ship to layer 2 (Ropes 2) and Outset to layer 4", true,
         &g_flags[GOSSIP_STONE_TRIGGER]},
     {"Post FF1 KoRL Cutscene", GENERAL_POST_FF1_KORL_CUTSCENE, "Spawns KoRL, sets savewarp to Windfall and FoF to layer 2", true,
         &g_flags[GENERAL_POST_FF1_KORL_CUTSCENE]},
