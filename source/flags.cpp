@@ -25,6 +25,8 @@ void updateFlags() {
     g_flags[DESTROY_HYRULE_BARRIER] = dComIfGs_isEventBit(0x2C02);
     g_flags[LOAD_TOTG_AFTER_T2Z] = dComIfGs_isEventBit(0x1820);
     g_flags[OPEN_HYRULE3_WARP] = dComIfGs_isEventBit(0x2D08);
+    g_flags[GET_HEROES_CLOTHES] = dComIfGs_isEventBit(0x2A80);
+    g_flags[GET_SEA_CHART] = dComIfGs_isEventBit(0x0908);
     g_flags[KOOLOO_LIMPAH] = dComIfGs_isEventBit(0x2E08);
     g_flags[BALLOON_DISCOUNT] = dComIfGs_isEventBit(0x1A10);
     g_flags[TINGS_DISCOUNT] = dComIfGs_isEventBit(0x1A08);

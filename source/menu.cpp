@@ -10,6 +10,7 @@
 #include "menus/quest_status_menu.h"
 #include "menus/delivery_bag_menu.h"
 #include "menus/spoils_bag_menu.h"
+#include "menus/bait_bag_menu.h"
 #include "menus/settings_menu.h"
 #include "menus/tools_menu.h"
 #include "menus/practice_menu.h"
@@ -46,6 +47,7 @@ menu_render_t l_menuDrawList[MENU_NUM] = {
     QuestStatusMenu::draw,
     DeliveryBagMenu::draw,
     SpoilsBagMenu::draw,
+    BaitBagMenu::draw,
 
     GeneralFlagMenu::draw,
     DungeonMenu::draw,

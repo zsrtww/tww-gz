@@ -271,6 +271,8 @@ public:
     void setDeliveryBagSlot(u8 index, u8 has_item) { mDeliveryBag[index] = has_item; }
     u8 getSpoilsBagSlot(u8 index) { return mSpoilsBag[index]; }
     void setSpoilsBagSlot(u8 index, u8 has_item) { mSpoilsBag[index] = has_item; }
+    u8 getBaitBagSlot(u8 index) { return mBaitBag[index]; }
+    void setBaitBagSlot(u8 index, u8 has_item) { mBaitBag[index] = has_item; }
 
     /* 0x00 */ u8 mSpoilsBag[8];
     /* 0x08 */ u8 mBaitBag[8];
@@ -296,6 +298,10 @@ public:
     u8 getSpoilsNum(u8 index) { return mSpoilsBagCounts[index]; }
 
     void setSpoilsNum(u8 index, u8 amount) { mSpoilsBagCounts[index] = amount; }
+
+     u8 getBaitNum(u8 index) { return mSpoilsBagCounts[index]; }
+
+    void setBaitNum(u8 index, u8 amount) { mSpoilsBagCounts[index] = amount; }
 
     /* 0x00 */ u8 mSpoilsBagCounts[8];
     /* 0x08 */ u8 mBaitBagCounts[8];

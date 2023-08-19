@@ -396,6 +396,22 @@ inline void dComIfGs_setSpoilsNum(u8 index, u8 amount) {
     return g_dComIfG_gameInfo.info.getPlayer().getBagItemRecord().setSpoilsNum(index, amount);
 }
 
+inline u8 dComIfGs_getBaitBagSlot(u8 index) {
+    return g_dComIfG_gameInfo.info.getPlayer().getBagItem().getBaitBagSlot(index);
+}
+
+inline void dComIfGs_setBaitBagSlot(u8 index, u8 item_id) {
+    g_dComIfG_gameInfo.info.getPlayer().getBagItem().setBaitBagSlot(index, item_id);
+}
+
+inline u8 dComIfGs_getBaitNum(u8 index) {
+    return g_dComIfG_gameInfo.info.getPlayer().getBagItemRecord().getBaitNum(index);
+}
+
+inline void dComIfGs_setBaitNum(u8 index, u8 amount) {
+    return g_dComIfG_gameInfo.info.getPlayer().getBagItemRecord().setBaitNum(index, amount);
+}
+
 inline u8 dComIfGs_getItemFlag(u8 index) {
     return g_dComIfG_gameInfo.info.getPlayer().getGetItem().getItemFlag(index);
 }

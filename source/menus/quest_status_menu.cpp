@@ -6,7 +6,7 @@
 #include "libtww/d/com/d_com_inf_game.h"
 #include "libtww/d/save/d_save.h"
 
-#define NUM_QUEST_ITEMS 26
+#define NUM_QUEST_ITEMS 27
 
 Cursor QuestStatusMenu::cursor;
 
@@ -16,6 +16,7 @@ Line lines[NUM_QUEST_ITEMS] = {
     {"Magic:", MENU_ITEM_MAGIC, "Add/remove/upgrade magic"},
     {"Wallet:", MENU_ITEM_WALLET, "Upgrade/downgrade wallet"},
     {"Quiver:", MENU_ITEM_QUIVER, "Add/remove/upgrade quiver"},
+    {"Hurricane Spin:", MENU_ITEM_HURRICANE_SPIN, "Add/remove hurricane spin"},
     {"Bomb Bag:", MENU_ITEM_BOMBAG, "Add/remove/upgrade bomb bag"},
     {"Power Bracelets:", MENU_ITEM_POWER_BRACELETS, "Add/remove power bracelets from inventory"},
     {"Pirate\'s Charm:", MENU_ITEM_PIRATES_CHARM, "Add/remove pirate\'s charm from inventory"},
@@ -57,6 +58,17 @@ const char* get_heros_charm_string(u8 has_heros_charm) {
         return "Hero\'s Charm (Disabled)";
     case HEROS_CHARM_ENABLED:
         return "Hero\'s Charm (Enabled)";
+    default:
+        return "Empty";
+    };
+}
+
+const char* get_hurricane_spin_string() {
+    switch (dComIfGs_isEventBit(0x0B20)) {
+    case 0:
+        return "Empty";
+    case 1:
+        return "Hurricane Spin Enabled";
     default:
         return "Empty";
     };
@@ -223,6 +235,17 @@ u8 powerBraceletsIdToPowerBraceletsOwned(u8 power_bracelets_item_id) {
         return 1;
     default:
         return 0;
+    }
+}
+
+void updateHurricaneSpin() {
+    u8 has_hurricane_spin = dComIfGs_isEventBit(0x0B20);
+    s8 position = 0;
+    Cursor::moveListSimple(position);
+    if ((position == 1) && (has_hurricane_spin == 0)) {
+        dComIfGs_onEventBit(0x0B20);
+    } else if ((position == -1) && (has_hurricane_spin == 1)) {
+        dComIfGs_offEventBit(0x0B20);
     }
 }
 
@@ -411,6 +434,9 @@ void QuestStatusMenu::draw() {
         dComIfGs_setArrowNum(new_arrows_capacity);
         dComIfGs_setArrowCapacity(new_arrows_capacity);
         break;
+    case MENU_ITEM_HURRICANE_SPIN:
+        updateHurricaneSpin();
+        break;
     case MENU_ITEM_BOMBAG:
         new_bombs_capacity = dComIfGs_getBombCapacity();
         Cursor::moveListSimple(new_bombs_capacity);
@@ -516,6 +542,7 @@ void QuestStatusMenu::draw() {
     tww_sprintf(lines[MENU_ITEM_WALLET].value, " <%s>",
                 get_wallet_string(g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusA().getWalletSize()));
     tww_sprintf(lines[MENU_ITEM_QUIVER].value, " <%s>", get_quiver_string(dComIfGs_getArrowCapacity()));
+    tww_sprintf(lines[MENU_ITEM_HURRICANE_SPIN].value, " <%s>", get_hurricane_spin_string());
     tww_sprintf(lines[MENU_ITEM_BOMBAG].value, " <%s>", get_bombags_string(dComIfGs_getBombCapacity()));
     tww_sprintf(lines[MENU_ITEM_POWER_BRACELETS].value, " <%s>",
                 item_id_to_str(dComIfGs_getPowerBracelets()));
