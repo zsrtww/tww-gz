@@ -29,5 +29,6 @@ void updateFlags() {
     g_flags[BALLOON_DISCOUNT] = dComIfGs_isEventBit(0x1A10);
     g_flags[TINGS_DISCOUNT] = dComIfGs_isEventBit(0x1A08);
     g_flags[HAND_ME_DOWN_TUNER] = dComIfGs_isEventBit(0x1708);
+    g_flags[GOSSIP_STONE_TRIGGER] = dComIfGs_isEventBit(0x0520);
 
 }

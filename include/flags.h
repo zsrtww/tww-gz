@@ -3,13 +3,14 @@
 
 #include "libtww/dolphin/gctypes.h"
 
-#define FLAG_AMNT 17
-#define SAVEWARP_FLAG_OFFSET 8
-#define TUNER_FLAG_OFFSET 13
+#define FLAG_AMNT 18
+#define SAVEWARP_FLAG_OFFSET 9
+#define TUNER_FLAG_OFFSET 14
 
 enum FlagId {
     /*General Flags*/
     WATCHED_FF2_HELMAROC_CUTSCENE,
+    GOSSIP_STONE_TRIGGER,
     GENERAL_POST_FF1_KORL_CUTSCENE,
     ENDLESS_NIGHT,
     RAISE_TOTG,

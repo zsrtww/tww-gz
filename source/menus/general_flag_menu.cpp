@@ -4,13 +4,15 @@
 #include "flags.h"
 
 
-#define LINE_NUM 8
+#define LINE_NUM 9
 Cursor GeneralFlagMenu::cursor;
 
 
 Line lines[LINE_NUM] = {
     {"FF2 Helmaroc Cutscene", WATCHED_FF2_HELMAROC_CUTSCENE, "Switches to animation set 2, among other things", true,
         &g_flags[WATCHED_FF2_HELMAROC_CUTSCENE]},
+    {"FF1 Gossip Stone Trigger", GOSSIP_STONE_TRIGGER, "Sets Pirate Ship to layer 2 (Ropes 2) and Outset tol layer 4", true,
+        &g_flags[GOSSIP_STONE_TRIGGER]},
     {"Post FF1 KoRL Cutscene", GENERAL_POST_FF1_KORL_CUTSCENE, "Spawns KoRL, sets savewarp to Windfall and FoF to layer 2", true,
         &g_flags[GENERAL_POST_FF1_KORL_CUTSCENE]},
     {"Endless Night", ENDLESS_NIGHT, "Activates Endless Night, incompatible with having Nayru's Pearl", true,
@@ -48,6 +50,9 @@ void GeneralFlagMenu::draw() {
         switch (cursor.y) {
         case WATCHED_FF2_HELMAROC_CUTSCENE:
             setEventFlag(0x2D01);
+            break;
+        case GOSSIP_STONE_TRIGGER:
+            setEventFlag(0x0520);
             break;
         case GENERAL_POST_FF1_KORL_CUTSCENE:
             setEventFlag(0x0F80);
