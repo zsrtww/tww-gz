@@ -4,12 +4,13 @@
 #include "menus/tools_menu.h"
 #include "menus/cheat_menu.h"
 #include "menus/watches_menu.h"
+#include "menus/item_equip_priority_menu.h"
 #include "commands.h"
 #include "libtww/dolphin/mtx/vec.h"
 #include "libtww/d/com/d_com_inf_game.h"
 
 #define GZ_SAVE_VERSION_NUMBER 0
-#define GZ_SAVE_ENTRIES_AMNT 7
+#define GZ_SAVE_ENTRIES_AMNT 8
 
 #ifdef NTSCJ
 #define sTmpBuf 0x803a8540
@@ -94,6 +95,7 @@ enum GZSaveIndex {
     SV_TOOLS_INDEX = 4,
     SV_COMMANDS_INDEX = 5,
     SV_WATCHES_INDEX = 6,
+    SV_ITEM_EQUIP_INDEX = 7,
 };
 
 struct GZSaveHeader {
@@ -105,6 +107,7 @@ struct GZSaveHeader {
 
 struct GZSaveLayout {
     GZCheat mCheats[CHEAT_AMNT];
+    ItemEquipSettings mItemEquipSettings[NUM_EQUIPPABLE_ITEMS];
     GZTool mTools[TOOL_AMNT];
     MemoryWatch mWatches[MAX_WATCHES];
     bool mCommandStates[COMMANDS_AMNT];

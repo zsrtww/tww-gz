@@ -33,6 +33,7 @@ struct ItemEquipSettings {
 };
 
 extern ItemEquipSettings g_item_equip_priorities[NUM_EQUIPPABLE_ITEMS];
+extern bool g_enable_item_equip_menu;
 
 u8 item_enum_to_item_slot(u8 item_enum);
 

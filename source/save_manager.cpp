@@ -124,7 +124,6 @@ void SaveManager::triggerLoad(uint32_t id, const char* category, special i_speci
 // runs at the beginning of phase_1 of dScnPly__phase_1 load sequence
 void SaveManager::loadData() {
     if (s_injectSave) {
-        OSReport("DOES THIS EVEN WORK!!!");
         SaveManager::injectSave(MEMFILE_BUF);
 
         // This code block happens after the save data is loaded, but before the load sequence completes
@@ -135,55 +134,34 @@ void SaveManager::loadData() {
         }
         s_injectSave = false;
 
-        // Put logic for overriding item equip location here
-        u8 cur_item_x = dComIfGs_getItemX();
-        u8 cur_item_y = dComIfGs_getItemY();
-        u8 cur_item_z = dComIfGs_getItemZ();
+        if (g_enable_item_equip_menu) {
+            u8 cur_item_x = dComIfGs_getItemX();
+            u8 cur_item_y = dComIfGs_getItemY();
+            u8 cur_item_z = dComIfGs_getItemZ();
 
-        OSReport("Item Equips in Save:  %d, %d, %d", cur_item_x, cur_item_y, cur_item_z);
+            u8 new_items[3] = {NO_ITEM, NO_ITEM, NO_ITEM};
 
-        u8 new_items[3] = {NO_ITEM, NO_ITEM, NO_ITEM};
+            for (int i = 0; i < NUM_EQUIPPABLE_ITEMS; i++) {
+                u8 item_slot = item_enum_to_item_slot(g_item_equip_priorities[i].item_name);
+                u8 highest_priority = g_item_equip_priorities[i].high_priority;
+                u8 medium_priority = g_item_equip_priorities[i].medium_priority;
 
-        for (int i = 0; i < NUM_EQUIPPABLE_ITEMS; i++) {
-            u8 item_id = item_enum_to_item_slot(g_item_equip_priorities[i].item_name);
-            u8 highest_priority = g_item_equip_priorities[i].high_priority;
-            u8 medium_priority = g_item_equip_priorities[i].medium_priority;
+                if (item_slot == NO_ITEM) continue;
 
-            OSReport("Item ID is %d", item_id);
-
-            //dComIfGs_setLife(item_id);
-            if (item_id == NO_ITEM) {
-                continue;
-            }
-
-            if (item_id == PICTO_BOX) {
-                if (cur_item_x == DELUXE_PICTO_BOX || cur_item_y == DELUXE_PICTO_BOX || cur_item_z == DELUXE_PICTO_BOX) {
-                    item_id = DELUXE_PICTO_BOX;
-                }
-            } else if (item_id == BOW) {
-                if (cur_item_x == BOW_WITH_FIRE_AND_ICE_ARROWS || cur_item_y == BOW_WITH_FIRE_AND_ICE_ARROWS || cur_item_z == BOW_WITH_FIRE_AND_ICE_ARROWS) {
-                    item_id = BOW_WITH_FIRE_AND_ICE_ARROWS;
-                } else if (cur_item_x == BOW_WITH_LIGHT_ARROWS || cur_item_y == BOW_WITH_LIGHT_ARROWS || cur_item_z == BOW_WITH_LIGHT_ARROWS) {
-                    item_id = BOW_WITH_LIGHT_ARROWS;
+                if (item_slot == cur_item_x || item_slot == cur_item_y || item_slot == cur_item_z) {
+                    if (new_items[highest_priority] == NO_ITEM) {
+                        new_items[highest_priority] = item_slot;
+                    } else if (new_items[medium_priority] == NO_ITEM) {
+                        new_items[medium_priority] = item_slot;
+                    } else {
+                        new_items[3 - highest_priority - medium_priority] = item_slot;
+                    }
                 }
             }
 
-            if (item_id == cur_item_x || item_id == cur_item_y || item_id == cur_item_z) {
-                if (new_items[highest_priority] == NO_ITEM) {
-                    new_items[highest_priority] = item_id;
-                    OSReport("Assigning item %d to slot %d", item_id, highest_priority);
-                } else if (new_items[medium_priority] == NO_ITEM) {
-                    new_items[medium_priority] = item_id;
-                    OSReport("Assigning item %d to slot %d", item_id, medium_priority);
-                } else {
-                    new_items[3 - highest_priority - medium_priority] = item_id;
-                    OSReport("Assigning item %d to slot %d", item_id, 3 - highest_priority - medium_priority);
-                }
-            }
+            dComIfGs_setItemX(new_items[name_X]);
+            dComIfGs_setItemY(new_items[name_Y]);
+            dComIfGs_setItemZ(new_items[name_Z]);
         }
-
-        dComIfGs_setItemX(new_items[name_X]);
-        dComIfGs_setItemY(new_items[name_Y]);
-        dComIfGs_setItemZ(new_items[name_Z]);
     }
 }

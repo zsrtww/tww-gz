@@ -9,6 +9,7 @@
 Cursor ItemEquipPriorityMenu::cursor;
 
 ItemEquipSettings g_item_equip_priorities[NUM_EQUIPPABLE_ITEMS] = {};
+bool g_enable_item_equip_menu;
 
 char button_enum_to_name(u8 button_enum, u8 item_enum) {
     if (item_enum == NO_ITEM_EQUIP) return '?';
@@ -301,8 +302,30 @@ void ItemEquipPriorityMenu::draw() {
         }
     }
 
+    if (GZ_getButtonTrig(GZPad::Z)) {
+        g_enable_item_equip_menu = !g_enable_item_equip_menu;
+    }
+
+    if (GZ_getButtonTrig(GZPad::START)) {
+        ItemEquipSettings tmp = g_item_equip_priorities[cursor.y];
+
+        for (int i = cursor.y; i > 0; i--) {
+            g_item_equip_priorities[i] = g_item_equip_priorities[i-1];
+        }
+
+        g_item_equip_priorities[0] = tmp;
+        cursor.y = 0;
+    }
+
     cursor.move(NUM_IEPM_COLUMNS, NUM_EQUIPPABLE_ITEMS);
-    Font::GZ_drawStr("Press START to move row to top", 25.0f, 440.f,
-                     WHITE, g_dropShadows);
+
+    if (g_enable_item_equip_menu) {
+        Font::GZ_drawStr("enable/disable [X]", ITEM_X_OFFSET, 400.f, WHITE, g_dropShadows);
+    } else {
+        Font::GZ_drawStr("enable/disable [ ]", ITEM_X_OFFSET, 400.f, WHITE, g_dropShadows);
+    }
+
+    Font::GZ_drawStr("Press START to move row to top", 25.0f, 440.f, WHITE, g_dropShadows);
+    Font::GZ_drawStr("Press Z to toggle menu", 25.0f, 460.f, WHITE, g_dropShadows);
     drawItemEquipLines();
 }
