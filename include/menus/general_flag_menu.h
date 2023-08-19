@@ -1,8 +1,8 @@
 #include "menu.h"
 
-class CutsceneFlagMenu : public Menu {
+class GeneralFlagMenu : public Menu {
 public:
-    CutsceneFlagMenu() : Menu() {}
+    GeneralFlagMenu() : Menu() {}
     static void draw();
 
     static Cursor cursor;

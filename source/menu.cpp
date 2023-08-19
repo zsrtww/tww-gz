@@ -1,9 +1,8 @@
 #include "menu.h"
 #include "menus/main_menu.h"
 #include "menus/flag_menu.h"
-#include "menus/important_flag_menu.h"
-#include "menus/cutscene_flag_menu.h"
-#include "menus/korl_flag_menu.h"
+#include "menus/general_flag_menu.h"
+#include "menus/tuner_flag_menu.h"
 #include "menus/savewarp_flag_menu.h"
 #include "menus/inventory_menu.h"
 #include "menus/amount_menu.h"
@@ -48,12 +47,11 @@ menu_render_t l_menuDrawList[MENU_NUM] = {
     DeliveryBagMenu::draw,
     SpoilsBagMenu::draw,
 
-    ImportantFlagMenu::draw,
-    CutsceneFlagMenu::draw,
-    KorlFlagMenu::draw,
-    SavewarpFlagMenu::draw,
-
+    GeneralFlagMenu::draw,
     DungeonMenu::draw,
+    SavewarpFlagMenu::draw,
+    TunerFlagMenu::draw,
+    
 };
 
 menu_render_t l_currentMenu = nullptr;

@@ -3,17 +3,17 @@
 #include "libtww/d/com/d_com_inf_game.h"
 #include "flags.h"
 
-#define LINE_NUM 6
+#define LINE_NUM 4
 
 Cursor FlagMenu::cursor;
 
 Line lines[LINE_NUM] = {
-    {"important", IMPORTANT_FLAG_INDEX, "Important Flags"},
-    {"cutscenes", CUTSCENE_FLAG_INDEX, "Cutscene Flags"},
-    {"korl", KORL_FLAG_INDEX, "KORL Flags"},
-    {"savewarp", SAVEWARP_FLAG_INDEX, "Savewarp Flags"},
-    {"quests", QUEST_FLAG_INDEX, "Quest Flags (disabled)"},
+    {"general", GENERAL_FLAG_INDEX, "General Flags"},
     {"dungeons",DUNGEON_FLAG_INDEX,"dungeon flags"},
+    {"savewarp", SAVEWARP_FLAG_INDEX, "Savewarp Flags"},
+    {"tuner", TUNER_FLAG_INDEX, "Tuner Flags (flags must be set before connection)"},
+    //{"quests", QUEST_FLAG_INDEX, "Quest Flags"},
+    
     
 };
 
@@ -31,26 +31,25 @@ void FlagMenu::draw() {
 
     if (GZ_getButtonTrig(GZPad::A)) {
         switch (cursor.y) {
-        case IMPORTANT_FLAG_INDEX:
-            GZ_setMenu(GZ_IMPORTANT_FLAG_MENU);
-            return;
-        case CUTSCENE_FLAG_INDEX:
-            GZ_setMenu(GZ_CUTSCENE_FLAG_MENU);
-            return;
-        case KORL_FLAG_INDEX:
-            GZ_setMenu(GZ_KORL_FLAG_MENU);
-            return;
-        case SAVEWARP_FLAG_INDEX:
-            GZ_setMenu(GZ_SAVEWARP_FLAG_MENU);
-            return;
-        case QUEST_FLAG_INDEX:
-            //GZ_setMenu(GZ_PLACEHOLDER1_MENU);
+        case GENERAL_FLAG_INDEX:
+            GZ_setMenu(GZ_GENERAL_FLAG_MENU);
             return;
         case DUNGEON_FLAG_INDEX:
              GZ_setMenu(GZ_DUNGEON_MENU);
             return;
+        case SAVEWARP_FLAG_INDEX:
+            GZ_setMenu(GZ_SAVEWARP_FLAG_MENU);
+            return;
+        case TUNER_FLAG_INDEX:
+            GZ_setMenu(GZ_TUNER_FLAG_MENU);
+            return;
+        //case QUEST_FLAG_INDEX:
+            //GZ_setMenu(GZ_PLACEHOLDER1_MENU);
+            //return;
+        
         }
     }
 
     GZ_drawMenuLines(lines, cursor.y, LINE_NUM);
+
 }

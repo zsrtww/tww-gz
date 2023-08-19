@@ -1,8 +1,8 @@
 #include "menu.h"
 
-class KorlFlagMenu : public Menu {
+class TunerFlagMenu : public Menu {
 public:
-    KorlFlagMenu() : Menu() {}
+    TunerFlagMenu() : Menu() {}
     static void draw();
 
     static Cursor cursor;
