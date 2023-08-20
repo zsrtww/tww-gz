@@ -3,7 +3,7 @@
 
 #include "libtww/dolphin/gctypes.h"
 
-#define FLAG_AMNT 20
+#define FLAG_AMNT 19
 #define SAVEWARP_FLAG_OFFSET 9
 #define TUNER_FLAG_OFFSET 14
 
@@ -18,7 +18,6 @@ enum FlagId {
     OPEN_HYRULE3_WARP,
     DESTROY_HYRULE_BARRIER,
     OPEN_DARK_PORTAL,
-    GET_HEROES_CLOTHES,
     GET_SEA_CHART,
 
     /*Savewarp Flags*/

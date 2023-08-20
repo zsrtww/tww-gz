@@ -4,7 +4,7 @@
 #include "flags.h"
 
 
-#define LINE_NUM 11
+#define LINE_NUM 10
 Cursor GeneralFlagMenu::cursor;
 
 
@@ -27,8 +27,6 @@ Line lines[LINE_NUM] = {
         &g_flags[DESTROY_HYRULE_BARRIER]},
     {"Dark Portal", OPEN_DARK_PORTAL, "Opens dark portal between FF3 and Ganon's Tower", true,
         &g_flags[OPEN_DARK_PORTAL]},
-    {"Heroes Clothes", GET_HEROES_CLOTHES, "Gives Link the Heroes Clothes", true,
-     &g_flags[GET_HEROES_CLOTHES]},
     {"Sea Chart", GET_SEA_CHART, " Gives the sea chart ", true,
      &g_flags[GET_SEA_CHART]},
 
@@ -77,9 +75,6 @@ void GeneralFlagMenu::draw() {
             break;
         case OPEN_DARK_PORTAL:
             setEventFlag(0x3D02);
-            break;
-        case GET_HEROES_CLOTHES:
-            setEventFlag(0x2A80);
             break;
         case GET_SEA_CHART:
             setEventFlag(0x0908);

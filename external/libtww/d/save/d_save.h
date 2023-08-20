@@ -299,9 +299,9 @@ public:
 
     void setSpoilsNum(u8 index, u8 amount) { mSpoilsBagCounts[index] = amount; }
 
-     u8 getBaitNum(u8 index) { return mSpoilsBagCounts[index]; }
+     u8 getBaitNum(u8 index) { return mBaitBagCounts[index]; }
 
-    void setBaitNum(u8 index, u8 amount) { mSpoilsBagCounts[index] = amount; }
+    void setBaitNum(u8 index, u8 amount) { mBaitBagCounts[index] = amount; }
 
     /* 0x00 */ u8 mSpoilsBagCounts[8];
     /* 0x08 */ u8 mBaitBagCounts[8];
