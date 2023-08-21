@@ -4,8 +4,8 @@
 #include "libtww/dolphin/gctypes.h"
 
 #define FLAG_AMNT 19
-#define SAVEWARP_FLAG_OFFSET 9
-#define TUNER_FLAG_OFFSET 14
+#define SAVEWARP_FLAG_OFFSET 10
+#define TUNER_FLAG_OFFSET 15
 
 enum FlagId {
     /*General Flags*/
