@@ -28,9 +28,9 @@ cheats menu:
 - upcharge                      // Hold X + Z to get negative speed for upcharge
 
 flags menu:
-- important flags menu		//Flags that are most relevant or important
-- cutscene flags menu		//Cutscene flags
-- *quest flags menu		//Flags related to certain sidequests and heart pieces
+- important flags menu		// Flags that are most relevant or important
+- cutscene flags menu		// Cutscene flags
+- *quest flags menu		// Flags related to certain sidequests and heart pieces
 
 important flags menu:
 - Watched FF2 Helmaroc Cutscene // Switches to animation set 2, among other things
@@ -41,8 +41,8 @@ inventory menu:
 - amounts menu                  // Modify amounts for health, magic, etc.
 - item inventory menu           // Modify item inventory menu
 - quest status menu             // Modify quest status menu
-- *spoils menu                  // Modify spoils bag items/amounts
-- *delivery bag menu            // Modify delivery bag
+- spoils menu                   // Modify spoils bag items/amounts
+- delivery bag menu             // Modify delivery bag
 
 amounts menu:
 - health                        // Modify the current health by quarter
@@ -106,9 +106,12 @@ memory menu:
 - memory editor menu            // View/edit memory
 - watches menu                  // Manage memory watches
 
-*practice menu:
+practice menu:
+- any% no mss menu              // Load an any% no mss save
 
-*scene menu:
+scene menu:
+*modify wind direction          // Change the current wind direction (currently broken, will be fixed)
+- display time info             // Display current day, time and moon phase
 
 settings menu:
 - cursor color                  // Change cursor color
@@ -132,9 +135,7 @@ tools menu:
 ### Planned Features
 
 ```
-- spoils menu
-- delivery bag menu
-- built-in practice saves for all major speedrun categories
+- built-in practice saves for all major speedrun categories such as 100%, All Dungeons and Any% (MSS)
 - more flags in the flags menu
 ```
 
