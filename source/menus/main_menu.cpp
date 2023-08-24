@@ -10,7 +10,7 @@ Line lines[LINE_NUM] = {
     {"inventory", INVENTORY_INDEX, "Set items and equipment", false},
     {"memory", MEMORY_INDEX, "View/edit memory, add watches, and save/load memfiles", false},
     {"practice", PRACTICE_INDEX, "Load practice files", false},
-    {"scene", SCENE_INDEX, "Adjust current scene settings (coming soon...)", false},
+    {"scene", SCENE_INDEX, "Adjust current scene settings", false},
     {"settings", SETTINGS_INDEX, "Configure settings", false},
     {"tools", TOOLS_INDEX, "Use various tools for practice and testing", false},
 };
