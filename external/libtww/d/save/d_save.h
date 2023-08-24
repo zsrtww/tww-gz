@@ -347,6 +347,9 @@ class dSv_player_info_c {
 public:
     char* getLinkName() { return (char*)mPlayerName; }
 
+    u8 getChartSet() { return mFmapIdx; }
+    void setChartSet(u8 index) { mFmapIdx = index; }
+
     /* 0x00 */ u8 field_0x0[0x10];
     /* 0x10 */ u16 field_0x10;
     /* 0x12 */ u16 field_0x12;

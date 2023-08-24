@@ -8,6 +8,7 @@
 enum SceneMenuIndex {
     MODIFY_WIND_INDEX,
     TIME_DISP_INDEX,
+    MODIFY_CHART_SET_INDEX,
 };
 
 struct GZScene {
@@ -15,7 +16,7 @@ struct GZScene {
     bool active;
 };
 
-extern GZScene g_scene[2];
+extern GZScene g_scene[3];
 
 class SceneMenu : public Menu {
 public:

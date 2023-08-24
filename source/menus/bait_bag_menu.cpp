@@ -70,6 +70,30 @@ void updateBaitBagItem(u8 slot) {
     updateBaitBagSlot(slot, new_item_id);
 }
 
+const char* bait_to_str(u8 slot) {
+    if (dComIfGs_getBaitBagSlot(slot) != ALL_PURPOSE_BAIT) {
+        return item_id_to_str(dComIfGs_getBaitBagSlot(slot));
+    } else {
+        switch (dComIfGs_getBaitNum(slot)) {
+        case 0:
+            return "All Purpose Bait (0)";
+            break;
+        case 1:
+            return "All Purpose Bait (1)";
+            break;
+        case 2:
+            return "All Purpose Bait (2)";
+            break;
+        case 3:
+            return "All Purpose Bait (3)";
+            break;
+        default:
+            return "All Purpose Bait (0)";
+            break;
+        }
+    }
+}
+
 void BaitBagMenu::draw() {
     cursor.setMode(Cursor::MODE_LIST);
 
@@ -105,14 +129,14 @@ void BaitBagMenu::draw() {
         break;
     }
 
-    tww_sprintf(lines[BAITSLOT1_INDEX].value, " <%s>", item_id_to_str(dComIfGs_getBaitBagSlot(BAITSLOT1_INDEX)));
-    tww_sprintf(lines[BAITSLOT2_INDEX].value, " <%s>", item_id_to_str(dComIfGs_getBaitBagSlot(BAITSLOT2_INDEX)));
-    tww_sprintf(lines[BAITSLOT3_INDEX].value, " <%s>", item_id_to_str(dComIfGs_getBaitBagSlot(BAITSLOT3_INDEX)));
-    tww_sprintf(lines[BAITSLOT4_INDEX].value, " <%s>", item_id_to_str(dComIfGs_getBaitBagSlot(BAITSLOT4_INDEX)));
-    tww_sprintf(lines[BAITSLOT5_INDEX].value, " <%s>", item_id_to_str(dComIfGs_getBaitBagSlot(BAITSLOT5_INDEX)));
-    tww_sprintf(lines[BAITSLOT6_INDEX].value, " <%s>", item_id_to_str(dComIfGs_getBaitBagSlot(BAITSLOT6_INDEX)));
-    tww_sprintf(lines[BAITSLOT7_INDEX].value, " <%s>", item_id_to_str(dComIfGs_getBaitBagSlot(BAITSLOT7_INDEX)));
-    tww_sprintf(lines[BAITSLOT8_INDEX].value, " <%s>", item_id_to_str(dComIfGs_getBaitBagSlot(BAITSLOT8_INDEX)));
+    tww_sprintf(lines[BAITSLOT1_INDEX].value, " <%s>", bait_to_str(BAITSLOT1_INDEX));
+    tww_sprintf(lines[BAITSLOT2_INDEX].value, " <%s>", bait_to_str(BAITSLOT2_INDEX));
+    tww_sprintf(lines[BAITSLOT3_INDEX].value, " <%s>", bait_to_str(BAITSLOT3_INDEX));
+    tww_sprintf(lines[BAITSLOT4_INDEX].value, " <%s>", bait_to_str(BAITSLOT4_INDEX));
+    tww_sprintf(lines[BAITSLOT5_INDEX].value, " <%s>", bait_to_str(BAITSLOT5_INDEX));
+    tww_sprintf(lines[BAITSLOT6_INDEX].value, " <%s>", bait_to_str(BAITSLOT6_INDEX));
+    tww_sprintf(lines[BAITSLOT7_INDEX].value, " <%s>", bait_to_str(BAITSLOT7_INDEX));
+    tww_sprintf(lines[BAITSLOT8_INDEX].value, " <%s>", bait_to_str(BAITSLOT8_INDEX));
 
     cursor.move(0, LINE_NUM);
     GZ_drawMenuLines(lines, cursor.y, LINE_NUM);

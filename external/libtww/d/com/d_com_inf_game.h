@@ -449,6 +449,14 @@ inline s32 dComIfGp_roomControl_getStayNo() {
     return dStage_roomControl_c__mStayNo;
 }
 
+inline u8 dComIfGs_getChartSet() {
+    return g_dComIfG_gameInfo.info.getPlayer().getPlayerInfo().getChartSet();
+}
+
+inline void dComIfGs_setChartSet(u8 set) {
+    g_dComIfG_gameInfo.info.getPlayer().getPlayerInfo().setChartSet(set);
+}
+
 inline bool dComIfGs_isEventBit(uint16_t flag) {
     return dSv_event_c__isEventBit(&g_dComIfG_gameInfo.info.mSavedata.mEvent, flag);
 }
