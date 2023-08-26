@@ -2,7 +2,7 @@
 #include "menus/inventory_menu.h"
 #include "libtww/d/save/d_save.h"
 
-#define LINE_NUM 5
+#define LINE_NUM 6
 
 Cursor InventoryMenu::cursor;
 
@@ -12,6 +12,7 @@ Line lines[LINE_NUM] = {
     {"quest status", QUEST_STATUS_INDEX, "Modify quest status menu"},
     {"delivery bag", DELIVERY_BAG_INDEX, "Modify delivery bag items/amounts"},
     {"spoils", SPOILS_INDEX, "Modify spoils bag items/amounts"},
+    {"bait", BAIT_INDEX, "Modify bait bag items/amounts"},
 };
 
 const char* item_id_to_str(u8 item_id) {
@@ -258,6 +259,9 @@ void InventoryMenu::draw() {
             return;
         case DELIVERY_BAG_INDEX:
             GZ_setMenu(GZ_DELIVERY_MENU);
+            return;
+        case BAIT_INDEX:
+            GZ_setMenu(GZ_BAIT_MENU);
             return;
         }
     }

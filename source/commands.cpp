@@ -95,6 +95,16 @@ void GZCmd_areaReload() {
     g_dComIfG_gameInfo.play.mNextStage.setWipe(0);
 }
 
+void GZCmd_full_health() {
+    u16 max_life = dComIfGs_getMaxLife();
+    dComIfGs_setLife(max_life);
+}
+
+void GZCmd_full_magic() {
+    u8 max_magic = dComIfGs_getMaxMagic();
+    dComIfGs_setMagic(max_magic);
+}
+
 static Command sCommands[COMMANDS_AMNT] = {
     {g_commandStates[CMD_STORE_POSITION], (CButton::DPAD_UP | CButton::R), GZCmd_storePosition},
     {g_commandStates[CMD_LOAD_POSITION], (CButton::DPAD_DOWN | CButton::R), GZCmd_loadPosition},
@@ -106,7 +116,9 @@ static Command sCommands[COMMANDS_AMNT] = {
     {g_commandStates[CMD_QUARTER_HEART], (CButton::R | CButton::DPAD_LEFT), GZCmd_quarterHeart},
     {g_commandStates[CMD_FAST_MOVEMENT], (CButton::DPAD_LEFT), GZCmd_fastMovement},
     {g_commandStates[CMD_UPCHARGE], (CButton::X | CButton::Z), GZCmd_upcharge},
-    {g_commandStates[CMD_AREA_RELOAD], (CButton::L | CButton::R | CButton::A | CButton::START), GZCmd_areaReload}
+    {g_commandStates[CMD_AREA_RELOAD], (CButton::L | CButton::R | CButton::A | CButton::START), GZCmd_areaReload},
+    {g_commandStates[CMD_REFILL_HEALTH], (CButton::R | CButton::DPAD_RIGHT), GZCmd_full_health},
+    {g_commandStates[CMD_REFILL_MAGIC], (CButton::L | CButton::DPAD_UP), GZCmd_full_magic},
 };
 
 void GZCmd_processInputs() {

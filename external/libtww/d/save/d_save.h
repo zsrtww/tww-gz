@@ -271,6 +271,8 @@ public:
     void setDeliveryBagSlot(u8 index, u8 has_item) { mDeliveryBag[index] = has_item; }
     u8 getSpoilsBagSlot(u8 index) { return mSpoilsBag[index]; }
     void setSpoilsBagSlot(u8 index, u8 has_item) { mSpoilsBag[index] = has_item; }
+    u8 getBaitBagSlot(u8 index) { return mBaitBag[index]; }
+    void setBaitBagSlot(u8 index, u8 has_item) { mBaitBag[index] = has_item; }
 
     /* 0x00 */ u8 mSpoilsBag[8];
     /* 0x08 */ u8 mBaitBag[8];
@@ -296,6 +298,10 @@ public:
     u8 getSpoilsNum(u8 index) { return mSpoilsBagCounts[index]; }
 
     void setSpoilsNum(u8 index, u8 amount) { mSpoilsBagCounts[index] = amount; }
+
+     u8 getBaitNum(u8 index) { return mBaitBagCounts[index]; }
+
+    void setBaitNum(u8 index, u8 amount) { mBaitBagCounts[index] = amount; }
 
     /* 0x00 */ u8 mSpoilsBagCounts[8];
     /* 0x08 */ u8 mBaitBagCounts[8];
@@ -340,6 +346,9 @@ static_assert(sizeof(dSv_player_map_c) == 0x84);
 class dSv_player_info_c {
 public:
     char* getLinkName() { return (char*)mPlayerName; }
+
+    u8 getChartSet() { return mFmapIdx; }
+    void setChartSet(u8 index) { mFmapIdx = index; }
 
     /* 0x00 */ u8 field_0x0[0x10];
     /* 0x10 */ u16 field_0x10;

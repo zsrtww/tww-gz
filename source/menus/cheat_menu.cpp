@@ -7,7 +7,7 @@
 #include "commands.h"
 #include "cheats.h"
 
-#define LINE_NUM 14
+#define LINE_NUM 16
 Cursor CheatMenu::cursor;
 
 Line lines[LINE_NUM] = {
@@ -19,8 +19,12 @@ Line lines[LINE_NUM] = {
         &g_cheats[InfiniteBombs].active},
     {"infinite hearts", InfiniteHearts, "Always have full hearts", true,
         &g_cheats[InfiniteHearts].active},
+    {"refill health", RefillHealth, "Hold R+D-pad right to refill health",
+     true, &g_cheats[RefillHealth].active},
     {"infinite magic", InfiniteMagic, "Always have full magic", true,
         &g_cheats[InfiniteMagic].active},
+    {"refill magic", RefillMagic, "Hold L+D-pad up to refill magic", true,
+        &g_cheats[RefillMagic].active},
     {"infinite rupees", InfiniteRupees, "Always have infinite rupees", true,
         &g_cheats[InfiniteRupees].active},
     {"moon jump", MoonJump, "Hold R+A to moon jump", true,
