@@ -165,7 +165,7 @@ tools menu:
 ### Planned Features
 
 ```
-- built-in practice saves for all remaining major speedrun categories such as 100%, All Dungeons, Any% (MSS), and Glitchless
+- built-in practice saves for all remaining major speedrun categories
 - chart menu to give normal, special, and triforce charts (and decipher).
 - edit time and day
 - scene flag editing for additions to flag menu
