@@ -18,7 +18,7 @@ cheats menu:
 - infinite hearts               // Always have full hearts
 - refill hearts                 // Hold R+D-pad right to refill health
 - infinite magic                // Always have full magic
-- refill magic                 // Hold L+D-pad up to refill magic
+- refill magic                  // Hold L+D-pad up to refill magic
 - infinite rupees               // Always have infinite rupees
 - moon jump                     // Hold R+A to moon jump
 - storage                       // Press D-pad right to get storage
