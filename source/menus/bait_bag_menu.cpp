@@ -53,6 +53,9 @@ void updateBaitBagItem(u8 slot) {
     } else if ((new_item_id == ALL_PURPOSE_BAIT + 1)) {
         new_item_id = HYOI_PEAR;
         dComIfGs_setBaitNum(slot, 0);
+    } else if ((new_item_id == HYOI_PEAR - 1)) {
+        new_item_id = ALL_PURPOSE_BAIT;
+        dComIfGs_setBaitNum(slot, 3);
     } else if ((new_item_id == HYOI_PEAR + 1)) {
         new_item_id = HYOI_PEAR;
     }

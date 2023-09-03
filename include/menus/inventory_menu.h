@@ -7,6 +7,7 @@ enum InventoryMenuIndex {
     DELIVERY_BAG_INDEX,
     SPOILS_INDEX,
     BAIT_INDEX,
+    CHART_INDEX,
 };
 
 class InventoryMenu : public Menu {

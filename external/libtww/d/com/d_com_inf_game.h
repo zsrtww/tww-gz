@@ -457,6 +457,38 @@ inline void dComIfGs_setChartSet(u8 set) {
     g_dComIfG_gameInfo.info.getPlayer().getPlayerInfo().setChartSet(set);
 }
 
+inline void dComIfGs_setChartOwned(u32 indx1, u8 indx2) {
+    g_dComIfG_gameInfo.info.getPlayer().mMap.setChartOwned(indx1, indx2);
+}
+
+inline void dComIfGs_setChartOpened(u32 indx1, u8 indx2) {
+    g_dComIfG_gameInfo.info.getPlayer().mMap.setChartOpened(indx1, indx2);
+}
+
+inline void dComIfGs_setChartCompleted(u32 indx1, u8 indx2) {
+    g_dComIfG_gameInfo.info.getPlayer().mMap.setChartCompleted(indx1, indx2);
+}
+
+inline void dComIfGs_setChartDeciphered(u8 indx1) {
+    g_dComIfG_gameInfo.info.getPlayer().mMap.setChartDeciphered(indx1);
+}
+
+inline u32 dComIfGs_getChartOwned(u8 indx1) {
+    return g_dComIfG_gameInfo.info.getPlayer().mMap.getChartOwned(indx1);
+}
+
+inline u32 dComIfGs_getChartOpened(u8 indx1) {
+    return g_dComIfG_gameInfo.info.getPlayer().mMap.getChartOpened(indx1);
+}
+
+inline u32 dComIfGs_getChartCompleted(u8 indx1) {
+    return g_dComIfG_gameInfo.info.getPlayer().mMap.getChartCompleted(indx1);
+}
+
+inline u8 dComIfGs_getChartDeciphered() {
+    return g_dComIfG_gameInfo.info.getPlayer().mMap.getChartDeciphered();
+}
+
 inline bool dComIfGs_isEventBit(uint16_t flag) {
     return dSv_event_c__isEventBit(&g_dComIfG_gameInfo.info.mSavedata.mEvent, flag);
 }

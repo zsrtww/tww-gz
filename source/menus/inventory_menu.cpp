@@ -2,7 +2,7 @@
 #include "menus/inventory_menu.h"
 #include "libtww/d/save/d_save.h"
 
-#define LINE_NUM 6
+#define LINE_NUM 7
 
 Cursor InventoryMenu::cursor;
 
@@ -13,6 +13,7 @@ Line lines[LINE_NUM] = {
     {"delivery bag", DELIVERY_BAG_INDEX, "Modify delivery bag items/amounts"},
     {"spoils", SPOILS_INDEX, "Modify spoils bag items/amounts"},
     {"bait", BAIT_INDEX, "Modify bait bag items/amounts"},
+    {"charts", CHART_INDEX, "Modify charts"},
 };
 
 const char* item_id_to_str(u8 item_id) {
@@ -262,6 +263,9 @@ void InventoryMenu::draw() {
             return;
         case BAIT_INDEX:
             GZ_setMenu(GZ_BAIT_MENU);
+            return;
+        case CHART_INDEX:
+            GZ_setMenu(GZ_CHART_MENU);
             return;
         }
     }
