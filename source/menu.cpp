@@ -11,6 +11,10 @@
 #include "menus/delivery_bag_menu.h"
 #include "menus/spoils_bag_menu.h"
 #include "menus/bait_bag_menu.h"
+#include "menus/chart_menu.h"
+#include "menus/treasure_chart_menu.h"
+#include "menus/special_chart_menu.h"
+#include "menus/triforce_chart_menu.h"
 #include "menus/settings_menu.h"
 #include "menus/tools_menu.h"
 #include "menus/practice_menu.h"
@@ -48,6 +52,11 @@ menu_render_t l_menuDrawList[MENU_NUM] = {
     DeliveryBagMenu::draw,
     SpoilsBagMenu::draw,
     BaitBagMenu::draw,
+    ChartMenu::draw,
+
+    TreasureChartMenu::draw,
+    SpecialChartMenu::draw,
+    TriforceChartMenu::draw,
 
     GeneralFlagMenu::draw,
     DungeonMenu::draw,

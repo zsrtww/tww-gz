@@ -334,10 +334,19 @@ static_assert(sizeof(dSv_player_collect_c) == 0xD);
 
 class dSv_player_map_c {
 public:
-    /* 0x00 */ u32 field_0x0[4][4];
+    void setChartOwned(u32 indx1, u8 indx2) { mCharts[1][indx2] = indx1; }
+    void setChartOpened(u32 indx1, u8 indx2) { mCharts[2][indx2] = indx1; }
+    void setChartCompleted(u32 indx1, u8 indx2) { mCharts[3][indx2] = indx1; }
+    void setChartDeciphered(u8 indx1) { mDecipheredCharts = indx1; }
+
+    u32 getChartOwned(u8 indx1) { return mCharts[1][indx1]; }
+    u32 getChartOpened(u8 indx1) { return mCharts[2][indx1]; }
+    u32 getChartCompleted(u8 indx1) { return mCharts[3][indx1]; }
+    u8 getChartDeciphered() { return mDecipheredCharts; }
+    /* 0x00 */ u32 mCharts[4][4];
     /* 0x40 */ u8 field_0x40[49];
     /* 0x71 */ u8 field_0x71[16];
-    /* 0x81 */ u8 field_0x81;
+    /* 0x81 */ u8 mDecipheredCharts;
     /* 0x82 */ u8 field_0x82[0x84 - 0x82];
 };  // Size: 0x84
 

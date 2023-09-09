@@ -6,6 +6,7 @@
 #include "font.h"
 #include "commands.h"
 #include "cheats.h"
+#include "libtww/d/com/d_com_inf_game.h"
 
 #define LINE_NUM 16
 Cursor CheatMenu::cursor;
