@@ -1,7 +1,7 @@
 # tww-gz
 The Wind Waker (SD) ROM hack to practice speedrunning.
 
-Patch your ISO using the romhack-patcher application, which is included in our official releases.
+Patch your ISO (JP) using the romhack-patcher application, which is included in our official releases.
 
 ⚠️ tww-gz is still in early development.<br>
 If you have questions or need help, ask in the [#practice-rom-development](https://discord.com/channels/136347487710609409/830218819695673405) channel of the [Wind Waker Speedrunning Discord](https://discord.gg/Sj5aehU).
@@ -33,11 +33,12 @@ flags menu:
 - general flags menu		// Flags that are most relevant or important
 - dungeon flags menu		// Flags related to dungeon collectables
 - savewarp flags menu		// Flags related to savewarp locations (higher tiers take priortiy)
+- tuner flags menu		// Flags related to tingle tuner
 
 general flags menu:
 - FF2 Helmaroc Cutscene       // Switches to animation set 2, among other things
-- FF1 Gossip Stone Trigger		// Sets Pirate Ship to layer 2 (Ropes 2) and Outset to layer 4
-- Endless Night			          // Activates Endless Night, incompatible with having Nayru's Pearl
+- FF1 Gossip Stone Trigger    // Sets Pirate Ship to layer 2 (Ropes 2) and Outset to layer 4
+- Endless Night		      // Activates Endless Night, incompatible with having Nayru's Pearl
 - Raise ToTG                  // Raises Tower of the Gods
 - Load ToTG After T2Z         // Sets FF3 Layer and F&I Arrows at Mother & Child
 - Hyrule 3 Warp               // Opens golden warp to Hyrule 3
@@ -47,17 +48,24 @@ general flags menu:
 
 dungeon flags menu:
 - dungeon <"dungeon name">     // Change the dungeon being modified
-- keys <"amount">		           // Modify the number of small keys
-- boss key		                 // Gives the boss key
+- keys <"amount">	       // Modify the number of small keys
+- boss key		       // Gives the boss key
 - map                          // Gives the dungeon map
 - compass                      // Gives the dungeon compass
+- partner                      // Spawns Medli/Makar (ET/WT Only)
 
 savewarp flags menu:
 - Leaving Outset Cutscene                     // Sets savewarp location to Pirate Ship (Overworld Travelling)
-- Tetra Text After Getting Spoils Bag		      // Sets savewarp location to Pirate Ship (At FF1)
-- Barrel Launch Cutscene		                  // Sets savewarp location to FF1
+- Tetra Text After Getting Spoils Bag	      // Sets savewarp location to Pirate Ship (At FF1)
+- Barrel Launch Cutscene		      // Sets savewarp location to FF1
 - Post FF1 KorL Cutscene                      // Sets savewarp location to Windfall, spawns KorL, and sets FoF to layer 2
 - Enter KorL First Time                       // Sets savewarp location to most recent loaded area
+
+tuner flags menu:
+- Kooloo-Limpah 10s Balloon+Shield	      // Adds the 10s Balloon+Shield to the Kooloo-Limpah pool
+- Tingle Balloon Discount                     // Gives Tingle Balloon Discount from 30 to 20 rupees
+- Tings Discount                              // Gives 50 percent off discount for all tings
+- Hand-Me-Down Tingle Tuner                   // Unlocks the Hand-Me-Down Tingle Tuner item in the tuner shop
 
 inventory menu:
 - amounts menu                  // Modify amounts for health, magic, etc.
