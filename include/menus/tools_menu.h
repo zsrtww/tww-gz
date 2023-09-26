@@ -27,6 +27,7 @@ struct GZTool {
 };
 
 #define TOOL_AMNT 8
+
 extern GZTool g_tools[TOOL_AMNT];
 
 class ToolsMenu : public Menu {

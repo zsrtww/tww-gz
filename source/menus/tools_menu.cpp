@@ -12,6 +12,7 @@
 #include "commands.h"
 
 #define LINE_NUM 8
+
 Cursor ToolsMenu::cursor;
 
 GZTool g_tools[TOOL_AMNT] = {
