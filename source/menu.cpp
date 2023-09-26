@@ -23,6 +23,8 @@
 #include "menus/scene_menu.h"
 #include "menus/dungeon_menu.h"
 
+#include "menus/item_equip_priority_menu.h"
+
 #include "menus/memory_editor_menu.h"
 #include "menus/watches_menu.h"
 
@@ -40,6 +42,8 @@ menu_render_t l_menuDrawList[MENU_NUM] = {
     PracticeMenu::draw,
     SettingsMenu::draw,
     ToolsMenu::draw,
+
+    ItemEquipPriorityMenu::draw,
 
     AnyNoMssSavesMenu::draw,
 
