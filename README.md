@@ -67,6 +67,7 @@ inventory menu:
 - delivery bag menu             // Modify delivery bag
 - spoils bag menu               // Modify spoils bag
 - bait bag menu                 // Modify bait bag
+- charts menu                   // Modify all chart types
 
 amounts menu:
 - health                        // Modify the current health by quarter
@@ -166,7 +167,6 @@ tools menu:
 
 ```
 - built-in practice saves for all remaining major speedrun categories
-- chart menu to give normal, special, and triforce charts (and decipher).
 - edit time and day
 - scene flag editing for additions to flag menu
 - any other epic stuff we think of by then
