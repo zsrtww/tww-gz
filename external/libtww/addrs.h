@@ -4,6 +4,11 @@
 
 /* init */
 #define tww_memcpy_addr 0x80003490
+#define tww_getSave_addr 0x8005b6e8
+#define tww_putSave_addr 0x8005b7a8
+#define tww_drawScreenPlayer_addr 0x80232de0
+#define tww_getLayerNo_addr 0x80050960
+#define tww_os_report_addr 0x800068ec
 
 /* MSL_C */
 #define tww_strlen_addr 0x8032b798
@@ -105,6 +110,9 @@
 
 /* d_kankyo */
 #define g_env_light_addr 0x803d7fa4
+#define dKy_getdaytime_minute_addr 0x8018d584
+#define dKy_getdaytime_hour_addr 0x8018d558
+#define dKy_moon_type_chk_addr 0x80193cb4  
 
 /* d_com_inf_game */
 #define g_dComIfG_gameInfo_addr 0x803b8108
@@ -112,6 +120,12 @@
 
 /* d_save */
 #define dSv_player_return_place_c__set_addr 0x800569c0
+#define dSv_event_c__isEventBit_addr 0x8005a954
+#define dSv_event_c__onEventBit_addr 0x8005a924
+#define dSv_event_c__offEventBit_addr 0x8005a93c
+#define onDungeonItem__12dSv_memBit_cFi_addr 0x8005a5c4
+#define isDungeonItem__12dSv_memBit_cFi_addr 0x8005a664
+#define getSave__10dSv_info_cFi_addr 0x8005b6e8
 
 /* d_stage */
 #define dStage_roomControl_c__mStayNo_addr 0x803e9f48
@@ -124,6 +138,7 @@
 #define l_debug_current_angle_addr 0x803ea3c8
 #define l_debug_shape_angle_addr 0x803ea3d0
 #define l_pointer_addr 0x803ad860
+#define l_equipped_arrow_type_addr 0x803ea04c
 
 #endif
 
@@ -250,5 +265,6 @@
 #define l_debug_keep_pos_addr 0x803e440c
 #define l_debug_current_angle_addr 0x803f6f10
 #define l_debug_shape_angle_addr 0x803f6f18
+#define l_equipped_arrow_type_addr 0x803f6b7c
 
 #endif

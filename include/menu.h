@@ -4,7 +4,7 @@
 #include "utils/cursor.h"
 #include "utils/lines.h"
 
-#define MENU_NUM 12
+#define MENU_NUM 27
 
 enum {
     /* Main Menus */
@@ -14,8 +14,16 @@ enum {
     GZ_FLAGS_MENU,
     GZ_INVENTORY_MENU,
     GZ_MEMORY_MENU,
+    GZ_SCENE_MENU,
+    GZ_PRACTICE_MENU,
     GZ_SETTINGS_MENU,
     GZ_TOOLS_MENU,
+
+    /* Settings Sub-Menus */
+    GZ_ITEM_EQUIP_PRIORITY_MENU,
+
+    /* Practice Sub-Menus */
+    GZ_ANY_NO_MSS_SAVES_MENU,
 
     /* Memory Sub-Menus */
     GZ_MEM_EDITOR_MENU,
@@ -25,8 +33,22 @@ enum {
     GZ_AMOUNT_MENU,
     GZ_ITEM_INVENTORY_MENU,
     GZ_QUEST_STATUS_MENU,
-    GZ_SPOILS_MENU,
     GZ_DELIVERY_MENU,
+    GZ_SPOILS_MENU,
+    GZ_BAIT_MENU,
+    GZ_CHART_MENU,
+
+    /* Chart Sub-Menus */
+    GZ_TREASURE_CHART_MENU,
+    GZ_SPECIAL_CHART_MENU,
+    GZ_TRIFORCE_CHART_MENU,
+
+    /* Flag Sub-Menus */
+    GZ_GENERAL_FLAG_MENU,
+    GZ_DUNGEON_MENU,
+    GZ_SAVEWARP_FLAG_MENU,
+    GZ_TUNER_FLAG_MENU,
+    
 };
 
 void GZ_drawMenu();

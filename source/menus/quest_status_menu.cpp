@@ -6,7 +6,7 @@
 #include "libtww/d/com/d_com_inf_game.h"
 #include "libtww/d/save/d_save.h"
 
-#define NUM_QUEST_ITEMS 25
+#define NUM_QUEST_ITEMS 28
 
 Cursor QuestStatusMenu::cursor;
 
@@ -14,7 +14,10 @@ Line lines[NUM_QUEST_ITEMS] = {
     {"Sword:", MENU_ITEM_SWORD, "Add/remove/upgrade sword"},
     {"Shield:", MENU_ITEM_SHIELD, "Add/remove/upgrade shield"},
     {"Magic:", MENU_ITEM_MAGIC, "Add/remove/upgrade magic"},
+    {"Wallet:", MENU_ITEM_WALLET, "Upgrade/downgrade wallet"},
     {"Quiver:", MENU_ITEM_QUIVER, "Add/remove/upgrade quiver"},
+    {"Hurricane Spin:", MENU_ITEM_HURRICANE_SPIN, "Add/remove hurricane spin"},
+    {"Heroes Clothes:", MENU_ITEM_HEROES_CLOTHES, "Add/remove heroes clothes (takes effect upon reload)"},
     {"Bomb Bag:", MENU_ITEM_BOMBAG, "Add/remove/upgrade bomb bag"},
     {"Power Bracelets:", MENU_ITEM_POWER_BRACELETS, "Add/remove power bracelets from inventory"},
     {"Pirate\'s Charm:", MENU_ITEM_PIRATES_CHARM, "Add/remove pirate\'s charm from inventory"},
@@ -61,6 +64,22 @@ const char* get_heros_charm_string(u8 has_heros_charm) {
     };
 }
 
+const char* get_hurricane_spin_string() {
+    if (dComIfGs_isEventBit(0x0B20)) {
+        return "Hurricane Spin";
+    } else {
+        return "Empty";
+    };
+}
+
+const char* get_heroes_clothes_string() {
+    if (dComIfGs_isEventBit(0x2A80)) {
+        return "Heroes Clothes";
+    } else {
+        return "Pajamas";
+    };
+}
+
 const char* get_song_string(u8 songs_owned, u8 song) {
     if ((songs_owned & song) == 0) {
         return "Empty";
@@ -101,7 +120,6 @@ const char* get_pearl_string(u8 pearls_owned, u8 pearl) {
     }
 }
 
-
 const char* get_magic_string(u8 magic_value) {
     if (magic_value == 0) {
         return "Empty";
@@ -109,6 +127,19 @@ const char* get_magic_string(u8 magic_value) {
         return "Double Magic";
     } else
         return "Single Magic";
+}
+
+const char* get_wallet_string(u8 wallet_size) {
+    switch (wallet_size) {
+    case WALLET_200:
+        return "Wallet 200";
+    case WALLET_1000:
+        return "Wallet 1000";
+    case WALLET_5000:
+        return "Wallet 5000";
+    default:
+        return "ERROR";
+    }
 }
 
 const char* get_quiver_string(u8 arrows_capacity) {
@@ -213,6 +244,28 @@ u8 powerBraceletsIdToPowerBraceletsOwned(u8 power_bracelets_item_id) {
     }
 }
 
+void updateHurricaneSpin() {
+    u8 has_hurricane_spin = dComIfGs_isEventBit(0x0B20);
+    s8 position = 0;
+    Cursor::moveListSimple(position);
+    if ((position == 1) && (has_hurricane_spin == 0)) {
+        dComIfGs_onEventBit(0x0B20);
+    } else if ((position == -1) && (has_hurricane_spin == 1)) {
+        dComIfGs_offEventBit(0x0B20);
+    }
+}
+
+void updateHeroesClothes() {
+    u8 has_heroesclothes = dComIfGs_isEventBit(0x2A80);
+    s8 position = 0;
+    Cursor::moveListSimple(position);
+    if ((position == 1) && (has_heroesclothes == 0)) {
+        dComIfGs_onEventBit(0x2A80);
+    } else if ((position == -1) && (has_heroesclothes == 1)) {
+        dComIfGs_offEventBit(0x2A80);
+    }
+}
+
 void updateSongs(u8 song_value) {
     u8 songs_owned = dComIfGs_getSongsOwned();
     u8 has_song = songs_owned & song_value;
@@ -259,8 +312,9 @@ void QuestStatusMenu::draw() {
         return;
     }
 
-    u8 new_sword_item_id, new_shield_item_id, new_max_magic_value, new_arrows_capacity,new_bombs_capacity,new_power_bracelets_item_id,
-is_pirates_charm_owned, heros_charm_flag;
+    u8 new_sword_item_id, new_shield_item_id, new_max_magic_value, new_wallet_size,
+        new_arrows_capacity, new_bombs_capacity, new_power_bracelets_item_id,
+        is_pirates_charm_owned, heros_charm_flag;
 
     switch (cursor.y) {
     case MENU_ITEM_SWORD:
@@ -334,6 +388,26 @@ is_pirates_charm_owned, heros_charm_flag;
         dComIfGs_setMagic(new_max_magic_value);
         dComIfGs_setMaxMagic(new_max_magic_value);
         break;
+    case MENU_ITEM_WALLET:
+        new_wallet_size = g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusA().getWalletSize();
+        Cursor::moveListSimple(new_wallet_size);
+        if (new_wallet_size == WALLET_200 - 1) {
+            new_wallet_size = WALLET_200;
+        } else if (new_wallet_size == WALLET_200 + 1) {
+            new_wallet_size = WALLET_1000;
+        } else if (new_wallet_size == WALLET_1000 - 1) {
+            new_wallet_size = WALLET_200;
+        } else if (new_wallet_size == WALLET_1000 + 1) {
+            new_wallet_size = WALLET_5000;
+        } else if (new_wallet_size == WALLET_5000 - 1) {
+            new_wallet_size = WALLET_1000;
+        } else if (new_wallet_size == WALLET_5000 + 1) {
+            new_wallet_size = WALLET_5000;
+        } else {
+            new_wallet_size = g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusA().getWalletSize();
+        }
+        g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusA().setWalletSize(new_wallet_size);
+        break;
     case MENU_ITEM_POWER_BRACELETS:
         new_power_bracelets_item_id = dComIfGs_getPowerBracelets();
         Cursor::moveListSimple(new_power_bracelets_item_id);
@@ -376,6 +450,12 @@ is_pirates_charm_owned, heros_charm_flag;
         }
         dComIfGs_setArrowNum(new_arrows_capacity);
         dComIfGs_setArrowCapacity(new_arrows_capacity);
+        break;
+    case MENU_ITEM_HURRICANE_SPIN:
+        updateHurricaneSpin();
+        break;
+    case MENU_ITEM_HEROES_CLOTHES:
+        updateHeroesClothes();
         break;
     case MENU_ITEM_BOMBAG:
         new_bombs_capacity = dComIfGs_getBombCapacity();
@@ -479,7 +559,11 @@ is_pirates_charm_owned, heros_charm_flag;
     tww_sprintf(lines[MENU_ITEM_SWORD].value, " <%s>", item_id_to_str(dComIfGs_getSword()));
     tww_sprintf(lines[MENU_ITEM_SHIELD].value, " <%s>", item_id_to_str(dComIfGs_getShield()));
     tww_sprintf(lines[MENU_ITEM_MAGIC].value, " <%s>", get_magic_string(dComIfGs_getMaxMagic()));
+    tww_sprintf(lines[MENU_ITEM_WALLET].value, " <%s>",
+                get_wallet_string(g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusA().getWalletSize()));
     tww_sprintf(lines[MENU_ITEM_QUIVER].value, " <%s>", get_quiver_string(dComIfGs_getArrowCapacity()));
+    tww_sprintf(lines[MENU_ITEM_HURRICANE_SPIN].value, " <%s>", get_hurricane_spin_string());
+    tww_sprintf(lines[MENU_ITEM_HEROES_CLOTHES].value, " <%s>", get_heroes_clothes_string());
     tww_sprintf(lines[MENU_ITEM_BOMBAG].value, " <%s>", get_bombags_string(dComIfGs_getBombCapacity()));
     tww_sprintf(lines[MENU_ITEM_POWER_BRACELETS].value, " <%s>",
                 item_id_to_str(dComIfGs_getPowerBracelets()));

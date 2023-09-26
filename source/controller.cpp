@@ -77,7 +77,6 @@ void GZ_readController() {
                 sCursorEnableDelay++;
             }
         }
-        g_cursorEnabled = true;
 
         setGamepadButtons(0);
         setGamepadTrig(0);

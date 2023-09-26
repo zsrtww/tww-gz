@@ -16,6 +16,8 @@ enum ToolsMenuIndex {
     MAP_SELECT_INDEX,
     ZH_INDEX,
     INPUT_VIEWER_INDEX,
+    ESS_CHECKER_INDEX,
+    DEADZONE_CHECKER_INDEX,
     //DISABLE_SVCHECK_INDEX,
 };
 
@@ -24,7 +26,8 @@ struct GZTool {
     bool active;
 };
 
-#define TOOL_AMNT 6
+#define TOOL_AMNT 8
+
 extern GZTool g_tools[TOOL_AMNT];
 
 class ToolsMenu : public Menu {

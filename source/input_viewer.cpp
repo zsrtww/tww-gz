@@ -5,6 +5,8 @@
 #include "utils/draw.h"
 #include "libtww/MSL_C/string.h"
 #include "libtww/MSL_C/math.h"
+#include "menus/tools_menu.h"
+#include "color.h"
 
 #define OUTLINE_WIDTH 0x10
 
@@ -113,6 +115,10 @@ void drawCross(uint32_t color, Vec2 pos, float size) {
                {branch_width, branch_length}, 4 * size / 25);
 }
 
+bool stickInRectRange(s8 xmin, s8 ymin, s8 xmax, s8 ymax) {
+    return ((tww_mPadStatus.stick_x <= xmax) && (tww_mPadStatus.stick_y <= ymax) && (tww_mPadStatus.stick_x >= xmin) && (tww_mPadStatus.stick_y >= ymin));
+}
+
 void InputViewer::drawViewer(Vec2 pos, float scale, bool is_shadow) {
     drawButton(GZPad::A, 'A', is_shadow ? 0x00000060 : 0x00FF7fFF,
                {pos.x + 130.f * scale, pos.y + 30.f * scale}, {30.f * scale, 30.f * scale},
@@ -136,14 +142,36 @@ void InputViewer::drawViewer(Vec2 pos, float scale, bool is_shadow) {
               25.f * scale);
 
     // analog sticks
-    drawStickOutline(is_shadow ? 0x00000060 : 0xFFFFFFFF,
+    uint32_t col;
+    double stickMag;
+    stickMag = tww_mPadStatus.stick_x*tww_mPadStatus.stick_x + tww_mPadStatus.stick_y*tww_mPadStatus.stick_y;
+    if ((g_tools[ESS_CHECKER_INDEX].active)) {
+        if (stickInRectRange(-2, -2, 2, 2)) {
+            col = BLACK;
+        } else if (stickMag <= 81) {
+            col = BLUE;
+        } else if (stickMag <= 324) {
+            col = GREEN;
+        } else if (stickMag <= 729) {
+            col = YELLOW;
+        } else if (stickMag <= 1296) {
+            col = ORANGE;
+        } else {
+            col = RED;
+        }
+    } else if (g_tools[DEADZONE_CHECKER_INDEX].active && stickInRectRange(-2, -2, 2, 2)) {
+        col = RED;
+    } else {
+        col = WHITE;
+    }
+    drawStickOutline(is_shadow ? 0x00000060 : col,
                      {pos.x + 17.5f * scale, pos.y + 30.f * scale}, 35.0f * scale);
-    drawStickOutline(is_shadow ? 0x00000060 : 0xFFD138FF,
-                     {pos.x + 62.5f * scale, pos.y + 30.f * scale}, 35.0f * scale);
-    drawEllipse(is_shadow ? 0x00000060 : 0xFFFFFFFF,
+    drawEllipse(is_shadow ? 0x00000060 : col,
                 {pos.x + (17.5f + tww_mPadMStick.mPosX * 10) * scale,
                  pos.y + (30.f - tww_mPadMStick.mPosY * 10) * scale},
                 {20.0f * scale, 20.0f * scale});
+    drawStickOutline(is_shadow ? 0x00000060 : 0xFFD138FF,
+                     {pos.x + 62.5f * scale, pos.y + 30.f * scale}, 35.0f * scale);
     drawEllipse(is_shadow ? 0x00000060 : 0xFFD138FF,
                 {pos.x + (62.5f + tww_mPadSStick.mPosX * 10) * scale,
                  pos.y + (30.f - tww_mPadSStick.mPosY * 10) * scale},

@@ -1,4 +1,5 @@
 #include "utils/card.h"
+#include "save_manager.h"
 #include "math.h"
 #include "menus/settings_menu.h"
 #include "libtww/MSL_C/math/s_ceil.h"
@@ -60,6 +61,7 @@ void GZ_storeSaveLayout(GZSaveLayout& save_layout) {
     tww_memcpy(save_layout.mTools, g_tools, sizeof(g_tools));
     tww_memcpy(save_layout.mCommandStates, g_commandStates, sizeof(g_commandStates));
     tww_memcpy(save_layout.mWatches, g_watches, sizeof(g_watches));
+    tww_memcpy(save_layout.mItemEquipSettings, g_item_equip_priorities, sizeof(g_item_equip_priorities));
 
     save_layout.mDropShadows = g_dropShadows;
     save_layout.mCursorColType = g_cursorColorType;
@@ -71,6 +73,7 @@ void GZ_loadSaveLayout(GZSaveLayout& save_layout) {
     tww_memcpy(g_tools, save_layout.mTools, sizeof(g_tools));
     tww_memcpy(g_commandStates, save_layout.mCommandStates, sizeof(g_commandStates));
     tww_memcpy(g_watches, save_layout.mWatches, sizeof(g_watches));
+    tww_memcpy(g_item_equip_priorities, save_layout.mItemEquipSettings, sizeof(g_item_equip_priorities));
 
     g_dropShadows = save_layout.mDropShadows;
     g_cursorColorType = save_layout.mCursorColType;
@@ -93,6 +96,7 @@ void GZ_setupSaveFile(GZSaveFile& save_file) {
     set_entry(SV_CURSOR_COLOR_INDEX, mCursorColType);
     set_entry(SV_FONT_INDEX, mFontType);
     set_entry(SV_DROP_SHADOW_INDEX, mDropShadows);
+    set_entry(SV_ITEM_EQUIP_INDEX, mItemEquipSettings);
 #undef set_entry
 }
 
@@ -124,6 +128,7 @@ s32 GZ_readSaveFile(Storage* storage, GZSaveFile& save_file, s32 sector_size) {
     }
 
     assert_read_entry(SV_CHEATS_INDEX, save_file.data.mCheats, sizeof(save_file.data.mCheats));
+    assert_read_entry(SV_ITEM_EQUIP_INDEX, save_file.data.mItemEquipSettings, sizeof(save_file.data.mItemEquipSettings));
     assert_read_entry(SV_TOOLS_INDEX, save_file.data.mTools, sizeof(save_file.data.mTools));
     assert_read_entry(SV_WATCHES_INDEX, save_file.data.mWatches, sizeof(save_file.data.mWatches));
     assert_read_entry(SV_COMMANDS_INDEX, save_file.data.mCommandStates,

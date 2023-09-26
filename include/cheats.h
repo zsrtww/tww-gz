@@ -1,14 +1,16 @@
 #ifndef LIB_TWW_CHEATS
 #define LIB_TWW_CHEATS
 
-#define CHEAT_AMNT 14
+#define CHEAT_AMNT 16
 
 enum CheatId {
     InfiniteAir,
     InfiniteArrows,
     InfiniteBombs,
     InfiniteHearts,
+    RefillHealth,
     InfiniteMagic,
+    RefillMagic,
     InfiniteRupees,
     MoonJump,
     StorageCheat,

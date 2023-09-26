@@ -19,6 +19,13 @@ enum Magic {
     SINGLE_MAGIC = 16,
     DOUBLE_MAGIC = 32
 };
+
+enum WalletSize {
+    WALLET_200 = 0,
+    WALLET_1000 = 1,
+    WALLET_5000 = 2
+};
+
 enum Quiver {
     NO_QUIVER = 0,
     ARROWS_30 = 30,
@@ -27,12 +34,11 @@ enum Quiver {
 };
 
 enum BombBag {
- NO_BOMBBAG  = 0,
+    NO_BOMBBAG = 0,
     BOMBS_30 = 30,
     BOMBS_60 = 60,
     BOMBS_99 = 99
 };
-
 
 enum HerosCharm {
     NO_HEROS_CHARM = 0,
@@ -70,7 +76,10 @@ enum QuestStatusMenuItems {
     MENU_ITEM_SWORD,
     MENU_ITEM_SHIELD,
     MENU_ITEM_MAGIC,
+    MENU_ITEM_WALLET,
     MENU_ITEM_QUIVER,
+    MENU_ITEM_HURRICANE_SPIN,
+    MENU_ITEM_HEROES_CLOTHES,
     MENU_ITEM_BOMBAG,
     MENU_ITEM_POWER_BRACELETS,
     MENU_ITEM_PIRATES_CHARM,

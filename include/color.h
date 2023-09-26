@@ -1,6 +1,6 @@
 #pragma once
 
-#define NUM_COLORS 8
+#define NUM_COLORS 9
 
 enum ColorPalette {
 	RED    = 0xCC0000FF,
@@ -11,7 +11,7 @@ enum ColorPalette {
 	PURPLE = 0x6600CCFF,
 	WHITE  = 0xFFFFFFFF,
 	GRAY   = 0xBABABAFF,
-	BLACK  = 0x00000000
+	BLACK  = 0x000000FF,
 };
 
 int rainbow();

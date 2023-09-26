@@ -16,7 +16,9 @@ cheats menu:
 - infinite arrows               // Always have max arrows
 - infinite bombs                // Always have max bombs
 - infinite hearts               // Always have full hearts
+- refill hearts                 // Hold R+D-pad right to refill health
 - infinite magic                // Always have full magic
+- refill magic                  // Hold L+D-pad up to refill magic
 - infinite rupees               // Always have infinite rupees
 - moon jump                     // Hold R+A to moon jump
 - storage                       // Press D-pad right to get storage
@@ -28,14 +30,44 @@ cheats menu:
 - upcharge                      // Hold X + Z to get negative speed for upcharge
 
 flags menu:
-- Watched FF2 Helmaroc Cutscene // Switches to animation set 2, among other things
+- general flags menu		// Flags that are most relevant or important
+- dungeon flags menu		// Flags related to dungeon collectables
+- savewarp flags menu		// Flags related to savewarp locations (higher tiers take priortiy)
+
+general flags menu:
+- FF2 Helmaroc Cutscene       // Switches to animation set 2, among other things
+- FF1 Gossip Stone Trigger		// Sets Pirate Ship to layer 2 (Ropes 2) and Outset to layer 4
+- Endless Night			          // Activates Endless Night, incompatible with having Nayru's Pearl
+- Raise ToTG                  // Raises Tower of the Gods
+- Load ToTG After T2Z         // Sets FF3 Layer and F&I Arrows at Mother & Child
+- Hyrule 3 Warp               // Opens golden warp to Hyrule 3
+- Hyrule Barrier              // Barrier Skip skip
+- Dark Portal                 // Opens dark portal between FF3 and Ganon's Tower
+- Sea Chart                   // Gives the sea chart
+
+dungeon flags menu:
+- dungeon <"dungeon name">     // Change the dungeon being modified
+- keys <"amount">		           // Modify the number of small keys
+- boss key		                 // Gives the boss key
+- map                          // Gives the dungeon map
+- compass                      // Gives the dungeon compass
+
+savewarp flags menu:
+- Leaving Outset Cutscene                     // Sets savewarp location to Pirate Ship (Overworld Travelling)
+- Tetra Text After Getting Spoils Bag		      // Sets savewarp location to Pirate Ship (At FF1)
+- Barrel Launch Cutscene		                  // Sets savewarp location to FF1
+- Post FF1 KorL Cutscene                      // Sets savewarp location to Windfall, spawns KorL, and sets FoF to layer 2
+- Enter KorL First Time                       // Sets savewarp location to most recent loaded area
 
 inventory menu:
 - amounts menu                  // Modify amounts for health, magic, etc.
 - item inventory menu           // Modify item inventory menu
 - quest status menu             // Modify quest status menu
-- *spoils menu                  // Modify spoils bag items/amounts
-- *delivery bag menu            // Modify delivery bag
+- spoils menu                   // Modify spoils bag items/amounts
+- delivery bag menu             // Modify delivery bag
+- spoils bag menu               // Modify spoils bag
+- bait bag menu                 // Modify bait bag
+- charts menu                   // Modify all chart types
 
 amounts menu:
 - health                        // Modify the current health by quarter
@@ -73,6 +105,8 @@ quest status menu:
 - Shield                        // Add/remove/upgrade shield
 - Magic                         // Add/remove/upgrade magic
 - Quiver                        // Add/remove/upgrade quiver
+- Hurricane Spin                // Add/remove Hurricane Spin
+- Hero's Clothes                // Add/remove Hero's Clothes
 - Bomb Bag                      // Add/remove/upgrade bomb bag
 - Power Bracelets               // Add/remove power bracelets from inventory
 - Pirate's Charm                // Add/remove pirate's charm from inventory
@@ -99,14 +133,19 @@ memory menu:
 - memory editor menu            // View/edit memory
 - watches menu                  // Manage memory watches
 
-*practice menu:
+practice menu:
+- any% no mss menu              // Load an any% no mss save
 
-*scene menu:
+scene menu:
+*modify wind direction          // Change the current wind direction (currently broken, will be fixed)
+- display time info             // Display current day, time and moon phase
+- modift chart set              // Change current chart set of file
 
 settings menu:
 - cursor color                  // Change cursor color
 - font                          // Change font
 - drop shadows                  // Add shadows to all font characters
+- item equip priorities         // Adjust priorities on item equips in practice saves
 - save card                     // Save settings to memory card
 - load card                     // Load settings from memory card
 - delete card                   // Delete settings on memory card
@@ -118,6 +157,8 @@ tools menu:
 - map select                    // Load Map Select by holding D-pad down + Y + Z
 - zombie hover info             // Display A and B button presses per second
 - input viewer                  // Show current inputs
+- ess checker                   // Change input viewer stick color based on distance from perfect ess
+- deadzone checker              // Change input viewer stick coor if stick is in deadzone
 ```
 
 \* - feature not implemented yet
@@ -125,13 +166,10 @@ tools menu:
 ### Planned Features
 
 ```
-- spoils menu
-- delivery bag menu
-- built-in practice saves for all major speedrun categories
-- more flags in the flags menu
-- modifiable wallet capacity
-- add/remove hurricane spin
-- full health cheat
+- built-in practice saves for all remaining major speedrun categories
+- edit time and day
+- scene flag editing for additions to flag menu
+- any other epic stuff we think of by then
 ```
 
 ## Building
@@ -139,7 +177,7 @@ tools menu:
 See [BUILDING.md](./BUILDING.md) to learn how to create local builds.
 
 ## Acknowledgements
-Credits to everyone involved in the making of tww-gz, this includes PK_Slam, CGF95, Glubbers_, and TakaRikka.
+Credits to everyone involved in the making of tww-gz, this includes PK_Slam, CGF95, Glubbers_, TakaRikka, Luzagar, Macrepeh, and EJ125.
 
 Taka deserves a special congratulations for the work done, providing us with the entire framework ported over from [Twilight Princess' Practice Rom](https://tpgz.io). Without Taka's help, this project would likely have never gotten off the ground.
 

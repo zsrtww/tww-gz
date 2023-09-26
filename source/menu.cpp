@@ -1,17 +1,34 @@
 #include "menu.h"
 #include "menus/main_menu.h"
 #include "menus/flag_menu.h"
+#include "menus/general_flag_menu.h"
+#include "menus/tuner_flag_menu.h"
+#include "menus/savewarp_flag_menu.h"
 #include "menus/inventory_menu.h"
 #include "menus/amount_menu.h"
 #include "menus/item_inventory_menu.h"
 #include "menus/quest_status_menu.h"
+#include "menus/delivery_bag_menu.h"
+#include "menus/spoils_bag_menu.h"
+#include "menus/bait_bag_menu.h"
+#include "menus/chart_menu.h"
+#include "menus/treasure_chart_menu.h"
+#include "menus/special_chart_menu.h"
+#include "menus/triforce_chart_menu.h"
 #include "menus/settings_menu.h"
 #include "menus/tools_menu.h"
+#include "menus/practice_menu.h"
 #include "menus/cheat_menu.h"
 #include "menus/memory_menu.h"
+#include "menus/scene_menu.h"
+#include "menus/dungeon_menu.h"
+
+#include "menus/item_equip_priority_menu.h"
 
 #include "menus/memory_editor_menu.h"
 #include "menus/watches_menu.h"
+
+#include "menus/any_no_mss_saves_menu.h"
 
 typedef void (*menu_render_t)();
 
@@ -21,15 +38,35 @@ menu_render_t l_menuDrawList[MENU_NUM] = {
     FlagMenu::draw,
     InventoryMenu::draw,
     MemoryMenu::draw,
+    SceneMenu::draw,
+    PracticeMenu::draw,
     SettingsMenu::draw,
     ToolsMenu::draw,
+
+    ItemEquipPriorityMenu::draw,
+
+    AnyNoMssSavesMenu::draw,
 
     MemoryEditorMenu::draw,
     WatchesMenu::draw,
 
     AmountMenu::draw,
     ItemInventoryMenu::draw,
-    QuestStatusMenu::draw
+    QuestStatusMenu::draw,
+    DeliveryBagMenu::draw,
+    SpoilsBagMenu::draw,
+    BaitBagMenu::draw,
+    ChartMenu::draw,
+
+    TreasureChartMenu::draw,
+    SpecialChartMenu::draw,
+    TriforceChartMenu::draw,
+
+    GeneralFlagMenu::draw,
+    DungeonMenu::draw,
+    SavewarpFlagMenu::draw,
+    TunerFlagMenu::draw,
+    
 };
 
 menu_render_t l_currentMenu = nullptr;
