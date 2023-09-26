@@ -204,6 +204,30 @@ inline void dComIfGs_setOxygen(int amount) {
     g_dComIfG_gameInfo.play.setOxygen(amount);
 }
 
+inline uint8_t dComIfGs_getItemX() {
+    return g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusA().getSelectItem(0);
+}
+
+inline void dComIfGs_setItemX(u8 item_id) {
+    g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusA().setSelectItem(0, item_id);
+}
+
+inline uint8_t dComIfGs_getItemY() {
+    return g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusA().getSelectItem(1);
+}
+
+inline void dComIfGs_setItemY(u8 item_id) {
+    g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusA().setSelectItem(1, item_id);
+}
+
+inline uint8_t dComIfGs_getItemZ() {
+    return g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusA().getSelectItem(2);
+}
+
+inline void dComIfGs_setItemZ(u8 item_id) {
+    g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusA().setSelectItem(2, item_id);
+}
+
 inline uint8_t dComIfGs_getSword() {
     return g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusA().getSelectEquip(SWORD_INDEX);
 }
