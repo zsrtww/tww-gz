@@ -48,16 +48,16 @@ u32 readControllerHook(u16* p1) {
 }
 
 void dComIfGs_setGameStartStageHook() {
-    /*
+    
     if (g_tools[DISABLE_SVCHECK_INDEX].active) {
         dComIfGs_setReturnPlace(dComIfGp_getStartStageName(), dComIfGp_roomControl_getStayNo(),
                                 dComIfGp_roomControl_getStayNo());
     } else {
         dComIfGs_setGameStartStageTrampoline();
     }
-    */
+    
 
-    dComIfGs_setGameStartStageTrampoline();
+   
 }
 
 void putSaveHook(void* addr, int stageNo) {
