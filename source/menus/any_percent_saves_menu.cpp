@@ -43,7 +43,7 @@ void AnyPercentSavesMenu::draw() {
             special(BOMBS_ANY, SaveMngSpecial_Windfall_Day0, nullptr),
             special(SAIL_SKIP, nullptr, nullptr),
             special(ROPES_2_ANY, SaveMngSpecial_Ropes2, nullptr),
-            special(FH_SWIM_ANY, SaveMngSpecial_Windfall_Day0, nullptr),
+            special(FH_SWIM_ANY, nullptr, nullptr),
             special(DTCS_ANY, SaveMngSpecial_DTCS, nullptr),
             special(LEAF_HOVER, SaveMngSpecial_LeafHover, SaveMngSpecial_LeafHover_After),
             special(QUIVER_FF2, nullptr, SaveMngSpecial_QuiverAny_After),
