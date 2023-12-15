@@ -8,7 +8,7 @@ Cursor AnyPercentSavesMenu::cursor;
 Line lines[LINE_NUM] = {
     {"manual superswim", MSS, "just after the intro, at bottom of watchtower"},
     {"post manual superswim", POST_MSS, "after mss at DRI"},
-    {"bombs", BOMBS_ANY, "at windfall island, post FF1 cutscene"},
+    {"windfall", BOMBS_ANY, "at windfall island, post FF1 cutscene"},
     {"sail skip*", SAIL_SKIP, "in KorL near Windfall, after greatfish cutscene skip"},
     {"ropes 2", ROPES_2_ANY, "inside pirate ship, ropes 2 minigame state"},
     {"forest haven swim", FH_SWIM_ANY, "at windfall island post bombs for swim to forest haven"},
