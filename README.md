@@ -1,7 +1,7 @@
 # tww-gz
 The Wind Waker (SD) ROM hack to practice speedrunning.
 
-Patch your ISO (JP) using the romhack-patcher application, which is included in our official releases.
+Patch your ISO (JP or US) using the romhack-patcher application, which is included in our official releases.
 
 ⚠️ tww-gz is still in early development.<br>
 If you have questions or need help, ask in the [#practice-rom-development](https://discord.com/channels/136347487710609409/830218819695673405) channel of the [Wind Waker Speedrunning Discord](https://discord.gg/Sj5aehU).
