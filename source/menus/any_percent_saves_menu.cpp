@@ -14,7 +14,7 @@ Line lines[LINE_NUM] = {
     {"forest haven swim", FH_SWIM_ANY, "at windfall island post bombs for swim to forest haven"},
     {"deku tree cutscene skip", DTCS_ANY, "inside forest haven for first time, for dtcs"},
     {"leaf hover", LEAF_HOVER, "inside forest haven, after dtcs with leaf spawned"},
-    {"quiver swim/pg skip ff2 swim*", QUIVER_FF2, "outside forest haven, quiver swim or ff2 pg skip swim"},
+    {"post leaf swim*", QUIVER_FF2, "outside forest haven, quiver swim or ff2 pg skip swim"},
     {"ff2 swim", FF2_SWIM_ANY, "at thorned fairy island, ff2 swim assuming you got quiver"},
     {"helmaroc skip", HELM_SKIP, "inside ff2 tower, at start of helmaroc king fight"},
     {"barrier skip", BARRIER_SKIP_ANY, "outside hyrule castle, about to do barrier skip"},
