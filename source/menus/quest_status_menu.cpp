@@ -81,7 +81,7 @@ const char* get_heroes_clothes_string() {
 }
 
 const char* get_song_string(u8 songs_owned, u8 song) {
-    if ((songs_owned & song) == 0) {
+    if (!songs_owned) {
         return "Empty";
     } else {
         switch (song) {
@@ -104,7 +104,7 @@ const char* get_song_string(u8 songs_owned, u8 song) {
 }
 
 const char* get_pearl_string(u8 pearls_owned, u8 pearl) {
-    if ((pearls_owned & pearl) == 0) {
+    if (!pearls_owned) {
         return "Empty";
     } else {
         switch (pearl) {
@@ -177,7 +177,7 @@ const char* get_bombags_string(u8 max_bombs_owned) {
 }
 
 const char* get_triforce_string(u8 triforce_owned, u8 triforce_piece) {
-    if ((triforce_owned & triforce_piece) == 0) {
+    if (!triforce_owned) {
         return "Empty";
     } else {
         switch (triforce_piece) {
@@ -267,7 +267,16 @@ void updateHeroesClothes() {
 }
 
 void updateSongs(u8 song_value) {
-    if (!dComIfGs_isTact(song_value)) {
+    u8 has_song = dComIfGs_isTact(song_value);
+    Cursor::moveListSimple(has_song);
+
+    if (has_song > 0) {
+        has_song = 1;
+    } else {
+        has_song = 0;
+    }
+
+    if (has_song) {
         dComIfGs_onTact(song_value);
     } else {
         dComIfGs_offTact(song_value);
@@ -275,7 +284,16 @@ void updateSongs(u8 song_value) {
 }
 
 void updatePearls(u8 pearl_value) {
-    if (!dComIfGs_isSymbol(pearl_value)) {
+    u8 has_pearl = dComIfGs_isSymbol(pearl_value);
+    Cursor::moveListSimple(has_pearl);
+
+    if (has_pearl > 0) {
+        has_pearl = 1;
+    } else {
+        has_pearl = 0;
+    }
+
+    if (has_pearl) {
         dComIfGs_onSymbol(pearl_value);
     } else {
         dComIfGs_offSymbol(pearl_value);
@@ -283,7 +301,16 @@ void updatePearls(u8 pearl_value) {
 }
 
 void updateTriforce(u8 triforce_value) {
-    if (!dComIfGs_isTriforce(triforce_value)) {
+    u8 has_triforce = dComIfGs_isTriforce(triforce_value);
+    Cursor::moveListSimple(has_triforce);
+
+    if (has_triforce > 0) {
+        has_triforce = 1;
+    } else {
+        has_triforce = 0;
+    }
+
+    if (has_triforce) {
         dComIfGs_onTriforce(triforce_value);
     } else {
         dComIfGs_offTriforce(triforce_value);
@@ -329,8 +356,8 @@ void QuestStatusMenu::draw() {
         } else {
             new_sword_item_id = dComIfGs_getSelectEquip(SWORD_INDEX);
         }
-        dComIfGp_setSelectEquip(SWORD_INDEX, new_sword_item_id);
-        dComIfGs_setCollect(SWORD_INDEX, new_sword_item_id);
+        dComIfGs_setSelectEquip(SWORD_INDEX, new_sword_item_id);
+        dComIfGs_onCollect(SWORD_INDEX, swordIdToSwordOwned(new_sword_item_id));
         break;
     case MENU_ITEM_SHIELD:
         new_shield_item_id = dComIfGs_getSelectEquip(SHIELD_INDEX);
@@ -350,8 +377,8 @@ void QuestStatusMenu::draw() {
         } else {
             new_shield_item_id = dComIfGs_getSelectEquip(SHIELD_INDEX);
         }
-        dComIfGp_setSelectEquip(SHIELD_INDEX, new_shield_item_id);
-        dComIfGs_setCollect(SHIELD_OWNED_INDEX, new_shield_item_id);
+        dComIfGs_setSelectEquip(SHIELD_INDEX, new_shield_item_id);
+        dComIfGs_onCollect(SHIELD_OWNED_INDEX, shieldIdToShieldOwned(new_shield_item_id));
         break;
     case MENU_ITEM_MAGIC:
         new_max_magic_value = dComIfGs_getMaxMagic();
@@ -408,8 +435,8 @@ void QuestStatusMenu::draw() {
         } else {
             new_power_bracelets_item_id = dComIfGs_getSelectEquip(POWER_BRACELETS_INDEX);
         }
-        dComIfGp_setSelectEquip(POWER_BRACELETS_INDEX, new_power_bracelets_item_id);
-        dComIfGs_setCollect(POWER_BRACELETS_OWNED_INDEX, new_power_bracelets_item_id);
+        dComIfGs_setSelectEquip(POWER_BRACELETS_INDEX, new_power_bracelets_item_id);
+        dComIfGs_onCollect(POWER_BRACELETS_OWNED_INDEX, powerBraceletsIdToPowerBraceletsOwned(new_power_bracelets_item_id));
         break;
     case MENU_ITEM_QUIVER:
         new_arrows_capacity = dComIfGs_getArrowMax();
@@ -470,22 +497,24 @@ void QuestStatusMenu::draw() {
         dComIfGs_setBombMax(new_bombs_capacity);
         break;
     case MENU_ITEM_PIRATES_CHARM:
-        is_pirates_charm_owned = dComIfGs_isCollect(PIRATES_CHARM_OWNED_INDEX, PIRATES_CHARM);
+        is_pirates_charm_owned = dComIfGs_isCollect(PIRATES_CHARM_OWNED_INDEX, 0);
         Cursor::moveListSimple(is_pirates_charm_owned);
-        if (is_pirates_charm_owned == 0xFF) {
-            is_pirates_charm_owned = 0;
-        } else if (is_pirates_charm_owned == 2) {
+
+        if (is_pirates_charm_owned > 0) {
             is_pirates_charm_owned = 1;
+        } else {
+            is_pirates_charm_owned = 0;
         }
         dComIfGs_onCollect(PIRATES_CHARM_OWNED_INDEX, is_pirates_charm_owned);
         break;
     case MENU_ITEM_HEROS_CHARM:
-        heros_charm_flag = dComIfGs_isCollect(HEROS_CHARM_OWNED_INDEX, HEROS_CHARM);
+        heros_charm_flag = dComIfGs_isCollect(HEROS_CHARM_OWNED_INDEX, 0);
         Cursor::moveListSimple(heros_charm_flag);
-        if (heros_charm_flag == 0xFF) {
+
+        if (heros_charm_flag > 0) {
+            heros_charm_flag = 1;
+        } else {
             heros_charm_flag = 0;
-        } else if (heros_charm_flag == 3) {
-            heros_charm_flag = HEROS_CHARM_ENABLED;
         }
         dComIfGs_onCollect(HEROS_CHARM_OWNED_INDEX, heros_charm_flag);
         break;
@@ -554,9 +583,9 @@ void QuestStatusMenu::draw() {
     tww_sprintf(lines[MENU_ITEM_POWER_BRACELETS].value, " <%s>",
                 item_id_to_str(dComIfGs_getSelectEquip(POWER_BRACELETS_INDEX)));
     tww_sprintf(lines[MENU_ITEM_PIRATES_CHARM].value, " <%s>",
-                get_pirates_charm_string(dComIfGs_isCollect(PIRATES_CHARM_OWNED_INDEX, PIRATES_CHARM)));
+                get_pirates_charm_string(dComIfGs_isCollect(PIRATES_CHARM_OWNED_INDEX, 0)));
     tww_sprintf(lines[MENU_ITEM_HEROS_CHARM].value, " <%s>",
-                get_heros_charm_string(dComIfGs_isCollect(HEROS_CHARM_OWNED_INDEX, HEROS_CHARM)));
+                get_heros_charm_string(dComIfGs_isCollect(HEROS_CHARM_OWNED_INDEX, 0)));
     tww_sprintf(lines[MENU_ITEM_WINDS_REQUIEM].value, " <%s>",
                 get_song_string(dComIfGs_isTact(WINDS_REQUIEM_VALUE), WINDS_REQUIEM_VALUE));
     tww_sprintf(lines[MENU_ITEM_BALLAD_OF_GALES].value, " <%s>",

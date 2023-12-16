@@ -22,7 +22,7 @@ Line lines[LINE_NUM] = {
 void updateSpoilsBagItemFlag(u8 item_id) {
     if (item_id == JOY_PENDANT) {
         dComIfGs_onGetItemBeast(7);
-    } else {
+    } else if (item_id - 0x45 >= 0 && item_id - 0x45 < 8) {
         dComIfGs_onGetItemBeast(item_id - 0x45);
     }
 }

@@ -38,19 +38,17 @@ Line lines[NUM_ITEM_SLOTS] = {
 };
 
 
-void updateItemFlag(u8 slot, u8 item_id) {
-    u8 has_item = item_id == NO_ITEM ? 0 : 1;
-
-    if (!has_item) {
-        dComIfGs_onGetItem(slot, item_id);
+void updateItemFlag(u8 slot, u8 item_id, u8 bit) {
+    if (item_id != NO_ITEM) {
+        dComIfGs_onGetItem(slot, bit);
     } else {
-        dComIfGs_offGetItem(slot, item_id);
+        dComIfGs_offGetItem(slot, bit);
     }
 }
 
 void updateItem(u8 slot, u8 item_id) {
     dComIfGs_setItem(slot, item_id);
-    updateItemFlag(slot, item_id);
+    updateItemFlag(slot, item_id, 0);
 }
 
 void updateSingleItem(u8 slot, u8 item_id) {
@@ -67,6 +65,7 @@ void updateSingleItem(u8 slot, u8 item_id) {
     } else {
         new_item_id = dComIfGs_getItem(slot);
     }
+
     updateItem(slot, new_item_id);
 }
 
@@ -177,7 +176,7 @@ void ItemInventoryMenu::draw() {
         break;
     case SLOT_BOMB:
         updateSingleItem(SLOT_BOMB, BOMBS);
-    if (GZ_getButtonTrig(GZPad::DPAD_RIGHT) && dComIfGs_getBombMax() == 0) {
+        if (GZ_getButtonTrig(GZPad::DPAD_RIGHT) && dComIfGs_getBombMax() == 0) {
             dComIfGs_setBombMax(DEFAULT_BOMB_CAPACITY);
             dComIfGs_setBombNum(DEFAULT_BOMB_CAPACITY);
         }
@@ -203,7 +202,7 @@ void ItemInventoryMenu::draw() {
     case SLOT_HAMMER:
         updateSingleItem(SLOT_HAMMER, SKULL_HAMMER);
         break;
-    };
+    }
 
     tww_sprintf(lines[SLOT_TELESCOPE].value, " <%s>", item_id_to_str(dComIfGs_getItem(SLOT_TELESCOPE)));
     tww_sprintf(lines[SLOT_SAIL].value, " <%s>", item_id_to_str(dComIfGs_getItem(SLOT_SAIL)));

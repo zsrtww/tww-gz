@@ -432,6 +432,9 @@ static_assert(sizeof(dComIfG_inf_c) == 0x1d1c8);
 typedef int (*tww_getLayerNo)(const char* stageName, int roomId, int layerOverride);
 #define tww_getLayerNo ((tww_getLayerNo)tww_getLayerNo_addr)
 
+typedef int (*dComIfGs_setSelectEquip_t)(int, u8);
+#define dComIfGs_setSelectEquip ((dComIfGs_setSelectEquip_t)dComIfGs_setSelectEquip_addr)
+
 inline u8 dComIfGs_getSelectEquip(int i_no) {
     return g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusA().getSelectEquip(i_no);
 }
@@ -511,20 +514,20 @@ inline u8 dComIfGs_getItem(int i_invIdx) {
  * @param i_itemNo The item number of the item to place in that slot, or 0xFF for no item.
  */
 inline void dComIfGs_setItem(int i_invIdx, u8 i_itemNo) {
-    if (i_invIdx < 0x15) {
+    if (i_invIdx < 21) {
         g_dComIfG_gameInfo.info.getPlayer().getItem().setItem(i_invIdx, i_itemNo);
-    } else if (i_invIdx < 0x18) {
+    } else if (i_invIdx < 24) {
         return;
-    } else if (i_invIdx < 0x18 + 8) {
-        dComIfGs_setItemBeast(i_invIdx - 0x18, i_itemNo);
-    } else if (i_invIdx < 0x24) {
+    } else if (i_invIdx < 24 + 8) {
+        dComIfGs_setItemBeast(i_invIdx - 24, i_itemNo);
+    } else if (i_invIdx < 36) {
         return;
-    } else if (i_invIdx < 0x24 + 8) {
-        dComIfGs_setItemBait(i_invIdx - 0x24, i_itemNo);
-    } else if (i_invIdx < 0x30) {
+    } else if (i_invIdx < 36 + 8) {
+        dComIfGs_setItemBait(i_invIdx - 36, i_itemNo);
+    } else if (i_invIdx < 48) {
         return;
-    } else if (i_invIdx < 0x30 + 8) {
-        dComIfGs_setItemReserve(i_invIdx - 0x30, i_itemNo);
+    } else if (i_invIdx < 48 + 8) {
+        dComIfGs_setItemReserve(i_invIdx - 48, i_itemNo);
     } else {
         return;
     }

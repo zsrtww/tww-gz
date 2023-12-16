@@ -124,6 +124,7 @@
 /* d_com_inf_game */
 #define g_dComIfG_gameInfo_addr 0x803b8108
 #define tww_dComIfGs_setGameStartStage_addr 0x80053054
+#define dComIfGs_setSelectEquip_addr 0x80053fbc
 
 /* d_save */
 #define dSv_player_return_place_c__set_addr 0x800569c0
