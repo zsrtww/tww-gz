@@ -26,16 +26,16 @@ bool GZCmd_checkTrig(int combo) {
 } */
 
 void GZCmd_storePosition() {
-    if (dComIfGp_getPlayer()) {
-        sSavePlayerPos = dComIfGp_getPlayer()->mCurrent.mPosition;
-        sSavePlayerAngle = dComIfGp_getPlayer()->mCurrent.mAngle;
+    if (dComIfGp_getPlayer(0)) {
+        sSavePlayerPos = dComIfGp_getPlayer(0)->current.mPosition;
+        sSavePlayerAngle = dComIfGp_getPlayer(0)->current.mAngle;
     }
 }
 
 void GZCmd_loadPosition() {
-    if (dComIfGp_getPlayer()) {
-        dComIfGp_getPlayer()->mCurrent.mPosition = sSavePlayerPos;
-        dComIfGp_getPlayer()->mCurrent.mAngle = sSavePlayerAngle;
+    if (dComIfGp_getPlayer(0)) {
+        dComIfGp_getPlayer(0)->current.mPosition = sSavePlayerPos;
+        dComIfGp_getPlayer(0)->current.mAngle = sSavePlayerAngle;
         l_debug_keep_pos = sSavePlayerPos;
         l_debug_current_angle = sSavePlayerAngle;
         l_debug_shape_angle = sSavePlayerAngle;
@@ -43,13 +43,13 @@ void GZCmd_loadPosition() {
 }
 
 void GZCmd_moonJump() {
-    if (dComIfGp_getPlayer()) {
-        dComIfGp_getPlayer()->mSpeed.y = 56.0f;
+    if (dComIfGp_getPlayer(0)) {
+        dComIfGp_getPlayer(0)->speed.y = 56.0f;
     }
 }
 
 void GZCmd_storage() {
-    dComIfGs_setStorage();
+    // dComIfGs_setStorage();
 }
 
 void GZCmd_quarterHeart() {
@@ -57,32 +57,32 @@ void GZCmd_quarterHeart() {
 }
 
 void GZCmd_normalCollision() {
-    u16* collision_ptr = dComIfGs_getCollision();
-    *collision_ptr &= 0xFFFF ^ 0x4004;
+    /* u16* collision_ptr = dComIfGs_getCollision();
+    *collision_ptr &= 0xFFFF ^ 0x4004; */
 }
 
 void GZCmd_chestStorage() {
-    u16* collision_ptr = dComIfGs_getCollision();
-    *collision_ptr = (*collision_ptr & (0xFFFF ^ 0x4000)) | 0x4;
+    /* u16* collision_ptr = dComIfGs_getCollision();
+    *collision_ptr = (*collision_ptr & (0xFFFF ^ 0x4000)) | 0x4; */
 }
 
 void GZCmd_doorCancel() {
-    u16* collision_ptr = dComIfGs_getCollision();
-    *collision_ptr |= 0x4004;
+    /* u16* collision_ptr = dComIfGs_getCollision();
+    *collision_ptr |= 0x4004; */
 }
 
 void GZCmd_fastMovement() {
-    u32 link_state = dComIfGs_getLinkState();
+    /* u32 link_state = dComIfGs_getLinkState();
     if (link_state >= 53 && link_state <= 55) dComIfGs_setSpeed(2000);
-    else dComIfGs_setSpeed(150);
+    else dComIfGs_setSpeed(150); */
 }
 
 void GZCmd_upcharge() {
-    dComIfGs_setSpeed(-550);
+    /* dComIfGs_setSpeed(-550); */
 }
 
 void GZCmd_areaReload() {
-    char* stage = g_dComIfG_gameInfo.play.mStartStage.getName();
+    const char* stage = g_dComIfG_gameInfo.play.mStartStage.getName();
     s16 entrance = g_dComIfG_gameInfo.play.mStartStage.getPoint();
     s8 room = g_dComIfG_gameInfo.play.mStartStage.getRoomNo();
     s8 layer = g_dComIfG_gameInfo.play.mStartStage.getLayer();

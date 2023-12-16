@@ -48,16 +48,12 @@ u32 readControllerHook(u16* p1) {
 }
 
 void dComIfGs_setGameStartStageHook() {
-    
     if (g_tools[DISABLE_SVCHECK_INDEX].active) {
         dComIfGs_setReturnPlace(dComIfGp_getStartStageName(), dComIfGp_roomControl_getStayNo(),
-                                dComIfGp_roomControl_getStayNo());
+                                0); // fix this to use proper last save point later
     } else {
         dComIfGs_setGameStartStageTrampoline();
-    }
-    
-
-   
+    }   
 }
 
 void putSaveHook(void* addr, int stageNo) {

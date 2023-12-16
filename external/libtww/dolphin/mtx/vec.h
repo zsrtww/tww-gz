@@ -1,23 +1,26 @@
 #ifndef VEC_H
 #define VEC_H
 
-struct Vec {
-    float x, y, z;
-    float GetX() const { return x; }
-    float GetY() const { return y; }
-    float GetZ() const { return z; }
-    float getXDiff(const Vec* other) const { return x - other->x; }
-    float getYDiff(const Vec* other) const { return y - other->y; }
-    float getZDiff(const Vec* other) const { return z - other->z; }
-};
+#include "../gctypes.h"
 
-struct Vec2 {
-    float x, y;
-};
+#ifdef __cplusplus
+extern "C" {
+#endif
 
-struct CameraMatrix {
-    Vec target;
-    Vec pos;
+typedef struct Vec {
+    f32 x, y, z;
+} Vec;
+
+typedef Vec* VecPtr;
+typedef Vec Point3d;
+typedef Vec* Point3dPtr;
+
+typedef struct SVec {
+    s16 x, y, z;
+} SVec;
+
+#ifdef __cplusplus
 };
+#endif
 
 #endif /* VEC_H */

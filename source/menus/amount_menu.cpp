@@ -28,7 +28,7 @@ Line lines[LINE_NUM] = {
 };
 
 void updateSpoilsBagAmount(u8 index) {
-    u8 amount = dComIfGs_getSpoilsNum(index);
+    u8 amount = dComIfGs_getBeastNum(index);
     Cursor::moveListSimple(amount);
     if (amount == 0xFF) {
         amount = 99;
@@ -36,7 +36,7 @@ void updateSpoilsBagAmount(u8 index) {
     if (amount > 99) {
         amount = 0;    
     }
-    dComIfGs_setSpoilsNum(index, amount);
+    dComIfGs_setBeastNum(index, amount);
 }
 
 void AmountMenu::draw() {
@@ -170,14 +170,14 @@ void AmountMenu::draw() {
     tww_sprintf(lines[RUPEE_INDEX].value, " <%d>", g_rupeeNum);
     tww_sprintf(lines[MAGIC_INDEX].value, " <%d>", g_magicNum);
     tww_sprintf(lines[HEART_PIECE_INDEX].value, " <%d>", g_heartNum);
-    tww_sprintf(lines[JOY_PENDANT_INDEX].value, " <%d>", dComIfGs_getSpoilsNum(7));
-    tww_sprintf(lines[SKULL_NECKLACE_INDEX].value, " <%d>", dComIfGs_getSpoilsNum(0));
-    tww_sprintf(lines[BOKO_BABA_SEED_INDEX].value, " <%d>", dComIfGs_getSpoilsNum(1));
-    tww_sprintf(lines[GOLDEN_FEATHER_INDEX].value, " <%d>", dComIfGs_getSpoilsNum(2));
-    tww_sprintf(lines[KNIGHTS_CREST_INDEX].value, " <%d>", dComIfGs_getSpoilsNum(3));
-    tww_sprintf(lines[RED_CHU_JELLY_INDEX].value, " <%d>", dComIfGs_getSpoilsNum(4));
-    tww_sprintf(lines[GREEN_CHU_JELLY_INDEX].value, " <%d>", dComIfGs_getSpoilsNum(5));
-    tww_sprintf(lines[BLUE_CHU_JELLY_INDEX].value, " <%d>", dComIfGs_getSpoilsNum(6));
+    tww_sprintf(lines[JOY_PENDANT_INDEX].value, " <%d>", dComIfGs_getBeastNum(7));
+    tww_sprintf(lines[SKULL_NECKLACE_INDEX].value, " <%d>", dComIfGs_getBeastNum(0));
+    tww_sprintf(lines[BOKO_BABA_SEED_INDEX].value, " <%d>", dComIfGs_getBeastNum(1));
+    tww_sprintf(lines[GOLDEN_FEATHER_INDEX].value, " <%d>", dComIfGs_getBeastNum(2));
+    tww_sprintf(lines[KNIGHTS_CREST_INDEX].value, " <%d>", dComIfGs_getBeastNum(3));
+    tww_sprintf(lines[RED_CHU_JELLY_INDEX].value, " <%d>", dComIfGs_getBeastNum(4));
+    tww_sprintf(lines[GREEN_CHU_JELLY_INDEX].value, " <%d>", dComIfGs_getBeastNum(5));
+    tww_sprintf(lines[BLUE_CHU_JELLY_INDEX].value, " <%d>", dComIfGs_getBeastNum(6));
 
     cursor.move(0, LINE_NUM);
     GZ_drawMenuLines(lines, cursor.y, LINE_NUM);

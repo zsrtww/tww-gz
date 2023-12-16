@@ -35,12 +35,24 @@ Line lines[LINE_NUM] = {
     {"partner", PARTNER_INDEX, "Medli/Makar in ET/WT",true, &l_partner},
 };
 
+inline bool isStageDungeonItem(int stage, int flag) {
+    return isDungeonItem__12dSv_memBit_cFi(&g_dComIfG_gameInfo.info.mSavedata.mSave[stage].mBit, flag);
+}
+
+inline void onStageDungeonItem(int stage,int flag) {
+    onDungeonItem__12dSv_memBit_cFi(&g_dComIfG_gameInfo.info.mSavedata.mSave[stage].mBit, flag);
+}
+
+inline void offStageDungeonItem(int stage, int flag) {
+    g_dComIfG_gameInfo.info.mSavedata.mSave[stage].mBit.offDungeonItem(flag);
+}
+
 void dungeonItemSwitch(int stage, int flag) {
-    if (dComIfGs_isDungeonItem(stage, flag)) {
-        dComIfGs_offDungeonItem(stage, flag);
+    if (isStageDungeonItem(stage, flag)) {
+        onStageDungeonItem(stage, flag);
     }
     else {
-        dComIfGs_onDungeonItem(stage, flag);
+        offStageDungeonItem(stage, flag);
     }
 }
 
@@ -79,7 +91,7 @@ u8 selectDungeon() {
 }
 
 void modifyKeys(int stage_id) {
-    u8 amount = dComIfGs_getKeyNum(stage_id);
+    u8 amount = dComIfGs_getSaveKeyNum(stage_id);
     Cursor::moveListSimple(amount);
     if (amount == 0xFF) {
         amount = 99;
@@ -87,7 +99,7 @@ void modifyKeys(int stage_id) {
     if (amount > 99) {
         amount = 0;
     }
-    dComIfGs_setKeyNum(stage_id, amount);
+    dComIfGs_setSaveKeyNum(stage_id, amount);
 }
 
 
@@ -118,9 +130,9 @@ void DungeonMenu::draw() {
         break;
     }
 
-    l_mapFlag = dComIfGs_isDungeonItem(area_id, 0);
-    l_compassFlag = dComIfGs_isDungeonItem(area_id, 1);
-    l_bosskeyFlag = dComIfGs_isDungeonItem(area_id, 2);
+    l_mapFlag = isStageDungeonItem(area_id, dSv_memBit_c::MAP);
+    l_compassFlag = isStageDungeonItem(area_id, dSv_memBit_c::COMPASS);
+    l_bosskeyFlag = isStageDungeonItem(area_id, dSv_memBit_c::BOSS_KEY);
     l_medli = (dComIfGs_isEventBit(0x1620) && dComIfGs_isEventBit(0x1608) &&
                dComIfGs_isEventBit(0x2920) && dComIfGs_isEventBit(0x2E04));
     l_makar = (dComIfGs_isEventBit(0x1610) && dComIfGs_isEventBit(0x1604) && dComIfGs_isEventBit(0x2910));
@@ -140,7 +152,7 @@ void DungeonMenu::draw() {
         if (cursor.y == PICK_DUNGEON_INDEX) {
             l_selDun = cursor.x;
         }
-        l_keyNum = dComIfGs_getKeyNum(area_id);
+        l_keyNum = dComIfGs_getSaveKeyNum(area_id);
         selectDungeon();
         break;
     case MODIFY_KEYS_INDEX:
@@ -180,7 +192,7 @@ void DungeonMenu::draw() {
     }
     dComIfGs_getSave(g_dComIfG_gameInfo.info.mDan.mStageNo);
     tww_sprintf(lines[PICK_DUNGEON_INDEX].value, " <%s>", get_dun_name(area_id));
-    tww_sprintf(lines[MODIFY_KEYS_INDEX].value, " <%d>", dComIfGs_getKeyNum(area_id));
+    tww_sprintf(lines[MODIFY_KEYS_INDEX].value, " <%d>", dComIfGs_getSaveKeyNum(area_id));
 
     if ((area_id != 6) && (area_id != 7)) {
         GZ_drawMenuLines(lines, cursor.y, LINE_NUM - 1);

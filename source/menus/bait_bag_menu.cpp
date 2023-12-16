@@ -21,11 +21,11 @@ Line lines[LINE_NUM] = {
 
 
 void updateBaitBagSlot(u8 slot, u8 item_id) {
-    dComIfGs_setBaitBagSlot(slot, item_id);
+    dComIfGs_setItemBait(slot, item_id);
 }
 
 void updateBaitBagAmount(u8 index) {
-    if (dComIfGs_getBaitBagSlot(index) == ALL_PURPOSE_BAIT) {
+    if (dComIfGs_getItemBait(index) == ALL_PURPOSE_BAIT) {
         u8 amount = dComIfGs_getBaitNum(index);
         Cursor::moveListSimple(amount);
         if (amount == 0xFF) {
@@ -39,7 +39,7 @@ void updateBaitBagAmount(u8 index) {
 }
 
 void updateBaitBagItem(u8 slot) {
-    u8 new_item_id = dComIfGs_getBaitBagSlot(slot);
+    u8 new_item_id = dComIfGs_getItemBait(slot);
     Cursor::moveListSimple(new_item_id);
     if (new_item_id == NO_ITEM - 1) {
         new_item_id = NO_ITEM;
@@ -74,8 +74,8 @@ void updateBaitBagItem(u8 slot) {
 }
 
 const char* bait_to_str(u8 slot) {
-    if (dComIfGs_getBaitBagSlot(slot) != ALL_PURPOSE_BAIT) {
-        return item_id_to_str(dComIfGs_getBaitBagSlot(slot));
+    if (dComIfGs_getItemBait(slot) != ALL_PURPOSE_BAIT) {
+        return item_id_to_str(dComIfGs_getItemBait(slot));
     } else {
         switch (dComIfGs_getBaitNum(slot)) {
         case 0:
