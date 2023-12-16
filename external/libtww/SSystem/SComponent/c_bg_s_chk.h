@@ -4,7 +4,11 @@
 #include "../../dolphin/gctypes.h"
 
 class cBgS_PolyPassChk;
-class cBgS_GrpPassChk;
+
+class cBgS_GrpPassChk {
+public:
+    void* vtable;
+};
 
 class cBgS_Chk {
 public:

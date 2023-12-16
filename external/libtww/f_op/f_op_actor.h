@@ -3,6 +3,7 @@
 
 #include "../SSystem/SComponent/c_sxyz.h"
 #include "../SSystem/SComponent/c_xyz.h"
+#include "../SSystem/SComponent/c_phase.h"
 #include "../dolphin/mtx/mtx.h"
 #include "../f_pc/f_pc_leaf.h"
 #include "../d/kankyo/d_kankyo.h"
@@ -137,9 +138,9 @@ public:
 };  // Size = 0x18
 
 struct actor_place {
-    cXyz mPosition;
-    csXyz mAngle;
-    u8 mRoomNo;
+    cXyz pos;
+    csXyz angle;
+    u8 roomNo;
 };
 
 struct actor_attention_types {

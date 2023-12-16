@@ -19,6 +19,10 @@ typedef struct SVec {
     s16 x, y, z;
 } SVec;
 
+typedef struct Quaternion {
+    f32 x, y, z, w;
+} Quaternion;
+
 #ifdef __cplusplus
 };
 #endif

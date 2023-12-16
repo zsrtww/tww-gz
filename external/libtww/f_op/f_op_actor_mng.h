@@ -2,6 +2,7 @@
 #define F_OP_ACTOR_MNG_H_
 
 #include "f_op_actor.h"
+#include "../f_pc/f_pc_manager.h"
 
 struct fopAcM_prmBase_class {
     /* 0x00 */ u32 field_0x00;
@@ -41,6 +42,14 @@ inline u32 fopAcM_checkHookCarryNow(fopAc_ac_c* pActor) {
     return fopAcM_checkStatus(pActor, fopAcStts_HOOK_CARRY_e);
 }
 
+inline u32 fopAcM_GetParam(void* pActor) {
+    return fpcM_GetParam(pActor);
+}
+
+inline u32 fopAcM_GetParamBit(u32 param, u8 shift, u8 bit) {
+    return (param >> shift) & ((1 << bit) - 1);
+}
+
 inline void fopAcM_OnStatus(fopAc_ac_c* pActor, u32 flag) {
     pActor->mStatus |= flag;
 }
@@ -50,7 +59,7 @@ inline void fopAcM_OffStatus(fopAc_ac_c* pActor, u32 flag) {
 }
 
 inline csXyz* fopAcM_GetAngle_p(fopAc_ac_c* i_actor) {
-    return &i_actor->current.mAngle;
+    return &i_actor->current.angle;
 }
 
 #endif

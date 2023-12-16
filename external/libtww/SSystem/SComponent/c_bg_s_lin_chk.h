@@ -22,7 +22,6 @@ public:
     void SetHit() { mFlag |= 0x10; }
     u32 ChkHit() const { return mFlag & 0x10; }
     void ClrSttsRoofOff() { mFlag &= ~0x20000000; }
-    void SetCross(const cXyz& pos) { mLin.SetEnd(pos); }
     cXyz& i_GetCross() { return mLin.GetEnd(); }
     cM3dGLin* GetLinP() { return &mLin; }
     void OnBackFlag() { mBackFlag = true; }

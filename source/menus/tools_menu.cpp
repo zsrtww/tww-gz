@@ -93,9 +93,9 @@ void ToolsMenu::displayLinkInfo() {
 
         tww_sprintf(link_angle, "angle: %d", playerAc->shape_angle.y);
         tww_sprintf(link_speed, "speed: %.4f", playerAc->speedF);
-        tww_sprintf(link_x, "x-pos: %.4f", playerAc->current.mPosition.x);
-        tww_sprintf(link_y, "y-pos: %.4f", playerAc->current.mPosition.y);
-        tww_sprintf(link_z, "z-pos: %.4f", playerAc->current.mPosition.z);
+        tww_sprintf(link_x, "x-pos: %.4f", playerAc->current.pos.x);
+        tww_sprintf(link_y, "y-pos: %.4f", playerAc->current.pos.y);
+        tww_sprintf(link_z, "z-pos: %.4f", playerAc->current.pos.z);
 
         Font::GZ_drawStr(link_angle, 450.f, 200.f, ColorPalette::WHITE, g_dropShadows);
         Font::GZ_drawStr(link_speed, 450.f, 220.f, ColorPalette::WHITE, g_dropShadows);
