@@ -1,5 +1,6 @@
 *.dmp
 *.o
+*.d
 *.a
 *.iso
 *.map

@@ -29,6 +29,7 @@
 #include "menus/watches_menu.h"
 
 #include "menus/any_no_mss_saves_menu.h"
+#include "menus/any_percent_saves_menu.h"
 
 typedef void (*menu_render_t)();
 
@@ -46,6 +47,7 @@ menu_render_t l_menuDrawList[MENU_NUM] = {
     ItemEquipPriorityMenu::draw,
 
     AnyNoMssSavesMenu::draw,
+    AnyPercentSavesMenu::draw,
 
     MemoryEditorMenu::draw,
     WatchesMenu::draw,
