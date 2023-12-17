@@ -51,17 +51,16 @@ const char* get_pirates_charm_string(u8 has_pirates_charm) {
     };
 }
 
-const char* get_heros_charm_string(u8 has_heros_charm) {
-    switch (has_heros_charm) {
-    case NO_HEROS_CHARM:
-        return "Empty";
-    case HEROS_CHARM_DISABLED:
+const char* get_heros_charm_string() {
+    if (dComIfGs_isCollect(HEROS_CHARM_OWNED_INDEX, 0)) {
+        if (dComIfGs_isCollect(HEROS_CHARM_OWNED_INDEX, 1)) {
+            return "Hero\'s Charm (Enabled)";
+        }
+
         return "Hero\'s Charm (Disabled)";
-    case HEROS_CHARM_ENABLED:
-        return "Hero\'s Charm (Enabled)";
-    default:
-        return "Empty";
-    };
+    }
+
+    return "Empty";
 }
 
 const char* get_hurricane_spin_string() {
@@ -508,12 +507,20 @@ void QuestStatusMenu::draw() {
         break;
     case MENU_ITEM_HEROS_CHARM:
         heros_charm_flag = dComIfGs_isCollect(HEROS_CHARM_OWNED_INDEX, 0);
+        if (dComIfGs_isCollect(HEROS_CHARM_OWNED_INDEX, 1)) {
+            heros_charm_flag = 2;
+        }
+
         Cursor::moveListSimple(heros_charm_flag);
 
-        if (heros_charm_flag) {
+        if (heros_charm_flag == 1) {
             dComIfGs_onCollect(HEROS_CHARM_OWNED_INDEX, 0);
+            dComIfGs_offCollect(HEROS_CHARM_OWNED_INDEX, 1);
+        } else if (heros_charm_flag == 2) {
+            dComIfGs_onCollect(HEROS_CHARM_OWNED_INDEX, 1);
         } else {
             dComIfGs_offCollect(HEROS_CHARM_OWNED_INDEX, 0);
+            dComIfGs_offCollect(HEROS_CHARM_OWNED_INDEX, 1);
         }
         break;
     case MENU_ITEM_WINDS_REQUIEM:
@@ -583,7 +590,7 @@ void QuestStatusMenu::draw() {
     tww_sprintf(lines[MENU_ITEM_PIRATES_CHARM].value, " <%s>",
                 get_pirates_charm_string(dComIfGs_isCollect(PIRATES_CHARM_OWNED_INDEX, 0)));
     tww_sprintf(lines[MENU_ITEM_HEROS_CHARM].value, " <%s>",
-                get_heros_charm_string(dComIfGs_isCollect(HEROS_CHARM_OWNED_INDEX, 0)));
+                get_heros_charm_string());
     tww_sprintf(lines[MENU_ITEM_WINDS_REQUIEM].value, " <%s>",
                 get_song_string(dComIfGs_isTact(WINDS_REQUIEM_VALUE), WINDS_REQUIEM_VALUE));
     tww_sprintf(lines[MENU_ITEM_BALLAD_OF_GALES].value, " <%s>",
