@@ -49,10 +49,10 @@ inline void offStageDungeonItem(int stage, int flag) {
 
 void dungeonItemSwitch(int stage, int flag) {
     if (isStageDungeonItem(stage, flag)) {
-        onStageDungeonItem(stage, flag);
+        offStageDungeonItem(stage, flag);
     }
     else {
-        offStageDungeonItem(stage, flag);
+        onStageDungeonItem(stage, flag);
     }
 }
 

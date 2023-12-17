@@ -500,23 +500,21 @@ void QuestStatusMenu::draw() {
         is_pirates_charm_owned = dComIfGs_isCollect(PIRATES_CHARM_OWNED_INDEX, 0);
         Cursor::moveListSimple(is_pirates_charm_owned);
 
-        if (is_pirates_charm_owned > 0) {
-            is_pirates_charm_owned = 1;
+        if (is_pirates_charm_owned) {
+            dComIfGs_onCollect(PIRATES_CHARM_OWNED_INDEX, 0);
         } else {
-            is_pirates_charm_owned = 0;
+            dComIfGs_offCollect(PIRATES_CHARM_OWNED_INDEX, 0);
         }
-        dComIfGs_onCollect(PIRATES_CHARM_OWNED_INDEX, is_pirates_charm_owned);
         break;
     case MENU_ITEM_HEROS_CHARM:
         heros_charm_flag = dComIfGs_isCollect(HEROS_CHARM_OWNED_INDEX, 0);
         Cursor::moveListSimple(heros_charm_flag);
 
-        if (heros_charm_flag > 0) {
-            heros_charm_flag = 1;
+        if (heros_charm_flag) {
+            dComIfGs_onCollect(HEROS_CHARM_OWNED_INDEX, 0);
         } else {
-            heros_charm_flag = 0;
+            dComIfGs_offCollect(HEROS_CHARM_OWNED_INDEX, 0);
         }
-        dComIfGs_onCollect(HEROS_CHARM_OWNED_INDEX, heros_charm_flag);
         break;
     case MENU_ITEM_WINDS_REQUIEM:
         updateSongs(WINDS_REQUIEM_VALUE);
