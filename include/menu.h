@@ -4,7 +4,7 @@
 #include "utils/cursor.h"
 #include "utils/lines.h"
 
-#define MENU_NUM 28
+#define MENU_NUM 29
 
 enum {
     /* Main Menus */
@@ -25,6 +25,8 @@ enum {
     /* Practice Sub-Menus */
     GZ_ANY_NO_MSS_SAVES_MENU,
     GZ_ANY_PERCENT_SAVES_MENU,
+    GZ_ALL_DUNGEONS_SAVES_MENU,
+
 
     /* Memory Sub-Menus */
     GZ_MEM_EDITOR_MENU,
