@@ -25,7 +25,7 @@ Line lines[LINE_NUM] = {
     {"enter tower of the gods", ENTER_TOTG_AD, "outside jabuun's cave for swim to sti/nti"},
     {"tower of the gods", TOTG_AD, "start of totg"},
     {"darknut", DARKNUT_AD, "darknut miniboss"},
-    {"after second statue", TOTG_AFTER_STATUE2_AD, "totg after returning second statue"},
+    {"totg third statue", TOTG_AFTER_STATUE2_AD, "totg after returning second statue"},
     {"gohdan", GOHDAN_BOSS_AD, "gohdan boss fight"},
     {"puzzle skip", PUZZLE_SKIP_AD, "inside hyrule castle for puzzle skip"},
     {"hyrule escape", HYRULE_ESCAPE_AD, "inside hyrule castle after master sword for hyrule escape"},
