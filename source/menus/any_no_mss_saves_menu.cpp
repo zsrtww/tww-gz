@@ -37,8 +37,6 @@ void AnyNoMssSavesMenu::draw() {
 
     if (GZ_getButtonTrig(GZPad::A)) {
         special AnyNoMssSpecials[] = {
-            special(AFTER_INTRO, nullptr, nullptr),
-            special(ORCA, nullptr, nullptr),
             special(FOREST_OF_FAIRIES, SaveMngSpecial_ForestOfFairies_FirstVisit, nullptr),
             special(ROPES_1, SaveMngSpecial_Ropes1, nullptr),
             special(FF1, SaveMngSpecial_FF1_PirateShip_Night, nullptr),

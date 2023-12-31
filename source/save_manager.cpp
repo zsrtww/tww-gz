@@ -119,6 +119,9 @@ void SaveManager::triggerLoad(uint32_t id, const char* category, special i_speci
 
     g_dComIfG_gameInfo.play.mNextStage.enabled = true;
     s_injectSave = true;
+
+    g_dComIfG_gameInfo.info.field_0x1154 = 0;
+    
 }
 
 // runs at the beginning of phase_1 of dScnPly__phase_1 load sequence

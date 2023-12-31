@@ -5,4 +5,5 @@
 enum SpeedrunCategories {
     ANY_NO_MSS,      
     ANY_PERCENT,
+    ALL_DUNGEONS,
 };
