@@ -188,8 +188,10 @@ static_assert(sizeof(dSv_player_status_a_c) == 0x18);
 class dSv_player_status_b_c {
 public:
     void setTime(float pTime) { mTime = pTime; }
+    void setDate(u16 i_date) { mDate = i_date; }
     float getTime() const { return mTime; }
     u16 getDate() const { return mDate; }
+    
 
     /* 0x00 */ u64 mDateIPL;
     /* 0x08 */ f32 field_0x8;
