@@ -348,9 +348,18 @@ inline float dComIfGs_getTime() {
     return g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusB().getTime();
 }
 
+inline void dComIfGs_setTime(float pTime) {
+    g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusB().setTime(pTime);
+}
+
 inline float dComIfGs_getDate() {
     return g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusB().getDate();
 }
+
+inline void dComIfGs_setDate(u16 i_date) {
+    return g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusB().setDate(i_date);
+}
+
 
 inline void dComIfGs_setForestWaterTimer(uint16_t frames) {
     g_dComIfG_gameInfo.info.getPlayer().getItemRecord().setForestWaterTimer(frames);
