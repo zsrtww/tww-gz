@@ -67,13 +67,16 @@ void ToolsMenu::displayTimeInfo() {
     char Date[10];
     char Moon[20];
 
+    tww_sprintf(Time, "%02d:%02d", hour, min);
+    tww_sprintf(Date, "date: %d", date);
+    tww_sprintf(Moon, "Moon: %d", moonphases[0]);
+
     Font::GZ_drawStr(Time, 450.f, 300.f, ColorPalette::WHITE, g_dropShadows);
     Font::GZ_drawStr(Date, 450.f, 320.f, ColorPalette::WHITE, g_dropShadows);
     Font::GZ_drawStr(moonphases[moonid], 450.f, 340.f, ColorPalette::WHITE, g_dropShadows);
 }
 
 void ToolsMenu::draw() {
-    cursor.setMode(Cursor::MODE_LIST);
     cursor.move(0, LINE_NUM);
 
     if (GZ_getButtonTrig(GZPad::B)) {
