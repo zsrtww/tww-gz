@@ -4,13 +4,10 @@
 #include "../addrs.h"
 #include "save/d_save.h"
 #include "../f_op/f_op_actor.h"
+#include "kankyo/d_kankyo.h"
 #include <string.h>
 
 class JKRExpHeap;
-
-struct color_RGB_class {
-    u8 r, g, b;
-};
 
 class stage_vrbox_info_class {
 public:

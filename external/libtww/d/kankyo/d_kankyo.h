@@ -4,6 +4,7 @@
 #include "../../dolphin/gctypes.h"
 #include "../../SSystem/SComponent/c_xyz.h"
 #include "../../dolphin/gx/gx.h"
+#include "../../JSystem/J3DGraphBase/J3DStruct.h"
 
 struct color_RGB_class {
     u8 r;
@@ -107,15 +108,6 @@ struct DEMO_PLIGHT {
     /* 0x04 */ int field_0x04;
     /* 0x08 */ LIGHT_INFLUENCE mLightInfluence;
 };
-
-class J3DLightInfo {
-public:
-    /* 0x00 */ Vec mLightPosition;
-    /* 0x0C */ Vec mLightDirection;
-    /* 0x18 */ GXColor mColor;
-    /* 0x1C */ Vec mCosAtten;
-    /* 0x28 */ Vec mDistAtten;
-};  // Size = 0x34
 
 class J3DLightObj {
 public:
