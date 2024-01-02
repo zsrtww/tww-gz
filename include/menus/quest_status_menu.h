@@ -1,7 +1,6 @@
 #include "menu.h"
 
 enum Sword {
-    NO_SWORD_OWNED,
     HEROS_SWORD_OWNED,
     UNCHARGED_MASTER_SWORD_OWNED,
     HALF_CHARGED_MASTER_SWORD_OWNED,

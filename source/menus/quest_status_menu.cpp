@@ -202,47 +202,6 @@ const char* get_triforce_string(u8 triforce_owned, u8 triforce_piece) {
     }
 }
 
-u8 swordIdToSwordOwned(u8 sword_item_id) {
-    switch (sword_item_id) {
-    case NO_ITEM:
-        return NO_SWORD_OWNED;
-    case HEROS_SWORD:
-        return HEROS_SWORD_OWNED;
-    case UNCHARGED_MASTER_SWORD:
-        return UNCHARGED_MASTER_SWORD_OWNED;
-    case HALF_CHARGED_MASTER_SWORD:
-        return HALF_CHARGED_MASTER_SWORD_OWNED;
-    case FULLY_CHARGED_MASTER_SWORD:
-        return FULLY_CHARGED_MASTER_SWORD_OWNED;
-    default:
-        return NO_SWORD_OWNED;
-    };
-}
-
-u8 shieldIdToShieldOwned(u8 shield_item_id) {
-    switch (shield_item_id) {
-    case NO_ITEM:
-        return NO_SHIELD_OWNED;
-    case HEROS_SHIELD:
-        return HEROS_SHIELD_OWNED;
-    case MIRROR_SHIELD:
-        return MIRROR_SHIELD_OWNED;
-    default:
-        return NO_SHIELD_OWNED;
-    };
-}
-
-u8 powerBraceletsIdToPowerBraceletsOwned(u8 power_bracelets_item_id) {
-    switch (power_bracelets_item_id) {
-    case NO_ITEM:
-        return 0;
-    case POWER_BRACELETS:
-        return 1;
-    default:
-        return 0;
-    }
-}
-
 void updateHurricaneSpin() {
     u8 has_hurricane_spin = dComIfGs_isEventBit(0x0B20);
     s8 position = 0;
@@ -355,8 +314,32 @@ void QuestStatusMenu::draw() {
         } else {
             new_sword_item_id = dComIfGs_getSelectEquip(SWORD_INDEX);
         }
+
+        switch (new_sword_item_id) {
+        case NO_ITEM:
+            dComIfGs_offCollect(SWORD_INDEX, 0);
+            dComIfGs_offCollect(SWORD_INDEX, 1);
+            dComIfGs_offCollect(SWORD_INDEX, 2);
+            dComIfGs_offCollect(SWORD_INDEX, 3);
+            break;
+        case HEROS_SWORD:
+            dComIfGs_onCollect(SWORD_INDEX, 0);
+            dComIfGs_offCollect(SWORD_INDEX, 1);
+            break;
+        case UNCHARGED_MASTER_SWORD:
+            dComIfGs_onCollect(SWORD_INDEX, 1);
+            dComIfGs_offCollect(SWORD_INDEX, 2);
+            break;
+        case HALF_CHARGED_MASTER_SWORD:
+            dComIfGs_onCollect(SWORD_INDEX, 2);
+            dComIfGs_offCollect(SWORD_INDEX, 3);
+            break;
+        case FULLY_CHARGED_MASTER_SWORD:
+            dComIfGs_onCollect(SWORD_INDEX, 3);
+            break;
+        }
+
         dComIfGs_setSelectEquip(SWORD_INDEX, new_sword_item_id);
-        dComIfGs_onCollect(SWORD_INDEX, swordIdToSwordOwned(new_sword_item_id));
         break;
     case MENU_ITEM_SHIELD:
         new_shield_item_id = dComIfGs_getSelectEquip(SHIELD_INDEX);
@@ -376,8 +359,22 @@ void QuestStatusMenu::draw() {
         } else {
             new_shield_item_id = dComIfGs_getSelectEquip(SHIELD_INDEX);
         }
+
+        switch (new_shield_item_id) {
+        case NO_ITEM:
+            dComIfGs_offCollect(SHIELD_INDEX, 0);
+            dComIfGs_offCollect(SHIELD_INDEX, 1);
+            break;
+        case HEROS_SHIELD:
+            dComIfGs_onCollect(SHIELD_INDEX, 0);
+            dComIfGs_offCollect(SHIELD_INDEX, 1);
+            break;
+        case MIRROR_SHIELD:
+            dComIfGs_onCollect(SHIELD_INDEX, 1);
+            break;
+        }
+
         dComIfGs_setSelectEquip(SHIELD_INDEX, new_shield_item_id);
-        dComIfGs_onCollect(SHIELD_OWNED_INDEX, shieldIdToShieldOwned(new_shield_item_id));
         break;
     case MENU_ITEM_MAGIC:
         new_max_magic_value = dComIfGs_getMaxMagic();
@@ -434,8 +431,17 @@ void QuestStatusMenu::draw() {
         } else {
             new_power_bracelets_item_id = dComIfGs_getSelectEquip(POWER_BRACELETS_INDEX);
         }
+
+        switch (new_power_bracelets_item_id) {
+        case NO_ITEM:
+            dComIfGs_offCollect(POWER_BRACELETS_INDEX, 0);
+            break;
+        case POWER_BRACELETS:
+            dComIfGs_onCollect(POWER_BRACELETS_INDEX, 0);
+            break;
+        }
+
         dComIfGs_setSelectEquip(POWER_BRACELETS_INDEX, new_power_bracelets_item_id);
-        dComIfGs_onCollect(POWER_BRACELETS_OWNED_INDEX, powerBraceletsIdToPowerBraceletsOwned(new_power_bracelets_item_id));
         break;
     case MENU_ITEM_QUIVER:
         new_arrows_capacity = dComIfGs_getArrowMax();
