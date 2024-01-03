@@ -4,13 +4,18 @@
 #include "c_m3d_g_pla.h"
 #include "c_xyz.h"
 
-class cM3dGTri {
-    // private:
+struct cM3dGTriS {
+    Vec a;
+    Vec b;
+    Vec c;
+};
+
+class cM3dGTri : public cM3dGPla {
 public:
-    cM3dGPla mPlane;
-    cXyz mA;
-    cXyz mB;
-    cXyz mC;
+    /* 0x00 */ /* cM3dGPla */
+    /* 0x14 */ Vec mA;
+    /* 0x20 */ Vec mB;
+    /* 0x2C */ Vec mC;
 };
 
 #endif

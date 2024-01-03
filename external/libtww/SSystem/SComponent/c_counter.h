@@ -4,16 +4,16 @@
 #include "../../dolphin/gctypes.h"
 #include "../../addrs.h"
 
-struct cCounter {
-    u32 game_counter;
-    u32 game_counter2;
-    u32 non_menu_counter;
+struct counter_class {
+    u32 mCounter0;
+    s32 mCounter1;
+    u32 mTimer;
 };
 
-#define g_Counter (*(cCounter*)(g_Counter_addr))
+#define g_Counter (*(counter_class*)(g_Counter_addr))
 
 u32 cCt_getFrameCount() {
-    return g_Counter.game_counter;
+    return g_Counter.mCounter0;
 }
 
 #endif /* C_COUNTER_H */

@@ -84,6 +84,13 @@
 /* c_counter */
 #define g_Counter_addr 0x803db620
 
+/* c_xyz */
+#define cXyz__operator_pl_addr 0x80242e04
+#define cXyz__operator_mi_addr 0x80242e54
+#define cXyz__operator_ml_addr 0x80242ea4
+#define cXyz__operator_ml2_addr 0x80242ef0
+#define cXyz__operator_dv_addr 0x80242f38
+
 /* JUTConsole */
 #define tww_draw_console_addr 0x802c8278
 
@@ -117,6 +124,7 @@
 /* d_com_inf_game */
 #define g_dComIfG_gameInfo_addr 0x803b8108
 #define tww_dComIfGs_setGameStartStage_addr 0x80053054
+#define dComIfGs_setSelectEquip_addr 0x80053fbc
 
 /* d_save */
 #define dSv_player_return_place_c__set_addr 0x800569c0
@@ -126,9 +134,45 @@
 #define onDungeonItem__12dSv_memBit_cFi_addr 0x8005a5c4
 #define isDungeonItem__12dSv_memBit_cFi_addr 0x8005a664
 #define getSave__10dSv_info_cFi_addr 0x8005b6e8
+#define dSv_player_bag_item_c__setBeastItem_addr 0x80057760
+#define dSv_player_bag_item_c__setBaitItem_addr 0x80058040
+#define dSv_player_map_c__isGetMap_addr 0x800591c4
+#define dSv_player_map_c__onGetMap_addr 0x80059118
+#define dSv_event_c__setEventReg_addr 0x8005a978
+#define dSv_event_c__getEventReg_addr 0x8005a99c
+#define dSv_player_collect_c__getTriforceNum_addr 0x80059028
+#define dSv_memBit_c__isTbox_addr 0x80059fa8
+#define dSv_memBit_c__onTbox_addr 0x80059f0c
+#define dSv_memBit_c__isSwitch_addr 0x8005a1a0
+#define dSv_memBit_c__onSwitch_addr 0x8005a048
+#define dSv_memBit_c__offSwitch_addr 0x8005a0f4
+#define dSv_memBit_c__onDungeonItem_addr 0x8005a5c4
+#define dSv_memBit_c__isDungeonItem_addr 0x8005a664
+#define dSv_player_collect_c__isCollect_addr 0x80058c08
+#define dSv_player_collect_c__onCollect_addr 0x80058ad8
+#define dSv_player_collect_c__offCollect_addr 0x80058b70
+#define dSv_player_collect_c__isTact_addr 0x80058d38
+#define dSv_player_collect_c__onTact_addr 0x80058ca4
+#define dSv_player_collect_c__isTriforce_addr 0x80058e64
+#define dSv_player_collect_c__onTriforce_addr 0x80058dd0
+#define dSv_player_collect_c__isSymbol_addr 0x80058f90
+#define dSv_player_collect_c__onSymbol_addr 0x80058efc
+#define dSv_info_c__onSwitch_addr 0x8005b944
+#define dSv_info_c__offSwitch_addr 0x8005bb0c
+#define dSv_info_c__isSwitch_addr 0x8005bcb8
+#define dSv_info_c__revSwitch_addr 0x8005be00
+#define dSv_info_c__onItem_addr 0x8005bfb0
+#define dSv_info_c__isItem_addr 0x8005c144
+#define dSv_player_get_item_c__onItem_addr 0x800572bc
+#define dSv_player_get_item_c__isItem_addr 0x80057354
+#define dSv_player_get_bag_item_c__onBeast_addr 0x800586c4
+#define dSv_player_get_bag_item_c__isBeast_addr 0x80058758
+#define dSv_player_get_bag_item_c__onBait_addr 0x800587f0
+#define dSv_player_get_bag_item_c__isBait_addr 0x80058884
 
 /* d_stage */
 #define dStage_roomControl_c__mStayNo_addr 0x803e9f48
+#define dStage_roomControl_c__m_time_pass_addr 0x803e9f54
 
 /* d_s_play */
 #define tww_dScnPly_Draw_addr 0x8023218c
@@ -137,8 +181,9 @@
 #define l_debug_keep_pos_addr 0x803d78fc
 #define l_debug_current_angle_addr 0x803ea3c8
 #define l_debug_shape_angle_addr 0x803ea3d0
-#define l_pointer_addr 0x803ad860
-#define l_equipped_arrow_type_addr 0x803ea04c
+
+/* d_com_static */
+#define daArrow_c__m_keep_type_addr 0x803ea04c
 
 #endif
 
@@ -265,6 +310,6 @@
 #define l_debug_keep_pos_addr 0x803e440c
 #define l_debug_current_angle_addr 0x803f6f10
 #define l_debug_shape_angle_addr 0x803f6f18
-#define l_equipped_arrow_type_addr 0x803f6b7c
+#define daArrow_c__m_keep_type_addr 0x803f6b7c
 
 #endif

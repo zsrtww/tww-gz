@@ -19,7 +19,7 @@ bool SaveManager::s_injectSave = false;
 void SaveManager::injectSave(void* src) {
     memcpy(&g_dComIfG_gameInfo.info.mSavedata.mPlayer.mPlayerStatusA, src, 0x18);
     memcpy(&g_dComIfG_gameInfo.info.mSavedata.mPlayer.mPlayerStatusB, (char*) src + 0x18, 0x18);
-    memcpy(&g_dComIfG_gameInfo.info.mSavedata.mPlayer.mPlayerReturnPlace, (char*) src + 0x30, 0xc);
+    memcpy(&g_dComIfG_gameInfo.info.mSavedata.mPlayer.mReturnPlace, (char*) src + 0x30, 0xc);
     memcpy(&g_dComIfG_gameInfo.info.mSavedata.mPlayer.mPlayerItem, (char*) src + 0x3c, 0x15);
     memcpy(&g_dComIfG_gameInfo.info.mSavedata.mPlayer.mGetItem, (char*) src + 0x51, 0x15);
     memcpy(&g_dComIfG_gameInfo.info.mSavedata.mPlayer.mItemRecord, (char*) src + 0x66, 8);
@@ -44,7 +44,7 @@ void SaveManager::injectSave(void* src) {
 }
 
 void SaveManager::injectDefault_before() {
-    g_dComIfG_gameInfo.play.mNextStage.wipe = 0;
+    g_dComIfG_gameInfo.play.mNextStage.mWipe = 0;
 }
 
 void SaveManager::injectDefault_during() {
@@ -104,12 +104,12 @@ void SaveManager::triggerLoad(uint32_t id, const char* category, special i_speci
     SaveManager::loadSavefile(l_filename);
     dSv_save_c* save = (dSv_save_c*) MEMFILE_BUF;
 
-    int state = tww_getLayerNo(save->getPlayer().mPlayerReturnPlace.mName,
-                              save->getPlayer().mPlayerReturnPlace.mRoomNo, 0xFF);
+    int state = tww_getLayerNo(save->getPlayer().mReturnPlace.mName,
+                              save->getPlayer().mReturnPlace.mRoomNo, 0xFF);
 
-    g_dComIfG_gameInfo.play.mNextStage.mRoomNo = save->getPlayer().mPlayerReturnPlace.mRoomNo;
-    g_dComIfG_gameInfo.play.mNextStage.mPoint = save->getPlayer().mPlayerReturnPlace.mPlayerStatus;
-    strcpy(g_dComIfG_gameInfo.play.mNextStage.mStage, save->getPlayer().mPlayerReturnPlace.mName);
+    g_dComIfG_gameInfo.play.mNextStage.mRoomNo = save->getPlayer().mReturnPlace.mRoomNo;
+    g_dComIfG_gameInfo.play.mNextStage.mPoint = save->getPlayer().mReturnPlace.mPoint;
+    strcpy(g_dComIfG_gameInfo.play.mNextStage.mName, save->getPlayer().mReturnPlace.mName);
     g_dComIfG_gameInfo.play.mNextStage.mLayer = state;
 
     // inject options after initial stage set since some options change stage location
@@ -117,7 +117,7 @@ void SaveManager::triggerLoad(uint32_t id, const char* category, special i_speci
         gSaveManager.mPracticeFileOpts.inject_options_during_load();
     }
 
-    g_dComIfG_gameInfo.play.mNextStage.enabled = true;
+    g_dComIfG_gameInfo.play.mNextStage.mEnable = true;
     s_injectSave = true;
 
     g_dComIfG_gameInfo.info.field_0x1154 = 0;
@@ -138,9 +138,9 @@ void SaveManager::loadData() {
         s_injectSave = false;
 
         if (g_enable_item_equip_menu) {
-            u8 cur_item_x = dComIfGs_getItemX();
-            u8 cur_item_y = dComIfGs_getItemY();
-            u8 cur_item_z = dComIfGs_getItemZ();
+            u8 cur_item_x = dComIfGs_getSelectItem(0);
+            u8 cur_item_y = dComIfGs_getSelectItem(1);
+            u8 cur_item_z = dComIfGs_getSelectItem(2);
 
             u8 new_items[3] = {NO_ITEM, NO_ITEM, NO_ITEM};
 
@@ -162,9 +162,9 @@ void SaveManager::loadData() {
                 }
             }
 
-            dComIfGs_setItemX(new_items[name_X]);
-            dComIfGs_setItemY(new_items[name_Y]);
-            dComIfGs_setItemZ(new_items[name_Z]);
+            dComIfGs_setSelectItem(0, new_items[name_X]);
+            dComIfGs_setSelectItem(1, new_items[name_Y]);
+            dComIfGs_setSelectItem(2, new_items[name_Z]);
         }
     }
 }

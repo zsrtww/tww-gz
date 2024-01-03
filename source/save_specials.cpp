@@ -1,4 +1,5 @@
 #include "libtww/d/com/d_com_inf_game.h"
+#include "libtww/d/com/d_com_static.h"
 
 #include "flags.h"
 #include "save_manager.h"
@@ -73,7 +74,7 @@ void SaveMngSpecial_TrialsSkip_After() {
 void SaveMngSpecial_PuppetGanon() {
     gSaveManager.injectDefault_during();
     g_dComIfG_gameInfo.play.mNextStage.setLayer(1);
-    l_equipped_arrow_type = 3;
+    daArrow_c__m_keep_type = 3;
 }
 
 void SaveMngSpecial_PuppetGanon_After() {
@@ -86,7 +87,7 @@ void SaveMngSpecial_MorthHover_during() {
     gSaveManager.injectDefault_during();
     g_dComIfG_gameInfo.play.mNextStage.setPoint(2);
     g_dComIfG_gameInfo.play.mNextStage.setLayer(1);
-    l_equipped_arrow_type = 3;
+    daArrow_c__m_keep_type = 3;
 }
 
 void SaveMngSpecial_MorthHover_after() {

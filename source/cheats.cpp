@@ -78,7 +78,7 @@ void GZ_applyCheats() {
     }
 
     if (GZ_checkCheat(InfiniteAir)) {
-        dComIfGs_setOxygen(900);
+        dComIfGp_setItemTimeCount(900);
     }
 
     if (GZ_checkCheat(InfiniteBombs)) {

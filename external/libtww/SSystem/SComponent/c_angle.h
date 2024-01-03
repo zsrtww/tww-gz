@@ -17,23 +17,23 @@ public:
 
 class cDegree {
 public:
-    float mDegree;
+    f32 mDegree;
 };
 
 class cSPolar {
 public:
-    float mRadial;
+    f32 mRadial;
     cSAngle mAngle1;
     cSAngle mAngle2;
 };
 
 class cSGlobe {
 public:
-    float mRadius;
+    f32 mRadius;
     cSAngle mAzimuth;      // original: V
     cSAngle mInclination;  // original: U
 
-    float R(void) const { return mRadius; }
+    f32 R(void) const { return mRadius; }
     const cSAngle& V(void) const { return mAzimuth; }
     const cSAngle& U(void) const { return mInclination; }
 };

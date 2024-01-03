@@ -83,19 +83,19 @@ void ToolsMenu::draw() {
 
 void ToolsMenu::displayLinkInfo() {
     // Generates Link position and angle data.
-    if (g_dComIfG_gameInfo.play.mPlayerPtr != nullptr) {
-        fopAc_ac_c* playerAc = (fopAc_ac_c*)g_dComIfG_gameInfo.play.mPlayerPtr;
+    if (dComIfGp_getPlayer(0) != nullptr) {
+        fopAc_ac_c* playerAc = (fopAc_ac_c*)dComIfGp_getPlayer(0);
         char link_angle[20];
         char link_speed[20];
         char link_x[20];
         char link_y[20];
         char link_z[20];
 
-        tww_sprintf(link_angle, "angle: %d", playerAc->mCollisionRot.sy);
-        tww_sprintf(link_speed, "speed: %.4f", playerAc->mSpeedF);
-        tww_sprintf(link_x, "x-pos: %.4f", playerAc->mCurrent.mPosition.x);
-        tww_sprintf(link_y, "y-pos: %.4f", playerAc->mCurrent.mPosition.y);
-        tww_sprintf(link_z, "z-pos: %.4f", playerAc->mCurrent.mPosition.z);
+        tww_sprintf(link_angle, "angle: %d", playerAc->shape_angle.y);
+        tww_sprintf(link_speed, "speed: %.4f", playerAc->speedF);
+        tww_sprintf(link_x, "x-pos: %.4f", playerAc->current.pos.x);
+        tww_sprintf(link_y, "y-pos: %.4f", playerAc->current.pos.y);
+        tww_sprintf(link_z, "z-pos: %.4f", playerAc->current.pos.z);
 
         Font::GZ_drawStr(link_angle, 450.f, 200.f, ColorPalette::WHITE, g_dropShadows);
         Font::GZ_drawStr(link_speed, 450.f, 220.f, ColorPalette::WHITE, g_dropShadows);
