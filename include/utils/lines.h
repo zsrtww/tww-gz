@@ -2,7 +2,7 @@
 
 #include "font.h"
 
-#define MAX_RENDER_LINES 15
+#define MAX_RENDER_LINES 18
 
 #define MAX_LIST_MEMBER_LENGTH 40
 #define MAX_LIST_ITEMS 20
