@@ -7,8 +7,10 @@
 
 enum SceneMenuIndex {
     MODIFY_WIND_INDEX,
-    TIME_DISP_INDEX,
     MODIFY_CHART_SET_INDEX,
+    TIME_HOURS_INDEX,
+    TIME_MINUTES_INDEX,
+    MODIFY_DATE_INDEX,
 };
 
 struct GZScene {
@@ -16,13 +18,13 @@ struct GZScene {
     bool active;
 };
 
-extern GZScene g_scene[3];
+extern GZScene g_scene[5];
 
 class SceneMenu : public Menu {
 public:
     SceneMenu() : Menu() {}
     static void draw();
-    static void displayTimeInfo();
+    
 
     static Cursor cursor;
 };

@@ -11,6 +11,7 @@
 
 enum ToolsMenuIndex {
     DEBUG_INDEX,
+    TIME_DISP_INDEX,
     TELEPORT_INDEX,
     AREA_RELOAD_INDEX,
     MAP_SELECT_INDEX,
@@ -27,7 +28,7 @@ struct GZTool {
     bool active;
 };
 
-#define TOOL_AMNT 9
+#define TOOL_AMNT 10
 
 extern GZTool g_tools[TOOL_AMNT];
 
@@ -37,6 +38,7 @@ public:
     static void draw();
     static void initFont();
     static void displayLinkInfo();
+    static void displayTimeInfo();
     static void displayZombieHoverInfo();
 
     static Cursor cursor;
