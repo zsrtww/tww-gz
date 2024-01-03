@@ -24,7 +24,6 @@ Line lines[LINE_NUM] = {
 void SavewarpFlagMenu::draw() {
     updateFlags();
 
-    cursor.setMode(Cursor::MODE_LIST);
     cursor.move(0, LINE_NUM);
     cursorOffset = cursor.y + SAVEWARP_FLAG_OFFSET;
 
