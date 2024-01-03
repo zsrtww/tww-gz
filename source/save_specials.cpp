@@ -282,36 +282,36 @@ void SaveMngSpecial_Hyrule2_Skip_AD_After() {
 
 void SaveMngSpecial_FireMountain_AD() {
     gSaveManager.injectDefault_during();
-    l_equipped_arrow_type = 2;
+    daArrow_c__m_keep_type = 2;
 }
 
 void SaveMngSpecial_Early_ET_AD() {
     gSaveManager.injectDefault_during();
     g_dComIfG_gameInfo.play.mNextStage.setPoint(1);
-    l_equipped_arrow_type = 2;
+    daArrow_c__m_keep_type = 2;
 }
 
 void SaveMngSpecial_ET_AD() {
     gSaveManager.injectDefault_during();
-    l_equipped_arrow_type = 2;
+    daArrow_c__m_keep_type = 2;
 }
 
 void SaveMngSpecial_Songstone_Skip_AD() {
     gSaveManager.injectDefault_during();
     g_dComIfG_gameInfo.play.mNextStage.setRoomNo(9);
     g_dComIfG_gameInfo.play.mNextStage.setPoint(11);
-    l_equipped_arrow_type = 3;
+    daArrow_c__m_keep_type = 3;
 }
 
 void SaveMngSpecial_Jalhalla_AD() {
     gSaveManager.injectDefault_during();
-    l_equipped_arrow_type = 3;
+    daArrow_c__m_keep_type = 3;
 }
 
 void SaveMngSpecial_IceRing_AD_During() {
     gSaveManager.injectDefault_during();
     g_dComIfG_gameInfo.play.mNextStage.setPoint(1);
-    l_equipped_arrow_type = 3;
+    daArrow_c__m_keep_type = 3;
 }
 
 void SaveMngSpecial_IceRing_AD_After() {
