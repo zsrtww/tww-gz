@@ -120,7 +120,7 @@ void SaveManager::triggerLoad(uint32_t id, const char* category, special i_speci
     g_dComIfG_gameInfo.play.mNextStage.mEnable = true;
     s_injectSave = true;
 
-    g_dComIfG_gameInfo.info.field_0x1154 = 0;
+    g_dComIfG_gameInfo.info.getRestart().mLastMode = 0;
     
 }
 
