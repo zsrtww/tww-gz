@@ -9,21 +9,27 @@
 #include "color.h"
 #include "utils/draw.h"
 #include "utils/hook.h"
+#include "utils/lines.h"
 #include "commands.h"
+#include "libtww/d/kankyo/d_kankyo.h"
+#include "libtww/d/com/d_com_inf_game.h"
 
-#define LINE_NUM 9
+#define LINE_NUM 10
 
 Cursor ToolsMenu::cursor;
 
 GZTool g_tools[TOOL_AMNT] = {
-    {DEBUG_INDEX, false},       {TELEPORT_INDEX, false},    {AREA_RELOAD_INDEX, false},
-    {MAP_SELECT_INDEX, false},  {ZH_INDEX, false},          {INPUT_VIEWER_INDEX, false},
-    {ESS_CHECKER_INDEX, false}, {DEADZONE_CHECKER_INDEX, false},  {DISABLE_SVCHECK_INDEX, false},
+    {DEBUG_INDEX, false},        {TIME_DISP_INDEX, false},    {TELEPORT_INDEX, false},    
+    {AREA_RELOAD_INDEX, false},  {MAP_SELECT_INDEX, false},   {ZH_INDEX, false},          
+    {INPUT_VIEWER_INDEX, false}, {ESS_CHECKER_INDEX, false},  {DEADZONE_CHECKER_INDEX, false},  
+    {DISABLE_SVCHECK_INDEX, false},
 };
 
 Line lines[LINE_NUM] = {
     {"link debug info", DEBUG_INDEX, "Display position and angle data for Link", true,
         &g_tools[DEBUG_INDEX].active},
+    {"display time info", TIME_DISP_INDEX, "Display current day, time and moon phase", true,
+        &g_tools[TIME_DISP_INDEX].active},
     {"teleport", TELEPORT_INDEX, "R+D-pad up to save position. R+D-pad down to load", true,
         &g_tools[TELEPORT_INDEX].active},
     {"area reload", AREA_RELOAD_INDEX, "Reload the current room by pressing L + R + A + Start",
@@ -43,8 +49,34 @@ Line lines[LINE_NUM] = {
 
 };
 
+void ToolsMenu::displayTimeInfo() {
+    int hour = dKy_getdaytime_hour();
+    int min = dKy_getdaytime_minute();
+    int moonid = dKy_moon_type_chk();
+    int date = dComIfGs_getDate();
+
+    char moonphases[7][20] = {"Full",
+                              "Waning Gibbous",
+                              "Last Quarter",
+                              "Waning Crescent",
+                              "Waxing Crescent",
+                              "First Quarter",
+                              "Waxing Gibbous"};
+
+    char Time[10];
+    char Date[10];
+    char Moon[20];
+
+    tww_sprintf(Time, "%02d:%02d", hour, min);
+    tww_sprintf(Date, "date: %d", date);
+    tww_sprintf(Moon, "Moon: %d", moonphases[0]);
+
+    Font::GZ_drawStr(Time, 450.f, 300.f, ColorPalette::WHITE, g_dropShadows);
+    Font::GZ_drawStr(Date, 450.f, 320.f, ColorPalette::WHITE, g_dropShadows);
+    Font::GZ_drawStr(moonphases[moonid], 450.f, 340.f, ColorPalette::WHITE, g_dropShadows);
+}
+
 void ToolsMenu::draw() {
-    cursor.setMode(Cursor::MODE_LIST);
     cursor.move(0, LINE_NUM);
 
     if (GZ_getButtonTrig(GZPad::B)) {
