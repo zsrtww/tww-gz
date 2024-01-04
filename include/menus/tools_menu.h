@@ -21,7 +21,7 @@ enum ToolsMenuIndex {
     DEADZONE_CHECKER_INDEX,
     DISABLE_SVCHECK_INDEX,
     INTRO_SKIP_INDEX,
-    
+
 };
 
 struct GZTool {
@@ -29,7 +29,9 @@ struct GZTool {
     bool active;
 };
 
+
 #define TOOL_AMNT 11
+
 
 extern GZTool g_tools[TOOL_AMNT];
 
