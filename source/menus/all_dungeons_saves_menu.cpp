@@ -58,7 +58,6 @@ Line lines[LINE_NUM] = {
 };
 
 void AllDungeonsSavesMenu::draw() {
-    cursor.setMode(Cursor::MODE_LIST);
     cursor.move(0, LINE_NUM);
 
     if (GZ_getButtonTrig(GZPad::B)) {

@@ -138,8 +138,8 @@ void draw() {
         InputViewer::draw();
     }
 
-    if (g_scene[TIME_DISP_INDEX].active) {
-        SceneMenu::displayTimeInfo();
+    if (g_tools[TIME_DISP_INDEX].active) {
+        ToolsMenu::displayTimeInfo();
     }
 
     GZ_drawMenu();
