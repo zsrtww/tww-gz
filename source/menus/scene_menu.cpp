@@ -29,26 +29,26 @@ Line lines[LINE_NUM] = {
     {"modify current date", MODIFY_DATE_INDEX, "Change the current date/moon phase"},
 };
 
-s16 windDirs[8] = { 0, 32, 64, 96, 128, 160, 192, 224 };
+s16 windDirs[8] = { -32768, -24576, -16384, -8192, 0, 8192, 16384, 24576 };
 
 const char* get_wind_str() {
     s16 wind = dkankyo_getWindDir();
     switch (wind) {
     case 0:
         return "East";
-    case 32:
+    case 8192:
         return "South East";
-    case 64:
+    case 16384:
         return "South";
-    case 96:
+    case 24576:
         return "South West";
-    case 128:
+    case -32768:
         return "West";
-    case 160:
+    case -24576:
         return "North West";
-    case 192:
+    case -16384:
         return "North";
-    case 224:
+    case -8192:
         return "North East";
     default:
         return "East";
@@ -78,10 +78,35 @@ const char* get_chart_set_str() {
 
 void updateWindDir() {
     s16 wind_dir = dkankyo_getWindDir();
-    if (wind_dir == 255) {
-        wind_dir = 0;
+    
+    u8 wIndex = 0;
+
+    if (wind_dir == -32768) {
+        wIndex = 0;
     }
-    u8 wIndex = wind_dir / 32;
+    else if (wind_dir == -24576) {
+        wIndex = 1;
+    }
+    else if (wind_dir == -16384) {
+        wIndex = 2;
+    }
+    else if (wind_dir == -8192) {
+        wIndex = 3;
+    }
+    else if (wind_dir == 0) {
+        wIndex = 4;
+    }
+    else if (wind_dir == 8192) {
+        wIndex = 5;
+    }
+    else if (wind_dir == 16384) {
+        wIndex = 6;
+    }
+    else if (wind_dir == 24576) {
+        wIndex = 7;
+    }
+
+
     Cursor::moveListSimple(wIndex);
     if (wIndex == 255) {
         wIndex = 7;
@@ -167,10 +192,10 @@ void SceneMenu::draw() {
         dComIfGs_setTime(current_time + 360.0f);
     }
 
-    if (date >= 7 && date <8) {
-        dComIfGs_setDate(date - 7);
-    } else if (date >= 9 && date <=65535) {
-        dComIfGs_setDate(date - 65529);
+    if (date == 7) {
+        dComIfGs_setDate(0);
+    } else if (date == 65535) {
+        dComIfGs_setDate(6);
     }
 
     tww_sprintf(lines[MODIFY_WIND_INDEX].value, " <%s>", get_wind_str());
