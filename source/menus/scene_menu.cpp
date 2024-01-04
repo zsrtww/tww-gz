@@ -22,7 +22,7 @@ GZScene g_scene[5] = {
 };
 
 Line lines[LINE_NUM] = {
-    {"modify wind direction", MODIFY_WIND_INDEX, "Change the current wind direction (currently broken)"},
+    {"modify wind direction", MODIFY_WIND_INDEX, "Change the current wind direction"},
     {"modify chart set", MODIFY_CHART_SET_INDEX, "Change the current chart set"},
     {"modify current hour", TIME_HOURS_INDEX, "Change the current hour"},
     {"modify current minute", TIME_MINUTES_INDEX, "Change the current minute"},
