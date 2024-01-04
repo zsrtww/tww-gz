@@ -10,8 +10,18 @@
 #include "utils/draw.h"
 #include "utils/hook.h"
 #include "commands.h"
+#include "libtww/dolphin/os/OSCache.h"
 
-#define LINE_NUM 9
+#define LINE_NUM TOOL_AMNT
+
+#ifdef NTSCJ
+#define INTRO_SKIP_INST0_ADDR 0x8023031c
+#define INTRO_SKIP_INST1_ADDR 0x8023032c
+#define INTRO_SKIP_ORIG_INST0 0x48000EB9
+#define INTRO_SKIP_ORIG_INST1 0x4082000C
+#endif
+
+// TODO add other region intro skip data
 
 Cursor ToolsMenu::cursor;
 
@@ -19,6 +29,7 @@ GZTool g_tools[TOOL_AMNT] = {
     {DEBUG_INDEX, false},       {TELEPORT_INDEX, false},    {AREA_RELOAD_INDEX, false},
     {MAP_SELECT_INDEX, false},  {ZH_INDEX, false},          {INPUT_VIEWER_INDEX, false},
     {ESS_CHECKER_INDEX, false}, {DEADZONE_CHECKER_INDEX, false},  {DISABLE_SVCHECK_INDEX, false},
+    {INTRO_SKIP_INDEX, false},
 };
 
 Line lines[LINE_NUM] = {
@@ -40,7 +51,8 @@ Line lines[LINE_NUM] = {
         &g_tools[DEADZONE_CHECKER_INDEX].active},
     {"disable save checks", DISABLE_SVCHECK_INDEX, "Disables save location safety checks", true,
         &g_tools[DISABLE_SVCHECK_INDEX].active},
-
+    {"intro skip", INTRO_SKIP_INDEX, "Skips the intro cutscenes when starting a new file", true,
+        &g_tools[INTRO_SKIP_INDEX].active},
 };
 
 void ToolsMenu::draw() {
@@ -64,6 +76,15 @@ void ToolsMenu::draw() {
             case AREA_RELOAD_INDEX:
                 GZCmd_enable(Commands::CMD_AREA_RELOAD);
                 break;
+            case INTRO_SKIP_INDEX:
+                *reinterpret_cast<u32*>(INTRO_SKIP_INST0_ADDR) = 0x60000000;  // nop
+                DCFlushRange(reinterpret_cast<u32*>(INTRO_SKIP_INST0_ADDR), sizeof(u32));
+                ICInvalidateRange(reinterpret_cast<u32*>(INTRO_SKIP_INST0_ADDR), sizeof(u32));
+
+                *reinterpret_cast<u32*>(INTRO_SKIP_INST1_ADDR) = 0x60000000;  // nop
+                DCFlushRange(reinterpret_cast<u32*>(INTRO_SKIP_INST1_ADDR), sizeof(u32));
+                ICInvalidateRange(reinterpret_cast<u32*>(INTRO_SKIP_INST1_ADDR), sizeof(u32));
+                break;
             }
         } else {
             switch (cursor.y) {
@@ -73,6 +94,15 @@ void ToolsMenu::draw() {
                 break;
             case AREA_RELOAD_INDEX:
                 GZCmd_disable(Commands::CMD_AREA_RELOAD);
+                break;
+            case INTRO_SKIP_INDEX:
+                *reinterpret_cast<u32*>(INTRO_SKIP_INST0_ADDR) = INTRO_SKIP_ORIG_INST0;  // bl dScnOpen_proc_c::proc_execute
+                DCFlushRange(reinterpret_cast<u32*>(INTRO_SKIP_INST0_ADDR), sizeof(u32));
+                ICInvalidateRange(reinterpret_cast<u32*>(INTRO_SKIP_INST0_ADDR), sizeof(u32));
+
+                *reinterpret_cast<u32*>(INTRO_SKIP_INST1_ADDR) = INTRO_SKIP_ORIG_INST1;  // bne ret
+                DCFlushRange(reinterpret_cast<u32*>(INTRO_SKIP_INST1_ADDR), sizeof(u32));
+                ICInvalidateRange(reinterpret_cast<u32*>(INTRO_SKIP_INST1_ADDR), sizeof(u32));
                 break;
             }
         }
