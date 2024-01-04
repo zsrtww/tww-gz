@@ -32,7 +32,7 @@ GZTool g_tools[TOOL_AMNT] = {
     {DEBUG_INDEX, false},        {TIME_DISP_INDEX, false},    {TELEPORT_INDEX, false},    
     {AREA_RELOAD_INDEX, false},  {MAP_SELECT_INDEX, false},   {ZH_INDEX, false},          
     {INPUT_VIEWER_INDEX, false}, {ESS_CHECKER_INDEX, false},  {DEADZONE_CHECKER_INDEX, false},  
-    {DISABLE_SVCHECK_INDEX, false}, {INTRO_SKIP_INDEX, false},
+    {INTRO_SKIP_INDEX, false}, //{DISABLE_SVCHECK_INDEX, false},
 };
 
 Line lines[LINE_NUM] = {
@@ -54,8 +54,8 @@ Line lines[LINE_NUM] = {
         &g_tools[ESS_CHECKER_INDEX].active},
     {"deadzone checker", DEADZONE_CHECKER_INDEX, "Change input viewer stick color if stick is in deadzone", true,
         &g_tools[DEADZONE_CHECKER_INDEX].active},
-    {"disable save checks", DISABLE_SVCHECK_INDEX, "Disables save location safety checks", true,
-        &g_tools[DISABLE_SVCHECK_INDEX].active},
+    //{"disable save checks", DISABLE_SVCHECK_INDEX, "Disables save location safety checks", true,
+    //    &g_tools[DISABLE_SVCHECK_INDEX].active},
     {"intro skip", INTRO_SKIP_INDEX, "Skips the intro cutscenes when starting a new file", true,
         &g_tools[INTRO_SKIP_INDEX].active},
 };
