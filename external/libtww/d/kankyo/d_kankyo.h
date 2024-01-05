@@ -358,4 +358,9 @@ inline void dkankyo_setWindDir(s16 dir) {
     g_env_light.mWind.mTactWindAngleY = dir;
 }
 
+inline void dKyw_tact_wind_set_go() {
+    g_env_light.mWind.mTactWindAngleFlags |= 1;
+    g_env_light.mWind.mEvtWindSet = 0xFF;
+}
+
 #endif
