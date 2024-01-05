@@ -78,8 +78,10 @@ const char* get_chart_set_str() {
 
 void updateWindDir() {
     s16 wind_dir = dkankyo_getWindDir();
+
     
     u8 wIndex = 0;
+    int eventWindCheck = g_env_light.mWind.mEvtWindSet;
 
     if (wind_dir == -32768) {
         wIndex = 0;
@@ -114,7 +116,15 @@ void updateWindDir() {
     else if (wIndex == 8) {
         wIndex = 0;
     }
-    dkankyo_setWindDir(windDirs[wIndex]);
+    
+    if (eventWindCheck != 0xFF){
+        dKyw_tact_wind_set_go();
+        dkankyo_setWindDir(windDirs[wIndex]);
+        g_env_light.mWind.mEvtWindSet = eventWindCheck;
+    }
+    else{
+        dkankyo_setWindDir(windDirs[wIndex]);
+    }
 }
 
 
