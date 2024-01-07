@@ -79,7 +79,7 @@ void SaveMngSpecial_PuppetGanon() {
 
 void SaveMngSpecial_PuppetGanon_After() {
     gSaveManager.injectDefault_after();
-    g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusA().setLife(8);
+    g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusA().setLife(10);
     g_dComIfG_gameInfo.info.getPlayer().getItemRecord().setBombNum(17);
 }
 
