@@ -120,10 +120,13 @@ void updateWindDir() {
     if (eventWindCheck != 0xFF){
         dKyw_tact_wind_set_go();
         dkankyo_setWindDir(windDirs[wIndex]);
-        g_env_light.mWind.mEvtWindSet = eventWindCheck;
+        dComIfGs_setWindX(g_env_light.mWind.mTactWindAngleX);
+        dComIfGs_setWindY(g_env_light.mWind.mTactWindAngleY);
     }
     else{
         dkankyo_setWindDir(windDirs[wIndex]);
+        dComIfGs_setWindX(g_env_light.mWind.mTactWindAngleX);
+        dComIfGs_setWindY(g_env_light.mWind.mTactWindAngleY);
     }
 }
 
