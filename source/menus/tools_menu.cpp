@@ -82,9 +82,9 @@ void ToolsMenu::displayTimeInfo() {
     tww_sprintf(Date, "date: %d", date);
     tww_sprintf(Moon, "Moon: %d", moonphases[0]);
 
-    Font::GZ_drawStr(Time, 450.f, 300.f, ColorPalette::WHITE, g_dropShadows);
-    Font::GZ_drawStr(Date, 450.f, 320.f, ColorPalette::WHITE, g_dropShadows);
-    Font::GZ_drawStr(moonphases[moonid], 450.f, 340.f, ColorPalette::WHITE, g_dropShadows);
+    Font::GZ_drawStr(Time, 450.f, 320.f, ColorPalette::WHITE, g_dropShadows);
+    Font::GZ_drawStr(Date, 450.f, 340.f, ColorPalette::WHITE, g_dropShadows);
+    Font::GZ_drawStr(moonphases[moonid], 450.f, 360.f, ColorPalette::WHITE, g_dropShadows);
 }
 
 void ToolsMenu::draw() {
@@ -185,6 +185,6 @@ void ToolsMenu::displayZombieHoverInfo() {
     tww_sprintf(a_presses_str, "A: %d", numAPressesPerWindow);
     tww_sprintf(b_presses_str, "B: %d", numBPressesPerWindow);
 
-    Font::GZ_drawStr(a_presses_str, 450.f, 320.f, zombieHoverColor(numAPressesPerWindow), g_dropShadows);
-    Font::GZ_drawStr(b_presses_str, 450.f, 340.f, zombieHoverColor(numBPressesPerWindow), g_dropShadows);
+    Font::GZ_drawStr(a_presses_str, 450.f, 400.f, zombieHoverColor(numAPressesPerWindow), g_dropShadows);
+    Font::GZ_drawStr(b_presses_str, 450.f, 420.f, zombieHoverColor(numBPressesPerWindow), g_dropShadows);
 }
