@@ -3,5 +3,7 @@
 #include "save_manager.h"
 
 enum SpeedrunCategories {
-    ANY_NO_MSS,
+    ANY_NO_MSS,      
+    ANY_PERCENT,
+    ALL_DUNGEONS,
 };

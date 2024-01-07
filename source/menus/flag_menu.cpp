@@ -20,7 +20,6 @@ Line lines[LINE_NUM] = {
 void FlagMenu::draw() {
     updateFlags();
 
-    cursor.setMode(Cursor::MODE_LIST);
     cursor.move(0, LINE_NUM);
 
 

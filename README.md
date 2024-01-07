@@ -143,11 +143,15 @@ memory menu:
 
 practice menu:
 - any% no mss menu              // Load an any% no mss save
+- any% menu			// Load an any% save (* for pg/sail skip saves)
+- all dungeons saves	        // Load an all dungeons save
 
 scene menu:
-*modify wind direction          // Change the current wind direction (currently broken, will be fixed)
-- display time info             // Display current day, time and moon phase
-- modift chart set              // Change current chart set of file
+- modify wind direction         // Change the current wind direction 
+- modify chart set              // Change current chart set of file
+- modify current hour           // Change current hour
+- modify current minutes        // Change current minute
+- modify current date           // Change current date/moon phase
 
 settings menu:
 - cursor color                  // Change cursor color
@@ -160,6 +164,7 @@ settings menu:
 
 tools menu:
 - link debug info               // Display position and angle data for Link
+- display time info             // Display current day, time and moon phase
 - teleport                      // R+D-pad up to save position. R+D-pad down to load
 - area reload                   // Reload the current room by pressing L + R + A + Start
 - map select                    // Load Map Select by holding D-pad down + Y + Z
@@ -167,6 +172,7 @@ tools menu:
 - input viewer                  // Show current inputs
 - ess checker                   // Change input viewer stick color based on distance from perfect ess
 - deadzone checker              // Change input viewer stick coor if stick is in deadzone
+- intro skip                    // Skip lore segment of intro on start of new file
 ```
 
 \* - feature not implemented yet
@@ -175,7 +181,6 @@ tools menu:
 
 ```
 - built-in practice saves for all remaining major speedrun categories
-- edit time and day
 - scene flag editing for additions to flag menu
 - any other epic stuff we think of by then
 ```

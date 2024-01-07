@@ -27,7 +27,6 @@ Line lines[LINE_NUM] = {
 };
 
 void AnyNoMssSavesMenu::draw() {
-    cursor.setMode(Cursor::MODE_LIST);
     cursor.move(0, LINE_NUM);
 
     if (GZ_getButtonTrig(GZPad::B)) {
@@ -37,8 +36,6 @@ void AnyNoMssSavesMenu::draw() {
 
     if (GZ_getButtonTrig(GZPad::A)) {
         special AnyNoMssSpecials[] = {
-            special(AFTER_INTRO, nullptr, nullptr),
-            special(ORCA, nullptr, nullptr),
             special(FOREST_OF_FAIRIES, SaveMngSpecial_ForestOfFairies_FirstVisit, nullptr),
             special(ROPES_1, SaveMngSpecial_Ropes1, nullptr),
             special(FF1, SaveMngSpecial_FF1_PirateShip_Night, nullptr),
@@ -47,14 +44,14 @@ void AnyNoMssSavesMenu::draw() {
             special(ROPES_2, SaveMngSpecial_Ropes2, nullptr),
             special(FH_SWIM, SaveMngSpecial_Windfall_Day0, nullptr),
             special(DTCS, SaveMngSpecial_DTCS, nullptr),
-            special(QUIVER_SWIM, nullptr, nullptr),
-            special(FF2_SWIM, SaveMngSpecial_ExitThornedFairy, nullptr),
+            special(QUIVER_SWIM, nullptr, SaveMngSpecial_QuiverAny_After),
+            special(FF2_SWIM, SaveMngSpecial_ExitThornedFairy, SaveMngSpecial_QuiverAny_After),
             special(HELMAROC_SKIP, SaveMngSpecial_HelmarocKing, nullptr),
-            special(BARRIER_SKIP, SaveMngSpecial_Hyrule2_BarrierSkip, nullptr),
-            special(TRIALS_SKIP, SaveMngSpecial_TrialsSkip, nullptr),
-            special(PG_FIGHT, SaveMngSpecial_PuppetGanon, nullptr),
+            special(BARRIER_SKIP, SaveMngSpecial_Hyrule2_BarrierSkip, SaveMngSpecial_Hyrule2_BarrierSkip_After),
+            special(TRIALS_SKIP, SaveMngSpecial_TrialsSkip, SaveMngSpecial_TrialsSkip_After),
+            special(PG_FIGHT, SaveMngSpecial_PuppetGanon, SaveMngSpecial_PuppetGanon_After),
             special(MORTH_HOVER, SaveMngSpecial_MorthHover_during, SaveMngSpecial_MorthHover_after),
-            special(GANONDORF, SaveMngSpecial_Ganondorf, nullptr),
+            special(GANONDORF, SaveMngSpecial_Ganondorf, SaveMngSpecial_Ganondorf_After),
         };
 
         SaveManager::triggerLoad(cursor.y, "any_no_mss", AnyNoMssSpecials, sizeof(AnyNoMssSpecials) / sizeof(AnyNoMssSpecials[0]));

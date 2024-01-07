@@ -8,14 +8,18 @@
 class cM3dGLin {
     // private:
 public:
-    cXyz mStart;
-    cXyz mEnd;
+    /* 0x00 */ cXyz mStart;
+    /* 0x0C */ cXyz mEnd;
+    /* 0x18 */ void* vtable;
 
-    virtual ~cM3dGLin() {}
-    const cXyz& GetStartP(void) const { return mStart; }
-    cXyz& GetStartP(void) { return mStart; }
-    const cXyz& GetEndP(void) const { return mEnd; }
-    cXyz& GetEndP(void) { return mEnd; }
+    const cXyz* GetStartP() const { return &mStart; }
+    cXyz* GetStartP() { return &mStart; }
+    cXyz& GetStart() { return mStart; }
+    const cXyz* GetEndP() const { return &mEnd; }
+    cXyz* GetEndP() { return &mEnd; }
+    cXyz& GetEnd() { return mEnd; }
 };
+
+static_assert(0x1C == sizeof(cM3dGLin));
 
 #endif /* C_M3D_G_LIN_H */

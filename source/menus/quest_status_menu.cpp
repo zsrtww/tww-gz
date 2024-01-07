@@ -51,17 +51,16 @@ const char* get_pirates_charm_string(u8 has_pirates_charm) {
     };
 }
 
-const char* get_heros_charm_string(u8 has_heros_charm) {
-    switch (has_heros_charm) {
-    case NO_HEROS_CHARM:
-        return "Empty";
-    case HEROS_CHARM_DISABLED:
+const char* get_heros_charm_string() {
+    if (dComIfGs_isCollect(HEROS_CHARM_OWNED_INDEX, 0)) {
+        if (dComIfGs_isCollect(HEROS_CHARM_OWNED_INDEX, 1)) {
+            return "Hero\'s Charm (Enabled)";
+        }
+
         return "Hero\'s Charm (Disabled)";
-    case HEROS_CHARM_ENABLED:
-        return "Hero\'s Charm (Enabled)";
-    default:
-        return "Empty";
-    };
+    }
+
+    return "Empty";
 }
 
 const char* get_hurricane_spin_string() {
@@ -81,7 +80,7 @@ const char* get_heroes_clothes_string() {
 }
 
 const char* get_song_string(u8 songs_owned, u8 song) {
-    if ((songs_owned & song) == 0) {
+    if (!songs_owned) {
         return "Empty";
     } else {
         switch (song) {
@@ -104,7 +103,7 @@ const char* get_song_string(u8 songs_owned, u8 song) {
 }
 
 const char* get_pearl_string(u8 pearls_owned, u8 pearl) {
-    if ((pearls_owned & pearl) == 0) {
+    if (!pearls_owned) {
         return "Empty";
     } else {
         switch (pearl) {
@@ -177,7 +176,7 @@ const char* get_bombags_string(u8 max_bombs_owned) {
 }
 
 const char* get_triforce_string(u8 triforce_owned, u8 triforce_piece) {
-    if ((triforce_owned & triforce_piece) == 0) {
+    if (!triforce_owned) {
         return "Empty";
     } else {
         switch (triforce_piece) {
@@ -200,47 +199,6 @@ const char* get_triforce_string(u8 triforce_owned, u8 triforce_piece) {
         default:
             return "Empty";
         };
-    }
-}
-
-u8 swordIdToSwordOwned(u8 sword_item_id) {
-    switch (sword_item_id) {
-    case NO_ITEM:
-        return NO_SWORD_OWNED;
-    case HEROS_SWORD:
-        return HEROS_SWORD_OWNED;
-    case UNCHARGED_MASTER_SWORD:
-        return UNCHARGED_MASTER_SWORD_OWNED;
-    case HALF_CHARGED_MASTER_SWORD:
-        return HALF_CHARGED_MASTER_SWORD_OWNED;
-    case FULLY_CHARGED_MASTER_SWORD:
-        return FULLY_CHARGED_MASTER_SWORD_OWNED;
-    default:
-        return NO_SWORD_OWNED;
-    };
-}
-
-u8 shieldIdToShieldOwned(u8 shield_item_id) {
-    switch (shield_item_id) {
-    case NO_ITEM:
-        return NO_SHIELD_OWNED;
-    case HEROS_SHIELD:
-        return HEROS_SHIELD_OWNED;
-    case MIRROR_SHIELD:
-        return MIRROR_SHIELD_OWNED;
-    default:
-        return NO_SHIELD_OWNED;
-    };
-}
-
-u8 powerBraceletsIdToPowerBraceletsOwned(u8 power_bracelets_item_id) {
-    switch (power_bracelets_item_id) {
-    case NO_ITEM:
-        return 0;
-    case POWER_BRACELETS:
-        return 1;
-    default:
-        return 0;
     }
 }
 
@@ -267,40 +225,53 @@ void updateHeroesClothes() {
 }
 
 void updateSongs(u8 song_value) {
-    u8 songs_owned = dComIfGs_getSongsOwned();
-    u8 has_song = songs_owned & song_value;
-    if (has_song == 0)
-        has_song = 0xFE;
+    u8 has_song = dComIfGs_isTact(song_value);
     Cursor::moveListSimple(has_song);
-    if (has_song == 0xFF) {
-        dComIfGs_setSongsOwned(songs_owned + song_value);
-    } else if (has_song == song_value - 1) {
-        dComIfGs_setSongsOwned(songs_owned - song_value);
+
+    if (has_song > 0) {
+        has_song = 1;
+    } else {
+        has_song = 0;
+    }
+
+    if (has_song) {
+        dComIfGs_onTact(song_value);
+    } else {
+        dComIfGs_offTact(song_value);
     }
 }
 
 void updatePearls(u8 pearl_value) {
-    u8 pearls_owned = dComIfGs_getPearlsOwned();
-    u8 has_pearl = pearls_owned & pearl_value;
-    if (has_pearl == 0)
-        has_pearl = 0xFE;
+    u8 has_pearl = dComIfGs_isSymbol(pearl_value);
     Cursor::moveListSimple(has_pearl);
-    if (has_pearl == 0xFF) {
-        dComIfGs_setPearlsOwned(pearls_owned + pearl_value);
-    } else if (has_pearl == pearl_value - 1) {
-        dComIfGs_setPearlsOwned(pearls_owned - pearl_value);
+
+    if (has_pearl > 0) {
+        has_pearl = 1;
+    } else {
+        has_pearl = 0;
+    }
+
+    if (has_pearl) {
+        dComIfGs_onSymbol(pearl_value);
+    } else {
+        dComIfGs_offSymbol(pearl_value);
     }
 }
 
 void updateTriforce(u8 triforce_value) {
-    u8 triforce_owned = dComIfGs_getTriforceOwned();
-    u8 has_triforce_piece = triforce_owned & triforce_value;
-    s8 position = 0;
-    Cursor::moveListSimple(position);
-    if (position == 1 && has_triforce_piece == 0) {
-        dComIfGs_setTriforceOwned(triforce_owned + triforce_value);
-    } else if (position == -1 && has_triforce_piece > 0) {
-        dComIfGs_setTriforceOwned(triforce_owned - triforce_value);
+    u8 has_triforce = dComIfGs_isTriforce(triforce_value);
+    Cursor::moveListSimple(has_triforce);
+
+    if (has_triforce > 0) {
+        has_triforce = 1;
+    } else {
+        has_triforce = 0;
+    }
+
+    if (has_triforce) {
+        dComIfGs_onTriforce(triforce_value);
+    } else {
+        dComIfGs_offTriforce(triforce_value);
     }
 }
 
@@ -318,7 +289,7 @@ void QuestStatusMenu::draw() {
 
     switch (cursor.y) {
     case MENU_ITEM_SWORD:
-        new_sword_item_id = dComIfGs_getSword();
+        new_sword_item_id = dComIfGs_getSelectEquip(SWORD_INDEX);
         Cursor::moveListSimple(new_sword_item_id);
         if (new_sword_item_id == NO_ITEM - 1) {
             new_sword_item_id = NO_ITEM;
@@ -341,13 +312,37 @@ void QuestStatusMenu::draw() {
         } else if (new_sword_item_id == FULLY_CHARGED_MASTER_SWORD + 1) {
             new_sword_item_id = FULLY_CHARGED_MASTER_SWORD;
         } else {
-            new_sword_item_id = dComIfGs_getSword();
+            new_sword_item_id = dComIfGs_getSelectEquip(SWORD_INDEX);
         }
-        dComIfGs_setSword(new_sword_item_id);
-        dComIfGs_setSwordOwned(swordIdToSwordOwned(new_sword_item_id));
+
+        switch (new_sword_item_id) {
+        case NO_ITEM:
+            dComIfGs_offCollect(SWORD_INDEX, 0);
+            dComIfGs_offCollect(SWORD_INDEX, 1);
+            dComIfGs_offCollect(SWORD_INDEX, 2);
+            dComIfGs_offCollect(SWORD_INDEX, 3);
+            break;
+        case HEROS_SWORD:
+            dComIfGs_onCollect(SWORD_INDEX, 0);
+            dComIfGs_offCollect(SWORD_INDEX, 1);
+            break;
+        case UNCHARGED_MASTER_SWORD:
+            dComIfGs_onCollect(SWORD_INDEX, 1);
+            dComIfGs_offCollect(SWORD_INDEX, 2);
+            break;
+        case HALF_CHARGED_MASTER_SWORD:
+            dComIfGs_onCollect(SWORD_INDEX, 2);
+            dComIfGs_offCollect(SWORD_INDEX, 3);
+            break;
+        case FULLY_CHARGED_MASTER_SWORD:
+            dComIfGs_onCollect(SWORD_INDEX, 3);
+            break;
+        }
+
+        dComIfGs_setSelectEquip(SWORD_INDEX, new_sword_item_id);
         break;
     case MENU_ITEM_SHIELD:
-        new_shield_item_id = dComIfGs_getShield();
+        new_shield_item_id = dComIfGs_getSelectEquip(SHIELD_INDEX);
         Cursor::moveListSimple(new_shield_item_id);
         if (new_shield_item_id == NO_ITEM - 1) {
             new_shield_item_id = NO_ITEM;
@@ -362,10 +357,24 @@ void QuestStatusMenu::draw() {
         } else if (new_shield_item_id == MIRROR_SHIELD + 1) {
             new_shield_item_id = MIRROR_SHIELD;
         } else {
-            new_shield_item_id = dComIfGs_getShield();
+            new_shield_item_id = dComIfGs_getSelectEquip(SHIELD_INDEX);
         }
-        dComIfGs_setShield(new_shield_item_id);
-        dComIfGs_setShieldOwned(shieldIdToShieldOwned(new_shield_item_id));
+
+        switch (new_shield_item_id) {
+        case NO_ITEM:
+            dComIfGs_offCollect(SHIELD_INDEX, 0);
+            dComIfGs_offCollect(SHIELD_INDEX, 1);
+            break;
+        case HEROS_SHIELD:
+            dComIfGs_onCollect(SHIELD_INDEX, 0);
+            dComIfGs_offCollect(SHIELD_INDEX, 1);
+            break;
+        case MIRROR_SHIELD:
+            dComIfGs_onCollect(SHIELD_INDEX, 1);
+            break;
+        }
+
+        dComIfGs_setSelectEquip(SHIELD_INDEX, new_shield_item_id);
         break;
     case MENU_ITEM_MAGIC:
         new_max_magic_value = dComIfGs_getMaxMagic();
@@ -409,7 +418,7 @@ void QuestStatusMenu::draw() {
         g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusA().setWalletSize(new_wallet_size);
         break;
     case MENU_ITEM_POWER_BRACELETS:
-        new_power_bracelets_item_id = dComIfGs_getPowerBracelets();
+        new_power_bracelets_item_id = dComIfGs_getSelectEquip(POWER_BRACELETS_INDEX);
         Cursor::moveListSimple(new_power_bracelets_item_id);
         if (new_power_bracelets_item_id == NO_ITEM - 1) {
             new_power_bracelets_item_id = NO_ITEM;
@@ -420,13 +429,22 @@ void QuestStatusMenu::draw() {
         } else if (new_power_bracelets_item_id == POWER_BRACELETS + 1) {
             new_power_bracelets_item_id = POWER_BRACELETS;
         } else {
-            new_power_bracelets_item_id = dComIfGs_getPowerBracelets();
+            new_power_bracelets_item_id = dComIfGs_getSelectEquip(POWER_BRACELETS_INDEX);
         }
-        dComIfGs_setPowerBracelets(new_power_bracelets_item_id);
-        dComIfGs_setPowerBraceletsOwned(powerBraceletsIdToPowerBraceletsOwned(new_power_bracelets_item_id));
+
+        switch (new_power_bracelets_item_id) {
+        case NO_ITEM:
+            dComIfGs_offCollect(POWER_BRACELETS_INDEX, 0);
+            break;
+        case POWER_BRACELETS:
+            dComIfGs_onCollect(POWER_BRACELETS_INDEX, 0);
+            break;
+        }
+
+        dComIfGs_setSelectEquip(POWER_BRACELETS_INDEX, new_power_bracelets_item_id);
         break;
     case MENU_ITEM_QUIVER:
-        new_arrows_capacity = dComIfGs_getArrowCapacity();
+        new_arrows_capacity = dComIfGs_getArrowMax();
         Cursor::moveListSimple(new_arrows_capacity);
          if (new_arrows_capacity == NO_QUIVER - 1) {
             new_arrows_capacity = NO_QUIVER;
@@ -446,10 +464,10 @@ void QuestStatusMenu::draw() {
             new_arrows_capacity = ARROWS_99;
             
         } else {
-            new_arrows_capacity = dComIfGs_getArrowCapacity();
+            new_arrows_capacity = dComIfGs_getArrowMax();
         }
         dComIfGs_setArrowNum(new_arrows_capacity);
-        dComIfGs_setArrowCapacity(new_arrows_capacity);
+        dComIfGs_setArrowMax(new_arrows_capacity);
         break;
     case MENU_ITEM_HURRICANE_SPIN:
         updateHurricaneSpin();
@@ -458,7 +476,7 @@ void QuestStatusMenu::draw() {
         updateHeroesClothes();
         break;
     case MENU_ITEM_BOMBAG:
-        new_bombs_capacity = dComIfGs_getBombCapacity();
+        new_bombs_capacity = dComIfGs_getBombMax();
         Cursor::moveListSimple(new_bombs_capacity);
          if (new_bombs_capacity == NO_BOMBBAG - 1) {
             new_bombs_capacity = NO_BOMBBAG;
@@ -478,30 +496,38 @@ void QuestStatusMenu::draw() {
             new_bombs_capacity = BOMBS_99;
             
         } else {
-            new_bombs_capacity = dComIfGs_getBombCapacity();
+            new_bombs_capacity = dComIfGs_getBombMax();
         }
         dComIfGs_setBombNum(new_bombs_capacity);
-        dComIfGs_setBombCapacity(new_bombs_capacity);
+        dComIfGs_setBombMax(new_bombs_capacity);
         break;
     case MENU_ITEM_PIRATES_CHARM:
-        is_pirates_charm_owned = dComIfGs_getPiratesCharmOwned();
+        is_pirates_charm_owned = dComIfGs_isCollect(PIRATES_CHARM_OWNED_INDEX, 0);
         Cursor::moveListSimple(is_pirates_charm_owned);
-        if (is_pirates_charm_owned == 0xFF) {
-            is_pirates_charm_owned = 0;
-        } else if (is_pirates_charm_owned == 2) {
-            is_pirates_charm_owned = 1;
+
+        if (is_pirates_charm_owned) {
+            dComIfGs_onCollect(PIRATES_CHARM_OWNED_INDEX, 0);
+        } else {
+            dComIfGs_offCollect(PIRATES_CHARM_OWNED_INDEX, 0);
         }
-        dComIfGs_setPiratesCharmOwned(is_pirates_charm_owned);
         break;
     case MENU_ITEM_HEROS_CHARM:
-        heros_charm_flag = dComIfGs_getHerosCharmOwned();
-        Cursor::moveListSimple(heros_charm_flag);
-        if (heros_charm_flag == 0xFF) {
-            heros_charm_flag = 0;
-        } else if (heros_charm_flag == 3) {
-            heros_charm_flag = HEROS_CHARM_ENABLED;
+        heros_charm_flag = dComIfGs_isCollect(HEROS_CHARM_OWNED_INDEX, 0);
+        if (dComIfGs_isCollect(HEROS_CHARM_OWNED_INDEX, 1)) {
+            heros_charm_flag = 2;
         }
-        dComIfGs_setHerosCharmOwned(heros_charm_flag);
+
+        Cursor::moveListSimple(heros_charm_flag);
+
+        if (heros_charm_flag == 1) {
+            dComIfGs_onCollect(HEROS_CHARM_OWNED_INDEX, 0);
+            dComIfGs_offCollect(HEROS_CHARM_OWNED_INDEX, 1);
+        } else if (heros_charm_flag == 2) {
+            dComIfGs_onCollect(HEROS_CHARM_OWNED_INDEX, 1);
+        } else {
+            dComIfGs_offCollect(HEROS_CHARM_OWNED_INDEX, 0);
+            dComIfGs_offCollect(HEROS_CHARM_OWNED_INDEX, 1);
+        }
         break;
     case MENU_ITEM_WINDS_REQUIEM:
         updateSongs(WINDS_REQUIEM_VALUE);
@@ -556,55 +582,55 @@ void QuestStatusMenu::draw() {
         break;
     };
 
-    tww_sprintf(lines[MENU_ITEM_SWORD].value, " <%s>", item_id_to_str(dComIfGs_getSword()));
-    tww_sprintf(lines[MENU_ITEM_SHIELD].value, " <%s>", item_id_to_str(dComIfGs_getShield()));
+    tww_sprintf(lines[MENU_ITEM_SWORD].value, " <%s>", item_id_to_str(dComIfGs_getSelectEquip(SWORD_INDEX)));
+    tww_sprintf(lines[MENU_ITEM_SHIELD].value, " <%s>", item_id_to_str(dComIfGs_getSelectEquip(SHIELD_INDEX)));
     tww_sprintf(lines[MENU_ITEM_MAGIC].value, " <%s>", get_magic_string(dComIfGs_getMaxMagic()));
     tww_sprintf(lines[MENU_ITEM_WALLET].value, " <%s>",
                 get_wallet_string(g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusA().getWalletSize()));
-    tww_sprintf(lines[MENU_ITEM_QUIVER].value, " <%s>", get_quiver_string(dComIfGs_getArrowCapacity()));
+    tww_sprintf(lines[MENU_ITEM_QUIVER].value, " <%s>", get_quiver_string(dComIfGs_getArrowMax()));
     tww_sprintf(lines[MENU_ITEM_HURRICANE_SPIN].value, " <%s>", get_hurricane_spin_string());
     tww_sprintf(lines[MENU_ITEM_HEROES_CLOTHES].value, " <%s>", get_heroes_clothes_string());
-    tww_sprintf(lines[MENU_ITEM_BOMBAG].value, " <%s>", get_bombags_string(dComIfGs_getBombCapacity()));
+    tww_sprintf(lines[MENU_ITEM_BOMBAG].value, " <%s>", get_bombags_string(dComIfGs_getBombMax()));
     tww_sprintf(lines[MENU_ITEM_POWER_BRACELETS].value, " <%s>",
-                item_id_to_str(dComIfGs_getPowerBracelets()));
+                item_id_to_str(dComIfGs_getSelectEquip(POWER_BRACELETS_INDEX)));
     tww_sprintf(lines[MENU_ITEM_PIRATES_CHARM].value, " <%s>",
-                get_pirates_charm_string(dComIfGs_getPiratesCharmOwned()));
+                get_pirates_charm_string(dComIfGs_isCollect(PIRATES_CHARM_OWNED_INDEX, 0)));
     tww_sprintf(lines[MENU_ITEM_HEROS_CHARM].value, " <%s>",
-                get_heros_charm_string(dComIfGs_getHerosCharmOwned()));
+                get_heros_charm_string());
     tww_sprintf(lines[MENU_ITEM_WINDS_REQUIEM].value, " <%s>",
-                get_song_string(dComIfGs_getSongsOwned(), WINDS_REQUIEM_VALUE));
+                get_song_string(dComIfGs_isTact(WINDS_REQUIEM_VALUE), WINDS_REQUIEM_VALUE));
     tww_sprintf(lines[MENU_ITEM_BALLAD_OF_GALES].value, " <%s>",
-                get_song_string(dComIfGs_getSongsOwned(), BALLAD_OF_GALES_VALUE));
+                get_song_string(dComIfGs_isTact(BALLAD_OF_GALES_VALUE), BALLAD_OF_GALES_VALUE));
     tww_sprintf(lines[MENU_ITEM_COMMAND_MELODY].value, " <%s>",
-                get_song_string(dComIfGs_getSongsOwned(), COMMAND_MELODY_VALUE));
+                get_song_string(dComIfGs_isTact(COMMAND_MELODY_VALUE), COMMAND_MELODY_VALUE));
     tww_sprintf(lines[MENU_ITEM_EARTH_GODS_LYRIC].value, " <%s>",
-                get_song_string(dComIfGs_getSongsOwned(), EARTH_GODS_LYRIC_VALUE));
+                get_song_string(dComIfGs_isTact(EARTH_GODS_LYRIC_VALUE), EARTH_GODS_LYRIC_VALUE));
     tww_sprintf(lines[MENU_ITEM_WIND_GODS_ARIA].value, " <%s>",
-                get_song_string(dComIfGs_getSongsOwned(), WIND_GODS_ARIA_VALUE));
+                get_song_string(dComIfGs_isTact(WIND_GODS_ARIA_VALUE), WIND_GODS_ARIA_VALUE));
     tww_sprintf(lines[MENU_ITEM_SONG_OF_PASSING].value, " <%s>",
-                get_song_string(dComIfGs_getSongsOwned(), SONG_OF_PASSING_VALUE));
+                get_song_string(dComIfGs_isTact(SONG_OF_PASSING_VALUE), SONG_OF_PASSING_VALUE));
     tww_sprintf(lines[MENU_ITEM_DINS_PEARL].value, " <%s>",
-                get_pearl_string(dComIfGs_getPearlsOwned(), DINS_PEARL_VALUE));
+                get_pearl_string(dComIfGs_isSymbol(DINS_PEARL_VALUE), DINS_PEARL_VALUE));
     tww_sprintf(lines[MENU_ITEM_FARORES_PEARL].value, " <%s>",
-                get_pearl_string(dComIfGs_getPearlsOwned(), FARORES_PEARL_VALUE));
+                get_pearl_string(dComIfGs_isSymbol(FARORES_PEARL_VALUE), FARORES_PEARL_VALUE));
     tww_sprintf(lines[MENU_ITEM_NAYRUS_PEARL].value, " <%s>",
-                get_pearl_string(dComIfGs_getPearlsOwned(), NAYRUS_PEARL_VALUE));
+                get_pearl_string(dComIfGs_isSymbol(NAYRUS_PEARL_VALUE), NAYRUS_PEARL_VALUE));
     tww_sprintf(lines[MENU_ITEM_TRIFORCE_PIECE_1].value, " <%s>",
-                get_triforce_string(dComIfGs_getTriforceOwned(), TRIFORCE_PIECE_1_VALUE));
+                get_triforce_string(dComIfGs_isTriforce(TRIFORCE_PIECE_1_VALUE), TRIFORCE_PIECE_1_VALUE));
     tww_sprintf(lines[MENU_ITEM_TRIFORCE_PIECE_2].value, " <%s>",
-                get_triforce_string(dComIfGs_getTriforceOwned(), TRIFORCE_PIECE_2_VALUE));
+                get_triforce_string(dComIfGs_isTriforce(TRIFORCE_PIECE_2_VALUE), TRIFORCE_PIECE_2_VALUE));
     tww_sprintf(lines[MENU_ITEM_TRIFORCE_PIECE_3].value, " <%s>",
-                get_triforce_string(dComIfGs_getTriforceOwned(), TRIFORCE_PIECE_3_VALUE));
+                get_triforce_string(dComIfGs_isTriforce(TRIFORCE_PIECE_3_VALUE), TRIFORCE_PIECE_3_VALUE));
     tww_sprintf(lines[MENU_ITEM_TRIFORCE_PIECE_4].value, " <%s>",
-                get_triforce_string(dComIfGs_getTriforceOwned(), TRIFORCE_PIECE_4_VALUE));
+                get_triforce_string(dComIfGs_isTriforce(TRIFORCE_PIECE_4_VALUE), TRIFORCE_PIECE_4_VALUE));
     tww_sprintf(lines[MENU_ITEM_TRIFORCE_PIECE_5].value, " <%s>",
-                get_triforce_string(dComIfGs_getTriforceOwned(), TRIFORCE_PIECE_5_VALUE));
+                get_triforce_string(dComIfGs_isTriforce(TRIFORCE_PIECE_5_VALUE), TRIFORCE_PIECE_5_VALUE));
     tww_sprintf(lines[MENU_ITEM_TRIFORCE_PIECE_6].value, " <%s>",
-                get_triforce_string(dComIfGs_getTriforceOwned(), TRIFORCE_PIECE_6_VALUE));
+                get_triforce_string(dComIfGs_isTriforce(TRIFORCE_PIECE_6_VALUE), TRIFORCE_PIECE_6_VALUE));
     tww_sprintf(lines[MENU_ITEM_TRIFORCE_PIECE_7].value, " <%s>",
-                get_triforce_string(dComIfGs_getTriforceOwned(), TRIFORCE_PIECE_7_VALUE));
+                get_triforce_string(dComIfGs_isTriforce(TRIFORCE_PIECE_7_VALUE), TRIFORCE_PIECE_7_VALUE));
     tww_sprintf(lines[MENU_ITEM_TRIFORCE_PIECE_8].value, " <%s>",
-                get_triforce_string(dComIfGs_getTriforceOwned(), TRIFORCE_PIECE_8_VALUE));
+                get_triforce_string(dComIfGs_isTriforce(TRIFORCE_PIECE_8_VALUE), TRIFORCE_PIECE_8_VALUE));
 
     cursor.move(0, NUM_QUEST_ITEMS);
     GZ_drawMenuLines(lines, cursor.y, NUM_QUEST_ITEMS);

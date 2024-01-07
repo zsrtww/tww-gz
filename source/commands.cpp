@@ -3,6 +3,7 @@
 #include "lib.h"
 #include "menus/settings_menu.h"
 #include "libtww/d/com/d_com_inf_game.h"
+#include "libtww/d/a/d_a_player_main.h"
 
 bool g_commandStates[COMMANDS_AMNT];
 
@@ -26,16 +27,16 @@ bool GZCmd_checkTrig(int combo) {
 } */
 
 void GZCmd_storePosition() {
-    if (dComIfGp_getPlayer()) {
-        sSavePlayerPos = dComIfGp_getPlayer()->mCurrent.mPosition;
-        sSavePlayerAngle = dComIfGp_getPlayer()->mCurrent.mAngle;
+    if (dComIfGp_getPlayer(0)) {
+        sSavePlayerPos = dComIfGp_getPlayer(0)->current.pos;
+        sSavePlayerAngle = dComIfGp_getPlayer(0)->current.angle;
     }
 }
 
 void GZCmd_loadPosition() {
-    if (dComIfGp_getPlayer()) {
-        dComIfGp_getPlayer()->mCurrent.mPosition = sSavePlayerPos;
-        dComIfGp_getPlayer()->mCurrent.mAngle = sSavePlayerAngle;
+    if (dComIfGp_getPlayer(0)) {
+        dComIfGp_getPlayer(0)->current.pos = sSavePlayerPos;
+        dComIfGp_getPlayer(0)->current.angle = sSavePlayerAngle;
         l_debug_keep_pos = sSavePlayerPos;
         l_debug_current_angle = sSavePlayerAngle;
         l_debug_shape_angle = sSavePlayerAngle;
@@ -43,13 +44,13 @@ void GZCmd_loadPosition() {
 }
 
 void GZCmd_moonJump() {
-    if (dComIfGp_getPlayer()) {
-        dComIfGp_getPlayer()->mSpeed.y = 56.0f;
+    if (dComIfGp_getPlayer(0)) {
+        dComIfGp_getPlayer(0)->speed.y = 56.0f;
     }
 }
 
 void GZCmd_storage() {
-    dComIfGs_setStorage();
+    g_dComIfG_gameInfo.play.getEvent().mbEndProc = 1;
 }
 
 void GZCmd_quarterHeart() {
@@ -57,32 +58,52 @@ void GZCmd_quarterHeart() {
 }
 
 void GZCmd_normalCollision() {
-    u16* collision_ptr = dComIfGs_getCollision();
-    *collision_ptr &= 0xFFFF ^ 0x4004;
+    daPy_lk_c* player_p = (daPy_lk_c*)dComIfGp_getPlayer(0);
+    if (player_p != nullptr) {
+        player_p->mAcch.ClrWallNone();
+    }
 }
 
 void GZCmd_chestStorage() {
-    u16* collision_ptr = dComIfGs_getCollision();
-    *collision_ptr = (*collision_ptr & (0xFFFF ^ 0x4000)) | 0x4;
+    daPy_lk_c* player_p = (daPy_lk_c*)dComIfGp_getPlayer(0);
+    if (player_p != nullptr) {
+        player_p->mAcch.SetWallNone();
+        player_p->mAcch.OffLineCheckNone();
+    }
 }
 
 void GZCmd_doorCancel() {
-    u16* collision_ptr = dComIfGs_getCollision();
-    *collision_ptr |= 0x4004;
+    daPy_lk_c* player_p = (daPy_lk_c*)dComIfGp_getPlayer(0);
+    if (player_p != nullptr) {
+        player_p->mAcch.SetWallNone();
+        player_p->mAcch.OnLineCheckNone();
+    }
 }
 
 void GZCmd_fastMovement() {
-    u32 link_state = dComIfGs_getLinkState();
-    if (link_state >= 53 && link_state <= 55) dComIfGs_setSpeed(2000);
-    else dComIfGs_setSpeed(150);
+    daPy_lk_c* player_p = (daPy_lk_c*)dComIfGp_getPlayer(0);
+
+    if (player_p != nullptr) {
+        if (player_p->mCurProcID == daPy_lk_c::PROC_SWIM_UP_e || player_p->mCurProcID == daPy_lk_c::PROC_SWIM_WAIT_e ||
+            player_p->mCurProcID == daPy_lk_c::PROC_SWIM_MOVE_e)
+        {
+            player_p->mVelocity = 2000.0f;
+        } else {
+            player_p->mVelocity = 150.0f;
+        }
+    }
 }
 
 void GZCmd_upcharge() {
-    dComIfGs_setSpeed(-550);
+    daPy_lk_c* player_p = (daPy_lk_c*)dComIfGp_getPlayer(0);
+
+    if (player_p != nullptr) {
+        player_p->mVelocity = -550.0f;
+    }
 }
 
 void GZCmd_areaReload() {
-    char* stage = g_dComIfG_gameInfo.play.mStartStage.getName();
+    const char* stage = g_dComIfG_gameInfo.play.mStartStage.getName();
     s16 entrance = g_dComIfG_gameInfo.play.mStartStage.getPoint();
     s8 room = g_dComIfG_gameInfo.play.mStartStage.getRoomNo();
     s8 layer = g_dComIfG_gameInfo.play.mStartStage.getLayer();

@@ -5,22 +5,22 @@
 
 class dEvent_exception_c {
 public:
-    u32 mEventInfoIdx;
-    u8 field_0x4;
-    u8 field_0x5;
-    u8 field_0x6;
-    u8 field_0x7;
-    u32 mState;
+    /* 0x0 */ s32 mEventInfoIdx;
+    /* 0x4 */ u8 field_0x4;
+    /* 0x5 */ u8 field_0x5;
+    /* 0x6 */ u8 field_0x6;
+    /* 0x7 */ u8 field_0x7;
+    /* 0x8 */ s32 mState;
 };
 static_assert(sizeof(dEvent_exception_c) == 0xC);
 
 class dEvent_manager_c {
 public:
-    /* 0x00 */ dEvDtBase_c mEventBase;
-    /* 0x20 */ s32 mCameraPlay;
-    /* 0x24 */ dEvent_exception_c mEventException;
-    /* 0x30 */ cXyz mGoal;
-    /* 0x3C */ dEvDtFlag_c mFlags;
+    /* 0x000 */ dEvDtBase_c mList;
+    /* 0x020 */ u32 mCameraPlay;
+    /* 0x024 */ dEvent_exception_c mException;
+    /* 0x030 */ cXyz mGoal;
+    /* 0x03C */ dEvDtFlag_c mFlag;
 };
 static_assert(sizeof(dEvent_manager_c) == 0x53C);
 

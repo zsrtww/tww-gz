@@ -22,11 +22,11 @@ Line lines[LINE_NUM] = {
 
 
 void updateDeliveryBagSlot(u8 slot, u8 item_id) {
-    dComIfGs_setDeliveryBagSlot(slot, item_id);
+    dComIfGs_setItemReserve(slot, item_id);
 }
 
 void updateDeliveryBagItem(u8 slot) {
-    u8 new_item_id = dComIfGs_getDeliveryBagSlot(slot);
+    u8 new_item_id = dComIfGs_getItemReserve(slot);
     Cursor::moveListSimple(new_item_id);
     if (new_item_id == NO_ITEM - 1) {
         new_item_id = NO_ITEM;
@@ -75,14 +75,14 @@ void DeliveryBagMenu::draw() {
         break;
     }
 
-    tww_sprintf(lines[SLOT1_INDEX].value, " <%s>",item_id_to_str(dComIfGs_getDeliveryBagSlot(SLOT1_INDEX)));
-    tww_sprintf(lines[SLOT2_INDEX].value, " <%s>",item_id_to_str(dComIfGs_getDeliveryBagSlot(SLOT2_INDEX)));
-    tww_sprintf(lines[SLOT3_INDEX].value, " <%s>",item_id_to_str(dComIfGs_getDeliveryBagSlot(SLOT3_INDEX)));
-    tww_sprintf(lines[SLOT4_INDEX].value, " <%s>",item_id_to_str(dComIfGs_getDeliveryBagSlot(SLOT4_INDEX)));
-    tww_sprintf(lines[SLOT5_INDEX].value, " <%s>",item_id_to_str(dComIfGs_getDeliveryBagSlot(SLOT5_INDEX)));
-    tww_sprintf(lines[SLOT6_INDEX].value, " <%s>",item_id_to_str(dComIfGs_getDeliveryBagSlot(SLOT6_INDEX)));
-    tww_sprintf(lines[SLOT7_INDEX].value, " <%s>",item_id_to_str(dComIfGs_getDeliveryBagSlot(SLOT7_INDEX)));
-    tww_sprintf(lines[SLOT8_INDEX].value, " <%s>",item_id_to_str(dComIfGs_getDeliveryBagSlot(SLOT8_INDEX)));
+    tww_sprintf(lines[SLOT1_INDEX].value, " <%s>",item_id_to_str(dComIfGs_getItemReserve(SLOT1_INDEX)));
+    tww_sprintf(lines[SLOT2_INDEX].value, " <%s>",item_id_to_str(dComIfGs_getItemReserve(SLOT2_INDEX)));
+    tww_sprintf(lines[SLOT3_INDEX].value, " <%s>",item_id_to_str(dComIfGs_getItemReserve(SLOT3_INDEX)));
+    tww_sprintf(lines[SLOT4_INDEX].value, " <%s>",item_id_to_str(dComIfGs_getItemReserve(SLOT4_INDEX)));
+    tww_sprintf(lines[SLOT5_INDEX].value, " <%s>",item_id_to_str(dComIfGs_getItemReserve(SLOT5_INDEX)));
+    tww_sprintf(lines[SLOT6_INDEX].value, " <%s>",item_id_to_str(dComIfGs_getItemReserve(SLOT6_INDEX)));
+    tww_sprintf(lines[SLOT7_INDEX].value, " <%s>",item_id_to_str(dComIfGs_getItemReserve(SLOT7_INDEX)));
+    tww_sprintf(lines[SLOT8_INDEX].value, " <%s>",item_id_to_str(dComIfGs_getItemReserve(SLOT8_INDEX)));
 
     cursor.move(0, LINE_NUM);
     GZ_drawMenuLines(lines, cursor.y, LINE_NUM);

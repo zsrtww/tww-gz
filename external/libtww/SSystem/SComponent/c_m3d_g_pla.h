@@ -6,14 +6,12 @@
 // Plane with a normal
 class cM3dGPla {
 public:
-    cXyz mNormal;
-    float mD;
-    cM3dGPla();
-    cM3dGPla(const cXyz*, float);
-    virtual ~cM3dGPla();
+    /* 0x00 */ cXyz mNormal;
+    /* 0x0C */ f32 mD;
+    /* 0x10 */ void* vtable;
 
-    const cXyz& GetNP() const { return mNormal; }
-    float GetD() const { return mD; }
+    cXyz* GetNP() { return &mNormal; }
+    const cXyz* GetNP() const { return &mNormal; }
 };
 
 #endif

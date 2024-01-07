@@ -22,29 +22,52 @@ typedef int (*SkipFunc)(void*, int);
 
 class dEvt_control_c {
 public:
-    void setStorage() { mHalt = 1; }
+    void setStorage() { mbEndProc = 1; }
 
-    /* 0x000 */ dEvt_order_c mOrder[8];
-    /* 0x0C0 */ u8 mNum;
-    /* 0x0C1 */ u8 mFirstOrderIdx;
-    /* 0x0C2 */ u8 mMode;
-    /* 0x0C3 */ u8 mHalt;
-    /* 0x0C4 */ u32 mPt1;
-    /* 0x0C8 */ u32 mPt2;
-    /* 0x0CC */ u32 mPtTalk;
-    /* 0x0D0 */ u32 mPtItem;
-    /* 0x0D4 */ u8 mCurStaffId;
-    /* 0x0D6 */ u16 field_0xd6;
-    /* 0x0D8 */ u16 mEventID;
-    /* 0x0DA */ u8 mEventEndSound;
-    /* 0x0DB */ u8 field_0xdb[0xE0 - 0xDB];
-    /* 0x0E0 */ u8 mTalkButton;
-    /* 0x0E1 */ u8 mItemNo;
-    /* 0x0E2 */ u8 mbInPhoto;
-    /* 0x0E4 */ float mCullFarClipRatio;
-    /* 0x0E8 */ u16 mStateFlags;
-    /* 0x0EA */ u8 mTactFreeMStick[4];
-    /* 0x0EE */ u8 mTactFreeCStick[4];
+    u8 getTalkXYBtn() { return mTalkButton; }
+    bool chkTalkXY() { return mTalkButton == 1 || mTalkButton == 2 || mTalkButton == 3; }
+    void setPtI_Id(u32 id) { mPtItem = id; }
+    void setGtItm(u8 itemNo) { mGetItemNo = itemNo; }
+    u8 getGtItm() { return mGetItemNo; }
+    u8 getPreItemNo() { return mItemNo; }
+    
+    f32 getCullRate() { return mCullFarClipRatio; }
+    void setCullRate(f32 ratio) { mCullFarClipRatio = ratio; }
+    
+    u16 chkEventFlag(u16 flag) { return flag & mEventFlag; }
+    void onEventFlag(u16 flag) { mEventFlag |= flag; }
+    void offEventFlag(u16 flag) { mEventFlag &= ~flag; }
+    void reset() { onEventFlag(8); }
+
+    bool runCheck() { return mMode != 0; }
+
+    /* 0x00 */ dEvt_order_c mOrder[8];
+    /* 0xC0 */ u8 mOrderCount;
+    /* 0xC1 */ u8 mFirstOrderIdx;
+    /* 0xC2 */ u8 mMode;
+    /* 0xC3 */ u8 mbEndProc;
+    /* 0xC4 */ u32 mPt1;
+    /* 0xC8 */ u32 mPt2;
+    /* 0xCC */ int mPtTalk;
+    /* 0xD0 */ u32 mPtItem;
+    /* 0xD4 */ u8 mGetItemNo;
+    /* 0xD5 */ u8 field_0xD5[0xD6 - 0xD5];
+    /* 0xD6 */ s16 field_0xd6;
+    /* 0xD8 */ s16 mEventId;
+    /* 0xDA */ u8 mEventEndSound;
+    /* 0xDB */ u8 field_0xdb;
+    /* 0xDC */ u8 field_0xdc;
+    /* 0xDD */ u8 field_0xDD[0xDE - 0xDD];
+    /* 0xDE */ u8 field_0xde;
+    /* 0xDF */ u8 field_0xdf;
+    /* 0xE0 */ u8 mTalkButton;
+    /* 0xE1 */ u8 mItemNo;
+    /* 0xE2 */ u8 mbInPhoto;
+    /* 0xE3 */ u8 field_0xE3[0xE4 - 0xE3];
+    /* 0xE4 */ f32 mCullFarClipRatio;
+    /* 0xE8 */ u16 mEventFlag;
+    /* 0xEA */ u8 mTactFreeMStick[4];
+    /* 0xEE */ u8 mTactFreeCStick[4];
 };
 
 static_assert(sizeof(dEvt_control_c) == 0xF4);

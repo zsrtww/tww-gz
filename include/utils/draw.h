@@ -1,7 +1,7 @@
 #pragma once
 
 #include "libtww/addrs.h"
-#include "libtww/dolphin/mtx/vec.h"
+#include "utils/types.h"
 #include "utils/texture.h"
 #include "gcn_c/include/gfx.h"
 

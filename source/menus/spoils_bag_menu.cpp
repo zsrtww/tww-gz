@@ -21,19 +21,19 @@ Line lines[LINE_NUM] = {
 
 void updateSpoilsBagItemFlag(u8 item_id) {
     if (item_id == JOY_PENDANT) {
-        dComIfGs_setSpoilFlag(7);
-    } else {
-        dComIfGs_setSpoilFlag(item_id - 0x45);
+        dComIfGs_onGetItemBeast(7);
+    } else if (item_id - 0x45 >= 0 && item_id - 0x45 < 8) {
+        dComIfGs_onGetItemBeast(item_id - 0x45);
     }
 }
 
 void updateSpoilsBagSlot(u8 slot, u8 item_id) {
-    dComIfGs_setSpoilsBagSlot(slot, item_id);
+    dComIfGs_setItemBeast(slot, item_id);
     updateSpoilsBagItemFlag(item_id);
 }
 
 void updateSpoilsBagItem(u8 slot) {
-    u8 new_item_id = dComIfGs_getSpoilsBagSlot(slot);
+    u8 new_item_id = dComIfGs_getItemBeast(slot);
     Cursor::moveListSimple(new_item_id);
     if (new_item_id == NO_ITEM - 1) {
         new_item_id = NO_ITEM;
@@ -91,14 +91,14 @@ void SpoilsBagMenu::draw() {
         break;
     }
 
-    tww_sprintf(lines[SPOILSSLOT1_INDEX].value, " <%s>", item_id_to_str(dComIfGs_getSpoilsBagSlot(SPOILSSLOT1_INDEX)));
-    tww_sprintf(lines[SPOILSSLOT2_INDEX].value, " <%s>", item_id_to_str(dComIfGs_getSpoilsBagSlot(SPOILSSLOT2_INDEX)));
-    tww_sprintf(lines[SPOILSSLOT3_INDEX].value, " <%s>", item_id_to_str(dComIfGs_getSpoilsBagSlot(SPOILSSLOT3_INDEX)));
-    tww_sprintf(lines[SPOILSSLOT4_INDEX].value, " <%s>", item_id_to_str(dComIfGs_getSpoilsBagSlot(SPOILSSLOT4_INDEX)));
-    tww_sprintf(lines[SPOILSSLOT5_INDEX].value, " <%s>", item_id_to_str(dComIfGs_getSpoilsBagSlot(SPOILSSLOT5_INDEX)));
-    tww_sprintf(lines[SPOILSSLOT6_INDEX].value, " <%s>", item_id_to_str(dComIfGs_getSpoilsBagSlot(SPOILSSLOT6_INDEX)));
-    tww_sprintf(lines[SPOILSSLOT7_INDEX].value, " <%s>", item_id_to_str(dComIfGs_getSpoilsBagSlot(SPOILSSLOT7_INDEX)));
-    tww_sprintf(lines[SPOILSSLOT8_INDEX].value, " <%s>", item_id_to_str(dComIfGs_getSpoilsBagSlot(SPOILSSLOT8_INDEX)));
+    tww_sprintf(lines[SPOILSSLOT1_INDEX].value, " <%s>", item_id_to_str(dComIfGs_getItemBeast(SPOILSSLOT1_INDEX)));
+    tww_sprintf(lines[SPOILSSLOT2_INDEX].value, " <%s>", item_id_to_str(dComIfGs_getItemBeast(SPOILSSLOT2_INDEX)));
+    tww_sprintf(lines[SPOILSSLOT3_INDEX].value, " <%s>", item_id_to_str(dComIfGs_getItemBeast(SPOILSSLOT3_INDEX)));
+    tww_sprintf(lines[SPOILSSLOT4_INDEX].value, " <%s>", item_id_to_str(dComIfGs_getItemBeast(SPOILSSLOT4_INDEX)));
+    tww_sprintf(lines[SPOILSSLOT5_INDEX].value, " <%s>", item_id_to_str(dComIfGs_getItemBeast(SPOILSSLOT5_INDEX)));
+    tww_sprintf(lines[SPOILSSLOT6_INDEX].value, " <%s>", item_id_to_str(dComIfGs_getItemBeast(SPOILSSLOT6_INDEX)));
+    tww_sprintf(lines[SPOILSSLOT7_INDEX].value, " <%s>", item_id_to_str(dComIfGs_getItemBeast(SPOILSSLOT7_INDEX)));
+    tww_sprintf(lines[SPOILSSLOT8_INDEX].value, " <%s>", item_id_to_str(dComIfGs_getItemBeast(SPOILSSLOT8_INDEX)));
 
     cursor.move(0, LINE_NUM);
     GZ_drawMenuLines(lines, cursor.y, LINE_NUM);

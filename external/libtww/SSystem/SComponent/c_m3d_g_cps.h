@@ -5,21 +5,16 @@
 #include "c_xyz.h"
 
 struct cM3dGCpsS {
-    Vec mStart;
-    Vec mEnd;
-    float unk_0x1c;
-};
+    /* 0x00 */ Vec mStart;
+    /* 0x0C */ Vec mEnd;
+    /* 0x18 */ f32 mRadius;
+};  // Size: 0x1C
 
 class cM3dGCps : public cM3dGLin {
-private:
-    float unk_0x1c;
-
 public:
-    cM3dGCps(void);
-    virtual ~cM3dGCps(void);
-    void Set(const cXyz&, const cXyz&, float);
-    void Set(const cM3dGCpsS&);
-    void SetCps(const cM3dGCps&);
+    /* 0x1C */ f32 mRadius;
 };
+
+static_assert(0x20 == sizeof(cM3dGCps));
 
 #endif /* C_M3D_G_CPS_H */

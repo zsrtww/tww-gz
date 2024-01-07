@@ -150,46 +150,51 @@ enum ItemTable {
 
 class dSv_player_status_a_c {
 public:
-    u16& getMaxLife() { return mMaxLife; }
-    u8& getMaxMagic() { return mMaxMagic; }
-    u8& getWalletSize() { return mWalletSize; }
-    u16& getLife() { return mLife; }
-    u8& getMagic() { return mMagic; }
-    u16& getRupee() { return mRupee; }
-    u8 getSelectItem(int item_index) const { return mSelectItem[item_index]; }
-    u8 getSelectEquip(int item_index) const { return mSelectEquip[item_index]; }
-
-    void setMagic(u8 magic) { mMagic = magic; }
-    void setMaxMagic(u8 max) { mMaxMagic = max; }
-    void setRupee(u16 rupees) { mRupee = rupees; }
+    u8 getSelectItem(int i_no) { return mSelectItem[i_no]; }
+    void setSelectItem(int i_no, u8 i_invIdx) { mSelectItem[i_no] = i_invIdx; }
+    u8 getSelectEquip(int i_no) { return mSelectEquip[i_no]; }
+    void setSelectEquip(int i_no, u8 i_itemNo) { mSelectEquip[i_no] = i_itemNo; }
+    u8 getWalletSize() { return mWalletSize; }
     void setWalletSize(u8 size) { mWalletSize = size; }
+    int getRupee() { return mRupee; }
+    void setRupee(u16 rupee) { mRupee = rupee; }
+    u8 getMagic() { return mMagic; }
+    void setMagic(u8 magic) { mMagic = magic;}
+    u8 getMaxMagic() { return mMaxMagic; }
+    void setMaxMagic(u8 magic) { mMaxMagic = magic; }
+    u16 getLife() { return mLife; }
     void setLife(u16 life) { mLife = life; }
-    void setMaxLife(u16 max) { mMaxLife = max; }
-    void setSelectItem(int item_index, u8 item) { mSelectItem[item_index] = item; }
-    void setSelectEquip(int item_index, u8 item) { mSelectEquip[item_index] = item; }
+    u16 getMaxLife() { return mMaxLife; }
+    void setMaxLife(u16 life) { mMaxLife = life; }
 
     /* 0x00 */ u16 mMaxLife;
     /* 0x02 */ u16 mLife;
     /* 0x04 */ u16 mRupee;
     /* 0x06 */ u16 field_0x6;
     /* 0x08 */ u8 field_0x8;
-    /* 0x09 */ u8 mSelectItem[5];
-    /* 0x0E */ u8 mSelectEquip[4];
+    /* 0x09 */ u8 mSelectItem[5];   // X, Y, Z button
+    /* 0x0E */ u8 mSelectEquip[4];  // Sword, Shield, Bracelet, ?
     /* 0x12 */ u8 mWalletSize;
     /* 0x13 */ u8 mMaxMagic;
     /* 0x14 */ u8 mMagic;
     /* 0x15 */ u8 field_0x15;
     /* 0x16 */ u8 field_0x16;
-    /* 0x17 */ u8 padding;
 };  // Size: 0x18
 
 static_assert(sizeof(dSv_player_status_a_c) == 0x18);
 
 class dSv_player_status_b_c {
 public:
-    void setTime(float pTime) { mTime = pTime; }
-    float getTime() const { return mTime; }
-    u16 getDate() const { return mDate; }
+    void setDateIpl(s64 i_time) { mDateIPL = i_time; }
+    u16 getDate() { return mDate; }
+    f32 getTime() { return mTime; }
+    void setDate(u16 i_date) { mDate = i_date; }
+    void setTime(f32 i_time) { mTime = i_time; }
+    s64 getDateIpl() { return mDateIPL; }
+    s16 getWindY() { return mTactWindAngleY; }
+    s16 getWindX() { return mTactWindAngleX; }
+    void setWindY(s16 i_windY) { mTactWindAngleY = i_windY; }
+    void setWindX(s16 i_windX) { mTactWindAngleX = i_windX; }
 
     /* 0x00 */ u64 mDateIPL;
     /* 0x08 */ f32 field_0x8;
@@ -197,36 +202,38 @@ public:
     /* 0x10 */ u16 mDate;
     /* 0x12 */ s16 mTactWindAngleX;
     /* 0x14 */ s16 mTactWindAngleY;
-    /* 0x16 */ u8 padding[2];
 };  // Size: 0x18
 
 static_assert(sizeof(dSv_player_status_b_c) == 0x18);
 
 class dSv_player_return_place_c {
 public:
+    s8 getRoomNo() { return mRoomNo; }
+    u8 getPoint() { return mPoint; }
+    char* getName() { return mName; }
+
     /* 0x00 */ char mName[8];
     /* 0x08 */ s8 mRoomNo;
-    /* 0x09 */ u8 mPlayerStatus;
-    /* 0x0A */ u8 unk10;
-    /* 0x0B */ u8 unk11;
+    /* 0x09 */ u8 mPoint;
+    /* 0x0A */ u8 unk_0xa;
+    /* 0x0B */ u8 unk_0xb;
 };  // Size: 0xC
 
 static_assert(sizeof(dSv_player_return_place_c) == 0xC);
 
 class dSv_player_item_c {
 public:
-    u8 getItemSlot(u8 index) { return mItemSlots[index]; }
-    void setItemSlot(u8 index, u8 item_id) { mItemSlots[index] = item_id; }
+    u8 getItem(int i_idx) { return mItems[i_idx]; }
+    void setItem(int i_idx, u8 i_itemNo) { mItems[i_idx] = i_itemNo; }
 
-    /* 0x0 */ u8 mItemSlots[21];
+    /* 0x00 */ u8 mItems[21];
 };  // Size: 0x15
 
 static_assert(sizeof(dSv_player_item_c) == 0x15);
 
 class dSv_player_get_item_c {
 public:
-    u8 getItemFlag(u8 index) { return mItemFlags[index]; }
-    void setItemFlag(u8 index, u8 has_item) { mItemFlags[index] = has_item; }
+    void offItem(int i_field, u8 i_item) { mItemFlags[i_field] &= ~(u8)(1 << i_item); }
 
     /* 0x0 */ u8 mItemFlags[21];
 };  // Size: 0x15
@@ -237,13 +244,14 @@ class dSv_player_item_record_c {
 public:
     u8 getArrowNum() { return mArrowNum; }
     u8 getBombNum() { return mBombNum; }
+    u8 getPictureNum() { return mPictureNum; }
 
     void setArrowNum(u8 amount) { mArrowNum = amount; }
     void setBombNum(u8 amount) { mBombNum = amount; }
-    void setForestWaterTimer(u16 frames) { mTimer = frames; }
+    void setTimer(u16 timer) { mTimer = timer; }
 
     /* 0x0 */ u16 mTimer;
-    /* 0x2 */ u8 field_0x2;
+    /* 0x2 */ u8 mPictureNum;
     /* 0x3 */ u8 mArrowNum;
     /* 0x4 */ u8 mBombNum;
     /* 0x5 */ u8 mBottleNum[3];
@@ -253,11 +261,11 @@ static_assert(sizeof(dSv_player_item_record_c) == 0x8);
 
 class dSv_player_item_max_c {
 public:
-    u8 getArrowCapacity() { return mArrowNum; }
-    u8 getBombCapacity() { return mBombNum; }
+    u8 getArrowNum() { return mArrowNum; }
+    u8 getBombNum() { return mBombNum; }
 
-    void setArrowCapacity(u8 amount) { mArrowNum = amount; }
-    void setBombCapacity(u8 amount) { mBombNum = amount; }
+    void setArrowNum(u8 amount) { mArrowNum = amount; }
+    void setBombNum(u8 amount) { mBombNum = amount; }
 
     /* 0x0 */ u8 field_0x0;
     /* 0x1 */ u8 mArrowNum;
@@ -269,26 +277,27 @@ static_assert(sizeof(dSv_player_item_max_c) == 0x8);
 
 class dSv_player_bag_item_c {
 public:
-    u8 getDeliveryBagSlot(u8 index) { return mDeliveryBag[index]; }
-    void setDeliveryBagSlot(u8 index, u8 has_item) { mDeliveryBag[index] = has_item; }
-    u8 getSpoilsBagSlot(u8 index) { return mSpoilsBag[index]; }
-    void setSpoilsBagSlot(u8 index, u8 has_item) { mSpoilsBag[index] = has_item; }
-    u8 getBaitBagSlot(u8 index) { return mBaitBag[index]; }
-    void setBaitBagSlot(u8 index, u8 has_item) { mBaitBag[index] = has_item; }
+    u8 getBeast(int i_idx) { return mBeast[i_idx]; }
+    void setBeast(int i_idx, u8 i_itemNo) { mBeast[i_idx] = i_itemNo; }
+    u8 getBait(int i_idx) { return mBait[i_idx]; }
+    void setBait(int i_idx, u8 i_itemNo) { mBait[i_idx] = i_itemNo; }
+    u8 getReserve(int i_idx) { return mReserve[i_idx]; }
+    void setReserve(int i_idx, u8 i_itemNo) { mReserve[i_idx] = i_itemNo; }
 
-    /* 0x00 */ u8 mSpoilsBag[8];
-    /* 0x08 */ u8 mBaitBag[8];
-    /* 0x10 */ u8 mDeliveryBag[8];
+    /* 0x00 */ u8 mBeast[8];
+    /* 0x08 */ u8 mBait[8];
+    /* 0x10 */ u8 mReserve[8];
 };  // Size: 0x18
 
 static_assert(sizeof(dSv_player_bag_item_c) == 0x18);
 
 class dSv_player_get_bag_item_c {
 public:
-    u8 getSpoilFlag(u8 index) { return mSpoilsFlags; }
-    void setSpoilFlag(u8 collected_item) { mSpoilsFlags |= (1 << collected_item); }
+    u8 getSpoilFlag(u8 index) { return mBeastFlags; }
+    void setSpoilFlag(u8 collected_item) { mBeastFlags |= (1 << collected_item); }
+
     /* 0x0 */ u32 mReserveFlags;
-    /* 0x4 */ u8 mSpoilsFlags;
+    /* 0x4 */ u8 mBeastFlags;
     /* 0x5 */ u8 mBaitFlags;
     /* 0x6 */ u8 unk_0x6[0xC - 0x6];
 };  // Size: 0xC
@@ -297,35 +306,41 @@ static_assert(sizeof(dSv_player_get_bag_item_c) == 0xC);
 
 class dSv_player_bag_item_record_c {
 public:
-    u8 getSpoilsNum(u8 index) { return mSpoilsBagCounts[index]; }
+    u8 getBeastNum(int i_idx) { return mBeastNum[i_idx]; }
+    void setBeastNum(int i_idx, u8 num) { mBeastNum[i_idx] = num; }
+    u8 getBaitNum(int i_idx) { return mBaitNum[i_idx]; }
+    void setBaitNum(int i_idx, u8 num) { mBaitNum[i_idx] = num; }
+    u8 getReserveNum(int i_idx) { return mReserveNum[i_idx]; }
+    void setReserveNum(int i_idx, u8 num) { mReserveNum[i_idx] = num; }
 
-    void setSpoilsNum(u8 index, u8 amount) { mSpoilsBagCounts[index] = amount; }
-
-     u8 getBaitNum(u8 index) { return mBaitBagCounts[index]; }
-
-    void setBaitNum(u8 index, u8 amount) { mBaitBagCounts[index] = amount; }
-
-    /* 0x00 */ u8 mSpoilsBagCounts[8];
-    /* 0x08 */ u8 mBaitBagCounts[8];
-    /* 0x10 */ u8 mDeliveryBagCounts[8];
+    /* 0x00 */ u8 mBeastNum[8];
+    /* 0x08 */ u8 mBaitNum[8];
+    /* 0x10 */ u8 mReserveNum[8];
 };  // Size: 0x18
 
 static_assert(sizeof(dSv_player_bag_item_record_c) == 0x18);
 
 class dSv_player_collect_c {
 public:
-    u8 getItemOwned(u8 index) { return mItem[index]; }
+    void setCollect(int idx, u8 byte) { mCollect[idx] = byte; }
+    u8 checkCollect(int idx) { return mCollect[idx]; }
+
+    void offTact(u8 i_no) { mTact &= ~(u8)(1 << i_no); }
+    void offTriforce(u8 i_no) { mTriforce &= ~(u8)(1 << i_no); }
+    void offSymbol(u8 i_no) { mSymbol &= ~(u8)(1 << i_no); }
+
+    /* u8 getItemOwned(u8 index) { return mCollect[index]; }
     u8 getSongsOwned() { return mTact; }
     u8 getTriforceOwned() { return mTriforce; }
     u8 getPearlsOwned() { return mSymbol; }
 
-    void setItemOwned(u8 index, u8 has_item) { mItem[index] = has_item; }
+    void setItemOwned(u8 index, u8 has_item) { mCollect[index] = has_item; }
     void setSongsOwned(u8 songs_owned) { mTact = songs_owned; }
     void setTriforceOwned(u8 triforce_owned) { mTriforce = triforce_owned; }
-    void setPearlsOwned(u8 pearls_owned) { mSymbol = pearls_owned; }
+    void setPearlsOwned(u8 pearls_owned) { mSymbol = pearls_owned; } */
 
-    /* 0x0 */ u8 mItem[8];
-    /* 0x8 */ u8 unk8;
+    /* 0x0 */ u8 mCollect[8];
+    /* 0x8 */ u8 field_0x8;
     /* 0x9 */ u8 mTact;
     /* 0xA */ u8 mTriforce;
     /* 0xB */ u8 mSymbol;
@@ -356,7 +371,7 @@ static_assert(sizeof(dSv_player_map_c) == 0x84);
 
 class dSv_player_info_c {
 public:
-    char* getLinkName() { return (char*)mPlayerName; }
+    const char* getPlayerName() const { return mPlayerName; }
 
     u8 getChartSet() { return mFmapIdx; }
     void setChartSet(u8 index) { mFmapIdx = index; }
@@ -388,6 +403,11 @@ static_assert(sizeof(dSv_player_config_c) == 0x5);
 
 class dSv_player_priest_c {
 public:
+    u8 getFlag() { return field_0xf; }
+    cXyz& getPos() { return field_0x0; }
+    s16 getRotate() { return field_0xc; }
+    s8 getRoomNo() { return field_0xe; }
+
     /* 0x0 */ cXyz field_0x0;
     /* 0xC */ s16 field_0xc;
     /* 0xE */ s8 field_0xe;
@@ -411,23 +431,56 @@ static_assert(sizeof(dSv_player_status_c_c) == 0x70);
 
 class dSv_player_c {
 public:
-    dSv_player_info_c& getPlayerInfo() { return mInfo; }
     dSv_player_status_a_c& getPlayerStatusA() { return mPlayerStatusA; }
+    dSv_player_status_a_c* getpPlayerStatusA() { return &mPlayerStatusA; }
+
     dSv_player_status_b_c& getPlayerStatusB() { return mPlayerStatusB; }
+    dSv_player_status_b_c* getpPlayerStatusB() { return &mPlayerStatusB; }
+    
+    dSv_player_return_place_c& getPlayerReturnPlace() { return mReturnPlace; }
+    dSv_player_return_place_c* getpPlayerReturnPlace() { return &mReturnPlace; }
+    
     dSv_player_item_c& getItem() { return mPlayerItem; }
-    dSv_player_collect_c& getCollect() { return mCollect; }
-    dSv_player_item_record_c& getItemRecord() { return mItemRecord; }
-    dSv_player_item_max_c& getItemMax() { return mItemMax; }
-    dSv_player_bag_item_c& getBagItem() { return mBagItem; }
-    dSv_player_return_place_c& getPlayerReturnPlace() { return mPlayerReturnPlace; }
+    dSv_player_item_c* getpItem() { return &mPlayerItem; }
+
     dSv_player_get_item_c& getGetItem() { return mGetItem; }
+    dSv_player_get_item_c* getpGetItem() { return &mGetItem; }
+    
+    dSv_player_item_record_c& getItemRecord() { return mItemRecord; }
+    dSv_player_item_record_c* getpItemRecord() { return &mItemRecord; }
+    
+    dSv_player_item_max_c& getItemMax() { return mItemMax; }
+    dSv_player_item_max_c* getpItemMax() { return &mItemMax; }
+    
+    dSv_player_bag_item_c& getBagItem() { return mBagItem; }
+    dSv_player_bag_item_c* getpBagItem() { return &mBagItem; }
+    
     dSv_player_get_bag_item_c& getGetBagItem() { return mGetBagItem; }
+    dSv_player_get_bag_item_c* getpGetBagItem() { return &mGetBagItem; }
+    
     dSv_player_bag_item_record_c& getBagItemRecord() { return mBagItemRecord; }
+    dSv_player_bag_item_record_c* getpBagItemRecord() { return &mBagItemRecord; }
+    
+    dSv_player_collect_c& getCollect() { return mCollect; }
+    dSv_player_collect_c* getpCollect() { return &mCollect; }
+    
+    dSv_player_map_c& getMap() { return mMap; }
+    dSv_player_map_c* getpMap() { return &mMap; }
+    
+    dSv_player_info_c& getPlayerInfo() { return mInfo; }
+    dSv_player_info_c* getpPlayerInfo() { return &mInfo; }
+    
     dSv_player_config_c& getConfig() { return mConfig; }
+    dSv_player_config_c* getpConfig() { return &mConfig; }
+    
+    dSv_player_priest_c& getPriest() { return mPriest; }
+    dSv_player_priest_c* getpPriest() { return &mPriest; }
+
+    dSv_player_status_c_c* getpPlayerStatusC(int i_idx) { return &mStatusC[i_idx]; }
 
     /* 0x000 */ dSv_player_status_a_c mPlayerStatusA;
     /* 0x018 */ dSv_player_status_b_c mPlayerStatusB;
-    /* 0x030 */ dSv_player_return_place_c mPlayerReturnPlace;
+    /* 0x030 */ dSv_player_return_place_c mReturnPlace;
     /* 0x03C */ dSv_player_item_c mPlayerItem;
     /* 0x051 */ dSv_player_get_item_c mGetItem;
     /* 0x066 */ dSv_player_item_record_c mItemRecord;
@@ -445,12 +498,39 @@ public:
 
 static_assert(sizeof(dSv_player_c) == 0x380);
 
+typedef bool (*dSv_memBit_c__isDungeonItem_t)(void* addr, int);
+#define dSv_memBit_c__isDungeonItem ((dSv_memBit_c__isDungeonItem_t) dSv_memBit_c__isDungeonItem_addr)
+
+typedef void (*dSv_memBit_c__onDungeonItem_t)(void* addr, int);
+#define dSv_memBit_c__onDungeonItem ((dSv_memBit_c__onDungeonItem_t) dSv_memBit_c__onDungeonItem_addr)
+
 class dSv_memBit_c {
 public:
-    void setKeyNum(int num) { mKeyNum = num; }
-    u8& getKeyNum() { return mKeyNum; }
+    enum {
+        /* 0x0 */ MAP,
+        /* 0x1 */ COMPASS,
+        /* 0x2 */ BOSS_KEY,
+        /* 0x3 */ STAGE_BOSS_ENEMY,
+        /* 0x4 */ STAGE_LIFE,
+        /* 0x5 */ STAGE_BOSS_DEMO,
+        /* 0x7 */ STAGE_BOSS_ENEMY_2 = 7
+    };
+
     void offDungeonItem(int flag) { mDungeonItem &= ~(1 << flag); }
- //   void onDungeonSwitch(int flag) { mSwitch[flag >> 5] = mSwitch[flag >> 5] | 1 << (flag & 0x1F); }
+    u8 getKeyNum() { return mKeyNum; }
+    void setKeyNum(u8 i_keyNum) { mKeyNum = i_keyNum; }
+    void onDungeonItemMap() { dSv_memBit_c__onDungeonItem(this, MAP); }
+    BOOL isDungeonItemMap() { return dSv_memBit_c__isDungeonItem(this, MAP); }
+    void onDungeonItemCompass() { dSv_memBit_c__onDungeonItem(this, COMPASS); }
+    BOOL isDungeonItemCompass() { return dSv_memBit_c__isDungeonItem(this, COMPASS); }
+    void onDungeonItemBossKey() { dSv_memBit_c__onDungeonItem(this, BOSS_KEY); }
+    BOOL isDungeonItemBossKey() { return dSv_memBit_c__isDungeonItem(this, BOSS_KEY); }
+    void onStageBossEnemy() { dSv_memBit_c__onDungeonItem(this, STAGE_BOSS_ENEMY); }
+    BOOL isStageBossEnemy() { return dSv_memBit_c__isDungeonItem(this, STAGE_BOSS_ENEMY); }
+    BOOL isStageBossEnemy2() { return dSv_memBit_c__isDungeonItem(this, STAGE_BOSS_ENEMY_2); }
+    void onStageLife() { dSv_memBit_c__onDungeonItem(this, STAGE_LIFE); }
+    BOOL isStageLife() { return dSv_memBit_c__isDungeonItem(this, STAGE_LIFE); }
+ 
     /* 0x00 */ u32 mTbox;
     /* 0x04 */ u32 mSwitch[4];
     /* 0x14 */ u32 mItem;
@@ -485,10 +565,12 @@ static_assert(sizeof(dSv_memory_c) == 0x24);
 
 class dSv_danBit_c {
 public:
+    u8 getGbaRupeeCount() { return mGbaRupeeCount; }
+    void incGbaRupeeCount() { mGbaRupeeCount++; }
+
     /* 0x0 */ s8 mStageNo;
-    /* 0x1 */ u8 field_0x1;
-    /* 0x4 */ int field_0x4;
-    /* 0x8 */ int field_0x8;
+    /* 0x1 */ u8 mGbaRupeeCount;
+    /* 0x4 */ u32 mSwitch[2];
 };  // Size: 0xC
 
 static_assert(sizeof(dSv_danBit_c) == 0xC);
@@ -515,7 +597,7 @@ public:
     dSv_zoneActor_c& getActor() { return mZoneActor; }
     const dSv_zoneActor_c& getActor() const { return mZoneActor; }
 
-    s8& getRoomNo() { return mRoomNo; }
+    s8 getRoomNo() { return mRoomNo; }
 
     /* 0x00 */ s8 mRoomNo;
     /* 0x02 */ dSv_zoneBit_c mZoneBit;
@@ -533,29 +615,59 @@ static_assert(sizeof(dSv_ocean_c) == 0x64);
 
 class dSv_restart_c {
 public:
-    /* 0x00 */ s8 mRestartCode;
-    /* 0x01 */ u8 field_0x1;
-    /* 0x02 */ s8 mRoomNo;
-    /* 0x04 */ s16 field_0x4;
-    /* 0x06 */ s16 mRoomAngleY;
-    /* 0x08 */ cXyz mRoomPos;
-    /* 0x14 */ u16 mStartCode;
-    /* 0x16 */ u16 mRoomParam;
+    void setRoomParam(u32 param) { mRestartParam = param; }
+    void setStartPoint(s16 point) { mStartCode = point; }
+    void setLastSceneInfo(f32 speed, u32 mode) {
+        mLastSpeedF = speed;
+        mLastMode = mode;
+    }
+
+    s16 getStartPoint() { return mStartCode; }
+    u32 getLastMode() { return mLastMode; }
+    f32 getLastSpeedF() { return mLastSpeedF; }
+    s8 getRoomNo() { return mRestartRoom; }
+    u32 getRoomParam() { return mRestartParam; }
+    cXyz& getRoomPos() { return mRestartPos; }
+    s16 getRoomAngleY() { return mRestartAngle; }
+    s8 getRestartOption() { return mOption; }
+    s8 getRestartOptionRoomNo() { return mOptionRoomNo; }
+    s16 getRestartOptionPoint() { return mOptionPoint; }
+    s16 getRestartOptionAngleY() { return mOptionRoomAngleY; }
+    cXyz& getRestartOptionPos() { return mOptionRoomPos; }
+
+    /* 0x00 */ s8 mRestartRoom;
+    /* 0x01 */ u8 mOption;
+    /* 0x02 */ s8 mOptionRoomNo;
+    /* 0x04 */ s16 mOptionPoint;
+    /* 0x06 */ s16 mOptionRoomAngleY;
+    /* 0x08 */ cXyz mOptionRoomPos;
+    /* 0x14 */ s16 mStartCode;
+    /* 0x16 */ s16 mRestartAngle;
     /* 0x18 */ cXyz mRestartPos;
     /* 0x24 */ u32 mRestartParam;
-};  // Size: 0x28
+    /* 0x28 */ f32 mLastSpeedF;
+    /* 0x2C */ u32 mLastMode;
+};  // Size: 0x30
 
-static_assert(sizeof(dSv_restart_c) == 0x28);
+static_assert(sizeof(dSv_restart_c) == 0x30);
 
 class dSv_turnRestart_c {
 public:
+    u32 getParam() { return mParam; }
+    cXyz& getPos() { return mPosition; }
+    s16 getAngleY() { return mAngleY; }
+    s8 getRoomNo() { return mRoomNo; }
+    cXyz& getShipPos() { return mShipPos; }
+    s16 getShipAngleY() { return mShipAngleY; }
+
     /* 0x00 */ cXyz mPosition;
     /* 0x0C */ u32 mParam;
     /* 0x10 */ s16 mAngleY;
     /* 0x12 */ s8 mRoomNo;
+    /* 0x13 */ u8 field_0x13;
     /* 0x14 */ u8 field_0x14[0x24 - 0x14];
-    /* 0x24 */ cXyz field_0x24;
-    /* 0x30 */ s16 field_0x30;
+    /* 0x24 */ cXyz mShipPos;
+    /* 0x30 */ s16 mShipAngleY;
     /* 0x34 */ int field_0x34;
 };  // Size: 0x38
 
@@ -565,6 +677,7 @@ class dSv_save_c {
 public:
     dSv_player_c& getPlayer() { return mPlayer; }
     dSv_event_c& getEvent() { return mEvent; }
+    dSv_ocean_c& getOcean() { return mOcean; }
     dSv_memory_c& getSave(int i_stageNo) { return mSave[i_stageNo]; }
     void putSave(int i_stageNo, dSv_memory_c mem) { mSave[i_stageNo] = mem; }
 
@@ -579,9 +692,15 @@ public:
 class dSv_info_c {
 public:
     dSv_save_c& getSavedata() { return mSavedata; }
-    dSv_memory_c& getMemory() { return mMemory; }
     dSv_player_c& getPlayer() { return mSavedata.getPlayer(); }
+    dSv_ocean_c& getOcean() { return mSavedata.getOcean(); }
+    dSv_event_c& getEvent() { return mSavedata.getEvent(); }
+    dSv_restart_c& getRestart() { return mRestart; }
     dSv_event_c& getTmp() { return mTmp; }
+    dSv_turnRestart_c& getTurnRestart() { return mTurnRestart; }
+    dSv_memory_c& getMemory() { return mMemory; }
+    dSv_danBit_c& getDan() { return mDan; }
+    dSv_zone_c& getZone(int id) { return mZone[id]; }
 
     /* 0x0000 */ dSv_save_c mSavedata;
     /* 0x0724 */ u8 unk_0x724[0x50];
@@ -589,8 +708,6 @@ public:
     /* 0x079C */ dSv_danBit_c mDan;
     /* 0x07A8 */ dSv_zone_c mZone[32];
     /* 0x1128 */ dSv_restart_c mRestart;
-    /* 0x1150 */ f32 field_0x1150;
-    /* 0x1154 */ int field_0x1154;
     /* 0x1158 */ dSv_event_c mTmp;
     /* 0x1258 */ dSv_turnRestart_c mTurnRestart;
     /* 0x1290 */ u8 field_0x1290;
@@ -628,5 +745,109 @@ typedef void (*tww_getSave)(void* addr, int32_t areaID);
 
 typedef void (*tww_putSave)(void* addr, int32_t areaID);
 #define tww_putSave ((tww_putSave)tww_putSave_addr)
+
+
+
+typedef void (*dSv_player_bag_item_c__setBeastItem_t)(void* addr, u8);
+#define dSv_player_bag_item_c__setBeastItem ((dSv_player_bag_item_c__setBeastItem_t) dSv_player_bag_item_c__setBeastItem_addr)
+
+typedef void (*dSv_player_bag_item_c__setBaitItem_t)(void* addr, u8);
+#define dSv_player_bag_item_c__setBaitItem ((dSv_player_bag_item_c__setBaitItem_t) dSv_player_bag_item_c__setBaitItem_addr)
+
+typedef bool (*dSv_player_map_c__isGetMap_t)(void* addr, int);
+#define dSv_player_map_c__isGetMap ((dSv_player_map_c__isGetMap_t) dSv_player_map_c__isGetMap_addr)
+
+typedef void (*dSv_player_map_c__onGetMap_t)(void* addr, int);
+#define dSv_player_map_c__onGetMap ((dSv_player_map_c__onGetMap_t) dSv_player_map_c__onGetMap_addr)
+
+typedef void (*dSv_event_c__setEventReg_t)(void* addr, u16 reg, u8 flag);
+#define dSv_event_c__setEventReg ((dSv_event_c__setEventReg_t) dSv_event_c__setEventReg_addr)
+
+typedef u8 (*dSv_event_c__getEventReg_t)(void* addr, u16 reg);
+#define dSv_event_c__getEventReg ((dSv_event_c__getEventReg_t) dSv_event_c__getEventReg_addr)
+
+typedef int (*dSv_player_collect_c__getTriforceNum_t)(void* addr);
+#define dSv_player_collect_c__getTriforceNum ((dSv_player_collect_c__getTriforceNum_t) dSv_player_collect_c__getTriforceNum_addr)
+
+typedef bool (*dSv_memBit_c__isTbox_t)(void* addr, int);
+#define dSv_memBit_c__isTbox ((dSv_memBit_c__isTbox_t) dSv_memBit_c__isTbox_addr)
+
+typedef void (*dSv_memBit_c__onTbox_t)(void* addr, int);
+#define dSv_memBit_c__onTbox ((dSv_memBit_c__onTbox_t) dSv_memBit_c__onTbox_addr)
+
+typedef bool (*dSv_memBit_c__isSwitch_t)(void* addr, int);
+#define dSv_memBit_c__isSwitch ((dSv_memBit_c__isSwitch_t) dSv_memBit_c__isSwitch_addr)
+
+typedef void (*dSv_memBit_c__onSwitch_t)(void* addr, int);
+#define dSv_memBit_c__onSwitch ((dSv_memBit_c__onSwitch_t) dSv_memBit_c__onSwitch_addr)
+
+typedef void (*dSv_memBit_c__offSwitch_t)(void* addr, int);
+#define dSv_memBit_c__offSwitch ((dSv_memBit_c__offSwitch_t) dSv_memBit_c__offSwitch_addr)
+
+typedef bool (*dSv_player_collect_c__isCollect_t)(void* addr, int, u8);
+#define dSv_player_collect_c__isCollect ((dSv_player_collect_c__isCollect_t) dSv_player_collect_c__isCollect_addr)
+
+typedef void (*dSv_player_collect_c__onCollect_t)(void* addr, int, u8);
+#define dSv_player_collect_c__onCollect ((dSv_player_collect_c__onCollect_t) dSv_player_collect_c__onCollect_addr)
+
+typedef void (*dSv_player_collect_c__offCollect_t)(void* addr, int, u8);
+#define dSv_player_collect_c__offCollect ((dSv_player_collect_c__offCollect_t) dSv_player_collect_c__offCollect_addr)
+
+typedef bool (*dSv_player_collect_c__isTact_t)(void* addr, u8);
+#define dSv_player_collect_c__isTact ((dSv_player_collect_c__isTact_t) dSv_player_collect_c__isTact_addr)
+
+typedef void (*dSv_player_collect_c__onTact_t)(void* addr, u8);
+#define dSv_player_collect_c__onTact ((dSv_player_collect_c__onTact_t) dSv_player_collect_c__onTact_addr)
+
+typedef bool (*dSv_player_collect_c__isTriforce_t)(void* addr, u8);
+#define dSv_player_collect_c__isTriforce ((dSv_player_collect_c__isTriforce_t) dSv_player_collect_c__isTriforce_addr)
+
+typedef void (*dSv_player_collect_c__onTriforce_t)(void* addr, u8);
+#define dSv_player_collect_c__onTriforce ((dSv_player_collect_c__onTriforce_t) dSv_player_collect_c__onTriforce_addr)
+
+typedef bool (*dSv_player_collect_c__isSymbol_t)(void* addr, u8);
+#define dSv_player_collect_c__isSymbol ((dSv_player_collect_c__isSymbol_t) dSv_player_collect_c__isSymbol_addr)
+
+typedef void (*dSv_player_collect_c__onSymbol_t)(void* addr, u8);
+#define dSv_player_collect_c__onSymbol ((dSv_player_collect_c__onSymbol_t) dSv_player_collect_c__onSymbol_addr)
+
+
+typedef void (*dSv_info_c__onSwitch_t)(void* addr, int, int);
+#define dSv_info_c__onSwitch ((dSv_info_c__onSwitch_t) dSv_info_c__onSwitch_addr)
+
+typedef void (*dSv_info_c__offSwitch_t)(void* addr, int, int);
+#define dSv_info_c__offSwitch ((dSv_info_c__offSwitch_t) dSv_info_c__offSwitch_addr)
+
+typedef bool (*dSv_info_c__isSwitch_t)(void* addr, int, int);
+#define dSv_info_c__isSwitch ((dSv_info_c__isSwitch_t) dSv_info_c__isSwitch_addr)
+
+typedef bool (*dSv_info_c__revSwitch_t)(void* addr, int, int);
+#define dSv_info_c__revSwitch ((dSv_info_c__revSwitch_t) dSv_info_c__revSwitch_addr)
+
+typedef void (*dSv_info_c__onItem_t)(void* addr, int, int);
+#define dSv_info_c__onItem ((dSv_info_c__onItem_t) dSv_info_c__onItem_addr)
+
+typedef bool (*dSv_info_c__isItem_t)(void* addr, int, int);
+#define dSv_info_c__isItem ((dSv_info_c__isItem_t) dSv_info_c__isItem_addr)
+
+
+typedef void (*dSv_player_get_item_c__onItem_t)(void* addr, int, u8);
+#define dSv_player_get_item_c__onItem ((dSv_player_get_item_c__onItem_t) dSv_player_get_item_c__onItem_addr)
+
+typedef bool (*dSv_player_get_item_c__isItem_t)(void* addr, int, u8);
+#define dSv_player_get_item_c__isItem ((dSv_player_get_item_c__isItem_t) dSv_player_get_item_c__isItem_addr)
+
+
+typedef void (*dSv_player_get_bag_item_c__onBeast_t)(void* addr, u8);
+#define dSv_player_get_bag_item_c__onBeast ((dSv_player_get_bag_item_c__onBeast_t) dSv_player_get_bag_item_c__onBeast_addr)
+
+typedef bool (*dSv_player_get_bag_item_c__isBeast_t)(void* addr, u8);
+#define dSv_player_get_bag_item_c__isBeast ((dSv_player_get_bag_item_c__isBeast_t) dSv_player_get_bag_item_c__isBeast_addr)
+
+typedef void (*dSv_player_get_bag_item_c__onBait_t)(void* addr,  u8);
+#define dSv_player_get_bag_item_c__onBait ((dSv_player_get_bag_item_c__onBait_t) dSv_player_get_bag_item_c__onBait_addr)
+
+typedef bool (*dSv_player_get_bag_item_c__isBait_t)(void* addr, u8);
+#define dSv_player_get_bag_item_c__isBait ((dSv_player_get_bag_item_c__isBait_t) dSv_player_get_bag_item_c__isBait_addr)
 
 #endif /* D_SAVE_D_SAVE_H */

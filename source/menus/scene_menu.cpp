@@ -9,43 +9,46 @@
 #include "color.h"
 #include "utils/draw.h"
 #include "utils/hook.h"
+#include "utils/lines.h"
 #include "commands.h"
 #include "libtww/d/kankyo/d_kankyo.h"
+#include "libtww/d/com/d_com_inf_game.h"
 
-#define LINE_NUM 3
+#define LINE_NUM 5
 Cursor SceneMenu::cursor;
 
-GZScene g_scene[3] = {
-    {MODIFY_WIND_INDEX, false},{TIME_DISP_INDEX, false},{MODIFY_CHART_SET_INDEX, false},
+GZScene g_scene[5] = {
+    {MODIFY_WIND_INDEX, false},{MODIFY_CHART_SET_INDEX, false},{TIME_HOURS_INDEX, false},{TIME_MINUTES_INDEX, false},{MODIFY_DATE_INDEX, false},
 };
 
 Line lines[LINE_NUM] = {
-    {"modify wind direction", MODIFY_WIND_INDEX, "Change the current wind direction (currently broken)"},
-    {"display time info", TIME_DISP_INDEX, "Display current day, time and moon phase", true,
-     &g_scene[TIME_DISP_INDEX].active},
+    {"modify wind direction", MODIFY_WIND_INDEX, "Change the current wind direction"},
     {"modify chart set", MODIFY_CHART_SET_INDEX, "Change the current chart set"},
+    {"modify current hour", TIME_HOURS_INDEX, "Change the current hour"},
+    {"modify current minute", TIME_MINUTES_INDEX, "Change the current minute"},
+    {"modify current date", MODIFY_DATE_INDEX, "Change the current date/moon phase"},
 };
 
-s16 windDirs[8] = { 0, 32, 64, 96, 128, 160, 192, 224 };
+s16 windDirs[8] = { -32768, -24576, -16384, -8192, 0, 8192, 16384, 24576 };
 
 const char* get_wind_str() {
     s16 wind = dkankyo_getWindDir();
     switch (wind) {
     case 0:
         return "East";
-    case 32:
+    case 8192:
         return "South East";
-    case 64:
+    case 16384:
         return "South";
-    case 96:
+    case 24576:
         return "South West";
-    case 128:
+    case -32768:
         return "West";
-    case 160:
+    case -24576:
         return "North West";
-    case 192:
+    case -16384:
         return "North";
-    case 224:
+    case -8192:
         return "North East";
     default:
         return "East";
@@ -72,12 +75,40 @@ const char* get_chart_set_str() {
     }
 }
 
+
 void updateWindDir() {
     s16 wind_dir = dkankyo_getWindDir();
-    if (wind_dir == 255) {
-        wind_dir = 0;
+
+    
+    u8 wIndex = 0;
+    int eventWindCheck = g_env_light.mWind.mEvtWindSet;
+
+    if (wind_dir == -32768) {
+        wIndex = 0;
     }
-    u8 wIndex = wind_dir / 32;
+    else if (wind_dir == -24576) {
+        wIndex = 1;
+    }
+    else if (wind_dir == -16384) {
+        wIndex = 2;
+    }
+    else if (wind_dir == -8192) {
+        wIndex = 3;
+    }
+    else if (wind_dir == 0) {
+        wIndex = 4;
+    }
+    else if (wind_dir == 8192) {
+        wIndex = 5;
+    }
+    else if (wind_dir == 16384) {
+        wIndex = 6;
+    }
+    else if (wind_dir == 24576) {
+        wIndex = 7;
+    }
+
+
     Cursor::moveListSimple(wIndex);
     if (wIndex == 255) {
         wIndex = 7;
@@ -85,35 +116,23 @@ void updateWindDir() {
     else if (wIndex == 8) {
         wIndex = 0;
     }
-    dkankyo_setWindDir(windDirs[wIndex]);
+    
+    if (eventWindCheck != 0xFF){
+        dKyw_tact_wind_set_go();
+        dkankyo_setWindDir(windDirs[wIndex]);
+        dComIfGs_setWindX(g_env_light.mWind.mTactWindAngleX);
+        dComIfGs_setWindY(g_env_light.mWind.mTactWindAngleY);
+    }
+    else{
+        dkankyo_setWindDir(windDirs[wIndex]);
+        dComIfGs_setWindX(g_env_light.mWind.mTactWindAngleX);
+        dComIfGs_setWindY(g_env_light.mWind.mTactWindAngleY);
+    }
 }
 
-void SceneMenu::displayTimeInfo() {
-    int hour = dKy_getdaytime_hour();
-    int min = dKy_getdaytime_minute();
-    int moonid = dKy_moon_type_chk();
-    int date = dComIfGs_getDate();
 
-    char moonphases[7][20] = {"Full",
-                              "Waning Gibbous",
-                              "Last Quarter",
-                              "Waning Crescent",
-                              "Waxing Crescent",
-                              "First Quarter",
-                              "Waxing Gibbous"};
 
-    char Time[10];
-    char Date[10];
-    char Moon[20];
 
-    tww_sprintf(Time, "%02d:%02d", hour, min);
-    tww_sprintf(Date, "date: %d", date);
-    tww_sprintf(Moon, "Moon: %d", moonphases[0]);
-
-    Font::GZ_drawStr(Time, 450.f, 300.f, ColorPalette::WHITE, g_dropShadows);
-    Font::GZ_drawStr(Date, 450.f, 320.f, ColorPalette::WHITE, g_dropShadows);
-    Font::GZ_drawStr(moonphases[moonid], 450.f, 340.f, ColorPalette::WHITE, g_dropShadows);
-}
 
 void updateChartSet() {
     u8 chartSet = dComIfGs_getChartSet();
@@ -126,6 +145,7 @@ void updateChartSet() {
     dComIfGs_setChartSet(chartSet);
 }
 
+
 void SceneMenu::draw() {
     cursor.setMode(Cursor::MODE_LIST);
 
@@ -134,20 +154,63 @@ void SceneMenu::draw() {
         return;
     }
 
+    float current_time = dComIfGs_getTime();
+
+    int current_hour = (int)current_time / 15;
+    if (current_hour > 23) {
+        current_hour = 0;
+    }
+    int current_minute = (int)((4.0f * current_time) - current_hour * 60);
+
+    int date = dComIfGs_getDate();
+
+    tww_sprintf(lines[TIME_HOURS_INDEX].value, "<%d>", current_hour);
+    tww_sprintf(lines[TIME_MINUTES_INDEX].value, "<%d>", current_minute);
+    tww_sprintf(lines[MODIFY_DATE_INDEX].value, "<%d>", date);
+
     switch (cursor.y) {
     case MODIFY_WIND_INDEX:
         updateWindDir();
         break;
-    case TIME_DISP_INDEX:
-        if (GZ_getButtonTrig(GZPad::A)) {
-            g_scene[cursor.y].active = !g_scene[cursor.y].active;
-        }
-        break;
     case MODIFY_CHART_SET_INDEX:
         updateChartSet();
         break;
-
+    case TIME_HOURS_INDEX:
+        if (GZ_getButtonRepeat(GZPad::DPAD_RIGHT)) {
+            dComIfGs_setTime(current_time + 15.0f);
+        } else if (GZ_getButtonRepeat(GZPad::DPAD_LEFT)) {
+            dComIfGs_setTime(current_time - 15.0f);
+        }
+        break;
+    case TIME_MINUTES_INDEX:
+        if (GZ_getButtonRepeat(GZPad::DPAD_RIGHT)) {
+            dComIfGs_setTime(current_time + 0.25f);
+        } else if (GZ_getButtonRepeat(GZPad::DPAD_LEFT)) {
+            dComIfGs_setTime(current_time - 0.25f);
+        }
+        break;
+    case MODIFY_DATE_INDEX:
+        if (GZ_getButtonRepeat(GZPad::DPAD_RIGHT)) {
+            dComIfGs_setDate(date + 1);
+        } else if (GZ_getButtonRepeat(GZPad::DPAD_LEFT)) {
+            dComIfGs_setDate(date - 1);
+        }
+        break;
+        
     }
+    
+    if (current_time >= 360.0f) {
+        dComIfGs_setTime(current_time - 360.0f);
+    } else if (current_time < 0) {
+        dComIfGs_setTime(current_time + 360.0f);
+    }
+
+    if (date == 7) {
+        dComIfGs_setDate(0);
+    } else if (date == 65535) {
+        dComIfGs_setDate(6);
+    }
+
     tww_sprintf(lines[MODIFY_WIND_INDEX].value, " <%s>", get_wind_str());
     tww_sprintf(lines[MODIFY_CHART_SET_INDEX].value, " <%s>", get_chart_set_str());
     cursor.move(0, LINE_NUM);

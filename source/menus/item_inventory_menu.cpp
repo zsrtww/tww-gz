@@ -38,18 +38,21 @@ Line lines[NUM_ITEM_SLOTS] = {
 };
 
 
-void updateItemFlag(u8 slot, u8 item_id) {
-    u8 has_item = item_id == NO_ITEM ? 0 : 1;
-    dComIfGs_setItemFlag(slot, has_item);
+void updateItemFlag(u8 slot, u8 item_id, u8 bit) {
+    if (item_id != NO_ITEM) {
+        dComIfGs_onGetItem(slot, bit);
+    } else {
+        dComIfGs_offGetItem(slot, bit);
+    }
 }
 
 void updateItem(u8 slot, u8 item_id) {
-    dComIfGs_setItemSlot(slot, item_id);
-    updateItemFlag(slot, item_id);
+    dComIfGs_setItem(slot, item_id);
+    updateItemFlag(slot, item_id, 0);
 }
 
 void updateSingleItem(u8 slot, u8 item_id) {
-    u8 new_item_id = dComIfGs_getItemSlot(slot);
+    u8 new_item_id = dComIfGs_getItem(slot);
     Cursor::moveListSimple(new_item_id);
     if (new_item_id == NO_ITEM - 1) {
         new_item_id = NO_ITEM;
@@ -60,13 +63,14 @@ void updateSingleItem(u8 slot, u8 item_id) {
     } else if (new_item_id == item_id + 1) {
         new_item_id = item_id;
     } else {
-        new_item_id = dComIfGs_getItemSlot(slot);
+        new_item_id = dComIfGs_getItem(slot);
     }
+
     updateItem(slot, new_item_id);
 }
 
 void updateBottle(u8 slot) {
-    u8 new_item_id = dComIfGs_getItemSlot(slot);
+    u8 new_item_id = dComIfGs_getItem(slot);
     Cursor::moveListSimple(new_item_id);
     if (new_item_id == NO_ITEM - 1) {
         new_item_id = NO_ITEM;
@@ -75,9 +79,9 @@ void updateBottle(u8 slot) {
     } else if (new_item_id == EMPTY_BOTTLE - 1) {
         new_item_id = NO_ITEM;
     } else if (new_item_id == FOREST_FIREFLY + 1) {
-        dComIfGs_setForestWaterTimer(36000);
+        dComIfGs_resetFwaterTimer(36000);
     } else if (new_item_id == FOREST_WATER - 1) {
-        dComIfGs_setForestWaterTimer(0);
+        dComIfGs_resetFwaterTimer(0);
     } else if (new_item_id == FOREST_WATER + 1) {
         new_item_id = FOREST_WATER;
     }
@@ -120,7 +124,7 @@ void ItemInventoryMenu::draw() {
         updateSingleItem(SLOT_TUNER, TINGLE_TUNER);
         break;
     case SLOT_CAMERA:
-        new_item_id = dComIfGs_getItemSlot(SLOT_CAMERA);
+        new_item_id = dComIfGs_getItem(SLOT_CAMERA);
         Cursor::moveListSimple(new_item_id);
         if (new_item_id == NO_ITEM - 1) {
             new_item_id = NO_ITEM;
@@ -135,7 +139,7 @@ void ItemInventoryMenu::draw() {
         } else if (new_item_id == DELUXE_PICTO_BOX + 1) {
             new_item_id = DELUXE_PICTO_BOX;
         } else {
-            new_item_id = dComIfGs_getItemSlot(SLOT_CAMERA);
+            new_item_id = dComIfGs_getItem(SLOT_CAMERA);
         }
         updateItem(SLOT_CAMERA, new_item_id);
         break;
@@ -149,7 +153,7 @@ void ItemInventoryMenu::draw() {
         updateSingleItem(SLOT_BAIT_BAG, BAIT_BAG);
         break;
     case SLOT_BOW:
-        new_item_id = dComIfGs_getItemSlot(SLOT_BOW);
+        new_item_id = dComIfGs_getItem(SLOT_BOW);
         Cursor::moveListSimple(new_item_id);
         if (new_item_id == NO_ITEM - 1) {
             new_item_id = NO_ITEM;
@@ -165,15 +169,15 @@ void ItemInventoryMenu::draw() {
             new_item_id = BOW_WITH_LIGHT_ARROWS;        
         }
         updateItem(SLOT_BOW, new_item_id);
-        if (GZ_getButtonTrig(GZPad::DPAD_RIGHT) && dComIfGs_getArrowCapacity() == 0) {
-            dComIfGs_setArrowCapacity(DEFAULT_ARROW_CAPACITY);
+        if (GZ_getButtonTrig(GZPad::DPAD_RIGHT) && dComIfGs_getArrowMax() == 0) {
+            dComIfGs_setArrowMax(DEFAULT_ARROW_CAPACITY);
             dComIfGs_setArrowNum(DEFAULT_ARROW_CAPACITY);
         }
         break;
     case SLOT_BOMB:
         updateSingleItem(SLOT_BOMB, BOMBS);
-    if (GZ_getButtonTrig(GZPad::DPAD_RIGHT) && dComIfGs_getBombCapacity() == 0) {
-            dComIfGs_setBombCapacity(DEFAULT_BOMB_CAPACITY);
+        if (GZ_getButtonTrig(GZPad::DPAD_RIGHT) && dComIfGs_getBombMax() == 0) {
+            dComIfGs_setBombMax(DEFAULT_BOMB_CAPACITY);
             dComIfGs_setBombNum(DEFAULT_BOMB_CAPACITY);
         }
         break;
@@ -198,29 +202,29 @@ void ItemInventoryMenu::draw() {
     case SLOT_HAMMER:
         updateSingleItem(SLOT_HAMMER, SKULL_HAMMER);
         break;
-    };
+    }
 
-    tww_sprintf(lines[SLOT_TELESCOPE].value, " <%s>", item_id_to_str(dComIfGs_getItemSlot(SLOT_TELESCOPE)));
-    tww_sprintf(lines[SLOT_SAIL].value, " <%s>", item_id_to_str(dComIfGs_getItemSlot(SLOT_SAIL)));
-    tww_sprintf(lines[SLOT_WIND_WAKER].value, " <%s>", item_id_to_str(dComIfGs_getItemSlot(SLOT_WIND_WAKER)));
-    tww_sprintf(lines[SLOT_ROPE].value, " <%s>", item_id_to_str(dComIfGs_getItemSlot(SLOT_ROPE)));
-    tww_sprintf(lines[SLOT_SPOILS_BAG].value, " <%s>", item_id_to_str(dComIfGs_getItemSlot(SLOT_SPOILS_BAG)));
-    tww_sprintf(lines[SLOT_BOOMERANG].value, " <%s>", item_id_to_str(dComIfGs_getItemSlot(SLOT_BOOMERANG)));
-    tww_sprintf(lines[SLOT_DEKU_LEAF].value, " <%s>", item_id_to_str(dComIfGs_getItemSlot(SLOT_DEKU_LEAF)));
-    tww_sprintf(lines[SLOT_TUNER].value, " <%s>", item_id_to_str(dComIfGs_getItemSlot(SLOT_TUNER)));
-    tww_sprintf(lines[SLOT_CAMERA].value, " <%s>", item_id_to_str(dComIfGs_getItemSlot(SLOT_CAMERA)));
-    tww_sprintf(lines[SLOT_IRON_BOOTS].value, " <%s>", item_id_to_str(dComIfGs_getItemSlot(SLOT_IRON_BOOTS)));
-    tww_sprintf(lines[SLOT_MAGIC_ARMOR].value, " <%s>", item_id_to_str(dComIfGs_getItemSlot(SLOT_MAGIC_ARMOR)));
-    tww_sprintf(lines[SLOT_BAIT_BAG].value, " <%s>", item_id_to_str(dComIfGs_getItemSlot(SLOT_BAIT_BAG)));
-    tww_sprintf(lines[SLOT_BOW].value, " <%s>", item_id_to_str(dComIfGs_getItemSlot(SLOT_BOW)));
-    tww_sprintf(lines[SLOT_BOMB].value, " <%s>", item_id_to_str(dComIfGs_getItemSlot(SLOT_BOMB)));
-    tww_sprintf(lines[SLOT_BOTTLE_1].value, " <%s>", item_id_to_str(dComIfGs_getItemSlot(SLOT_BOTTLE_1)));
-    tww_sprintf(lines[SLOT_BOTTLE_2].value, " <%s>", item_id_to_str(dComIfGs_getItemSlot(SLOT_BOTTLE_2)));
-    tww_sprintf(lines[SLOT_BOTTLE_3].value, " <%s>", item_id_to_str(dComIfGs_getItemSlot(SLOT_BOTTLE_3)));
-    tww_sprintf(lines[SLOT_BOTTLE_4].value, " <%s>", item_id_to_str(dComIfGs_getItemSlot(SLOT_BOTTLE_4)));
-    tww_sprintf(lines[SLOT_TRADE_ITEM].value, " <%s>", item_id_to_str(dComIfGs_getItemSlot(SLOT_TRADE_ITEM)));
-    tww_sprintf(lines[SLOT_HOOKSHOT].value, " <%s>", item_id_to_str(dComIfGs_getItemSlot(SLOT_HOOKSHOT)));
-    tww_sprintf(lines[SLOT_HAMMER].value, " <%s>", item_id_to_str(dComIfGs_getItemSlot(SLOT_HAMMER)));
+    tww_sprintf(lines[SLOT_TELESCOPE].value, " <%s>", item_id_to_str(dComIfGs_getItem(SLOT_TELESCOPE)));
+    tww_sprintf(lines[SLOT_SAIL].value, " <%s>", item_id_to_str(dComIfGs_getItem(SLOT_SAIL)));
+    tww_sprintf(lines[SLOT_WIND_WAKER].value, " <%s>", item_id_to_str(dComIfGs_getItem(SLOT_WIND_WAKER)));
+    tww_sprintf(lines[SLOT_ROPE].value, " <%s>", item_id_to_str(dComIfGs_getItem(SLOT_ROPE)));
+    tww_sprintf(lines[SLOT_SPOILS_BAG].value, " <%s>", item_id_to_str(dComIfGs_getItem(SLOT_SPOILS_BAG)));
+    tww_sprintf(lines[SLOT_BOOMERANG].value, " <%s>", item_id_to_str(dComIfGs_getItem(SLOT_BOOMERANG)));
+    tww_sprintf(lines[SLOT_DEKU_LEAF].value, " <%s>", item_id_to_str(dComIfGs_getItem(SLOT_DEKU_LEAF)));
+    tww_sprintf(lines[SLOT_TUNER].value, " <%s>", item_id_to_str(dComIfGs_getItem(SLOT_TUNER)));
+    tww_sprintf(lines[SLOT_CAMERA].value, " <%s>", item_id_to_str(dComIfGs_getItem(SLOT_CAMERA)));
+    tww_sprintf(lines[SLOT_IRON_BOOTS].value, " <%s>", item_id_to_str(dComIfGs_getItem(SLOT_IRON_BOOTS)));
+    tww_sprintf(lines[SLOT_MAGIC_ARMOR].value, " <%s>", item_id_to_str(dComIfGs_getItem(SLOT_MAGIC_ARMOR)));
+    tww_sprintf(lines[SLOT_BAIT_BAG].value, " <%s>", item_id_to_str(dComIfGs_getItem(SLOT_BAIT_BAG)));
+    tww_sprintf(lines[SLOT_BOW].value, " <%s>", item_id_to_str(dComIfGs_getItem(SLOT_BOW)));
+    tww_sprintf(lines[SLOT_BOMB].value, " <%s>", item_id_to_str(dComIfGs_getItem(SLOT_BOMB)));
+    tww_sprintf(lines[SLOT_BOTTLE_1].value, " <%s>", item_id_to_str(dComIfGs_getItem(SLOT_BOTTLE_1)));
+    tww_sprintf(lines[SLOT_BOTTLE_2].value, " <%s>", item_id_to_str(dComIfGs_getItem(SLOT_BOTTLE_2)));
+    tww_sprintf(lines[SLOT_BOTTLE_3].value, " <%s>", item_id_to_str(dComIfGs_getItem(SLOT_BOTTLE_3)));
+    tww_sprintf(lines[SLOT_BOTTLE_4].value, " <%s>", item_id_to_str(dComIfGs_getItem(SLOT_BOTTLE_4)));
+    tww_sprintf(lines[SLOT_TRADE_ITEM].value, " <%s>", item_id_to_str(dComIfGs_getItem(SLOT_TRADE_ITEM)));
+    tww_sprintf(lines[SLOT_HOOKSHOT].value, " <%s>", item_id_to_str(dComIfGs_getItem(SLOT_HOOKSHOT)));
+    tww_sprintf(lines[SLOT_HAMMER].value, " <%s>", item_id_to_str(dComIfGs_getItem(SLOT_HAMMER)));
 
     cursor.move(0, NUM_ITEM_SLOTS);
     GZ_drawMenuLines(lines, cursor.y, NUM_ITEM_SLOTS);
