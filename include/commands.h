@@ -31,3 +31,7 @@ struct Command {
 void GZCmd_processInputs();
 void GZCmd_enable(int idx);
 void GZCmd_disable(int idx);
+f32 getWaterSpeed();
+void setWaterSpeed(f32 speedNum);
+f32 getLandSpeed();
+void setLandSpeed(f32 speedNum);

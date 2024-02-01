@@ -12,6 +12,8 @@ static SVec sSavePlayerAngle = {0, 0, 0};
 
 static int sLastInputs;
 static int sCurInputs;
+f32 g_waterSpeed = 1500.0f;
+f32 g_landSpeed = 150.0f;
 
 bool GZCmd_checkTrig(int combo) {
     if (sCurInputs == combo && sLastInputs != combo) {
@@ -82,14 +84,13 @@ void GZCmd_doorCancel() {
 
 void GZCmd_fastMovement() {
     daPy_lk_c* player_p = (daPy_lk_c*)dComIfGp_getPlayer(0);
-
     if (player_p != nullptr) {
         if (player_p->mCurProcID == daPy_lk_c::PROC_SWIM_UP_e || player_p->mCurProcID == daPy_lk_c::PROC_SWIM_WAIT_e ||
             player_p->mCurProcID == daPy_lk_c::PROC_SWIM_MOVE_e)
         {
-            player_p->mVelocity = 2000.0f;
+            player_p->mVelocity = getWaterSpeed();
         } else {
-            player_p->mVelocity = 150.0f;
+            player_p->mVelocity = getLandSpeed();
         }
     }
 }
@@ -162,4 +163,20 @@ void GZCmd_enable(int idx) {
 
 void GZCmd_disable(int idx) {
     sCommands[idx].active = false;
+}
+
+f32 getWaterSpeed(){
+    return g_waterSpeed;
+}
+
+void setWaterSpeed(f32 speed){
+    g_waterSpeed = speed;
+}
+
+f32 getLandSpeed(){
+    return g_landSpeed;
+}
+
+void setLandSpeed(f32 speed){
+    g_landSpeed = speed;
 }
