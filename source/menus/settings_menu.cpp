@@ -125,6 +125,12 @@ void SettingsMenu::draw() {
     case WATER_SPEED_INDEX: {
         waterSpeed = getWaterSpeed();
         Cursor::moveList(waterSpeed);
+        if (GZ_getButtonRepeat(GZPad::A)) {
+            waterSpeed += 100.0f;  
+        }
+        if (GZ_getButtonRepeat(GZPad::R)) {
+            waterSpeed -= 100.0f;  
+        }
         if (waterSpeed < 1.0f){
             waterSpeed = 5000.0f;
         }
@@ -138,6 +144,12 @@ void SettingsMenu::draw() {
     case LAND_SPEED_INDEX: {
         landSpeed = getLandSpeed();
         Cursor::moveList(landSpeed);
+        if (GZ_getButtonRepeat(GZPad::A)) {
+            landSpeed += 100.0f;  
+        }
+        if (GZ_getButtonRepeat(GZPad::R)) {
+            landSpeed -= 100.0f;  
+        }
         if (landSpeed < 1.0f){
             landSpeed = 5000.0f;
         }
