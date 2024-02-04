@@ -10,6 +10,8 @@ enum SettingsMenuIndex {
     SAVE_CARD_INDEX,
     LOAD_CARD_INDEX,
     DELETE_CARD_INDEX,
+    WATER_SPEED_INDEX,
+    LAND_SPEED_INDEX,
 };
 
 extern bool g_dropShadows;

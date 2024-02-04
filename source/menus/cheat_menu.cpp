@@ -40,7 +40,7 @@ Line lines[LINE_NUM] = {
         &g_cheats[DoorCancel].active},
     {"quarter heart", QuarterHeart, "Hold R+D-pad left to reduce health to quarter heart", true,
         &g_cheats[QuarterHeart].active},
-    {"fast movement", FastMovement, "Hold D-pad left to get super speed", true,
+    {"fast movement", FastMovement, "Hold D-pad left to get super speed. Modify the speed in settings.", true,
         &g_cheats[FastMovement].active},
     {"upcharge", Upcharge, "Hold X + Z to get negative speed for upcharge", true,
         &g_cheats[Upcharge].active}
