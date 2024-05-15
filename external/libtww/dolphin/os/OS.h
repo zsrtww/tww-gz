@@ -72,6 +72,11 @@ typedef u32 OSTick;
 
 typedef int64_t OSTime;
 
+#define OSBusClock ((uint32_t)tww_os_bus_clock_addr)
+
+typedef OSTime (*OSGetTime)(void);
+#define OSGetTime ((OSGetTime)tww_os_get_time_addr)
+
 struct OSCalendarTime {
     s32 seconds;
     s32 minutes;

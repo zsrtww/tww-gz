@@ -9,6 +9,8 @@
 #define tww_drawScreenPlayer_addr 0x80232de0
 #define tww_getLayerNo_addr 0x80050960
 #define tww_os_report_addr 0x800068ec
+#define tww_os_bus_clock_addr 0x800000f8
+#define tww_os_get_time_addr 0x80307334
 
 /* MSL_C */
 #define tww_strlen_addr 0x8032b798

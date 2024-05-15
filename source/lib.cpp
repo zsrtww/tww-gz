@@ -8,6 +8,7 @@
 #include "controller.h"
 #include "menus/settings_menu.h"
 #include "menus/watches_menu.h"
+#include "libtww/dolphin/os/OS.h"
 #include "libtww/d/kankyo/d_kankyo.h"
 #include "libtww/d/com/d_com_inf_game.h"
 #include "libtww/f_op/f_op_scene_req.h"
@@ -49,9 +50,11 @@ void init() {
 }
 
 void game_loop() {
-    // Button combo to bypass the automatic loading of the save file
-    // in case of crash caused by the load.
-    if (GZ_getButtonStatus() == CButton::B && l_loadCard) {
+    if (l_loadCard) {
+        const OSTime endingTime = OSGetTime() + static_cast<OSTime>(1500 * ((OSBusClock / 4) / 1000));
+
+        while (OSGetTime() < endingTime);
+
         l_loadCard = false;
     }
 
