@@ -1,3 +1,4 @@
+#ifndef WII_PLATFORM
 #include "card.h"
 #include "card_internal.h"
 #include "storage.h"
@@ -142,3 +143,4 @@ int32_t CARDDelete(int32_t chn, const char* fileName)
 // +=-=-=-=-=-=-=-=-=-=-=-=-=-=-=+
 // | Other functions go here...  |
 // +=-=-=-=-=-=-=-=-=-=-=-=-=-=-=+
+#endif

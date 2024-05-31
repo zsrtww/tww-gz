@@ -1,0 +1,88 @@
+#ifndef JKRHEAP_H
+#define JKRHEAP_H
+
+#include "JKRDisposer.h"
+#include "../../dolphin/os/OSMutex.h"
+
+class JKRHeap;
+typedef void (*JKRErrorHandler)(void*, u32, int);
+
+class JKRHeap : public JKRDisposer {
+public:
+    class TState {
+    public:
+        /* 0x00 */ u32 mUsedSize;
+        /* 0x04 */ u32 mCheckCode;
+        /* 0x08 */ u32 mBuf;
+        /* 0x0C */ u32 field_0xc;
+        /* 0x10 */ JKRHeap* mHeap;
+        /* 0x14 */ u32 mId;
+
+    public:
+        u32 getUsedSize() const { return mUsedSize; }
+        u32 getCheckCode() const { return mCheckCode; }
+        JKRHeap* getHeap() const { return mHeap; }
+        u32 getId() const { return mId; }
+    };
+
+public:
+    void setDebugFill(bool debugFill) { mDebugFill = debugFill; }
+    bool getDebugFill() const { return mDebugFill; }
+    void* getStartAddr() const { return (void*)mStart; }
+    void* getEndAddr() const { return (void*)mEnd; }
+    u32 getSize() const { return mSize; }
+    bool getErrorFlag() const { return mErrorFlag; }
+    void callErrorHandler(JKRHeap* heap, u32 size, int alignment) {
+        if (mErrorHandler) {
+            (*mErrorHandler)(heap, size, alignment);
+        }
+    }
+
+    JKRHeap* getParent() const {
+        JSUTree<JKRHeap>* parent = mChildTree.getParent();
+        return parent->getObject();
+    }
+
+    JSUTree<JKRHeap>& getHeapTree() { return mChildTree; }
+    /* void appendDisposer(JKRDisposer* disposer) { mDisposerList.append(&disposer->mLink); }
+    void removeDisposer(JKRDisposer* disposer) { mDisposerList.remove(&disposer->mLink); }
+    void lock() { OSLockMutex(&mMutex); }
+    void unlock() { OSUnlockMutex(&mMutex); } */
+    u32 getHeapSize() { return mSize; }
+
+protected:
+    /* 0x00 */  // vtable
+    /* 0x04 */  // JKRDisposer
+    /* 0x18 */ OSMutex mMutex;
+    /* 0x30 */ u8* mStart;
+    /* 0x34 */ u8* mEnd;
+    /* 0x38 */ u32 mSize;
+    /* 0x3C */ bool mDebugFill;
+    /* 0x3D */ bool mCheckMemoryFilled;
+    /* 0x3E */ u8 mAllocationMode;  // EAllocMode?
+    /* 0x3F */ u8 mGroupId;
+    /* 0x40 */ JSUTree<JKRHeap> mChildTree;
+    /* 0x5C */ JSUList<JKRDisposer> mDisposerList;
+    /* 0x68 */ bool mErrorFlag;
+    /* 0x69 */ bool mInitFlag;
+    /* 0x6A */ u8 padding_0x6a[2];
+};
+
+extern "C" {
+/**
+ *	@brief Allocates a number of bytes in a given heap
+ *
+ *	@param size The number of bytes to be allocated
+ *	@param heap The heap pointer
+ *	@param alignment The alignment to use for the address of the allocated memory
+ */
+void* __nw_JKRHeap(u32 size, void* heap, s32 alignment);
+/**
+ *	@brief Frees memory used in any of the game's vanilla heaps
+ *
+ *	@param ptr The pointer to the memory to free
+ */
+void __dl_JKRHeap(void* ptr);
+}
+
+#endif /* JKRHEAP_H */
