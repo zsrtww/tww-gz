@@ -32,7 +32,7 @@ void MainMenu::draw() {
         case CHEAT_INDEX:
             g_menuMgr->push(MN_CHEAT_INDEX);
             return;
-        /* case FLAGS_INDEX:
+        case FLAGS_INDEX:
             g_menuMgr->push(MN_FLAGS_INDEX);
             return;
         case INVENTORY_INDEX:
@@ -46,13 +46,13 @@ void MainMenu::draw() {
             return;
         case SCENE_INDEX:
             g_menuMgr->push(MN_SCENE_INDEX);
-            return; */
+            return;
         case SETTINGS_INDEX:
             g_menuMgr->push(MN_SETTINGS_INDEX);
             return;
-        /* case TOOLS_INDEX:
+        case TOOLS_INDEX:
             g_menuMgr->push(MN_TOOLS_INDEX);
-            return; */
+            return;
         }
     }
 

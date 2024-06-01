@@ -30,6 +30,15 @@ struct Cursor {
         }
     }
 
+    template <typename T>
+    static void moveListSimple(T& index) {
+        if (GZ_getButtonRepeat(GZPad::DPAD_LEFT)) {
+            index--;
+        } else if (GZ_getButtonRepeat(GZPad::DPAD_RIGHT)) {
+            index++;
+        }
+    }
+
     void reset();
     void lock(bool x, bool y);
     void setMode(uint8_t m);

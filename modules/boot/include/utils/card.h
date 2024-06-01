@@ -1,6 +1,7 @@
 #include "font.h"
 #include "gcn_c/include/storage.h"
 #include "settings.h"
+#include "equip_priority.h"
 #include "cheats.h"
 #include "tools.h"
 #include "commands.h"
