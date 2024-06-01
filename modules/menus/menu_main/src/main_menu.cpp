@@ -15,7 +15,6 @@ KEEP_FUNC MainMenu::MainMenu(Cursor& cursor)
                         {"scene", SCENE_INDEX, "Adjust current scene settings", false},
                         {"settings", SETTINGS_INDEX, "Configure settings", false},
                         {"tools", TOOLS_INDEX, "Use various tools for practice and testing", false},
-                        {"warping", WARPING_INDEX, "Warp to any area", false},
                     } {}
 
 KEEP_FUNC MainMenu::~MainMenu() {}
@@ -30,10 +29,10 @@ void MainMenu::draw() {
 
     if (GZ_getButtonTrig(SELECTION_BUTTON)) {
         switch (cursor.y) {
-        /* case CHEAT_INDEX:
+        case CHEAT_INDEX:
             g_menuMgr->push(MN_CHEAT_INDEX);
             return;
-        case FLAGS_INDEX:
+        /* case FLAGS_INDEX:
             g_menuMgr->push(MN_FLAGS_INDEX);
             return;
         case INVENTORY_INDEX:
@@ -53,9 +52,6 @@ void MainMenu::draw() {
             return;
         /* case TOOLS_INDEX:
             g_menuMgr->push(MN_TOOLS_INDEX);
-            return;
-        case WARPING_INDEX:
-            g_menuMgr->push(MN_WARPING_INDEX);
             return; */
         }
     }

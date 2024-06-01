@@ -3,6 +3,7 @@
 #include "fifo_queue.h"
 #include "font.h"
 #include "menu.h"
+#include "pos_settings.h"
 #include "menus/utils/menu_mgr.h"
 #include "libtww/include/m_Do/m_Do_ext.h"
 
@@ -21,6 +22,7 @@ void main() {
     Hook::applyHooks();
     Font::loadFont("/twwgz/fonts/consola.fnt");
     Draw::init();
+    GZ_PosSettings_initDefaults();
 
     g_menuMgr = new MenuMgr();
     g_fifoVisible = true;
@@ -29,6 +31,7 @@ void main() {
     // Setup the render order
     g_drawListener->addListener(GZ_renderMenuTitle);
     g_drawListener->addListener(GZ_renderFifoQueue);
+    g_drawListener->addListener(GZ_displaySplash);
     
     // Init the pre-loop listener
     g_PreLoopListener = new PreLoopListener();

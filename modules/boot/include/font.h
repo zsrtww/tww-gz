@@ -11,6 +11,18 @@
 #define DROP_SHADOWS_RGBA 0x000000FF
 #define FONT_DEFAULT_SIZE 17.f
 
+enum ColorPalette {
+	RED    = 0xCC0000FF,
+	ORANGE = 0xEE8000FF,
+	YELLOW = 0xFFCC00FF,
+	GREEN  = 0x00CC00FF,
+	BLUE   = 0x0080FFFF,
+	PURPLE = 0x6600CCFF,
+	WHITE  = 0xFFFFFFFF,
+	GRAY   = 0xBABABAFF,
+	BLACK  = 0x000000FF,
+};
+
 enum FontCode {
     FNT_OK = 1,           /*<@brief Font loaded successfully */
     FNT_UNLOADED = 0,     /*<@brief Font hasn't been loaded yet */

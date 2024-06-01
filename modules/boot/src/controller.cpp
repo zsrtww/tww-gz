@@ -1,5 +1,7 @@
 #include "libtww/include/JSystem/JUtility/JUTGamePad.h"
 #include "gz_flags.h"
+#include "cheats.h"
+#include "commands.h"
 #include "controller.h"
 #include "libtww/include/SSystem/SComponent/c_counter.h"
 #include "menu.h"
@@ -13,7 +15,6 @@
 
 #define buttonStatus (mPadStatus.button)
 #define A_BUTTON (CButton::A)
-#define ITEM_WHEEL_BUTTON (CButton::DPAD_DOWN)
 #define TRIGGER_BUTTONS (CButton::L | CButton::R)
 
 static uint16_t sButtonsLastFrame = 0;
@@ -48,7 +49,7 @@ KEEP_FUNC void GZ_readController() {
         }
     }
 
-    // GZ_applyCheats();
+    GZ_applyCheats();
     if (g_menuMgr->isOpen()) {
         uint16_t current_input = GZ_getButtonStatus();
 
@@ -77,7 +78,7 @@ KEEP_FUNC void GZ_readController() {
     } else {
         g_cursorEnabled = false;
         sCursorEnableDelay = 0;
-        // GZCmd_processInputs();
+        GZCmd_processInputs();
     }
 }
 

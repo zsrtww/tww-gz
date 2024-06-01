@@ -7,6 +7,7 @@
 #include "menu.h"
 #include "settings.h"
 #include "fifo_queue.h"
+#include "pos_settings.h"
 #include "menus/utils/menu_mgr.h"
 #include "utils/card.h"
 #include "utils/draw.h"
@@ -123,16 +124,49 @@ KEEP_FUNC void GZ_handleCardLoad() {
     }
 
     // check and load gz settings card if found
-    // GZ_loadGZSave(l_loadCard);
+    GZ_loadGZSave(l_loadCard);
 }
 
 KEEP_FUNC void GZ_renderMenuTitle() {
     if (g_menuMgr->isOpen()) {
-        Font::GZ_drawStr("twwgz v" INTERNAL_GZ_VERSION, 25.0f + 35.0f, 25.0f,
+        Font::GZ_drawStr("twwgz v" INTERNAL_GZ_VERSION, g_spriteOffsets[MENU_INDEX].x + 35.0f, 25.0f,
                          g_cursorColor, g_dropShadows);
         if (l_gzIconTex.loadCode == TexCode::TEX_OK) {
-            Draw::drawRect(0xFFFFFFFF, {25.0f, 5.0f},
+            Draw::drawRect(0xFFFFFFFF, {g_spriteOffsets[MENU_INDEX].x, 5.0f},
                            {30 * (isWidescreen ? 0.75f : 1.0f), 30}, &l_gzIconTex._texObj);
         }
+    }
+}
+
+KEEP_FUNC void GZ_displaySplash() {
+    // Create and render a splash screen once the game has launched using the supplied address
+    extern u32* mDoExt_font0;
+    static int splash_time = 256;
+
+    if (splash_time > 0) {
+        if (mDoExt_font0 == nullptr) {
+            return;
+        }
+
+        // Set up the splash properties
+        const char* name = "twwgz v" INTERNAL_GZ_VERSION;//MAKESTRING(PACKAGE_NAME);
+        const char* url = "github.com/zsrtww/tww-gz"; //MAKESTRING(PACKAGE_URL);
+        float splash_x = 200.0f;
+        float splash_y = 440.0f;
+
+        Vec2 icon_pos = {splash_x - 48.0f, splash_y - 8.0f};
+        Vec2 icon_scale = {32, 32};
+
+        // Draw the string
+        Font::GZ_drawStr(name, splash_x, splash_y, ColorPalette::WHITE, true, 18.0f);
+        Font::GZ_drawStr(url, splash_x, splash_y + 25.0f, ColorPalette::WHITE, true, 18.0f);
+
+        // Draw twwgz's logo
+        if (l_gzIconTex.loadCode == TexCode::TEX_OK) {
+            Draw::drawRect(ColorPalette::WHITE, icon_pos, icon_scale, &l_gzIconTex._texObj);
+        }
+
+        // Then when splash_time hits < 1, it won't display the string or logo anymore
+        splash_time--;
     }
 }

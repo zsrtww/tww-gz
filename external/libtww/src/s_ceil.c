@@ -20,7 +20,10 @@
  *	Inexact flag raised if x not equal to ceil(x).
  */
 
-// #include "fdlibm.h"
+#define __HI(x) *(int*)&x
+#define __LO(x) *(1+(int*)&x)
+#define __HIp(x) *(int*)x
+#define __LOp(x) *(1+(int*)x)
 
 #ifdef __STDC__
 static const double huge = 1.0e300;
@@ -28,13 +31,7 @@ static const double huge = 1.0e300;
 static double huge = 1.0e300;
 #endif
 
-#ifdef __STDC__
-	double ceil(double x)
-#else
-	double ceil(x)
-	double x;
-#endif
-{
+double ceil(double x) {
 	int i0,i1,j0;
 	unsigned i,j;
 	i0 =  __HI(x);

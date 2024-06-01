@@ -15,7 +15,7 @@ KEEP_FUNC float maxF(float a, float b) {
 }
 
 KEEP_FUNC void GZ_drawMenuLines(Line input_lines[], uint32_t cursor, uint32_t LINES) {
-    float x_offset = 25.0f;
+    float x_offset = g_spriteOffsets[MENU_INDEX].x;
     float y_offset = 0.0f;
 
     float max_line_width = 0.0f;

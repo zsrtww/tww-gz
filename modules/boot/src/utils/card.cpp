@@ -1,11 +1,11 @@
 #include <cstdio>
 #include "utils/card.h"
 #include "math.h"
-#include "settings.h"
 #include "libtww/include/MSL_C/math.h"
 #include "libtww/include/MSL_C/string.h"
 #include "libtww/include/SSystem/SComponent/c_malloc.h"
 #include "libtww/include/SSystem/SComponent/c_counter.h"
+#include "libtww/include/m_Do/m_Do_printf.h"
 #include "fifo_queue.h"
 #include "rels/include/defines.h"
 #include "rels/include/cxx.h"
@@ -64,12 +64,13 @@ int32_t GZ_storageRead(Storage* storage, void* data, int32_t size, int32_t offse
     return result;
 }
 
-/* void GZ_storeSaveLayout(GZSaveLayout& save_layout) {
+void GZ_storeSaveLayout(GZSaveLayout& save_layout) {
     memcpy(save_layout.mCheats, g_cheats, sizeof(g_cheats));
+    memcpy(save_layout.mItemEquipSettings, g_item_equip_priorities, sizeof(g_item_equip_priorities));
     memcpy(save_layout.mTools, g_tools, sizeof(g_tools));
     memcpy(save_layout.mCommandStates, g_commandStates, sizeof(g_commandStates));
     memcpy(save_layout.mWatches, g_watches, sizeof(g_watches));
-    memcpy(save_layout.mItemEquipSettings, g_item_equip_priorities, sizeof(g_item_equip_priorities));
+    memcpy(save_layout.mSpriteOffsets, g_spriteOffsets, sizeof(g_spriteOffsets));
 
     save_layout.mDropShadows = g_dropShadows;
     save_layout.mCursorColType = g_cursorColorType;
@@ -78,17 +79,18 @@ int32_t GZ_storageRead(Storage* storage, void* data, int32_t size, int32_t offse
 
 void GZ_loadSaveLayout(GZSaveLayout& save_layout) {
     memcpy(g_cheats, save_layout.mCheats, sizeof(g_cheats));
+    memcpy(g_item_equip_priorities, save_layout.mItemEquipSettings, sizeof(g_item_equip_priorities));
     memcpy(g_tools, save_layout.mTools, sizeof(g_tools));
     memcpy(g_commandStates, save_layout.mCommandStates, sizeof(g_commandStates));
     memcpy(g_watches, save_layout.mWatches, sizeof(g_watches));
-    memcpy(g_item_equip_priorities, save_layout.mItemEquipSettings, sizeof(g_item_equip_priorities));
+    memcpy(g_spriteOffsets, save_layout.mSpriteOffsets, sizeof(g_spriteOffsets));
 
     g_dropShadows = save_layout.mDropShadows;
     g_cursorColorType = save_layout.mCursorColType;
     g_fontType = save_layout.mFontType;
-} */
+}
 
-/* void GZ_setupSaveFile(GZSaveFile& save_file) {
+void GZ_setupSaveFile(GZSaveFile& save_file) {
     save_file.header.version = GZ_SAVE_VERSION_NUMBER;
     save_file.header.entries = GZ_SAVE_ENTRIES_AMNT;
     save_file.header.offsetsLoc = offsetof(GZSaveFile, offsets);
@@ -98,19 +100,18 @@ void GZ_loadSaveLayout(GZSaveLayout& save_layout) {
     save_file.sizes[idx] = sizeof(save_file.data.attr)
 
     set_entry(SV_CHEATS_INDEX, mCheats);
+    set_entry(SV_ITEM_EQUIP_INDEX, mItemEquipSettings);
     set_entry(SV_TOOLS_INDEX, mTools);
-    set_entry(SV_SCENE_INDEX, mSceneFlags);
     set_entry(SV_WATCHES_INDEX, mWatches);
-    set_entry(SV_SPRITES_INDEX, mSpriteOffsets);
     set_entry(SV_COMMANDS, mCommandStates);
     set_entry(SV_DROP_SHADOW_INDEX, mDropShadows);
-    set_entry(SV_AREA_RELOAD_INDEX, mReloadType);
     set_entry(SV_CURSOR_COLOR_INDEX, mCursorColType);
     set_entry(SV_FONT_INDEX, mFontType);
+    set_entry(SV_SPRITES_INDEX, mSpriteOffsets);
 #undef set_entry
-} */
+}
 
-/* int32_t GZ_readSaveFile(Storage* storage, GZSaveFile& save_file, int32_t sector_size) {
+int32_t GZ_readSaveFile(Storage* storage, GZSaveFile& save_file, int32_t sector_size) {
     int32_t result = Ready;
 #define assert_result(stmt)                                                                        \
     if ((result = (stmt)) != Ready) {                                                              \
@@ -137,28 +138,25 @@ void GZ_loadSaveLayout(GZSaveLayout& save_layout) {
                                      save_file.offsets[idx], sector_size));                        \
     }
     assert_read_entry(SV_CHEATS_INDEX, save_file.data.mCheats, sizeof(save_file.data.mCheats));
+    assert_read_entry(SV_ITEM_EQUIP_INDEX, save_file.data.mItemEquipSettings, sizeof(save_file.data.mItemEquipSettings));
     assert_read_entry(SV_TOOLS_INDEX, save_file.data.mTools, sizeof(save_file.data.mTools));
-    assert_read_entry(SV_SCENE_INDEX, save_file.data.mSceneFlags,
-                      sizeof(save_file.data.mSceneFlags));
     assert_read_entry(SV_WATCHES_INDEX, save_file.data.mWatches, sizeof(save_file.data.mWatches));
-    assert_read_entry(SV_SPRITES_INDEX, save_file.data.mSpriteOffsets,
-                      sizeof(save_file.data.mSpriteOffsets));
     assert_read_entry(SV_COMMANDS, save_file.data.mCommandStates,
                       sizeof(save_file.data.mCommandStates));
     assert_read_entry(SV_DROP_SHADOW_INDEX, &save_file.data.mDropShadows,
                       sizeof(save_file.data.mDropShadows));
-    assert_read_entry(SV_AREA_RELOAD_INDEX, &save_file.data.mReloadType,
-                      sizeof(save_file.data.mReloadType));
     assert_read_entry(SV_CURSOR_COLOR_INDEX, &save_file.data.mCursorColType,
                       sizeof(save_file.data.mCursorColType));
     assert_read_entry(SV_FONT_INDEX, &save_file.data.mFontType, sizeof(save_file.data.mFontType));
+    assert_read_entry(SV_SPRITES_INDEX, save_file.data.mSpriteOffsets,
+                      sizeof(save_file.data.mSpriteOffsets));
 #undef assert_read_entry
 #undef assert_result
 
     return result;
-} */
+}
 
-/* KEEP_FUNC void GZ_storeMemCard(Storage& storage) {
+KEEP_FUNC void GZ_storeMemCard(Storage& storage) {
     GZSaveFile save_file;
     GZ_setupSaveFile(save_file);
     GZ_storeSaveLayout(save_file.data);
@@ -213,12 +211,12 @@ KEEP_FUNC void GZ_loadMemCard(Storage& storage) {
         }
         storage.result = StorageClose(&storage.info);
     }
-} */
+}
 
 #define FRAME_COUNT 200
 #define FILE_NAME "twwgz01"
 
-/* KEEP_FUNC void GZ_loadGZSave(bool& card_load) {
+KEEP_FUNC void GZ_loadGZSave(bool& card_load) {
     uint8_t frame_count = cCt_getFrameCount();
     if (card_load && frame_count > FRAME_COUNT) {
         static Storage storage;
@@ -234,4 +232,4 @@ KEEP_FUNC void GZ_loadMemCard(Storage& storage) {
 
         card_load = false;
     }
-} */
+}

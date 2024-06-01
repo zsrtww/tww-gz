@@ -9,7 +9,8 @@ enum MainMenuIndex {
     SCENE_INDEX,
     SETTINGS_INDEX,
     TOOLS_INDEX,
-    WARPING_INDEX,
+
+    MAIN_MENU_MAX,
 };
 
 class MainMenu : public Menu {
@@ -19,5 +20,5 @@ public:
     virtual void draw();
 
 private:
-    Line lines[9];
+    Line lines[MAIN_MENU_MAX];
 };

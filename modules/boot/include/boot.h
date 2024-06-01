@@ -21,6 +21,7 @@ void exit();
 void GZ_handleCardLoad();
 void GZ_handleMenu();
 void GZ_renderMenuTitle();
+void GZ_displaySplash();
 
 extern "C" {
 void game_loop();

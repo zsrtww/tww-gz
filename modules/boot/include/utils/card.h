@@ -1,23 +1,28 @@
 #include "font.h"
 #include "gcn_c/include/storage.h"
+#include "settings.h"
+#include "cheats.h"
+#include "tools.h"
+#include "commands.h"
+#include "watches.h"
+#include "pos_settings.h"
 #include "menu.h"
 
 #define GZ_SAVE_VERSION_NUMBER 0
-#define GZ_SAVE_ENTRIES_AMNT 0
+#define GZ_SAVE_ENTRIES_AMNT 9
 
 // These numbers can only change when we change the GZ_SAVE_VERSION_NUMBER,
 // otherwise, only new entries can be added.
 enum GZSaveIndex {
     SV_CHEATS_INDEX = 0,
-    SV_TOOLS_INDEX = 1,
-    SV_SCENE_INDEX = 2,
+    SV_ITEM_EQUIP_INDEX = 1,
+    SV_TOOLS_INDEX = 2,
     SV_WATCHES_INDEX = 3,
-    SV_SPRITES_INDEX = 4,
+    SV_COMMANDS = 4,
     SV_DROP_SHADOW_INDEX = 5,
-    SV_AREA_RELOAD_INDEX = 6,
-    SV_CURSOR_COLOR_INDEX = 7,
-    SV_COMMANDS = 8,
-    SV_FONT_INDEX = 9,
+    SV_CURSOR_COLOR_INDEX = 6,
+    SV_FONT_INDEX = 7,
+    SV_SPRITES_INDEX = 8,
 };
 
 struct GZSaveHeader {
@@ -28,16 +33,15 @@ struct GZSaveHeader {
 };
 
 struct GZSaveLayout {
-    /* Cheat mCheats[CHEAT_AMNT];
+    Cheat mCheats[CHEAT_AMNT];
+    ItemEquipSettings mItemEquipSettings[NUM_EQUIPPABLE_ITEMS];
     Tool mTools[TOOLS_COUNT];
-    SceneItem mSceneFlags[SCENE_AMNT];
     MemoryWatch mWatches[MAX_WATCHES];
-    Vec2 mSpriteOffsets[SPRITES_AMNT];
     bool mCommandStates[COMMANDS_AMNT];
     bool mDropShadows;
-    int mReloadType;
     int mCursorColType;
-    int mFontType; */
+    int mFontType;
+    Vec2 mSpriteOffsets[SPRITES_AMNT];
 };
 
 struct GZSaveFile {

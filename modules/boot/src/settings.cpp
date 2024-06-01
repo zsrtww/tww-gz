@@ -9,6 +9,8 @@ KEEP_VAR bool g_dropShadows;
 KEEP_VAR uint32_t g_fontType = 0;
 KEEP_VAR uint32_t g_cursorColorType;
 
+KEEP_VAR ItemEquipSettings g_item_equip_priorities[NUM_EQUIPPABLE_ITEMS] = {};
+
 void GZ_initFont() {
     if (g_fontType >= 0 && g_fontType < FONT_OPTIONS_COUNT) {
         char buf[40] = {0};

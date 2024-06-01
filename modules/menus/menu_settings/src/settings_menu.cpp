@@ -33,7 +33,6 @@ void SettingsMenu::draw() {
         return;
     }
 
-    // static Storage storage;
     if (GZ_getButtonTrig(SELECTION_BUTTON)) {
         switch (cursor.y) {
         case DROP_SHADOWS_INDEX:
@@ -43,7 +42,7 @@ void SettingsMenu::draw() {
             g_menuMgr->push(MN_POS_SETTINGS_INDEX);
             return; */
         case SAVE_CARD_INDEX: {
-            /* static Storage storage;
+            static Storage storage;
             storage.file_name = "twwgz01";
             storage.sector_size = SECTOR_SIZE;
             snprintf(storage.file_name_buffer, sizeof(storage.file_name_buffer), storage.file_name);
@@ -51,11 +50,11 @@ void SettingsMenu::draw() {
             storage.result = CARDProbeEx(0, nullptr, &storage.sector_size);
             if (storage.result == Ready) {
                 GZ_storeMemCard(storage);
-            } */
+            }
             break;
         }
         case LOAD_CARD_INDEX: {
-            /* static Storage storage;
+            static Storage storage;
             storage.file_name = "twwgz01";
             storage.sector_size = SECTOR_SIZE;
             snprintf(storage.file_name_buffer, sizeof(storage.file_name_buffer), storage.file_name);
@@ -63,11 +62,11 @@ void SettingsMenu::draw() {
             storage.result = CARDProbeEx(0, NULL, &storage.sector_size);
             if (storage.result == Ready) {
                 GZ_loadMemCard(storage);
-            } */
+            }
             break;
         }
         case DELETE_CARD_INDEX: {
-            /* static Storage storage;
+            static Storage storage;
             storage.file_name = "twwgz01";
             storage.sector_size = SECTOR_SIZE;
             snprintf(storage.file_name_buffer, sizeof(storage.file_name_buffer), storage.file_name);
@@ -75,7 +74,7 @@ void SettingsMenu::draw() {
             storage.result = CARDProbeEx(0, nullptr, &storage.sector_size);
             if (storage.result == Ready) {
                 GZ_deleteMemCard(storage);
-            } */
+            }
             break;
         }
         }
