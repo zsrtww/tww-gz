@@ -72,6 +72,10 @@ int saveInjectHook(void* i_scene) {
 #define menu_data_path (char*)0x80356249
 #endif
 
+#ifdef PAL
+#define menu_data_path (char*)0x80369919
+#endif
+
 int dScnPly_DrawHook(void* _this) {
     // if DPAD_DOWN + Y + Z is pressed, change scene to map select
     if (g_tools[MAP_SELECT_INDEX].active && mPadStatus.button == (CButton::DPAD_DOWN | CButton::Y | CButton::Z)) {

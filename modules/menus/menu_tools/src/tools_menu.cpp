@@ -8,10 +8,26 @@
 #include "rels/include/defines.h"
 #include "menus/utils/menu_mgr.h"
 
+#ifdef NTSCJ
 #define INTRO_SKIP_INST0_ADDR 0x8023031c
 #define INTRO_SKIP_INST1_ADDR 0x8023032c
 #define INTRO_SKIP_ORIG_INST0 0x48000EB9
 #define INTRO_SKIP_ORIG_INST1 0x4082000C
+#endif
+
+#ifdef NTSCU
+#define INTRO_SKIP_INST0_ADDR 0x80232c78
+#define INTRO_SKIP_INST1_ADDR 0x80232c88
+#define INTRO_SKIP_ORIG_INST0 0x48000F6D
+#define INTRO_SKIP_ORIG_INST1 0x4082000C
+#endif
+
+#ifdef PAL
+#define INTRO_SKIP_INST0_ADDR 0x80237d00
+#define INTRO_SKIP_INST1_ADDR 0x80237d10
+#define INTRO_SKIP_ORIG_INST0 0x48000F6D
+#define INTRO_SKIP_ORIG_INST1 0x4082000C
+#endif
 
 KEEP_FUNC ToolsMenu::ToolsMenu(Cursor& cursor)
     : Menu(cursor),

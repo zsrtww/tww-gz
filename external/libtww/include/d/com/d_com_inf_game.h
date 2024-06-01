@@ -261,21 +261,17 @@ public:
     /* 0x47EC */ JKRArchive* mpCamResArchive;
     /* 0x47F0 */ JKRArchive* mpSwimResArchive;
     /* 0x47F4 */ JKRArchive* mpWindResArchive;
-
-#ifdef NTSCU
     /* 0x47F8 */ JKRArchive* mpEnglishTextArchive;
-#endif
-
+#ifndef NTSCJ
     /* 0x47FC */ JKRArchive* mpHyruleTextArchive;
-
-#ifdef NTSCU
-    /* 0x4800 */ u8 field_0x4800[0x4824 - 0x4800];
+    /* 0x4800 */ void* mPictureBoxDataHeap[3];
+    /* 0x480C */ void* mBossBattleDataHeap[4];
+    /* 0x481C */ void* field_0x481c;
+    /* 0x4820 */ void* field_0x4820;
+#else
+    /* 0x47FC */ void* mPictureBoxDataHeap[3];
+    /* 0x480C */ void* mBossBattleDataHeap[4];
 #endif
-
-#ifdef NTSCJ
-    /* 0x4800 */ u8 field_0x47fc[0x4818 - 0x47FC];
-#endif
-
     /* 0x4824 */ dPa_control_c* mParticle;
     /* 0x4828 */ dDemo_manager_c* mDemo;
     /* 0x482C */ dMagma_packet_c* mpMagmaPacket;
@@ -367,7 +363,7 @@ public:
     /* 0x4961 */ u8 field_0x4961;
     /* 0x4962 */ u8 mHeapLockFlag;
     /* 0x4963 */ u8 field_0x4963;
-#ifdef NTSCU
+#ifndef NTSCJ
     /* 0x4964 */ u8 mGameLanguage;
 #endif
     /* 0x4965 */ u8 field_0x4965;

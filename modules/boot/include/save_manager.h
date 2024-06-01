@@ -8,6 +8,14 @@
 #define sTmpBuf 0x803a8540
 #endif
 
+#ifdef NTSCU
+#define sTmpBuf 0x803b5040
+#endif
+
+#ifdef PAL
+#define sTmpBuf 0x803bbd40
+#endif
+
 #define MEMFILE_BUF ((void*)sTmpBuf)
 
 typedef void (*LoadingCallback)(void);
