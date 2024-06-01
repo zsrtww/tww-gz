@@ -19,15 +19,12 @@ void MemoryMenu::draw() {
 
     if (GZ_getButtonTrig(SELECTION_BUTTON)) {
         switch (cursor.y) {
-        /* case 0:
+        case 0:
             g_menuMgr->push(MN_WATCHES_INDEX);
             return;
         case 1:
             g_menuMgr->push(MN_MEMORY_EDITOR_INDEX);
             return;
-        case 2:
-            g_menuMgr->push(MN_MEM_FILES_INDEX);
-            return; */
         }
     }
 

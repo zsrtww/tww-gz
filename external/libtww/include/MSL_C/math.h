@@ -1,7 +1,9 @@
 #ifndef LIB_TWW_MATH
 #define LIB_TWW_MATH
 
-// #define M_PI ((double)3.141592653589793238462643383279502884e+00)
+#ifndef M_PI
+#define M_PI ((double)3.141592653589793238462643383279502884e+00)
+#endif
 
 #define MAX(a, b) ((a) > (b) ? (a) : (b))
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
@@ -35,6 +37,8 @@ typedef double (*tww_fmod_t)(double x, double y);
 #define tww_fmod ((tww_fmod_t)tww_fmod_addr)
 
 extern "C" {
+    double cos(double x);
+    double sin(double x);
     double ceil(double);
 }
 

@@ -18,6 +18,9 @@ void exit();
 
 }  // namespace twwgz::modules
 
+extern twwgz::dyn::GZModule g_InputViewer_rel;
+
+void GZ_handleRelTools();
 void GZ_handleCardLoad();
 void GZ_handleMenu();
 void GZ_renderMenuTitle();

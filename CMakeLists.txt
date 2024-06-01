@@ -49,7 +49,7 @@ include(cmake/relmapper.cmake)
 include(cmake/fonts.cmake)
 
 project(TWWGZ
-        VERSION 1.0.0
+        VERSION 0.4.0
         DESCRIPTION "The Wind Waker speedrunning practice and testing tool"
         LANGUAGES C CXX ASM)
 

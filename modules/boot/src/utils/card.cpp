@@ -11,7 +11,6 @@
 #include "rels/include/cxx.h"
 #include "menus/utils/menu_mgr.h"
 #include "rels/include/defines.h"
-#include "gcn_c/include/gu.h"
 
 /**
  * @brief Like CARDWrite, but allows for arbitrary sizes and offsets.

@@ -41,6 +41,9 @@ void SettingsMenu::draw() {
         /* case POS_SETTINGS_MENU_INDEX:
             g_menuMgr->push(MN_POS_SETTINGS_INDEX);
             return; */
+        case ITEM_EQUIP_PRIORITY_INDEX:
+            g_menuMgr->push(MN_EQUIP_PRIORITY_INDEX);
+            return;
         case SAVE_CARD_INDEX: {
             static Storage storage;
             storage.file_name = "twwgz01";

@@ -29,6 +29,8 @@ bool l_loadCard = true;
 Texture l_gzIconTex;
 bool last_frame_was_loading = false;
 
+twwgz::dyn::GZModule g_InputViewer_rel("/twwgz/rels/features/input_viewer.rel");
+
 #define Q(x) #x
 #define QUOTE(x) Q(x)
 
@@ -93,6 +95,30 @@ KEEP_FUNC void draw() {
 }
 
 /**
+ * @brief Loads into memory the RELs for each tool which is active.
+ *
+ * @param id    The ID of the tool (index in g_tools).
+ * @param rel   The GZModule object used to load the REL.
+ */
+inline void handleModule(size_t id, twwgz::dyn::GZModule& rel) {
+    if (g_tools[id].active && !rel.isLoaded()) {
+        rel.loadFixed(true);
+    }
+    if (!g_tools[id].active && rel.isLoaded()) {
+        rel.close();
+    }
+}
+
+/**
+ * @brief   Handles when to load tools into memory.
+ *          Registered to run before the main loop.
+ */
+KEEP_FUNC void GZ_handleRelTools() {
+    // Put modules that toggles with the state of g_tools
+    handleModule(INPUT_VIEWER_INDEX, g_InputViewer_rel);
+}
+
+/**
  * @brief Handles when to show/hid the menus.
  */
 KEEP_FUNC void GZ_handleMenu() {
@@ -129,10 +155,10 @@ KEEP_FUNC void GZ_handleCardLoad() {
 
 KEEP_FUNC void GZ_renderMenuTitle() {
     if (g_menuMgr->isOpen()) {
-        Font::GZ_drawStr("twwgz v" INTERNAL_GZ_VERSION, g_spriteOffsets[MENU_INDEX].x + 35.0f, 25.0f,
+        Font::GZ_drawStr("twwgz v" INTERNAL_GZ_VERSION, g_spriteOffsets[SPR_MENU_INDEX].x + 35.0f, 25.0f,
                          g_cursorColor, g_dropShadows);
         if (l_gzIconTex.loadCode == TexCode::TEX_OK) {
-            Draw::drawRect(0xFFFFFFFF, {g_spriteOffsets[MENU_INDEX].x, 5.0f},
+            Draw::drawRect(0xFFFFFFFF, {g_spriteOffsets[SPR_MENU_INDEX].x, 5.0f},
                            {30 * (isWidescreen ? 0.75f : 1.0f), 30}, &l_gzIconTex._texObj);
         }
     }

@@ -1,9 +1,10 @@
 #include "flags.h"
 #include "libtww/include/d/com/d_com_inf_game.h"
+#include "rels/include/defines.h"
 
-bool g_flags[FLAG_AMNT];
+KEEP_VAR bool g_flags[FLAG_AMNT];
 
-void setEventFlag(uint16_t flag) {
+KEEP_FUNC void setEventFlag(uint16_t flag) {
     if (dComIfGs_isEventBit(flag)) {
         dComIfGs_offEventBit(flag);
     } else {
@@ -11,7 +12,7 @@ void setEventFlag(uint16_t flag) {
     }
 }
 
-void updateFlags() {
+KEEP_FUNC void updateFlags() {
     g_flags[WATCHED_FF2_HELMAROC_CUTSCENE] = dComIfGs_isEventBit(0x2D01);
     g_flags[ENDLESS_NIGHT] = dComIfGs_isEventBit(0x0A02);
     g_flags[GENERAL_POST_FF1_KORL_CUTSCENE] = dComIfGs_isEventBit(0x0F80);
@@ -31,5 +32,4 @@ void updateFlags() {
     g_flags[TINGS_DISCOUNT] = dComIfGs_isEventBit(0x1A08);
     g_flags[HAND_ME_DOWN_TUNER] = dComIfGs_isEventBit(0x1708);
     g_flags[GOSSIP_STONE_TRIGGER] = dComIfGs_isEventBit(0x0520);
-
 }

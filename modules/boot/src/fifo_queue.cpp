@@ -19,8 +19,8 @@ void FIFOQueue::renderItems(_FIFOQueue& Queue) {
         }
         color |= alpha;
         if (g_fifoVisible) {
-            Font::renderChars(Queue.messages[i].msg, (g_spriteOffsets[FIFO_SPR_INDEX].x),
-                              offset + (g_spriteOffsets[FIFO_SPR_INDEX].y), color);
+            Font::renderChars(Queue.messages[i].msg, (g_spriteOffsets[SPR_FIFO_INDEX].x),
+                              offset + (g_spriteOffsets[SPR_FIFO_INDEX].y), color);
         }
     }
 };

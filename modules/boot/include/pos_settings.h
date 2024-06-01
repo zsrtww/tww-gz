@@ -3,8 +3,11 @@
 #include "libtww/include/dolphin/mtx/vec.h"
 
 enum SpritesIndex {
-    MENU_INDEX,
-    FIFO_SPR_INDEX,
+    SPR_MENU_INDEX,
+    SPR_FIFO_INDEX,
+    SPR_DEBUG_INFO_INDEX,
+    SPR_TIME_DISP_INDEX,
+    SPR_VIEWER_INDEX,
 
     SPRITES_AMNT,
 };

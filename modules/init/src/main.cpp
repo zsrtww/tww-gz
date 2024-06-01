@@ -11,6 +11,7 @@
 #include "utils/card.h"
 #include "utils/draw.h"
 #include "utils/hook.h"
+#include "utils/link.h"
 #include "rels/include/cxx.h"
 #include "events/draw_listener.h"
 #include "events/pre_loop_listener.h"
@@ -31,13 +32,17 @@ void main() {
     // Setup the render order
     g_drawListener->addListener(GZ_renderMenuTitle);
     g_drawListener->addListener(GZ_renderFifoQueue);
+    g_drawListener->addListener(GZ_displayLinkInfo);
+    g_drawListener->addListener(GZ_displayTimeInfo);
     g_drawListener->addListener(GZ_displaySplash);
+    g_drawListener->addListener(GZ_drawWatches);
     
     // Init the pre-loop listener
     g_PreLoopListener = new PreLoopListener();
     g_PreLoopListener->addListener(GZ_handleCardLoad);
     g_PreLoopListener->addListener(GZ_handleMenu);
     g_PreLoopListener->addListener(GZ_setCursorColor);
+    g_PreLoopListener->addListener(GZ_handleRelTools);
     
     // Init the post-loop listener
     g_PostLoopListener = new PostLoopListener();

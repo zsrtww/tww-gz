@@ -22,21 +22,18 @@ void FlagsMenu::draw() {
 
     if (GZ_getButtonTrig(SELECTION_BUTTON)) {
         switch (cursor.y) {
-        /* case GENERAL_FLAGS_INDEX:
+        case GENERAL_FLAGS_INDEX:
             g_menuMgr->push(MN_GENERAL_FLAGS_INDEX);
             return;
         case DUNGEON_FLAGS_INDEX:
             g_menuMgr->push(MN_DUNGEON_FLAGS_INDEX);
             return;
-        case PORTAL_FLAGS_INDEX:
-            g_menuMgr->push(MN_PORTAL_FLAGS_INDEX);
+        case SAVEWARP_FLAG_INDEX:
+            g_menuMgr->push(MN_SAVEWARP_FLAGS_INDEX);
             return;
-        case FLAG_RECORDS_INDEX:
-            g_menuMgr->push(MN_FLAG_RECORDS_INDEX);
+        case TUNER_FLAG_INDEX:
+            g_menuMgr->push(MN_TUNER_FLAGS_INDEX);
             return;
-        case FLAG_LOG_INDEX:
-            g_menuMgr->push(MN_FLAG_LOG_INDEX);
-            return; */
         }
     }
 

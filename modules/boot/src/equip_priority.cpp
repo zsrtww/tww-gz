@@ -5,7 +5,7 @@
 KEEP_VAR ItemEquipSettings g_item_equip_priorities[NUM_EQUIPPABLE_ITEMS] = {};
 KEEP_VAR bool g_enable_item_equip_menu = false;
 
-char button_enum_to_name(u8 button_enum, u8 item_enum) {
+KEEP_FUNC char button_enum_to_name(u8 button_enum, u8 item_enum) {
     if (item_enum == NO_ITEM_EQUIP) return '?';
 
     switch (button_enum) {
@@ -20,7 +20,7 @@ char button_enum_to_name(u8 button_enum, u8 item_enum) {
     }
 }
 
-const char* item_enum_to_name(u8 item_enum) {
+KEEP_FUNC const char* item_enum_to_name(u8 item_enum) {
     switch (item_enum) {
     case NO_ITEM_EQUIP:
         return "No Item";
@@ -57,7 +57,7 @@ const char* item_enum_to_name(u8 item_enum) {
     }
 }
 
-u8 item_enum_to_item_slot(u8 item_enum) {
+KEEP_FUNC u8 item_enum_to_item_slot(u8 item_enum) {
     switch (item_enum) {
     case NO_ITEM_EQUIP:
         return NO_ITEM;
