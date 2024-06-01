@@ -6,11 +6,7 @@
 #include "libtww/include/dolphin/os/OSCache.h"
 
 extern "C" {
-#ifndef WII_PLATFORM
 #define resize1_JKRHeap resize__7JKRHeapFPvUlP7JKRHeap
-#else
-#define resize1_JKRHeap JKRHeap__resize_void____unsigned_long__JKRHeap___
-#endif
 void resize1_JKRHeap(void* ptr, uint32_t size, void* heap);
 }
 
@@ -25,7 +21,6 @@ GZModule::~GZModule() {
     }
 }
 
-#ifndef WII_PLATFORM
 bool GZModule::load(bool negativeAlignment) {
     if (m_loaded) {
         return true;
@@ -244,121 +239,6 @@ bool GZModule::loadFixed(bool negativeAlignment) {
     m_loaded = true;
     return true;
 }
-#else
-bool GZModule::load(bool negativeAlignment, bool fixedLinking) {
-    if (m_loaded) {
-        return true;
-    }
-
-    // Try to open the file from the disc
-    DVDFileInfo fileInfo;
-    if (!DVDOpen(m_path, &fileInfo)) {
-        return false;
-    }
-
-    // Get the length of the file
-    uint32_t length = fileInfo.len;
-
-    // Round the length to be in multiples of DVD_READ_SIZE
-    length = (length + DVD_READ_SIZE - 1) & ~(DVD_READ_SIZE - 1);
-
-    // Buffers that DVDReadPrio uses must be aligned to 0x20 bytes
-    int32_t alignment;
-    if (!negativeAlignment) {
-        // Allocate to the front of the heap
-        alignment = 0x20;
-    } else {
-        // Allocate to the back of the heap
-        alignment = -0x20;
-    }
-
-    // Allocate bytes for the file
-    // REL files need to be in MEM1 to function properly, so put it in the Zelda heap
-    uint8_t* fileData = new (alignment, HEAP_ZELDA) uint8_t[length];
-    clear_DC_IC_Cache(fileData, length);
-
-    // Read the REL from the disc
-    int32_t r = DVDReadPrio(&fileInfo, fileData, length, 0, 2);
-    int32_t result = (r > 0) ? DVD_STATE_END : r;
-
-    // Close the file, as it's no longer needed
-    DVDClose(&fileInfo);
-
-    // Make sure the read was successful
-    if (result != DVD_STATE_END) {
-        delete[] fileData;
-        return false;
-    }
-
-    // Get the REL's BSS size and allocate memory for it
-    OSModuleInfo* relFile = reinterpret_cast<OSModuleInfo*>(fileData);
-    uint32_t bssSize = relFile->bssSize;
-
-    // If bssSize is 0, then use an arbitrary size
-    if (bssSize == 0) {
-        bssSize = 0x1;
-    }
-
-    // Handle the alignment for the BSS
-    int32_t bssAlignment = relFile->bssAlignment;
-    if (negativeAlignment) {
-        bssAlignment = -bssAlignment;
-    }
-
-    // Allocate the memory to the back of the heap to avoid fragmentation
-    uint8_t* bssArea = new (bssAlignment) uint8_t[bssSize];
-
-    // Disable interrupts to make sure other REL files do not try to be linked while this one is
-    // being linked
-    bool enable = OSDisableInterrupts();
-
-    // Link the REL file
-    bool linkSucceeded;
-    if (!fixedLinking) {
-        linkSucceeded = OSLink(relFile, bssArea);
-    } else {
-        linkSucceeded = OSLinkFixed(relFile, bssArea);
-    }
-
-    if (!linkSucceeded) {
-        // Try to unlink to be safe
-        OSUnlink(relFile);
-
-        // Restore interrupts
-        OSRestoreInterrupts(enable);
-
-        delete[] bssArea;
-        delete[] relFile;
-        return false;
-    }
-
-    // Restore interrupts
-    OSRestoreInterrupts(enable);
-
-    if (fixedLinking) {
-        // Resize the allocated memory to remove the space used by the unnecessary relocation data.
-        // relFile->fixSize becomes a pointer.
-        uint32_t fixedSize = relFile->fixSize - (uint32_t)relFile;
-        resize1_JKRHeap(relFile, fixedSize, nullptr);
-        length = fixedSize;
-    }
-
-    // Call the REL's prolog functon
-    reinterpret_cast<void (*)()>(relFile->prologFuncOffset)();
-
-    m_rel = relFile;
-    m_bss = bssArea;
-    m_length = length;
-    m_loaded = true;
-    return true;
-}
-bool GZModule::load(bool negativeAlignment) {
-    return load(negativeAlignment, false);
-}
-bool GZModule::loadFixed(bool negativeAlignment) {
-    return load(negativeAlignment, true);
-}
-#endif
 
 bool GZModule::close() {
     if (!m_loaded) {

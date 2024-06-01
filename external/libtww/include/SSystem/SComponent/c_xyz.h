@@ -3,7 +3,7 @@
 
 #include "../../dolphin/gctypes.h"
 #include "../../dolphin/mtx/vec.h"
-#include "libtww/addrs.h"
+#include "../../addrs.h"
 
 class cXyz;
 

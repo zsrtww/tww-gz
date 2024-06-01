@@ -4,6 +4,7 @@
 #include "font.h"
 #include "menu.h"
 #include "menus/utils/menu_mgr.h"
+#include "libtww/include/m_Do/m_Do_ext.h"
 
 #include "utils/memory.h"
 #include "utils/card.h"
@@ -27,12 +28,17 @@ void main() {
     g_drawListener = new DrawListener();
     // Setup the render order
     g_drawListener->addListener(GZ_renderMenuTitle);
+    g_drawListener->addListener(GZ_renderFifoQueue);
     
     // Init the pre-loop listener
     g_PreLoopListener = new PreLoopListener();
+    g_PreLoopListener->addListener(GZ_handleCardLoad);
+    g_PreLoopListener->addListener(GZ_handleMenu);
+    g_PreLoopListener->addListener(GZ_setCursorColor);
     
     // Init the post-loop listener
     g_PostLoopListener = new PostLoopListener();
+    g_PostLoopListener->addListener(GZ_setCursorColor);
 }
 void exit() {}
 

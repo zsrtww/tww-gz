@@ -138,10 +138,10 @@ public:
     /* 0xA0 */ int64_t mResetTime;
 };
 
-#define tww_mPadStatus (*(PADStatus*)tww_mPadStatus_addr)
-#define tww_mPadButton (*(JUTGamePad::CButton*)tww_mPadButton_addr)
-#define tww_mPadMStick (*(JUTGamePad::CStick*)tww_mPadMStick_addr)
-#define tww_mPadSStick (*(JUTGamePad::CStick*)tww_mPadSStick_addr)
+#define mPadStatus (*(PADStatus*)tww_mPadStatus_addr)
+#define mPadButton (*(JUTGamePad::CButton*)tww_mPadButton_addr)
+#define mPadMStick (*(JUTGamePad::CStick*)tww_mPadMStick_addr)
+#define mPadSStick (*(JUTGamePad::CStick*)tww_mPadSStick_addr)
 #define g_mDoCPd_cpadInfo ((interface_of_controller_pad*)g_mDoCPd_cpadInfo_addr)
 
 /* typedef void (*tww_JUTGamePadRead_t)(void);

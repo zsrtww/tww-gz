@@ -1,4 +1,6 @@
 #pragma once
+// #include "commands.h"
+#include "controller.h"
 #include "font.h"
 #include "libtww/include/JSystem/JUtility/JUTGamePad.h"
 #include "libtww/include/dolphin/mtx/vec.h"
@@ -13,6 +15,8 @@
 enum MenuIndex {
     MN_NONE_INDEX = -1,
     MN_MAIN_MENU_INDEX = 0,
+    // Main menu's sub menus
+    MN_SETTINGS_INDEX,
 
     // This entry is used only to get a count of the number of valid entries.
     MN_COUNT

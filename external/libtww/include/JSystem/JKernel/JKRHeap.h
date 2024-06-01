@@ -2,7 +2,7 @@
 #define JKRHEAP_H
 
 #include "JKRDisposer.h"
-#include "../../dolphin/os/OSMutex.h"
+#include "../../dolphin/os/OS.h"
 
 class JKRHeap;
 typedef void (*JKRErrorHandler)(void*, u32, int);
@@ -32,11 +32,6 @@ public:
     void* getEndAddr() const { return (void*)mEnd; }
     u32 getSize() const { return mSize; }
     bool getErrorFlag() const { return mErrorFlag; }
-    void callErrorHandler(JKRHeap* heap, u32 size, int alignment) {
-        if (mErrorHandler) {
-            (*mErrorHandler)(heap, size, alignment);
-        }
-    }
 
     JKRHeap* getParent() const {
         JSUTree<JKRHeap>* parent = mChildTree.getParent();
@@ -83,6 +78,13 @@ void* __nw_JKRHeap(u32 size, void* heap, s32 alignment);
  *	@param ptr The pointer to the memory to free
  */
 void __dl_JKRHeap(void* ptr);
+}
+
+extern "C" {
+extern JKRHeap* gameHeap;
+extern JKRHeap* zeldaHeap;
+extern JKRHeap* commandHeap;
+extern JKRHeap* archiveHeap;  // Archive heap pointer
 }
 
 #endif /* JKRHEAP_H */

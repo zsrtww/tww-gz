@@ -6,11 +6,7 @@
 #include "rels/include/cxx.h"
 
 _Font Font::font;
-#ifdef WII_PLATFORM
-extern bool isWidescreen;
-#else
 #define isWidescreen (false)
-#endif
 
 KEEP_FUNC FontCode Font::loadFont(const char* path) {
     DVDFileInfo fileInfo;

@@ -12,7 +12,7 @@ struct counter_class {
 
 #define g_Counter (*(counter_class*)(g_Counter_addr))
 
-u32 cCt_getFrameCount() {
+inline u32 cCt_getFrameCount() {
     return g_Counter.mCounter0;
 }
 

@@ -119,4 +119,52 @@ struct OSThread {
     void* data[2];
 };
 
+struct OSModuleInfo {
+    u32 id;
+    OSModuleInfo* next;
+    OSModuleInfo* prev;
+    u32 numSections;
+    u32 sectionInfoOffset;
+    u32 nameOffset;
+    u32 nameSize;
+    u32 version;
+    u32 bssSize;
+    u32 relOffset;
+    u32 impOffset;
+    u32 impSize;
+    u8 prologSection;
+    u8 epilogSection;
+    u8 unresolvedSection;
+    u8 bssSection;
+    u32 prologFuncOffset;
+    u32 epilogFuncOffset;
+    u32 unresolvedFuncOffset;
+    u32 moduleAlignment;
+    u32 bssAlignment;
+    u32 fixSize;
+} __attribute__((__packed__));
+
+struct OSModuleList {
+    OSModuleInfo* first;
+    OSModuleInfo* last;
+    const char* unk;
+} __attribute__((__packed__));
+
+static_assert(sizeof(OSModuleInfo) == 0x4C);
+static_assert(sizeof(OSModuleList) == 0xC);
+
+extern "C" {
+bool OSLink(OSModuleInfo* newModule, void* bss);
+bool OSLinkFixed(OSModuleInfo* newModule, void* bss);
+bool OSUnlink(OSModuleInfo* module);
+
+bool OSDisableInterrupts();
+bool OSRestoreInterrupts(bool enable);
+
+OSTime OSGetTime();
+void OSTicksToCalendarTime(OSTime ticks, OSCalendarTime* ct);
+
+extern OSModuleList osModuleList;
+}
+
 #endif

@@ -6,6 +6,8 @@
 #include "../JSystem/J3DGraphBase/J3DTexture.h"
 #include "../JSystem/J3DGraphBase/J3DJoint.h"
 #include "../JSystem/J3DGraphBase/J3DMatBlock.h"
+#include "../JSystem/J3DGraphBase/J3DPacket.h"
+#include "../JSystem/JKernel/JKRHeap.h"
 #include "../SSystem/SComponent/c_xyz.h"
 #include "../JAZelAudio/JAIZelAnime.h"
 

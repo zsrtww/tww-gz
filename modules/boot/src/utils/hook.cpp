@@ -1,6 +1,7 @@
 #include "utils/hook.h"
 #include <cstdio>
 #include "boot.h"
+#include "controller.h"
 #include "libtww/include/addrs.h"
 #include "rels/include/patch.h"
 #include "rels/include/cxx.h"
