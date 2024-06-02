@@ -79,7 +79,7 @@ add_subdirectory(modules)
 
 add_library(twwgz STATIC "${CPPFILES}")
 add_dependencies(twwgz tww_c gcn_c modules)
-set_property(TARGET twwgz PROPERTY COMPILE_FLAGS "-g -c -Os -std=gnu++20 -Wall ${DEVKITPRO_MACHDEP}")
+set_property(TARGET twwgz PROPERTY COMPILE_FLAGS "-g -c -Oz -std=gnu++20 -Wall ${DEVKITPRO_MACHDEP}")
 
 get_target_property(TWWGZ_MODULES modules TWWGZ_MODULES)
 foreach(module ${TWWGZ_MODULES})
