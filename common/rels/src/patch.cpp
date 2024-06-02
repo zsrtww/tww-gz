@@ -1,15 +1,10 @@
-// Taken from https://github.com/zsrtp/GC-Randomizer/blob/stable/source/patch.cpp
+// Taken from https://github.com/zsrtp/libtp_rel/blob/master/source/patch.cpp
 #include "rels/include/patch.h"
 #include "libtww/include/dolphin/os/OSCache.h"
 #include <stdint.h>
 
 void writeBranch(void* ptr, void* destination) {
     uint32_t branch = 0x48000000;  // b
-    writeBranchMain(ptr, destination, branch);
-}
-
-void writeBranchLR(void* ptr, void* destination) {
-    uint32_t branch = 0x48000001;  // bl
     writeBranchMain(ptr, destination, branch);
 }
 
@@ -41,4 +36,13 @@ void writeAbsoluteBranch(void* ptr, void* destination) {
 
     DCFlushRange(ptr, sizeof(uint32_t) * 4);
     ICInvalidateRange(ptr, sizeof(uint32_t) * 4);
+}
+
+void writeStandardBranches(void* ptr, void* funcStart, void* funcEnd)
+{
+    // Write the main branch
+    writeBranch(ptr, funcStart);
+
+    // Write the returning branch
+    writeBranch(funcEnd, reinterpret_cast<void*>(reinterpret_cast<uint32_t>(ptr) + 0x4));
 }

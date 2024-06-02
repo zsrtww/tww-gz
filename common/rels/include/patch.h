@@ -1,4 +1,4 @@
-// Taken from https://github.com/zsrtp/GC-Randomizer/blob/stable/include/patch.h
+// Taken from https://github.com/zsrtp/libtp_rel/blob/master/include/patch.h
 #pragma once
 
 #include <stdint.h>
@@ -6,10 +6,30 @@
 #include "rels/include/cxx.h"
 
 void writeBranch(void* ptr, void* destination);
-void writeBranchLR(void* ptr, void* destination);
 void writeBranchBL(void* ptr, void* destination);
 void writeBranchMain(void* ptr, void* destination, uint32_t branch);
 void writeAbsoluteBranch(void* ptr, void* destination);
+void writeStandardBranches(void* ptr, void* funcStart, void* funcEnd);
+
+template<typename Func, typename Dest>
+void writeBranch(Func func, Dest dst)
+{
+    writeBranch(reinterpret_cast<void*>(func), reinterpret_cast<void*>(dst));
+}
+
+template<typename Func, typename Dest>
+void writeBranchBL(Func func, Dest dst)
+{
+    writeBranchBL(reinterpret_cast<void*>(func), reinterpret_cast<void*>(dst));
+}
+
+template<typename Ptr, typename FuncStart, typename FuncEnd>
+void writeStandardBranches(Ptr ptr, FuncStart funcStart, FuncEnd funcEnd)
+{
+    writeStandardBranches(reinterpret_cast<void*>(ptr),
+                          reinterpret_cast<void*>(funcStart),
+                          reinterpret_cast<void*>(funcEnd));
+}
 
 /**
  * @brief Hooks a function to execute the provided one instead.
@@ -38,9 +58,6 @@ Func hookFunction(Func function, Dest destination, bool absoluteBranch) {
     trampoline[0] = instructions[0];
     DCFlushRange(&trampoline[0], sizeof(uint32_t));
     ICInvalidateRange(&trampoline[0], sizeof(uint32_t));
-
-    // Branch to original function past hook
-    writeBranch(&trampoline[1], &instructions[1]);
 
     // Write actual hook
     writeBranch(&instructions[0], reinterpret_cast<void*>(static_cast<Func>(destination)));
@@ -83,7 +100,8 @@ Func unhookFunction(Func trampoline) {
         instructionAddress |= (instructions[2] & 0xFFFF);                 // Lower 16 bits
         address = reinterpret_cast<uint32_t*>(instructionAddress - 0x4);
     } else {
-        // Standard branchinstructionCount = 2;
+        // Standard branch
+        instructionCount = 2;
         int32_t branchLength = firstInstruction & 0x03FFFFFC;
 
         // Check if this is a negative branch
