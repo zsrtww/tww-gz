@@ -27,3 +27,7 @@ uint16_t GZ_getButtonStatus();
 void GZ_readController();
 bool GZ_getButtonTrig(int idx);
 void GZ_getButtonPressCount(u8& i_pressCounter, int i_button, int i_gzButton);
+
+void GZ_readZombieHoverInputs();
+u8 GZ_getAPressesPerWindow();
+u8 GZ_getBPressesPerWindow();

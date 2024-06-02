@@ -12,6 +12,7 @@
 #define BUTTON_STATES 12
 #define REPEAT_TIME 4
 #define REPEAT_DELAY 5
+#define WINDOW_LENGTH 30
 
 #define buttonStatus (mPadStatus.button)
 #define A_BUTTON (CButton::A)
@@ -21,6 +22,11 @@ static uint16_t sButtonsLastFrame = 0;
 static uint16_t sButtons = 0;
 static uint16_t sButtonsPressed = 0;
 static uint16_t sCursorEnableDelay = 0;
+
+u8 a_presses_per_window = 0;
+u8 b_presses_per_window = 0;
+u8 a_presses[WINDOW_LENGTH] = {0};
+u8 b_presses[WINDOW_LENGTH] = {0};
 
 struct ButtonState {
     uint16_t button;
@@ -80,6 +86,8 @@ KEEP_FUNC void GZ_readController() {
         sCursorEnableDelay = 0;
         GZCmd_processInputs();
     }
+
+    GZ_readZombieHoverInputs();
 }
 
 KEEP_FUNC bool GZ_getButtonPressed(int idx) {
@@ -88,7 +96,7 @@ KEEP_FUNC bool GZ_getButtonPressed(int idx) {
 
 KEEP_FUNC bool GZ_getButtonRepeat(int idx, uint16_t repeat_time) {
     // Needs to be signed due to delta sometimes being negative
-    // which causes a subtle bug making held_down_long_enough 
+    // which causes a subtle bug making held_down_long_enough
     // true when it shouldn't be
     s32 delta = cCt_getFrameCount() - buttonStates[idx].pressed_frame;
 
@@ -117,7 +125,7 @@ KEEP_FUNC bool GZ_getButtonTrig(int idx) {
 
 KEEP_FUNC bool GZ_getButtonHold(int idx, int phase) {
     uint32_t delta = cCt_getFrameCount() - buttonStates[idx].pressed_frame;
-    
+
     if (phase != POST_GAME_LOOP)
         delta++;
 
@@ -128,4 +136,46 @@ KEEP_FUNC void GZ_getButtonPressCount(u8& i_pressCounter, int i_button, int i_gz
     if ((GZ_getButtonStatus() & i_button) && (buttonStates[i_gzButton].button & sButtonsPressed)) {
         i_pressCounter++;
     }
+}
+
+u8 arraySum(const u8 (&myArray)[WINDOW_LENGTH]) {
+    u8 myArraySum = 0;
+    for (int i = 0; i < WINDOW_LENGTH; i++) {
+        myArraySum += myArray[i];
+    }
+
+    return myArraySum;
+}
+
+void updateButtonPressesInWindow(u8 (&buttonPressesInWindow)[WINDOW_LENGTH],
+                                 const u32& current_frame, const u16& cButton,
+                                 const int& gzButton) {
+    u16 current_input = GZ_getButtonStatus();
+
+    if ((current_input & cButton) && (buttonStates[gzButton].button & sButtonsPressed) != 0) {
+        buttonPressesInWindow[current_frame % WINDOW_LENGTH] = 1;
+    } else {
+        buttonPressesInWindow[current_frame % WINDOW_LENGTH] = 0;
+    }
+}
+
+void GZ_readZombieHoverInputs() {
+    u32 zh_window_update_rate = 6;
+    u32 current_frame = cCt_getFrameCount();
+
+    if (current_frame % zh_window_update_rate == 0) {
+        a_presses_per_window = arraySum(a_presses);
+        b_presses_per_window = arraySum(b_presses);
+    }
+
+    updateButtonPressesInWindow(a_presses, current_frame, CButton::A, GZPad::A);
+    updateButtonPressesInWindow(b_presses, current_frame, CButton::B, GZPad::B);
+}
+
+u8 GZ_getAPressesPerWindow() {
+    return a_presses_per_window;
+}
+
+u8 GZ_getBPressesPerWindow() {
+    return b_presses_per_window;
 }

@@ -5,6 +5,8 @@
 #include "libtww/include/d/com/d_com_inf_game.h"
 #include "libtww/include/d/kankyo/d_kankyo.h"
 #include "libtww/include/d/a/d_a_player_main.h"
+#include "libtww/include/SSystem/SComponent/c_counter.h"
+#include "controller.h"
 #include "tools.h"
 #include "rels/include/defines.h"
 
@@ -71,4 +73,42 @@ KEEP_FUNC void GZ_displayTimeInfo() {
     Font::GZ_drawStr(Time, g_spriteOffsets[SPR_TIME_DISP_INDEX].x, g_spriteOffsets[SPR_TIME_DISP_INDEX].y, ColorPalette::WHITE, g_dropShadows);
     Font::GZ_drawStr(Date, g_spriteOffsets[SPR_TIME_DISP_INDEX].x, g_spriteOffsets[SPR_TIME_DISP_INDEX].y + 20.0f, ColorPalette::WHITE, g_dropShadows);
     Font::GZ_drawStr(Moon, g_spriteOffsets[SPR_TIME_DISP_INDEX].x, g_spriteOffsets[SPR_TIME_DISP_INDEX].y + 40.0f, ColorPalette::WHITE, g_dropShadows);
+}
+
+int rainbow() {
+	switch(cCt_getFrameCount() % 6) {
+		case 0: return ColorPalette::RED;
+		case 1: return ColorPalette::ORANGE;
+		case 2: return ColorPalette::YELLOW;
+		case 3: return ColorPalette::GREEN;
+		case 4: return ColorPalette::BLUE;
+		default: return ColorPalette::PURPLE;
+	}
+}
+
+int zombieHoverColor(u8 buttonPressesPerWindow) {
+    if (buttonPressesPerWindow == 15) return rainbow();
+    if (buttonPressesPerWindow >= 11) return ColorPalette::GREEN;
+    if (buttonPressesPerWindow >= 9) return ColorPalette::YELLOW;
+    if (buttonPressesPerWindow >= 1) return ColorPalette::RED;
+    return ColorPalette::WHITE;
+}
+
+KEEP_FUNC void GZ_displayZombieHoverInfo() {
+    if (!g_tools[ZH_INDEX].active) {
+        return;
+    }
+
+    // Generates A and B button presses per second
+    char a_presses_str[8];
+    char b_presses_str[8];
+
+    u8 numAPressesPerWindow = GZ_getAPressesPerWindow();
+    u8 numBPressesPerWindow = GZ_getBPressesPerWindow();
+
+    sprintf(a_presses_str, "A: %d", numAPressesPerWindow);
+    sprintf(b_presses_str, "B: %d", numBPressesPerWindow);
+
+    Font::GZ_drawStr(a_presses_str, 450.f, 400.f, zombieHoverColor(numAPressesPerWindow), g_dropShadows);
+    Font::GZ_drawStr(b_presses_str, 450.f, 420.f, zombieHoverColor(numBPressesPerWindow), g_dropShadows);
 }
