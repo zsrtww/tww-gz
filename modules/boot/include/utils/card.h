@@ -9,6 +9,11 @@
 #include "pos_settings.h"
 #include "menu.h"
 
+static_assert(sizeof(CARDFileInfo) == 0x14);
+static_assert(sizeof(CARDStat) == 0x6C);
+static_assert(sizeof(CARDDir) == 0x40);
+static_assert(sizeof(CARDControl) == 0x110);
+
 #define GZ_SAVE_VERSION_NUMBER 0
 #define GZ_SAVE_ENTRIES_AMNT 9
 

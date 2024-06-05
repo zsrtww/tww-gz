@@ -6,7 +6,7 @@
 #ifndef WII_PLATFORM
 #include "card.h"
 #define STORAGE_FILENAME_MAX CARD_FILENAME_MAX
-#define FileInfo CardInfo
+#define FileInfo CARDFileInfo
 #define OPEN_MODE_READ
 #define OPEN_MODE_WRITE
 #define OPEN_MODE_RW

@@ -2,6 +2,7 @@
 #define __DVD_H__
 
 #include <stdint.h>
+#include <stdbool.h>
 
 /*
  * DVD state codes
@@ -50,7 +51,7 @@ typedef struct _DVDFileInfo DVDFileInfo;
 typedef void (*DVDCallback)(int32_t result, DVDFileInfo* info);
 typedef void (*DVDCBCallback)(int32_t result, DVDCommandBlock* block);
 
-struct DVDDiskID {
+typedef struct DVDDiskID {
     char game_name[4];
     char company[2];
     uint8_t disk_number;
@@ -58,7 +59,7 @@ struct DVDDiskID {
     uint8_t is_streaming;
     uint8_t streaming_buffer_size;
     uint8_t padding[22];
-} __attribute__((__packed__));
+} DVDDiskID;
 
 /*!
  * \typedef struct _dvdcmdblk dvdcmdblk
@@ -118,7 +119,7 @@ bool DVDOpenDir(const char* path, DVDDirCursor* dirinfo);
  * @param[out] entryInfo The data on the current entry.
  * @returns True if the cursor successfully fetched an entry. False otherwise.
  */
-bool DVDReadDir(DVDDirCursor* cursor, _DVDDirEntryInfo* entryInfo);
+bool DVDReadDir(DVDDirCursor* cursor, DVDDirEntryInfo* entryInfo);
 bool DVDCloseDir(DVDDirCursor*);
 
 #ifdef __cplusplus
