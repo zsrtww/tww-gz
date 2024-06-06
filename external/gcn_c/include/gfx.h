@@ -146,28 +146,17 @@
  * triangle strips or fans instead of discrete triangles.
  * @{
  */
-#define GX_POINTS 0xB8 /*!< Draws a series of points. Each vertex is a single point. */
-#define GX_LINES                                                                                   \
-    0xA8 /*!< Draws a series of unconnected line segments. Each pair of vertices makes a line. */
-#define GX_LINESTRIP                                                                               \
-    0xB0 /*!< Draws a series of lines. Each vertex (besides the first) makes a line between it and \
-            the previous. */
-#define GX_TRIANGLES                                                                               \
-    0x90 /*!< Draws a series of unconnected triangles. Three vertices make a single triangle. */
-#define GX_TRIANGLESTRIP                                                                           \
-    0x98 /*!< Draws a series of triangles. Each triangle (besides the first) shares a side with    \
-          * the previous triangle. \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \             \
-          * Each vertex (besides the first two) completes a triangle. */
-#define GX_TRIANGLEFAN                                                                             \
-    0xA0 /*!< Draws a single triangle fan. The first vertex is the "centerpoint". The second and   \
-          * third vertex complete  \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \             \
-          * the first triangle. Each subsequent vertex completes another triangle which shares a   \
-          * side with the previous \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ triangle    \
-          * (except the first triangle) and has the centerpoint vertex as one of the vertices. */
-#define GX_QUADS                                                                                   \
-    0x80 /*!< Draws a series of unconnected quads. Every four vertices completes a quad.           \
-          * Internally, each quad is \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \           \
-          * translated into a pair of triangles. */
+#define GX_POINTS 0xB8        /*!< Draws a series of points. Each vertex is a single point. */
+#define GX_LINES 0xA8         /*!< Draws a series of unconnected line segments. Each pair of vertices makes a line. */
+#define GX_LINESTRIP 0xB0     /*!< Draws a series of lines. Each vertex (besides the first) makes a line between it and the previous. */
+#define GX_TRIANGLES 0x90     /*!< Draws a series of unconnected triangles. Three vertices make a single triangle. */
+#define GX_TRIANGLESTRIP 0x98 /*!< Draws a series of triangles. Each triangle (besides the first) shares a side with the previous triangle. \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \
+                               * Each vertex (besides the first two) completes a triangle. */
+#define GX_TRIANGLEFAN 0xA0   /*!< Draws a single triangle fan. The first vertex is the "centerpoint". The second and third vertex complete  \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \
+                               * the first triangle. Each subsequent vertex completes another triangle which shares a side with the previous \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \
+                               * triangle (except the first triangle) and has the centerpoint vertex as one of the vertices. */
+#define GX_QUADS 0x80         /*!< Draws a series of unconnected quads. Every four vertices completes a quad. Internally, each quad is \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \
+                               * translated into a pair of triangles. */
 /*! @} */
 
 #define GX_SRC_REG 0
@@ -362,24 +351,19 @@
 /*! \addtogroup texgentyp Texture coordinate generation type
  * @{
  */
-#define GX_TG_MTX3x4                                                                               \
-    0 /*!< 2x4 matrix multiply on the input attribute and generate S,T texture coordinates. */
-#define GX_TG_MTX2x4                                                                               \
-    1 /*!< 3x4 matrix multiply on the input attribute and generate S,T,Q coordinates; S,T are then \
-       * divided \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \                               \
-       * by Q to produce the actual 2D texture coordinates. */
-#define GX_TG_BUMP0 2 /*!< Use light 0 in the bump map calculation. */
-#define GX_TG_BUMP1 3 /*!< Use light 1 in the bump map calculation. */
-#define GX_TG_BUMP2 4 /*!< Use light 2 in the bump map calculation. */
-#define GX_TG_BUMP3 5 /*!< Use light 3 in the bump map calculation. */
-#define GX_TG_BUMP4 6 /*!< Use light 4 in the bump map calculation. */
-#define GX_TG_BUMP5 7 /*!< Use light 5 in the bump map calculation. */
-#define GX_TG_BUMP6 8 /*!< Use light 6 in the bump map calculation. */
-#define GX_TG_BUMP7 9 /*!< Use light 7 in the bump map calculation. */
-#define GX_TG_SRTG                                                                                 \
-    10 /*!< Coordinates generated from vertex lighting results; one of the color channel results   \
-        * is converted \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ into texture            \
-        * coordinates. */
+#define GX_TG_MTX3x4 0 /*!< 2x4 matrix multiply on the input attribute and generate S,T texture coordinates. */
+#define GX_TG_MTX2x4 1 /*!< 3x4 matrix multiply on the input attribute and generate S,T,Q coordinates; S,T are then divided \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \
+                        * by Q to produce the actual 2D texture coordinates. */
+#define GX_TG_BUMP0 2  /*!< Use light 0 in the bump map calculation. */
+#define GX_TG_BUMP1 3  /*!< Use light 1 in the bump map calculation. */
+#define GX_TG_BUMP2 4  /*!< Use light 2 in the bump map calculation. */
+#define GX_TG_BUMP3 5  /*!< Use light 3 in the bump map calculation. */
+#define GX_TG_BUMP4 6  /*!< Use light 4 in the bump map calculation. */
+#define GX_TG_BUMP5 7  /*!< Use light 5 in the bump map calculation. */
+#define GX_TG_BUMP6 8  /*!< Use light 6 in the bump map calculation. */
+#define GX_TG_BUMP7 9  /*!< Use light 7 in the bump map calculation. */
+#define GX_TG_SRTG 10  /*!< Coordinates generated from vertex lighting results; one of the color channel results is converted \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \
+                        * into texture coordinates. */
 /*! @} */
 
 /*! \addtogroup texgensrc Texture coordinate source
@@ -489,14 +473,11 @@
 /*! @} */
 
 /*! \addtogroup tevdefmode TEV combiner operation
- * \brief Color/Alpha combiner modes for GX_SetTevOp().
+ * \brief Color/Alpha combiner modes for GXSetTevOp().
  *
- * \details For these equations, <i>Cv</i> is the output color for the stage, <i>Cr</i> is the
- * output color of previous stage, and <i>Ct</i> is the texture color. <i>Av</i> is the output alpha
- * for a stage, <i>Ar</i> is the output alpha of previous stage, and <i>At</i> is the texture alpha.
- * As a special case, rasterized color
- * (<tt>GX_CC_RASC</tt>) is used as <i>Cr</i> and rasterized alpha (<tt>GX_CA_RASA</tt>) is used as
- * <i>Ar</i> at the first TEV stage because there is no previous stage.
+ * \details For these equations, <i>Cv</i> is the output color for the stage, <i>Cr</i> is the output color of previous stage, and <i>Ct</i> is the texture color. <i>Av</i> is the output
+ * alpha for a stage, <i>Ar</i> is the output alpha of previous stage, and <i>At</i> is the texture alpha. As a special case, rasterized color
+ * (<tt>GX_CC_RASC</tt>) is used as <i>Cr</i> and rasterized alpha (<tt>GX_CA_RASA</tt>) is used as <i>Ar</i> at the first TEV stage because there is no previous stage.
  *
  * @{
  */
@@ -548,9 +529,8 @@
 /*! @} */
 
 /*! \addtogroup tevstage TEV stage
- * \details The GameCube's Graphics Processor (GP) can use up to 16 stages to compute a texel for a
- * particular surface. By default, each texture will use two stages, but it can be configured
- * through various functions calls.
+ * \details The GameCube's Graphics Processor (GP) can use up to 16 stages to compute a texel for a particular surface.
+ * By default, each texture will use two stages, but it can be configured through various functions calls.
  *
  * \note This is different from \ref texmapid s, where textures are loaded into.
  * @{
@@ -673,10 +653,8 @@
 #define GX_TEXMAP6 6 /*!< Texture map slot 6 */
 #define GX_TEXMAP7 7 /*!< Texture map slot 7 */
 #define GX_MAX_TEXMAP 8
-#define GX_TEXMAP_NULL 0xff /*!< No texmap */
-#define GX_TEXMAP_DISABLE                                                                          \
-    0x100 /*!< Disable texmap lookup for this texmap slot (use bitwise OR with a texture map       \
-             slot). */
+#define GX_TEXMAP_NULL 0xff     /*!< No texmap */
+#define GX_TEXMAP_DISABLE 0x100 /*!< Disable texmap lookup for this texmap slot (use bitwise OR with a texture map slot). */
 /*! @} */
 
 /*! \addtogroup alphaop Alpha combine control
@@ -1057,30 +1035,23 @@
  * the triangle. A coverage of 1 indicates that only 1 pixel in the quad intersected the triangle.
  * @{
  */
-#define GX_PERF0_VERTICES 0  /*!< Number of vertices processed by the GP. */
-#define GX_PERF0_CLIP_VTX 1  /*!< Number of vertices that were clipped by the GP. */
-#define GX_PERF0_CLIP_CLKS 2 /*!< Number of GP clocks spent clipping. */
-#define GX_PERF0_XF_WAIT_IN                                                                        \
-    3 /*!< Number of cycles the XF is waiting on input. If the XF is waiting a large percentage \  \
-       * \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \                                         \
-       * of the total time, it may indicate that the CPU is not supplying data fast enough to   \  \
-       * \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ keep the GP busy. */
-#define GX_PERF0_XF_WAIT_OUT                                                                       \
-    4 /*!< Number of cycles the XF waits to send its output to the rest of the GP pipeline. If \ \ \
-       * \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ the XF cannot output, it may indicate     \
-       * that the GP is currently fill-rate limited. */
-#define GX_PERF0_XF_XFRM_CLKS 5 /*!< Number of cycles the transform engine is busy. */
-#define GX_PERF0_XF_LIT_CLKS 6  /*!< Number of cycles the lighting engine is busy. */
-#define GX_PERF0_XF_BOT_CLKS                                                                       \
-    7 /*!< Number of cycles the bottom of the pipe (result combiner) is busy. */
+#define GX_PERF0_VERTICES 0      /*!< Number of vertices processed by the GP. */
+#define GX_PERF0_CLIP_VTX 1      /*!< Number of vertices that were clipped by the GP. */
+#define GX_PERF0_CLIP_CLKS 2     /*!< Number of GP clocks spent clipping. */
+#define GX_PERF0_XF_WAIT_IN 3    /*!< Number of cycles the XF is waiting on input. If the XF is waiting a large percentage \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \
+                                  * of the total time, it may indicate that the CPU is not supplying data fast enough to   \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \
+                                  * keep the GP busy. */
+#define GX_PERF0_XF_WAIT_OUT 4   /*!< Number of cycles the XF waits to send its output to the rest of the GP pipeline. If \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \
+                                  * the XF cannot output, it may indicate that the GP is currently fill-rate limited. */
+#define GX_PERF0_XF_XFRM_CLKS 5  /*!< Number of cycles the transform engine is busy. */
+#define GX_PERF0_XF_LIT_CLKS 6   /*!< Number of cycles the lighting engine is busy. */
+#define GX_PERF0_XF_BOT_CLKS 7   /*!< Number of cycles the bottom of the pipe (result combiner) is busy. */
 #define GX_PERF0_XF_REGLD_CLKS 8 /*!< Number of cycles are spent loading XF state registers. */
 #define GX_PERF0_XF_REGRD_CLKS 9 /*!< Number of cycles the XF reads the state registers. */
 #define GX_PERF0_CLIP_RATIO 10
-#define GX_PERF0_TRIANGLES 11 /*!< Number of triangles. */
-#define GX_PERF0_TRIANGLES_CULLED                                                                  \
-    12 /*!< Number of triangles that <i>failed</i> the front-face/back-face culling test. */
-#define GX_PERF0_TRIANGLES_PASSED                                                                  \
-    13 /*!< Number of triangles that <i>passed</i> the front-face/back-face culling test. */
+#define GX_PERF0_TRIANGLES 11           /*!< Number of triangles. */
+#define GX_PERF0_TRIANGLES_CULLED 12    /*!< Number of triangles that <i>failed</i> the front-face/back-face culling test. */
+#define GX_PERF0_TRIANGLES_PASSED 13    /*!< Number of triangles that <i>passed</i> the front-face/back-face culling test. */
 #define GX_PERF0_TRIANGLES_SCISSORED 14 /*!< Number of triangles that are scissored. */
 #define GX_PERF0_TRIANGLES_0TEX 15
 #define GX_PERF0_TRIANGLES_1TEX 16
@@ -1101,12 +1072,8 @@
 #define GX_PERF0_QUAD_3CVG 31    /*!< Number of quads with 3 pixel coverage. */
 #define GX_PERF0_QUAD_4CVG 32    /*!< Number of quads with 4 pixel coverage. */
 #define GX_PERF0_AVG_QUAD_CNT 33 /*!< Average quad count; average based on what is unknown */
-#define GX_PERF0_CLOCKS                                                                            \
-    34 /*!< Number of GP clocks that have elapsed since the previous call to GX_ReadGP0Metric().   \
-        */
-#define GX_PERF0_NONE                                                                              \
-    35 /*!< Disables performance measurement for perf0 and resets the counter.                     \
-        */
+#define GX_PERF0_CLOCKS 34       /*!< Number of GP clocks that have elapsed since the previous call to GXReadGP0Metric(). */
+#define GX_PERF0_NONE 35         /*!< Disables performance measurement for perf0 and resets the counter. */
 /*! @} */
 
 /*! \addtogroup perf1metrics Performance counter 1 metric
@@ -1123,12 +1090,10 @@
  * \note <tt>GX_PERF1_VC_*</tt> count different vertex cache stall conditions.
  * @{
  */
-#define GX_PERF1_TEXELS 0  /*!< Number of texels processed by the GP. */
-#define GX_PERF1_TX_IDLE 1 /*!< Number of clocks that the texture unit (TX) is idle. */
-#define GX_PERF1_TX_REGS                                                                           \
-    2 /*!< Number of GP clocks spent writing to state registers in the TX unit. */
-#define GX_PERF1_TX_MEMSTALL                                                                       \
-    3 /*!< Number of GP clocks the TX unit is stalled waiting for main memory. */
+#define GX_PERF1_TEXELS 0      /*!< Number of texels processed by the GP. */
+#define GX_PERF1_TX_IDLE 1     /*!< Number of clocks that the texture unit (TX) is idle. */
+#define GX_PERF1_TX_REGS 2     /*!< Number of GP clocks spent writing to state registers in the TX unit. */
+#define GX_PERF1_TX_MEMSTALL 3 /*!< Number of GP clocks the TX unit is stalled waiting for main memory. */
 #define GX_PERF1_TC_CHECK1_2 4
 #define GX_PERF1_TC_CHECK3_4 5
 #define GX_PERF1_TC_CHECK5_6 6
@@ -1141,22 +1106,14 @@
 #define GX_PERF1_VC_MISSREP_FULL 13
 #define GX_PERF1_VC_STREAMBUF_LOW 14
 #define GX_PERF1_VC_ALL_STALLS 15
-#define GX_PERF1_VERTICES 16 /*!< Number of vertices processed by the GP. */
-#define GX_PERF1_FIFO_REQ 17 /*!< Number of lines (32B) read from the GP FIFO. */
-#define GX_PERF1_CALL_REQ 18 /*!< Number of lines (32B) read from called display lists. */
-#define GX_PERF1_VC_MISS_REQ                                                                       \
-    19 /*!< Number vertex cache miss request. Each miss requests a 32B transfer from main memory.  \
-        */
-#define GX_PERF1_CP_ALL_REQ                                                                        \
-    20 /*!< Counts all requests (32B/request) from the GP Command Processor (CP). It should be     \
-        * equal to \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \                             \
-        * the sum of counts returned by <tt>GX_PERF1_FIFO_REQ</tt>, <tt>GX_PERF1_CALL_REQ</tt>,    \
-        * and <tt>GX_PERF1_VC_MISS_REQ</tt>. */
-#define GX_PERF1_CLOCKS                                                                            \
-    21 /*!< Number of GP clocks that have elapsed since the last call to GX_ReadGP1Metric(). */
-#define GX_PERF1_NONE                                                                              \
-    22 /*!< Disables performance measurement for perf1 and resets the counter.                     \
-        */
+#define GX_PERF1_VERTICES 16    /*!< Number of vertices processed by the GP. */
+#define GX_PERF1_FIFO_REQ 17    /*!< Number of lines (32B) read from the GP FIFO. */
+#define GX_PERF1_CALL_REQ 18    /*!< Number of lines (32B) read from called display lists. */
+#define GX_PERF1_VC_MISS_REQ 19 /*!< Number vertex cache miss request. Each miss requests a 32B transfer from main memory. */
+#define GX_PERF1_CP_ALL_REQ 20  /*!< Counts all requests (32B/request) from the GP Command Processor (CP). It should be equal to \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \
+                                 * the sum of counts returned by <tt>GX_PERF1_FIFO_REQ</tt>, <tt>GX_PERF1_CALL_REQ</tt>, and <tt>GX_PERF1_VC_MISS_REQ</tt>. */
+#define GX_PERF1_CLOCKS 21      /*!< Number of GP clocks that have elapsed since the last call to GXReadGP1Metric(). */
+#define GX_PERF1_NONE 22        /*!< Disables performance measurement for perf1 and resets the counter. */
 /*! @} */
 
 /*! \addtogroup tlutname TLUT name
@@ -1164,7 +1121,7 @@
  *
  * \details Each table <tt>GX_TLUT0</tt>-<tt>GX_TLUT15</tt> contains 256 entries,16b per entry.
  * <tt>GX_BIGTLUT0</tt>-<tt>3</tt> contains 1024 entries, 16b per entry. Used for configuring
- * texture memory in GX_Init().
+ * texture memory in GXInit().
  * @{
  */
 #define GX_TLUT0 0
@@ -1209,11 +1166,8 @@ typedef union _wgpipe {
     volatile float F32;
 } WGPipe;
 
-#ifndef wgPipe_addr
-#warning "Using default wgPipe address of 0xCC008000"
-#define wgPipe_addr 0xCC008000
-#endif
-#define wgPipe ((WGPipe*)wgPipe_addr)
+// Default address should be 0xCC008000 for all versions and platforms
+extern WGPipe wgPipe;
 
 typedef struct _gx_color {
     uint8_t r;
@@ -1284,748 +1238,341 @@ typedef void (*GXDrawSyncCallback)(uint16_t token);
 typedef GXTexRegion* (*GXTexRegionCallback)(GXTexObj* obj, uint8_t mapid);
 typedef GXTlutRegion* (*GXTlutRegionCallback)(uint32_t tlut_name);
 
+extern "C" {
 // Function Pointers
-typedef GXFifoObj* (*GXInit_t)(void* base, uint32_t size);
-typedef void (*GXInitFifoBase_t)(GXFifoObj* fifo, void* base, uint32_t size);
-typedef void (*GXInitFifoPtrs_t)(GXFifoObj* fifo, void* rd_ptr, void* wt_ptr);
-typedef void (*GXInitFifoLimits_t)(GXFifoObj* fifo, uint32_t hiwatermark, uint32_t lowatermark);
-typedef void (*GXSetCPUFifo_t)(GXFifoObj* fifo);
-typedef void (*GXSetGPFifo_t)(GXFifoObj* fifo);
-typedef void (*GXGetGPStatus_t)(uint8_t* overhi, uint8_t* underlow, uint8_t* readIdle,
-                                uint8_t* cmdIdle, uint8_t* brkpt);
-typedef void* (*GXGetFifoBase_t)(GXFifoObj* fifo);
-typedef uint32_t (*GXGetFifoSize_t)(GXFifoObj* fifo);
-typedef GXBreakPtCallback (*GXSetBreakPtCallback_t)(GXBreakPtCallback cb);
-typedef uint32_t (*GXSetCurrentGXThread_t)(void);
-typedef uint32_t (*GXGetCurrentGXThread_t)(void);
-typedef void (*GXGetCPUFifo_t)(GXFifoObj* fifo);
-typedef void (*GXGetGPFifo_t)(GXFifoObj* fifo);
-typedef void (*GXSetVtxDesc_t)(uint8_t attr, uint8_t type);
-typedef void (*GXSetVtxDescv_t)(GXVtxDesc* attr_list);
-typedef void (*GXClearVtxDesc_t)(void);
-typedef void (*GXSetVtxAttrFmt_t)(uint8_t vtxfmt, uint32_t vtxattr, uint32_t comptype,
-                                  uint32_t compsize, uint32_t frac);
-typedef void (*GXSetVtxAttrFmtv_t)(uint8_t vtxfmt, GXVtxAttrFmt* attr_list);
-typedef void (*GXSetArray_t)(uint32_t attr, void* ptr, uint8_t stride);
-typedef void (*GXSetTexCoordGen2_t)(uint16_t texcoord, uint32_t tgen_typ, uint32_t tgen_src,
-                                    uint32_t mtxsrc, uint32_t normalize, uint32_t postmtx);
-typedef void (*GXSetNumTexGens_t)(uint32_t nr);
-typedef void (*GXSetMisc_t)(uint32_t token, uint32_t value);
-typedef void (*GXFlush_t)(void);
-typedef void (*GXAbortFrame_t)(void);
-typedef void (*GXSetDrawDone_t)(void);
-typedef void (*GXDrawDone_t)(void);
-typedef void (*GXPixModeSync_t)(void);
-typedef void (*GXPokeAlphaMode_t)(uint8_t func, uint8_t threshold);
-typedef void (*GXPokeAlphaRead_t)(uint8_t mode);
-typedef void (*GXPokeAlphaUpdate_t)(uint8_t update_enable);
-typedef void (*GXPokeBlendMode_t)(uint8_t type, uint8_t src_fact, uint8_t dst_fact, uint8_t op);
-typedef void (*GXPokeColorUpdate_t)(uint8_t update_enable);
-typedef void (*GXPokeDstAlpha_t)(uint8_t enable, uint8_t a);
-typedef void (*GXPokeDither_t)(uint8_t dither);
-typedef void (*GXPokeZMode_t)(uint8_t comp_enable, uint8_t func, uint8_t update_enable);
-typedef void (*GXPeekZ_t)(uint16_t x, uint16_t y, uint32_t* z);
-typedef GXDrawSyncCallback (*GXSetDrawSyncCallback_t)(GXDrawSyncCallback cb);
-typedef GXDrawDoneCallback (*GXSetDrawDoneCallback_t)(GXDrawDoneCallback cb);
-typedef void (*GXBegin_t)(uint8_t primitve, uint8_t vtxfmt, uint16_t vtxcnt);
-typedef void (*GXSetLineWidth_t)(uint8_t width, uint8_t fmt);
-typedef void (*GXSetPointSize_t)(uint8_t width, uint8_t fmt);
-typedef void (*GXEnableTexOffsets_t)(uint8_t coord, uint8_t line_enable, uint8_t point_enable);
-typedef void (*GXSetCullMode_t)(uint8_t mode);
-typedef void (*GXSetCoPlanar_t)(uint8_t enable);
-typedef void (*GXSetDispCopySrc_t)(uint16_t left, uint16_t top, uint16_t wd, uint16_t ht);
-typedef void (*GXSetTexCopySrc_t)(uint16_t left, uint16_t top, uint16_t wd, uint16_t ht);
-typedef void (*GXSetDispCopyDst_t)(uint16_t wd, uint16_t ht);
-typedef void (*GXSetTexCopyDst_t)(uint16_t wd, uint16_t ht, uint32_t fmt, uint8_t mipmap);
-typedef void (*GXSetDispCopyFrame2Field_t)(uint8_t mode);
-typedef void (*GXSetCopyClamp_t)(uint8_t clamp);
-typedef float (*GXGetYScaleFactor_t)(uint16_t efbHeight, uint16_t xfbHeight);
-typedef uint32_t (*GXSetDispCopyYScale_t)(float yscale);
-typedef void (*GXSetCopyClear_t)(GXColor color, uint32_t zvalue);
-typedef void (*GXSetCopyFilter_t)(uint8_t aa, uint8_t sample_pattern[12][2], uint8_t vf,
-                                  uint8_t vfilter[7]);
-typedef void (*GXSetDispCopyGamma_t)(uint8_t gamma);
-typedef void (*GXCopyDisp_t)(void* dest, uint8_t clear);
-typedef void (*GXCopyTex_t)(void* dest, uint8_t clear);
-typedef void (*GXClearBoundingBox_t)(void);
-typedef void (*GXInitLightAttn_t)(GXLightObj* lit_obj, float a0, float a1, float a2, float k0,
-                                  float k1, float k2);
-typedef void (*GXInitLightSpot_t)(GXLightObj* lit_obj, float cut_off, uint8_t spotfn);
-typedef void (*GXInitLightDistAttn_t)(GXLightObj* lit_obj, float ref_dist, float ref_brite,
-                                      uint8_t dist_fn);
-typedef void (*GXInitLightPos_t)(GXLightObj* lit_obj, float x, float y, float z);
-typedef void (*GXInitLightDir_t)(GXLightObj* lit_obj, float nx, float ny, float nz);
-typedef void (*GXInitLightColor_t)(GXLightObj* lit_obj, GXColor col);
-typedef void (*GXSetChanAmbColor_t)(int32_t channel, GXColor color);
-typedef void (*GXSetChanMatColor_t)(int32_t channel, GXColor color);
-typedef void (*GXSetNumChans_t)(uint8_t num);
-typedef void (*GXSetChanCtrl_t)(int32_t channel, uint8_t enable, uint8_t ambsrc, uint8_t matsrc,
-                                uint8_t litmask, uint8_t diff_fn, uint8_t attn_fn);
-typedef uint32_t (*GXGetTexBufferSize_t)(uint16_t wd, uint16_t ht, uint32_t fmt, uint8_t mipmap,
-                                         uint8_t maxlod);
-typedef void (*GXInitTexObj_t)(GXTexObj* obj, void* img_ptr, uint16_t wd, uint16_t ht, uint8_t fmt,
-                               uint8_t wrap_s, uint8_t wrap_t, uint8_t mipmap);
-typedef void (*GXInitTexObjCI_t)(GXTexObj* obj, void* img_ptr, uint16_t wd, uint16_t ht,
-                                 uint8_t fmt, uint8_t wrap_s, uint8_t wrap_t, uint8_t mipmap,
-                                 uint32_t tlut_name);
-typedef void (*GXInitTexObjLOD_t)(GXTexObj* obj, uint8_t minfilt, uint8_t magfilt, float minlod,
-                                  float maxlod, float lodbias, uint8_t biasclamp, uint8_t edgelod,
-                                  uint8_t maxaniso);
-typedef uint16_t (*GXGetTexObjWidth_t)(GXTexObj* obj);
-typedef uint16_t (*GXGetTexObjHeight_t)(GXTexObj* obj);
-typedef uint32_t (*GXGetTexObjFmt_t)(GXTexObj* obj);
-typedef uint8_t (*GXGetTexObjWrapS_t)(GXTexObj* obj);
-typedef uint8_t (*GXGetTexObjWrapT_t)(GXTexObj* obj);
-typedef uint32_t (*GXGetTexObjMipMap_t)(GXTexObj* obj);
-typedef void (*GXLoadTexObj_t)(GXTexObj* obj, uint8_t mapid);
-typedef void (*GXInitTlutObj_t)(GXTlutObj* obj, void* lut, uint8_t fmt, uint16_t entries);
-typedef void (*GXLoadTlut_t)(GXTlutObj* obj, uint32_t tlut_name);
-typedef void (*GXInitTexCacheRegion_t)(GXTexRegion* region, uint8_t iint32_tbmipmap,
-                                       uint32_t tmem_even, uint8_t size_even, uint32_t tmem_odd,
-                                       uint8_t size_odd);
-typedef void (*GXInitTlutRegion_t)(GXTlutRegion* region, uint32_t tmem_addr, uint8_t tlut_sz);
-typedef void (*GXInvalidateTexAll_t)(void);
-typedef GXTexRegionCallback (*GXSetTexRegionCallback_t)(GXTexRegionCallback cb);
-typedef GXTlutRegionCallback (*GXSetTlutRegionCallback_t)(GXTlutRegionCallback cb);
-typedef void (*GXSetTexCoordScaleManually_t)(uint8_t texcoord, uint8_t enable, uint16_t ss,
-                                             uint16_t ts);
-typedef void (*GXSetTevIndirect_t)(uint8_t tevstage, uint8_t indtexid, uint8_t format, uint8_t bias,
-                                   uint8_t mtxid, uint8_t wrap_s, uint8_t wrap_t, uint8_t addprev,
-                                   uint8_t utclod, uint8_t a);
-typedef void (*GXSetIndTexCoordScale_t)(uint8_t indtexid, uint8_t scale_s, uint8_t scale_t);
-typedef void (*GXSetIndTexOrder_t)(uint8_t indtexstage, uint8_t texcoord, uint8_t texmap);
-typedef void (*GXSetNumIndStages_t)(uint8_t nstages);
-typedef void (*GXSetTevDirect_t)(uint8_t tevstage);
-typedef void (*GXSetTevOp_t)(uint8_t tevstage, uint8_t mode);
-typedef void (*GXSetTevColorIn_t)(uint8_t tevstage, uint8_t a, uint8_t b, uint8_t c, uint8_t d);
-typedef void (*GXSetTevAlphaIn_t)(uint8_t tevstage, uint8_t a, uint8_t b, uint8_t c, uint8_t d);
-typedef void (*GXSetTevColorOp_t)(uint8_t tevstage, uint8_t tevop, uint8_t tevbias,
-                                  uint8_t tevscale, uint8_t clamp, uint8_t tevregid);
-typedef void (*GXSetTevAlphaOp_t)(uint8_t tevstage, uint8_t tevop, uint8_t tevbias,
-                                  uint8_t tevscale, uint8_t clamp, uint8_t tevregid);
-typedef void (*GXSetTevColor_t)(uint8_t tev_regid, GXColor color);
-typedef void (*GXSetTevColorS10_t)(uint8_t tev_regid, GXColorS10 color);
-typedef void (*GXSetTevKColor_t)(uint8_t sel, GXColor col);
-typedef void (*GXSetTevKColorSel_t)(uint8_t tevstage, uint8_t sel);
-typedef void (*GXSetTevKAlphaSel_t)(uint8_t tevstage, uint8_t sel);
-typedef void (*GXSetTevSwapMode_t)(uint8_t tevstage, uint8_t ras_sel, uint8_t tex_sel);
-typedef void (*GXSetTevSwapModeTable_t)(uint8_t swapid, uint8_t r, uint8_t g, uint8_t b, uint8_t a);
-typedef void (*GXSetAlphaCompare_t)(uint8_t comp0, uint8_t ref0, uint8_t aop, uint8_t comp1,
-                                    uint8_t ref1);
-typedef void (*GXSetZTexture_t)(uint8_t op, uint8_t fmt, uint32_t bias);
-typedef void (*GXSetTevOrder_t)(uint8_t tevstage, uint8_t texcoord, uint32_t texmap, uint8_t color);
-typedef void (*GXSetNumTevStages_t)(uint8_t num);
-typedef void (*GXSetFog_t)(uint8_t type, float startz, float endz, float nearz, float farz,
-                           GXColor col);
-typedef void (*GXSetFogRangeAdj_t)(uint8_t enable, uint16_t center, GXFogAdjTbl* table);
-typedef void (*GXSetBlendMode_t)(uint8_t type, uint8_t src_fact, uint8_t dst_fact, uint8_t op);
-typedef void (*GXSetColorUpdate_t)(uint8_t enable);
-typedef void (*GXSetAlphaUpdate_t)(uint8_t enable);
-typedef void (*GXSetZMode_t)(uint8_t enable, uint8_t func, uint8_t update_enable);
-typedef void (*GXSetZCompLoc_t)(uint8_t before_tex);
-typedef void (*GXSetPixelFmt_t)(uint8_t pix_fmt, uint8_t z_fmt);
-typedef void (*GXSetDither_t)(uint8_t dither);
-typedef void (*GXSetDstAlpha_t)(uint8_t enable, uint8_t a);
-typedef void (*GXSetFieldMask_t)(uint8_t even_mask, uint8_t odd_mask);
-typedef void (*GXSetFieldMode_t)(uint8_t field_mode, uint8_t half_aspect_ratio);
-typedef void (*GXLoadPosMtxImm_t)(Mtx mt, uint32_t pnidx);
-typedef void (*GXLoadNrmMtxImm_t)(Mtx mt, uint32_t pnidx);
-typedef void (*GXSetCurrentMtx_t)(uint32_t mtx);
-typedef void (*GXLoadTexMtxImm_t)(Mtx mt, uint32_t texidx, uint8_t type);
-typedef void (*GXSetViewport_t)(float xOrig, float yOrig, float wd, float ht, float nearZ,
-                                float farZ);
-typedef void (*GXSetScissor_t)(uint32_t xOrigin, uint32_t yOrigin, uint32_t wd, uint32_t ht);
-typedef void (*GXSetScissorBoxOffset_t)(int32_t xoffset, int32_t yoffset);
-typedef void (*GXSetClipMode_t)(uint8_t mode);
-typedef void (*GXSetGPMetric_t)(uint32_t perf0, uint32_t perf1);
-typedef void (*GXClearGPMetric_t)(void);
-typedef void (*GXReadXfRasMetric_t)(uint32_t* xfwaitin, uint32_t* xfwaitout, uint32_t* rasbusy,
-                                    uint32_t* clks);
+GXFifoObj* GXInit(void* base, uint32_t size);
+void GXInitFifoBase(GXFifoObj* fifo, void* base, uint32_t size);
+void GXInitFifoPtrs(GXFifoObj* fifo, void* rd_ptr, void* wt_ptr);
+void GXInitFifoLimits(GXFifoObj* fifo, uint32_t hiwatermark, uint32_t lowatermark);
+void GXSetCPUFifo(GXFifoObj* fifo);
+void GXSetGPFifo(GXFifoObj* fifo);
+void GXGetGPStatus(uint8_t* overhi, uint8_t* underlow, uint8_t* readIdle, uint8_t* cmdIdle,
+                   uint8_t* brkpt);
+void* GXGetFifoBase(GXFifoObj* fifo);
+uint32_t GXGetFifoSize(GXFifoObj* fifo);
+GXBreakPtCallback GXSetBreakPtCallback(GXBreakPtCallback cb);
+uint32_t GXSetCurrentGXThread(void);
+uint32_t GXGetCurrentGXThread(void);
+void GXGetCPUFifo(GXFifoObj* fifo);
+void GXGetGPFifo(GXFifoObj* fifo);
+void GXSetVtxDesc(uint8_t attr, uint8_t type);
+void GXSetVtxDescv(GXVtxDesc* attr_list);
+void GXClearVtxDesc(void);
+void GXSetVtxAttrFmt(uint8_t vtxfmt, uint32_t vtxattr, uint32_t comptype, uint32_t compsize,
+                     uint32_t frac);
+void GXSetVtxAttrFmtv(uint8_t vtxfmt, GXVtxAttrFmt* attr_list);
+void GXSetArray(uint32_t attr, void* ptr, uint8_t stride);
+void GXSetTexCoordGen2(uint16_t texcoord, uint32_t tgen_typ, uint32_t tgen_src, uint32_t mtxsrc,
+                       uint32_t normalize, uint32_t postmtx);
+void GXSetNumTexGens(uint32_t nr);
+void GXSetMisc(uint32_t token, uint32_t value);
+void GXFlush(void);
+void GXAbortFrame(void);
+void GXSetDrawDone(void);
+void GXDrawDone(void);
+void GXPixModeSync(void);
+void GXPokeAlphaMode(uint8_t func, uint8_t threshold);
+void GXPokeAlphaRead(uint8_t mode);
+void GXPokeAlphaUpdate(uint8_t update_enable);
+void GXPokeBlendMode(uint8_t type, uint8_t src_fact, uint8_t dst_fact, uint8_t op);
+void GXPokeColorUpdate(uint8_t update_enable);
+void GXPokeDstAlpha(uint8_t enable, uint8_t a);
+void GXPokeDither(uint8_t dither);
+void GXPokeZMode(uint8_t comp_enable, uint8_t func, uint8_t update_enable);
+void GXPeekZ(uint16_t x, uint16_t y, uint32_t* z);
+GXDrawSyncCallback GXSetDrawSyncCallback(GXDrawSyncCallback cb);
+GXDrawDoneCallback GXSetDrawDoneCallback(GXDrawDoneCallback cb);
+void GXBegin(uint8_t primitve, uint8_t vtxfmt, uint16_t vtxcnt);
+void GXSetLineWidth(uint8_t width, uint8_t fmt);
+void GXSetPointSize(uint8_t width, uint8_t fmt);
+void GXEnableTexOffsets(uint8_t coord, uint8_t line_enable, uint8_t point_enable);
+void GXSetCullMode(uint8_t mode);
+void GXSetCoPlanar(uint8_t enable);
+void GXSetDispCopySrc(uint16_t left, uint16_t top, uint16_t wd, uint16_t ht);
+void GXSetTexCopySrc(uint16_t left, uint16_t top, uint16_t wd, uint16_t ht);
+void GXSetDispCopyDst(uint16_t wd, uint16_t ht);
+void GXSetTexCopyDst(uint16_t wd, uint16_t ht, uint32_t fmt, uint8_t mipmap);
+void GXSetDispCopyFrame2Field(uint8_t mode);
+void GXSetCopyClamp(uint8_t clamp);
+float GXGetYScaleFactor(uint16_t efbHeight, uint16_t xfbHeight);
+uint32_t GXSetDispCopyYScale(float yscale);
+void GXSetCopyClear(GXColor color, uint32_t zvalue);
+void GXSetCopyFilter(uint8_t aa, uint8_t sample_pattern[12][2], uint8_t vf, uint8_t vfilter[7]);
+void GXSetDispCopyGamma(uint8_t gamma);
+void GXCopyDisp(void* dest, uint8_t clear);
+void GXCopyTex(void* dest, uint8_t clear);
+void GXClearBoundingBox(void);
+void GXInitLightAttn(GXLightObj* lit_obj, float a0, float a1, float a2, float k0, float k1,
+                     float k2);
+void GXInitLightSpot(GXLightObj* lit_obj, float cut_off, uint8_t spotfn);
+void GXInitLightDistAttn(GXLightObj* lit_obj, float ref_dist, float ref_brite, uint8_t dist_fn);
+void GXInitLightPos(GXLightObj* lit_obj, float x, float y, float z);
+void GXInitLightDir(GXLightObj* lit_obj, float nx, float ny, float nz);
+void GXInitLightColor(GXLightObj* lit_obj, GXColor col);
+void GXSetChanAmbColor(int32_t channel, GXColor color);
+void GXSetChanMatColor(int32_t channel, GXColor color);
+void GXSetNumChans(uint8_t num);
+void GXSetChanCtrl(int32_t channel, uint8_t enable, uint8_t ambsrc, uint8_t matsrc, uint8_t litmask,
+                   uint8_t diff_fn, uint8_t attn_fn);
+uint32_t GXGetTexBufferSize(uint16_t wd, uint16_t ht, uint32_t fmt, uint8_t mipmap, uint8_t maxlod);
+void GXInitTexObj(GXTexObj* obj, void* img_ptr, uint16_t wd, uint16_t ht, uint8_t fmt,
+                  uint8_t wrap_s, uint8_t wrap_t, uint8_t mipmap);
+void GXInitTexObjCI(GXTexObj* obj, void* img_ptr, uint16_t wd, uint16_t ht, uint8_t fmt,
+                    uint8_t wrap_s, uint8_t wrap_t, uint8_t mipmap, uint32_t tlut_name);
+void GXInitTexObjLOD(GXTexObj* obj, uint8_t minfilt, uint8_t magfilt, float minlod, float maxlod,
+                     float lodbias, uint8_t biasclamp, uint8_t edgelod, uint8_t maxaniso);
+uint16_t GXGetTexObjWidth(GXTexObj* obj);
+uint16_t GXGetTexObjHeight(GXTexObj* obj);
+uint32_t GXGetTexObjFmt(GXTexObj* obj);
+uint8_t GXGetTexObjWrapS(GXTexObj* obj);
+uint8_t GXGetTexObjWrapT(GXTexObj* obj);
+uint32_t GXGetTexObjMipMap(GXTexObj* obj);
+void GXLoadTexObj(GXTexObj* obj, uint8_t mapid);
+void GXInitTlutObj(GXTlutObj* obj, void* lut, uint8_t fmt, uint16_t entries);
+void GXLoadTlut(GXTlutObj* obj, uint32_t tlut_name);
+void GXInitTexCacheRegion(GXTexRegion* region, uint8_t iint32_tbmipmap, uint32_t tmem_even,
+                          uint8_t size_even, uint32_t tmem_odd, uint8_t size_odd);
+void GXInitTlutRegion(GXTlutRegion* region, uint32_t tmem_addr, uint8_t tlut_sz);
+void GXInvalidateTexAll(void);
+GXTexRegionCallback GXSetTexRegionCallback(GXTexRegionCallback cb);
+GXTlutRegionCallback GXSetTlutRegionCallback(GXTlutRegionCallback cb);
+void GXSetTexCoordScaleManually(uint8_t texcoord, uint8_t enable, uint16_t ss, uint16_t ts);
+void GXSetTevIndirect(uint8_t tevstage, uint8_t indtexid, uint8_t format, uint8_t bias,
+                      uint8_t mtxid, uint8_t wrap_s, uint8_t wrap_t, uint8_t addprev,
+                      uint8_t utclod, uint8_t a);
+void GXSetIndTexCoordScale(uint8_t indtexid, uint8_t scale_s, uint8_t scale_t);
+void GXSetIndTexOrder(uint8_t indtexstage, uint8_t texcoord, uint8_t texmap);
+void GXSetNumIndStages(uint8_t nstages);
+void GXSetTevDirect(uint8_t tevstage);
+void GXSetTevOp(uint8_t tevstage, uint8_t mode);
+void GXSetTevColorIn(uint8_t tevstage, uint8_t a, uint8_t b, uint8_t c, uint8_t d);
+void GXSetTevAlphaIn(uint8_t tevstage, uint8_t a, uint8_t b, uint8_t c, uint8_t d);
+void GXSetTevColorOp(uint8_t tevstage, uint8_t tevop, uint8_t tevbias, uint8_t tevscale,
+                     uint8_t clamp, uint8_t tevregid);
+void GXSetTevAlphaOp(uint8_t tevstage, uint8_t tevop, uint8_t tevbias, uint8_t tevscale,
+                     uint8_t clamp, uint8_t tevregid);
+void GXSetTevColor(uint8_t tev_regid, GXColor color);
+void GXSetTevColorS10(uint8_t tev_regid, GXColorS10 color);
+void GXSetTevKColor(uint8_t sel, GXColor col);
+void GXSetTevKColorSel(uint8_t tevstage, uint8_t sel);
+void GXSetTevKAlphaSel(uint8_t tevstage, uint8_t sel);
+void GXSetTevSwapMode(uint8_t tevstage, uint8_t ras_sel, uint8_t tex_sel);
+void GXSetTevSwapModeTable(uint8_t swapid, uint8_t r, uint8_t g, uint8_t b, uint8_t a);
+void GXSetAlphaCompare(uint8_t comp0, uint8_t ref0, uint8_t aop, uint8_t comp1, uint8_t ref1);
+void GXSetZTexture(uint8_t op, uint8_t fmt, uint32_t bias);
+void GXSetTevOrder(uint8_t tevstage, uint8_t texcoord, uint32_t texmap, uint8_t color);
+void GXSetNumTevStages(uint8_t num);
+void GXSetFog(uint8_t type, float startz, float endz, float nearz, float farz, GXColor col);
+void GXSetFogRangeAdj(uint8_t enable, uint16_t center, GXFogAdjTbl* table);
+void GXSetBlendMode(uint8_t type, uint8_t src_fact, uint8_t dst_fact, uint8_t op);
+void GXSetColorUpdate(uint8_t enable);
+void GXSetAlphaUpdate(uint8_t enable);
+void GXSetZMode(uint8_t enable, uint8_t func, uint8_t update_enable);
+void GXSetZCompLoc(uint8_t before_tex);
+void GXSetPixelFmt(uint8_t pix_fmt, uint8_t z_fmt);
+void GXSetDither(uint8_t dither);
+void GXSetDstAlpha(uint8_t enable, uint8_t a);
+void GXSetFieldMask(uint8_t even_mask, uint8_t odd_mask);
+void GXSetFieldMode(uint8_t field_mode, uint8_t half_aspect_ratio);
+void GXLoadPosMtxImm(Mtx mt, uint32_t pnidx);
+void GXLoadNrmMtxImm(Mtx mt, uint32_t pnidx);
+void GXSetCurrentMtx(uint32_t mtx);
+void GXLoadTexMtxImm(Mtx mt, uint32_t texidx, uint8_t type);
+void GXSetViewport(float xOrig, float yOrig, float wd, float ht, float nearZ, float farZ);
+void GXSetScissor(uint32_t xOrigin, uint32_t yOrigin, uint32_t wd, uint32_t ht);
+void GXSetScissorBoxOffset(int32_t xoffset, int32_t yoffset);
+void GXSetClipMode(uint8_t mode);
+void GXSetGPMetric(uint32_t perf0, uint32_t perf1);
+void GXClearGPMetric(void);
+void GXReadXfRasMetric(uint32_t* xfwaitin, uint32_t* xfwaitout, uint32_t* rasbusy, uint32_t* clks);
 
-static inline void GX_End(void) {}
+static inline void GXEnd(void) {}
 
-static inline void GX_Position3f32(float x, float y, float z) {
-    wgPipe->F32 = x;
-    wgPipe->F32 = y;
-    wgPipe->F32 = z;
+static inline void GXPosition3f32(float x, float y, float z) {
+    wgPipe.F32 = x;
+    wgPipe.F32 = y;
+    wgPipe.F32 = z;
 }
 
-static inline void GX_Position3u16(uint16_t x, uint16_t y, uint16_t z) {
-    wgPipe->U16 = x;
-    wgPipe->U16 = y;
-    wgPipe->U16 = z;
+static inline void GXPosition3u16(uint16_t x, uint16_t y, uint16_t z) {
+    wgPipe.U16 = x;
+    wgPipe.U16 = y;
+    wgPipe.U16 = z;
 }
 
-static inline void GX_Position3s16(int16_t x, int16_t y, int16_t z) {
-    wgPipe->S16 = x;
-    wgPipe->S16 = y;
-    wgPipe->S16 = z;
+static inline void GXPosition3s16(int16_t x, int16_t y, int16_t z) {
+    wgPipe.S16 = x;
+    wgPipe.S16 = y;
+    wgPipe.S16 = z;
 }
 
-static inline void GX_Position3u8(uint8_t x, uint8_t y, uint8_t z) {
-    wgPipe->U8 = x;
-    wgPipe->U8 = y;
-    wgPipe->U8 = z;
+static inline void GXPosition3u8(uint8_t x, uint8_t y, uint8_t z) {
+    wgPipe.U8 = x;
+    wgPipe.U8 = y;
+    wgPipe.U8 = z;
 }
 
-static inline void GX_Position3s8(int8_t x, int8_t y, int8_t z) {
-    wgPipe->S8 = x;
-    wgPipe->S8 = y;
-    wgPipe->S8 = z;
+static inline void GXPosition3s8(int8_t x, int8_t y, int8_t z) {
+    wgPipe.S8 = x;
+    wgPipe.S8 = y;
+    wgPipe.S8 = z;
 }
 
-static inline void GX_Position2f32(float x, float y) {
-    wgPipe->F32 = x;
-    wgPipe->F32 = y;
+static inline void GXPosition2f32(float x, float y) {
+    wgPipe.F32 = x;
+    wgPipe.F32 = y;
 }
 
-static inline void GX_Position2u16(uint16_t x, uint16_t y) {
-    wgPipe->U16 = x;
-    wgPipe->U16 = y;
+static inline void GXPosition2u16(uint16_t x, uint16_t y) {
+    wgPipe.U16 = x;
+    wgPipe.U16 = y;
 }
 
-static inline void GX_Position2s16(int16_t x, int16_t y) {
-    wgPipe->S16 = x;
-    wgPipe->S16 = y;
+static inline void GXPosition2s16(int16_t x, int16_t y) {
+    wgPipe.S16 = x;
+    wgPipe.S16 = y;
 }
 
-static inline void GX_Position2u8(uint8_t x, uint8_t y) {
-    wgPipe->U8 = x;
-    wgPipe->U8 = y;
+static inline void GXPosition2u8(uint8_t x, uint8_t y) {
+    wgPipe.U8 = x;
+    wgPipe.U8 = y;
 }
 
-static inline void GX_Position2s8(int8_t x, int8_t y) {
-    wgPipe->S8 = x;
-    wgPipe->S8 = y;
+static inline void GXPosition2s8(int8_t x, int8_t y) {
+    wgPipe.S8 = x;
+    wgPipe.S8 = y;
 }
 
-static inline void GX_Position1x8(uint8_t index) {
-    wgPipe->U8 = index;
+static inline void GXPosition1x8(uint8_t index) {
+    wgPipe.U8 = index;
 }
 
-static inline void GX_Position1x16(uint16_t index) {
-    wgPipe->U16 = index;
+static inline void GXPosition1x16(uint16_t index) {
+    wgPipe.U16 = index;
 }
 
-static inline void GX_Normal3f32(float nx, float ny, float nz) {
-    wgPipe->F32 = nx;
-    wgPipe->F32 = ny;
-    wgPipe->F32 = nz;
+static inline void GXNormal3f32(float nx, float ny, float nz) {
+    wgPipe.F32 = nx;
+    wgPipe.F32 = ny;
+    wgPipe.F32 = nz;
 }
 
-static inline void GX_Normal3s16(int16_t nx, int16_t ny, int16_t nz) {
-    wgPipe->S16 = nx;
-    wgPipe->S16 = ny;
-    wgPipe->S16 = nz;
+static inline void GXNormal3s16(int16_t nx, int16_t ny, int16_t nz) {
+    wgPipe.S16 = nx;
+    wgPipe.S16 = ny;
+    wgPipe.S16 = nz;
 }
 
-static inline void GX_Normal3s8(int8_t nx, int8_t ny, int8_t nz) {
-    wgPipe->S8 = nx;
-    wgPipe->S8 = ny;
-    wgPipe->S8 = nz;
+static inline void GXNormal3s8(int8_t nx, int8_t ny, int8_t nz) {
+    wgPipe.S8 = nx;
+    wgPipe.S8 = ny;
+    wgPipe.S8 = nz;
 }
 
-static inline void GX_Normal1x8(uint8_t index) {
-    wgPipe->U8 = index;
+static inline void GXNormal1x8(uint8_t index) {
+    wgPipe.U8 = index;
 }
 
-static inline void GX_Normal1x16(uint16_t index) {
-    wgPipe->U16 = index;
+static inline void GXNormal1x16(uint16_t index) {
+    wgPipe.U16 = index;
 }
 
-static inline void GX_Color4u8(uint8_t r, uint8_t g, uint8_t b, uint8_t a) {
-    wgPipe->U8 = r;
-    wgPipe->U8 = g;
-    wgPipe->U8 = b;
-    wgPipe->U8 = a;
+static inline void GXColor4u8(uint8_t r, uint8_t g, uint8_t b, uint8_t a) {
+    wgPipe.U8 = r;
+    wgPipe.U8 = g;
+    wgPipe.U8 = b;
+    wgPipe.U8 = a;
 }
 
-static inline void GX_Color3u8(uint8_t r, uint8_t g, uint8_t b) {
-    wgPipe->U8 = r;
-    wgPipe->U8 = g;
-    wgPipe->U8 = b;
+static inline void GXColor3u8(uint8_t r, uint8_t g, uint8_t b) {
+    wgPipe.U8 = r;
+    wgPipe.U8 = g;
+    wgPipe.U8 = b;
 }
 
-static inline void GX_Color3f32(float r, float g, float b) {
-    wgPipe->U8 = (uint8_t)(r * 255.0);
-    wgPipe->U8 = (uint8_t)(g * 255.0);
-    wgPipe->U8 = (uint8_t)(b * 255.0);
+static inline void GXColor3f32(float r, float g, float b) {
+    wgPipe.U8 = (uint8_t)(r * 255.0);
+    wgPipe.U8 = (uint8_t)(g * 255.0);
+    wgPipe.U8 = (uint8_t)(b * 255.0);
 }
 
-static inline void GX_Color1u32(uint32_t clr) {
-    wgPipe->U32 = clr;
+static inline void GXColor1u32(uint32_t clr) {
+    wgPipe.U32 = clr;
 }
 
-static inline void GX_Color1u16(uint16_t clr) {
-    wgPipe->U16 = clr;
+static inline void GXColor1u16(uint16_t clr) {
+    wgPipe.U16 = clr;
 }
 
-static inline void GX_Color1x8(uint8_t index) {
-    wgPipe->U8 = index;
+static inline void GXColor1x8(uint8_t index) {
+    wgPipe.U8 = index;
 }
 
-static inline void GX_Color1x16(uint16_t index) {
-    wgPipe->U16 = index;
+static inline void GXColor1x16(uint16_t index) {
+    wgPipe.U16 = index;
 }
 
-static inline void GX_TexCoord2f32(float s, float t) {
-    wgPipe->F32 = s;
-    wgPipe->F32 = t;
+static inline void GXTexCoord2f32(float s, float t) {
+    wgPipe.F32 = s;
+    wgPipe.F32 = t;
 }
 
-static inline void GX_TexCoord2u16(uint16_t s, uint16_t t) {
-    wgPipe->U16 = s;
-    wgPipe->U16 = t;
+static inline void GXTexCoord2u16(uint16_t s, uint16_t t) {
+    wgPipe.U16 = s;
+    wgPipe.U16 = t;
 }
 
-static inline void GX_TexCoord2s16(int16_t s, int16_t t) {
-    wgPipe->S16 = s;
-    wgPipe->S16 = t;
+static inline void GXTexCoord2s16(int16_t s, int16_t t) {
+    wgPipe.S16 = s;
+    wgPipe.S16 = t;
 }
 
-static inline void GX_TexCoord2u8(uint8_t s, uint8_t t) {
-    wgPipe->U8 = s;
-    wgPipe->U8 = t;
+static inline void GXTexCoord2u8(uint8_t s, uint8_t t) {
+    wgPipe.U8 = s;
+    wgPipe.U8 = t;
 }
 
-static inline void GX_TexCoord2s8(int8_t s, int8_t t) {
-    wgPipe->S8 = s;
-    wgPipe->S8 = t;
+static inline void GXTexCoord2s8(int8_t s, int8_t t) {
+    wgPipe.S8 = s;
+    wgPipe.S8 = t;
 }
 
-static inline void GX_TexCoord1f32(float s) {
-    wgPipe->F32 = s;
+static inline void GXTexCoord1f32(float s) {
+    wgPipe.F32 = s;
 }
 
-static inline void GX_TexCoord1u16(uint16_t s) {
-    wgPipe->U16 = s;
+static inline void GXTexCoord1u16(uint16_t s) {
+    wgPipe.U16 = s;
 }
 
-static inline void GX_TexCoord1s16(int16_t s) {
-    wgPipe->S16 = s;
+static inline void GXTexCoord1s16(int16_t s) {
+    wgPipe.S16 = s;
 }
 
-static inline void GX_TexCoord1u8(uint8_t s) {
-    wgPipe->U8 = s;
+static inline void GXTexCoord1u8(uint8_t s) {
+    wgPipe.U8 = s;
 }
 
-static inline void GX_TexCoord1s8(int8_t s) {
-    wgPipe->S8 = s;
+static inline void GXTexCoord1s8(int8_t s) {
+    wgPipe.S8 = s;
 }
 
-static inline void GX_TexCoord1x8(uint8_t index) {
-    wgPipe->U8 = index;
+static inline void GXTexCoord1x8(uint8_t index) {
+    wgPipe.U8 = index;
 }
 
-static inline void GX_TexCoord1x16(uint16_t index) {
-    wgPipe->U16 = index;
+static inline void GXTexCoord1x16(uint16_t index) {
+    wgPipe.U16 = index;
 }
 
-static inline void GX_MatrixIndex1x8(uint8_t index) {
-    wgPipe->U8 = index;
+static inline void GXMatrixIndex1x8(uint8_t index) {
+    wgPipe.U8 = index;
 }
 
-// Defines
-#ifdef GXInit_addr
-#define GX_Init ((GXInit_t)(GXInit_addr))
-#endif
-#ifdef GXInitFifoBase_addr
-#define GX_InitFifoBase ((GXInitFifoBase_t)(GXInitFifoBase_addr))
-#endif
-#ifdef GXInitFifoPtrs_addr
-#define GX_InitFifoPtrs ((GXInitFifoPtrs_t)(GXInitFifoPtrs_addr))
-#endif
-#ifdef GXInitFifoLimits_addr
-#define GX_InitFifoLimits ((GXInitFifoLimits_t)(GXInitFifoLimits_addr))
-#endif
-#ifdef GXSetCPUFifo_addr
-#define GX_SetCPUFifo ((GXSetCPUFifo_t)(GXSetCPUFifo_addr))
-#endif
-#ifdef GXSetGPFifo_addr
-#define GX_SetGPFifo ((GXSetGPFifo_t)(GXSetGPFifo_addr))
-#endif
-#ifdef GXGetGPStatus_addr
-#define GX_GetGPStatus ((GXGetGPStatus_t)(GXGetGPStatus_addr))
-#endif
-#ifdef GXGetFifoBase_addr
-#define GX_GetFifoBase ((GXGetFifoBase_t)(GXGetFifoBase_addr))
-#endif
-#ifdef GXGetFifoSize_addr
-#define GX_GetFifoSize ((GXGetFifoSize_t)(GXGetFifoSize_addr))
-#endif
-#ifdef GXSetBreakPtCallback_addr
-#define GX_SetBreakPtCallback ((GXSetBreakPtCallback_t)(GXSetBreakPtCallback_addr))
-#endif
-#ifdef GXSetCurrentGXThread_addr
-#define GX_SetCurrentGXThread ((GXSetCurrentGXThread_t)(GXSetCurrentGXThread_addr))
-#endif
-#ifdef GXGetCurrentGXThread_addr
-#define GX_GetCurrentGXThread ((GXGetCurrentGXThread_t)(GXGetCurrentGXThread_addr))
-#endif
-#ifdef GXGetCPUFifo_addr
-#define GX_GetCPUFifo ((GXGetCPUFifo_t)(GXGetCPUFifo_addr))
-#endif
-#ifdef GXGetGPFifo_addr
-#define GX_GetGPFifo ((GXGetGPFifo_t)(GXGetGPFifo_addr))
-#endif
-#ifdef GXSetVtxDesc_addr
-#define GX_SetVtxDesc ((GXSetVtxDesc_t)(GXSetVtxDesc_addr))
-#endif
-#ifdef GXSetVtxDescv_addr
-#define GX_SetVtxDescv ((GXSetVtxDescv_t)(GXSetVtxDescv_addr))
-#endif
-#ifdef GXClearVtxDesc_addr
-#define GX_ClearVtxDesc ((GXClearVtxDesc_t)(GXClearVtxDesc_addr))
-#endif
-#ifdef GXSetVtxAttrFmt_addr
-#define GX_SetVtxAttrFmt ((GXSetVtxAttrFmt_t)(GXSetVtxAttrFmt_addr))
-#endif
-#ifdef GXSetVtxAttrFmtv_addr
-#define GX_SetVtxAttrFmtv ((GXSetVtxAttrFmtv_t)(GXSetVtxAttrFmtv_addr))
-#endif
-#ifdef GXSetArray_addr
-#define GX_SetArray ((GXSetArray_t)(GXSetArray_addr))
-#endif
-#ifdef GXSetTexCoordGen2_addr
-#define GX_SetTexCoordGen2 ((GXSetTexCoordGen2_t)(GXSetTexCoordGen2_addr))
-void inline GX_SetTexCoordGen(uint16_t texcoord, uint32_t tgen_typ, uint32_t tgen_src,
-                              uint32_t mtxsrc) {
-    GX_SetTexCoordGen2(texcoord, tgen_typ, tgen_src, mtxsrc, GX_FALSE, GX_DTTIDENTITY);
+void inline GXSetTexCoordGen(uint16_t texcoord, uint32_t tgen_typ, uint32_t tgen_src,
+                             uint32_t mtxsrc) {
+    GXSetTexCoordGen2(texcoord, tgen_typ, tgen_src, mtxsrc, GX_FALSE, GX_DTTIDENTITY);
 }
-#endif
-#ifdef GXSetNumTexGens_addr
-#define GX_SetNumTexGens ((GXSetNumTexGens_t)(GXSetNumTexGens_addr))
-#endif
-#ifdef GXSetMisc_addr
-#define GX_SetMisc ((GXSetMisc_t)(GXSetMisc_addr))
-#endif
-#ifdef GXFlush_addr
-#define GX_Flush ((GXFlush_t)(GXFlush_addr))
-#endif
-#ifdef GXAbortFrame_addr
-#define GX_AbortFrame ((GXAbortFrame_t)(GXAbortFrame_addr))
-#endif
-#ifdef GXSetDrawDone_addr
-#define GX_SetDrawDone ((GXSetDrawDone_t)(GXSetDrawDone_addr))
-#endif
-#ifdef GXDrawDone_addr
-#define GX_DrawDone ((GXDrawDone_t)(GXDrawDone_addr))
-#endif
-#ifdef GXPixModeSync_addr
-#define GX_PixModeSync ((GXPixModeSync_t)(GXPixModeSync_addr))
-#endif
-#ifdef GXPokeAlphaMode_addr
-#define GX_PokeAlphaMode ((GXPokeAlphaMode_t)(GXPokeAlphaMode_addr))
-#endif
-#ifdef GXPokeAlphaRead_addr
-#define GX_PokeAlphaRead ((GXPokeAlphaRead_t)(GXPokeAlphaRead_addr))
-#endif
-#ifdef GXPokeAlphaUpdate_addr
-#define GX_PokeAlphaUpdate ((GXPokeAlphaUpdate_t)(GXPokeAlphaUpdate_addr))
-#endif
-#ifdef GXPokeBlendMode_addr
-#define GX_PokeBlendMode ((GXPokeBlendMode_t)(GXPokeBlendMode_addr))
-#endif
-#ifdef GXPokeColorUpdate_addr
-#define GX_PokeColorUpdate ((GXPokeColorUpdate_t)(GXPokeColorUpdate_addr))
-#endif
-#ifdef GXPokeDstAlpha_addr
-#define GX_PokeDstAlpha ((GXPokeDstAlpha_t)(GXPokeDstAlpha_addr))
-#endif
-#ifdef GXPokeDither_addr
-#define GX_PokeDither ((GXPokeDither_t)(GXPokeDither_addr))
-#endif
-#ifdef GXPokeZMode_addr
-#define GX_PokeZMode ((GXPokeZMode_t)(GXPokeZMode_addr))
-#endif
-#ifdef GXPeekZ_addr
-#define GX_PeekZ ((GXPeekZ_t)(GXPeekZ_addr))
-#endif
-#ifdef GXSetDrawSyncCallback_addr
-#define GX_SetDrawSyncCallback ((GXSetDrawSyncCallback_t)(GXSetDrawSyncCallback_addr))
-#endif
-#ifdef GXSetDrawDoneCallback_addr
-#define GX_SetDrawDoneCallback ((GXSetDrawDoneCallback_t)(GXSetDrawDoneCallback_addr))
-#endif
-#ifdef GXBegin_addr
-#define GX_Begin ((GXBegin_t)(GXBegin_addr))
-#endif
-#ifdef GXSetLineWidth_addr
-#define GX_SetLineWidth ((GXSetLineWidth_t)(GXSetLineWidth_addr))
-#endif
-#ifdef GXSetPointSize_addr
-#define GX_SetPointSize ((GXSetPointSize_t)(GXSetPointSize_addr))
-#endif
-#ifdef GXEnableTexOffsets_addr
-#define GX_EnableTexOffsets ((GXEnableTexOffsets_t)(GXEnableTexOffsets_addr))
-#endif
-#ifdef GXSetCullMode_addr
-#define GX_SetCullMode ((GXSetCullMode_t)(GXSetCullMode_addr))
-#endif
-#ifdef GXSetCoPlanar_addr
-#define GX_SetCoPlanar ((GXSetCoPlanar_t)(GXSetCoPlanar_addr))
-#endif
-#ifdef GXSetDispCopySrc_addr
-#define GX_SetDispCopySrc ((GXSetDispCopySrc_t)(GXSetDispCopySrc_addr))
-#endif
-#ifdef GXSetTexCopySrc_addr
-#define GX_SetTexCopySrc ((GXSetTexCopySrc_t)(GXSetTexCopySrc_addr))
-#endif
-#ifdef GXSetDispCopyDst_addr
-#define GX_SetDispCopyDst ((GXSetDispCopyDst_t)(GXSetDispCopyDst_addr))
-#endif
-#ifdef GXSetTexCopyDst_addr
-#define GX_SetTexCopyDst ((GXSetTexCopyDst_t)(GXSetTexCopyDst_addr))
-#endif
-#ifdef GXSetDispCopyFrame2Field_addr
-#define GX_SetDispCopyFrame2Field ((GXSetDispCopyFrame2Field_t)(GXSetDispCopyFrame2Field_addr))
-#endif
-#ifdef GXSetCopyClamp_addr
-#define GX_SetCopyClamp ((GXSetCopyClamp_t)(GXSetCopyClamp_addr))
-#endif
-#ifdef GXGetYScaleFactor_addr
-#define GX_GetYScaleFactor ((GXGetYScaleFactor_t)(GXGetYScaleFactor_addr))
-#endif
-#ifdef GXSetDispCopyYScale_addr
-#define GX_SetDispCopyYScale ((GXSetDispCopyYScale_t)(GXSetDispCopyYScale_addr))
-#endif
-#ifdef GXSetCopyClear_addr
-#define GX_SetCopyClear ((GXSetCopyClear_t)(GXSetCopyClear_addr))
-#endif
-#ifdef GXSetCopyFilter_addr
-#define GX_SetCopyFilter ((GXSetCopyFilter_t)(GXSetCopyFilter_addr))
-#endif
-#ifdef GXSetDispCopyGamma_addr
-#define GX_SetDispCopyGamma ((GXSetDispCopyGamma_t)(GXSetDispCopyGamma_addr))
-#endif
-#ifdef GXCopyDisp_addr
-#define GX_CopyDisp ((GXCopyDisp_t)(GXCopyDisp_addr))
-#endif
-#ifdef GXCopyTex_addr
-#define GX_CopyTex ((GXCopyTex_t)(GXCopyTex_addr))
-#endif
-#ifdef GXClearBoundingBox_addr
-#define GX_ClearBoundingBox ((GXClearBoundingBox_t)(GXClearBoundingBox_addr))
-#endif
-#ifdef GXInitLightAttn_addr
-#define GX_InitLightAttn ((GXInitLightAttn_t)(GXInitLightAttn_addr))
-#endif
-#ifdef GXInitLightSpot_addr
-#define GX_InitLightSpot ((GXInitLightSpot_t)(GXInitLightSpot_addr))
-#endif
-#ifdef GXInitLightDistAttn_addr
-#define GX_InitLightDistAttn ((GXInitLightDistAttn_t)(GXInitLightDistAttn_addr))
-#endif
-#ifdef GXInitLightPos_addr
-#define GX_InitLightPos ((GXInitLightPos_t)(GXInitLightPos_addr))
-#endif
-#ifdef GXInitLightDir_addr
-#define GX_InitLightDir ((GXInitLightDir_t)(GXInitLightDir_addr))
-#endif
-#ifdef GXInitLightColor_addr
-#define GX_InitLightColor ((GXInitLightColor_t)(GXInitLightColor_addr))
-#endif
-#ifdef GXSetChanAmbColor_addr
-#define GX_SetChanAmbColor ((GXSetChanAmbColor_t)(GXSetChanAmbColor_addr))
-#endif
-#ifdef GXSetChanMatColor_addr
-#define GX_SetChanMatColor ((GXSetChanMatColor_t)(GXSetChanMatColor_addr))
-#endif
-#ifdef GXSetNumChans_addr
-#define GX_SetNumChans ((GXSetNumChans_t)(GXSetNumChans_addr))
-#endif
-#ifdef GXSetChanCtrl_addr
-#define GX_SetChanCtrl ((GXSetChanCtrl_t)(GXSetChanCtrl_addr))
-#endif
-#ifdef GXGetTexBufferSize_addr
-#define GX_GetTexBufferSize ((GXGetTexBufferSize_t)(GXGetTexBufferSize_addr))
-#endif
-#ifdef GXInitTexObj_addr
-#define GX_InitTexObj ((GXInitTexObj_t)(GXInitTexObj_addr))
-#endif
-#ifdef GXInitTexObjCI_addr
-#define GX_InitTexObjCI ((GXInitTexObjCI_t)(GXInitTexObjCI_addr))
-#endif
-#ifdef GXInitTexObjLOD_addr
-#define GX_InitTexObjLOD ((GXInitTexObjLOD_t)(GXInitTexObjLOD_addr))
-#endif
-#ifdef GXGetTexObjWidth_addr
-#define GX_GetTexObjWidth ((GXGetTexObjWidth_t)(GXGetTexObjWidth_addr))
-#endif
-#ifdef GXGetTexObjHeight_addr
-#define GX_GetTexObjHeight ((GXGetTexObjHeight_t)(GXGetTexObjHeight_addr))
-#endif
-#ifdef GXGetTexObjFmt_addr
-#define GX_GetTexObjFmt ((GXGetTexObjFmt_t)(GXGetTexObjFmt_addr))
-#endif
-#ifdef GXGetTexObjWrapS_addr
-#define GX_GetTexObjWrapS ((GXGetTexObjWrapS_t)(GXGetTexObjWrapS_addr))
-#endif
-#ifdef GXGetTexObjWrapT_addr
-#define GX_GetTexObjWrapT ((GXGetTexObjWrapT_t)(GXGetTexObjWrapT_addr))
-#endif
-#ifdef GXGetTexObjMipMap_addr
-#define GX_GetTexObjMipMap ((GXGetTexObjMipMap_t)(GXGetTexObjMipMap_addr))
-#endif
-#ifdef GXLoadTexObj_addr
-#define GX_LoadTexObj ((GXLoadTexObj_t)(GXLoadTexObj_addr))
-#endif
-#ifdef GXInitTlutObj_addr
-#define GX_InitTlutObj ((GXInitTlutObj_t)(GXInitTlutObj_addr))
-#endif
-#ifdef GXLoadTlut_addr
-#define GX_LoadTlut ((GXLoadTlut_t)(GXLoadTlut_addr))
-#endif
-#ifdef GXInitTexCacheRegion_addr
-#define GX_InitTexCacheRegion ((GXInitTexCacheRegion_t)(GXInitTexCacheRegion_addr))
-#endif
-#ifdef GXInitTlutRegion_addr
-#define GX_InitTlutRegion ((GXInitTlutRegion_t)(GXInitTlutRegion_addr))
-#endif
-#ifdef GXInvalidateTexAll_addr
-#define GX_InvalidateTexAll ((GXInvalidateTexAll_t)(GXInvalidateTexAll_addr))
-#endif
-#ifdef GXSetTexRegionCallback_addr
-#define GX_SetTexRegionCallback ((GXSetTexRegionCallback_t)(GXSetTexRegionCallback_addr))
-#endif
-#ifdef GXSetTlutRegionCallback_addr
-#define GX_SetTlutRegionCallback ((GXSetTlutRegionCallback_t)(GXSetTlutRegionCallback_addr))
-#endif
-#ifdef GXSetTexCoordScaleManually_addr
-#define GX_SetTexCoordScaleManually                                                                \
-    ((GXSetTexCoordScaleManually_t)(GXSetTexCoordScaleManually_addr))
-#endif
-#ifdef GXSetTevIndirect_addr
-#define GX_SetTevIndirect ((GXSetTevIndirect_t)(GXSetTevIndirect_addr))
-#endif
-#ifdef GXSetIndTexCoordScale_addr
-#define GX_SetIndTexCoordScale ((GXSetIndTexCoordScale_t)(GXSetIndTexCoordScale_addr))
-#endif
-#ifdef GXSetIndTexOrder_addr
-#define GX_SetIndTexOrder ((GXSetIndTexOrder_t)(GXSetIndTexOrder_addr))
-#endif
-#ifdef GXSetNumIndStages_addr
-#define GX_SetNumIndStages ((GXSetNumIndStages_t)(GXSetNumIndStages_addr))
-#endif
-#ifdef GXSetTevDirect_addr
-#define GX_SetTevDirect ((GXSetTevDirect_t)(GXSetTevDirect_addr))
-#endif
-#ifdef GXSetTevOp_addr
-#define GX_SetTevOp ((GXSetTevOp_t)(GXSetTevOp_addr))
-#endif
-#ifdef GXSetTevColorIn_addr
-#define GX_SetTevColorIn ((GXSetTevColorIn_t)(GXSetTevColorIn_addr))
-#endif
-#ifdef GXSetTevAlphaIn_addr
-#define GX_SetTevAlphaIn ((GXSetTevAlphaIn_t)(GXSetTevAlphaIn_addr))
-#endif
-#ifdef GXSetTevColorOp_addr
-#define GX_SetTevColorOp ((GXSetTevColorOp_t)(GXSetTevColorOp_addr))
-#endif
-#ifdef GXSetTevAlphaOp_addr
-#define GX_SetTevAlphaOp ((GXSetTevAlphaOp_t)(GXSetTevAlphaOp_addr))
-#endif
-#ifdef GXSetTevColor_addr
-#define GX_SetTevColor ((GXSetTevColor_t)(GXSetTevColor_addr))
-#endif
-#ifdef GXSetTevColorS10_addr
-#define GX_SetTevColorS10 ((GXSetTevColorS10_t)(GXSetTevColorS10_addr))
-#endif
-#ifdef GXSetTevKColor_addr
-#define GX_SetTevKColor ((GXSetTevKColor_t)(GXSetTevKColor_addr))
-#endif
-#ifdef GXSetTevKColorSel_addr
-#define GX_SetTevKColorSel ((GXSetTevKColorSel_t)(GXSetTevKColorSel_addr))
-#endif
-#ifdef GXSetTevKAlphaSel_addr
-#define GX_SetTevKAlphaSel ((GXSetTevKAlphaSel_t)(GXSetTevKAlphaSel_addr))
-#endif
-#ifdef GXSetTevSwapMode_addr
-#define GX_SetTevSwapMode ((GXSetTevSwapMode_t)(GXSetTevSwapMode_addr))
-#endif
-#ifdef GXSetTevSwapModeTable_addr
-#define GX_SetTevSwapModeTable ((GXSetTevSwapModeTable_t)(GXSetTevSwapModeTable_addr))
-#endif
-#ifdef GXSetAlphaCompare_addr
-#define GX_SetAlphaCompare ((GXSetAlphaCompare_t)(GXSetAlphaCompare_addr))
-#endif
-#ifdef GXSetZTexture_addr
-#define GX_SetZTexture ((GXSetZTexture_t)(GXSetZTexture_addr))
-#endif
-#ifdef GXSetTevOrder_addr
-#define GX_SetTevOrder ((GXSetTevOrder_t)(GXSetTevOrder_addr))
-#endif
-#ifdef GXSetNumTevStages_addr
-#define GX_SetNumTevStages ((GXSetNumTevStages_t)(GXSetNumTevStages_addr))
-#endif
-#ifdef GXSetFog_addr
-#define GX_SetFog ((GXSetFog_t)(GXSetFog_addr))
-#endif
-#ifdef GXSetFogRangeAdj_addr
-#define GX_SetFogRangeAdj ((GXSetFogRangeAdj_t)(GXSetFogRangeAdj_addr))
-#endif
-#ifdef GXSetBlendMode_addr
-#define GX_SetBlendMode ((GXSetBlendMode_t)(GXSetBlendMode_addr))
-#endif
-#ifdef GXSetColorUpdate_addr
-#define GX_SetColorUpdate ((GXSetColorUpdate_t)(GXSetColorUpdate_addr))
-#endif
-#ifdef GXSetAlphaUpdate_addr
-#define GX_SetAlphaUpdate ((GXSetAlphaUpdate_t)(GXSetAlphaUpdate_addr))
-#endif
-#ifdef GXSetZMode_addr
-#define GX_SetZMode ((GXSetZMode_t)(GXSetZMode_addr))
-#endif
-#ifdef GXSetZCompLoc_addr
-#define GX_SetZCompLoc ((GXSetZCompLoc_t)(GXSetZCompLoc_addr))
-#endif
-#ifdef GXSetPixelFmt_addr
-#define GX_SetPixelFmt ((GXSetPixelFmt_t)(GXSetPixelFmt_addr))
-#endif
-#ifdef GXSetDither_addr
-#define GX_SetDither ((GXSetDither_t)(GXSetDither_addr))
-#endif
-#ifdef GXSetDstAlpha_addr
-#define GX_SetDstAlpha ((GXSetDstAlpha_t)(GXSetDstAlpha_addr))
-#endif
-#ifdef GXSetFieldMask_addr
-#define GX_SetFieldMask ((GXSetFieldMask_t)(GXSetFieldMask_addr))
-#endif
-#ifdef GXSetFieldMode_addr
-#define GX_SetFieldMode ((GXSetFieldMode_t)(GXSetFieldMode_addr))
-#endif
-#ifdef GXLoadPosMtxImm_addr
-#define GX_LoadPosMtxImm ((GXLoadPosMtxImm_t)(GXLoadPosMtxImm_addr))
-#endif
-#ifdef GXLoadNrmMtxImm_addr
-#define GX_LoadNrmMtxImm ((GXLoadNrmMtxImm_t)(GXLoadNrmMtxImm_addr))
-#endif
-#ifdef GXSetCurrentMtx_addr
-#define GX_SetCurrentMtx ((GXSetCurrentMtx_t)(GXSetCurrentMtx_addr))
-#endif
-#ifdef GXLoadTexMtxImm_addr
-#define GX_LoadTexMtxImm ((GXLoadTexMtxImm_t)(GXLoadTexMtxImm_addr))
-#endif
-#ifdef GXSetViewport_addr
-#define GX_SetViewport ((GXSetViewport_t)(GXSetViewport_addr))
-#endif
-#ifdef GXSetScissor_addr
-#define GX_SetScissor ((GXSetScissor_t)(GXSetScissor_addr))
-#endif
-#ifdef GXSetScissorBoxOffset_addr
-#define GX_SetScissorBoxOffset ((GXSetScissorBoxOffset_t)(GXSetScissorBoxOffset_addr))
-#endif
-#ifdef GXSetClipMode_addr
-#define GX_SetClipMode ((GXSetClipMode_t)(GXSetClipMode_addr))
-#endif
-#ifdef GXSetGPMetric_addr
-#define GX_SetGPMetric ((GXSetGPMetric_t)(GXSetGPMetric_addr))
-#endif
-#ifdef GXClearGPMetric_addr
-#define GX_ClearGPMetric ((GXClearGPMetric_t)(GXClearGPMetric_addr))
-#endif
-#ifdef GXReadXfRasMetric_addr
-#define GX_ReadXfRasMetric ((GXReadXfRasMetric_t)(GXReadXfRasMetric_addr))
-#endif
+}
 
 #endif
