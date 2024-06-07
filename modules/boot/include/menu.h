@@ -57,6 +57,7 @@ enum MenuIndex {
 
     // Settings sub menus
     MN_EQUIP_PRIORITY_INDEX,
+    MN_POS_SETTINGS_INDEX,
 
     // This entry is used only to get a count of the number of valid entries.
     MN_COUNT

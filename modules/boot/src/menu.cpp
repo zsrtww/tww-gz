@@ -8,7 +8,7 @@ const char* g_menuPaths[MN_COUNT] = {
     "dungeon_flags",  "savewarp_flags", "tuner_flags",    "amounts",        "item_inventory",
     "quest_status",   "delivery_bag",   "spoils_bag",     "bait_bag",       "charts",
     "treasure_chart", "special_chart",  "triforce_chart", "watches",        "memory_editor",
-    "any_saves",      "nomss_saves",    "ad_saves",       "equip_priority",
+    "any_saves",      "nomss_saves",    "ad_saves",       "equip_priority", "pos_settings",
 };
 
 KEEP_FUNC Menu::Menu(Cursor& cursor) : cursor(cursor) {}

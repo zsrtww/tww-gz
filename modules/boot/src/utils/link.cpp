@@ -55,7 +55,7 @@ KEEP_FUNC void GZ_displayTimeInfo() {
     int hour = dKy_getdaytime_hour();
     int min = dKy_getdaytime_minute();
     int moonid = dKy_moon_type_chk();
-    int date = dComIfGs_getDate();
+    u16 date = dComIfGs_getDate();
 
     const char* moonphases[] = {
         "Full",          "Waning Gibbous", "Last Quarter", "Waning Crescent", "Waxing Crescent",
@@ -64,7 +64,7 @@ KEEP_FUNC void GZ_displayTimeInfo() {
 
     char Time[10];
     char Date[10];
-    char Moon[20];
+    char Moon[30];
 
     sprintf(Time, "%02d:%02d", hour, min);
     sprintf(Date, "date: %d", date);
