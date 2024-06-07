@@ -4,6 +4,7 @@
 #include "../addrs.h"
 #include "save/d_save.h"
 #include "../f_op/f_op_actor.h"
+#include "../defines.h"
 #include "kankyo/d_kankyo.h"
 #include <string.h>
 
@@ -441,5 +442,8 @@ struct dStage_objectNameInf {
 
 #define dStage_roomControl_c__mStayNo (*(s8*)(dStage_roomControl_c__mStayNo_addr))
 #define dStage_roomControl_c__m_time_pass (*(BOOL*)(dStage_roomControl_c__m_time_pass_addr))
+
+LIBTWW_DEFINE_FUNC(SetTimePass__20dStage_roomControl_cFi,
+                  void, dStage_roomControl_c__setTimePass, (int))
 
 #endif /* D_D_STAGE_H */

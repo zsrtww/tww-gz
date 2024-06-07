@@ -1,8 +1,9 @@
 #include "scene.h"
+#include "fifo_queue.h"
 #include "libtww/include/d/com/d_com_inf_game.h"
+#include "libtww/include/d/kankyo/d_kankyo.h"
+#include "libtww/include/m_Do/m_Do_printf.h"
 
-/* SceneItem g_sceneFlags[SCENE_AMNT] = {
-    {FREEZE_ACTOR_INDEX, false}, {HIDE_ACTOR_INDEX, false},    {DISABLE_BG_INDEX, false},
-    {DISABLE_SFX_INDEX, false},  {FREEZE_CAMERA_INDEX, false}, {HIDE_HUD_INDEX, false},
-    {FREEZE_TIME_INDEX, false},
-}; */
+KEEP_VAR SceneItem g_sceneFlags[SCENE_FLAG_AMNT] = {
+    {FREEZE_TIME_INDEX, false}
+};

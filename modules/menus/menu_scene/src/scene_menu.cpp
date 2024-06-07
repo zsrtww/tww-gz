@@ -8,6 +8,8 @@
 KEEP_FUNC SceneMenu::SceneMenu(Cursor& cursor)
     : Menu(cursor),
       lines{
+          {"freeze time", FREEZE_TIME_INDEX, "Freezes ingame time", true,
+                         &g_sceneFlags[FREEZE_TIME_INDEX].active},
           {"wind direction", MODIFY_WIND_INDEX, "Change the current wind direction"},
           {"chart set", MODIFY_CHART_SET_INDEX, "Change the current chart set"},
           {"current hour", TIME_HOURS_INDEX, "Change the current hour"},
@@ -17,30 +19,39 @@ KEEP_FUNC SceneMenu::SceneMenu(Cursor& cursor)
 
 SceneMenu::~SceneMenu() {}
 
-s16 windDirs[8] = {-0x8000, -0x6000, -0x4000, -0x2000, 0, 0x2000, 0x4000, 0x6000};
+#define WIND_DIR_E   0x0000
+#define WIND_DIR_SE  0x2000
+#define WIND_DIR_S   0x4000
+#define WIND_DIR_SW  0x6000
+#define WIND_DIR_W  -0x8000
+#define WIND_DIR_NW -0x6000
+#define WIND_DIR_N  -0x4000
+#define WIND_DIR_NE -0x2000
+
+s16 windDirs[8] = {WIND_DIR_W, WIND_DIR_NW, WIND_DIR_N, WIND_DIR_NE, WIND_DIR_E, WIND_DIR_SE, WIND_DIR_S, WIND_DIR_SW};
 
 const char* get_wind_str() {
     s16 wind = dkankyo_getWindDir();
     switch (wind) {
-    case 0:
+    case WIND_DIR_E:
         return "East";
-    case 0x2000:
+    case WIND_DIR_SE:
         return "South East";
-    case 0x4000:
+    case WIND_DIR_S:
         return "South";
-    case 0x6000:
+    case WIND_DIR_SW:
         return "South West";
-    case -0x8000:
+    case WIND_DIR_W:
         return "West";
-    case -0x6000:
+    case WIND_DIR_NW:
         return "North West";
-    case -0x4000:
+    case WIND_DIR_N:
         return "North";
-    case -0x2000:
+    case WIND_DIR_NE:
         return "North East";
     default:
         return "East";
-    };
+    }
 }
 
 void updateWindDir() {
@@ -49,21 +60,21 @@ void updateWindDir() {
     u8 wIndex = 0;
     int eventWindCheck = g_env_light.mWind.mEvtWindSet;
 
-    if (wind_dir == -32768) {
+    if (wind_dir == WIND_DIR_W) {
         wIndex = 0;
-    } else if (wind_dir == -24576) {
+    } else if (wind_dir == WIND_DIR_NW) {
         wIndex = 1;
-    } else if (wind_dir == -16384) {
+    } else if (wind_dir == WIND_DIR_N) {
         wIndex = 2;
-    } else if (wind_dir == -8192) {
+    } else if (wind_dir == WIND_DIR_NE) {
         wIndex = 3;
-    } else if (wind_dir == 0) {
+    } else if (wind_dir == WIND_DIR_E) {
         wIndex = 4;
-    } else if (wind_dir == 8192) {
+    } else if (wind_dir == WIND_DIR_SE) {
         wIndex = 5;
-    } else if (wind_dir == 16384) {
+    } else if (wind_dir == WIND_DIR_S) {
         wIndex = 6;
-    } else if (wind_dir == 24576) {
+    } else if (wind_dir == WIND_DIR_SW) {
         wIndex = 7;
     }
 
@@ -118,6 +129,10 @@ void SceneMenu::draw() {
     lines[TIME_HOURS_INDEX].printf(" <%d>", current_hour);
     lines[TIME_MINUTES_INDEX].printf(" <%d>", current_minute);
     lines[MODIFY_DATE_INDEX].printf(" <%d>", date);
+
+    if (GZ_getButtonTrig(SELECTION_BUTTON)) {
+        g_sceneFlags[cursor.y].active = !g_sceneFlags[cursor.y].active;
+    }
 
     switch (cursor.y) {
     case MODIFY_WIND_INDEX:

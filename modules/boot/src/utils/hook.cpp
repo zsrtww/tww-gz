@@ -3,6 +3,7 @@
 #include "boot.h"
 #include "controller.h"
 #include "tools.h"
+#include "scene.h"
 #include "save_manager.h"
 #include "libtww/include/addrs.h"
 #include "libtww/include/f_op/f_op_scene_req.h"
@@ -22,6 +23,7 @@ HOOK_DEF(void, dComIfGs_setGameStartStage, (void));
 HOOK_DEF(int, dScnPly_Draw, (void*));
 HOOK_DEF(void, putSave, (void*, int));
 HOOK_DEF(int, dScnPly__phase_1, (void*));
+HOOK_DEF(void, setDaytime, (void*));
 
 namespace Hook {
 void gameLoopHook(void) {
@@ -90,6 +92,14 @@ int dScnPly_DrawHook(void* _this) {
     }
 }
 
+void setDaytimeHook(void* i_this) {
+    if (g_sceneFlags[FREEZE_TIME_INDEX].active) {
+        return;
+    } else {
+        return setDaytimeTrampoline(i_this);
+    }
+}
+
 #define draw_console draw__17JUTConsoleManagerCFv
 #define f_fapGm_Execute fapGm_Execute__Fv
 
@@ -101,6 +111,7 @@ void dComIfGs_setGameStartStage__Fv(void);
 int dScnPly_Draw__FP13dScnPly_ply_c(void*);
 void putSave__10dSv_info_cFi(void*, int);
 int phase_1__FP13dScnPly_ply_c(void*);
+void setDaytime__18dScnKy_env_light_cFv(void*);
 }
 
 KEEP_FUNC void applyHooks() {
@@ -113,6 +124,7 @@ KEEP_FUNC void applyHooks() {
     APPLY_HOOK(dScnPly_Draw, &dScnPly_Draw__FP13dScnPly_ply_c, dScnPly_DrawHook);
     APPLY_HOOK(putSave, &putSave__10dSv_info_cFi, putSaveHook);
     APPLY_HOOK(dScnPly__phase_1, &phase_1__FP13dScnPly_ply_c, saveInjectHook);
+    APPLY_HOOK(setDaytime, &setDaytime__18dScnKy_env_light_cFv, setDaytimeHook);
 
 #undef APPLY_HOOK
 }

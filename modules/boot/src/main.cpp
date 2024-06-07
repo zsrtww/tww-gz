@@ -153,6 +153,14 @@ KEEP_FUNC void GZ_handleCardLoad() {
     GZ_loadGZSave(l_loadCard);
 }
 
+KEEP_FUNC void GZ_handleFlags_PreLoop() {
+    GZ_execute(GAME_LOOP);
+}
+
+KEEP_FUNC void GZ_handleFlags_PostLoop() {
+    GZ_execute(POST_GAME_LOOP);
+}
+
 KEEP_FUNC void GZ_renderMenuTitle() {
     if (g_menuMgr->isOpen()) {
         Font::GZ_drawStr("twwgz v" INTERNAL_GZ_VERSION, g_spriteOffsets[SPR_MENU_INDEX].x + 35.0f, 25.0f,
