@@ -72,6 +72,9 @@ KEEP_FUNC void Cursor::setMode(uint8_t m) {
     mode = m;
 }
 
+#include "libtww/include/d/com/d_com_inf_game.h"
+#include "geometry_draw.h"
+
 KEEP_FUNC void GZ_setCursorColor() {
     switch (g_cursorColorType) {
     case CURSOR_GREEN:

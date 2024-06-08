@@ -125,4 +125,9 @@ public:
     }
 };
 
+class cXy {
+public:
+    f32 x, y;
+};
+
 #endif

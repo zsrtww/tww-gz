@@ -1,6 +1,5 @@
 #include <cstdio>
 #include "utils/card.h"
-#include "math.h"
 #include "libtww/include/MSL_C/math.h"
 #include "libtww/include/MSL_C/string.h"
 #include "libtww/include/SSystem/SComponent/c_malloc.h"

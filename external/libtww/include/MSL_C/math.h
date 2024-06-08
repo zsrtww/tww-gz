@@ -42,4 +42,12 @@ extern "C" {
     double ceil(double);
 }
 
+inline float fcos(float v) {
+    return (float)cos(v);
+}
+
+inline float fsin(float v) {
+    return (float)sin(v);
+}
+
 #endif  // !LIB_TWW_MATH
