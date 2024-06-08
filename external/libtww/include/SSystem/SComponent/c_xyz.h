@@ -4,6 +4,7 @@
 #include "../../dolphin/gctypes.h"
 #include "../../dolphin/mtx/vec.h"
 #include "../../addrs.h"
+#include "../../MSL_C/math.h"
 
 class cXyz;
 
@@ -123,6 +124,21 @@ public:
             z = other.z;
         }
     }
+
+    float getSquareMag() const { return PSVECSquareMag(this); }
+    f32 getSquareDistance(const Vec& other) const { return PSVECSquareDistance(this, &other); }
+
+    f32 abs2() const { return this->getSquareMag(); }
+    f32 abs2(const Vec& other) const { return this->getSquareDistance(other); }
+
+    f32 abs() const { return (f32)sqrtf(this->abs2()); }
+    f32 abs(const Vec& other) const { return (f32)sqrtf(this->abs2(other)); }
+
+    f32 abs2XZ() const {
+        cXyz tmp(this->x, 0, this->z);
+        return tmp.abs2();
+    }
+    f32 absXZ() const { return sqrtf(this->abs2XZ()); }
 };
 
 class cXy {

@@ -13,6 +13,8 @@ struct cM3dGCpsS {
 class cM3dGCps : public cM3dGLin {
 public:
     /* 0x1C */ f32 mRadius;
+
+    f32 GetR() const { return mRadius; }
 };
 
 static_assert(0x20 == sizeof(cM3dGCps));

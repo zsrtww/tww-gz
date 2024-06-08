@@ -573,3 +573,102 @@ void mDoExt_circlePacket__draw(mDoExt_circlePacket* i_this) {
     }
     GXEnd();
 }
+
+LIBTWW_DEFINE_FUNC(cM3d_UpMtx_Base__FRC3VecRC3VecPA4_f,
+                  int, cM3d_UpMtx_Base, (const Vec& param_0, const Vec& param_1, Mtx m))
+
+int cM3d_UpMtx(const Vec& param_0, Mtx m) {
+    static Vec base_y = {0.0f, 1.0f, 0.0f};
+
+    return cM3d_UpMtx_Base(base_y, param_0, m);
+}
+
+#define MAX_DRAW_DIST 2000.0f
+
+KEEP_FUNC void dCcD_Cyl_Draw(dCcD_Cyl* i_this, const GXColor& i_color) {
+    if (dComIfGp_getPlayer(0)->current.pos.abs(i_this->mCylAttr.cyl.mCenter) < MAX_DRAW_DIST) {
+        dDbVw_drawCylinderXlu(i_this->mCylAttr.cyl.mCenter, i_this->mCylAttr.cyl.GetR(), i_this->mCylAttr.cyl.GetH(), i_color, 1);
+    }
+}
+
+KEEP_FUNC void dCcD_Sph_Draw(dCcD_Sph* i_this, const GXColor& i_color) {
+    if (dComIfGp_getPlayer(0)->current.pos.abs(i_this->mSphAttr.sph.mCenter) < MAX_DRAW_DIST) {
+        dDbVw_drawSphereXlu(i_this->mSphAttr.sph.mCenter, i_this->mSphAttr.sph.GetR(), i_color, 1);
+    }
+}
+
+KEEP_FUNC void dCcD_Cps_Draw(dCcD_Cps* i_this, const GXColor& i_color) {
+    if (dComIfGp_getPlayer(0)->current.pos.abs(i_this->mCpsAttr.cps.mStart) < MAX_DRAW_DIST) {
+        Mtx up_m;
+        Mtx sp98;
+        Mtx cyl_m;
+        PSMTXIdentity(cyl_m);
+
+        cXyz spD8;
+        i_this->mCpsAttr.cps.CalcVec(&spD8);
+
+        mDoMtx_trans(sp98, i_this->mCpsAttr.cps.GetStartP()->x, i_this->mCpsAttr.cps.GetStartP()->y, i_this->mCpsAttr.cps.GetStartP()->z);
+        cM3d_UpMtx(spD8, up_m);
+        mDoMtx_concat(sp98, up_m, cyl_m);
+
+        mDoMtx_scale(sp98, i_this->mCpsAttr.cps.GetR(), i_this->mCpsAttr.cps.GetLen() * 0.5f, i_this->mCpsAttr.cps.GetR());
+        mDoMtx_concat(cyl_m, sp98, cyl_m);
+        mDoMtx_trans(sp98, 0.0f, 1.0f, 0.0f);
+        mDoMtx_concat(cyl_m, sp98, cyl_m);
+        mDoMtx_XrotS(sp98, 0x4000);
+        mDoMtx_concat(cyl_m, sp98, cyl_m);
+
+        dDbVw_drawCylinderMXlu(cyl_m, i_color, 1);
+        dDbVw_drawSphereXlu(*i_this->mCpsAttr.cps.GetStartP(), i_this->mCpsAttr.cps.GetR(), i_color, 1);
+        dDbVw_drawSphereXlu(*i_this->mCpsAttr.cps.GetEndP(), i_this->mCpsAttr.cps.GetR(), i_color, 1);
+    }
+}
+
+KEEP_FUNC void dCcD_DrawCc(cCcD_Obj* i_obj, const GXColor& i_color) {
+    if (i_obj->vtable == &dCcD_Sph_vtable) {
+        dCcD_Sph_Draw((dCcD_Sph*)i_obj, i_color);
+    } else if (i_obj->vtable == &dCcD_Cyl_vtable) {
+        dCcD_Cyl_Draw((dCcD_Cyl*)i_obj, i_color);
+    } else if (i_obj->vtable == &dCcD_Cps_vtable) {
+        dCcD_Cps_Draw((dCcD_Cps*)i_obj, i_color);
+    }
+}
+
+int dCcS_Data::at_obj_count = 0;
+int dCcS_Data::tg_obj_count = 0;
+int dCcS_Data::co_obj_count = 0;
+
+KEEP_FUNC void GZ_drawCc(dCcS* i_this) {
+    fopAc_ac_c* player = dComIfGp_getPlayer(0);
+    if (player != NULL) {
+        /* if (1 g_collisionFlags[VIEW_AT_CC].active) {
+            for (int i = 0; i < dCcS_Data::at_obj_count; i++) {
+                cCcD_Obj* obj = i_this->mpObjAt[i];
+                if (obj != NULL) {
+                    GXColor at_color = {0xFF, 0x00, 0x00, 0x80};
+                    dCcD_DrawCc(obj, at_color);
+                }
+            }
+        } */
+
+        /* if (g_collisionFlags[VIEW_TG_CC].active) {
+            for (u16 i = 0; i < dCcS_Data::tg_obj_count; i++) {
+                cCcD_Obj* obj = i_this->mpObjTg[i];
+                if (obj != NULL) {
+                    GXColor tg_color = {0x3A, 0x82, 0xF0, g_geometryOpacity};
+                    obj->vtable->Draw(obj, tg_color);
+                }
+            } 
+        }
+
+        if (g_collisionFlags[VIEW_CO_CC].active) {
+            for (u16 i = 0; i < dCcS_Data::co_obj_count; i++) {
+                cCcD_Obj* obj = i_this->mpObjCo[i];
+                if (obj != NULL) {
+                    GXColor co_color = {0xFF, 0xFF, 0xFF, g_geometryOpacity};
+                    obj->vtable->Draw(obj, co_color);
+                }
+            }
+        } */
+    }
+}

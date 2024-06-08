@@ -66,18 +66,24 @@ public:
 };
 static_assert(0x20 == sizeof(cCcD_ShapeAttr));
 
-class cCcD_CpsAttr : public cCcD_ShapeAttr, public cM3dGCps {
+class cCcD_CpsAttr {
 public:
+    cCcD_ShapeAttr shape_base;
+    cM3dGCps cps;
 };
 static_assert(0x40 == sizeof(cCcD_CpsAttr));
 
-class cCcD_SphAttr : public cCcD_ShapeAttr, public cM3dGSph {
+class cCcD_SphAttr {
 public:
+    cCcD_ShapeAttr shape_base;
+    cM3dGSph sph;
 };
 static_assert(0x34 == sizeof(cCcD_SphAttr));
 
-class cCcD_CylAttr : public cCcD_ShapeAttr, public cM3dGCyl {
+class cCcD_CylAttr {
 public:
+    cCcD_ShapeAttr shape_base;
+    cM3dGCyl cyl;
 };
 static_assert(0x38 == sizeof(cCcD_CylAttr));
 
@@ -175,6 +181,19 @@ public:
 
 class cCcD_ObjCo : public cCcD_ObjCommonBase {
 public:
+};
+
+struct cCcD_GObjInf__vtbl_t {
+    /* 0x00 */ void* RTTI;
+    /* 0x04 */ void* pad;
+    /* 0x08 */ void* dtor;
+    /* 0x0C */ void* GetGObjInf_const;
+    /* 0x10 */ void* GetGObjInf;
+    /* 0x14 */ void* GetShapeAttr_const;
+    /* 0x18 */ void* GetShapeAttr;
+    /* 0x20 */ void* ClrAtHit;
+    /* 0x24 */ void* ClrTgHit;
+    /* 0x28 */ void* ClrCoHit;
 };
 
 class cCcD_ObjHitInf {

@@ -7,6 +7,15 @@
 #include "libtww/include/SSystem/SComponent/c_sxyz.h"
 #include "libtww/include/m_Do/m_Do_mtx.h"
 
+namespace dCcS_Data {
+    extern int at_obj_count;
+    extern int tg_obj_count;
+    extern int co_obj_count;
+}
+
+class dCcS;
+void GZ_drawCc(dCcS* i_this);
+
 void dDbVw_deleteDrawPacketList();
 
 //----------------------------------------
