@@ -4,7 +4,7 @@
 #include "settings.h"
 #include "fifo_queue.h"
 
-#define MAX_GZ_FLAGS 13
+#define MAX_GZ_FLAGS 1
 
 struct GZFlag {
     bool* mpFlag;

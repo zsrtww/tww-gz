@@ -21,6 +21,9 @@ KEEP_FUNC SettingsMenu::SettingsMenu(Cursor& cursor)
                         {"save card", SAVE_CARD_INDEX, "Save settings to memory card"},
                         {"load card", LOAD_CARD_INDEX, "Load settings from memory card"},
                         {"delete card", DELETE_CARD_INDEX, "Delete settings from memory card"},
+                        {"menu positions", POS_SETTINGS_MENU_INDEX,
+                         "Change menu object positions (A to toggle selection, DPad to move)",
+                         false},
                     } {}
 
 SettingsMenu::~SettingsMenu() {}
@@ -38,9 +41,9 @@ void SettingsMenu::draw() {
         case DROP_SHADOWS_INDEX:
             g_dropShadows = !g_dropShadows;
             break;
-        /* case POS_SETTINGS_MENU_INDEX:
+        case POS_SETTINGS_MENU_INDEX:
             g_menuMgr->push(MN_POS_SETTINGS_INDEX);
-            return; */
+            return;
         case ITEM_EQUIP_PRIORITY_INDEX:
             g_menuMgr->push(MN_EQUIP_PRIORITY_INDEX);
             return;

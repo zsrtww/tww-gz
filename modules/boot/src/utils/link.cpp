@@ -55,7 +55,7 @@ KEEP_FUNC void GZ_displayTimeInfo() {
     int hour = dKy_getdaytime_hour();
     int min = dKy_getdaytime_minute();
     int moonid = dKy_moon_type_chk();
-    int date = dComIfGs_getDate();
+    u16 date = dComIfGs_getDate();
 
     const char* moonphases[] = {
         "Full",          "Waning Gibbous", "Last Quarter", "Waning Crescent", "Waxing Crescent",
@@ -63,8 +63,8 @@ KEEP_FUNC void GZ_displayTimeInfo() {
     };
 
     char Time[10];
-    char Date[10];
-    char Moon[20];
+    char Date[12];
+    char Moon[30];
 
     sprintf(Time, "%02d:%02d", hour, min);
     sprintf(Date, "date: %d", date);
@@ -109,6 +109,6 @@ KEEP_FUNC void GZ_displayZombieHoverInfo() {
     sprintf(a_presses_str, "A: %d", numAPressesPerWindow);
     sprintf(b_presses_str, "B: %d", numBPressesPerWindow);
 
-    Font::GZ_drawStr(a_presses_str, 450.f, 400.f, zombieHoverColor(numAPressesPerWindow), g_dropShadows);
-    Font::GZ_drawStr(b_presses_str, 450.f, 420.f, zombieHoverColor(numBPressesPerWindow), g_dropShadows);
+    Font::GZ_drawStr(a_presses_str, g_spriteOffsets[SPR_ZH_INFO_INDEX].x, g_spriteOffsets[SPR_ZH_INFO_INDEX].y, zombieHoverColor(numAPressesPerWindow), g_dropShadows);
+    Font::GZ_drawStr(b_presses_str, g_spriteOffsets[SPR_ZH_INFO_INDEX].x, g_spriteOffsets[SPR_ZH_INFO_INDEX].y + 20.0f, zombieHoverColor(numBPressesPerWindow), g_dropShadows);
 }

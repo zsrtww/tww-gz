@@ -6,60 +6,53 @@
 #include "menus/utils/menu_mgr.h"
 
 KEEP_FUNC SceneMenu::SceneMenu(Cursor& cursor)
-    : Menu(cursor),
-      lines{
-          {"modify wind direction", MODIFY_WIND_INDEX, "Change the current wind direction"},
-          {"modify chart set", MODIFY_CHART_SET_INDEX, "Change the current chart set"},
-          {"modify current hour", TIME_HOURS_INDEX, "Change the current hour"},
-          {"modify current minute", TIME_MINUTES_INDEX, "Change the current minute"},
-          {"modify current date", MODIFY_DATE_INDEX, "Change the current date/moon phase"},
-      } {}
+    : Menu(cursor), lines{
+                        {"disable bg music", MUTE_BGM_INDEX, "Disables background and enemy music",
+                         true, &g_sceneFlags[MUTE_BGM_INDEX].active},
+                        {"freeze time", FREEZE_TIME_INDEX, "Freezes ingame time", true,
+                         &g_sceneFlags[FREEZE_TIME_INDEX].active},
+                        {"wind direction", MODIFY_WIND_INDEX, "Change the current wind direction"},
+                        {"chart set", MODIFY_CHART_SET_INDEX, "Change the current chart set"},
+                        {"current hour", TIME_HOURS_INDEX, "Change the current hour"},
+                        {"current minute", TIME_MINUTES_INDEX, "Change the current minute"},
+                        {"current date", MODIFY_DATE_INDEX, "Change the current date/moon phase"},
+                    } {}
 
 SceneMenu::~SceneMenu() {}
 
-s16 windDirs[8] = {-32768, -24576, -16384, -8192, 0, 8192, 16384, 24576};
+#define WIND_DIR_E 0x0000
+#define WIND_DIR_SE 0x2000
+#define WIND_DIR_S 0x4000
+#define WIND_DIR_SW 0x6000
+#define WIND_DIR_W -0x8000
+#define WIND_DIR_NW -0x6000
+#define WIND_DIR_N -0x4000
+#define WIND_DIR_NE -0x2000
+
+s16 windDirs[8] = {WIND_DIR_W, WIND_DIR_NW, WIND_DIR_N, WIND_DIR_NE,
+                   WIND_DIR_E, WIND_DIR_SE, WIND_DIR_S, WIND_DIR_SW};
 
 const char* get_wind_str() {
     s16 wind = dkankyo_getWindDir();
     switch (wind) {
-    case 0:
+    case WIND_DIR_E:
         return "East";
-    case 8192:
+    case WIND_DIR_SE:
         return "South East";
-    case 16384:
+    case WIND_DIR_S:
         return "South";
-    case 24576:
+    case WIND_DIR_SW:
         return "South West";
-    case -32768:
+    case WIND_DIR_W:
         return "West";
-    case -24576:
+    case WIND_DIR_NW:
         return "North West";
-    case -16384:
+    case WIND_DIR_N:
         return "North";
-    case -8192:
+    case WIND_DIR_NE:
         return "North East";
     default:
         return "East";
-    };
-}
-
-const char* get_chart_set_str() {
-    switch (dComIfGs_getChartSet()) {
-    case 0:
-        return "0";
-        break;
-    case 1:
-        return "1";
-        break;
-    case 2:
-        return "2";
-        break;
-    case 3:
-        return "3";
-        break;
-    default:
-        return "0";
-        break;
     }
 }
 
@@ -69,21 +62,21 @@ void updateWindDir() {
     u8 wIndex = 0;
     int eventWindCheck = g_env_light.mWind.mEvtWindSet;
 
-    if (wind_dir == -32768) {
+    if (wind_dir == WIND_DIR_W) {
         wIndex = 0;
-    } else if (wind_dir == -24576) {
+    } else if (wind_dir == WIND_DIR_NW) {
         wIndex = 1;
-    } else if (wind_dir == -16384) {
+    } else if (wind_dir == WIND_DIR_N) {
         wIndex = 2;
-    } else if (wind_dir == -8192) {
+    } else if (wind_dir == WIND_DIR_NE) {
         wIndex = 3;
-    } else if (wind_dir == 0) {
+    } else if (wind_dir == WIND_DIR_E) {
         wIndex = 4;
-    } else if (wind_dir == 8192) {
+    } else if (wind_dir == WIND_DIR_SE) {
         wIndex = 5;
-    } else if (wind_dir == 16384) {
+    } else if (wind_dir == WIND_DIR_S) {
         wIndex = 6;
-    } else if (wind_dir == 24576) {
+    } else if (wind_dir == WIND_DIR_SW) {
         wIndex = 7;
     }
 
@@ -109,9 +102,9 @@ void updateWindDir() {
 void updateChartSet() {
     u8 chartSet = dComIfGs_getChartSet();
     Cursor::moveListSimple(chartSet);
-    if (chartSet == 255) {
+    if (chartSet == 0xFF) {
         chartSet = 0;
-    } else if (chartSet == 4) {
+    } else if (chartSet > 3) {
         chartSet = 3;
     }
     dComIfGs_setChartSet(chartSet);
@@ -138,6 +131,10 @@ void SceneMenu::draw() {
     lines[TIME_HOURS_INDEX].printf(" <%d>", current_hour);
     lines[TIME_MINUTES_INDEX].printf(" <%d>", current_minute);
     lines[MODIFY_DATE_INDEX].printf(" <%d>", date);
+
+    if (GZ_getButtonTrig(SELECTION_BUTTON)) {
+        g_sceneFlags[cursor.y].active = !g_sceneFlags[cursor.y].active;
+    }
 
     switch (cursor.y) {
     case MODIFY_WIND_INDEX:
@@ -175,14 +172,14 @@ void SceneMenu::draw() {
         dComIfGs_setTime(current_time + 360.0f);
     }
 
-    if (date == 7) {
+    if (date > 6) {
         dComIfGs_setDate(0);
-    } else if (date == 65535) {
+    } else if (date == 0xFFFF) {
         dComIfGs_setDate(6);
     }
 
-    lines[MODIFY_WIND_INDEX].printf(" <%d>", get_wind_str());
-    lines[MODIFY_CHART_SET_INDEX].printf(" <%d>", get_chart_set_str());
+    lines[MODIFY_WIND_INDEX].printf(" <%s>", get_wind_str());
+    lines[MODIFY_CHART_SET_INDEX].printf(" <%d>", dComIfGs_getChartSet());
 
     cursor.move(0, MENU_LINE_NUM);
     GZ_drawMenuLines(lines, cursor.y, MENU_LINE_NUM);
