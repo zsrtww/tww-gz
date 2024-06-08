@@ -63,7 +63,7 @@ KEEP_FUNC void GZ_displayTimeInfo() {
     };
 
     char Time[10];
-    char Date[10];
+    char Date[12];
     char Moon[30];
 
     sprintf(Time, "%02d:%02d", hour, min);

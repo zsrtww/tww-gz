@@ -6,29 +6,31 @@
 #include "menus/utils/menu_mgr.h"
 
 KEEP_FUNC SceneMenu::SceneMenu(Cursor& cursor)
-    : Menu(cursor),
-      lines{
-          {"freeze time", FREEZE_TIME_INDEX, "Freezes ingame time", true,
+    : Menu(cursor), lines{
+                        {"disable bg music", MUTE_BGM_INDEX, "Disables background and enemy music",
+                         true, &g_sceneFlags[MUTE_BGM_INDEX].active},
+                        {"freeze time", FREEZE_TIME_INDEX, "Freezes ingame time", true,
                          &g_sceneFlags[FREEZE_TIME_INDEX].active},
-          {"wind direction", MODIFY_WIND_INDEX, "Change the current wind direction"},
-          {"chart set", MODIFY_CHART_SET_INDEX, "Change the current chart set"},
-          {"current hour", TIME_HOURS_INDEX, "Change the current hour"},
-          {"current minute", TIME_MINUTES_INDEX, "Change the current minute"},
-          {"current date", MODIFY_DATE_INDEX, "Change the current date/moon phase"},
-      } {}
+                        {"wind direction", MODIFY_WIND_INDEX, "Change the current wind direction"},
+                        {"chart set", MODIFY_CHART_SET_INDEX, "Change the current chart set"},
+                        {"current hour", TIME_HOURS_INDEX, "Change the current hour"},
+                        {"current minute", TIME_MINUTES_INDEX, "Change the current minute"},
+                        {"current date", MODIFY_DATE_INDEX, "Change the current date/moon phase"},
+                    } {}
 
 SceneMenu::~SceneMenu() {}
 
-#define WIND_DIR_E   0x0000
-#define WIND_DIR_SE  0x2000
-#define WIND_DIR_S   0x4000
-#define WIND_DIR_SW  0x6000
-#define WIND_DIR_W  -0x8000
+#define WIND_DIR_E 0x0000
+#define WIND_DIR_SE 0x2000
+#define WIND_DIR_S 0x4000
+#define WIND_DIR_SW 0x6000
+#define WIND_DIR_W -0x8000
 #define WIND_DIR_NW -0x6000
-#define WIND_DIR_N  -0x4000
+#define WIND_DIR_N -0x4000
 #define WIND_DIR_NE -0x2000
 
-s16 windDirs[8] = {WIND_DIR_W, WIND_DIR_NW, WIND_DIR_N, WIND_DIR_NE, WIND_DIR_E, WIND_DIR_SE, WIND_DIR_S, WIND_DIR_SW};
+s16 windDirs[8] = {WIND_DIR_W, WIND_DIR_NW, WIND_DIR_N, WIND_DIR_NE,
+                   WIND_DIR_E, WIND_DIR_SE, WIND_DIR_S, WIND_DIR_SW};
 
 const char* get_wind_str() {
     s16 wind = dkankyo_getWindDir();

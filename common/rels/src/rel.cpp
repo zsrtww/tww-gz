@@ -60,4 +60,8 @@ void __throw_out_of_range(char const*) {
     while (true)
         ;
 }
+void __throw_domain_error(char const*) {
+    while (true)
+        ;
+}
 }  // namespace std

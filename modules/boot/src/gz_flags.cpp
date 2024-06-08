@@ -6,7 +6,9 @@
 
 bool g_framePaused = false;
 
-GZFlag g_gzFlags[MAX_GZ_FLAGS] = {};
+GZFlag g_gzFlags[MAX_GZ_FLAGS] = {
+    {&g_sceneFlags[MUTE_BGM_INDEX].active, GAME_LOOP, GZ_disableBGM, GZ_enableBGM},
+};
 
 void GZ_execute(int phase) {
     for (int i = 0; i < MAX_GZ_FLAGS; i++) {
