@@ -20,7 +20,8 @@ KEEP_FUNC PosSettingsMenu::PosSettingsMenu(Cursor& cursor, PosSettingsData& data
              false},
             {"time display", SpritesIndex::SPR_TIME_DISP_INDEX, "Change Time Display position",
              false},
-            {"input viewer", SpritesIndex::SPR_VIEWER_INDEX, "Change input viewer position", false}} {}
+            {"input viewer", SpritesIndex::SPR_VIEWER_INDEX, "Change input viewer position", false},
+            {"zombie hover info", SpritesIndex::SPR_ZH_INFO_INDEX, "Change zombie hover info position", false}} {}
 
 PosSettingsMenu::~PosSettingsMenu() {}
 

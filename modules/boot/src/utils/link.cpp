@@ -109,6 +109,6 @@ KEEP_FUNC void GZ_displayZombieHoverInfo() {
     sprintf(a_presses_str, "A: %d", numAPressesPerWindow);
     sprintf(b_presses_str, "B: %d", numBPressesPerWindow);
 
-    Font::GZ_drawStr(a_presses_str, 450.f, 400.f, zombieHoverColor(numAPressesPerWindow), g_dropShadows);
-    Font::GZ_drawStr(b_presses_str, 450.f, 420.f, zombieHoverColor(numBPressesPerWindow), g_dropShadows);
+    Font::GZ_drawStr(a_presses_str, g_spriteOffsets[SPR_ZH_INFO_INDEX].x, g_spriteOffsets[SPR_ZH_INFO_INDEX].y, zombieHoverColor(numAPressesPerWindow), g_dropShadows);
+    Font::GZ_drawStr(b_presses_str, g_spriteOffsets[SPR_ZH_INFO_INDEX].x, g_spriteOffsets[SPR_ZH_INFO_INDEX].y + 20.0f, zombieHoverColor(numBPressesPerWindow), g_dropShadows);
 }
