@@ -625,6 +625,8 @@ KEEP_FUNC void dCcD_Cps_Draw(dCcD_Cps* i_this, const GXColor& i_color) {
 }
 
 KEEP_FUNC void dCcD_DrawCc(cCcD_Obj* i_obj, const GXColor& i_color) {
+    // stupid hack, but need to differentiate between collider types
+    // and this is the only decent way i know how
     if (i_obj->vtable == &dCcD_Sph_vtable) {
         dCcD_Sph_Draw((dCcD_Sph*)i_obj, i_color);
     } else if (i_obj->vtable == &dCcD_Cyl_vtable) {
@@ -641,34 +643,34 @@ int dCcS_Data::co_obj_count = 0;
 KEEP_FUNC void GZ_drawCc(dCcS* i_this) {
     fopAc_ac_c* player = dComIfGp_getPlayer(0);
     if (player != NULL) {
-        /* if (1 g_collisionFlags[VIEW_AT_CC].active) {
+        if (g_collisionFlags[VIEW_AT_CC].active) {
             for (int i = 0; i < dCcS_Data::at_obj_count; i++) {
                 cCcD_Obj* obj = i_this->mpObjAt[i];
                 if (obj != NULL) {
-                    GXColor at_color = {0xFF, 0x00, 0x00, 0x80};
+                    GXColor at_color = {0xFF, 0x00, 0x00, g_geometryOpacity};
                     dCcD_DrawCc(obj, at_color);
                 }
             }
-        } */
+        }
 
-        /* if (g_collisionFlags[VIEW_TG_CC].active) {
-            for (u16 i = 0; i < dCcS_Data::tg_obj_count; i++) {
+        if (g_collisionFlags[VIEW_TG_CC].active) {
+            for (int i = 0; i < dCcS_Data::tg_obj_count; i++) {
                 cCcD_Obj* obj = i_this->mpObjTg[i];
                 if (obj != NULL) {
                     GXColor tg_color = {0x3A, 0x82, 0xF0, g_geometryOpacity};
-                    obj->vtable->Draw(obj, tg_color);
+                    dCcD_DrawCc(obj, tg_color);
                 }
             } 
         }
 
         if (g_collisionFlags[VIEW_CO_CC].active) {
-            for (u16 i = 0; i < dCcS_Data::co_obj_count; i++) {
+            for (int i = 0; i < dCcS_Data::co_obj_count; i++) {
                 cCcD_Obj* obj = i_this->mpObjCo[i];
                 if (obj != NULL) {
                     GXColor co_color = {0xFF, 0xFF, 0xFF, g_geometryOpacity};
-                    obj->vtable->Draw(obj, co_color);
+                    dCcD_DrawCc(obj, co_color);
                 }
             }
-        } */
+        }
     }
 }

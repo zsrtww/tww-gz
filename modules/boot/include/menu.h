@@ -55,6 +55,9 @@ enum MenuIndex {
     MN_ANY_NOMSS_SAVES_INDEX,
     MN_AD_SAVES_INDEX,
 
+    // Scene menu's sub menus
+    MN_COLLISION_VIEW_INDEX,
+
     // Settings sub menus
     MN_EQUIP_PRIORITY_INDEX,
     MN_POS_SETTINGS_INDEX,

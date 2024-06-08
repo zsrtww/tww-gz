@@ -7,6 +7,22 @@
 #include "libtww/include/SSystem/SComponent/c_sxyz.h"
 #include "libtww/include/m_Do/m_Do_mtx.h"
 
+enum CollisionIndex {
+    VIEW_AT_CC,
+    VIEW_TG_CC,
+    VIEW_CO_CC,
+
+    VIEW_COLLISION_MAX,
+};
+
+struct CollisionItem {
+    enum CollisionIndex id;
+    bool active;
+};
+
+extern CollisionItem g_collisionFlags[VIEW_COLLISION_MAX];
+extern u8 g_geometryOpacity;
+
 namespace dCcS_Data {
     extern int at_obj_count;
     extern int tg_obj_count;
