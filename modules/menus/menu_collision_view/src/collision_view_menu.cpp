@@ -16,7 +16,16 @@ KEEP_FUNC CollisionViewMenu::CollisionViewMenu(Cursor& cursor)
                          &g_collisionFlags[VIEW_TG_CC].active},
                         {"push colliders", VIEW_CO_CC, "view push colliders", true,
                          &g_collisionFlags[VIEW_CO_CC].active},
-                        {"opacity:", 3, "opacity of drawn geometry"},
+                        {"ground polys", VIEW_POLYGON_GROUND, "view ground polygons", true,
+                         &g_collisionFlags[VIEW_POLYGON_GROUND].active},
+                        {"roof polys", VIEW_POLYGON_ROOF, "view roof polygons", true,
+                         &g_collisionFlags[VIEW_POLYGON_ROOF].active},
+                        {"wall polys", VIEW_POLYGON_WALL, "view wall polygons", true,
+                         &g_collisionFlags[VIEW_POLYGON_WALL].active},
+                        {"poly edges", VIEW_POLYGON_EDGES, "view polygon edges", true,
+                         &g_collisionFlags[VIEW_POLYGON_EDGES].active},                         
+                        {"poly draw raise:", 7, "amount to raise the drawn polygon by"},
+                        {"opacity:", 8, "opacity of drawn geometry"},
                     } {}
 
 CollisionViewMenu::~CollisionViewMenu() {}
@@ -34,12 +43,16 @@ void CollisionViewMenu::draw() {
     }
 
     switch (cursor.y) {
-    case 3:
+    case 7:
+        Cursor::moveList(g_collisionRaise);
+        break;
+    case 8:
         Cursor::moveList(g_geometryOpacity);
         break;
     }
 
-    lines[3].printf(" <%d>", g_geometryOpacity);
+    lines[7].printf(" <%d>", g_collisionRaise);
+    lines[8].printf(" <%d>", g_geometryOpacity);
 
     cursor.move(0, MENU_LINE_NUM);
     GZ_drawMenuLines(lines, cursor.y, MENU_LINE_NUM);

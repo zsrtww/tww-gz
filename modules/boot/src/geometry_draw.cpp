@@ -1,6 +1,8 @@
 #include "geometry_draw.h"
 #include "global_data.h"
 #include "libtww/include/d/com/d_com_inf_game.h"
+#include "libtww/include/d/bg/d_bg_s_captpoly.h"
+#include "libtww/include/d/bg/d_bg_w.h"
 #include "libtww/include/dolphin/gx/gx.h"
 #include "libtww/include/JSystem/J3DGraphBase/J3DSys.h"
 #include "libtww/include/m_Do/m_Do_printf.h"
@@ -689,6 +691,210 @@ KEEP_FUNC void GZ_drawCc(dCcS* i_this) {
                     dCcD_DrawCc(obj, co_color);
                 }
             }
+        }
+    }
+}
+
+//-------------------------------------------------------
+//                      POLY DRAW
+//-------------------------------------------------------
+
+int drawPoly(dBgS_CaptPoly* i_captpoly, cBgD_Vtx_t* i_vtx, int i_ia, int i_ib, int i_ic, cM3dGPla* i_plane) {
+    cXyz vertices[3];
+
+    GXColor ground_col = {0xFF, 0x00, 0x00, g_geometryOpacity};
+    GXColor roof_col = {0x00, 0x00, 0xFF, g_geometryOpacity};
+    GXColor wall_col = {0x00, 0xFF, 0x00, g_geometryOpacity};
+
+    GXColor flat_col = {0xFF, 0xC5, 0xC5, g_geometryOpacity};
+
+    cXyz raise;
+    PSVECScale(&i_plane->mNormal, &raise, (f32)g_collisionRaise);
+
+    vertices[0] = i_vtx[i_ia].vertex;
+    vertices[1] = i_vtx[i_ib].vertex;
+    vertices[2] = i_vtx[i_ic].vertex;
+
+    PSVECAdd(&vertices[0], &raise, &vertices[0]);
+    PSVECAdd(&vertices[1], &raise, &vertices[1]);
+    PSVECAdd(&vertices[2], &raise, &vertices[2]);
+
+    if (cBgW_CheckBGround(i_plane->mNormal.y)) {
+        if (g_collisionFlags[VIEW_POLYGON_GROUND].active) {
+            if (i_plane->mNormal.y >= 1.0f) {
+                // draw special color for fully flat ground
+                dDbVw_drawTriangleXlu(vertices, flat_col, 1);
+            } else {
+                dDbVw_drawTriangleXlu(vertices, ground_col, 1);
+            }
+        }
+    } else if (cBgW_CheckBRoof(i_plane->mNormal.y)) {
+        if (g_collisionFlags[VIEW_POLYGON_ROOF].active) {
+            dDbVw_drawTriangleXlu(vertices, roof_col, 1);
+        }
+    } else if (g_collisionFlags[VIEW_POLYGON_WALL].active) {
+        dDbVw_drawTriangleXlu(vertices, wall_col, 1);
+    }
+
+    return 0;
+}
+
+int poly_edge_draw(dBgS_CaptPoly* i_captpoly, cBgD_Vtx_t* i_vtx, int i_ia, int i_ib, int i_ic, cM3dGPla* i_plane) {
+    if (cBgW_CheckBGround(i_plane->mNormal.y)) {
+        if (!g_collisionFlags[VIEW_POLYGON_GROUND].active) {
+            return 0;
+        }
+    } else if (cBgW_CheckBRoof(i_plane->mNormal.y)) {
+        if (!g_collisionFlags[VIEW_POLYGON_ROOF].active) {
+            return 0;
+        }
+    } else if (!g_collisionFlags[VIEW_POLYGON_WALL].active) {
+        return 0;
+    }
+    
+    GXColor color = {0xFF, 0xFF, 0xFF, 0xFF};
+
+    cXyz raise;
+    PSVECScale(&i_plane->mNormal, &raise, (f32)g_collisionRaise);
+
+    cXyz start;
+    cXyz end;
+
+    // A to B
+    start.set(i_vtx[i_ia].vertex.x, i_vtx[i_ia].vertex.y, i_vtx[i_ia].vertex.z);
+    end.set(i_vtx[i_ib].vertex.x, i_vtx[i_ib].vertex.y, i_vtx[i_ib].vertex.z);
+    PSVECAdd(&raise, &start, &start);
+    PSVECAdd(&raise, &end, &end);
+    dDbVw_drawLineXlu(start, end, color, 1, 12);
+
+    // B to C
+    start.set(i_vtx[i_ib].vertex.x, i_vtx[i_ib].vertex.y, i_vtx[i_ib].vertex.z);
+    end.set(i_vtx[i_ic].vertex.x, i_vtx[i_ic].vertex.y, i_vtx[i_ic].vertex.z);
+    PSVECAdd(&raise, &start, &start);
+    PSVECAdd(&raise, &end, &end);
+    dDbVw_drawLineXlu(start, end, color, 1, 12);
+
+    // C to A
+    start.set(i_vtx[i_ic].vertex.x, i_vtx[i_ic].vertex.y, i_vtx[i_ic].vertex.z);
+    end.set(i_vtx[i_ia].vertex.x, i_vtx[i_ia].vertex.y, i_vtx[i_ia].vertex.z);
+    PSVECAdd(&raise, &start, &start);
+    PSVECAdd(&raise, &end, &end);
+    dDbVw_drawLineXlu(start, end, color, 1, 12);
+
+    return 0;
+}
+
+void dBgW__RwgCaptPoly(dBgW* i_this, int param_0, dBgS_CaptPoly& i_captPoly) {
+    while (true) {
+        cBgW_RwgElm* puVar2 = &i_this->pm_rwg[param_0];
+        i_captPoly.mpCallback(&i_captPoly, (cBgD_Vtx_t*)i_this->pm_vtx_tbl, i_this->pm_bgd->m_t_tbl[param_0].vtx0,
+                           i_this->pm_bgd->m_t_tbl[param_0].vtx1, i_this->pm_bgd->m_t_tbl[param_0].vtx2,
+                           &i_this->pm_tri[param_0].m_plane);
+        if (puVar2->next == 0xFFFF)
+            break;
+        param_0 = puVar2->next;
+    }
+}
+
+void dBgW__CaptPolyRp(dBgW* i_this, dBgS_CaptPoly& i_captPoly, int param_1) {
+    if (!i_this->m_nt_tbl[param_1].Cross(i_captPoly.GetBndP())) {
+        return;
+    }
+
+    cBgD_Tree_t* tree_data = &i_this->pm_bgd->m_tree_tbl[param_1];
+    if (tree_data->mFlag & 1) {
+        if (i_this->pm_blk[tree_data->mChild[0]].m_wall != 0xFFFF) {
+            dBgW__RwgCaptPoly(i_this, i_this->pm_blk[tree_data->mChild[0]].m_wall, i_captPoly);
+        }
+        if (i_this->pm_blk[tree_data->mChild[0]].m_roof != 0xFFFF) {
+            dBgW__RwgCaptPoly(i_this, i_this->pm_blk[tree_data->mChild[0]].m_roof, i_captPoly);
+        }
+        if (i_this->pm_blk[tree_data->mChild[0]].m_ground != 0xFFFF) {
+            dBgW__RwgCaptPoly(i_this, i_this->pm_blk[tree_data->mChild[0]].m_ground, i_captPoly);
+        }
+        return;
+    }
+
+    for (int i = 0; i < 8; i++) {
+        if (tree_data->mChild[i] == 0xFFFF) {
+            continue;
+        }
+        dBgW__CaptPolyRp(i_this, i_captPoly, tree_data->mChild[i]);
+    }
+}
+
+void dBgW__CaptPolyGrpRp(dBgW* i_this, dBgS_CaptPoly& i_captPoly, int i_rootGrpIdx, int param_2) {
+    /* cBgW_GrpElm* grp = &i_this->pm_grp[i_rootGrpIdx];
+
+    if (!grp->m_aab.Cross(i_captPoly.GetBndP())) {
+        OSReport("dBgW__CaptPolyGrpRp: !grp->m_aab.Cross()\n");
+        return;
+    } */
+
+    if (dBgW__ChkGrpThrough(i_this, i_rootGrpIdx, i_captPoly.field_0x00.GetGrpPassChk(), param_2)) {
+        return;
+    }
+
+    if (i_this->pm_bgd->m_g_tbl[i_rootGrpIdx].m_tree_idx != 0xFFFF) {
+        dBgW__CaptPolyRp(i_this, i_captPoly, i_this->pm_bgd->m_g_tbl[i_rootGrpIdx].m_tree_idx);
+    }
+
+    s32 uVar1 = i_this->pm_bgd->m_g_tbl[i_rootGrpIdx].m_first_child;
+    while (true) {
+        if (uVar1 == 0xFFFF) {
+            break;
+        }
+        dBgW__CaptPolyGrpRp(i_this, i_captPoly, uVar1, param_2 + 1);
+        uVar1 = i_this->pm_bgd->m_g_tbl[uVar1].m_next_sibling;
+    }
+}
+
+void dBgW__CaptPoly(dBgW* i_this, dBgS_CaptPoly& poly) {
+    dBgW__CaptPolyGrpRp(i_this, poly, i_this->m_rootGrpIdx, 1);
+}
+
+void CaptPoly(dBgS_CaptPoly& i_captpoly) {
+    cBgS_ChkElm* poly_elm = dComIfG_Bgsp()->m_chk_element;
+
+    for (int i = 0; i < 0x100; i++) {
+        if (poly_elm->ChkUsed()) {
+            dBgW__CaptPoly((dBgW*)poly_elm->m_bgw_base_ptr, i_captpoly);
+        }
+        poly_elm++;
+    }
+}
+
+KEEP_FUNC void GZ_drawPolygons() {
+    if (g_collisionFlags[VIEW_POLYGON_GROUND].active || g_collisionFlags[VIEW_POLYGON_WALL].active || g_collisionFlags[VIEW_POLYGON_ROOF].active) {
+        fopAc_ac_c* player = dComIfGp_getPlayer(0);
+
+        if (player != NULL) {
+            Vec* base_pos = &player->current.pos;
+
+            cM3dGAab aab;
+			cXyz min;
+			cXyz max;
+
+			f32 range = 100.0f;
+			min.set(base_pos->x - range, base_pos->y - range, base_pos->z - range);
+			max.set(base_pos->x + range, base_pos->y + range, base_pos->z + range);
+			aab.mMin = min;
+			aab.mMax = max;
+
+            dBgS_CaptPoly poly_capt;
+			poly_capt.field_0x14.mGrpPassChkInfo.OnAll();
+			poly_capt.mAab.mMin = aab.mMin;
+			poly_capt.mAab.mMax = aab.mMax;
+
+            // draw edges
+            if (g_collisionFlags[VIEW_POLYGON_EDGES].active) {
+                poly_capt.mpCallback = poly_edge_draw;
+			    CaptPoly(poly_capt);
+            }
+    
+            // draw poly
+			poly_capt.mpCallback = drawPoly;
+			CaptPoly(poly_capt);
         }
     }
 }

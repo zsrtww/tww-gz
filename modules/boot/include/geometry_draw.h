@@ -11,6 +11,10 @@ enum CollisionIndex {
     VIEW_AT_CC,
     VIEW_TG_CC,
     VIEW_CO_CC,
+    VIEW_POLYGON_GROUND,
+    VIEW_POLYGON_ROOF,
+    VIEW_POLYGON_WALL,
+    VIEW_POLYGON_EDGES,
 
     VIEW_COLLISION_MAX,
 };
@@ -22,6 +26,7 @@ struct CollisionItem {
 
 extern CollisionItem g_collisionFlags[VIEW_COLLISION_MAX];
 extern u8 g_geometryOpacity;
+extern u8 g_collisionRaise;
 
 namespace dCcS_Data {
     extern int at_obj_count;
@@ -31,6 +36,7 @@ namespace dCcS_Data {
 
 class dCcS;
 void GZ_drawCc(dCcS* i_this);
+void GZ_drawPolygons();
 
 void dDbVw_deleteDrawPacketList();
 
