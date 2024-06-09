@@ -624,14 +624,32 @@ KEEP_FUNC void dCcD_Cps_Draw(dCcD_Cps* i_this, const GXColor& i_color) {
     }
 }
 
+class dCcD_GenericBase {
+public:
+    dCcD_GObjInf mGObjInf;
+    cCcD_ShapeAttr mShapeAttr;
+};
+
+extern "C" {
+    bool CrossAtTg__12cCcD_SphAttrCFRC12cCcD_CpsAttrP4cXyz(void*, void*, cXyz*);
+    bool CrossAtTg__12cCcD_CylAttrCFRC12cCcD_CpsAttrP4cXyz(void*, void*, cXyz*);
+    bool CrossAtTg__12cCcD_CpsAttrCFRC12cCcD_CpsAttrP4cXyz(void*, void*, cXyz*);
+}
+
 KEEP_FUNC void dCcD_DrawCc(cCcD_Obj* i_obj, const GXColor& i_color) {
     // stupid hack, but need to differentiate between collider types
-    // and this is the only decent way i know how
-    if (i_obj->vtable == &dCcD_Sph_vtable) {
+    
+    // cast the obj to the generic collider base, then check if one of the vfunc's addresses
+    // matches an address to a vfunc unique to a specific collider type, which is known
+    // to only exist at one static address (in the DOL).
+    // this is disgusting but seems to work well enough without being super intrusive
+    dCcD_GenericBase* generic = (dCcD_GenericBase*)i_obj;
+
+    if (generic->mShapeAttr.vtable->CrossAtTg_2 == CrossAtTg__12cCcD_SphAttrCFRC12cCcD_CpsAttrP4cXyz) {
         dCcD_Sph_Draw((dCcD_Sph*)i_obj, i_color);
-    } else if (i_obj->vtable == &dCcD_Cyl_vtable) {
+    } else if (generic->mShapeAttr.vtable->CrossAtTg_2 == CrossAtTg__12cCcD_CylAttrCFRC12cCcD_CpsAttrP4cXyz) {
         dCcD_Cyl_Draw((dCcD_Cyl*)i_obj, i_color);
-    } else if (i_obj->vtable == &dCcD_Cps_vtable) {
+    } else if (generic->mShapeAttr.vtable->CrossAtTg_2 == CrossAtTg__12cCcD_CpsAttrCFRC12cCcD_CpsAttrP4cXyz) {
         dCcD_Cps_Draw((dCcD_Cps*)i_obj, i_color);
     }
 }

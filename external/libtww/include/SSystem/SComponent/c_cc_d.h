@@ -59,10 +59,34 @@ enum CoSPrm_e {
     CO_SPRM_NO_CO_HIT_INF_SET = 0x200,
 };
 
+struct cCcD_ShapeAttr__vtbl {
+    void* rtti;
+    void* padding;
+    void* dtor;
+    void* CrossAtTg_0;
+    void* CrossAtTg_1;
+    void* CrossAtTg_2;
+    void* CrossAtTg_3;
+    void* CrossAtTg_4;
+    void* CrossAtTg_5;
+    void* CrossAtTg_6;
+    void* CrossAtCo_0;
+    void* CrossAtCo_1;
+    void* CrossAtCo_2;
+    void* CrossAtCo_3;
+    void* CrossAtCo_4;
+    void* CrossAtCo_5;
+    void* CrossAtCo_6;
+    void* GetCoCp_0;
+    void* GetCoCp_1;
+    void* CalcAabBox;
+    void* GetNVec;
+};
+
 class cCcD_ShapeAttr {
 public:
     /* 0x00 */ cM3dGAab mAab;
-    /* 0x1C */ void* vtable;
+    /* 0x1C */ cCcD_ShapeAttr__vtbl* vtable;
 };
 static_assert(0x20 == sizeof(cCcD_ShapeAttr));
 
@@ -191,9 +215,9 @@ struct cCcD_GObjInf__vtbl_t {
     /* 0x10 */ void* GetGObjInf;
     /* 0x14 */ void* GetShapeAttr_const;
     /* 0x18 */ void* GetShapeAttr;
-    /* 0x20 */ void* ClrAtHit;
-    /* 0x24 */ void* ClrTgHit;
-    /* 0x28 */ void* ClrCoHit;
+    /* 0x1C */ void* ClrAtHit;
+    /* 0x20 */ void* ClrTgHit;
+    /* 0x24 */ void* ClrCoHit;
 };
 
 class cCcD_ObjHitInf {
@@ -201,7 +225,7 @@ public:
     /* 0x000 */ cCcD_ObjAt mObjAt;
     /* 0x018 */ cCcD_ObjTg mObjTg;
     /* 0x02C */ cCcD_ObjCo mObjCo;
-    /* 0x03C */ void* vtable;
+    /* 0x03C */ cCcD_GObjInf__vtbl_t* vtable;
 };  // Size = 0x40
 
 static_assert(0x40 == sizeof(cCcD_ObjHitInf));
