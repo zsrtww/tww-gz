@@ -5,6 +5,7 @@
 #include "../../dolphin/mtx/vec.h"
 #include "../../addrs.h"
 #include "../../MSL_C/math.h"
+#include "c_math.h"
 
 class cXyz;
 
@@ -139,6 +140,8 @@ public:
         return tmp.abs2();
     }
     f32 absXZ() const { return sqrtf(this->abs2XZ()); }
+
+    s16 atan2sX_Z() const { return cM_atan2s(x, z); }
 };
 
 class cXy {

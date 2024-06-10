@@ -226,6 +226,29 @@ public:
 void mDoExt_circlePacket__dtor(mDoExt_circlePacket* i_this);
 void mDoExt_circlePacket__draw(mDoExt_circlePacket* i_this);
 
+class mDoExt_ArrowPacket {
+public:
+    mDoExt_ArrowPacket(cXyz& startPos, cXyz& endPos, const GXColor& color, u8 clipZ, u8 width) {
+        mStartPos = startPos;
+        mEndPos = endPos;
+        mColor = color;
+        mClipZ = clipZ;
+        mLineWidth = width;
+    }
+
+    ~mDoExt_ArrowPacket() {}
+
+    /* 0x00 */ J3DPacket base;
+    /* 0x10 */ cXyz mStartPos;
+    /* 0x1C */ cXyz mEndPos;
+    /* 0x28 */ GXColor mColor;
+    /* 0x2C */ u8 mClipZ;
+    /* 0x2D */ u8 mLineWidth;
+};
+
+void mDoExt_ArrowPacket__dtor(mDoExt_ArrowPacket* i_this);
+void mDoExt_ArrowPacket__draw(mDoExt_ArrowPacket* i_this);
+
 void dDbVw_drawCubeXlu(cXyz& pos, cXyz& size, csXyz& angle, const GXColor& color);
 void dDbVw_drawSphereXlu(cXyz& position, f32 radius, const GXColor& color, u8 param_3);
 void dDbVw_drawCylinderXlu(cXyz& position, f32 radius, f32 height, const GXColor& color, u8 param_4);
@@ -234,3 +257,4 @@ void dDbVw_drawTriangleXlu(cXyz* points, const GXColor& color, u8 param_2);
 void dDbVw_drawLineXlu(cXyz& pointA, cXyz& pointB, const GXColor& color, u8 param_3, u8 width);
 void dDbVw_drawCylinderMXlu(Mtx m, const GXColor& color, u8 param_2);
 void dDbVw_drawCircleXlu(cXyz& i_position, f32 i_radius, const GXColor& i_color, u8 param_3, u8 i_lineWidth);
+void dDbVw_drawArrowXlu(cXyz& i_startPos, cXyz& i_endPos, const GXColor& i_color, u8 i_clipZ, u8 i_lineWidth);

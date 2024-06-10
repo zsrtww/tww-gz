@@ -4,6 +4,7 @@
 #include "libtww/include/d/bg/d_bg_s_captpoly.h"
 #include "libtww/include/d/bg/d_bg_w.h"
 #include "libtww/include/dolphin/gx/gx.h"
+#include "libtww/include/SSystem/SComponent/c_lib.h"
 #include "libtww/include/JSystem/J3DGraphBase/J3DSys.h"
 #include "libtww/include/m_Do/m_Do_printf.h"
 #include "libtww/include/MSL_C/math.h"
@@ -573,6 +574,91 @@ void mDoExt_circlePacket__draw(mDoExt_circlePacket* i_this) {
         GXPosition3f32(sp38.x, sp38.y, sp38.z);
         GXPosition3f32(sp44.x, sp44.y, sp44.z);
     }
+    GXEnd();
+}
+
+//-------------------------------------------------------
+//                        Arrow
+//-------------------------------------------------------
+
+static J3DPacket__vtable_t mDoExt_ArrowPacket__vtable {
+    (void*)nullptr,  // RTTI
+    (void*)nullptr,  // pad
+    (void*)&J3DPacket__isSame,
+    (void*)&J3DPacket__entry,
+    (void*)&mDoExt_ArrowPacket__draw,
+    (void*)&mDoExt_ArrowPacket__dtor,
+};
+
+KEEP_FUNC void dDbVw_drawArrowXlu(cXyz& i_startPos, cXyz& i_endPos, const GXColor& i_color, u8 i_clipZ, u8 i_lineWidth) {
+    if (l_drawPacketListNum < DRAW_PACKET_MAX) {
+        mDoExt_ArrowPacket* arrow = new mDoExt_ArrowPacket(i_startPos, i_endPos, i_color, i_clipZ, i_lineWidth);
+        arrow->base.vtable = &mDoExt_ArrowPacket__vtable;
+
+        dDbVw_setDrawPacketList(&arrow->base, 1);
+    }
+}
+
+void mDoExt_ArrowPacket__dtor(mDoExt_ArrowPacket* i_this) {
+    i_this->~mDoExt_ArrowPacket();
+    delete i_this;
+}
+
+void mDoExt_ArrowPacket__draw(mDoExt_ArrowPacket* i_this) {
+    cXyz sp78;
+
+    GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_POS, GX_POS_XYZ, GX_F32, 0);
+    GXClearVtxDesc();
+    GXSetVtxDesc(GX_VA_POS, GX_DIRECT);
+    GXSetNumChans(1);
+    GXSetChanCtrl(GX_COLOR0, GX_DISABLE, GX_SRC_REG, GX_SRC_REG, GX_LIGHT_NULL, GX_DF_CLAMP, GX_AF_NONE);
+    GXSetNumTexGens(0);
+    GXSetNumTevStages(1);
+    GXSetTevColor(GX_TEVREG0, i_this->mColor);
+    GXSetTevOrder(GX_TEVSTAGE0, GX_TEXCOORD_NULL, GX_TEXMAP_NULL, GX_COLOR0A0);
+    GXSetTevColorIn(GX_TEVSTAGE0, GX_CC_ZERO, GX_CC_ZERO, GX_CC_ZERO, GX_CC_C0);
+    GXSetTevColorOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, GX_ENABLE, GX_TEVPREV);
+    GXSetTevAlphaIn(GX_TEVSTAGE0, GX_CA_ZERO, GX_CA_ZERO, GX_CA_ZERO, GX_CA_A0);
+    GXSetTevAlphaOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, GX_ENABLE, GX_TEVPREV);
+
+    if (i_this->mClipZ) {
+        GXSetZMode(GX_ENABLE, GX_LEQUAL, GX_ENABLE);
+    } else {
+        GXSetZMode(GX_DISABLE, GX_LEQUAL, GX_DISABLE);
+    }
+
+    GXSetBlendMode(GX_BM_BLEND, GX_BL_SRC_ALPHA, GX_BL_INV_SRC_ALPHA, GX_LO_CLEAR);
+    GXSetAlphaCompare(GX_ALWAYS, 0, GX_AOP_OR, GX_ALWAYS, 0);
+    GXSetCullMode(GX_CULL_NONE);
+    GXSetClipMode(GX_CLIP_ENABLE);
+    GXSetLineWidth(i_this->mLineWidth, GX_TO_ZERO);
+
+    sp78 = i_this->mEndPos - i_this->mStartPos;
+    MtxTrans(i_this->mStartPos.x, i_this->mStartPos.y, i_this->mStartPos.z, 0);
+    mDoMtx_YrotM(*calc_mtx, sp78.atan2sX_Z());
+    mDoMtx_XrotM(*calc_mtx, cM_atan2s(sqrtf(sp78.x * sp78.x + sp78.z * sp78.z), sp78.y));
+    Mtx ab;
+    mDoMtx_concat(j3dSys.getViewMtx(), *calc_mtx, ab);
+
+    GXLoadPosMtxImm(ab, 0);
+    GXSetCurrentMtx(0);
+    
+    GXBegin(GX_LINES, GX_VTXFMT0, 2);
+    GXPosition3f32(0.0f, 0.0f, 0.0f);
+    GXPosition3f32(0.0f, sp78.abs(), 0.0f);
+    GXEnd();
+
+    f32 temp_f29 = sp78.abs();
+    f32 temp_f31 = temp_f29 * 0.1f;
+    f32 temp_f30 = temp_f29 * 0.8f;
+
+    GXBegin(GX_TRIANGLEFAN, GX_VTXFMT0, 6);
+    GXPosition3f32(0.0f, temp_f29, 0.0f);
+    GXPosition3f32(0.0f, temp_f30, temp_f31);
+    GXPosition3f32(temp_f31, temp_f30, 0.0f);
+    GXPosition3f32(0.0f, temp_f30, -temp_f31);
+    GXPosition3f32(-temp_f31, temp_f30, 0.0f);
+    GXPosition3f32(0.0f, temp_f30, temp_f31);
     GXEnd();
 }
 
