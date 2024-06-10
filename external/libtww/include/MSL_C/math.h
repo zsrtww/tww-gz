@@ -9,6 +9,7 @@
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
 
 #include "../addrs.h"
+#include "../defines.h"
 
 typedef double (*tww_atan_t)(double x);
 typedef double (*tww_copysign_t)(double x, double y);
@@ -41,5 +42,16 @@ extern "C" {
     double sin(double x);
     double ceil(double);
 }
+
+inline float fcos(float v) {
+    return (float)cos(v);
+}
+
+inline float fsin(float v) {
+    return (float)sin(v);
+}
+
+LIBTWW_DEFINE_FUNC(sqrtf__3stdFf,
+                  float, sqrtf, (float))
 
 #endif  // !LIB_TWW_MATH

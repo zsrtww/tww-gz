@@ -5,6 +5,7 @@
 #include "tools.h"
 #include "scene.h"
 #include "save_manager.h"
+#include "geometry_draw.h"
 #include "libtww/include/addrs.h"
 #include "libtww/include/f_op/f_op_scene_req.h"
 #include "rels/include/patch.h"
@@ -24,6 +25,9 @@ HOOK_DEF(int, dScnPly_Draw, (void*));
 HOOK_DEF(void, putSave, (void*, int));
 HOOK_DEF(int, dScnPly__phase_1, (void*));
 HOOK_DEF(void, setDaytime, (void*));
+HOOK_DEF(void, BeforeOfPaint, (void));
+HOOK_DEF(void, dCcS__draw, (dCcS*));
+HOOK_DEF(void, dCcS__MoveAfterCheck, (dCcS*));
 
 namespace Hook {
 void gameLoopHook(void) {
@@ -100,6 +104,23 @@ void setDaytimeHook(void* i_this) {
     }
 }
 
+void beforeOfPaintHook() {
+    BeforeOfPaintTrampoline();
+    dDbVw_deleteDrawPacketList();
+}
+
+void dCcSDrawHook(dCcS* i_this) {
+    GZ_drawCc(i_this);
+    return dCcS__drawTrampoline(i_this);
+}
+
+void dCcSMoveAfterCheckHook(dCcS* i_this) {
+    dCcS_Data::at_obj_count = i_this->mObjAtCount;
+    dCcS_Data::tg_obj_count = i_this->mObjTgCount;
+    dCcS_Data::co_obj_count = i_this->mObjCoCount;
+    return dCcS__MoveAfterCheckTrampoline(i_this);
+}
+
 #define draw_console draw__17JUTConsoleManagerCFv
 #define f_fapGm_Execute fapGm_Execute__Fv
 
@@ -112,6 +133,9 @@ int dScnPly_Draw__FP13dScnPly_ply_c(void*);
 void putSave__10dSv_info_cFi(void*, int);
 int phase_1__FP13dScnPly_ply_c(void*);
 void setDaytime__18dScnKy_env_light_cFv(void*);
+void dScnPly_BeforeOfPaint__Fv();
+void Draw__4dCcSFv(dCcS*);
+void MoveAfterCheck__4dCcSFv(dCcS*);
 }
 
 KEEP_FUNC void applyHooks() {
@@ -125,6 +149,9 @@ KEEP_FUNC void applyHooks() {
     APPLY_HOOK(putSave, &putSave__10dSv_info_cFi, putSaveHook);
     APPLY_HOOK(dScnPly__phase_1, &phase_1__FP13dScnPly_ply_c, saveInjectHook);
     APPLY_HOOK(setDaytime, &setDaytime__18dScnKy_env_light_cFv, setDaytimeHook);
+    APPLY_HOOK(BeforeOfPaint, &dScnPly_BeforeOfPaint__Fv, beforeOfPaintHook);
+    APPLY_HOOK(dCcS__draw, &Draw__4dCcSFv, dCcSDrawHook);
+    APPLY_HOOK(dCcS__MoveAfterCheck, &MoveAfterCheck__4dCcSFv, dCcSMoveAfterCheckHook);
 
 #undef APPLY_HOOK
 }

@@ -4,6 +4,7 @@
 #include "font.h"
 #include "menu.h"
 #include "pos_settings.h"
+#include "geometry_draw.h"
 #include "menus/utils/menu_mgr.h"
 #include "libtww/include/m_Do/m_Do_ext.h"
 
@@ -45,6 +46,7 @@ void main() {
     g_PreLoopListener->addListener(GZ_handleFlags_PreLoop);
     g_PreLoopListener->addListener(GZ_setCursorColor);
     g_PreLoopListener->addListener(GZ_handleRelTools);
+    g_PreLoopListener->addListener(GZ_drawPolygons);
     
     // Init the post-loop listener
     g_PostLoopListener = new PostLoopListener();

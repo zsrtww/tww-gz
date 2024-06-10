@@ -235,23 +235,40 @@ public:
 
 static_assert(sizeof(dCcD_GObjInf) == 0xF8);
 
-class dCcD_Cyl : public dCcD_GObjInf, public cCcD_CylAttr {
+class dCcD_Cyl {
 public:
+    dCcD_GObjInf mGObjInf;
+    cCcD_CylAttr mCylAttr;
 };  // Size = 0x130
 static_assert(sizeof(dCcD_Cyl) == 0x130);
 
-class dCcD_Sph : public dCcD_GObjInf, public cCcD_SphAttr {
+extern "C" cCcD_GObjInf__vtbl_t __vt__8dCcD_Cyl;
+#define dCcD_Cyl_vtable __vt__8dCcD_Cyl
+
+class dCcD_Sph {
 public:
+    dCcD_GObjInf mGObjInf;
+    cCcD_SphAttr mSphAttr;
 };  // Size = 0x12C
 static_assert(sizeof(dCcD_Sph) == 0x12C);
 
-class dCcD_Cps : public dCcD_GObjInf, public cCcD_CpsAttr {
+extern "C" cCcD_GObjInf__vtbl_t __vt__8dCcD_Sph;
+#define dCcD_Sph_vtable __vt__8dCcD_Sph
+
+class dCcD_Cps {
 public:
+    dCcD_GObjInf mGObjInf;
+    cCcD_CpsAttr mCpsAttr;
 };  // Size = 0x138
 static_assert(sizeof(dCcD_Cps) == 0x138);
 
-class dCcD_Tri : public dCcD_GObjInf, public cCcD_TriAttr {
+extern "C" cCcD_GObjInf__vtbl_t __vt__8dCcD_Cps;
+#define dCcD_Cps_vtable __vt__8dCcD_Cps
+
+class dCcD_Tri {
 public:
+    dCcD_GObjInf mGObjInf;
+    cCcD_TriAttr mTriAttr;
 };
 
 #endif /* D_CC_D_CC_D_H */

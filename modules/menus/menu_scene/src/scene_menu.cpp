@@ -16,6 +16,7 @@ KEEP_FUNC SceneMenu::SceneMenu(Cursor& cursor)
                         {"current hour", TIME_HOURS_INDEX, "Change the current hour"},
                         {"current minute", TIME_MINUTES_INDEX, "Change the current minute"},
                         {"current date", MODIFY_DATE_INDEX, "Change the current date/moon phase"},
+                        {"collision viewer", COLLISION_VIEW_INDEX, "Change Collision Viewer settings", false},
                     } {}
 
 SceneMenu::~SceneMenu() {}
@@ -134,6 +135,12 @@ void SceneMenu::draw() {
 
     if (GZ_getButtonTrig(SELECTION_BUTTON)) {
         g_sceneFlags[cursor.y].active = !g_sceneFlags[cursor.y].active;
+
+        switch (cursor.y) {
+        case COLLISION_VIEW_INDEX:
+            g_menuMgr->push(MN_COLLISION_VIEW_INDEX);
+            return;
+        }
     }
 
     switch (cursor.y) {

@@ -12,6 +12,9 @@ public:
     /* 0x0C */ cXyz mEnd;
     /* 0x18 */ void* vtable;
 
+    void CalcVec(Vec* pOut) const { PSVECSubtract(&this->mEnd, &this->mStart, pOut); }
+    f32 GetLen() const { return PSVECDistance(&mStart, &mEnd); }
+
     const cXyz* GetStartP() const { return &mStart; }
     cXyz* GetStartP() { return &mStart; }
     cXyz& GetStart() { return mStart; }
