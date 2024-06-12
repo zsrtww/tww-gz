@@ -12,7 +12,7 @@ struct cBgD_Vtx_t {
     Vec vertex;
 };
 
-typedef int (*dBgS_CaptCallback)(dBgS_CaptPoly*, cBgD_Vtx_t*, int, int, int, cM3dGPla*);
+typedef int (*dBgS_CaptCallback)(dBgS_CaptPoly*, cBgD_Vtx_t*, int, int, int, cM3dGPla*,cBgD_Ti_t*, int);
 
 class dBgS_CaptPoly {
 public:
