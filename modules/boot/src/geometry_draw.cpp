@@ -785,15 +785,25 @@ KEEP_FUNC void GZ_drawCc(dCcS* i_this) {
 //                      POLY DRAW
 //-------------------------------------------------------
 
-int drawPoly(dBgS_CaptPoly* i_captpoly, cBgD_Vtx_t* i_vtx, int i_ia, int i_ib, int i_ic, cM3dGPla* i_plane) {
+int drawPoly(dBgS_CaptPoly* i_captpoly, cBgD_Vtx_t* i_vtx, int i_ia, int i_ib, int i_ic, cM3dGPla* i_plane, cBgD_Ti_t* i_prop, int i_id) {
+    cBgD_Ti_t* prop = &i_prop[i_id];
+
     cXyz vertices[3];
 
-    GXColor ground_col = {0xFF, 0x00, 0x00, g_geometryOpacity};
     GXColor roof_col = {0x00, 0x00, 0xFF, g_geometryOpacity};
+    GXColor ground_col = {0xFF, 0x00, 0x00, g_geometryOpacity};
+    GXColor flat_col = {0xFF, 0x80, 0x80, g_geometryOpacity};
+
     GXColor wall_col = {0x00, 0xFF, 0x00, g_geometryOpacity};
+    GXColor flat_wall_col = {0x00, 0x33, 0x00, g_geometryOpacity};
 
-    GXColor flat_col = {0xFF, 0xC5, 0xC5, g_geometryOpacity};
-
+    //modify colors if slippery
+    if(((prop->mPolyInf1 << 16) >> 28) == 1){
+        ground_col = {0x99, 0x00, 0x33, g_geometryOpacity};
+        flat_col.a = 0xAA;
+        wall_col.b = 0xCC;
+        flat_wall_col.r = 0x1a;
+    }
     cXyz raise;
     PSVECScale(&i_plane->mNormal, &raise, (f32)g_collisionRaise);
 
@@ -811,7 +821,7 @@ int drawPoly(dBgS_CaptPoly* i_captpoly, cBgD_Vtx_t* i_vtx, int i_ia, int i_ib, i
                 // draw special color for fully flat ground
                 dDbVw_drawTriangleXlu(vertices, flat_col, 1);
             } else {
-                dDbVw_drawTriangleXlu(vertices, ground_col, 1);
+                dDbVw_drawTriangleXlu(vertices, ground_col, 1);             
             }
         }
     } else if (cBgW_CheckBRoof(i_plane->mNormal.y)) {
@@ -819,13 +829,19 @@ int drawPoly(dBgS_CaptPoly* i_captpoly, cBgD_Vtx_t* i_vtx, int i_ia, int i_ib, i
             dDbVw_drawTriangleXlu(vertices, roof_col, 1);
         }
     } else if (g_collisionFlags[VIEW_POLYGON_WALL].active) {
-        dDbVw_drawTriangleXlu(vertices, wall_col, 1);
+         if (i_plane->mNormal.y >= 0.000001f) {
+            dDbVw_drawTriangleXlu(vertices, wall_col, 1);
+        }
+        else{
+            dDbVw_drawTriangleXlu(vertices, flat_wall_col, 1);
+        }
+            
     }
 
     return 0;
 }
 
-int poly_edge_draw(dBgS_CaptPoly* i_captpoly, cBgD_Vtx_t* i_vtx, int i_ia, int i_ib, int i_ic, cM3dGPla* i_plane) {
+int poly_edge_draw(dBgS_CaptPoly* i_captpoly, cBgD_Vtx_t* i_vtx, int i_ia, int i_ib, int i_ic, cM3dGPla* i_plane, cBgD_Ti_t* i_prop, int i_id) {
     if (cBgW_CheckBGround(i_plane->mNormal.y)) {
         if (!g_collisionFlags[VIEW_POLYGON_GROUND].active) {
             return 0;
@@ -872,10 +888,12 @@ int poly_edge_draw(dBgS_CaptPoly* i_captpoly, cBgD_Vtx_t* i_vtx, int i_ia, int i
 
 void dBgW__RwgCaptPoly(dBgW* i_this, int param_0, dBgS_CaptPoly& i_captPoly) {
     while (true) {
+        //cBgD_Ti_t* i_prop = i_this->pm_bgd->m_ti_tbl;
+
         cBgW_RwgElm* puVar2 = &i_this->pm_rwg[param_0];
         i_captPoly.mpCallback(&i_captPoly, (cBgD_Vtx_t*)i_this->pm_vtx_tbl, i_this->pm_bgd->m_t_tbl[param_0].vtx0,
                            i_this->pm_bgd->m_t_tbl[param_0].vtx1, i_this->pm_bgd->m_t_tbl[param_0].vtx2,
-                           &i_this->pm_tri[param_0].m_plane);
+                           &i_this->pm_tri[param_0].m_plane, i_this->pm_bgd->m_ti_tbl, i_this->pm_bgd->m_t_tbl[param_0].id);
         if (puVar2->next == 0xFFFF)
             break;
         param_0 = puVar2->next;
@@ -920,6 +938,7 @@ void dBgW__CaptPolyGrpRp(dBgW* i_this, dBgS_CaptPoly& i_captPoly, int i_rootGrpI
     if (dBgW__ChkGrpThrough(i_this, i_rootGrpIdx, i_captPoly.field_0x00.GetGrpPassChk(), param_2)) {
         return;
     }
+
 
     if (i_this->pm_bgd->m_g_tbl[i_rootGrpIdx].m_tree_idx != 0xFFFF) {
         dBgW__CaptPolyRp(i_this, i_captPoly, i_this->pm_bgd->m_g_tbl[i_rootGrpIdx].m_tree_idx);
