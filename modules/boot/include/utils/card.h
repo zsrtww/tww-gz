@@ -29,6 +29,8 @@ enum GZSaveIndex {
     SV_CURSOR_COLOR_INDEX = 6,
     SV_FONT_INDEX = 7,
     SV_SPRITES_INDEX = 8,
+    /*SV_LAND_SPEED_INDEX = 9,
+    SV_WATER_SPEED_INDEX = 10,*/
 };
 
 struct GZSaveHeader {
@@ -48,6 +50,8 @@ struct GZSaveLayout {
     int mCursorColType;
     int mFontType;
     Vec2 mSpriteOffsets[SPRITES_AMNT];
+    /*f32 mlandSpeed;
+    f32 mwaterSpeed;*/
 };
 
 struct GZSaveFile {

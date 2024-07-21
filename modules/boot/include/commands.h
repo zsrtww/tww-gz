@@ -1,6 +1,7 @@
 #pragma once
 #include "libtww/include/dolphin/gctypes.h"
 
+
 #define COMMANDS_AMNT 13
 
 extern bool g_commandStates[COMMANDS_AMNT];
@@ -30,3 +31,8 @@ struct Command {
 void GZCmd_processInputs();
 void GZCmd_enable(int idx);
 void GZCmd_disable(int idx);
+
+f32 getWaterSpeed();
+void setWaterSpeed(f32 speedNum);
+f32 getLandSpeed();
+void setLandSpeed(f32 speedNum);
