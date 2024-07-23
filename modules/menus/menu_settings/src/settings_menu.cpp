@@ -6,9 +6,13 @@
 #include "settings.h"
 #include "rels/include/defines.h"
 #include "menus/utils/menu_mgr.h"
+#include "boot/include/commands.h"
 
 #define MAX_RELOAD_OPTIONS 2
 #define MAX_CURSOR_COLOR_OPTIONS 6
+
+KEEP_VAR f32 waterSpeed = 1500.0f;
+KEEP_VAR f32 landSpeed = 150.0f;
 
 KEEP_FUNC SettingsMenu::SettingsMenu(Cursor& cursor)
     : Menu(cursor), lines{
@@ -24,12 +28,15 @@ KEEP_FUNC SettingsMenu::SettingsMenu(Cursor& cursor)
                         {"menu positions", POS_SETTINGS_MENU_INDEX,
                          "Change menu object positions (A to toggle selection, DPad to move)",
                          false},
+                        {"fast swimming speed: ", WATER_SPEED_INDEX, "Change max speed of fast movement cheat for swimming"},
+                        {"fast running speed: ", LAND_SPEED_INDEX, "change max speed of Fast Movement cheat for running"},
                     } {}
 
 SettingsMenu::~SettingsMenu() {}
 
 void SettingsMenu::draw() {
     cursor.setMode(Cursor::MODE_LIST);
+
 
     if (GZ_getButtonTrig(BACK_BUTTON)) {
         g_menuMgr->pop();
@@ -116,6 +123,48 @@ void SettingsMenu::draw() {
         }
         break;
     }
+
+    // Controls the constant speed for link's fast movement cheat. moveList to set and cycle through the numbers, and
+    // cursor.move so that the list does not stick once option is selected.
+    case WATER_SPEED_INDEX: {
+        waterSpeed = getWaterSpeed();
+        Cursor::moveList(waterSpeed);
+        if (GZ_getButtonRepeat(GZPad::A)) {
+            waterSpeed += 100.0f;  
+        }
+        if (GZ_getButtonRepeat(GZPad::R)) {
+            waterSpeed -= 100.0f;  
+        }
+        if (waterSpeed < 1.0f){
+            waterSpeed = 5000.0f;
+        }
+        if (waterSpeed > 5000.0f){
+            waterSpeed = 1.0f;
+        }
+        setWaterSpeed(waterSpeed);
+        cursor.move(0, MENU_LINE_NUM);
+        break;
+    }
+    case LAND_SPEED_INDEX: {
+        landSpeed = getLandSpeed();
+        Cursor::moveList(landSpeed);
+        if (GZ_getButtonRepeat(GZPad::A)) {
+            landSpeed += 100.0f;  
+        }
+        if (GZ_getButtonRepeat(GZPad::R)) {
+            landSpeed -= 100.0f;  
+        }
+        if (landSpeed < 1.0f){
+            landSpeed = 5000.0f;
+        }
+        if (landSpeed > 5000.0f){
+            landSpeed = 1.0f;
+        }
+        setLandSpeed(landSpeed);
+        cursor.move(0, MENU_LINE_NUM);
+        break;
+    }
+
     default:
         cursor.move(0, MENU_LINE_NUM);
         break;
@@ -123,6 +172,8 @@ void SettingsMenu::draw() {
 
     lines[CURSOR_COLOR_INDEX].printf(" <%s>", cursorCol_opt[g_cursorColorType].member);
     lines[FONT_INDEX].printf(" <%s>", g_font_opt[g_fontType].member);
+    lines[WATER_SPEED_INDEX].printf(" <%4.0f>", waterSpeed);
+    lines[LAND_SPEED_INDEX].printf(" <%4.0f>", landSpeed);
 
     GZ_drawMenuLines(lines, cursor.y, MENU_LINE_NUM);
 }

@@ -8,6 +8,7 @@
 #include "libtww/include/d/com/d_com_inf_game.h"
 #include "libtww/include/d/a/d_a_player_main.h"
 #include "gz_flags.h"
+#include "rels/include/defines.h"
 
 bool g_commandStates[COMMANDS_AMNT];
 
@@ -18,6 +19,9 @@ static Vec sSaveCamTarget = {0.0f, 0.0f, 0.0f}; */
 
 static int sLastInputs;
 static int sCurInputs;
+
+KEEP_VAR f32 g_waterSpeed = 1500.0f;
+KEEP_VAR f32 g_landSpeed = 150.0f;
 
 bool GZCmd_checkTrig(int combo) {
     if (sCurInputs == combo && sLastInputs != combo) {
@@ -63,27 +67,20 @@ void GZCmd_quarterHeart() {
     dComIfGs_setLife(1);
 }
 
+/*Temporary functions to fix bug with collision codes from inline function*/
 void GZCmd_normalCollision() {
-    daPy_lk_c* player_p = (daPy_lk_c*)dComIfGp_getPlayer(0);
-    if (player_p != nullptr) {
-        player_p->mAcch.ClrWallNone();
-    }
+    u16* collision_ptr = dComIfGs_getCollision();
+    *collision_ptr &= 0xFFFF ^ 0x4004;
 }
 
 void GZCmd_chestStorage() {
-    daPy_lk_c* player_p = (daPy_lk_c*)dComIfGp_getPlayer(0);
-    if (player_p != nullptr) {
-        player_p->mAcch.SetWallNone();
-        player_p->mAcch.OffLineCheckNone();
-    }
+    u16* collision_ptr = dComIfGs_getCollision();
+    *collision_ptr = (*collision_ptr & (0xFFFF ^ 0x4000)) | 0x4;
 }
 
 void GZCmd_doorCancel() {
-    daPy_lk_c* player_p = (daPy_lk_c*)dComIfGp_getPlayer(0);
-    if (player_p != nullptr) {
-        player_p->mAcch.SetWallNone();
-        player_p->mAcch.OnLineCheckNone();
-    }
+    u16* collision_ptr = dComIfGs_getCollision();
+    *collision_ptr |= 0x4004;
 }
 
 void GZCmd_fastMovement() {
@@ -93,9 +90,9 @@ void GZCmd_fastMovement() {
         if (player_p->mCurProcID == daPy_lk_c::PROC_SWIM_UP_e || player_p->mCurProcID == daPy_lk_c::PROC_SWIM_WAIT_e ||
             player_p->mCurProcID == daPy_lk_c::PROC_SWIM_MOVE_e)
         {
-            player_p->mVelocity = 2000.0f;
+            player_p->mVelocity = getWaterSpeed();
         } else {
-            player_p->mVelocity = 150.0f;
+            player_p->mVelocity = getLandSpeed();
         }
     }
 }
@@ -168,4 +165,20 @@ void GZCmd_enable(int idx) {
 
 void GZCmd_disable(int idx) {
     sCommands[idx].active = false;
+}
+
+KEEP_FUNC f32 getWaterSpeed(){
+    return g_waterSpeed;
+}
+
+KEEP_FUNC void setWaterSpeed(f32 speed){
+    g_waterSpeed = speed;
+}
+
+KEEP_FUNC f32 getLandSpeed(){
+    return g_landSpeed;
+}
+
+KEEP_FUNC void setLandSpeed(f32 speed){
+    g_landSpeed = speed;
 }

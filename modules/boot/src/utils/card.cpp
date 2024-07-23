@@ -10,6 +10,8 @@
 #include "rels/include/cxx.h"
 #include "menus/utils/menu_mgr.h"
 #include "rels/include/defines.h"
+#include "boot/include/commands.h"
+#include "menus/menu_settings/include/settings_menu.h"
 
 /**
  * @brief Like CARDWrite, but allows for arbitrary sizes and offsets.
@@ -62,6 +64,7 @@ int32_t GZ_storageRead(Storage* storage, void* data, int32_t size, int32_t offse
     return result;
 }
 
+
 void GZ_storeSaveLayout(GZSaveLayout& save_layout) {
     memcpy(save_layout.mCheats, g_cheats, sizeof(g_cheats));
     memcpy(save_layout.mItemEquipSettings, g_item_equip_priorities, sizeof(g_item_equip_priorities));
@@ -75,6 +78,7 @@ void GZ_storeSaveLayout(GZSaveLayout& save_layout) {
     save_layout.mFontType = g_fontType;
 }
 
+
 void GZ_loadSaveLayout(GZSaveLayout& save_layout) {
     memcpy(g_cheats, save_layout.mCheats, sizeof(g_cheats));
     memcpy(g_item_equip_priorities, save_layout.mItemEquipSettings, sizeof(g_item_equip_priorities));
@@ -83,6 +87,7 @@ void GZ_loadSaveLayout(GZSaveLayout& save_layout) {
     memcpy(g_watches, save_layout.mWatches, sizeof(g_watches));
     memcpy(g_spriteOffsets, save_layout.mSpriteOffsets, sizeof(g_spriteOffsets));
 
+    
     g_dropShadows = save_layout.mDropShadows;
     g_cursorColorType = save_layout.mCursorColType;
     g_fontType = save_layout.mFontType;
