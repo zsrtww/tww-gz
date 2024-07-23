@@ -67,6 +67,7 @@ void GZCmd_quarterHeart() {
     dComIfGs_setLife(1);
 }
 
+/*Temporary functions to fix bug with collision codes from inline function*/
 void GZCmd_normalCollision() {
     u16* collision_ptr = dComIfGs_getCollision();
     *collision_ptr &= 0xFFFF ^ 0x4004;
