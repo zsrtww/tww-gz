@@ -8,8 +8,6 @@ KEEP_VAR ListMember g_font_opt[] = {"consola",   "calamity-bold",  "lib-sans",  
 KEEP_VAR bool g_dropShadows;
 KEEP_VAR uint32_t g_fontType = 0;
 KEEP_VAR uint32_t g_cursorColorType;
-/*KEEP_VAR f32 g_landSpeed;
-KEEP_VAR f32 g_waterSpeed;*/
 
 void GZ_initFont() {
     if (g_fontType >= 0 && g_fontType < FONT_OPTIONS_COUNT) {
