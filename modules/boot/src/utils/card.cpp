@@ -216,7 +216,7 @@ KEEP_FUNC void GZ_loadMemCard(Storage& storage) {
     }
 }
 
-#define FRAME_COUNT 200
+#define FRAME_COUNT 450
 #define FILE_NAME "twwgz01"
 
 KEEP_FUNC void GZ_loadGZSave(bool& card_load) {
