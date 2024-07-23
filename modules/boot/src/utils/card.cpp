@@ -76,8 +76,6 @@ void GZ_storeSaveLayout(GZSaveLayout& save_layout) {
     save_layout.mDropShadows = g_dropShadows;
     save_layout.mCursorColType = g_cursorColorType;
     save_layout.mFontType = g_fontType;
-    /*save_layout.mlandSpeed = g_landSpeed;
-    save_layout.mwaterSpeed = g_waterSpeed;*/
 }
 
 
@@ -93,8 +91,6 @@ void GZ_loadSaveLayout(GZSaveLayout& save_layout) {
     g_dropShadows = save_layout.mDropShadows;
     g_cursorColorType = save_layout.mCursorColType;
     g_fontType = save_layout.mFontType;
-    /*g_landSpeed = save_layout.mlandSpeed;
-    g_waterSpeed = save_layout.mwaterSpeed;*/
 }
 
 void GZ_setupSaveFile(GZSaveFile& save_file) {
@@ -115,8 +111,6 @@ void GZ_setupSaveFile(GZSaveFile& save_file) {
     set_entry(SV_CURSOR_COLOR_INDEX, mCursorColType);
     set_entry(SV_FONT_INDEX, mFontType);
     set_entry(SV_SPRITES_INDEX, mSpriteOffsets);
-    /*set_entry(SV_LAND_SPEED_INDEX, mlandSpeed);
-    set_entry(SV_WATER_SPEED_INDEX, mwaterSpeed);*/
 #undef set_entry
 }
 
@@ -159,8 +153,6 @@ int32_t GZ_readSaveFile(Storage* storage, GZSaveFile& save_file, int32_t sector_
     assert_read_entry(SV_FONT_INDEX, &save_file.data.mFontType, sizeof(save_file.data.mFontType));
     assert_read_entry(SV_SPRITES_INDEX, save_file.data.mSpriteOffsets,
                       sizeof(save_file.data.mSpriteOffsets));
-    /*assert_read_entry(LAND_SPEED_INDEX, &save_file.data.mlandSpeed, sizeof(save_file.data.mlandSpeed));
-    assert_read_entry(WATER_SPEED_INDEX, &save_file.data.mwaterSpeed, sizeof(save_file.data.mwaterSpeed));*/
 #undef assert_read_entry
 #undef assert_result
 
