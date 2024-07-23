@@ -1607,6 +1607,7 @@ inline u8 dComIfGs_getChartDeciphered() {
     return g_dComIfG_gameInfo.info.getPlayer().mMap.getChartDeciphered();
 }
 
+ /*Temporary function to fix bug with collision codes from inline function*/
 inline u16* dComIfGs_getCollision() {
     u16** collision_base_address_ptr = (u16**) &g_dComIfG_gameInfo.play.mCameraInfo->mCameraTarget + 4;
     u16* collision_base_address = *collision_base_address_ptr;
