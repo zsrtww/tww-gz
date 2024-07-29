@@ -1,5 +1,5 @@
 #include "utils/lines.h"
-#include "libtww/include/msl_c/math.h"
+#include "libtww/include/MSL_C/math.h"
 #include "pos_settings.h"
 #include "settings.h"
 #include "utils/draw.h"
