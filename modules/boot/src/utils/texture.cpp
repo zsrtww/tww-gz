@@ -1,7 +1,7 @@
 #include "utils/texture.h"
 #include <cstring>
 #include "libtww/include/addrs.h"
-#include "libtww/include/msl_c/math.h"
+#include "libtww/include/MSL_C/math.h"
 #include "utils/disc.h"
 #include "gcn_c/include/dvd.h"
 #include "rels/include/cxx.h"
