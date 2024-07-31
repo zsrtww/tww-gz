@@ -44,7 +44,7 @@ void AnyNoMssSavesMenu::draw() {
             special(ROPES_1, SaveMngSpecial_Ropes1, nullptr),
             special(FF1, SaveMngSpecial_FF1_PirateShip_Night, nullptr),
             special(WINDFALL, SaveMngSpecial_Windfall_Day0, nullptr),
-            special(BOMBS_SWIM, SaveMngSpecial_Windfall_Day0, nullptr),
+            special(BOMBS_SWIM, SaveMngSpecial_Windfall_Day0, SaveMngSpecial_BombsSwim_After),
             special(ROPES_2, SaveMngSpecial_Ropes2, nullptr),
             special(FH_SWIM, SaveMngSpecial_Windfall_Day0, nullptr),
             special(DTCS, SaveMngSpecial_DTCS, nullptr),

@@ -31,6 +31,18 @@ KEEP_FUNC void SaveMngSpecial_Windfall_Day0() {
     g_dComIfG_gameInfo.play.mNextStage.setLayer(0);
 }
 
+KEEP_FUNC void SaveMngSpecial_BombsSwim_After() {
+    gSaveManager.injectDefault_after();
+
+    fopAc_ac_c* ship_p = g_dComIfG_gameInfo.play.mpPlayerPtr[2];
+
+    if (ship_p != nullptr) {
+        // set KORL pos and angle to be the same as when the Wind Waker cutscene ends
+        ship_p->current.pos.set(196459.0f, 0.0f, -199693.0f);
+        ship_p->current.angle.y = ship_p->shape_angle.y = 0x623E;
+    }
+}
+
 KEEP_FUNC void SaveMngSpecial_DTCS() {
     gSaveManager.injectDefault_during();
     g_dComIfG_gameInfo.play.mNextStage.setPoint(5);

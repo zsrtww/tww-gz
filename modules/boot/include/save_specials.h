@@ -5,6 +5,7 @@ void SaveMngSpecial_Ropes1();
 void SaveMngSpecial_Ropes2();
 void SaveMngSpecial_FF1_PirateShip_Night();
 void SaveMngSpecial_Windfall_Day0();
+void SaveMngSpecial_BombsSwim_After();
 void SaveMngSpecial_DTCS();
 void SaveMngSpecial_ExitThornedFairy();
 void SaveMngSpecial_HelmarocKing();

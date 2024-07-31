@@ -61,6 +61,7 @@ public:
     special* mSpecials;
 
     static bool s_injectSave;
+    static s8 s_applyAfterTimer;
 
 public:
     static void injectSave(void* buffer);
@@ -73,6 +74,7 @@ public:
     static void defaultLoad();
 
     static void loadData();
+    static void applyAfterOptions();
 
     void setSavePosition(float x, float y, float z) {
         mPracticeSaveInfo.position.x = x;
