@@ -6,7 +6,7 @@
 #ifndef WII_PLATFORM
 #include "card.h"
 #define STORAGE_FILENAME_MAX CARD_FILENAME_MAX
-#define FileInfo CardInfo
+#define FileInfo CARDFileInfo
 #define OPEN_MODE_READ
 #define OPEN_MODE_WRITE
 #define OPEN_MODE_RW
@@ -57,7 +57,12 @@ typedef struct Storage {
 #define StorageWrite(storage, data, length, offset)                                                \
     ({ (storage).result = CARDWrite(&(storage).info, data, length, offset); })
 #else  // WII_PLATFORM
-#define StorageCreate(ch, fileName, size, fileBuffer) NANDCreate(fileName, 0x34, 0)
+#define StorageCreate(ch, fileName, size, fileBuffer)                                              \
+    ({                                                                                             \
+        (void)size;                                                                                \
+        (void)fileBuffer;                                                                          \
+        NANDCreate(fileName, 0x34, 0);                                                             \
+    })
 #define StorageDelete(ch, fileName) NANDDelete(fileName)
 #define StorageOpen(ch, fileName, fileInfo, mode) NANDOpen(fileName, fileInfo, mode)
 #define StorageClose(fileInfo) NANDClose(fileInfo)

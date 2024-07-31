@@ -1,0 +1,110 @@
+{
+    "configurations": [
+        {
+            "name": "US",
+            "includePath": [
+                "${workspaceFolder}/modules/boot/include/**",
+                "${workspaceFolder}/modules/**",
+                "${workspaceFolder}/common/**",
+                "${workspaceFolder}/external/**"
+            ],
+            "defines": [
+                "NTSCU",
+                "REL_MODULE"
+            ],
+            "compilerPath": "/opt/devkitpro/devkitPPC/bin/powerpc-eabi-g++",
+            "cStandard": "gnu17",
+            "cppStandard": "gnu++20",
+            "intelliSenseMode": "gcc-x86",
+            "mergeConfigurations": false,
+            "browse": {
+                "path": [
+                    "${workspaceFolder}/**"
+                ],
+                "limitSymbolsToIncludedHeaders": true
+            },
+            "compilerArgs": [
+                "-g",
+                "-c",
+                "-Os",
+                "-Wall",
+                "-DGEKKO",
+                "-mrvl",
+                "-mcpu=750",
+                "-meabi",
+                "-mhard-float"
+            ]
+        },
+        {
+            "name": "PAL",
+            "includePath": [
+                "${workspaceFolder}/modules/boot/include/**",
+                "${workspaceFolder}/modules/**",
+                "${workspaceFolder}/common/**",
+                "${workspaceFolder}/external/**"
+            ],
+            "defines": [
+                "PAL",
+                "REL_MODULE"
+            ],
+            "compilerPath": "/opt/devkitpro/devkitPPC/bin/powerpc-eabi-g++",
+            "cStandard": "gnu17",
+            "cppStandard": "gnu++20",
+            "intelliSenseMode": "gcc-x86",
+            "mergeConfigurations": false,
+            "browse": {
+                "path": [
+                    "${workspaceFolder}/**"
+                ],
+                "limitSymbolsToIncludedHeaders": true
+            },
+            "compilerArgs": [
+                "-g",
+                "-c",
+                "-Os",
+                "-Wall",
+                "-DGEKKO",
+                "-mrvl",
+                "-mcpu=750",
+                "-meabi",
+                "-mhard-float"
+            ]
+        },
+        {
+            "name": "JP",
+            "includePath": [
+                "${workspaceFolder}/modules/boot/include/**",
+                "${workspaceFolder}/modules/**",
+                "${workspaceFolder}/common/**",
+                "${workspaceFolder}/external/**"
+            ],
+            "defines": [
+                "NTSCJ",
+                "REL_MODULE"
+            ],
+            "compilerPath": "/opt/devkitpro/devkitPPC/bin/powerpc-eabi-g++",
+            "cStandard": "gnu17",
+            "cppStandard": "gnu++20",
+            "intelliSenseMode": "gcc-x86",
+            "mergeConfigurations": false,
+            "browse": {
+                "path": [
+                    "${workspaceFolder}/**"
+                ],
+                "limitSymbolsToIncludedHeaders": true
+            },
+            "compilerArgs": [
+                "-g",
+                "-c",
+                "-Os",
+                "-Wall",
+                "-DGEKKO",
+                "-mrvl",
+                "-mcpu=750",
+                "-meabi",
+                "-mhard-float"
+            ]
+        },
+    ],
+    "version": 4
+}

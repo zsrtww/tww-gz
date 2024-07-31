@@ -1,0 +1,146 @@
+#ifndef J3DSYS_H
+#define J3DSYS_H
+
+#include "../../dolphin/gx/gx.h"
+#include "../../dolphin/mtx/vec.h"
+#include "../../dolphin/mtx/mtx.h"
+#include "../../dolphin/gctypes.h"
+#include "../../defines.h"
+
+// Perhaps move to a new J3DEnum.h?
+enum J3DError {
+    J3DErrType_Success = 0,
+    J3DErrType_OutOfMemory = 4,
+};
+
+enum J3DSysDrawBuffer {
+    /* 0x0 */ OPA_BUFFER,
+    /* 0x1 */ XLU_BUFFER
+};
+
+class J3DMtxCalc;
+class J3DModel;
+class J3DMatPacket;
+class J3DShapePacket;
+class J3DShape;
+class J3DDrawBuffer;
+class J3DTexture;
+
+struct J3DTexCoordScaleInfo {
+    /* 0x0 */ u16 field_0x00;
+    /* 0x2 */ u16 field_0x02;
+    /* 0x4 */ u16 field_0x04;
+    /* 0x6 */ u16 field_0x06;
+};
+
+enum J3DSysFlag {
+    J3DSysFlag_SkinPosCpu = 0x00000004,
+    J3DSysFlag_SkinNrmCpu = 0x00000008,
+    J3DSysFlag_PostTexMtx = 0x40000000,
+};
+
+struct J3DSys {
+public:
+    enum DrawMode {
+        /* 0x3 */ OPA_TEX_EDGE = 3,
+        /* 0x4 */ XLU,
+    };
+
+    MtxP getViewMtx() { return mViewMtx; }
+    void setViewMtx(Mtx m) { PSMTXCopy(m, mViewMtx); }
+
+    void setDrawModeOpaTexEdge() { mDrawMode = OPA_TEX_EDGE; }
+
+    void setDrawModeXlu() { mDrawMode = XLU; }
+
+    void* getVtxPos() const { return mVtxPos; }
+    void setVtxPos(void* pVtxPos) { mVtxPos = pVtxPos; }
+
+    void* getVtxNrm() const { return mVtxNrm; }
+    void setVtxNrm(void* pVtxNrm) { mVtxNrm = pVtxNrm; }
+
+    void* getVtxCol() const { return mVtxCol; }
+    void setVtxCol(GXColor* pVtxCol) { mVtxCol = pVtxCol; }
+
+    void setModel(J3DModel* pModel) { mModel = pModel; }
+    void setShapePacket(J3DShapePacket* pPacket) { mShapePacket = pPacket; }
+    void setMatPacket(J3DMatPacket* pPacket) { mMatPacket = pPacket; }
+    J3DMatPacket* getMatPacket() { return mMatPacket; }
+    void setMaterialMode(u32 mode) { mMaterialMode = mode; }
+
+    void setCurrentMtxCalc(J3DMtxCalc * pCalc) { mCurrentMtxCalc = pCalc; }
+    J3DMtxCalc * getCurrentMtxCalc() const { return mCurrentMtxCalc; }
+
+    void setTexture(J3DTexture* pTex) { mTexture = pTex; }
+    J3DTexture* getTexture() { return mTexture; }
+
+    void setNBTScale(Vec* scale) { mNBTScale = scale; }
+
+    void onFlag(u32 flag) { mFlags |= flag; }
+
+    void offFlag(u32 flag) { mFlags &= ~flag; }
+
+    bool checkFlag(u32 flag) { return mFlags & flag; }
+
+    void setModelDrawMtx(Mtx* pMtxArr) {
+        mModelDrawMtx = pMtxArr;
+        GXSetArray(GX_POS_MTX_ARRAY, mModelDrawMtx, sizeof(*mModelDrawMtx));
+    }
+
+    void setModelNrmMtx(Mtx33* pMtxArr) {
+        mModelNrmMtx = pMtxArr;
+        GXSetArray(GX_NRM_MTX_ARRAY, mModelNrmMtx, sizeof(*mModelNrmMtx));
+    }
+
+    // Type 0: Opa Buffer
+    // Type 1: Xlu Buffer
+    void setDrawBuffer(J3DDrawBuffer* buffer, int type) { mDrawBuffer[type] = buffer; }
+
+    // Type 0: Opa Buffer
+    // Type 1: Xlu Buffer
+    J3DDrawBuffer* getDrawBuffer(int type) { return mDrawBuffer[type]; }
+
+    Mtx& getModelDrawMtx(u16 no) const { return mModelDrawMtx[no]; }
+    J3DShapePacket* getShapePacket() const { return mShapePacket; }
+
+    J3DModel* getModel() { return mModel; }
+    Vec* getNBTScale() { return mNBTScale; }
+
+    /* 0x000 */ Mtx mViewMtx;
+    /* 0x030 */ J3DMtxCalc* mCurrentMtxCalc;
+    /* 0x034 */ u32 mFlags;
+    /* 0x038 */ J3DModel* mModel;
+    /* 0x03C */ J3DMatPacket* mMatPacket;
+    /* 0x040 */ J3DShapePacket* mShapePacket;
+    /* 0x044 */ J3DShape* mShape;
+    /* 0x048 */ J3DDrawBuffer* mDrawBuffer[2];
+    /* 0x050 */ u32 mDrawMode;
+    /* 0x054 */ u32 mMaterialMode;
+    /* 0x058 */ J3DTexture* mTexture;
+    /* 0x05C */ u8 field_0x5c[0x04];
+    /* 0x060 */ u32 mTexCacheRegionNum;
+    /* 0x064 */ GXTexRegion mTexCacheRegion[8];
+    /* 0x0E4 */ u8 field_0xe4[0x20];
+    /* 0x104 */ void* field_0x104;
+    /* 0x108 */ Mtx* mModelDrawMtx;
+    /* 0x10C */ Mtx33* mModelNrmMtx;
+    /* 0x110 */ void* mVtxPos;
+    /* 0x114 */ void* mVtxNrm;
+    /* 0x118 */ GXColor* mVtxCol;
+    /* 0x11C */ void* field_0x11c;
+    /* 0x120 */ void* field_0x120;
+    /* 0x124 */ Vec* mNBTScale;
+};
+
+extern u32 j3dDefaultViewNo;
+extern J3DSys j3dSys;
+
+LIBTWW_DEFINE_FUNC(reinitGX__6J3DSysFv,
+                  void, J3DSys__reinitGX, (J3DSys*))
+
+extern "C" void* sOldVcdVatCmd__8J3DShape;
+#define sOldVcdVatCmd sOldVcdVatCmd__8J3DShape
+
+inline void resetVcdVatCache() { sOldVcdVatCmd = NULL; }
+
+#endif /* J3DSYS_H */
