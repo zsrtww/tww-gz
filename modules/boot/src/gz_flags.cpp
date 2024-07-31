@@ -2,7 +2,6 @@
 #include <cstring>
 #include "controller.h"
 #include "scene.h"
-#include "save_manager.h"
 #include "rels/include/defines.h"
 
 bool g_framePaused = false;
@@ -20,15 +19,5 @@ void GZ_execute(int phase) {
                 g_gzFlags[i].mpDeactiveFunc();
             }
         }
-    }
-
-    // Timer set after dScnPly__phase_4, delay until objects are fully loaded
-    if (SaveManager::s_applyAfterTimer > 0) {
-        SaveManager::s_applyAfterTimer--;
-    } else if (SaveManager::s_applyAfterTimer == 0) {
-        if (gSaveManager.mPracticeFileOpts.inject_options_after_load) {
-            gSaveManager.mPracticeFileOpts.inject_options_after_load();
-        }
-        SaveManager::s_applyAfterTimer = -1;
     }
 }

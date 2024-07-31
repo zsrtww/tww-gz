@@ -10,19 +10,7 @@
 #include "tools.h"
 #include "rels/include/defines.h"
 
-#include "save_manager.h"
-
 KEEP_FUNC void GZ_displayLinkInfo() {
-    char phase_6[22];
-    snprintf(phase_6, sizeof(phase_6), "phase_6: %d", SaveManager::phase_6_time);
-    Font::GZ_drawStr(phase_6, g_spriteOffsets[SPR_DEBUG_INFO_INDEX].x - 40.0f,
-                         g_spriteOffsets[SPR_DEBUG_INFO_INDEX].y + 20.0f, 0xFFFFFFFF, g_dropShadows);
-
-    char phase_c[22];
-    snprintf(phase_c, sizeof(phase_c), "phase_compleate: %d", SaveManager::phase_compleate_time);
-    Font::GZ_drawStr(phase_c, g_spriteOffsets[SPR_DEBUG_INFO_INDEX].x - 40.0f,
-                         g_spriteOffsets[SPR_DEBUG_INFO_INDEX].y + 40.0f, 0xFFFFFFFF, g_dropShadows);
-
     if (!g_tools[DEBUG_INDEX].active) {
         return;
     }
