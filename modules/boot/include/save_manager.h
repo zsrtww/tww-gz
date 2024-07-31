@@ -63,6 +63,10 @@ public:
     static bool s_injectSave;
     static s8 s_applyAfterTimer;
 
+    // DELETE
+    static u32 phase_6_time;
+    static u32 phase_compleate_time;
+
 public:
     static void injectSave(void* buffer);
     static void injectDefault_before();

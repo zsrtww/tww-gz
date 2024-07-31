@@ -25,6 +25,8 @@ HOOK_DEF(int, dScnPly_Draw, (void*));
 HOOK_DEF(void, putSave, (void*, int));
 HOOK_DEF(int, dScnPly__phase_1, (void*));
 HOOK_DEF(int, dScnPly__phase_4, (void*));
+HOOK_DEF(int, dScnPly__phase_6, (void*));
+HOOK_DEF(int, dScnPly__phase_compleate, (void*));
 HOOK_DEF(void, setDaytime, (void*));
 HOOK_DEF(void, BeforeOfPaint, (void));
 HOOK_DEF(void, dCcS__draw, (dCcS*));
@@ -72,13 +74,26 @@ int dScnPly__phase_1Hook(void* i_scene) {
 int dScnPly__phase_4Hook(void* i_scene) {
     int ret = dScnPly__phase_4Trampoline(i_scene);
 
-    // SaveManager `after` callbacks are applied after phase 4 of `dScnPly`.
-    // This is so that actors can be modified after the stage has been fully loaded.
-    // TP-GZ reportedly ecountered some issues with this hook, and had to use a 5 frame delay timer
-    // before applying the `after` callbacks.
-    // For now this does not use the delay, and should be investigated further if issues arise. 
-    SaveManager::applyAfterOptions();
+    // SaveManager::applyAfterOptions();
     
+    return ret;
+}
+
+#include "libtww/include/SSystem/SComponent/c_counter.h"
+
+int dScnPly__phase_6Hook(void* i_scene) {
+    int ret = dScnPly__phase_6Trampoline(i_scene);
+
+    // SaveManager::applyAfterOptions();
+    SaveManager::phase_6_time = cCt_getFrameCount();
+    return ret;
+}
+
+int dScnPly__phase_compleateHook(void* i_scene) {
+    int ret = dScnPly__phase_compleateTrampoline(i_scene);
+
+    // SaveManager::applyAfterOptions();
+    SaveManager::phase_compleate_time = cCt_getFrameCount();
     return ret;
 }
 
@@ -145,6 +160,8 @@ int dScnPly_Draw__FP13dScnPly_ply_c(void*);
 void putSave__10dSv_info_cFi(void*, int);
 int phase_1__FP13dScnPly_ply_c(void*);
 int phase_4__FP13dScnPly_ply_c(void*);
+int phase_6__FP13dScnPly_ply_c(void*);
+int phase_compleate__FPv(void*);
 void setDaytime__18dScnKy_env_light_cFv(void*);
 void dScnPly_BeforeOfPaint__Fv();
 void Draw__4dCcSFv(dCcS*);
@@ -162,6 +179,8 @@ KEEP_FUNC void applyHooks() {
     APPLY_HOOK(putSave, &putSave__10dSv_info_cFi, putSaveHook);
     APPLY_HOOK(dScnPly__phase_1, &phase_1__FP13dScnPly_ply_c, dScnPly__phase_1Hook);
     APPLY_HOOK(dScnPly__phase_4, &phase_4__FP13dScnPly_ply_c, dScnPly__phase_4Hook);
+    APPLY_HOOK(dScnPly__phase_6, &phase_6__FP13dScnPly_ply_c, dScnPly__phase_6Hook);
+    APPLY_HOOK(dScnPly__phase_compleate, &phase_compleate__FPv, dScnPly__phase_compleateHook);
     APPLY_HOOK(setDaytime, &setDaytime__18dScnKy_env_light_cFv, setDaytimeHook);
     APPLY_HOOK(BeforeOfPaint, &dScnPly_BeforeOfPaint__Fv, beforeOfPaintHook);
     APPLY_HOOK(dCcS__draw, &Draw__4dCcSFv, dCcSDrawHook);

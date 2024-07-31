@@ -18,6 +18,8 @@ SaveManager gSaveManager;
 
 bool SaveManager::s_injectSave = false;
 KEEP_VAR s8 SaveManager::s_applyAfterTimer = -1;
+KEEP_VAR u32 SaveManager::phase_6_time = 0;
+KEEP_VAR u32 SaveManager::phase_compleate_time = 0;
 
 void SaveManager::injectSave(void* src) {
     memcpy(&g_dComIfG_gameInfo.info.mSavedata.mPlayer.mPlayerStatusA, src, 0x18);
@@ -167,13 +169,13 @@ KEEP_FUNC void SaveManager::loadData() {
 
 KEEP_FUNC void SaveManager::applyAfterOptions() {
     if (s_injectSave) {
-        // if (gSaveManager.mPracticeFileOpts.inject_options_after_load) {
-        //     gSaveManager.mPracticeFileOpts.inject_options_after_load();
-        // }
+        if (gSaveManager.mPracticeFileOpts.inject_options_after_load) {
+            gSaveManager.mPracticeFileOpts.inject_options_after_load();
+        }
 
         // 53 frames is the minimum for ship to be spawned.. who knows if this is true for all actors.
         // doing 60 for now for safety
-        s_applyAfterTimer = 60;
+        // s_applyAfterTimer = 60;
         s_injectSave = false;
     }
 }
