@@ -37,7 +37,7 @@ KEEP_FUNC void SaveMngSpecial_BombsSwim_After() {
     fopAc_ac_c* ship_p = g_dComIfG_gameInfo.play.mpPlayerPtr[2];
 
     if (ship_p != nullptr) {
-        // set KORL pos and angle to be the same as when the Wind Waker cutscene ends
+        // set KorL's pos and angle to be the same as when the Wind Waker cutscene ends
         ship_p->current.pos.set(196459.0f, 0.0f, -199693.0f);
         ship_p->current.angle.y = ship_p->shape_angle.y = 0x623E;
     }

@@ -8,6 +8,7 @@
 #include "geometry_draw.h"
 #include "libtww/include/addrs.h"
 #include "libtww/include/f_op/f_op_scene_req.h"
+#include "libtww/include/SSystem/SComponent/c_phase.h"
 #include "rels/include/patch.h"
 #include "rels/include/cxx.h"
 #include "rels/include/defines.h"
@@ -25,7 +26,6 @@ HOOK_DEF(int, dScnPly_Draw, (void*));
 HOOK_DEF(void, putSave, (void*, int));
 HOOK_DEF(int, dScnPly__phase_1, (void*));
 HOOK_DEF(int, dScnPly__phase_4, (void*));
-HOOK_DEF(int, dScnPly__phase_6, (void*));
 HOOK_DEF(int, dScnPly__phase_compleate, (void*));
 HOOK_DEF(void, setDaytime, (void*));
 HOOK_DEF(void, BeforeOfPaint, (void));
@@ -76,7 +76,7 @@ int dScnPly__phase_4Hook(void* i_scene) {
 
     // Only apply the `after` options now if phase 4 indicates the loading proccess is complete.
     // If the rest of the phases need to run, the options will be applied later in `dScnPly__phase_compleate`.
-    if (ret = cPhs_COMPLEATE_e) {
+    if (ret == cPhs_COMPLEATE_e) {
         SaveManager::applyAfterOptions();
     }
     
