@@ -121,9 +121,9 @@ Set and unset various flags in the game.
 ---
 
 ### Inventory
-Modify various parts of the inventory
+Modify various parts of the inventory:
 <details>
-<summary>Amounts - Modify amounts for health, magic, etc.</summary>
+<summary>Amounts        - Modify amounts for health, magic, etc.</summary>
 <br>  
 
 | Flag Name           | Description                   
@@ -168,7 +168,7 @@ Modify various parts of the inventory
 </details>
 
 <details>
-<summary>Quest Status - Modify Quest Status Menu</summary>
+<summary>Quest Status   - Modify Quest Status Menu</summary>
 <br>  
 
 | Flag Name           | Description                   
@@ -204,7 +204,7 @@ Modify various parts of the inventory
 </details>
 
 <details>
-<summary>Spoils Bag - Modify Spoils Bag Items/Amounts</summary>
+<summary>Spoils Bag   - Modify Spoils Bag Items/Amounts</summary>
 <br>  
 
 TODO: create table  
@@ -226,7 +226,7 @@ TODO: create table
 </details>
 
 <details>
-<summary>Spoils Bag - Modify Spoils Bag</summary>
+<summary>Spoils Bag  - Modify Spoils Bag</summary>
 <br>  
 
 TODO: create table  
@@ -237,7 +237,7 @@ TODO: create table
 </details>
 
 <details>
-<summary>Bait Bag - Modify Bait Bag</summary>
+<summary>Bait Bag   - Modify Bait Bag</summary>
 <br>  
 
 TODO: create table  
@@ -248,7 +248,7 @@ TODO: create table
 </details>
 
 <details>
-<summary>Charts - Modify All Chart Types</summary>
+<summary>Charts     - Modify All Chart Types</summary>
 <br>  
 
 TODO: create table  
@@ -262,8 +262,11 @@ TODO: create table
 
 ### Memory
 
-- memory editor menu            // View/edit memory
-- watches menu                  // Manage memory watches
+Watches: View values at specific memory locations  
+TODO: Explain more about how this works
+
+Memory Editor: Edit values at specific memory locations  
+TODO: Explain more about how this works
 
 ---
 
