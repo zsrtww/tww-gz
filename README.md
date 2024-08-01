@@ -206,57 +206,65 @@ Modify various parts of the inventory:
 </details>
 
 <details>
-<summary>Spoils Bag - Modify Spoils Bag Items/Amounts</summary>
+<summary>Delivery Bag - Modify Spoils Bag Items/Amounts</summary>
 <br>  
-
-TODO: create table  
+ 
 | Flag Name           | Description                   
-| :--                 | :--        
-
+| :--                 | :--    
+| Slot 1              | Modify Item/Amount in Delivery Bag slot 1
+| Slot 2              | Modify Item/Amount in Delivery Bag slot 2
+| Slot 3              | Modify Item/Amount in Delivery Bag slot 3
+| Slot 4              | Modify Item/Amount in Delivery Bag slot 4
+| Slot 5              | Modify Item/Amount in Delivery Bag slot 5
+| Slot 6              | Modify Item/Amount in Delivery Bag slot 6
+| Slot 7              | Modify Item/Amount in Delivery Bag slot 7
+| Slot 8              | Modify Item/Amount in Delivery Bag slot 8
 
 </details>
 
 <details>
-<summary>Delivery Bag - Modify Delivery Bag</summary>
+<summary>Spoils Bag - Modify Delivery Bag</summary>
 <br>  
-
-TODO: create table  
+ 
 | Flag Name           | Description                   
 | :--                 | :--        
-
+| Slot 1              | Modify Item/Amount in Spoils Bag slot 1
+| Slot 2              | Modify Item/Amount in Spoils Bag slot 2
+| Slot 3              | Modify Item/Amount in Spoils Bag slot 3
+| Slot 4              | Modify Item/Amount in Spoils Bag slot 4
+| Slot 5              | Modify Item/Amount in Spoils Bag slot 5
+| Slot 6              | Modify Item/Amount in Spoils Bag slot 6
+| Slot 7              | Modify Item/Amount in Spoils Bag slot 7
+| Slot 8              | Modify Item/Amount in Spoils Bag slot 8
 
 </details>
 
 <details>
-<summary>Spoils Bag - Modify Spoils Bag</summary>
+<summary>Bait Bag - Modify Spoils Bag</summary>
 <br>  
-
-TODO: create table  
+  
 | Flag Name           | Description                   
 | :--                 | :--        
-
-
-</details>
-
-<details>
-<summary>Bait Bag - Modify Bait Bag</summary>
-<br>  
-
-TODO: create table  
-| Flag Name           | Description                   
-| :--                 | :--        
-
+| Slot 1              | Modify Item/Amount in Bait Bag slot 1
+| Slot 2              | Modify Item/Amount in Bait Bag slot 2
+| Slot 3              | Modify Item/Amount in Bait Bag slot 3
+| Slot 4              | Modify Item/Amount in Bait Bag slot 4
+| Slot 5              | Modify Item/Amount in Bait Bag slot 5
+| Slot 6              | Modify Item/Amount in Bait Bag slot 6
+| Slot 7              | Modify Item/Amount in Bait Bag slot 7
+| Slot 8              | Modify Item/Amount in Bait Bag slot 8
 
 </details>
 
 <details>
 <summary>Charts - Modify All Chart Types</summary>
 <br>  
-
-TODO: create table  
+ 
 | Flag Name           | Description                   
 | :--                 | :--        
-
+| Special Charts      | Add/Remove Special charts
+| Triforce Charts     | Add/Remove/Decipher/Complete Triforce charts
+| All Charts          | Add/Remove all charts
 
 </details>
 
@@ -264,7 +272,7 @@ TODO: create table
 
 ### Memory
 
-Watches: View values at specific memory locations  
+Watches: View and pin on-screen values at specific memory locations  
 TODO: Explain more about how this works
 
 Memory Editor: Edit values at specific memory locations  
