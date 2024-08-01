@@ -206,7 +206,7 @@ Modify various parts of the inventory:
 </details>
 
 <details>
-<summary>Delivery Bag - Modify Delivery Bag Items/Amounts</summary>
+<summary>Delivery Bag - Modify Delivery Bag </summary>
 <br>  
  
 | Flag Name           | Description                   
@@ -223,7 +223,7 @@ Modify various parts of the inventory:
 </details>
 
 <details>
-<summary>Spoils Bag - Modify Spoils Bag</summary>
+<summary>Spoils Bag - Modify Spoils Bag Items/Amounts</summary>
 <br>  
  
 | Flag Name           | Description                   
