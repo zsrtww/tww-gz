@@ -51,6 +51,7 @@ After WSL and VSCode is installed, and a terminal is available, the following in
     - Clicking Terminal > Run Task... > Select Task > Select Version
     - Running contrl+P, typing "task " and then typing or selecting an appropriate task  
 
-    Note that the first time the task runs, the setup process can take a long time.
+    Note that the first time the task runs, the setup process can take a long time.  
+<br/>
 
 8. The resulting build artifacts will be generated in a corresponding build folder, for example in `build_ntscj/`
