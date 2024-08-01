@@ -1,6 +1,7 @@
 # Patching an ISO Using a Patch File
 
-Patch files allow for easy distribution of tww-gz builds without needing to distribute entire ISO files.
+Patch files allow for easy distribution of tww-gz builds without needing to distribute entire ISO files.  
+(Note that stable releases include a .bat script for patching on Windows that automates this process)
 
 1. Download the [ROM Hack Compiler](https://github.com/zsrtp/romhack-compiler/releases)  
   Make sure to download the GameCube version denoted by "gc"

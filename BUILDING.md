@@ -2,52 +2,55 @@
 
 For simply using tww-gz as is, patch your ISO using the romhack-patcher application, which is included in our official releases.
 
-These instructions are meant for people that want to make their own custom builds or need an alternate method for building the rom.
+These instructions are meant for people that want to build from source for development work
 
-## Compiling
+## Setting Up Build Environment
 
-1.  Clone the repo locally.
+The current build setup works best in a Linux environment. For Windows Users it is reccomended to use [WSL](https://learn.microsoft.com/en-us/windows/wsl/install). These instructions will assume the use of WSL within Windows, but can be easily adapted for use on native Linux.
 
-```bash
-git clone https://github.com/zsrtww/tww-gz.git
-```
+Additionally, Dev Containers work with the [VSCode](https://code.visualstudio.com/) text editor. After VSCode is installed, install the following extensions:  
+    - [WSL Extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl)  
+    - [Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
 
-2.  Copy your The Wind Waker NTSC-J ISO into the root 'tww-gz' folder.  You will need to rename the ISO to GZLJ01.iso.  No other version of the game will work.
+Lastly, [Docker](https://www.docker.com/products/docker-desktop/) will be needed to run the Dev Container. The desktop app for Docker works fine.  
+  - After Docker Desktop is installed, ensure that the "Use the WSL 2 based engine" checkbox is enabled in settings  
+<br/>  
 
-    - The ISO can be ripped from your disc (which you obviously have) by using CleanRip, a Wii Homebrew app.
+After WSL and VSCode is installed, and a terminal is available, the following instructions can be used:
 
-3.  Install DevKitPro which can be found on [windows here](https://github.com/devkitPro/installer/releases), or for mac/linux read [this guide](https://devkitpro.org/wiki/Getting_Started)
+1. Fork the repo, and clone the repo locally.
 
-4.  Download the latest version of the [Romhack Compiler](https://github.com/zsrtp/romhack-compiler/releases). Install the gc version, since The Wind Waker is a Gamecube game.
+    ```bash
+    git clone https://github.com/<your-username>/tww-gz.git
+    ```
+<br/>  
 
-    - Put the romhack compiler in the root of your `tww-gz` folder.
-    - The rom will only work built with the command line.
-        - Note:  Do NOT use powershell on windows, only the command prompt.
+2. Download the [ROM Hack Compiler](https://github.com/zsrtp/romhack-compiler/releases).  
+  Even though the host OS is Windows, we will need the Linux version for WSL
+    - `romhack-vx.x.x-r2-linux-x64-gc.zip`  
+<br/>  
 
-5.  Launch a terminal and go to the root 'tww-gz' directory.
+3. Place the ROM Hack Compiler executeable into the root `tww-gz/` folder.
+    - You can open a File Explorer window in the current WSL location by typing `explorer.exe .`  
+<br/>  
 
-6.  Run `make` to compile the code.
+4. Place a TWW ISO into the root `tww-gz/` folder, and rename it according to the following:  
+    - NTSCJ: `GZLJ01.iso`
+    - NTSCE: `GZLE01.iso`
+    - PAL: `GZLP01.iso`  
+<br/>  
 
-7.  Run `romhack build --raw` to create a new ISO with our changes applied.
+5. Type `code .` to open a VSCode Window from the `tww-gz/` root folder. Opening VSCode from WSL will open VSCode in a linked "WSL Mode", which is required for building.
+<br/>  
 
-    - The new .iso file is located at `build/twwgz.iso`.
+6. After VSCode opens, there should be a pop-up in the bottom right corner of the screen that prompts you to restart VSCode in Dev Container mode. 
+    - If this pop up does not appear, make sure all previous steps were followed correctly, including installing Docker and the proper VSCode extensions.  
+<br/>  
 
-## Using Patches
+7. At this point, VSCode tasks can be used to Build the project. This can be done by
+    - Clicking Terminal > Run Task... > Select Task > Select Version
+    - Running contrl+P, typing "task " and then typing or selecting an appropriate task  
 
-Patch files are a convenient way to share your changes with others.
+    Note that the first time the task runs, the setup process can take a long time.
 
-- To create a patch, run:
-
-  ```
-  romhack build --raw --patch
-  ```
-
-  The new patch file is located at `build/twwgz.patch`.
-
-- To apply a patch, run:
-
-  ```
-  romhack apply <example.patch> <input.iso> <output.iso>
-  ```
-
-  Your patched ISO will be named \<output.iso>.
+8. The resulting build artifacts will be generated in a corresponding build folder, for example in `build_ntscj/`
