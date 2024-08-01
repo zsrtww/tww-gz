@@ -269,18 +269,126 @@ TODO: create table
 
 ### Practice
 
-The practice menu contains hacked save files which allow you to instantly warp to key points.
+The practice menu contains hacked save files which allow you to instantly warp to key points in a speedrun route.
 The following categories are supported. Click the dropdown to view a list of each save:
 
-- any% no mss menu              // Load an any% no mss save
-- any% menu			            // Load an any% save
-- all dungeons saves	        // Load an all dungeons save
+<details>
+<summary>Any% No MSS</summary>
+<br>  
+
+| Save                    | Description                   
+| :--                     | :--    
+| After Intro             | Just after the intro at bottom of watchtower
+| Orca                    | Inside orca's house about to do sword tutorial
+| Forest of Fairies       | Inside forest of fairies about to rescue tetra
+| Ropes 1                 | Inside pirate ship about to play ropes 1 minigame
+| Forsaken Fortress 1     | At start of ff1 before gossip stone cutscene
+| Windfall                | At windfall island just finished talking to korl
+| Bombs Swim              | At dragon roost island just got the wind waker
+| Ropes 2                 | Inside pirate ship about to play ropes 2 minigame
+| Forest Haven Swim       | At windfall island about to swim to forest haven
+| Deku Tree Cutscene Skip | At forest haven about to do dtcs
+| Quiver Swim             | At forest haven about to swim to thorned fairy island
+| FF2 Swim                | At thorned fairy island about to swim to ff2
+| Helmaroc Skip           | Inside ff2 tower at start of helmaroc king fight
+| Barrier Skip            | Outside hyrule castle about to do barrier skip
+| Trials Skip             | Inside ganon's tower about to do trials skip
+| Puppet Ganon Fight      | Inside ganondorf's bedroom at start of puppet ganon fight
+| Morth Hover             | Inside ganondorf's bedroom after fight at top of room
+| Ganondorf               | On top of ganondorf's tower at start of ganondorf fight
+
+</details>
+
+<details>
+<summary>Any%</summary>
+<br>  
+ 
+| Save                        | Description                                    
+| :--                         | :--                                           
+| Manual Superswim            | Just after the intro, at bottom of watchtower
+| Post Manual Superswim       | After MSS at DRI
+| Windfall                    | At Windfall Island, post FF1 cutscene
+| Sail Skip                   | In KorL near Windfall, after Greatfish cutscene skip
+| Ropes 2                     | Inside pirate ship, ropes 2 minigame state
+| Forest Haven Swim           | At Windfall Island post bombs for swim to Forest Haven
+| Deku Tree Cutscene Skip     | Inside Forest Haven for first time, for DTCS
+| Leaf Hover                  | Inside Forest Haven, after DTCS with leaf spawned
+| Post Leaf Swim              | Outside Forest Haven, quiver swim or FF2 PG skip swim
+| FF2 Swim                    | At Thorned Fairy Island, FF2 swim assuming you got quiver
+| Helmaroc Skip               | Inside FF2 Tower, at start of Helmaroc King fight
+| Barrier Skip                | Outside Hyrule Castle, about to do barrier skip
+| Trials Skip                 | Inside Ganon's Tower, in trials room for trials skip
+| Light Arrow Skip            | In Phantom Ganon's room for light arrow skip
+| Puppet Ganon Cutscene Skip  | At bottom Grand Staircase for Puppet Ganon cutscene skip
+| Puppet Ganon Skip           | Bottom of Ganondorf's Bedroom for Puppet Ganon skip
+| Puppet Ganon Fight          | Bottom of Ganondorf's Bedroom, at start of Puppet Ganon fight
+| Morth Hover                 | Inside Ganondorf's Bedroom after fight, at top of room
+| Ganondorf                   | On top of Ganondorf's Tower, at start of Ganondorf fight
+
+</details>
+
+<details>
+<summary>All Dungeons</summary>
+<br>  
+ 
+| Save                                | Description                   
+| :--                                 | :--        
+| Manual Superswim                    | After intro at bottom of tower
+| Post Manual Superswim               | After MSS at DRI
+| Forsaken Fortress 1 Chest Storage   | FF1 in yellow rupee chest room
+| Windfall                            | At Windfall, after FF1 cutscene for sail/tuner/GFCS
+| Ropes 2                             | In pirate ship, ropes 2 state
+| Forest Haven Swim                   | At Windfall for swim to Forest Haven
+| Early Leaf Hover                    | Outside Forest Haven for hover to higher entrance
+| Deku Tree Cutscene Skip             | Inside Forest Haven upper spawn for cutscene skip
+| Forbidden Woods                     | Start of Forbidden Woods
+| Kalle Demos                         | Kalle Demos boss fight
+| Enter Dragon Roost Cavern           | Outside Forest Haven for swim to ETI/DRI
+| Dragon Roost Cavern                 | Start of DRC
+| DRC Miniboss                        | Outside area of DRC
+| DRC Boss Key Skip                   | Inside DRC in boss door room for BK skip
+| Gohma                               | Gohma boss fight
+| Nayru's Pearl                       | At DRI after DRC for balloon swim to Outset
+| Enter Tower of the Gods             | Outside Jabuun's Cave for swim to STI/NTI
+| Tower of the Gods                   | Start of TOTG
+| Darknut                             | Darknut miniboss
+| TOTG Third Statue                   | TOTG after returning second statue
+| Gohdan                              | Gohdan boss fight
+| Puzzle Skip                         | Inside Hyrule Castle for puzzle skip
+| Hyrule Escape                       | Inside Hyrule Castle after Master Sword for Hyrule escape
+| Barrier Skip                        | Outside Hyrule Castle for barrier skip
+| Trial Skip                          | Inside Ganon's Tower, in trials room for trials skip
+| Boomerang Skip                      | In Phantom Ganon's room for boomerang skip
+| Phantom Ganon                       | Phantom Ganon fight miniboss
+| Enter Helmaroc                      | After Phantom Ganon fight for chest storage climb
+| Hyrule 2 Skip                       | In Helm boss fight for EMS cutscene skip
+| Early Wind God's Aria               | At Windfall after FF2 for swim to Gale Isle
+| Power Bracelets                     | At Fire Mountain for power bracelets
+| Early Earth Temple                  | At Headstone for early Earth Temple
+| Earth Temple                        | Start of Earth Temple
+| Song Stone Skip                     | In Earth Temple in song stone room
+| Jalhalla                            | Jalhalla boss fight
+| Iron Boots                          | At Headstone for swim to Ice Ring for Iron Boots
+| Makar                               | At Ice Ring for swim to Forest Haven for Makar
+| Enter Wind Temple                   | At Forest Haven for balloon swim to Gale Isle
+| Wind Temple                         | Start of Wind Temple
+| Wizzrobe                            | Wizzrobe miniboss
+| After Hookshot                      | Wind Temple after Hookshot
+| Molgera                             | Molgera boss fight
+| Swim to Flight Control Platform     | At Gale Isle for swim to Flight Control Platform
+| FCP Layer Manip                     | At Flight Control Platform for layer manip dark portal
+| Puppet Ganon Cutscene Skip          | In Grand Staircase for Puppet Ganon cutscene skip
+| Puppet Ganon Skip                   | In Puppet Ganon room on layer 8 for Puppet Ganon skip
+| Puppet Ganon                        | Puppet Ganon fight if not doing PG skip
+| Ganondorf                           | Ganondorf boss fight
+
+</details>
 
 ---
 
 ### Scene
 
-Changeor view various properties about the scene
+Change/view various properties of the scene
 | Option              | Description                   
 | :--                 | :--    
 | Disable BG Music    | Disable background music from playing    
