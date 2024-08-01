@@ -132,14 +132,6 @@ KEEP_FUNC void SaveManager::loadData() {
     if (s_injectSave) {
         SaveManager::injectSave(MEMFILE_BUF);
 
-        // This code block happens after the save data is loaded, but before the load sequence completes
-        //   so inject_options_after_load() is good for editing save data
-        //   but fails in other ways, like editing actor spawn location
-        if (gSaveManager.mPracticeFileOpts.inject_options_after_load) {
-            gSaveManager.mPracticeFileOpts.inject_options_after_load();
-        }
-        s_injectSave = false;
-
         if (g_enable_item_equip_menu) {
             u8 cur_item_x = dComIfGs_getSelectItem(0);
             u8 cur_item_y = dComIfGs_getSelectItem(1);
@@ -169,5 +161,15 @@ KEEP_FUNC void SaveManager::loadData() {
             dComIfGs_setSelectItem(1, new_items[name_Y]);
             dComIfGs_setSelectItem(2, new_items[name_Z]);
         }
+    }
+}
+
+KEEP_FUNC void SaveManager::applyAfterOptions() {
+    if (s_injectSave) {
+        if (gSaveManager.mPracticeFileOpts.inject_options_after_load) {
+            gSaveManager.mPracticeFileOpts.inject_options_after_load();
+        }
+
+        s_injectSave = false;
     }
 }

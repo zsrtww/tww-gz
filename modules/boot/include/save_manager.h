@@ -73,6 +73,7 @@ public:
     static void defaultLoad();
 
     static void loadData();
+    static void applyAfterOptions();
 
     void setSavePosition(float x, float y, float z) {
         mPracticeSaveInfo.position.x = x;

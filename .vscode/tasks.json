@@ -188,7 +188,7 @@
                 "pal",
                 "ntscj",
             ],
-            "default": "ntscu"
+            "default": "ntscj"
         }
     ]
 }
