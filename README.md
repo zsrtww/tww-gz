@@ -3,7 +3,7 @@ The Wind Waker (SD) ROM hack to practice speedrunning.
 
 To patch an ISO with a patch file, see: [PATCHING.md](./PATCHING.md)  
 To build the project from source, see: [BUILDING.md](./BUILDING.md)  
-For acknowledgements, see [THANKS.md](./THANKS.md)  
+For acknowledgements, see: [THANKS.md](./THANKS.md)  
 
 If you have questions or need help, ask in the [#practice-rom-development](https://discord.com/channels/136347487710609409/830218819695673405) channel of the [Wind Waker Speedrunning Discord](https://discord.gg/Sj5aehU).
 
