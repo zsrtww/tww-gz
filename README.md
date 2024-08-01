@@ -136,6 +136,14 @@ Modify various parts of the inventory:
 | Rupees              | Modify the current rupee count
 | Magic               | Modify the current magic amount
 | Heart Pieces        | Modify the current heart pieces collected
+| Joy Pendants        | Modify the current Joy Pendants count
+| Skull Necklaces     | Modify the current Skull Necklaces count
+| Boko Baba Seeds     | Modify the current Boko Baba Seeds count
+| Golden Feathers     | Modify the current Golden Feathers count
+| Knights Crests      | Modify the current Knights Crests count
+| Red Chu Jelly       | Modify the current Red Chu Jelly count
+| Green Chu Jelly     | Modify the current Green Chu Jelly count
+| Blue Chu Jelly      | Modify the current Blue Chu Jelly count
 
 </details>
 
@@ -206,36 +214,36 @@ Modify various parts of the inventory:
 </details>
 
 <details>
-<summary>Delivery Bag - Modify Delivery Bag </summary>
+<summary>Spoils Bag - Modify Spoils Bag Item Slots</summary>
 <br>  
  
 | Flag Name           | Description                   
 | :--                 | :--    
-| Slot 1              | Modify Item/Amount in Delivery Bag slot 1
-| Slot 2              | Modify Item/Amount in Delivery Bag slot 2
-| Slot 3              | Modify Item/Amount in Delivery Bag slot 3
-| Slot 4              | Modify Item/Amount in Delivery Bag slot 4
-| Slot 5              | Modify Item/Amount in Delivery Bag slot 5
-| Slot 6              | Modify Item/Amount in Delivery Bag slot 6
-| Slot 7              | Modify Item/Amount in Delivery Bag slot 7
-| Slot 8              | Modify Item/Amount in Delivery Bag slot 8
+| Slot 1              | Modify Item in Spoils Bag slot 1
+| Slot 2              | Modify Item in Spoils Bag slot 2
+| Slot 3              | Modify Item in Spoils Bag slot 3
+| Slot 4              | Modify Item in Spoils Bag slot 4
+| Slot 5              | Modify Item in Spoils Bag slot 5
+| Slot 6              | Modify Item in Spoils Bag slot 6
+| Slot 7              | Modify Item in Spoils Bag slot 7
+| Slot 8              | Modify Item in Spoils Bag slot 8
 
 </details>
 
 <details>
-<summary>Spoils Bag - Modify Spoils Bag Items/Amounts</summary>
+<summary>Delivery Bag - Modify Delivery Bag Item Slots</summary>
 <br>  
  
 | Flag Name           | Description                   
 | :--                 | :--        
-| Slot 1              | Modify Item/Amount in Spoils Bag slot 1
-| Slot 2              | Modify Item/Amount in Spoils Bag slot 2
-| Slot 3              | Modify Item/Amount in Spoils Bag slot 3
-| Slot 4              | Modify Item/Amount in Spoils Bag slot 4
-| Slot 5              | Modify Item/Amount in Spoils Bag slot 5
-| Slot 6              | Modify Item/Amount in Spoils Bag slot 6
-| Slot 7              | Modify Item/Amount in Spoils Bag slot 7
-| Slot 8              | Modify Item/Amount in Spoils Bag slot 8
+| Slot 1              | Modify Item in Delivery Bag slot 1
+| Slot 2              | Modify Item in Delivery Bag slot 2
+| Slot 3              | Modify Item in Delivery Bag slot 3
+| Slot 4              | Modify Item in Delivery Bag slot 4
+| Slot 5              | Modify Item in Delivery Bag slot 5
+| Slot 6              | Modify Item in Delivery Bag slot 6
+| Slot 7              | Modify Item in Delivery Bag slot 7
+| Slot 8              | Modify Item in Delivery Bag slot 8
 
 </details>
 
@@ -245,14 +253,14 @@ Modify various parts of the inventory:
   
 | Flag Name           | Description                   
 | :--                 | :--        
-| Slot 1              | Modify Item/Amount in Bait Bag slot 1
-| Slot 2              | Modify Item/Amount in Bait Bag slot 2
-| Slot 3              | Modify Item/Amount in Bait Bag slot 3
-| Slot 4              | Modify Item/Amount in Bait Bag slot 4
-| Slot 5              | Modify Item/Amount in Bait Bag slot 5
-| Slot 6              | Modify Item/Amount in Bait Bag slot 6
-| Slot 7              | Modify Item/Amount in Bait Bag slot 7
-| Slot 8              | Modify Item/Amount in Bait Bag slot 8
+| Slot 1              | Modify Item in Bait Bag slot 1
+| Slot 2              | Modify Item in Bait Bag slot 2
+| Slot 3              | Modify Item in Bait Bag slot 3
+| Slot 4              | Modify Item in Bait Bag slot 4
+| Slot 5              | Modify Item in Bait Bag slot 5
+| Slot 6              | Modify Item in Bait Bag slot 6
+| Slot 7              | Modify Item in Bait Bag slot 7
+| Slot 8              | Modify Item in Bait Bag slot 8
 
 </details>
 
