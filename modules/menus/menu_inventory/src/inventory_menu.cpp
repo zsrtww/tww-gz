@@ -9,9 +9,9 @@ KEEP_FUNC InventoryMenu::InventoryMenu(Cursor& cursor)
                         {"amounts", AMOUNT_INDEX, "Modify amounts for health, magic, etc."},
                         {"item inventory", ITEM_INVENTORY_INDEX, "Modify item inventory menu"},
                         {"quest status", QUEST_STATUS_INDEX, "Modify quest status menu"},
-                        {"delivery bag", DELIVERY_BAG_INDEX, "Modify delivery bag items/amounts"},
-                        {"spoils", SPOILS_INDEX, "Modify spoils bag items/amounts"},
-                        {"bait", BAIT_INDEX, "Modify bait bag items/amounts"},
+                        {"spoils bag", DELIVERY_BAG_INDEX, "Modify spoils bag items slots"},
+                        {"delivery bag", SPOILS_INDEX, "Modify delivery bag items slots"},
+                        {"bait bag", BAIT_INDEX, "Modify bait bag items slots"},
                         {"charts", CHART_INDEX, "Modify charts"},
                     } {}
 
