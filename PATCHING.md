@@ -14,12 +14,12 @@ Patch files allow for easy distribution of tww-gz builds without needing to dist
     - PAL: `GZLP01.iso`  
 <br/>
 
-4. Place a patch file you want to use in the same folder as the ROM Hack Compiler + ISO  
+3. Place a patch file you want to use in the same folder as the ROM Hack Compiler + ISO  
 <br/>
 
-5. Open a Command Prompt/Terminal in the folder that contains the ISO, compiler, and patch file
+4. Open a Command Prompt/Terminal in the folder that contains the ISO, compiler, and patch file
     - On windows, you can click on the folder path bar at the top of Windows Explorer and type "cmd" and hit enter to open a Command Prompt in the current folder  
 <br/>
 
-6. Run the following command (this example is for Windows): `romhack.exe apply <patch-filename> <input ISO name> <output ISO name>`
+5. Run the following command (this example is for Windows): `romhack.exe apply <patch-filename> <input ISO name> <output ISO name>`
     - The patched rom will be created with the filename as `<output ISO name>` from above
