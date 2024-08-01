@@ -1,7 +1,7 @@
 # tww-gz
 The Wind Waker (SD) ROM hack to practice speedrunning.
 
-To patch an ISO with a patch file, see: PATCHING.md  
+To patch an ISO with a patch file, see: [PATCHING.md](./PATCHING.md)
 To build the project from source, see: [BUILDING.md](./BUILDING.md)  
 For acknowledgements, see [THANKS.md](./THANKS.md)
 
@@ -393,7 +393,8 @@ The following categories are supported. Click the dropdown to view a list of eac
 
 ### Scene
 
-Change/view various properties of the scene
+#### Change/view various properties of the scene
+
 | Option              | Description                   
 | :--                 | :--    
 | Disable BG Music    | Disable background music from playing    
@@ -403,10 +404,8 @@ Change/view various properties of the scene
 | Current Hour        | Change current hour
 | Current Minutes     | Change current minute
 | Current Date        | Change current date/moon phase
-
-<details>
-<summary>Collision Viewer - view various types of collision</summary>
-<br>  
+  
+#### Collision Viewer - view various types of collision
 
 | Option              | Description                   
 | :--                 | :--    
@@ -419,8 +418,6 @@ Change/view various properties of the scene
 | Poly Edges          | View edges of each polygon
 | Poly Draw Raise     | Amount to raise the drawn polygons by
 | Opcaity             | Transparency amount of collision viewer
-
-</details>
 
 ---
 
