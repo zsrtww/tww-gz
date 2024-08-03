@@ -7,8 +7,11 @@ USER vscode
 RUN sudo dpkg --add-architecture i386
 RUN sudo apt-get update
 RUN sudo apt-get install -y clang-format-10
+RUN sudo apt-get install -y python3-pip
 RUN sudo apt-get install -y cmake
 RUN sudo apt-get install -y ninja-build
+
+RUN python3 -m pip install Pillow
 
 # Install DevkitPPC
 RUN sudo ln -sf /proc/self/mounts /etc/mtab
