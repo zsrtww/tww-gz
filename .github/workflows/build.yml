@@ -29,10 +29,10 @@ jobs:
       run: |
         cp -R /isos isos
         cp /clang-format-10 external/misc/clang-format-10
+        
+        - name: Setup
+        run: | 
         export DEVKITPRO=/opt/devkitpro
-    
-    - name: Setup
-      run: | 
         mkdir -p build_${{matrix.version}}
         cd build_${{matrix.version}}
         cmake .. -DREGION=$(echo ${{matrix.version}} | tr '[:lower:]' '[:upper:]') -GNinja
