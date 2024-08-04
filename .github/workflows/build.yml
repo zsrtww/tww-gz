@@ -26,6 +26,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Setup
+        run: cp /clang-format-10 clang-format-10
+
       - name: Check Formatting
         run: tools/clang-format-check.sh
 
@@ -58,9 +61,7 @@ jobs:
       run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
 
     - name: Prepare
-      run: |
-        cp -R /isos isos
-        cp /clang-format-10 clang-format-10
+      run: cp -R /isos isos
         
     - name: Setup
       run: |
