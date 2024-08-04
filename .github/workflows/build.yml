@@ -20,7 +20,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        version: [ntscj]
+        version: [NTSCJ]
     steps:
     - name: Checkout
       uses: actions/checkout@v4
@@ -38,9 +38,7 @@ jobs:
     - name: Setup 2
       run: cd build_${{matrix.version}}
     - name: Setup 3
-      run: echo "REGION_U=${${{matrix.version}}@U}" >> "${GITHUB_ENV}"
-    - name: Setup 4
-      run: cmake .. -DREGION=$(echo ${REGION_U} | tr '[:lower:]' '[:upper:]') -GNinja
+      run: cmake .. -DREGION=${{matrix.version}} -GNinja
     
     - name: Build
       run: |
