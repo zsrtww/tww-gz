@@ -34,13 +34,12 @@ jobs:
     - name: Setup
       run: | 
         mkdir -p build_${{matrix.version}}
-        pushd build_${{matrix.version}}
+        cd build_${{matrix.version}}
         cmake .. -DREGION=$(echo ${{matrix.version}} | tr '[:lower:]' '[:upper:]') -GNinja
-        popd
     
     - name: Build
       run: |
-        pushd build_${{matrix.version}}
+        cd build_${{matrix.version}}
         ninja patch
 
     - name: Upload patch
