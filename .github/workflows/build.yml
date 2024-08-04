@@ -33,12 +33,14 @@ jobs:
         cp -R /isos isos
         cp /clang-format-10 external/misc/clang-format-10
         
-    - name: Setup
-      run: | 
-        mkdir -p build_${{matrix.version}}
-        cd build_${{matrix.version}}
-        echo "REGION_U=${${{matrix.version}}@U}" >> "${GITHUB_ENV}"
-        cmake .. -DREGION=$(echo ${REGION_U} | tr '[:lower:]' '[:upper:]') -GNinja
+    - name: Setup 1
+      run: mkdir -p build_${{matrix.version}}
+    - name: Setup 2
+      run: cd build_${{matrix.version}}
+    - name: Setup 3
+      run: echo "REGION_U=${${{matrix.version}}@U}" >> "${GITHUB_ENV}"
+    - name: Setup 4
+      run: cmake .. -DREGION=$(echo ${REGION_U} | tr '[:lower:]' '[:upper:]') -GNinja
     
     - name: Build
       run: |
