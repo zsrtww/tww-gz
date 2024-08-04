@@ -1,0 +1,66 @@
+name: Build All
+
+on:
+    push:
+      branches: [ main ]
+    pull_request:
+      branches: [ main ]
+
+env:
+    DEVKITPRO: /opt/devkitpro
+
+permissions:
+  contents: read
+  packages: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: ghcr.io/zsrtww/tww-gz-build:main
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+            # The build system uses lower case and upper case in different areas
+            # and its invonvenient to change strings between upper and lower in github actions shell commands.
+            # So, just store both as a pair.
+            # Ideally at some point we remove this inconsistency in the build system and just use uppercase always.
+            - version_upper: NTSCJ
+              version_lower: ntscj
+            - version_upper: NTSCU
+              version_lower: ntscu
+            - version_upper: PAL
+              version_lower: pal
+        
+    
+    name: ${{matrix.version_upper}}
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Git config
+      run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+
+    - name: Prepare
+      run: |
+        cp -R /isos isos
+        cp /clang-format-10 external/misc/clang-format-10
+        
+    - name: Setup
+      run: |
+        mkdir -p build_${{matrix.version_lower}}
+        cd build_${{matrix.version_lower}}
+        cmake .. -DREGION=${{matrix.version_upper}} -GNinja
+    
+    - name: Build
+      run: |
+        cd build_${{matrix.version_lower}}
+        ninja patch
+
+    - name: Upload patch
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{ matrix.version_upper }}-${{ github.sha }}.patch
+        path: build_${{ matrix.version_lower }}/${{ matrix.version_lower }}.patch
