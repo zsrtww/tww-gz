@@ -16,6 +16,19 @@ permissions:
   id-token: write
 
 jobs:
+  check-formatting:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+
+    name: Check Formatting
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Check Formatting
+        run: external/misc/clang-format-check.sh
+
   build:
     runs-on: ubuntu-latest
     container: ghcr.io/zsrtww/tww-gz-build:main
