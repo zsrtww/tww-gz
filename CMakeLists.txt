@@ -101,7 +101,7 @@ add_custom_command(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/${TWWGZ_CFG_BLD_ISO}
 string(REPLACE ".iso" ".patch" TWWGZ_CFG_BLD_PATCH_OLD ${TWWGZ_CFG_BLD_ISO})
 string(TOLOWER ${REGION} twwgz_region_lower)
 string(REPLACE "_" "-" twwgz_region_lower ${twwgz_region_lower})
-set(TWWGZ_CFG_BLD_PATCH ${CMAKE_PROJECT_VERSION}-${twwgz_region_lower}.patch)
+set(TWWGZ_CFG_BLD_PATCH ${twwgz_region_lower}.patch)
 add_custom_command(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/${TWWGZ_CFG_BLD_PATCH}
     DEPENDS twwgz modules ${TWWGZ_PATCHER_EXE} ${CMAKE_CURRENT_SOURCE_DIR}/res ${CMAKE_CURRENT_BINARY_DIR}/patch.asm ${CMAKE_CURRENT_BINARY_DIR}/RomHack.toml ${TWWGZ_REL_FILES}
     COMMAND ${TWWGZ_PATCHER_EXE} build --raw --patch
