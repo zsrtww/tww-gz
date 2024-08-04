@@ -18,6 +18,7 @@ permissions:
 jobs:
   check-formatting:
     runs-on: ubuntu-latest
+    container: ghcr.io/zsrtww/tww-gz-build:main
     strategy:
       fail-fast: true
 
