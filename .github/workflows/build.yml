@@ -53,4 +53,4 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: ${{ github.sha }}-${{ matrix.version_lower }}.patch
-        path: build_${{ matrix.version_lower }}/0.4.0-${{ matrix.version_lower }}.patch
+        path: build-${{ matrix.version_lower }}/0.4.0-${{ matrix.version_lower }}.patch
