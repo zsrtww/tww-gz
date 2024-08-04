@@ -1,0 +1,50 @@
+name: Build
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+  packages: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: ghcr.io/zsrtww/tww-gz-build:main
+    strategy:
+      fail-fast: false
+      matrix:
+        version: [GZLJ01]
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Git config
+      run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+
+    - name: Prepare
+      run: |
+        cp -R /isos isos
+        cp /clang-format-10 external/misc/clang-format-10
+        export DEVKITPRO=/opt/devkitpro
+    
+    - name: Setup
+      run: | 
+        mkdir -p build_${{matrix.version}}
+        pushd build_${{matrix.version}}
+        cmake .. -DREGION=$(echo ${{matrix.version}} | tr '[:lower:]' '[:upper:]') -GNinja
+        popd
+    
+    - name: Build
+      run: |
+        pushd build_${{matrix.version}}
+        ninja patch
+
+    - name: Upload patch
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{ github.sha }}-${{ matrix.version }}.patch
+        path: build_${{ matrix.version }}/0.4.0-${{ matrix.version }}.patch
