@@ -76,8 +76,7 @@ void SaveManager::loadSave(uint32_t id, const char* category, special i_specials
     SaveManager::defaultLoad();
 
     if (gSaveManager.mPracticeSaveInfo.requirements) {
-        gSaveManager.mPracticeFileOpts.inject_options_after_counter =
-            gSaveManager.mPracticeSaveInfo.counter;
+        gSaveManager.mPracticeFileOpts.inject_options_after_counter = gSaveManager.mPracticeSaveInfo.counter;
     }
 
     // If the selected file was a special, run the special callbacks
@@ -85,12 +84,10 @@ void SaveManager::loadSave(uint32_t id, const char* category, special i_specials
         for (int i = 0; i < size; ++i) {
             if (id == i_specials[i].idx) {
                 if (i_specials[i].CallbackDuring) {
-                    gSaveManager.mPracticeFileOpts.inject_options_during_load =
-                        i_specials[i].CallbackDuring;
+                    gSaveManager.mPracticeFileOpts.inject_options_during_load = i_specials[i].CallbackDuring;
                 }
                 if (i_specials[i].CallbackAfter) {
-                    gSaveManager.mPracticeFileOpts.inject_options_after_load =
-                        i_specials[i].CallbackAfter;
+                    gSaveManager.mPracticeFileOpts.inject_options_after_load = i_specials[i].CallbackAfter;
                 }
                 break;
             }
@@ -102,15 +99,13 @@ void SaveManager::loadSavefile(const char* l_filename) {
     loadFile(l_filename, MEMFILE_BUF, sizeof(dSv_save_c), 0);
 }
 
-KEEP_FUNC void SaveManager::triggerLoad(uint32_t id, const char* category, special i_specials[],
-                                        int size) {
+KEEP_FUNC void SaveManager::triggerLoad(uint32_t id, const char* category, special i_specials[], int size) {
     loadSave(id, category, i_specials, size);
 
     SaveManager::loadSavefile(l_filename);
     dSv_save_c* save = (dSv_save_c*)MEMFILE_BUF;
 
-    int state = tww_getLayerNo(save->getPlayer().mReturnPlace.mName,
-                               save->getPlayer().mReturnPlace.mRoomNo, 0xFF);
+    int state = tww_getLayerNo(save->getPlayer().mReturnPlace.mName, save->getPlayer().mReturnPlace.mRoomNo, 0xFF);
 
     g_dComIfG_gameInfo.play.mNextStage.mRoomNo = save->getPlayer().mReturnPlace.mRoomNo;
     g_dComIfG_gameInfo.play.mNextStage.mPoint = save->getPlayer().mReturnPlace.mPoint;

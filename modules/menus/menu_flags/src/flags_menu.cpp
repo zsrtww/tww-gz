@@ -8,8 +8,7 @@ KEEP_FUNC FlagsMenu::FlagsMenu(Cursor& cursor)
                         {"general", GENERAL_FLAGS_INDEX, "General Flags"},
                         {"dungeons", DUNGEON_FLAGS_INDEX, "dungeon flags"},
                         {"savewarp", SAVEWARP_FLAG_INDEX, "Savewarp Flags"},
-                        {"tuner", TUNER_FLAG_INDEX,
-                         "Tuner Flags (flags must be set before connection)"},
+                        {"tuner", TUNER_FLAG_INDEX, "Tuner Flags (flags must be set before connection)"},
                     } {}
 
 FlagsMenu::~FlagsMenu() {}
@@ -22,18 +21,18 @@ void FlagsMenu::draw() {
 
     if (GZ_getButtonTrig(SELECTION_BUTTON)) {
         switch (cursor.y) {
-        case GENERAL_FLAGS_INDEX:
-            g_menuMgr->push(MN_GENERAL_FLAGS_INDEX);
-            return;
-        case DUNGEON_FLAGS_INDEX:
-            g_menuMgr->push(MN_DUNGEON_FLAGS_INDEX);
-            return;
-        case SAVEWARP_FLAG_INDEX:
-            g_menuMgr->push(MN_SAVEWARP_FLAGS_INDEX);
-            return;
-        case TUNER_FLAG_INDEX:
-            g_menuMgr->push(MN_TUNER_FLAGS_INDEX);
-            return;
+            case GENERAL_FLAGS_INDEX:
+                g_menuMgr->push(MN_GENERAL_FLAGS_INDEX);
+                return;
+            case DUNGEON_FLAGS_INDEX:
+                g_menuMgr->push(MN_DUNGEON_FLAGS_INDEX);
+                return;
+            case SAVEWARP_FLAG_INDEX:
+                g_menuMgr->push(MN_SAVEWARP_FLAGS_INDEX);
+                return;
+            case TUNER_FLAG_INDEX:
+                g_menuMgr->push(MN_TUNER_FLAGS_INDEX);
+                return;
         }
     }
 

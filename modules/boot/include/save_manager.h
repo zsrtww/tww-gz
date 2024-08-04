@@ -67,8 +67,7 @@ public:
     static void injectDefault_before();
     static void injectDefault_during();
     static void injectDefault_after();
-    static void loadSave(uint32_t id, const char* category, special* i_specials = nullptr,
-                         int size = 0);
+    static void loadSave(uint32_t id, const char* category, special* i_specials = nullptr, int size = 0);
     static void loadSavefile(const char* fileName);
     static void triggerLoad(uint32_t id, const char* category, special i_specials[], int size);
     static void defaultLoad();

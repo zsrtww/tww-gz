@@ -19,16 +19,16 @@ extern "C" {
 
 uint32_t get_size(uint32_t format, uint32_t width, uint32_t height) {
     switch (format) {
-    case TexFmt::CMPR: {
-        return width * height / 2;
-    }
-    case TexFmt::I8: {
-        return width * height;
-    }
-    case TexFmt::RGB8:
-    default: {
-        return 4 * width * height;
-    }
+        case TexFmt::CMPR: {
+            return width * height / 2;
+        }
+        case TexFmt::I8: {
+            return width * height;
+        }
+        case TexFmt::RGB8:
+        default: {
+            return 4 * width * height;
+        }
     }
 }
 
@@ -45,40 +45,38 @@ TexCode load_texture_offset(const char* path, Texture* tex, uint32_t offset) {
 
     if (!DVDOpen(path, &fileInfo)) {
         tex->loadCode = TexCode::TEX_ERR_FILE;
-        OSReport_Warning("Texture not loaded \"%s\"; Couldn't open path [%d]\n", path,
-                         tex->loadCode);
+        OSReport_Warning("Texture not loaded \"%s\"; Couldn't open path [%d]\n", path, tex->loadCode);
         return tex->loadCode;
     }
     readsize = dvd_read(&fileInfo, &tex->header, sizeof(TexHeader), offset);
     if (readsize < (int32_t)sizeof(TexHeader)) {
         DVDClose(&fileInfo);
         tex->loadCode = TexCode::TEX_ERR_READ;
-        OSReport_Warning("Texture not loaded \"%s\"; Couldn't read file header [%d]\n", path,
-                         tex->loadCode);
+        OSReport_Warning("Texture not loaded \"%s\"; Couldn't read file header [%d]\n", path, tex->loadCode);
         return tex->loadCode;
     }
 
     uint8_t fmt = GX_TF_I8;
     switch (tex->header.format) {
-    case TexFmt::RGB8: {
-        fmt = GX_TF_RGBA8;
-        break;
-    }
-    case TexFmt::CMPR: {
-        fmt = GX_TF_CMPR;
-        break;
-    }
-    case TexFmt::I8: {
-        fmt = GX_TF_I8;
-        break;
-    }
-    default: {
-        DVDClose(&fileInfo);
-        tex->loadCode = TexCode::TEX_ERR_INVALID_FORMAT;
-        OSReport_Warning("Texture not loaded \"%s\"; Invalid texture format id (%d) [%d]\n", path,
-                         tex->header.format, tex->loadCode);
-        return tex->loadCode;
-    }
+        case TexFmt::RGB8: {
+            fmt = GX_TF_RGBA8;
+            break;
+        }
+        case TexFmt::CMPR: {
+            fmt = GX_TF_CMPR;
+            break;
+        }
+        case TexFmt::I8: {
+            fmt = GX_TF_I8;
+            break;
+        }
+        default: {
+            DVDClose(&fileInfo);
+            tex->loadCode = TexCode::TEX_ERR_INVALID_FORMAT;
+            OSReport_Warning("Texture not loaded \"%s\"; Invalid texture format id (%d) [%d]\n", path,
+                             tex->header.format, tex->loadCode);
+            return tex->loadCode;
+        }
     }
 
     uint32_t size = get_size(tex->header.format, tex->header.width, tex->header.height);
@@ -86,8 +84,8 @@ TexCode load_texture_offset(const char* path, Texture* tex, uint32_t offset) {
     if (tex->data == nullptr) {
         DVDClose(&fileInfo);
         tex->loadCode = TexCode::TEX_ERR_MEM;
-        OSReport_Warning("Texture not loaded \"%s\"; Couldn't allocate 0x%x bytes for data [%d]\n",
-                         path, size, tex->loadCode);
+        OSReport_Warning("Texture not loaded \"%s\"; Couldn't allocate 0x%x bytes for data [%d]\n", path, size,
+                         tex->loadCode);
         return tex->loadCode;
     }
 
@@ -95,15 +93,14 @@ TexCode load_texture_offset(const char* path, Texture* tex, uint32_t offset) {
         delete tex->data;
         DVDClose(&fileInfo);
         tex->loadCode = TexCode::TEX_ERR_READ;
-        OSReport_Warning("Texture not loaded \"%s\"; Couldn't read texture data [%d]\n", path,
-                         tex->loadCode);
+        OSReport_Warning("Texture not loaded \"%s\"; Couldn't read texture data [%d]\n", path, tex->loadCode);
         return tex->loadCode;
     }
     DVDClose(&fileInfo);
 
     memset(&tex->_texObj, 0, sizeof(GXTexObj));
-    GXInitTexObj(&tex->_texObj, tex->data, tex->header.width, tex->header.height, (GXTexFmt)fmt,
-                 GX_CLAMP, GX_CLAMP, GX_FALSE);
+    GXInitTexObj(&tex->_texObj, tex->data, tex->header.width, tex->header.height, (GXTexFmt)fmt, GX_CLAMP, GX_CLAMP,
+                 GX_FALSE);
     tex->loadCode = TexCode::TEX_OK;
     return tex->loadCode;
 }

@@ -63,25 +63,17 @@ void SpecialChartMenu::draw() {
     updateSpecialChart(g_charts[cursor.y + 41].byte, g_charts[cursor.y + 41].index);
 
     lines[MENU_TINGLE_CHART].printf(" <%s>", chart_to_str(g_charts[41].byte, g_charts[41].index));
-    lines[MENU_GHOST_SHIP_CHART].printf(" <%s>",
-                                        chart_to_str(g_charts[42].byte, g_charts[42].index));
-    lines[MENU_INCREDIBLE_CHART].printf(" <%s>",
-                                        chart_to_str(g_charts[43].byte, g_charts[43].index));
+    lines[MENU_GHOST_SHIP_CHART].printf(" <%s>", chart_to_str(g_charts[42].byte, g_charts[42].index));
+    lines[MENU_INCREDIBLE_CHART].printf(" <%s>", chart_to_str(g_charts[43].byte, g_charts[43].index));
     lines[MENU_BIG_OCTO_CHART].printf(" <%s>", chart_to_str(g_charts[44].byte, g_charts[44].index));
     lines[MENU_FAIRY_CHART].printf(" <%s>", chart_to_str(g_charts[45].byte, g_charts[45].index));
-    lines[MENU_HEART_PIECE_CHART].printf(" <%s>",
-                                         chart_to_str(g_charts[46].byte, g_charts[46].index));
-    lines[MENU_SEA_HEARTS_CHART].printf(" <%s>",
-                                        chart_to_str(g_charts[47].byte, g_charts[47].index));
-    lines[MENU_SECRET_CAVE_CHART].printf(" <%s>",
-                                         chart_to_str(g_charts[48].byte, g_charts[48].index));
-    lines[MENU_LIGHT_RING_CHART].printf(" <%s>",
-                                        chart_to_str(g_charts[49].byte, g_charts[49].index));
-    lines[MENU_PLATFORMS_CHART].printf(" <%s>",
-                                       chart_to_str(g_charts[50].byte, g_charts[50].index));
+    lines[MENU_HEART_PIECE_CHART].printf(" <%s>", chart_to_str(g_charts[46].byte, g_charts[46].index));
+    lines[MENU_SEA_HEARTS_CHART].printf(" <%s>", chart_to_str(g_charts[47].byte, g_charts[47].index));
+    lines[MENU_SECRET_CAVE_CHART].printf(" <%s>", chart_to_str(g_charts[48].byte, g_charts[48].index));
+    lines[MENU_LIGHT_RING_CHART].printf(" <%s>", chart_to_str(g_charts[49].byte, g_charts[49].index));
+    lines[MENU_PLATFORMS_CHART].printf(" <%s>", chart_to_str(g_charts[50].byte, g_charts[50].index));
     lines[MENU_BEEDLE_CHART].printf(" <%s>", chart_to_str(g_charts[51].byte, g_charts[51].index));
-    lines[MENU_SUBMARINE_CHART].printf(" <%s>",
-                                       chart_to_str(g_charts[52].byte, g_charts[52].index));
+    lines[MENU_SUBMARINE_CHART].printf(" <%s>", chart_to_str(g_charts[52].byte, g_charts[52].index));
 
     cursor.move(0, MENU_LINE_NUM);
     GZ_drawMenuLines(lines, cursor.y, MENU_LINE_NUM);

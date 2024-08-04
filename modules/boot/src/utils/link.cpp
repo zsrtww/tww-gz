@@ -33,23 +33,17 @@ KEEP_FUNC void GZ_displayLinkInfo() {
         snprintf(link_z, sizeof(link_z), "z-pos: %.4f", player->current.pos.z);
 
         Font::GZ_drawStr(link_angle, g_spriteOffsets[SPR_DEBUG_INFO_INDEX].x,
-                         g_spriteOffsets[SPR_DEBUG_INFO_INDEX].y + 20.0f, 0xFFFFFFFF,
-                         g_dropShadows);
+                         g_spriteOffsets[SPR_DEBUG_INFO_INDEX].y + 20.0f, 0xFFFFFFFF, g_dropShadows);
         Font::GZ_drawStr(y_angle, g_spriteOffsets[SPR_DEBUG_INFO_INDEX].x,
-                         g_spriteOffsets[SPR_DEBUG_INFO_INDEX].y + 40.0f, 0xFFFFFFFF,
-                         g_dropShadows);
+                         g_spriteOffsets[SPR_DEBUG_INFO_INDEX].y + 40.0f, 0xFFFFFFFF, g_dropShadows);
         Font::GZ_drawStr(link_speed, g_spriteOffsets[SPR_DEBUG_INFO_INDEX].x,
-                         g_spriteOffsets[SPR_DEBUG_INFO_INDEX].y + 60.0f, 0xFFFFFFFF,
-                         g_dropShadows);
+                         g_spriteOffsets[SPR_DEBUG_INFO_INDEX].y + 60.0f, 0xFFFFFFFF, g_dropShadows);
         Font::GZ_drawStr(link_x, g_spriteOffsets[SPR_DEBUG_INFO_INDEX].x,
-                         g_spriteOffsets[SPR_DEBUG_INFO_INDEX].y + 80.0f, 0xFFFFFFFF,
-                         g_dropShadows);
+                         g_spriteOffsets[SPR_DEBUG_INFO_INDEX].y + 80.0f, 0xFFFFFFFF, g_dropShadows);
         Font::GZ_drawStr(link_y, g_spriteOffsets[SPR_DEBUG_INFO_INDEX].x,
-                         g_spriteOffsets[SPR_DEBUG_INFO_INDEX].y + 100.0f, 0xFFFFFFFF,
-                         g_dropShadows);
+                         g_spriteOffsets[SPR_DEBUG_INFO_INDEX].y + 100.0f, 0xFFFFFFFF, g_dropShadows);
         Font::GZ_drawStr(link_z, g_spriteOffsets[SPR_DEBUG_INFO_INDEX].x,
-                         g_spriteOffsets[SPR_DEBUG_INFO_INDEX].y + 120.0f, 0xFFFFFFFF,
-                         g_dropShadows);
+                         g_spriteOffsets[SPR_DEBUG_INFO_INDEX].y + 120.0f, 0xFFFFFFFF, g_dropShadows);
     }
 }
 
@@ -76,30 +70,28 @@ KEEP_FUNC void GZ_displayTimeInfo() {
     sprintf(Date, "date: %d", date);
     sprintf(Moon, "moon: %s", moonphases[moonid]);
 
-    Font::GZ_drawStr(Time, g_spriteOffsets[SPR_TIME_DISP_INDEX].x,
-                     g_spriteOffsets[SPR_TIME_DISP_INDEX].y, ColorPalette::WHITE, g_dropShadows);
-    Font::GZ_drawStr(Date, g_spriteOffsets[SPR_TIME_DISP_INDEX].x,
-                     g_spriteOffsets[SPR_TIME_DISP_INDEX].y + 20.0f, ColorPalette::WHITE,
-                     g_dropShadows);
-    Font::GZ_drawStr(Moon, g_spriteOffsets[SPR_TIME_DISP_INDEX].x,
-                     g_spriteOffsets[SPR_TIME_DISP_INDEX].y + 40.0f, ColorPalette::WHITE,
-                     g_dropShadows);
+    Font::GZ_drawStr(Time, g_spriteOffsets[SPR_TIME_DISP_INDEX].x, g_spriteOffsets[SPR_TIME_DISP_INDEX].y,
+                     ColorPalette::WHITE, g_dropShadows);
+    Font::GZ_drawStr(Date, g_spriteOffsets[SPR_TIME_DISP_INDEX].x, g_spriteOffsets[SPR_TIME_DISP_INDEX].y + 20.0f,
+                     ColorPalette::WHITE, g_dropShadows);
+    Font::GZ_drawStr(Moon, g_spriteOffsets[SPR_TIME_DISP_INDEX].x, g_spriteOffsets[SPR_TIME_DISP_INDEX].y + 40.0f,
+                     ColorPalette::WHITE, g_dropShadows);
 }
 
 int rainbow() {
     switch (cCt_getFrameCount() % 6) {
-    case 0:
-        return ColorPalette::RED;
-    case 1:
-        return ColorPalette::ORANGE;
-    case 2:
-        return ColorPalette::YELLOW;
-    case 3:
-        return ColorPalette::GREEN;
-    case 4:
-        return ColorPalette::BLUE;
-    default:
-        return ColorPalette::PURPLE;
+        case 0:
+            return ColorPalette::RED;
+        case 1:
+            return ColorPalette::ORANGE;
+        case 2:
+            return ColorPalette::YELLOW;
+        case 3:
+            return ColorPalette::GREEN;
+        case 4:
+            return ColorPalette::BLUE;
+        default:
+            return ColorPalette::PURPLE;
     }
 }
 
@@ -130,10 +122,8 @@ KEEP_FUNC void GZ_displayZombieHoverInfo() {
     sprintf(a_presses_str, "A: %d", numAPressesPerWindow);
     sprintf(b_presses_str, "B: %d", numBPressesPerWindow);
 
-    Font::GZ_drawStr(a_presses_str, g_spriteOffsets[SPR_ZH_INFO_INDEX].x,
-                     g_spriteOffsets[SPR_ZH_INFO_INDEX].y, zombieHoverColor(numAPressesPerWindow),
-                     g_dropShadows);
-    Font::GZ_drawStr(b_presses_str, g_spriteOffsets[SPR_ZH_INFO_INDEX].x,
-                     g_spriteOffsets[SPR_ZH_INFO_INDEX].y + 20.0f,
+    Font::GZ_drawStr(a_presses_str, g_spriteOffsets[SPR_ZH_INFO_INDEX].x, g_spriteOffsets[SPR_ZH_INFO_INDEX].y,
+                     zombieHoverColor(numAPressesPerWindow), g_dropShadows);
+    Font::GZ_drawStr(b_presses_str, g_spriteOffsets[SPR_ZH_INFO_INDEX].x, g_spriteOffsets[SPR_ZH_INFO_INDEX].y + 20.0f,
                      zombieHoverColor(numBPressesPerWindow), g_dropShadows);
 }

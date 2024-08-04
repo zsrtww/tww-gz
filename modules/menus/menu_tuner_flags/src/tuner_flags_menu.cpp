@@ -8,17 +8,14 @@
 
 KEEP_FUNC TunerFlagMenu::TunerFlagMenu(Cursor& cursor)
     : Menu(cursor), lines{
-                        {"Kooloo-Limpah 10s Balloon+Shield", 0,
-                         "Adds the 10s Balloon+Shield to the Kooloo-Limpah pool", true,
-                         &g_flags[KOOLOO_LIMPAH]},
-                        {"Tingle Balloon Discount", 1,
-                         "Gives Tingle Balloon Discount from 30 to 20 rupees", true,
+                        {"Kooloo-Limpah 10s Balloon+Shield", 0, "Adds the 10s Balloon+Shield to the Kooloo-Limpah pool",
+                         true, &g_flags[KOOLOO_LIMPAH]},
+                        {"Tingle Balloon Discount", 1, "Gives Tingle Balloon Discount from 30 to 20 rupees", true,
                          &g_flags[BALLOON_DISCOUNT]},
                         {"Tings Discount", 2, "Gives 50 percent off discount for all tings", true,
                          &g_flags[TINGS_DISCOUNT]},
-                        {"Hand-Me-Down Tingle Tuner", 3,
-                         "Unlocks the Hand-Me-Down Tingle Tuner item in the tuner shop", true,
-                         &g_flags[HAND_ME_DOWN_TUNER]},
+                        {"Hand-Me-Down Tingle Tuner", 3, "Unlocks the Hand-Me-Down Tingle Tuner item in the tuner shop",
+                         true, &g_flags[HAND_ME_DOWN_TUNER]},
                     } {}
 
 TunerFlagMenu::~TunerFlagMenu() {}
@@ -33,18 +30,18 @@ void TunerFlagMenu::draw() {
 
     if (GZ_getButtonTrig(GZPad::A)) {
         switch (cursor.y) {
-        case 0:
-            setEventFlag(0x2E08);
-            break;
-        case 1:
-            setEventFlag(0x1A10);
-            break;
-        case 2:
-            setEventFlag(0x1A08);
-            break;
-        case 3:
-            setEventFlag(0x1708);
-            break;
+            case 0:
+                setEventFlag(0x2E08);
+                break;
+            case 1:
+                setEventFlag(0x1A10);
+                break;
+            case 2:
+                setEventFlag(0x1A08);
+                break;
+            case 3:
+                setEventFlag(0x1708);
+                break;
         }
     }
 

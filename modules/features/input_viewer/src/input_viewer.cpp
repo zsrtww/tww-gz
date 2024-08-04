@@ -54,8 +54,7 @@ void drawEllipseOutline(uint32_t color, Vec2 center, Vec2 dim, uint8_t line_widt
             dy[j] = tmp;
         }
     }
-    Draw::add_vertex(color, {center.x + dim.x / 2 * dx[0], center.y + dim.y / 2 * dy[0]},
-                     {0.5f + dx[0], 0.5f + dy[0]});
+    Draw::add_vertex(color, {center.x + dim.x / 2 * dx[0], center.y + dim.y / 2 * dy[0]}, {0.5f + dx[0], 0.5f + dy[0]});
     Draw::end();
 }
 
@@ -89,10 +88,8 @@ void drawStickOutline(uint32_t color, Vec2 pos, float size, float x_ratio) {
     float tmp;
     Draw::begin_outline(9, OUTLINE_WIDTH);
     for (uint8_t i = 0; i < 4; ++i) {
-        Draw::add_vertex(color, {pos.x + s2 * dx1 * x_ratio, pos.y + s2 * dy1},
-                         {(0.5f + dx1) * x_ratio, 0.5f + dy1});
-        Draw::add_vertex(color, {pos.x + s2 * dx2 * x_ratio, pos.y + s2 * dy2},
-                         {(0.5f + dx2) * x_ratio, 0.5f + dy2});
+        Draw::add_vertex(color, {pos.x + s2 * dx1 * x_ratio, pos.y + s2 * dy1}, {(0.5f + dx1) * x_ratio, 0.5f + dy1});
+        Draw::add_vertex(color, {pos.x + s2 * dx2 * x_ratio, pos.y + s2 * dy2}, {(0.5f + dx2) * x_ratio, 0.5f + dy2});
         tmp = dx1;
         dx1 = -dy1;
         dy1 = tmp;
@@ -100,8 +97,7 @@ void drawStickOutline(uint32_t color, Vec2 pos, float size, float x_ratio) {
         dx2 = -dy2;
         dy2 = tmp;
     }
-    Draw::add_vertex(color, {pos.x + s2 * dx1 * x_ratio, pos.y + s2 * dy1},
-                     {(0.5f + dx1) * x_ratio, 0.5f + dy1});
+    Draw::add_vertex(color, {pos.x + s2 * dx1 * x_ratio, pos.y + s2 * dy1}, {(0.5f + dx1) * x_ratio, 0.5f + dy1});
     Draw::end();
 }
 
@@ -130,46 +126,37 @@ void drawButtonEllipse(GZPad button, char c, uint32_t color, Vec2 pos, Vec2 dim,
 void drawCross(uint32_t color, Vec2 pos, float size, float x_ratio) {
     float branch_width = 3.f * size / 11.f;
     float branch_length = 4.f * size / 11.f;
-    drawButton(GZPad::DPAD_LEFT, '-', color, {pos.x, pos.y + branch_length},
-               {branch_length * x_ratio, branch_width}, 8 * size / 25);
+    drawButton(GZPad::DPAD_LEFT, '-', color, {pos.x, pos.y + branch_length}, {branch_length * x_ratio, branch_width},
+               8 * size / 25);
     drawButton(GZPad::DPAD_UP, '|', color, {pos.x + branch_length * x_ratio, pos.y},
                {branch_width * x_ratio, branch_length}, 4 * size / 25);
-    drawButton(GZPad::DPAD_RIGHT, '-', color,
-               {pos.x + (branch_length + branch_width) * x_ratio, pos.y + branch_length},
+    drawButton(GZPad::DPAD_RIGHT, '-', color, {pos.x + (branch_length + branch_width) * x_ratio, pos.y + branch_length},
                {branch_length * x_ratio, branch_width}, 8 * size / 25);
-    drawButton(GZPad::DPAD_DOWN, '|', color,
-               {pos.x + branch_length * x_ratio, pos.y + branch_length + branch_width},
+    drawButton(GZPad::DPAD_DOWN, '|', color, {pos.x + branch_length * x_ratio, pos.y + branch_length + branch_width},
                {branch_width * x_ratio, branch_length}, 4 * size / 25);
 }
 
 bool stickInRectRange(s8 xmin, s8 ymin, s8 xmax, s8 ymax) {
-    return ((mPadStatus.stick_x <= xmax) && (mPadStatus.stick_y <= ymax) &&
-            (mPadStatus.stick_x >= xmin) && (mPadStatus.stick_y >= ymin));
+    return ((mPadStatus.stick_x <= xmax) && (mPadStatus.stick_y <= ymax) && (mPadStatus.stick_x >= xmin) &&
+            (mPadStatus.stick_y >= ymin));
 }
 
 void InputViewer::drawViewer(Vec2 pos, float scale, bool is_shadow, bool wide_screen) {
     float x_ratio = wide_screen ? 0.75f : 1.0f;
 
-    drawButton(GZPad::A, 'A', is_shadow ? 0x00000060 : 0x00FF7fFF,
-               {pos.x + 130.f * scale, pos.y + 30.f * scale}, {30.f * scale, 30.f * scale},
-               8 * scale);
-    drawButton(GZPad::B, 'B', is_shadow ? 0x00000060 : 0xFF0000FF,
-               {pos.x + 108.5f * scale, pos.y + 45.f * scale}, {13.f * scale, 13.f * scale},
-               8 * scale);
-    drawButton(GZPad::X, 'X', is_shadow ? 0x00000060 : 0xFFFFFFFF,
-               {pos.x + 167.5f * scale, pos.y + 30.f * scale}, {15.f * scale, 30.f * scale},
-               8 * scale);
-    drawButton(GZPad::Y, 'Y', is_shadow ? 0x00000060 : 0xFFFFFFFF,
-               {pos.x + 130.f * scale, pos.y + 7.5f * scale}, {30.f * scale, 15.f * scale},
-               8 * scale);
-    drawButton(GZPad::Z, 'Z', is_shadow ? 0x00000060 : 0x8A2BE2FF,
-               {pos.x + 167.5f * scale, pos.y + 7.5f * scale}, {15.f * scale, 15.f * scale},
-               8 * scale);
-    drawButton(GZPad::START, ' ', is_shadow ? 0x00000060 : 0xFFFFFFFF,
-               {pos.x + 87.5f * scale, pos.y + 40.f * scale}, {10.f * scale, 10.f * scale},
-               8 * scale);
-    drawCross(is_shadow ? 0x00000060 : 0xFFFFFFFF, {pos.x + 95.f * scale, pos.y + 10.f * scale},
-              25.f * scale, x_ratio);
+    drawButton(GZPad::A, 'A', is_shadow ? 0x00000060 : 0x00FF7fFF, {pos.x + 130.f * scale, pos.y + 30.f * scale},
+               {30.f * scale, 30.f * scale}, 8 * scale);
+    drawButton(GZPad::B, 'B', is_shadow ? 0x00000060 : 0xFF0000FF, {pos.x + 108.5f * scale, pos.y + 45.f * scale},
+               {13.f * scale, 13.f * scale}, 8 * scale);
+    drawButton(GZPad::X, 'X', is_shadow ? 0x00000060 : 0xFFFFFFFF, {pos.x + 167.5f * scale, pos.y + 30.f * scale},
+               {15.f * scale, 30.f * scale}, 8 * scale);
+    drawButton(GZPad::Y, 'Y', is_shadow ? 0x00000060 : 0xFFFFFFFF, {pos.x + 130.f * scale, pos.y + 7.5f * scale},
+               {30.f * scale, 15.f * scale}, 8 * scale);
+    drawButton(GZPad::Z, 'Z', is_shadow ? 0x00000060 : 0x8A2BE2FF, {pos.x + 167.5f * scale, pos.y + 7.5f * scale},
+               {15.f * scale, 15.f * scale}, 8 * scale);
+    drawButton(GZPad::START, ' ', is_shadow ? 0x00000060 : 0xFFFFFFFF, {pos.x + 87.5f * scale, pos.y + 40.f * scale},
+               {10.f * scale, 10.f * scale}, 8 * scale);
+    drawCross(is_shadow ? 0x00000060 : 0xFFFFFFFF, {pos.x + 95.f * scale, pos.y + 10.f * scale}, 25.f * scale, x_ratio);
 
     // analog sticks
     uint32_t col;
@@ -195,24 +182,22 @@ void InputViewer::drawViewer(Vec2 pos, float scale, bool is_shadow, bool wide_sc
         col = WHITE;
     }
 
-    drawStickOutline(is_shadow ? 0x00000060 : col, {pos.x + 17.5f * scale, pos.y + 30.f * scale},
-                     35.0f * scale, x_ratio);
-    drawStickOutline(is_shadow ? 0x00000060 : 0xFFD138FF,
-                     {pos.x + 62.5f * scale, pos.y + 30.f * scale}, 35.0f * scale, x_ratio);
+    drawStickOutline(is_shadow ? 0x00000060 : col, {pos.x + 17.5f * scale, pos.y + 30.f * scale}, 35.0f * scale,
+                     x_ratio);
+    drawStickOutline(is_shadow ? 0x00000060 : 0xFFD138FF, {pos.x + 62.5f * scale, pos.y + 30.f * scale}, 35.0f * scale,
+                     x_ratio);
     drawEllipse(is_shadow ? 0x00000060 : col,
-                {pos.x + (17.5f + mPadMStick.mPosX * 10) * scale,
-                 pos.y + (30.f - mPadMStick.mPosY * 10) * scale},
+                {pos.x + (17.5f + mPadMStick.mPosX * 10) * scale, pos.y + (30.f - mPadMStick.mPosY * 10) * scale},
                 {20.0f * scale, 20.0f * scale});
     drawEllipse(is_shadow ? 0x00000060 : 0xFFD138FF,
-                {pos.x + (62.5f + mPadSStick.mPosX * 10) * scale,
-                 pos.y + (30.f - mPadSStick.mPosY * 10) * scale},
+                {pos.x + (62.5f + mPadSStick.mPosX * 10) * scale, pos.y + (30.f - mPadSStick.mPosY * 10) * scale},
                 {20.0f * scale, 20.0f * scale});
 
     // Analog triggers
-    Draw::drawRectOutline(is_shadow ? 0x00000060 : 0xFFFFFFFF, {pos.x, pos.y},
-                          {35.f * scale, 7.f * scale}, OUTLINE_WIDTH);
-    Draw::drawRect(is_shadow ? 0x00000060 : GZ_getButtonPressed(GZPad::L) ? 0x00FF00FF : 0xFFFFFFFF,
-                   {pos.x, pos.y}, {35.f * mPadButton.mAnalogLf * scale, 7.f * scale});
+    Draw::drawRectOutline(is_shadow ? 0x00000060 : 0xFFFFFFFF, {pos.x, pos.y}, {35.f * scale, 7.f * scale},
+                          OUTLINE_WIDTH);
+    Draw::drawRect(is_shadow ? 0x00000060 : GZ_getButtonPressed(GZPad::L) ? 0x00FF00FF : 0xFFFFFFFF, {pos.x, pos.y},
+                   {35.f * mPadButton.mAnalogLf * scale, 7.f * scale});
     Draw::drawRectOutline(is_shadow ? 0x00000060 : 0xFFFFFFFF, {pos.x + 45.f * scale, pos.y},
                           {35.f * scale, 7.f * scale}, OUTLINE_WIDTH);
     Draw::drawRect(is_shadow ? 0x00000060 : GZ_getButtonPressed(GZPad::R) ? 0x00FF00FF : 0xFFFFFFFF,
@@ -230,14 +215,13 @@ void InputViewer::drawViewer(Vec2 pos, float scale, bool is_shadow, bool wide_sc
     sprintf(c_x, "%3d", mPadStatus.substick_x);
     sprintf(c_y, "%3d", mPadStatus.substick_y);
 
-    Font::GZ_drawStr(control_x, pos.x, pos.y + 65.f * scale, is_shadow ? 0x00000060 : 0xFFFFFFFF,
-                     false, 13 * scale);
-    Font::GZ_drawStr(control_y, pos.x + 23.f * scale, pos.y + 65.f * scale,
-                     is_shadow ? 0x00000060 : 0xFFFFFFFF, false, 13 * scale);
-    Font::GZ_drawStr(c_x, pos.x + 45.f * scale, pos.y + 65.f * scale,
-                     is_shadow ? 0x00000060 : 0xFFD138FF, false, 13 * scale);
-    Font::GZ_drawStr(c_y, pos.x + 70.f * scale, pos.y + 65.f * scale,
-                     is_shadow ? 0x00000060 : 0xFFD138FF, false, 13 * scale);
+    Font::GZ_drawStr(control_x, pos.x, pos.y + 65.f * scale, is_shadow ? 0x00000060 : 0xFFFFFFFF, false, 13 * scale);
+    Font::GZ_drawStr(control_y, pos.x + 23.f * scale, pos.y + 65.f * scale, is_shadow ? 0x00000060 : 0xFFFFFFFF, false,
+                     13 * scale);
+    Font::GZ_drawStr(c_x, pos.x + 45.f * scale, pos.y + 65.f * scale, is_shadow ? 0x00000060 : 0xFFD138FF, false,
+                     13 * scale);
+    Font::GZ_drawStr(c_y, pos.x + 70.f * scale, pos.y + 65.f * scale, is_shadow ? 0x00000060 : 0xFFD138FF, false,
+                     13 * scale);
 }
 
 KEEP_FUNC void InputViewer::draw() {

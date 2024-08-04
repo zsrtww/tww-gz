@@ -53,8 +53,7 @@ void drawCube(MtxP mtx, cXyz* array, const GXColor& color) {
     GXClearVtxDesc();
     GXSetVtxDesc(GX_VA_POS, GX_INDEX8);
     GXSetNumChans(1);
-    GXSetChanCtrl(GX_COLOR0, GX_DISABLE, GX_SRC_REG, GX_SRC_REG, GX_LIGHT_NULL, GX_DF_CLAMP,
-                  GX_AF_NONE);
+    GXSetChanCtrl(GX_COLOR0, GX_DISABLE, GX_SRC_REG, GX_SRC_REG, GX_LIGHT_NULL, GX_DF_CLAMP, GX_AF_NONE);
     GXSetNumTexGens(0);
     GXSetNumTevStages(1);
     GXSetTevColor(GX_TEVREG0, color);
@@ -201,11 +200,9 @@ static J3DPacket__vtable_t mDoExt_cylinderPacket__vtable{
     (void*)&mDoExt_cylinderPacket__dtor,
 };
 
-KEEP_FUNC void dDbVw_drawCylinderXlu(cXyz& position, f32 radius, f32 height, const GXColor& color,
-                                     u8 param_4) {
+KEEP_FUNC void dDbVw_drawCylinderXlu(cXyz& position, f32 radius, f32 height, const GXColor& color, u8 param_4) {
     if (l_drawPacketListNum < DRAW_PACKET_MAX) {
-        mDoExt_cylinderPacket* cyl =
-            new mDoExt_cylinderPacket(position, radius, height, color, param_4);
+        mDoExt_cylinderPacket* cyl = new mDoExt_cylinderPacket(position, radius, height, color, param_4);
         cyl->base.vtable = &mDoExt_cylinderPacket__vtable;
 
         dDbVw_setDrawPacketList(&cyl->base, 1);
@@ -243,8 +240,7 @@ void mDoExt_cylinderPacket__draw(mDoExt_cylinderPacket* i_this) {
     f32 height = i_this->mHeight;
 
     mDoMtx_stack_c::copy(j3dSys.getViewMtx());
-    mDoMtx_stack_c::transM(i_this->mPosition.x, i_this->mPosition.y + (height / 2),
-                           i_this->mPosition.z);
+    mDoMtx_stack_c::transM(i_this->mPosition.x, i_this->mPosition.y + (height / 2), i_this->mPosition.z);
     mDoMtx_stack_c::scaleM(i_this->mRadius, i_this->mRadius + (height / 2), i_this->mRadius);
     mDoMtx_stack_c::XrotM(0x4000);
 
@@ -325,8 +321,7 @@ void mDoExt_trianglePacket__draw(mDoExt_trianglePacket* i_this) {
     GXLoadPosMtxImm(j3dSys.getViewMtx(), 0);
     GXSetCurrentMtx(0);
     GXSetNumChans(1);
-    GXSetChanCtrl(GX_COLOR0, GX_DISABLE, GX_SRC_REG, GX_SRC_REG, GX_LIGHT_NULL, GX_DF_CLAMP,
-                  GX_AF_NONE);
+    GXSetChanCtrl(GX_COLOR0, GX_DISABLE, GX_SRC_REG, GX_SRC_REG, GX_LIGHT_NULL, GX_DF_CLAMP, GX_AF_NONE);
     GXSetNumTexGens(0);
     GXSetNumTevStages(1);
     GXSetTevColor(GX_TEVREG0, i_this->mColor);
@@ -376,8 +371,7 @@ static J3DPacket__vtable_t mDoExt_linePacket__vtable{
     (void*)&mDoExt_linePacket__dtor,
 };
 
-KEEP_FUNC void dDbVw_drawLineXlu(cXyz& pointA, cXyz& pointB, const GXColor& color, u8 param_3,
-                                 u8 width) {
+KEEP_FUNC void dDbVw_drawLineXlu(cXyz& pointA, cXyz& pointB, const GXColor& color, u8 param_3, u8 width) {
     if (l_drawPacketListNum < DRAW_PACKET_MAX) {
         mDoExt_linePacket* line = new mDoExt_linePacket(pointA, pointB, color, param_3, width);
         line->base.vtable = &mDoExt_linePacket__vtable;
@@ -400,8 +394,7 @@ void mDoExt_linePacket__draw(mDoExt_linePacket* i_this) {
     GXLoadPosMtxImm(j3dSys.getViewMtx(), 0);
     GXSetCurrentMtx(0);
     GXSetNumChans(1);
-    GXSetChanCtrl(GX_COLOR0, GX_DISABLE, GX_SRC_REG, GX_SRC_REG, GX_LIGHT_NULL, GX_DF_CLAMP,
-                  GX_AF_NONE);
+    GXSetChanCtrl(GX_COLOR0, GX_DISABLE, GX_SRC_REG, GX_SRC_REG, GX_LIGHT_NULL, GX_DF_CLAMP, GX_AF_NONE);
     GXSetNumTexGens(0);
     GXSetNumTevStages(1);
     GXSetTevColor(GX_TEVREG0, i_this->mColor);
@@ -512,11 +505,9 @@ static J3DPacket__vtable_t mDoExt_circlePacket__vtable{
     (void*)&mDoExt_circlePacket__dtor,
 };
 
-KEEP_FUNC void dDbVw_drawCircleXlu(cXyz& i_position, f32 i_radius, const GXColor& i_color,
-                                   u8 param_3, u8 i_lineWidth) {
+KEEP_FUNC void dDbVw_drawCircleXlu(cXyz& i_position, f32 i_radius, const GXColor& i_color, u8 param_3, u8 i_lineWidth) {
     if (l_drawPacketListNum < DRAW_PACKET_MAX) {
-        mDoExt_circlePacket* circle =
-            new mDoExt_circlePacket(i_position, i_radius, i_color, param_3, i_lineWidth);
+        mDoExt_circlePacket* circle = new mDoExt_circlePacket(i_position, i_radius, i_color, param_3, i_lineWidth);
         circle->base.vtable = &mDoExt_circlePacket__vtable;
 
         dDbVw_setDrawPacketList(&circle->base, 1);
@@ -533,8 +524,7 @@ void mDoExt_circlePacket__draw(mDoExt_circlePacket* i_this) {
     GXClearVtxDesc();
     GXSetVtxDesc(GX_VA_POS, GX_DIRECT);
     GXSetNumChans(1);
-    GXSetChanCtrl(GX_COLOR0, GX_DISABLE, GX_SRC_REG, GX_SRC_REG, GX_LIGHT_NULL, GX_DF_CLAMP,
-                  GX_AF_NONE);
+    GXSetChanCtrl(GX_COLOR0, GX_DISABLE, GX_SRC_REG, GX_SRC_REG, GX_LIGHT_NULL, GX_DF_CLAMP, GX_AF_NONE);
     GXSetNumTexGens(0);
     GXSetNumTevStages(1);
     GXSetTevColor(GX_TEVREG0, i_this->m_color);
@@ -594,11 +584,10 @@ static J3DPacket__vtable_t mDoExt_ArrowPacket__vtable{
     (void*)&mDoExt_ArrowPacket__dtor,
 };
 
-KEEP_FUNC void dDbVw_drawArrowXlu(cXyz& i_startPos, cXyz& i_endPos, const GXColor& i_color,
-                                  u8 i_clipZ, u8 i_lineWidth) {
+KEEP_FUNC void dDbVw_drawArrowXlu(cXyz& i_startPos, cXyz& i_endPos, const GXColor& i_color, u8 i_clipZ,
+                                  u8 i_lineWidth) {
     if (l_drawPacketListNum < DRAW_PACKET_MAX) {
-        mDoExt_ArrowPacket* arrow =
-            new mDoExt_ArrowPacket(i_startPos, i_endPos, i_color, i_clipZ, i_lineWidth);
+        mDoExt_ArrowPacket* arrow = new mDoExt_ArrowPacket(i_startPos, i_endPos, i_color, i_clipZ, i_lineWidth);
         arrow->base.vtable = &mDoExt_ArrowPacket__vtable;
 
         dDbVw_setDrawPacketList(&arrow->base, 1);
@@ -617,8 +606,7 @@ void mDoExt_ArrowPacket__draw(mDoExt_ArrowPacket* i_this) {
     GXClearVtxDesc();
     GXSetVtxDesc(GX_VA_POS, GX_DIRECT);
     GXSetNumChans(1);
-    GXSetChanCtrl(GX_COLOR0, GX_DISABLE, GX_SRC_REG, GX_SRC_REG, GX_LIGHT_NULL, GX_DF_CLAMP,
-                  GX_AF_NONE);
+    GXSetChanCtrl(GX_COLOR0, GX_DISABLE, GX_SRC_REG, GX_SRC_REG, GX_LIGHT_NULL, GX_DF_CLAMP, GX_AF_NONE);
     GXSetNumTexGens(0);
     GXSetNumTevStages(1);
     GXSetTevColor(GX_TEVREG0, i_this->mColor);
@@ -682,8 +670,8 @@ int cM3d_UpMtx(const Vec& param_0, Mtx m) {
 
 KEEP_FUNC void dCcD_Cyl_Draw(dCcD_Cyl* i_this, const GXColor& i_color) {
     if (dComIfGp_getPlayer(0)->current.pos.abs(i_this->mCylAttr.cyl.mCenter) < MAX_DRAW_DIST) {
-        dDbVw_drawCylinderXlu(i_this->mCylAttr.cyl.mCenter, i_this->mCylAttr.cyl.GetR(),
-                              i_this->mCylAttr.cyl.GetH(), i_color, 1);
+        dDbVw_drawCylinderXlu(i_this->mCylAttr.cyl.mCenter, i_this->mCylAttr.cyl.GetR(), i_this->mCylAttr.cyl.GetH(),
+                              i_color, 1);
     }
 }
 
@@ -717,10 +705,8 @@ KEEP_FUNC void dCcD_Cps_Draw(dCcD_Cps* i_this, const GXColor& i_color) {
         mDoMtx_concat(cyl_m, sp98, cyl_m);
 
         dDbVw_drawCylinderMXlu(cyl_m, i_color, 1);
-        dDbVw_drawSphereXlu(*i_this->mCpsAttr.cps.GetStartP(), i_this->mCpsAttr.cps.GetR(), i_color,
-                            1);
-        dDbVw_drawSphereXlu(*i_this->mCpsAttr.cps.GetEndP(), i_this->mCpsAttr.cps.GetR(), i_color,
-                            1);
+        dDbVw_drawSphereXlu(*i_this->mCpsAttr.cps.GetStartP(), i_this->mCpsAttr.cps.GetR(), i_color, 1);
+        dDbVw_drawSphereXlu(*i_this->mCpsAttr.cps.GetEndP(), i_this->mCpsAttr.cps.GetR(), i_color, 1);
     }
 }
 
@@ -745,14 +731,11 @@ KEEP_FUNC void dCcD_DrawCc(cCcD_Obj* i_obj, const GXColor& i_color) {
     // this is disgusting but seems to work well enough without being super intrusive
     dCcD_GenericBase* generic = (dCcD_GenericBase*)i_obj;
 
-    if (generic->mShapeAttr.vtable->CrossAtTg_2 ==
-        CrossAtTg__12cCcD_SphAttrCFRC12cCcD_CpsAttrP4cXyz) {
+    if (generic->mShapeAttr.vtable->CrossAtTg_2 == CrossAtTg__12cCcD_SphAttrCFRC12cCcD_CpsAttrP4cXyz) {
         dCcD_Sph_Draw((dCcD_Sph*)i_obj, i_color);
-    } else if (generic->mShapeAttr.vtable->CrossAtTg_2 ==
-               CrossAtTg__12cCcD_CylAttrCFRC12cCcD_CpsAttrP4cXyz) {
+    } else if (generic->mShapeAttr.vtable->CrossAtTg_2 == CrossAtTg__12cCcD_CylAttrCFRC12cCcD_CpsAttrP4cXyz) {
         dCcD_Cyl_Draw((dCcD_Cyl*)i_obj, i_color);
-    } else if (generic->mShapeAttr.vtable->CrossAtTg_2 ==
-               CrossAtTg__12cCcD_CpsAttrCFRC12cCcD_CpsAttrP4cXyz) {
+    } else if (generic->mShapeAttr.vtable->CrossAtTg_2 == CrossAtTg__12cCcD_CpsAttrCFRC12cCcD_CpsAttrP4cXyz) {
         dCcD_Cps_Draw((dCcD_Cps*)i_obj, i_color);
     }
 }
@@ -800,8 +783,8 @@ KEEP_FUNC void GZ_drawCc(dCcS* i_this) {
 //                      POLY DRAW
 //-------------------------------------------------------
 
-int drawPoly(dBgS_CaptPoly* i_captpoly, cBgD_Vtx_t* i_vtx, int i_ia, int i_ib, int i_ic,
-             cM3dGPla* i_plane, cBgD_Ti_t* i_prop, int i_id) {
+int drawPoly(dBgS_CaptPoly* i_captpoly, cBgD_Vtx_t* i_vtx, int i_ia, int i_ib, int i_ic, cM3dGPla* i_plane,
+             cBgD_Ti_t* i_prop, int i_id) {
     cBgD_Ti_t* prop = &i_prop[i_id];
 
     cXyz vertices[3];
@@ -855,8 +838,8 @@ int drawPoly(dBgS_CaptPoly* i_captpoly, cBgD_Vtx_t* i_vtx, int i_ia, int i_ib, i
     return 0;
 }
 
-int poly_edge_draw(dBgS_CaptPoly* i_captpoly, cBgD_Vtx_t* i_vtx, int i_ia, int i_ib, int i_ic,
-                   cM3dGPla* i_plane, cBgD_Ti_t* i_prop, int i_id) {
+int poly_edge_draw(dBgS_CaptPoly* i_captpoly, cBgD_Vtx_t* i_vtx, int i_ia, int i_ib, int i_ic, cM3dGPla* i_plane,
+                   cBgD_Ti_t* i_prop, int i_id) {
     if (cBgW_CheckBGround(i_plane->mNormal.y)) {
         if (!g_collisionFlags[VIEW_POLYGON_GROUND].active) {
             return 0;
@@ -906,11 +889,10 @@ void dBgW__RwgCaptPoly(dBgW* i_this, int param_0, dBgS_CaptPoly& i_captPoly) {
         // cBgD_Ti_t* i_prop = i_this->pm_bgd->m_ti_tbl;
 
         cBgW_RwgElm* puVar2 = &i_this->pm_rwg[param_0];
-        i_captPoly.mpCallback(
-            &i_captPoly, (cBgD_Vtx_t*)i_this->pm_vtx_tbl, i_this->pm_bgd->m_t_tbl[param_0].vtx0,
-            i_this->pm_bgd->m_t_tbl[param_0].vtx1, i_this->pm_bgd->m_t_tbl[param_0].vtx2,
-            &i_this->pm_tri[param_0].m_plane, i_this->pm_bgd->m_ti_tbl,
-            i_this->pm_bgd->m_t_tbl[param_0].id);
+        i_captPoly.mpCallback(&i_captPoly, (cBgD_Vtx_t*)i_this->pm_vtx_tbl, i_this->pm_bgd->m_t_tbl[param_0].vtx0,
+                              i_this->pm_bgd->m_t_tbl[param_0].vtx1, i_this->pm_bgd->m_t_tbl[param_0].vtx2,
+                              &i_this->pm_tri[param_0].m_plane, i_this->pm_bgd->m_ti_tbl,
+                              i_this->pm_bgd->m_t_tbl[param_0].id);
         if (puVar2->next == 0xFFFF)
             break;
         param_0 = puVar2->next;
@@ -986,8 +968,8 @@ void CaptPoly(dBgS_CaptPoly& i_captpoly) {
 }
 
 KEEP_FUNC void GZ_drawPolygons() {
-    if (g_collisionFlags[VIEW_POLYGON_GROUND].active ||
-        g_collisionFlags[VIEW_POLYGON_WALL].active || g_collisionFlags[VIEW_POLYGON_ROOF].active) {
+    if (g_collisionFlags[VIEW_POLYGON_GROUND].active || g_collisionFlags[VIEW_POLYGON_WALL].active ||
+        g_collisionFlags[VIEW_POLYGON_ROOF].active) {
         fopAc_ac_c* player = dComIfGp_getPlayer(0);
 
         if (player != NULL) {

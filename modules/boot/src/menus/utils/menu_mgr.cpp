@@ -71,23 +71,23 @@ void MenuMgr::handleCommands() {
         return;
     }
     switch (command.cmd_id) {
-    case menus::MC_OPEN:
-        handleOpen();
-        break;
-    case menus::MC_HIDE:
-        handleHide();
-        break;
-    case menus::MC_PUSH:
-        handlePush(command.menu_id);
-        break;
-    case menus::MC_POP:
-        handlePop();
-        break;
-    case menus::MC_CLEAR:
-        handleClear();
-        break;
-    case menus::MC_NONE:
-        break;
+        case menus::MC_OPEN:
+            handleOpen();
+            break;
+        case menus::MC_HIDE:
+            handleHide();
+            break;
+        case menus::MC_PUSH:
+            handlePush(command.menu_id);
+            break;
+        case menus::MC_POP:
+            handlePop();
+            break;
+        case menus::MC_CLEAR:
+            handleClear();
+            break;
+        case menus::MC_NONE:
+            break;
     }
     command = {menus::MC_NONE, MN_NONE_INDEX};
 }

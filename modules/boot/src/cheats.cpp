@@ -7,12 +7,10 @@
 #include "menus/utils/menu_mgr.h"
 
 Cheat g_cheats[CHEAT_AMNT] = {
-    {InfiniteAir, false},    {InfiniteArrows, false},  {InfiniteBombs, false},
-    {InfiniteHearts, false}, {RefillHealth, false},    {InfiniteMagic, false},
-    {RefillMagic, false},    {InfiniteRupees, false},  {MoonJump, false},
-    {StorageCheat, false},   {NormalCollision, false}, {ChestStorage, false},
-    {DoorCancel, false},     {QuarterHeart, false},    {FastMovement, false},
-    {Upcharge, false},
+    {InfiniteAir, false},  {InfiniteArrows, false}, {InfiniteBombs, false},   {InfiniteHearts, false},
+    {RefillHealth, false}, {InfiniteMagic, false},  {RefillMagic, false},     {InfiniteRupees, false},
+    {MoonJump, false},     {StorageCheat, false},   {NormalCollision, false}, {ChestStorage, false},
+    {DoorCancel, false},   {QuarterHeart, false},   {FastMovement, false},    {Upcharge, false},
 };
 
 inline bool GZ_checkCheat(int cheatIdx) {
@@ -92,15 +90,15 @@ void GZ_applyCheats() {
         u8 wallet_size = g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusA().getWalletSize();
 
         switch (wallet_size) {
-        case 0:
-            g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusA().setRupee(200);
-            break;
-        case 1:
-            g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusA().setRupee(1000);
-            break;
-        case 2:
-            g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusA().setRupee(5000);
-            break;
+            case 0:
+                g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusA().setRupee(200);
+                break;
+            case 1:
+                g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusA().setRupee(1000);
+                break;
+            case 2:
+                g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusA().setRupee(5000);
+                break;
         }
     }
 

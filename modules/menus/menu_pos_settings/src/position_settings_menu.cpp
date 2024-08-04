@@ -12,17 +12,13 @@
 #define MAX_SPEED 20.f
 
 KEEP_FUNC PosSettingsMenu::PosSettingsMenu(Cursor& cursor, PosSettingsData& data)
-    : Menu(cursor), init_once(data.init_once), l_cursorSpeed(data.l_cursorSpeed),
-      l_selItem(data.l_selItem),
+    : Menu(cursor), init_once(data.init_once), l_cursorSpeed(data.l_cursorSpeed), l_selItem(data.l_selItem),
       lines{{"main menu", SpritesIndex::SPR_MENU_INDEX, "Change main menu position", false},
             {"fifo queue", SpritesIndex::SPR_FIFO_INDEX, "Change fifo queue position", false},
-            {"link debug info", SpritesIndex::SPR_DEBUG_INFO_INDEX,
-             "Change link debug info position", false},
-            {"time display", SpritesIndex::SPR_TIME_DISP_INDEX, "Change Time Display position",
-             false},
+            {"link debug info", SpritesIndex::SPR_DEBUG_INFO_INDEX, "Change link debug info position", false},
+            {"time display", SpritesIndex::SPR_TIME_DISP_INDEX, "Change Time Display position", false},
             {"input viewer", SpritesIndex::SPR_VIEWER_INDEX, "Change input viewer position", false},
-            {"zombie hover info", SpritesIndex::SPR_ZH_INFO_INDEX,
-             "Change zombie hover info position", false}} {}
+            {"zombie hover info", SpritesIndex::SPR_ZH_INFO_INDEX, "Change zombie hover info position", false}} {}
 
 PosSettingsMenu::~PosSettingsMenu() {}
 

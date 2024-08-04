@@ -22,7 +22,7 @@ BreakBeforeBinaryOperators: None
 BreakBeforeBraces: Attach
 BreakBeforeTernaryOperators: false
 BreakConstructorInitializersBeforeComma: false
-ColumnLimit:     100
+ColumnLimit:     120
 CommentPragmas:  '^ (IWYU pragma:|NOLINT)'
 ConstructorInitializerAllOnOneLineOrOnePerLine: false
 ConstructorInitializerIndentWidth: 4
@@ -38,7 +38,7 @@ IncludeCategories:
     Priority:        2
   - Regex:           '^"'
     Priority:        3
-IndentCaseLabels: false
+IndentCaseLabels: true
 IndentWidth:     4
 IndentWrappedFunctionNames: false
 KeepEmptyLinesAtTheStartOfBlocks: false

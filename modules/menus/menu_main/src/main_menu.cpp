@@ -9,8 +9,7 @@ KEEP_FUNC MainMenu::MainMenu(Cursor& cursor)
                         {"cheats", CHEAT_INDEX, "Toggle cheats", false},
                         {"flags", FLAGS_INDEX, "Toggle in-game flags", false},
                         {"inventory", INVENTORY_INDEX, "Set items and equipment", false},
-                        {"memory", MEMORY_INDEX,
-                         "View/edit memory, add watches, and save/load memfiles", false},
+                        {"memory", MEMORY_INDEX, "View/edit memory, add watches, and save/load memfiles", false},
                         {"practice", PRACTICE_INDEX, "Load practice files", false},
                         {"scene", SCENE_INDEX, "Adjust current scene settings", false},
                         {"settings", SETTINGS_INDEX, "Configure settings", false},
@@ -29,30 +28,30 @@ void MainMenu::draw() {
 
     if (GZ_getButtonTrig(SELECTION_BUTTON)) {
         switch (cursor.y) {
-        case CHEAT_INDEX:
-            g_menuMgr->push(MN_CHEAT_INDEX);
-            return;
-        case FLAGS_INDEX:
-            g_menuMgr->push(MN_FLAGS_INDEX);
-            return;
-        case INVENTORY_INDEX:
-            g_menuMgr->push(MN_INVENTORY_INDEX);
-            return;
-        case MEMORY_INDEX:
-            g_menuMgr->push(MN_MEMORY_INDEX);
-            return;
-        case PRACTICE_INDEX:
-            g_menuMgr->push(MN_PRACTICE_INDEX);
-            return;
-        case SCENE_INDEX:
-            g_menuMgr->push(MN_SCENE_INDEX);
-            return;
-        case SETTINGS_INDEX:
-            g_menuMgr->push(MN_SETTINGS_INDEX);
-            return;
-        case TOOLS_INDEX:
-            g_menuMgr->push(MN_TOOLS_INDEX);
-            return;
+            case CHEAT_INDEX:
+                g_menuMgr->push(MN_CHEAT_INDEX);
+                return;
+            case FLAGS_INDEX:
+                g_menuMgr->push(MN_FLAGS_INDEX);
+                return;
+            case INVENTORY_INDEX:
+                g_menuMgr->push(MN_INVENTORY_INDEX);
+                return;
+            case MEMORY_INDEX:
+                g_menuMgr->push(MN_MEMORY_INDEX);
+                return;
+            case PRACTICE_INDEX:
+                g_menuMgr->push(MN_PRACTICE_INDEX);
+                return;
+            case SCENE_INDEX:
+                g_menuMgr->push(MN_SCENE_INDEX);
+                return;
+            case SETTINGS_INDEX:
+                g_menuMgr->push(MN_SETTINGS_INDEX);
+                return;
+            case TOOLS_INDEX:
+                g_menuMgr->push(MN_TOOLS_INDEX);
+                return;
         }
     }
 

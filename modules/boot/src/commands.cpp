@@ -87,8 +87,7 @@ void GZCmd_fastMovement() {
     daPy_lk_c* player_p = (daPy_lk_c*)dComIfGp_getPlayer(0);
 
     if (player_p != nullptr) {
-        if (player_p->mCurProcID == daPy_lk_c::PROC_SWIM_UP_e ||
-            player_p->mCurProcID == daPy_lk_c::PROC_SWIM_WAIT_e ||
+        if (player_p->mCurProcID == daPy_lk_c::PROC_SWIM_UP_e || player_p->mCurProcID == daPy_lk_c::PROC_SWIM_WAIT_e ||
             player_p->mCurProcID == daPy_lk_c::PROC_SWIM_MOVE_e) {
             player_p->mVelocity = getWaterSpeed();
         } else {
@@ -134,15 +133,13 @@ static Command sCommands[COMMANDS_AMNT] = {
     {g_commandStates[CMD_LOAD_POSITION], (CButton::DPAD_DOWN | CButton::R), GZCmd_loadPosition},
     {g_commandStates[CMD_MOON_JUMP], (CButton::R | CButton::A), GZCmd_moonJump},
     {g_commandStates[CMD_STORAGE], (CButton::DPAD_RIGHT), GZCmd_storage},
-    {g_commandStates[CMD_NORMAL_COLLISION], (CButton::L | CButton::DPAD_DOWN),
-     GZCmd_normalCollision},
+    {g_commandStates[CMD_NORMAL_COLLISION], (CButton::L | CButton::DPAD_DOWN), GZCmd_normalCollision},
     {g_commandStates[CMD_CHEST_STORAGE], (CButton::L | CButton::DPAD_RIGHT), GZCmd_chestStorage},
     {g_commandStates[CMD_DOOR_CANCEL], (CButton::L | CButton::DPAD_LEFT), GZCmd_doorCancel},
     {g_commandStates[CMD_QUARTER_HEART], (CButton::R | CButton::DPAD_LEFT), GZCmd_quarterHeart},
     {g_commandStates[CMD_FAST_MOVEMENT], (CButton::DPAD_LEFT), GZCmd_fastMovement},
     {g_commandStates[CMD_UPCHARGE], (CButton::X | CButton::Z), GZCmd_upcharge},
-    {g_commandStates[CMD_AREA_RELOAD], (CButton::L | CButton::R | CButton::A | CButton::START),
-     GZCmd_areaReload},
+    {g_commandStates[CMD_AREA_RELOAD], (CButton::L | CButton::R | CButton::A | CButton::START), GZCmd_areaReload},
     {g_commandStates[CMD_REFILL_HEALTH], (CButton::R | CButton::DPAD_RIGHT), GZCmd_full_health},
     {g_commandStates[CMD_REFILL_MAGIC], (CButton::L | CButton::DPAD_UP), GZCmd_full_magic},
 };

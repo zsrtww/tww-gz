@@ -35,8 +35,7 @@ void onCreate() {
 }
 
 void onLoad() {
-    l_menu = new WatchesMenu(*g_menuMgr->getPermanentData<Cursor>(),
-                             *g_menuMgr->getPersistentData<WatchesData>());
+    l_menu = new WatchesMenu(*g_menuMgr->getPermanentData<Cursor>(), *g_menuMgr->getPersistentData<WatchesData>());
     g_drawListener->addListener(onDraw);
 }
 

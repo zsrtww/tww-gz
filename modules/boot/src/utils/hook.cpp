@@ -13,8 +13,8 @@
 #include "rels/include/cxx.h"
 #include "rels/include/defines.h"
 
-#define HOOK_DEF(rettype, name, params)                                                            \
-    typedef rettype(*tww_##name##_t) params;                                                       \
+#define HOOK_DEF(rettype, name, params)                                                                                \
+    typedef rettype(*tww_##name##_t) params;                                                                           \
     tww_##name##_t name##Trampoline;
 
 HOOK_DEF(void, draw, (void*));
@@ -105,8 +105,7 @@ int dScnPly__phase_compleateHook(void* i_scene) {
 
 int dScnPly_DrawHook(void* _this) {
     // if DPAD_DOWN + Y + Z is pressed, change scene to map select
-    if (g_tools[MAP_SELECT_INDEX].active &&
-        mPadStatus.button == (CButton::DPAD_DOWN | CButton::Y | CButton::Z)) {
+    if (g_tools[MAP_SELECT_INDEX].active && mPadStatus.button == (CButton::DPAD_DOWN | CButton::Y | CButton::Z)) {
         // overwrite original path with our custom path
         strcpy(menu_data_path, "/twwgz/mn/Menu1.dat");
 
@@ -168,8 +167,7 @@ KEEP_FUNC void applyHooks() {
     APPLY_HOOK(draw, &draw_console, drawHook);
     APPLY_HOOK(PADRead, &PADRead, readControllerHook);
 
-    APPLY_HOOK(dComIfGs_setGameStartStage, &dComIfGs_setGameStartStage__Fv,
-               dComIfGs_setGameStartStageHook);
+    APPLY_HOOK(dComIfGs_setGameStartStage, &dComIfGs_setGameStartStage__Fv, dComIfGs_setGameStartStageHook);
     APPLY_HOOK(dScnPly_Draw, &dScnPly_Draw__FP13dScnPly_ply_c, dScnPly_DrawHook);
     APPLY_HOOK(putSave, &putSave__10dSv_info_cFi, putSaveHook);
     APPLY_HOOK(dScnPly__phase_1, &phase_1__FP13dScnPly_ply_c, dScnPly__phase_1Hook);

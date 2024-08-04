@@ -57,10 +57,8 @@ struct GZSaveFile {
     GZSaveLayout data;
 };
 
-int32_t GZ_storageWrite(Storage* info, void* data, int32_t size, int32_t offset,
-                        int32_t sector_size);
-int32_t GZ_storageRead(Storage* info, void* data, int32_t size, int32_t offset,
-                       int32_t sector_size);
+int32_t GZ_storageWrite(Storage* info, void* data, int32_t size, int32_t offset, int32_t sector_size);
+int32_t GZ_storageRead(Storage* info, void* data, int32_t size, int32_t offset, int32_t sector_size);
 void GZ_storeMemCard(Storage& card);
 void GZ_storeMemfile(Storage& card);
 void GZ_deleteMemCard(Storage& card);
