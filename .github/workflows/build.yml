@@ -1,4 +1,4 @@
-name: Build
+name: Build All
 
 on:
   push:
@@ -20,7 +20,12 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        version: [NTSCJ]
+        include:
+            - version_upper: NTSCJ
+              version_lower: ntsj
+        
+    
+    name: ${{matrix.version_upper}}
     steps:
     - name: Checkout
       uses: actions/checkout@v4
@@ -33,19 +38,19 @@ jobs:
         cp -R /isos isos
         cp /clang-format-10 external/misc/clang-format-10
         
-    - name: Setup 1
+    - name: Setup
       run: |
-        mkdir -p build_${{matrix.version}}
-        cd build_${{matrix.version}}
-        cmake .. -DREGION=${{matrix.version}} -GNinja
+        mkdir -p build_${{matrix.version_lower}}
+        cd build_${{matrix.version_lower}}
+        cmake .. -DREGION=${{matrix.version_upper}} -GNinja
     
     - name: Build
       run: |
-        cd build_${{matrix.version}}
+        cd build_${{matrix.version_lower}}
         ninja patch
 
     - name: Upload patch
       uses: actions/upload-artifact@v4
       with:
-        name: ${{ github.sha }}-${{ matrix.version }}.patch
-        path: build_${{ matrix.version }}/0.4.0-${{ matrix.version }}.patch
+        name: ${{ github.sha }}-${{ matrix.version_lower }}.patch
+        path: build_${{ matrix.version_lower }}/0.4.0-${{ matrix.version_lower }}.patch
