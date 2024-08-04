@@ -23,6 +23,8 @@ jobs:
         include:
             - version_upper: NTSCJ
               version_lower: ntscj
+            - version_upper: NTSCU
+              version_lower: ntscu
         
     
     name: ${{matrix.version_upper}}
