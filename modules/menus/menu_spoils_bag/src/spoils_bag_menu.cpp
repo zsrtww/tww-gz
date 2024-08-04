@@ -61,30 +61,30 @@ void SpoilsBagMenu::draw() {
     }
 
     switch (cursor.y) {
-        case SPOILSSLOT1_INDEX:
-            updateSpoilsBagItem(SPOILSSLOT1_INDEX);
-            break;
-        case SPOILSSLOT2_INDEX:
-            updateSpoilsBagItem(SPOILSSLOT2_INDEX);
-            break;
-        case SPOILSSLOT3_INDEX:
-            updateSpoilsBagItem(SPOILSSLOT3_INDEX);
-            break;
-        case SPOILSSLOT4_INDEX:
-            updateSpoilsBagItem(SPOILSSLOT4_INDEX);
-            break;
-        case SPOILSSLOT5_INDEX:
-            updateSpoilsBagItem(SPOILSSLOT5_INDEX);
-            break;
-        case SPOILSSLOT6_INDEX:
-            updateSpoilsBagItem(SPOILSSLOT6_INDEX);
-            break;
-        case SPOILSSLOT7_INDEX:
-            updateSpoilsBagItem(SPOILSSLOT7_INDEX);
-            break;
-        case SPOILSSLOT8_INDEX:
-            updateSpoilsBagItem(SPOILSSLOT8_INDEX);
-            break;
+    case SPOILSSLOT1_INDEX:
+        updateSpoilsBagItem(SPOILSSLOT1_INDEX);
+        break;
+    case SPOILSSLOT2_INDEX:
+        updateSpoilsBagItem(SPOILSSLOT2_INDEX);
+        break;
+    case SPOILSSLOT3_INDEX:
+        updateSpoilsBagItem(SPOILSSLOT3_INDEX);
+        break;
+    case SPOILSSLOT4_INDEX:
+        updateSpoilsBagItem(SPOILSSLOT4_INDEX);
+        break;
+    case SPOILSSLOT5_INDEX:
+        updateSpoilsBagItem(SPOILSSLOT5_INDEX);
+        break;
+    case SPOILSSLOT6_INDEX:
+        updateSpoilsBagItem(SPOILSSLOT6_INDEX);
+        break;
+    case SPOILSSLOT7_INDEX:
+        updateSpoilsBagItem(SPOILSSLOT7_INDEX);
+        break;
+    case SPOILSSLOT8_INDEX:
+        updateSpoilsBagItem(SPOILSSLOT8_INDEX);
+        break;
     }
 
     lines[SPOILSSLOT1_INDEX].printf(" <%s>", item_id_to_str(dComIfGs_getItemBeast(SPOILSSLOT1_INDEX)));

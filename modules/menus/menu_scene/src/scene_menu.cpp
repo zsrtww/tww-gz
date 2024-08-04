@@ -35,24 +35,24 @@ s16 windDirs[8] = {WIND_DIR_W, WIND_DIR_NW, WIND_DIR_N, WIND_DIR_NE, WIND_DIR_E,
 const char* get_wind_str() {
     s16 wind = dkankyo_getWindDir();
     switch (wind) {
-        case WIND_DIR_E:
-            return "East";
-        case WIND_DIR_SE:
-            return "South East";
-        case WIND_DIR_S:
-            return "South";
-        case WIND_DIR_SW:
-            return "South West";
-        case WIND_DIR_W:
-            return "West";
-        case WIND_DIR_NW:
-            return "North West";
-        case WIND_DIR_N:
-            return "North";
-        case WIND_DIR_NE:
-            return "North East";
-        default:
-            return "East";
+    case WIND_DIR_E:
+        return "East";
+    case WIND_DIR_SE:
+        return "South East";
+    case WIND_DIR_S:
+        return "South";
+    case WIND_DIR_SW:
+        return "South West";
+    case WIND_DIR_W:
+        return "West";
+    case WIND_DIR_NW:
+        return "North West";
+    case WIND_DIR_N:
+        return "North";
+    case WIND_DIR_NE:
+        return "North East";
+    default:
+        return "East";
     }
 }
 
@@ -136,40 +136,40 @@ void SceneMenu::draw() {
         g_sceneFlags[cursor.y].active = !g_sceneFlags[cursor.y].active;
 
         switch (cursor.y) {
-            case COLLISION_VIEW_INDEX:
-                g_menuMgr->push(MN_COLLISION_VIEW_INDEX);
-                return;
+        case COLLISION_VIEW_INDEX:
+            g_menuMgr->push(MN_COLLISION_VIEW_INDEX);
+            return;
         }
     }
 
     switch (cursor.y) {
-        case MODIFY_WIND_INDEX:
-            updateWindDir();
-            break;
-        case MODIFY_CHART_SET_INDEX:
-            updateChartSet();
-            break;
-        case TIME_HOURS_INDEX:
-            if (GZ_getButtonRepeat(GZPad::DPAD_RIGHT)) {
-                dComIfGs_setTime(current_time + 15.0f);
-            } else if (GZ_getButtonRepeat(GZPad::DPAD_LEFT)) {
-                dComIfGs_setTime(current_time - 15.0f);
-            }
-            break;
-        case TIME_MINUTES_INDEX:
-            if (GZ_getButtonRepeat(GZPad::DPAD_RIGHT)) {
-                dComIfGs_setTime(current_time + 0.25f);
-            } else if (GZ_getButtonRepeat(GZPad::DPAD_LEFT)) {
-                dComIfGs_setTime(current_time - 0.25f);
-            }
-            break;
-        case MODIFY_DATE_INDEX:
-            if (GZ_getButtonRepeat(GZPad::DPAD_RIGHT)) {
-                dComIfGs_setDate(date + 1);
-            } else if (GZ_getButtonRepeat(GZPad::DPAD_LEFT)) {
-                dComIfGs_setDate(date - 1);
-            }
-            break;
+    case MODIFY_WIND_INDEX:
+        updateWindDir();
+        break;
+    case MODIFY_CHART_SET_INDEX:
+        updateChartSet();
+        break;
+    case TIME_HOURS_INDEX:
+        if (GZ_getButtonRepeat(GZPad::DPAD_RIGHT)) {
+            dComIfGs_setTime(current_time + 15.0f);
+        } else if (GZ_getButtonRepeat(GZPad::DPAD_LEFT)) {
+            dComIfGs_setTime(current_time - 15.0f);
+        }
+        break;
+    case TIME_MINUTES_INDEX:
+        if (GZ_getButtonRepeat(GZPad::DPAD_RIGHT)) {
+            dComIfGs_setTime(current_time + 0.25f);
+        } else if (GZ_getButtonRepeat(GZPad::DPAD_LEFT)) {
+            dComIfGs_setTime(current_time - 0.25f);
+        }
+        break;
+    case MODIFY_DATE_INDEX:
+        if (GZ_getButtonRepeat(GZPad::DPAD_RIGHT)) {
+            dComIfGs_setDate(date + 1);
+        } else if (GZ_getButtonRepeat(GZPad::DPAD_LEFT)) {
+            dComIfGs_setDate(date - 1);
+        }
+        break;
     }
 
     if (current_time >= 360.0f) {

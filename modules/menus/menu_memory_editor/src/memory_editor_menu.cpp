@@ -181,10 +181,10 @@ void MemoryEditorMenu::draw() {
 
     if (GZ_getButtonTrig(SELECTION_BUTTON)) {
         switch (cursor.y) {
-            case 0:
-                cursor.lock_y = true;
-                l_idxSelected = true;
-                break;
+        case 0:
+            cursor.lock_y = true;
+            l_idxSelected = true;
+            break;
         }
 
         if (cursor.y > 0) {

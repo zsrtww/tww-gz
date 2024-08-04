@@ -51,18 +51,18 @@ void AmountMenu::draw() {
 
     u16 max_rupees;
     switch (g_walletSize) {
-        case 0:
-            max_rupees = 200;
-            break;
-        case 1:
-            max_rupees = 1000;
-            break;
-        case 2:
-            max_rupees = 5000;
-            break;
-        default:
-            max_rupees = 200;
-            break;
+    case 0:
+        max_rupees = 200;
+        break;
+    case 1:
+        max_rupees = 1000;
+        break;
+    case 2:
+        max_rupees = 5000;
+        break;
+    default:
+        max_rupees = 200;
+        break;
     }
 
     if (GZ_getButtonTrig(BACK_BUTTON)) {
@@ -76,90 +76,90 @@ void AmountMenu::draw() {
      * or back to 0 in some cases
      */
     switch (cursor.y) {
-        case HEALTH_INDEX:
-            Cursor::moveList(g_healthNum);
-            if (GZ_getButtonTrig(GZPad::A)) {
-                g_healthNum = 1;  // Quarter heart health
-            }
-            if (GZ_getButtonTrig(GZPad::R)) {
-                g_healthNum = g_heartNum;  // Maximum available health
-            }
-            if (g_healthNum < 1) {
-                g_healthNum = 1;  // Don't allow the player to go under 1 quarter heart
-            }
-            dComIfGs_setLife(g_healthNum);
-            break;
-        case BOMB_INDEX:
-            Cursor::moveList(g_bombNum);
-            if (g_bombNum == 0xFF) {
-                g_bombNum = 99;
-            }
-            if (g_bombNum > 99) {
-                g_bombNum = 0;
-            }
-            dComIfGs_setBombNum(g_bombNum);
-            break;
-        case ARROW_INDEX:
-            Cursor::moveList(g_arrowNum);
-            if (g_arrowNum == 0xFF) {
-                g_arrowNum = 99;
-            }
-            if (g_arrowNum > 99) {
-                g_arrowNum = 0;
-            }
-            dComIfGs_setArrowNum(g_arrowNum);
-            break;
-        case RUPEE_INDEX:
-            Cursor::moveList(g_rupeeNum);
-            if (g_rupeeNum == 0xFFFF) {
-                g_rupeeNum = max_rupees;
-            }
-            if (g_rupeeNum > max_rupees) {
-                g_rupeeNum = 0;
-            }
-            g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusA().setRupee(g_rupeeNum);
-            break;
-        case MAGIC_INDEX:
-            Cursor::moveList(g_magicNum);
-            if (g_magicNum == 0xFF) {
-                g_magicNum = g_maxMagicNum;
-            }
-            if (g_magicNum > g_maxMagicNum) {
-                g_magicNum = 0;
-            }
-            dComIfGs_setMagic(g_magicNum);
-            break;
-        case HEART_PIECE_INDEX:
-            Cursor::moveList(g_heartNum);
-            if (g_heartNum < 12) {
-                g_heartNum = 12;
-            }
-            dComIfGs_setMaxLife(g_heartNum);
-            break;
-        case JOY_PENDANT_INDEX:
-            updateSpoilsBagAmount(7);
-            break;
-        case SKULL_NECKLACE_INDEX:
-            updateSpoilsBagAmount(0);
-            break;
-        case BOKO_BABA_SEED_INDEX:
-            updateSpoilsBagAmount(1);
-            break;
-        case GOLDEN_FEATHER_INDEX:
-            updateSpoilsBagAmount(2);
-            break;
-        case KNIGHTS_CREST_INDEX:
-            updateSpoilsBagAmount(3);
-            break;
-        case RED_CHU_JELLY_INDEX:
-            updateSpoilsBagAmount(4);
-            break;
-        case GREEN_CHU_JELLY_INDEX:
-            updateSpoilsBagAmount(5);
-            break;
-        case BLUE_CHU_JELLY_INDEX:
-            updateSpoilsBagAmount(6);
-            break;
+    case HEALTH_INDEX:
+        Cursor::moveList(g_healthNum);
+        if (GZ_getButtonTrig(GZPad::A)) {
+            g_healthNum = 1;  // Quarter heart health
+        }
+        if (GZ_getButtonTrig(GZPad::R)) {
+            g_healthNum = g_heartNum;  // Maximum available health
+        }
+        if (g_healthNum < 1) {
+            g_healthNum = 1;  // Don't allow the player to go under 1 quarter heart
+        }
+        dComIfGs_setLife(g_healthNum);
+        break;
+    case BOMB_INDEX:
+        Cursor::moveList(g_bombNum);
+        if (g_bombNum == 0xFF) {
+            g_bombNum = 99;
+        }
+        if (g_bombNum > 99) {
+            g_bombNum = 0;
+        }
+        dComIfGs_setBombNum(g_bombNum);
+        break;
+    case ARROW_INDEX:
+        Cursor::moveList(g_arrowNum);
+        if (g_arrowNum == 0xFF) {
+            g_arrowNum = 99;
+        }
+        if (g_arrowNum > 99) {
+            g_arrowNum = 0;
+        }
+        dComIfGs_setArrowNum(g_arrowNum);
+        break;
+    case RUPEE_INDEX:
+        Cursor::moveList(g_rupeeNum);
+        if (g_rupeeNum == 0xFFFF) {
+            g_rupeeNum = max_rupees;
+        }
+        if (g_rupeeNum > max_rupees) {
+            g_rupeeNum = 0;
+        }
+        g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusA().setRupee(g_rupeeNum);
+        break;
+    case MAGIC_INDEX:
+        Cursor::moveList(g_magicNum);
+        if (g_magicNum == 0xFF) {
+            g_magicNum = g_maxMagicNum;
+        }
+        if (g_magicNum > g_maxMagicNum) {
+            g_magicNum = 0;
+        }
+        dComIfGs_setMagic(g_magicNum);
+        break;
+    case HEART_PIECE_INDEX:
+        Cursor::moveList(g_heartNum);
+        if (g_heartNum < 12) {
+            g_heartNum = 12;
+        }
+        dComIfGs_setMaxLife(g_heartNum);
+        break;
+    case JOY_PENDANT_INDEX:
+        updateSpoilsBagAmount(7);
+        break;
+    case SKULL_NECKLACE_INDEX:
+        updateSpoilsBagAmount(0);
+        break;
+    case BOKO_BABA_SEED_INDEX:
+        updateSpoilsBagAmount(1);
+        break;
+    case GOLDEN_FEATHER_INDEX:
+        updateSpoilsBagAmount(2);
+        break;
+    case KNIGHTS_CREST_INDEX:
+        updateSpoilsBagAmount(3);
+        break;
+    case RED_CHU_JELLY_INDEX:
+        updateSpoilsBagAmount(4);
+        break;
+    case GREEN_CHU_JELLY_INDEX:
+        updateSpoilsBagAmount(5);
+        break;
+    case BLUE_CHU_JELLY_INDEX:
+        updateSpoilsBagAmount(6);
+        break;
     }
 
     lines[HEALTH_INDEX].printf(" <%d>", g_healthNum);

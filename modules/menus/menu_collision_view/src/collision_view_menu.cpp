@@ -38,12 +38,12 @@ void CollisionViewMenu::draw() {
     }
 
     switch (cursor.y) {
-        case 7:
-            Cursor::moveList(g_collisionRaise);
-            break;
-        case 8:
-            Cursor::moveList(g_geometryOpacity);
-            break;
+    case 7:
+        Cursor::moveList(g_collisionRaise);
+        break;
+    case 8:
+        Cursor::moveList(g_geometryOpacity);
+        break;
     }
 
     lines[7].printf(" <%d>", g_collisionRaise);

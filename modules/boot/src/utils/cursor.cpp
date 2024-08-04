@@ -77,23 +77,23 @@ KEEP_FUNC void Cursor::setMode(uint8_t m) {
 
 KEEP_FUNC void GZ_setCursorColor() {
     switch (g_cursorColorType) {
-        case CURSOR_GREEN:
-            g_cursorColor = 0x00CC00FF;
-            break;
-        case CURSOR_BLUE:
-            g_cursorColor = 0x0080FFFF;
-            break;
-        case CURSOR_RED:
-            g_cursorColor = 0xCC0000FF;
-            break;
-        case CURSOR_ORANGE:
-            g_cursorColor = 0xEE8000FF;
-            break;
-        case CURSOR_YELLOW:
-            g_cursorColor = 0xFFCC00FF;
-            break;
-        case CURSOR_PURPLE:
-            g_cursorColor = 0x6600CCFF;
-            break;
+    case CURSOR_GREEN:
+        g_cursorColor = 0x00CC00FF;
+        break;
+    case CURSOR_BLUE:
+        g_cursorColor = 0x0080FFFF;
+        break;
+    case CURSOR_RED:
+        g_cursorColor = 0xCC0000FF;
+        break;
+    case CURSOR_ORANGE:
+        g_cursorColor = 0xEE8000FF;
+        break;
+    case CURSOR_YELLOW:
+        g_cursorColor = 0xFFCC00FF;
+        break;
+    case CURSOR_PURPLE:
+        g_cursorColor = 0x6600CCFF;
+        break;
     }
 }

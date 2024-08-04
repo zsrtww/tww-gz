@@ -30,18 +30,18 @@ void TunerFlagMenu::draw() {
 
     if (GZ_getButtonTrig(GZPad::A)) {
         switch (cursor.y) {
-            case 0:
-                setEventFlag(0x2E08);
-                break;
-            case 1:
-                setEventFlag(0x1A10);
-                break;
-            case 2:
-                setEventFlag(0x1A08);
-                break;
-            case 3:
-                setEventFlag(0x1708);
-                break;
+        case 0:
+            setEventFlag(0x2E08);
+            break;
+        case 1:
+            setEventFlag(0x1A10);
+            break;
+        case 2:
+            setEventFlag(0x1A08);
+            break;
+        case 3:
+            setEventFlag(0x1708);
+            break;
         }
     }
 

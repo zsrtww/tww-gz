@@ -19,16 +19,16 @@ extern "C" {
 
 uint32_t get_size(uint32_t format, uint32_t width, uint32_t height) {
     switch (format) {
-        case TexFmt::CMPR: {
-            return width * height / 2;
-        }
-        case TexFmt::I8: {
-            return width * height;
-        }
-        case TexFmt::RGB8:
-        default: {
-            return 4 * width * height;
-        }
+    case TexFmt::CMPR: {
+        return width * height / 2;
+    }
+    case TexFmt::I8: {
+        return width * height;
+    }
+    case TexFmt::RGB8:
+    default: {
+        return 4 * width * height;
+    }
     }
 }
 
@@ -58,25 +58,25 @@ TexCode load_texture_offset(const char* path, Texture* tex, uint32_t offset) {
 
     uint8_t fmt = GX_TF_I8;
     switch (tex->header.format) {
-        case TexFmt::RGB8: {
-            fmt = GX_TF_RGBA8;
-            break;
-        }
-        case TexFmt::CMPR: {
-            fmt = GX_TF_CMPR;
-            break;
-        }
-        case TexFmt::I8: {
-            fmt = GX_TF_I8;
-            break;
-        }
-        default: {
-            DVDClose(&fileInfo);
-            tex->loadCode = TexCode::TEX_ERR_INVALID_FORMAT;
-            OSReport_Warning("Texture not loaded \"%s\"; Invalid texture format id (%d) [%d]\n", path,
-                             tex->header.format, tex->loadCode);
-            return tex->loadCode;
-        }
+    case TexFmt::RGB8: {
+        fmt = GX_TF_RGBA8;
+        break;
+    }
+    case TexFmt::CMPR: {
+        fmt = GX_TF_CMPR;
+        break;
+    }
+    case TexFmt::I8: {
+        fmt = GX_TF_I8;
+        break;
+    }
+    default: {
+        DVDClose(&fileInfo);
+        tex->loadCode = TexCode::TEX_ERR_INVALID_FORMAT;
+        OSReport_Warning("Texture not loaded \"%s\"; Invalid texture format id (%d) [%d]\n", path, tex->header.format,
+                         tex->loadCode);
+        return tex->loadCode;
+    }
     }
 
     uint32_t size = get_size(tex->header.format, tex->header.width, tex->header.height);

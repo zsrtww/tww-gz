@@ -54,112 +54,110 @@ void ItemEquipPriorityMenu::drawItemEquipLines() {
 
         if (g_item_equip_priorities[i].line_selected) {
             switch ((ItemEquipColumns)cursor.x) {
-                case ItemName:
-                    if (g_item_equip_priorities[i].value_selected) {
-                        if (GZ_getButtonRepeat(GZPad::DPAD_RIGHT)) {
-                            if (g_item_equip_priorities[i].item_name == SKULL_HAMMER_EQUIP) {
-                                g_item_equip_priorities[i].item_name = NO_ITEM_EQUIP;
-                            } else {
-                                g_item_equip_priorities[i].item_name++;
-                            }
+            case ItemName:
+                if (g_item_equip_priorities[i].value_selected) {
+                    if (GZ_getButtonRepeat(GZPad::DPAD_RIGHT)) {
+                        if (g_item_equip_priorities[i].item_name == SKULL_HAMMER_EQUIP) {
+                            g_item_equip_priorities[i].item_name = NO_ITEM_EQUIP;
+                        } else {
+                            g_item_equip_priorities[i].item_name++;
                         }
-                        if (GZ_getButtonRepeat(GZPad::DPAD_LEFT)) {
-                            if (g_item_equip_priorities[i].item_name == NO_ITEM_EQUIP) {
-                                g_item_equip_priorities[i].item_name = SKULL_HAMMER_EQUIP;
-                            } else {
-                                g_item_equip_priorities[i].item_name--;
-                            }
-                        }
-                        sprintf(item_name, "<%s>", item_enum_to_name(g_item_equip_priorities[i].item_name));
-                        Font::GZ_drawStr(item_name, ITEM_X_OFFSET - 8.0f, line_y_offset, CURSOR_RGBA, g_dropShadows);
-                    } else {
-                        Font::GZ_drawStr(item_name, ITEM_X_OFFSET, line_y_offset, CURSOR_RGBA, g_dropShadows);
                     }
-                    Font::GZ_drawStr(high_priority, item_equip_high_pos_x_offset, line_y_offset, WHITE, g_dropShadows);
-                    Font::GZ_drawStr(medium_priority, item_equip_medium_pos_x_offset, line_y_offset, WHITE,
-                                     g_dropShadows);
-                    break;
-                case HighPriority:
-                    if (g_item_equip_priorities[i].value_selected) {
-                        if (GZ_getButtonRepeat(GZPad::DPAD_RIGHT)) {
-                            if (g_item_equip_priorities[i].high_priority == name_Z) {
-                                g_item_equip_priorities[i].high_priority = name_X;
-                            } else {
-                                g_item_equip_priorities[i].high_priority++;
-                            }
+                    if (GZ_getButtonRepeat(GZPad::DPAD_LEFT)) {
+                        if (g_item_equip_priorities[i].item_name == NO_ITEM_EQUIP) {
+                            g_item_equip_priorities[i].item_name = SKULL_HAMMER_EQUIP;
+                        } else {
+                            g_item_equip_priorities[i].item_name--;
                         }
-                        if (GZ_getButtonRepeat(GZPad::DPAD_LEFT)) {
-                            if (g_item_equip_priorities[i].high_priority == name_X) {
-                                g_item_equip_priorities[i].high_priority = name_Z;
-                            } else {
-                                g_item_equip_priorities[i].high_priority--;
-                            }
-                        }
-                        sprintf(high_priority, "<%c>",
-                                button_enum_to_name(g_item_equip_priorities[i].high_priority,
-                                                    g_item_equip_priorities[i].item_name));
-                        Font::GZ_drawStr(high_priority, item_equip_high_pos_x_offset - 8.0f, line_y_offset, CURSOR_RGBA,
-                                         g_dropShadows);
-                    } else {
-                        Font::GZ_drawStr(high_priority, item_equip_high_pos_x_offset, line_y_offset, CURSOR_RGBA,
-                                         g_dropShadows);
                     }
-                    Font::GZ_drawStr(item_name, ITEM_X_OFFSET, line_y_offset, WHITE, g_dropShadows);
-                    Font::GZ_drawStr(medium_priority, item_equip_medium_pos_x_offset, line_y_offset, WHITE,
+                    sprintf(item_name, "<%s>", item_enum_to_name(g_item_equip_priorities[i].item_name));
+                    Font::GZ_drawStr(item_name, ITEM_X_OFFSET - 8.0f, line_y_offset, CURSOR_RGBA, g_dropShadows);
+                } else {
+                    Font::GZ_drawStr(item_name, ITEM_X_OFFSET, line_y_offset, CURSOR_RGBA, g_dropShadows);
+                }
+                Font::GZ_drawStr(high_priority, item_equip_high_pos_x_offset, line_y_offset, WHITE, g_dropShadows);
+                Font::GZ_drawStr(medium_priority, item_equip_medium_pos_x_offset, line_y_offset, WHITE, g_dropShadows);
+                break;
+            case HighPriority:
+                if (g_item_equip_priorities[i].value_selected) {
+                    if (GZ_getButtonRepeat(GZPad::DPAD_RIGHT)) {
+                        if (g_item_equip_priorities[i].high_priority == name_Z) {
+                            g_item_equip_priorities[i].high_priority = name_X;
+                        } else {
+                            g_item_equip_priorities[i].high_priority++;
+                        }
+                    }
+                    if (GZ_getButtonRepeat(GZPad::DPAD_LEFT)) {
+                        if (g_item_equip_priorities[i].high_priority == name_X) {
+                            g_item_equip_priorities[i].high_priority = name_Z;
+                        } else {
+                            g_item_equip_priorities[i].high_priority--;
+                        }
+                    }
+                    sprintf(high_priority, "<%c>",
+                            button_enum_to_name(g_item_equip_priorities[i].high_priority,
+                                                g_item_equip_priorities[i].item_name));
+                    Font::GZ_drawStr(high_priority, item_equip_high_pos_x_offset - 8.0f, line_y_offset, CURSOR_RGBA,
                                      g_dropShadows);
-                    break;
-                case MediumPriority:
-                    if (g_item_equip_priorities[i].value_selected) {
-                        if (GZ_getButtonRepeat(GZPad::DPAD_RIGHT)) {
-                            if (g_item_equip_priorities[i].medium_priority == name_Z) {
-                                g_item_equip_priorities[i].medium_priority = name_X;
-                                if (g_item_equip_priorities[i].medium_priority ==
-                                    g_item_equip_priorities[i].high_priority) {
+                } else {
+                    Font::GZ_drawStr(high_priority, item_equip_high_pos_x_offset, line_y_offset, CURSOR_RGBA,
+                                     g_dropShadows);
+                }
+                Font::GZ_drawStr(item_name, ITEM_X_OFFSET, line_y_offset, WHITE, g_dropShadows);
+                Font::GZ_drawStr(medium_priority, item_equip_medium_pos_x_offset, line_y_offset, WHITE, g_dropShadows);
+                break;
+            case MediumPriority:
+                if (g_item_equip_priorities[i].value_selected) {
+                    if (GZ_getButtonRepeat(GZPad::DPAD_RIGHT)) {
+                        if (g_item_equip_priorities[i].medium_priority == name_Z) {
+                            g_item_equip_priorities[i].medium_priority = name_X;
+                            if (g_item_equip_priorities[i].medium_priority ==
+                                g_item_equip_priorities[i].high_priority) {
+                                g_item_equip_priorities[i].medium_priority++;
+                            }
+                        } else {
+                            g_item_equip_priorities[i].medium_priority++;
+                            if (g_item_equip_priorities[i].medium_priority ==
+                                g_item_equip_priorities[i].high_priority) {
+                                if (g_item_equip_priorities[i].medium_priority == name_Z) {
+                                    g_item_equip_priorities[i].medium_priority = name_X;
+                                } else {
                                     g_item_equip_priorities[i].medium_priority++;
                                 }
-                            } else {
-                                g_item_equip_priorities[i].medium_priority++;
-                                if (g_item_equip_priorities[i].medium_priority ==
-                                    g_item_equip_priorities[i].high_priority) {
-                                    if (g_item_equip_priorities[i].medium_priority == name_Z) {
-                                        g_item_equip_priorities[i].medium_priority = name_X;
-                                    } else {
-                                        g_item_equip_priorities[i].medium_priority++;
-                                    }
-                                }
                             }
                         }
-                        if (GZ_getButtonRepeat(GZPad::DPAD_LEFT)) {
-                            if (g_item_equip_priorities[i].medium_priority == name_X) {
-                                g_item_equip_priorities[i].medium_priority = name_Z;
-                                if (g_item_equip_priorities[i].medium_priority ==
-                                    g_item_equip_priorities[i].high_priority) {
+                    }
+                    if (GZ_getButtonRepeat(GZPad::DPAD_LEFT)) {
+                        if (g_item_equip_priorities[i].medium_priority == name_X) {
+                            g_item_equip_priorities[i].medium_priority = name_Z;
+                            if (g_item_equip_priorities[i].medium_priority ==
+                                g_item_equip_priorities[i].high_priority) {
+                                g_item_equip_priorities[i].medium_priority--;
+                            }
+                        } else {
+                            g_item_equip_priorities[i].medium_priority--;
+                            if (g_item_equip_priorities[i].medium_priority ==
+                                g_item_equip_priorities[i].high_priority) {
+                                if (g_item_equip_priorities[i].medium_priority == name_X) {
+                                    g_item_equip_priorities[i].medium_priority = name_Z;
+                                } else {
                                     g_item_equip_priorities[i].medium_priority--;
                                 }
-                            } else {
-                                g_item_equip_priorities[i].medium_priority--;
-                                if (g_item_equip_priorities[i].medium_priority ==
-                                    g_item_equip_priorities[i].high_priority) {
-                                    if (g_item_equip_priorities[i].medium_priority == name_X) {
-                                        g_item_equip_priorities[i].medium_priority = name_Z;
-                                    } else {
-                                        g_item_equip_priorities[i].medium_priority--;
-                                    }
-                                }
                             }
                         }
-                        sprintf(medium_priority, "<%c>",
-                                button_enum_to_name(g_item_equip_priorities[i].medium_priority,
-                                                    g_item_equip_priorities[i].item_name));
-                        Font::GZ_drawStr(medium_priority, item_equip_medium_pos_x_offset - 8.0f, line_y_offset,
-                                         CURSOR_RGBA, g_dropShadows);
-                    } else {
-                        Font::GZ_drawStr(medium_priority, item_equip_medium_pos_x_offset, line_y_offset, CURSOR_RGBA,
-                                         g_dropShadows);
                     }
-                    Font::GZ_drawStr(item_name, ITEM_X_OFFSET, line_y_offset, WHITE, g_dropShadows);
-                    Font::GZ_drawStr(high_priority, item_equip_high_pos_x_offset, line_y_offset, WHITE, g_dropShadows);
-                    break;
+                    sprintf(medium_priority, "<%c>",
+                            button_enum_to_name(g_item_equip_priorities[i].medium_priority,
+                                                g_item_equip_priorities[i].item_name));
+                    Font::GZ_drawStr(medium_priority, item_equip_medium_pos_x_offset - 8.0f, line_y_offset, CURSOR_RGBA,
+                                     g_dropShadows);
+                } else {
+                    Font::GZ_drawStr(medium_priority, item_equip_medium_pos_x_offset, line_y_offset, CURSOR_RGBA,
+                                     g_dropShadows);
+                }
+                Font::GZ_drawStr(item_name, ITEM_X_OFFSET, line_y_offset, WHITE, g_dropShadows);
+                Font::GZ_drawStr(high_priority, item_equip_high_pos_x_offset, line_y_offset, WHITE, g_dropShadows);
+                break;
             }
         } else {
             int y = cursor.y;

@@ -43,12 +43,12 @@ QuestStatusMenu::~QuestStatusMenu() {}
 
 const char* get_pirates_charm_string(u8 has_pirates_charm) {
     switch (has_pirates_charm) {
-        case 0:
-            return "Empty";
-        case 1:
-            return "Pirate\'s Charm";
-        default:
-            return "Empty";
+    case 0:
+        return "Empty";
+    case 1:
+        return "Pirate\'s Charm";
+    default:
+        return "Empty";
     };
 }
 
@@ -85,20 +85,20 @@ const char* get_song_string(u8 songs_owned, u8 song) {
         return "Empty";
     } else {
         switch (song) {
-            case WINDS_REQUIEM_VALUE:
-                return "Wind\'s Requiem";
-            case BALLAD_OF_GALES_VALUE:
-                return "Ballad of Gales";
-            case COMMAND_MELODY_VALUE:
-                return "Command Melody";
-            case EARTH_GODS_LYRIC_VALUE:
-                return "Earth God\'s Lyric";
-            case WIND_GODS_ARIA_VALUE:
-                return "Wind God\'s Aria";
-            case SONG_OF_PASSING_VALUE:
-                return "Song of Passing";
-            default:
-                return "Empty";
+        case WINDS_REQUIEM_VALUE:
+            return "Wind\'s Requiem";
+        case BALLAD_OF_GALES_VALUE:
+            return "Ballad of Gales";
+        case COMMAND_MELODY_VALUE:
+            return "Command Melody";
+        case EARTH_GODS_LYRIC_VALUE:
+            return "Earth God\'s Lyric";
+        case WIND_GODS_ARIA_VALUE:
+            return "Wind God\'s Aria";
+        case SONG_OF_PASSING_VALUE:
+            return "Song of Passing";
+        default:
+            return "Empty";
         };
     }
 }
@@ -108,14 +108,14 @@ const char* get_pearl_string(u8 pearls_owned, u8 pearl) {
         return "Empty";
     } else {
         switch (pearl) {
-            case NAYRUS_PEARL_VALUE:
-                return "Nayru\'s Pearl";
-            case DINS_PEARL_VALUE:
-                return "Din\'s Pearl";
-            case FARORES_PEARL_VALUE:
-                return "Farore\'s Pearl";
-            default:
-                return "Empty";
+        case NAYRUS_PEARL_VALUE:
+            return "Nayru\'s Pearl";
+        case DINS_PEARL_VALUE:
+            return "Din\'s Pearl";
+        case FARORES_PEARL_VALUE:
+            return "Farore\'s Pearl";
+        default:
+            return "Empty";
         };
     }
 }
@@ -131,14 +131,14 @@ const char* get_magic_string(u8 magic_value) {
 
 const char* get_wallet_string(u8 wallet_size) {
     switch (wallet_size) {
-        case WALLET_200:
-            return "Wallet 200";
-        case WALLET_1000:
-            return "Wallet 1000";
-        case WALLET_5000:
-            return "Wallet 5000";
-        default:
-            return "ERROR";
+    case WALLET_200:
+        return "Wallet 200";
+    case WALLET_1000:
+        return "Wallet 1000";
+    case WALLET_5000:
+        return "Wallet 5000";
+    default:
+        return "ERROR";
     }
 }
 
@@ -147,14 +147,14 @@ const char* get_quiver_string(u8 arrows_capacity) {
         return "No Quiver";
     } else {
         switch (arrows_capacity) {
-            case ARROWS_30:
-                return "Quiver 30";
-            case ARROWS_60:
-                return "Quiver 60";
-            case ARROWS_99:
-                return "Quiver 99";
-            default:
-                return "Empty";
+        case ARROWS_30:
+            return "Quiver 30";
+        case ARROWS_60:
+            return "Quiver 60";
+        case ARROWS_99:
+            return "Quiver 99";
+        default:
+            return "Empty";
         };
     }
 }
@@ -164,14 +164,14 @@ const char* get_bombags_string(u8 max_bombs_owned) {
         return "No Bomb Bag";
     } else {
         switch (max_bombs_owned) {
-            case BOMBS_30:
-                return "Bomb Bag 30";
-            case BOMBS_60:
-                return "Bomb Bag 60";
-            case BOMBS_99:
-                return "Bomb Bag 99";
-            default:
-                return "Empty";
+        case BOMBS_30:
+            return "Bomb Bag 30";
+        case BOMBS_60:
+            return "Bomb Bag 60";
+        case BOMBS_99:
+            return "Bomb Bag 99";
+        default:
+            return "Empty";
         };
     }
 }
@@ -181,24 +181,24 @@ const char* get_triforce_string(u8 triforce_owned, u8 triforce_piece) {
         return "Empty";
     } else {
         switch (triforce_piece) {
-            case TRIFORCE_PIECE_1_VALUE:
-                return "Triforce Piece 1";
-            case TRIFORCE_PIECE_2_VALUE:
-                return "Triforce Piece 2";
-            case TRIFORCE_PIECE_3_VALUE:
-                return "Triforce Piece 3";
-            case TRIFORCE_PIECE_4_VALUE:
-                return "Triforce Piece 4";
-            case TRIFORCE_PIECE_5_VALUE:
-                return "Triforce Piece 5";
-            case TRIFORCE_PIECE_6_VALUE:
-                return "Triforce Piece 6";
-            case TRIFORCE_PIECE_7_VALUE:
-                return "Triforce Piece 7";
-            case TRIFORCE_PIECE_8_VALUE:
-                return "Triforce Piece 8";
-            default:
-                return "Empty";
+        case TRIFORCE_PIECE_1_VALUE:
+            return "Triforce Piece 1";
+        case TRIFORCE_PIECE_2_VALUE:
+            return "Triforce Piece 2";
+        case TRIFORCE_PIECE_3_VALUE:
+            return "Triforce Piece 3";
+        case TRIFORCE_PIECE_4_VALUE:
+            return "Triforce Piece 4";
+        case TRIFORCE_PIECE_5_VALUE:
+            return "Triforce Piece 5";
+        case TRIFORCE_PIECE_6_VALUE:
+            return "Triforce Piece 6";
+        case TRIFORCE_PIECE_7_VALUE:
+            return "Triforce Piece 7";
+        case TRIFORCE_PIECE_8_VALUE:
+            return "Triforce Piece 8";
+        default:
+            return "Empty";
         };
     }
 }
@@ -288,298 +288,298 @@ void QuestStatusMenu::draw() {
         new_bombs_capacity, new_power_bracelets_item_id, is_pirates_charm_owned, heros_charm_flag;
 
     switch (cursor.y) {
-        case MENU_ITEM_SWORD:
+    case MENU_ITEM_SWORD:
+        new_sword_item_id = dComIfGs_getSelectEquip(SWORD_INDEX);
+        Cursor::moveListSimple(new_sword_item_id);
+        if (new_sword_item_id == NO_ITEM - 1) {
+            new_sword_item_id = NO_ITEM;
+        } else if (new_sword_item_id == 0) {
+            new_sword_item_id = HEROS_SWORD;
+        } else if (new_sword_item_id == HEROS_SWORD - 1) {
+            new_sword_item_id = NO_ITEM;
+        } else if (new_sword_item_id == HEROS_SWORD + 1) {
+            new_sword_item_id = UNCHARGED_MASTER_SWORD;
+        } else if (new_sword_item_id == UNCHARGED_MASTER_SWORD - 1) {
+            new_sword_item_id = HEROS_SWORD;
+        } else if (new_sword_item_id == UNCHARGED_MASTER_SWORD + 1) {
+            new_sword_item_id = HALF_CHARGED_MASTER_SWORD;
+        } else if (new_sword_item_id == HALF_CHARGED_MASTER_SWORD - 1) {
+            new_sword_item_id = UNCHARGED_MASTER_SWORD;
+        } else if (new_sword_item_id == HALF_CHARGED_MASTER_SWORD + 1) {
+            new_sword_item_id = FULLY_CHARGED_MASTER_SWORD;
+        } else if (new_sword_item_id == FULLY_CHARGED_MASTER_SWORD - 1) {
+            new_sword_item_id = HALF_CHARGED_MASTER_SWORD;
+        } else if (new_sword_item_id == FULLY_CHARGED_MASTER_SWORD + 1) {
+            new_sword_item_id = FULLY_CHARGED_MASTER_SWORD;
+        } else {
             new_sword_item_id = dComIfGs_getSelectEquip(SWORD_INDEX);
-            Cursor::moveListSimple(new_sword_item_id);
-            if (new_sword_item_id == NO_ITEM - 1) {
-                new_sword_item_id = NO_ITEM;
-            } else if (new_sword_item_id == 0) {
-                new_sword_item_id = HEROS_SWORD;
-            } else if (new_sword_item_id == HEROS_SWORD - 1) {
-                new_sword_item_id = NO_ITEM;
-            } else if (new_sword_item_id == HEROS_SWORD + 1) {
-                new_sword_item_id = UNCHARGED_MASTER_SWORD;
-            } else if (new_sword_item_id == UNCHARGED_MASTER_SWORD - 1) {
-                new_sword_item_id = HEROS_SWORD;
-            } else if (new_sword_item_id == UNCHARGED_MASTER_SWORD + 1) {
-                new_sword_item_id = HALF_CHARGED_MASTER_SWORD;
-            } else if (new_sword_item_id == HALF_CHARGED_MASTER_SWORD - 1) {
-                new_sword_item_id = UNCHARGED_MASTER_SWORD;
-            } else if (new_sword_item_id == HALF_CHARGED_MASTER_SWORD + 1) {
-                new_sword_item_id = FULLY_CHARGED_MASTER_SWORD;
-            } else if (new_sword_item_id == FULLY_CHARGED_MASTER_SWORD - 1) {
-                new_sword_item_id = HALF_CHARGED_MASTER_SWORD;
-            } else if (new_sword_item_id == FULLY_CHARGED_MASTER_SWORD + 1) {
-                new_sword_item_id = FULLY_CHARGED_MASTER_SWORD;
-            } else {
-                new_sword_item_id = dComIfGs_getSelectEquip(SWORD_INDEX);
-            }
+        }
 
-            switch (new_sword_item_id) {
-                case NO_ITEM:
-                    dComIfGs_offCollect(SWORD_INDEX, 0);
-                    dComIfGs_offCollect(SWORD_INDEX, 1);
-                    dComIfGs_offCollect(SWORD_INDEX, 2);
-                    dComIfGs_offCollect(SWORD_INDEX, 3);
-                    break;
-                case HEROS_SWORD:
-                    dComIfGs_onCollect(SWORD_INDEX, 0);
-                    dComIfGs_offCollect(SWORD_INDEX, 1);
-                    break;
-                case UNCHARGED_MASTER_SWORD:
-                    dComIfGs_onCollect(SWORD_INDEX, 1);
-                    dComIfGs_offCollect(SWORD_INDEX, 2);
-                    break;
-                case HALF_CHARGED_MASTER_SWORD:
-                    dComIfGs_onCollect(SWORD_INDEX, 2);
-                    dComIfGs_offCollect(SWORD_INDEX, 3);
-                    break;
-                case FULLY_CHARGED_MASTER_SWORD:
-                    dComIfGs_onCollect(SWORD_INDEX, 3);
-                    break;
-            }
-
-            dComIfGs_setSelectEquip(SWORD_INDEX, new_sword_item_id);
+        switch (new_sword_item_id) {
+        case NO_ITEM:
+            dComIfGs_offCollect(SWORD_INDEX, 0);
+            dComIfGs_offCollect(SWORD_INDEX, 1);
+            dComIfGs_offCollect(SWORD_INDEX, 2);
+            dComIfGs_offCollect(SWORD_INDEX, 3);
             break;
-        case MENU_ITEM_SHIELD:
+        case HEROS_SWORD:
+            dComIfGs_onCollect(SWORD_INDEX, 0);
+            dComIfGs_offCollect(SWORD_INDEX, 1);
+            break;
+        case UNCHARGED_MASTER_SWORD:
+            dComIfGs_onCollect(SWORD_INDEX, 1);
+            dComIfGs_offCollect(SWORD_INDEX, 2);
+            break;
+        case HALF_CHARGED_MASTER_SWORD:
+            dComIfGs_onCollect(SWORD_INDEX, 2);
+            dComIfGs_offCollect(SWORD_INDEX, 3);
+            break;
+        case FULLY_CHARGED_MASTER_SWORD:
+            dComIfGs_onCollect(SWORD_INDEX, 3);
+            break;
+        }
+
+        dComIfGs_setSelectEquip(SWORD_INDEX, new_sword_item_id);
+        break;
+    case MENU_ITEM_SHIELD:
+        new_shield_item_id = dComIfGs_getSelectEquip(SHIELD_INDEX);
+        Cursor::moveListSimple(new_shield_item_id);
+        if (new_shield_item_id == NO_ITEM - 1) {
+            new_shield_item_id = NO_ITEM;
+        } else if (new_shield_item_id == 0) {
+            new_shield_item_id = HEROS_SHIELD;
+        } else if (new_shield_item_id == HEROS_SHIELD - 1) {
+            new_shield_item_id = NO_ITEM;
+        } else if (new_shield_item_id == HEROS_SHIELD + 1) {
+            new_shield_item_id = MIRROR_SHIELD;
+        } else if (new_shield_item_id == MIRROR_SHIELD - 1) {
+            new_shield_item_id = HEROS_SHIELD;
+        } else if (new_shield_item_id == MIRROR_SHIELD + 1) {
+            new_shield_item_id = MIRROR_SHIELD;
+        } else {
             new_shield_item_id = dComIfGs_getSelectEquip(SHIELD_INDEX);
-            Cursor::moveListSimple(new_shield_item_id);
-            if (new_shield_item_id == NO_ITEM - 1) {
-                new_shield_item_id = NO_ITEM;
-            } else if (new_shield_item_id == 0) {
-                new_shield_item_id = HEROS_SHIELD;
-            } else if (new_shield_item_id == HEROS_SHIELD - 1) {
-                new_shield_item_id = NO_ITEM;
-            } else if (new_shield_item_id == HEROS_SHIELD + 1) {
-                new_shield_item_id = MIRROR_SHIELD;
-            } else if (new_shield_item_id == MIRROR_SHIELD - 1) {
-                new_shield_item_id = HEROS_SHIELD;
-            } else if (new_shield_item_id == MIRROR_SHIELD + 1) {
-                new_shield_item_id = MIRROR_SHIELD;
-            } else {
-                new_shield_item_id = dComIfGs_getSelectEquip(SHIELD_INDEX);
-            }
+        }
 
-            switch (new_shield_item_id) {
-                case NO_ITEM:
-                    dComIfGs_offCollect(SHIELD_INDEX, 0);
-                    dComIfGs_offCollect(SHIELD_INDEX, 1);
-                    break;
-                case HEROS_SHIELD:
-                    dComIfGs_onCollect(SHIELD_INDEX, 0);
-                    dComIfGs_offCollect(SHIELD_INDEX, 1);
-                    break;
-                case MIRROR_SHIELD:
-                    dComIfGs_onCollect(SHIELD_INDEX, 1);
-                    break;
-            }
-
-            dComIfGs_setSelectEquip(SHIELD_INDEX, new_shield_item_id);
+        switch (new_shield_item_id) {
+        case NO_ITEM:
+            dComIfGs_offCollect(SHIELD_INDEX, 0);
+            dComIfGs_offCollect(SHIELD_INDEX, 1);
             break;
-        case MENU_ITEM_MAGIC:
+        case HEROS_SHIELD:
+            dComIfGs_onCollect(SHIELD_INDEX, 0);
+            dComIfGs_offCollect(SHIELD_INDEX, 1);
+            break;
+        case MIRROR_SHIELD:
+            dComIfGs_onCollect(SHIELD_INDEX, 1);
+            break;
+        }
+
+        dComIfGs_setSelectEquip(SHIELD_INDEX, new_shield_item_id);
+        break;
+    case MENU_ITEM_MAGIC:
+        new_max_magic_value = dComIfGs_getMaxMagic();
+        Cursor::moveListSimple(new_max_magic_value);
+        if (new_max_magic_value == NO_MAGIC - 1) {
+            new_max_magic_value = NO_MAGIC;
+        } else if (new_max_magic_value == NO_MAGIC + 1) {
+            new_max_magic_value = SINGLE_MAGIC;
+        } else if (new_max_magic_value == SINGLE_MAGIC - 1) {
+            new_max_magic_value = NO_MAGIC;
+        } else if (new_max_magic_value == SINGLE_MAGIC + 1) {
+            new_max_magic_value = DOUBLE_MAGIC;
+        } else if (new_max_magic_value == DOUBLE_MAGIC - 1) {
+            new_max_magic_value = SINGLE_MAGIC;
+        } else if (new_max_magic_value == DOUBLE_MAGIC + 1) {
+            new_max_magic_value = DOUBLE_MAGIC;
+        } else {
             new_max_magic_value = dComIfGs_getMaxMagic();
-            Cursor::moveListSimple(new_max_magic_value);
-            if (new_max_magic_value == NO_MAGIC - 1) {
-                new_max_magic_value = NO_MAGIC;
-            } else if (new_max_magic_value == NO_MAGIC + 1) {
-                new_max_magic_value = SINGLE_MAGIC;
-            } else if (new_max_magic_value == SINGLE_MAGIC - 1) {
-                new_max_magic_value = NO_MAGIC;
-            } else if (new_max_magic_value == SINGLE_MAGIC + 1) {
-                new_max_magic_value = DOUBLE_MAGIC;
-            } else if (new_max_magic_value == DOUBLE_MAGIC - 1) {
-                new_max_magic_value = SINGLE_MAGIC;
-            } else if (new_max_magic_value == DOUBLE_MAGIC + 1) {
-                new_max_magic_value = DOUBLE_MAGIC;
-            } else {
-                new_max_magic_value = dComIfGs_getMaxMagic();
-            }
-            dComIfGs_setMagic(new_max_magic_value);
-            dComIfGs_setMaxMagic(new_max_magic_value);
-            break;
-        case MENU_ITEM_WALLET:
+        }
+        dComIfGs_setMagic(new_max_magic_value);
+        dComIfGs_setMaxMagic(new_max_magic_value);
+        break;
+    case MENU_ITEM_WALLET:
+        new_wallet_size = g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusA().getWalletSize();
+        Cursor::moveListSimple(new_wallet_size);
+        if (new_wallet_size == WALLET_200 - 1) {
+            new_wallet_size = WALLET_200;
+        } else if (new_wallet_size == WALLET_200 + 1) {
+            new_wallet_size = WALLET_1000;
+        } else if (new_wallet_size == WALLET_1000 - 1) {
+            new_wallet_size = WALLET_200;
+        } else if (new_wallet_size == WALLET_1000 + 1) {
+            new_wallet_size = WALLET_5000;
+        } else if (new_wallet_size == WALLET_5000 - 1) {
+            new_wallet_size = WALLET_1000;
+        } else if (new_wallet_size == WALLET_5000 + 1) {
+            new_wallet_size = WALLET_5000;
+        } else {
             new_wallet_size = g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusA().getWalletSize();
-            Cursor::moveListSimple(new_wallet_size);
-            if (new_wallet_size == WALLET_200 - 1) {
-                new_wallet_size = WALLET_200;
-            } else if (new_wallet_size == WALLET_200 + 1) {
-                new_wallet_size = WALLET_1000;
-            } else if (new_wallet_size == WALLET_1000 - 1) {
-                new_wallet_size = WALLET_200;
-            } else if (new_wallet_size == WALLET_1000 + 1) {
-                new_wallet_size = WALLET_5000;
-            } else if (new_wallet_size == WALLET_5000 - 1) {
-                new_wallet_size = WALLET_1000;
-            } else if (new_wallet_size == WALLET_5000 + 1) {
-                new_wallet_size = WALLET_5000;
-            } else {
-                new_wallet_size = g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusA().getWalletSize();
-            }
-            g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusA().setWalletSize(new_wallet_size);
-            break;
-        case MENU_ITEM_POWER_BRACELETS:
+        }
+        g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusA().setWalletSize(new_wallet_size);
+        break;
+    case MENU_ITEM_POWER_BRACELETS:
+        new_power_bracelets_item_id = dComIfGs_getSelectEquip(POWER_BRACELETS_INDEX);
+        Cursor::moveListSimple(new_power_bracelets_item_id);
+        if (new_power_bracelets_item_id == NO_ITEM - 1) {
+            new_power_bracelets_item_id = NO_ITEM;
+        } else if (new_power_bracelets_item_id == 0) {
+            new_power_bracelets_item_id = POWER_BRACELETS;
+        } else if (new_power_bracelets_item_id == POWER_BRACELETS - 1) {
+            new_power_bracelets_item_id = NO_ITEM;
+        } else if (new_power_bracelets_item_id == POWER_BRACELETS + 1) {
+            new_power_bracelets_item_id = POWER_BRACELETS;
+        } else {
             new_power_bracelets_item_id = dComIfGs_getSelectEquip(POWER_BRACELETS_INDEX);
-            Cursor::moveListSimple(new_power_bracelets_item_id);
-            if (new_power_bracelets_item_id == NO_ITEM - 1) {
-                new_power_bracelets_item_id = NO_ITEM;
-            } else if (new_power_bracelets_item_id == 0) {
-                new_power_bracelets_item_id = POWER_BRACELETS;
-            } else if (new_power_bracelets_item_id == POWER_BRACELETS - 1) {
-                new_power_bracelets_item_id = NO_ITEM;
-            } else if (new_power_bracelets_item_id == POWER_BRACELETS + 1) {
-                new_power_bracelets_item_id = POWER_BRACELETS;
-            } else {
-                new_power_bracelets_item_id = dComIfGs_getSelectEquip(POWER_BRACELETS_INDEX);
-            }
+        }
 
-            switch (new_power_bracelets_item_id) {
-                case NO_ITEM:
-                    dComIfGs_offCollect(POWER_BRACELETS_INDEX, 0);
-                    break;
-                case POWER_BRACELETS:
-                    dComIfGs_onCollect(POWER_BRACELETS_INDEX, 0);
-                    break;
-            }
-
-            dComIfGs_setSelectEquip(POWER_BRACELETS_INDEX, new_power_bracelets_item_id);
+        switch (new_power_bracelets_item_id) {
+        case NO_ITEM:
+            dComIfGs_offCollect(POWER_BRACELETS_INDEX, 0);
             break;
-        case MENU_ITEM_QUIVER:
+        case POWER_BRACELETS:
+            dComIfGs_onCollect(POWER_BRACELETS_INDEX, 0);
+            break;
+        }
+
+        dComIfGs_setSelectEquip(POWER_BRACELETS_INDEX, new_power_bracelets_item_id);
+        break;
+    case MENU_ITEM_QUIVER:
+        new_arrows_capacity = dComIfGs_getArrowMax();
+        Cursor::moveListSimple(new_arrows_capacity);
+        if (new_arrows_capacity == NO_QUIVER - 1) {
+            new_arrows_capacity = NO_QUIVER;
+        } else if (new_arrows_capacity == NO_QUIVER + 1) {
+            new_arrows_capacity = ARROWS_30;
+        } else if (new_arrows_capacity == ARROWS_30 - 1) {
+            new_arrows_capacity = NO_QUIVER;
+        } else if (new_arrows_capacity == ARROWS_30 + 1) {
+            new_arrows_capacity = ARROWS_60;
+        } else if (new_arrows_capacity == ARROWS_60 - 1) {
+            new_arrows_capacity = ARROWS_30;
+        } else if (new_arrows_capacity == ARROWS_60 + 1) {
+            new_arrows_capacity = ARROWS_99;
+        } else if (new_arrows_capacity == ARROWS_99 - 1) {
+            new_arrows_capacity = ARROWS_60;
+        } else if (new_arrows_capacity == ARROWS_99 + 1) {
+            new_arrows_capacity = ARROWS_99;
+
+        } else {
             new_arrows_capacity = dComIfGs_getArrowMax();
-            Cursor::moveListSimple(new_arrows_capacity);
-            if (new_arrows_capacity == NO_QUIVER - 1) {
-                new_arrows_capacity = NO_QUIVER;
-            } else if (new_arrows_capacity == NO_QUIVER + 1) {
-                new_arrows_capacity = ARROWS_30;
-            } else if (new_arrows_capacity == ARROWS_30 - 1) {
-                new_arrows_capacity = NO_QUIVER;
-            } else if (new_arrows_capacity == ARROWS_30 + 1) {
-                new_arrows_capacity = ARROWS_60;
-            } else if (new_arrows_capacity == ARROWS_60 - 1) {
-                new_arrows_capacity = ARROWS_30;
-            } else if (new_arrows_capacity == ARROWS_60 + 1) {
-                new_arrows_capacity = ARROWS_99;
-            } else if (new_arrows_capacity == ARROWS_99 - 1) {
-                new_arrows_capacity = ARROWS_60;
-            } else if (new_arrows_capacity == ARROWS_99 + 1) {
-                new_arrows_capacity = ARROWS_99;
+        }
+        dComIfGs_setArrowNum(new_arrows_capacity);
+        dComIfGs_setArrowMax(new_arrows_capacity);
+        break;
+    case MENU_ITEM_HURRICANE_SPIN:
+        updateHurricaneSpin();
+        break;
+    case MENU_ITEM_HEROES_CLOTHES:
+        updateHeroesClothes();
+        break;
+    case MENU_ITEM_BOMBAG:
+        new_bombs_capacity = dComIfGs_getBombMax();
+        Cursor::moveListSimple(new_bombs_capacity);
+        if (new_bombs_capacity == NO_BOMBBAG - 1) {
+            new_bombs_capacity = NO_BOMBBAG;
+        } else if (new_bombs_capacity == NO_BOMBBAG + 1) {
+            new_bombs_capacity = BOMBS_30;
+        } else if (new_bombs_capacity == BOMBS_30 - 1) {
+            new_bombs_capacity = NO_BOMBBAG;
+        } else if (new_bombs_capacity == BOMBS_30 + 1) {
+            new_bombs_capacity = BOMBS_60;
+        } else if (new_bombs_capacity == BOMBS_60 - 1) {
+            new_bombs_capacity = BOMBS_30;
+        } else if (new_bombs_capacity == BOMBS_60 + 1) {
+            new_bombs_capacity = BOMBS_99;
+        } else if (new_bombs_capacity == BOMBS_99 - 1) {
+            new_bombs_capacity = BOMBS_60;
+        } else if (new_bombs_capacity == BOMBS_99 + 1) {
+            new_bombs_capacity = BOMBS_99;
 
-            } else {
-                new_arrows_capacity = dComIfGs_getArrowMax();
-            }
-            dComIfGs_setArrowNum(new_arrows_capacity);
-            dComIfGs_setArrowMax(new_arrows_capacity);
-            break;
-        case MENU_ITEM_HURRICANE_SPIN:
-            updateHurricaneSpin();
-            break;
-        case MENU_ITEM_HEROES_CLOTHES:
-            updateHeroesClothes();
-            break;
-        case MENU_ITEM_BOMBAG:
+        } else {
             new_bombs_capacity = dComIfGs_getBombMax();
-            Cursor::moveListSimple(new_bombs_capacity);
-            if (new_bombs_capacity == NO_BOMBBAG - 1) {
-                new_bombs_capacity = NO_BOMBBAG;
-            } else if (new_bombs_capacity == NO_BOMBBAG + 1) {
-                new_bombs_capacity = BOMBS_30;
-            } else if (new_bombs_capacity == BOMBS_30 - 1) {
-                new_bombs_capacity = NO_BOMBBAG;
-            } else if (new_bombs_capacity == BOMBS_30 + 1) {
-                new_bombs_capacity = BOMBS_60;
-            } else if (new_bombs_capacity == BOMBS_60 - 1) {
-                new_bombs_capacity = BOMBS_30;
-            } else if (new_bombs_capacity == BOMBS_60 + 1) {
-                new_bombs_capacity = BOMBS_99;
-            } else if (new_bombs_capacity == BOMBS_99 - 1) {
-                new_bombs_capacity = BOMBS_60;
-            } else if (new_bombs_capacity == BOMBS_99 + 1) {
-                new_bombs_capacity = BOMBS_99;
+        }
+        dComIfGs_setBombNum(new_bombs_capacity);
+        dComIfGs_setBombMax(new_bombs_capacity);
+        break;
+    case MENU_ITEM_PIRATES_CHARM:
+        is_pirates_charm_owned = dComIfGs_isCollect(PIRATES_CHARM_OWNED_INDEX, 0);
+        Cursor::moveListSimple(is_pirates_charm_owned);
 
-            } else {
-                new_bombs_capacity = dComIfGs_getBombMax();
-            }
-            dComIfGs_setBombNum(new_bombs_capacity);
-            dComIfGs_setBombMax(new_bombs_capacity);
-            break;
-        case MENU_ITEM_PIRATES_CHARM:
-            is_pirates_charm_owned = dComIfGs_isCollect(PIRATES_CHARM_OWNED_INDEX, 0);
-            Cursor::moveListSimple(is_pirates_charm_owned);
+        if (is_pirates_charm_owned) {
+            dComIfGs_onCollect(PIRATES_CHARM_OWNED_INDEX, 0);
+        } else {
+            dComIfGs_offCollect(PIRATES_CHARM_OWNED_INDEX, 0);
+        }
+        break;
+    case MENU_ITEM_HEROS_CHARM:
+        heros_charm_flag = dComIfGs_isCollect(HEROS_CHARM_OWNED_INDEX, 0);
+        if (dComIfGs_isCollect(HEROS_CHARM_OWNED_INDEX, 1)) {
+            heros_charm_flag = 2;
+        }
 
-            if (is_pirates_charm_owned) {
-                dComIfGs_onCollect(PIRATES_CHARM_OWNED_INDEX, 0);
-            } else {
-                dComIfGs_offCollect(PIRATES_CHARM_OWNED_INDEX, 0);
-            }
-            break;
-        case MENU_ITEM_HEROS_CHARM:
-            heros_charm_flag = dComIfGs_isCollect(HEROS_CHARM_OWNED_INDEX, 0);
-            if (dComIfGs_isCollect(HEROS_CHARM_OWNED_INDEX, 1)) {
-                heros_charm_flag = 2;
-            }
+        Cursor::moveListSimple(heros_charm_flag);
 
-            Cursor::moveListSimple(heros_charm_flag);
-
-            if (heros_charm_flag == 1) {
-                dComIfGs_onCollect(HEROS_CHARM_OWNED_INDEX, 0);
-                dComIfGs_offCollect(HEROS_CHARM_OWNED_INDEX, 1);
-            } else if (heros_charm_flag == 2) {
-                dComIfGs_onCollect(HEROS_CHARM_OWNED_INDEX, 1);
-            } else {
-                dComIfGs_offCollect(HEROS_CHARM_OWNED_INDEX, 0);
-                dComIfGs_offCollect(HEROS_CHARM_OWNED_INDEX, 1);
-            }
-            break;
-        case MENU_ITEM_WINDS_REQUIEM:
-            updateSongs(WINDS_REQUIEM_VALUE);
-            break;
-        case MENU_ITEM_BALLAD_OF_GALES:
-            updateSongs(BALLAD_OF_GALES_VALUE);
-            break;
-        case MENU_ITEM_COMMAND_MELODY:
-            updateSongs(COMMAND_MELODY_VALUE);
-            break;
-        case MENU_ITEM_EARTH_GODS_LYRIC:
-            updateSongs(EARTH_GODS_LYRIC_VALUE);
-            break;
-        case MENU_ITEM_WIND_GODS_ARIA:
-            updateSongs(WIND_GODS_ARIA_VALUE);
-            break;
-        case MENU_ITEM_SONG_OF_PASSING:
-            updateSongs(SONG_OF_PASSING_VALUE);
-            break;
-        case MENU_ITEM_DINS_PEARL:
-            updatePearls(DINS_PEARL_VALUE);
-            break;
-        case MENU_ITEM_FARORES_PEARL:
-            updatePearls(FARORES_PEARL_VALUE);
-            break;
-        case MENU_ITEM_NAYRUS_PEARL:
-            updatePearls(NAYRUS_PEARL_VALUE);
-            break;
-        case MENU_ITEM_TRIFORCE_PIECE_1:
-            updateTriforce(TRIFORCE_PIECE_1_VALUE);
-            break;
-        case MENU_ITEM_TRIFORCE_PIECE_2:
-            updateTriforce(TRIFORCE_PIECE_2_VALUE);
-            break;
-        case MENU_ITEM_TRIFORCE_PIECE_3:
-            updateTriforce(TRIFORCE_PIECE_3_VALUE);
-            break;
-        case MENU_ITEM_TRIFORCE_PIECE_4:
-            updateTriforce(TRIFORCE_PIECE_4_VALUE);
-            break;
-        case MENU_ITEM_TRIFORCE_PIECE_5:
-            updateTriforce(TRIFORCE_PIECE_5_VALUE);
-            break;
-        case MENU_ITEM_TRIFORCE_PIECE_6:
-            updateTriforce(TRIFORCE_PIECE_6_VALUE);
-            break;
-        case MENU_ITEM_TRIFORCE_PIECE_7:
-            updateTriforce(TRIFORCE_PIECE_7_VALUE);
-            break;
-        case MENU_ITEM_TRIFORCE_PIECE_8:
-            updateTriforce(TRIFORCE_PIECE_8_VALUE);
-            break;
+        if (heros_charm_flag == 1) {
+            dComIfGs_onCollect(HEROS_CHARM_OWNED_INDEX, 0);
+            dComIfGs_offCollect(HEROS_CHARM_OWNED_INDEX, 1);
+        } else if (heros_charm_flag == 2) {
+            dComIfGs_onCollect(HEROS_CHARM_OWNED_INDEX, 1);
+        } else {
+            dComIfGs_offCollect(HEROS_CHARM_OWNED_INDEX, 0);
+            dComIfGs_offCollect(HEROS_CHARM_OWNED_INDEX, 1);
+        }
+        break;
+    case MENU_ITEM_WINDS_REQUIEM:
+        updateSongs(WINDS_REQUIEM_VALUE);
+        break;
+    case MENU_ITEM_BALLAD_OF_GALES:
+        updateSongs(BALLAD_OF_GALES_VALUE);
+        break;
+    case MENU_ITEM_COMMAND_MELODY:
+        updateSongs(COMMAND_MELODY_VALUE);
+        break;
+    case MENU_ITEM_EARTH_GODS_LYRIC:
+        updateSongs(EARTH_GODS_LYRIC_VALUE);
+        break;
+    case MENU_ITEM_WIND_GODS_ARIA:
+        updateSongs(WIND_GODS_ARIA_VALUE);
+        break;
+    case MENU_ITEM_SONG_OF_PASSING:
+        updateSongs(SONG_OF_PASSING_VALUE);
+        break;
+    case MENU_ITEM_DINS_PEARL:
+        updatePearls(DINS_PEARL_VALUE);
+        break;
+    case MENU_ITEM_FARORES_PEARL:
+        updatePearls(FARORES_PEARL_VALUE);
+        break;
+    case MENU_ITEM_NAYRUS_PEARL:
+        updatePearls(NAYRUS_PEARL_VALUE);
+        break;
+    case MENU_ITEM_TRIFORCE_PIECE_1:
+        updateTriforce(TRIFORCE_PIECE_1_VALUE);
+        break;
+    case MENU_ITEM_TRIFORCE_PIECE_2:
+        updateTriforce(TRIFORCE_PIECE_2_VALUE);
+        break;
+    case MENU_ITEM_TRIFORCE_PIECE_3:
+        updateTriforce(TRIFORCE_PIECE_3_VALUE);
+        break;
+    case MENU_ITEM_TRIFORCE_PIECE_4:
+        updateTriforce(TRIFORCE_PIECE_4_VALUE);
+        break;
+    case MENU_ITEM_TRIFORCE_PIECE_5:
+        updateTriforce(TRIFORCE_PIECE_5_VALUE);
+        break;
+    case MENU_ITEM_TRIFORCE_PIECE_6:
+        updateTriforce(TRIFORCE_PIECE_6_VALUE);
+        break;
+    case MENU_ITEM_TRIFORCE_PIECE_7:
+        updateTriforce(TRIFORCE_PIECE_7_VALUE);
+        break;
+    case MENU_ITEM_TRIFORCE_PIECE_8:
+        updateTriforce(TRIFORCE_PIECE_8_VALUE);
+        break;
     };
 
     lines[MENU_ITEM_SWORD].printf(" <%s>", item_id_to_str(dComIfGs_getSelectEquip(SWORD_INDEX)));

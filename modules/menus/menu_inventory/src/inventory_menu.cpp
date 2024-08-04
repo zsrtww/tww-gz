@@ -27,27 +27,27 @@ void InventoryMenu::draw() {
 
     if (GZ_getButtonTrig(SELECTION_BUTTON)) {
         switch (cursor.y) {
-            case AMOUNT_INDEX:
-                g_menuMgr->push(MN_AMOUNTS_INDEX);
-                return;
-            case ITEM_INVENTORY_INDEX:
-                g_menuMgr->push(MN_ITEM_INVENTORY_INDEX);
-                return;
-            case QUEST_STATUS_INDEX:
-                g_menuMgr->push(MN_QUEST_STATUS_INDEX);
-                return;
-            case SPOILS_INDEX:
-                g_menuMgr->push(MN_DELIVERY_BAG_INDEX);
-                return;
-            case DELIVERY_BAG_INDEX:
-                g_menuMgr->push(MN_SPOILS_BAG_INDEX);
-                return;
-            case BAIT_INDEX:
-                g_menuMgr->push(MN_BAIT_BAG_INDEX);
-                return;
-            case CHART_INDEX:
-                g_menuMgr->push(MN_CHARTS_INDEX);
-                return;
+        case AMOUNT_INDEX:
+            g_menuMgr->push(MN_AMOUNTS_INDEX);
+            return;
+        case ITEM_INVENTORY_INDEX:
+            g_menuMgr->push(MN_ITEM_INVENTORY_INDEX);
+            return;
+        case QUEST_STATUS_INDEX:
+            g_menuMgr->push(MN_QUEST_STATUS_INDEX);
+            return;
+        case SPOILS_INDEX:
+            g_menuMgr->push(MN_DELIVERY_BAG_INDEX);
+            return;
+        case DELIVERY_BAG_INDEX:
+            g_menuMgr->push(MN_SPOILS_BAG_INDEX);
+            return;
+        case BAIT_INDEX:
+            g_menuMgr->push(MN_BAIT_BAG_INDEX);
+            return;
+        case CHART_INDEX:
+            g_menuMgr->push(MN_CHARTS_INDEX);
+            return;
         }
     }
 

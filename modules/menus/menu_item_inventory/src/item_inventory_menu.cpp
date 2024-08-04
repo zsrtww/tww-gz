@@ -99,109 +99,109 @@ void ItemInventoryMenu::draw() {
     u8 new_item_id = 0;
 
     switch (cursor.y) {
-        case SLOT_TELESCOPE:
-            updateSingleItem(SLOT_TELESCOPE, TELESCOPE);
-            break;
-        case SLOT_SAIL:
-            updateSingleItem(SLOT_SAIL, SAIL);
-            break;
-        case SLOT_WIND_WAKER:
-            updateSingleItem(SLOT_WIND_WAKER, WIND_WAKER);
-            break;
-        case SLOT_ROPE:
-            updateSingleItem(SLOT_ROPE, GRAPPLING_HOOK);
-            break;
-        case SLOT_SPOILS_BAG:
-            updateSingleItem(SLOT_SPOILS_BAG, SPOILS_BAG);
-            break;
-        case SLOT_BOOMERANG:
-            updateSingleItem(SLOT_BOOMERANG, BOOMERANG);
-            break;
-        case SLOT_DEKU_LEAF:
-            updateSingleItem(SLOT_DEKU_LEAF, DEKU_LEAF);
-            break;
-        case SLOT_TUNER:
-            updateSingleItem(SLOT_TUNER, TINGLE_TUNER);
-            break;
-        case SLOT_CAMERA:
+    case SLOT_TELESCOPE:
+        updateSingleItem(SLOT_TELESCOPE, TELESCOPE);
+        break;
+    case SLOT_SAIL:
+        updateSingleItem(SLOT_SAIL, SAIL);
+        break;
+    case SLOT_WIND_WAKER:
+        updateSingleItem(SLOT_WIND_WAKER, WIND_WAKER);
+        break;
+    case SLOT_ROPE:
+        updateSingleItem(SLOT_ROPE, GRAPPLING_HOOK);
+        break;
+    case SLOT_SPOILS_BAG:
+        updateSingleItem(SLOT_SPOILS_BAG, SPOILS_BAG);
+        break;
+    case SLOT_BOOMERANG:
+        updateSingleItem(SLOT_BOOMERANG, BOOMERANG);
+        break;
+    case SLOT_DEKU_LEAF:
+        updateSingleItem(SLOT_DEKU_LEAF, DEKU_LEAF);
+        break;
+    case SLOT_TUNER:
+        updateSingleItem(SLOT_TUNER, TINGLE_TUNER);
+        break;
+    case SLOT_CAMERA:
+        new_item_id = dComIfGs_getItem(SLOT_CAMERA);
+        Cursor::moveListSimple(new_item_id);
+        if (new_item_id == NO_ITEM - 1) {
+            new_item_id = NO_ITEM;
+        } else if (new_item_id == 0) {
+            new_item_id = PICTO_BOX;
+        } else if (new_item_id == PICTO_BOX - 1) {
+            new_item_id = NO_ITEM;
+        } else if (new_item_id == PICTO_BOX + 1) {
+            new_item_id = DELUXE_PICTO_BOX;
+        } else if (new_item_id == DELUXE_PICTO_BOX - 1) {
+            new_item_id = PICTO_BOX;
+        } else if (new_item_id == DELUXE_PICTO_BOX + 1) {
+            new_item_id = DELUXE_PICTO_BOX;
+        } else {
             new_item_id = dComIfGs_getItem(SLOT_CAMERA);
-            Cursor::moveListSimple(new_item_id);
-            if (new_item_id == NO_ITEM - 1) {
-                new_item_id = NO_ITEM;
-            } else if (new_item_id == 0) {
-                new_item_id = PICTO_BOX;
-            } else if (new_item_id == PICTO_BOX - 1) {
-                new_item_id = NO_ITEM;
-            } else if (new_item_id == PICTO_BOX + 1) {
-                new_item_id = DELUXE_PICTO_BOX;
-            } else if (new_item_id == DELUXE_PICTO_BOX - 1) {
-                new_item_id = PICTO_BOX;
-            } else if (new_item_id == DELUXE_PICTO_BOX + 1) {
-                new_item_id = DELUXE_PICTO_BOX;
-            } else {
-                new_item_id = dComIfGs_getItem(SLOT_CAMERA);
-            }
-            updateItem(SLOT_CAMERA, new_item_id);
-            break;
-        case SLOT_IRON_BOOTS:
-            updateSingleItem(SLOT_IRON_BOOTS, IRON_BOOTS);
-            break;
-        case SLOT_MAGIC_ARMOR:
-            updateSingleItem(SLOT_MAGIC_ARMOR, MAGIC_ARMOR);
-            break;
-        case SLOT_BAIT_BAG:
-            updateSingleItem(SLOT_BAIT_BAG, BAIT_BAG);
-            break;
-        case SLOT_BOW:
-            new_item_id = dComIfGs_getItem(SLOT_BOW);
-            Cursor::moveListSimple(new_item_id);
-            if (new_item_id == NO_ITEM - 1) {
-                new_item_id = NO_ITEM;
-            } else if (new_item_id == 0) {
-                new_item_id = BOW;
-            } else if (new_item_id == BOW - 1) {
-                new_item_id = NO_ITEM;
-            } else if (new_item_id == BOW + 1) {
-                new_item_id = BOW_WITH_FIRE_AND_ICE_ARROWS;
-            } else if (new_item_id == BOW_WITH_FIRE_AND_ICE_ARROWS - 1) {
-                new_item_id = BOW;
-            } else if (new_item_id == BOW_WITH_LIGHT_ARROWS + 1) {
-                new_item_id = BOW_WITH_LIGHT_ARROWS;
-            }
-            updateItem(SLOT_BOW, new_item_id);
-            if (GZ_getButtonTrig(GZPad::DPAD_RIGHT) && dComIfGs_getArrowMax() == 0) {
-                dComIfGs_setArrowMax(DEFAULT_ARROW_CAPACITY);
-                dComIfGs_setArrowNum(DEFAULT_ARROW_CAPACITY);
-            }
-            break;
-        case SLOT_BOMB:
-            updateSingleItem(SLOT_BOMB, BOMBS);
-            if (GZ_getButtonTrig(GZPad::DPAD_RIGHT) && dComIfGs_getBombMax() == 0) {
-                dComIfGs_setBombMax(DEFAULT_BOMB_CAPACITY);
-                dComIfGs_setBombNum(DEFAULT_BOMB_CAPACITY);
-            }
-            break;
-        case SLOT_BOTTLE_1:
-            updateBottle(SLOT_BOTTLE_1);
-            break;
-        case SLOT_BOTTLE_2:
-            updateBottle(SLOT_BOTTLE_2);
-            break;
-        case SLOT_BOTTLE_3:
-            updateBottle(SLOT_BOTTLE_3);
-            break;
-        case SLOT_BOTTLE_4:
-            updateBottle(SLOT_BOTTLE_4);
-            break;
-        case SLOT_TRADE_ITEM:
-            updateSingleItem(SLOT_TRADE_ITEM, DELIVERY_BAG);
-            break;
-        case SLOT_HOOKSHOT:
-            updateSingleItem(SLOT_HOOKSHOT, HOOKSHOT);
-            break;
-        case SLOT_HAMMER:
-            updateSingleItem(SLOT_HAMMER, SKULL_HAMMER);
-            break;
+        }
+        updateItem(SLOT_CAMERA, new_item_id);
+        break;
+    case SLOT_IRON_BOOTS:
+        updateSingleItem(SLOT_IRON_BOOTS, IRON_BOOTS);
+        break;
+    case SLOT_MAGIC_ARMOR:
+        updateSingleItem(SLOT_MAGIC_ARMOR, MAGIC_ARMOR);
+        break;
+    case SLOT_BAIT_BAG:
+        updateSingleItem(SLOT_BAIT_BAG, BAIT_BAG);
+        break;
+    case SLOT_BOW:
+        new_item_id = dComIfGs_getItem(SLOT_BOW);
+        Cursor::moveListSimple(new_item_id);
+        if (new_item_id == NO_ITEM - 1) {
+            new_item_id = NO_ITEM;
+        } else if (new_item_id == 0) {
+            new_item_id = BOW;
+        } else if (new_item_id == BOW - 1) {
+            new_item_id = NO_ITEM;
+        } else if (new_item_id == BOW + 1) {
+            new_item_id = BOW_WITH_FIRE_AND_ICE_ARROWS;
+        } else if (new_item_id == BOW_WITH_FIRE_AND_ICE_ARROWS - 1) {
+            new_item_id = BOW;
+        } else if (new_item_id == BOW_WITH_LIGHT_ARROWS + 1) {
+            new_item_id = BOW_WITH_LIGHT_ARROWS;
+        }
+        updateItem(SLOT_BOW, new_item_id);
+        if (GZ_getButtonTrig(GZPad::DPAD_RIGHT) && dComIfGs_getArrowMax() == 0) {
+            dComIfGs_setArrowMax(DEFAULT_ARROW_CAPACITY);
+            dComIfGs_setArrowNum(DEFAULT_ARROW_CAPACITY);
+        }
+        break;
+    case SLOT_BOMB:
+        updateSingleItem(SLOT_BOMB, BOMBS);
+        if (GZ_getButtonTrig(GZPad::DPAD_RIGHT) && dComIfGs_getBombMax() == 0) {
+            dComIfGs_setBombMax(DEFAULT_BOMB_CAPACITY);
+            dComIfGs_setBombNum(DEFAULT_BOMB_CAPACITY);
+        }
+        break;
+    case SLOT_BOTTLE_1:
+        updateBottle(SLOT_BOTTLE_1);
+        break;
+    case SLOT_BOTTLE_2:
+        updateBottle(SLOT_BOTTLE_2);
+        break;
+    case SLOT_BOTTLE_3:
+        updateBottle(SLOT_BOTTLE_3);
+        break;
+    case SLOT_BOTTLE_4:
+        updateBottle(SLOT_BOTTLE_4);
+        break;
+    case SLOT_TRADE_ITEM:
+        updateSingleItem(SLOT_TRADE_ITEM, DELIVERY_BAG);
+        break;
+    case SLOT_HOOKSHOT:
+        updateSingleItem(SLOT_HOOKSHOT, HOOKSHOT);
+        break;
+    case SLOT_HAMMER:
+        updateSingleItem(SLOT_HAMMER, SKULL_HAMMER);
+        break;
     }
 
     lines[SLOT_TELESCOPE].printf(" <%s>", item_id_to_str(dComIfGs_getItem(SLOT_TELESCOPE)));

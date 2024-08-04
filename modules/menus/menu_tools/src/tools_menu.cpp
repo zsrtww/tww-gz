@@ -69,42 +69,42 @@ void ToolsMenu::draw() {
 
         if (g_tools[cursor.y].active) {
             switch (cursor.y) {
-                case TELEPORT_INDEX:
-                    GZCmd_enable(Commands::CMD_STORE_POSITION);
-                    GZCmd_enable(Commands::CMD_LOAD_POSITION);
-                    break;
-                case AREA_RELOAD_INDEX:
-                    GZCmd_enable(Commands::CMD_AREA_RELOAD);
-                    break;
-                case INTRO_SKIP_INDEX:
-                    *reinterpret_cast<u32*>(INTRO_SKIP_INST0_ADDR) = 0x60000000;  // nop
-                    DCFlushRange(reinterpret_cast<u32*>(INTRO_SKIP_INST0_ADDR), sizeof(u32));
-                    ICInvalidateRange(reinterpret_cast<u32*>(INTRO_SKIP_INST0_ADDR), sizeof(u32));
+            case TELEPORT_INDEX:
+                GZCmd_enable(Commands::CMD_STORE_POSITION);
+                GZCmd_enable(Commands::CMD_LOAD_POSITION);
+                break;
+            case AREA_RELOAD_INDEX:
+                GZCmd_enable(Commands::CMD_AREA_RELOAD);
+                break;
+            case INTRO_SKIP_INDEX:
+                *reinterpret_cast<u32*>(INTRO_SKIP_INST0_ADDR) = 0x60000000;  // nop
+                DCFlushRange(reinterpret_cast<u32*>(INTRO_SKIP_INST0_ADDR), sizeof(u32));
+                ICInvalidateRange(reinterpret_cast<u32*>(INTRO_SKIP_INST0_ADDR), sizeof(u32));
 
-                    *reinterpret_cast<u32*>(INTRO_SKIP_INST1_ADDR) = 0x60000000;  // nop
-                    DCFlushRange(reinterpret_cast<u32*>(INTRO_SKIP_INST1_ADDR), sizeof(u32));
-                    ICInvalidateRange(reinterpret_cast<u32*>(INTRO_SKIP_INST1_ADDR), sizeof(u32));
-                    break;
+                *reinterpret_cast<u32*>(INTRO_SKIP_INST1_ADDR) = 0x60000000;  // nop
+                DCFlushRange(reinterpret_cast<u32*>(INTRO_SKIP_INST1_ADDR), sizeof(u32));
+                ICInvalidateRange(reinterpret_cast<u32*>(INTRO_SKIP_INST1_ADDR), sizeof(u32));
+                break;
             }
         } else {
             switch (cursor.y) {
-                case TELEPORT_INDEX:
-                    GZCmd_disable(Commands::CMD_STORE_POSITION);
-                    GZCmd_disable(Commands::CMD_LOAD_POSITION);
-                    break;
-                case AREA_RELOAD_INDEX:
-                    GZCmd_disable(Commands::CMD_AREA_RELOAD);
-                    break;
-                case INTRO_SKIP_INDEX:
-                    *reinterpret_cast<u32*>(INTRO_SKIP_INST0_ADDR) =
-                        INTRO_SKIP_ORIG_INST0;  // bl dScnOpen_proc_c::proc_execute
-                    DCFlushRange(reinterpret_cast<u32*>(INTRO_SKIP_INST0_ADDR), sizeof(u32));
-                    ICInvalidateRange(reinterpret_cast<u32*>(INTRO_SKIP_INST0_ADDR), sizeof(u32));
+            case TELEPORT_INDEX:
+                GZCmd_disable(Commands::CMD_STORE_POSITION);
+                GZCmd_disable(Commands::CMD_LOAD_POSITION);
+                break;
+            case AREA_RELOAD_INDEX:
+                GZCmd_disable(Commands::CMD_AREA_RELOAD);
+                break;
+            case INTRO_SKIP_INDEX:
+                *reinterpret_cast<u32*>(INTRO_SKIP_INST0_ADDR) =
+                    INTRO_SKIP_ORIG_INST0;  // bl dScnOpen_proc_c::proc_execute
+                DCFlushRange(reinterpret_cast<u32*>(INTRO_SKIP_INST0_ADDR), sizeof(u32));
+                ICInvalidateRange(reinterpret_cast<u32*>(INTRO_SKIP_INST0_ADDR), sizeof(u32));
 
-                    *reinterpret_cast<u32*>(INTRO_SKIP_INST1_ADDR) = INTRO_SKIP_ORIG_INST1;  // bne ret
-                    DCFlushRange(reinterpret_cast<u32*>(INTRO_SKIP_INST1_ADDR), sizeof(u32));
-                    ICInvalidateRange(reinterpret_cast<u32*>(INTRO_SKIP_INST1_ADDR), sizeof(u32));
-                    break;
+                *reinterpret_cast<u32*>(INTRO_SKIP_INST1_ADDR) = INTRO_SKIP_ORIG_INST1;  // bne ret
+                DCFlushRange(reinterpret_cast<u32*>(INTRO_SKIP_INST1_ADDR), sizeof(u32));
+                ICInvalidateRange(reinterpret_cast<u32*>(INTRO_SKIP_INST1_ADDR), sizeof(u32));
+                break;
             }
         }
     }

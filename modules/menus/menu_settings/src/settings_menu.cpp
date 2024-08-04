@@ -43,51 +43,51 @@ void SettingsMenu::draw() {
 
     if (GZ_getButtonTrig(SELECTION_BUTTON)) {
         switch (cursor.y) {
-            case DROP_SHADOWS_INDEX:
-                g_dropShadows = !g_dropShadows;
-                break;
-            case POS_SETTINGS_MENU_INDEX:
-                g_menuMgr->push(MN_POS_SETTINGS_INDEX);
-                return;
-            case ITEM_EQUIP_PRIORITY_INDEX:
-                g_menuMgr->push(MN_EQUIP_PRIORITY_INDEX);
-                return;
-            case SAVE_CARD_INDEX: {
-                static Storage storage;
-                storage.file_name = "twwgz01";
-                storage.sector_size = SECTOR_SIZE;
-                snprintf(storage.file_name_buffer, sizeof(storage.file_name_buffer), storage.file_name);
+        case DROP_SHADOWS_INDEX:
+            g_dropShadows = !g_dropShadows;
+            break;
+        case POS_SETTINGS_MENU_INDEX:
+            g_menuMgr->push(MN_POS_SETTINGS_INDEX);
+            return;
+        case ITEM_EQUIP_PRIORITY_INDEX:
+            g_menuMgr->push(MN_EQUIP_PRIORITY_INDEX);
+            return;
+        case SAVE_CARD_INDEX: {
+            static Storage storage;
+            storage.file_name = "twwgz01";
+            storage.sector_size = SECTOR_SIZE;
+            snprintf(storage.file_name_buffer, sizeof(storage.file_name_buffer), storage.file_name);
 
-                storage.result = CARDProbeEx(0, nullptr, &storage.sector_size);
-                if (storage.result == Ready) {
-                    GZ_storeMemCard(storage);
-                }
-                break;
+            storage.result = CARDProbeEx(0, nullptr, &storage.sector_size);
+            if (storage.result == Ready) {
+                GZ_storeMemCard(storage);
             }
-            case LOAD_CARD_INDEX: {
-                static Storage storage;
-                storage.file_name = "twwgz01";
-                storage.sector_size = SECTOR_SIZE;
-                snprintf(storage.file_name_buffer, sizeof(storage.file_name_buffer), storage.file_name);
+            break;
+        }
+        case LOAD_CARD_INDEX: {
+            static Storage storage;
+            storage.file_name = "twwgz01";
+            storage.sector_size = SECTOR_SIZE;
+            snprintf(storage.file_name_buffer, sizeof(storage.file_name_buffer), storage.file_name);
 
-                storage.result = CARDProbeEx(0, NULL, &storage.sector_size);
-                if (storage.result == Ready) {
-                    GZ_loadMemCard(storage);
-                }
-                break;
+            storage.result = CARDProbeEx(0, NULL, &storage.sector_size);
+            if (storage.result == Ready) {
+                GZ_loadMemCard(storage);
             }
-            case DELETE_CARD_INDEX: {
-                static Storage storage;
-                storage.file_name = "twwgz01";
-                storage.sector_size = SECTOR_SIZE;
-                snprintf(storage.file_name_buffer, sizeof(storage.file_name_buffer), storage.file_name);
+            break;
+        }
+        case DELETE_CARD_INDEX: {
+            static Storage storage;
+            storage.file_name = "twwgz01";
+            storage.sector_size = SECTOR_SIZE;
+            snprintf(storage.file_name_buffer, sizeof(storage.file_name_buffer), storage.file_name);
 
-                storage.result = CARDProbeEx(0, nullptr, &storage.sector_size);
-                if (storage.result == Ready) {
-                    GZ_deleteMemCard(storage);
-                }
-                break;
+            storage.result = CARDProbeEx(0, nullptr, &storage.sector_size);
+            if (storage.result == Ready) {
+                GZ_deleteMemCard(storage);
             }
+            break;
+        }
         }
     }
 
@@ -95,76 +95,76 @@ void SettingsMenu::draw() {
 
     // handle list rendering
     switch (cursor.y) {
-        case CURSOR_COLOR_INDEX:
-            cursor.x = g_cursorColorType;
-            cursor.move(MAX_CURSOR_COLOR_OPTIONS, MENU_LINE_NUM);
+    case CURSOR_COLOR_INDEX:
+        cursor.x = g_cursorColorType;
+        cursor.move(MAX_CURSOR_COLOR_OPTIONS, MENU_LINE_NUM);
 
-            if (cursor.y == CURSOR_COLOR_INDEX) {
-                g_cursorColorType = cursor.x;
-            }
-            break;
-        case FONT_INDEX: {
-            cursor.x = g_fontType;
-            uint32_t old_font = g_fontType;
-            cursor.move(FONT_OPTIONS_COUNT, MENU_LINE_NUM);
-
-            if (cursor.y == FONT_INDEX) {
-                g_fontType = cursor.x;
-            }
-            if (old_font != g_fontType) {
-                if (g_fontType >= 0 && g_fontType < FONT_OPTIONS_COUNT) {
-                    char buf[40];
-                    snprintf(buf, sizeof(buf), "twwgz/fonts/%s.fnt", g_font_opt[g_fontType].member);
-                    Font::loadFont(buf);
-                }
-            }
-            break;
+        if (cursor.y == CURSOR_COLOR_INDEX) {
+            g_cursorColorType = cursor.x;
         }
+        break;
+    case FONT_INDEX: {
+        cursor.x = g_fontType;
+        uint32_t old_font = g_fontType;
+        cursor.move(FONT_OPTIONS_COUNT, MENU_LINE_NUM);
 
-        // Controls the constant speed for link's fast movement cheat. moveList to set and cycle through
-        // the numbers, and cursor.move so that the list does not stick once option is selected.
-        case WATER_SPEED_INDEX: {
-            waterSpeed = getWaterSpeed();
-            Cursor::moveList(waterSpeed);
-            if (GZ_getButtonRepeat(GZPad::A)) {
-                waterSpeed += 100.0f;
-            }
-            if (GZ_getButtonRepeat(GZPad::R)) {
-                waterSpeed -= 100.0f;
-            }
-            if (waterSpeed < 1.0f) {
-                waterSpeed = 5000.0f;
-            }
-            if (waterSpeed > 5000.0f) {
-                waterSpeed = 1.0f;
-            }
-            setWaterSpeed(waterSpeed);
-            cursor.move(0, MENU_LINE_NUM);
-            break;
+        if (cursor.y == FONT_INDEX) {
+            g_fontType = cursor.x;
         }
-        case LAND_SPEED_INDEX: {
-            landSpeed = getLandSpeed();
-            Cursor::moveList(landSpeed);
-            if (GZ_getButtonRepeat(GZPad::A)) {
-                landSpeed += 100.0f;
+        if (old_font != g_fontType) {
+            if (g_fontType >= 0 && g_fontType < FONT_OPTIONS_COUNT) {
+                char buf[40];
+                snprintf(buf, sizeof(buf), "twwgz/fonts/%s.fnt", g_font_opt[g_fontType].member);
+                Font::loadFont(buf);
             }
-            if (GZ_getButtonRepeat(GZPad::R)) {
-                landSpeed -= 100.0f;
-            }
-            if (landSpeed < 1.0f) {
-                landSpeed = 5000.0f;
-            }
-            if (landSpeed > 5000.0f) {
-                landSpeed = 1.0f;
-            }
-            setLandSpeed(landSpeed);
-            cursor.move(0, MENU_LINE_NUM);
-            break;
         }
+        break;
+    }
 
-        default:
-            cursor.move(0, MENU_LINE_NUM);
-            break;
+    // Controls the constant speed for link's fast movement cheat. moveList to set and cycle through
+    // the numbers, and cursor.move so that the list does not stick once option is selected.
+    case WATER_SPEED_INDEX: {
+        waterSpeed = getWaterSpeed();
+        Cursor::moveList(waterSpeed);
+        if (GZ_getButtonRepeat(GZPad::A)) {
+            waterSpeed += 100.0f;
+        }
+        if (GZ_getButtonRepeat(GZPad::R)) {
+            waterSpeed -= 100.0f;
+        }
+        if (waterSpeed < 1.0f) {
+            waterSpeed = 5000.0f;
+        }
+        if (waterSpeed > 5000.0f) {
+            waterSpeed = 1.0f;
+        }
+        setWaterSpeed(waterSpeed);
+        cursor.move(0, MENU_LINE_NUM);
+        break;
+    }
+    case LAND_SPEED_INDEX: {
+        landSpeed = getLandSpeed();
+        Cursor::moveList(landSpeed);
+        if (GZ_getButtonRepeat(GZPad::A)) {
+            landSpeed += 100.0f;
+        }
+        if (GZ_getButtonRepeat(GZPad::R)) {
+            landSpeed -= 100.0f;
+        }
+        if (landSpeed < 1.0f) {
+            landSpeed = 5000.0f;
+        }
+        if (landSpeed > 5000.0f) {
+            landSpeed = 1.0f;
+        }
+        setLandSpeed(landSpeed);
+        cursor.move(0, MENU_LINE_NUM);
+        break;
+    }
+
+    default:
+        cursor.move(0, MENU_LINE_NUM);
+        break;
     }
 
     lines[CURSOR_COLOR_INDEX].printf(" <%s>", cursorCol_opt[g_cursorColorType].member);

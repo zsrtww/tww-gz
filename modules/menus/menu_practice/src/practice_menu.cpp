@@ -21,15 +21,15 @@ void PracticeMenu::draw() {
 
     if (GZ_getButtonTrig(SELECTION_BUTTON)) {
         switch (cursor.y) {
-            case ANY_NO_MSS:
-                g_menuMgr->push(MN_ANY_NOMSS_SAVES_INDEX);
-                return;
-            case ANY_PERCENT:
-                g_menuMgr->push(MN_ANY_SAVES_INDEX);
-                return;
-            case ALL_DUNGEONS:
-                g_menuMgr->push(MN_AD_SAVES_INDEX);
-                return;
+        case ANY_NO_MSS:
+            g_menuMgr->push(MN_ANY_NOMSS_SAVES_INDEX);
+            return;
+        case ANY_PERCENT:
+            g_menuMgr->push(MN_ANY_SAVES_INDEX);
+            return;
+        case ALL_DUNGEONS:
+            g_menuMgr->push(MN_AD_SAVES_INDEX);
+            return;
         }
     }
 

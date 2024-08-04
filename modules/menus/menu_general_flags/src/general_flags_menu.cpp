@@ -37,36 +37,36 @@ void GeneralFlagsMenu::draw() {
 
     if (GZ_getButtonTrig(GZPad::A)) {
         switch (cursor.y) {
-            case WATCHED_FF2_HELMAROC_CUTSCENE:
-                setEventFlag(0x2D01);
-                break;
-            case GOSSIP_STONE_TRIGGER:
-                setEventFlag(0x0520);
-                break;
-            case GENERAL_POST_FF1_KORL_CUTSCENE:
-                setEventFlag(0x0F80);
-                break;
-            case ENDLESS_NIGHT:
-                setEventFlag(0x0A02);
-                break;
-            case RAISE_TOTG:
-                setEventFlag(0x1E40);
-                break;
-            case LOAD_TOTG_AFTER_T2Z:
-                setEventFlag(0x1820);
-                break;
-            case OPEN_HYRULE3_WARP:
-                setEventFlag(0x2D08);
-                break;
-            case DESTROY_HYRULE_BARRIER:
-                setEventFlag(0x2C02);
-                break;
-            case OPEN_DARK_PORTAL:
-                setEventFlag(0x3D02);
-                break;
-            case GET_SEA_CHART:
-                setEventFlag(0x0908);
-                break;
+        case WATCHED_FF2_HELMAROC_CUTSCENE:
+            setEventFlag(0x2D01);
+            break;
+        case GOSSIP_STONE_TRIGGER:
+            setEventFlag(0x0520);
+            break;
+        case GENERAL_POST_FF1_KORL_CUTSCENE:
+            setEventFlag(0x0F80);
+            break;
+        case ENDLESS_NIGHT:
+            setEventFlag(0x0A02);
+            break;
+        case RAISE_TOTG:
+            setEventFlag(0x1E40);
+            break;
+        case LOAD_TOTG_AFTER_T2Z:
+            setEventFlag(0x1820);
+            break;
+        case OPEN_HYRULE3_WARP:
+            setEventFlag(0x2D08);
+            break;
+        case DESTROY_HYRULE_BARRIER:
+            setEventFlag(0x2C02);
+            break;
+        case OPEN_DARK_PORTAL:
+            setEventFlag(0x3D02);
+            break;
+        case GET_SEA_CHART:
+            setEventFlag(0x0908);
+            break;
         }
     }
 

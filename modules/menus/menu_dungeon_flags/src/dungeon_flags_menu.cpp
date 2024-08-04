@@ -51,23 +51,23 @@ void dungeonItemSwitch(int stage, int flag) {
 
 const char* get_dun_name(u8 area_id) {
     switch (area_id) {
-        case 3:
-            return "DRC";
-            break;
-        case 4:
-            return "FW";
-            break;
-        case 5:
-            return "TOTG";
-            break;
-        case 6:
-            return "ET";
-            break;
-        case 7:
-            return "WT";
-            break;
-        default:
-            return "DRC";
+    case 3:
+        return "DRC";
+        break;
+    case 4:
+        return "FW";
+        break;
+    case 5:
+        return "TOTG";
+        break;
+    case 6:
+        return "ET";
+        break;
+    case 7:
+        return "WT";
+        break;
+    default:
+        return "DRC";
     }
 }
 
@@ -105,21 +105,21 @@ void DungeonFlagsMenu::draw() {
 
     u8 area_id = 3;
     switch (l_selDun) {
-        case 0:
-            area_id = 3;
-            break;
-        case 1:
-            area_id = 4;
-            break;
-        case 2:
-            area_id = 5;
-            break;
-        case 3:
-            area_id = 6;
-            break;
-        case 4:
-            area_id = 7;
-            break;
+    case 0:
+        area_id = 3;
+        break;
+    case 1:
+        area_id = 4;
+        break;
+    case 2:
+        area_id = 5;
+        break;
+    case 3:
+        area_id = 6;
+        break;
+    case 4:
+        area_id = 7;
+        break;
     }
 
     l_mapFlag = isStageDungeonItem(area_id, dSv_memBit_c::MAP);
@@ -145,50 +145,50 @@ void DungeonFlagsMenu::draw() {
     }
 
     switch (cursor.y) {
-        case PICK_DUNGEON_INDEX:
-            cursor.x = l_selDun;
-            cursor.move(5, MAX_MOVE);
+    case PICK_DUNGEON_INDEX:
+        cursor.x = l_selDun;
+        cursor.move(5, MAX_MOVE);
 
-            if (cursor.y == PICK_DUNGEON_INDEX) {
-                l_selDun = cursor.x;
-            }
-            l_keyNum = dComIfGs_getSaveKeyNum(area_id);
-            selectDungeon();
-            break;
-        case MODIFY_KEYS_INDEX:
-            cursor.move(0, MAX_MOVE);
-            modifyKeys(area_id);
-            break;
-        default:
-            cursor.move(0, MAX_MOVE);
-            break;
+        if (cursor.y == PICK_DUNGEON_INDEX) {
+            l_selDun = cursor.x;
+        }
+        l_keyNum = dComIfGs_getSaveKeyNum(area_id);
+        selectDungeon();
+        break;
+    case MODIFY_KEYS_INDEX:
+        cursor.move(0, MAX_MOVE);
+        modifyKeys(area_id);
+        break;
+    default:
+        cursor.move(0, MAX_MOVE);
+        break;
     }
 
     if (GZ_getButtonTrig(GZPad::A)) {
         switch (cursor.y) {
-            case BOSS_KEY_INDEX:
-                dungeonItemSwitch(area_id, 2);
-                break;
-            case MAP_INDEX:
-                dungeonItemSwitch(area_id, 0);
-                break;
-            case COMPASS_INDEX:
-                dungeonItemSwitch(area_id, 1);
-                break;
-                if ((area_id == 6) || (area_id == 7)) {
-                    case PARTNER_INDEX:
-                        if (area_id == 6) {
-                            setEventFlag(0x1620);
-                            setEventFlag(0x1608);
-                            setEventFlag(0x2920);
-                            setEventFlag(0x2E04);
-                        }
-                        if (area_id == 7) {
-                            setEventFlag(0x1610);
-                            setEventFlag(0x1604);
-                            setEventFlag(0x2910);
-                        }
+        case BOSS_KEY_INDEX:
+            dungeonItemSwitch(area_id, 2);
+            break;
+        case MAP_INDEX:
+            dungeonItemSwitch(area_id, 0);
+            break;
+        case COMPASS_INDEX:
+            dungeonItemSwitch(area_id, 1);
+            break;
+            if ((area_id == 6) || (area_id == 7)) {
+            case PARTNER_INDEX:
+                if (area_id == 6) {
+                    setEventFlag(0x1620);
+                    setEventFlag(0x1608);
+                    setEventFlag(0x2920);
+                    setEventFlag(0x2E04);
                 }
+                if (area_id == 7) {
+                    setEventFlag(0x1610);
+                    setEventFlag(0x1604);
+                    setEventFlag(0x2910);
+                }
+            }
         }
     }
 

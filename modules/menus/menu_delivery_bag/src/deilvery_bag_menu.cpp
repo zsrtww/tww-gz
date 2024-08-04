@@ -48,30 +48,30 @@ void DeliveryBagMenu::draw() {
     }
 
     switch (cursor.y) {
-        case SLOT1_INDEX:
-            updateDeliveryBagItem(SLOT1_INDEX);
-            break;
-        case SLOT2_INDEX:
-            updateDeliveryBagItem(SLOT2_INDEX);
-            break;
-        case SLOT3_INDEX:
-            updateDeliveryBagItem(SLOT3_INDEX);
-            break;
-        case SLOT4_INDEX:
-            updateDeliveryBagItem(SLOT4_INDEX);
-            break;
-        case SLOT5_INDEX:
-            updateDeliveryBagItem(SLOT5_INDEX);
-            break;
-        case SLOT6_INDEX:
-            updateDeliveryBagItem(SLOT6_INDEX);
-            break;
-        case SLOT7_INDEX:
-            updateDeliveryBagItem(SLOT7_INDEX);
-            break;
-        case SLOT8_INDEX:
-            updateDeliveryBagItem(SLOT8_INDEX);
-            break;
+    case SLOT1_INDEX:
+        updateDeliveryBagItem(SLOT1_INDEX);
+        break;
+    case SLOT2_INDEX:
+        updateDeliveryBagItem(SLOT2_INDEX);
+        break;
+    case SLOT3_INDEX:
+        updateDeliveryBagItem(SLOT3_INDEX);
+        break;
+    case SLOT4_INDEX:
+        updateDeliveryBagItem(SLOT4_INDEX);
+        break;
+    case SLOT5_INDEX:
+        updateDeliveryBagItem(SLOT5_INDEX);
+        break;
+    case SLOT6_INDEX:
+        updateDeliveryBagItem(SLOT6_INDEX);
+        break;
+    case SLOT7_INDEX:
+        updateDeliveryBagItem(SLOT7_INDEX);
+        break;
+    case SLOT8_INDEX:
+        updateDeliveryBagItem(SLOT8_INDEX);
+        break;
     }
 
     lines[SLOT1_INDEX].printf(" <%s>", item_id_to_str(dComIfGs_getItemReserve(SLOT1_INDEX)));

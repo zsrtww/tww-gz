@@ -77,21 +77,21 @@ const char* bait_to_str(u8 slot) {
         return item_id_to_str(dComIfGs_getItemBait(slot));
     } else {
         switch (dComIfGs_getBaitNum(slot)) {
-            case 0:
-                return "All Purpose Bait (0)";
-                break;
-            case 1:
-                return "All Purpose Bait (1)";
-                break;
-            case 2:
-                return "All Purpose Bait (2)";
-                break;
-            case 3:
-                return "All Purpose Bait (3)";
-                break;
-            default:
-                return "All Purpose Bait (0)";
-                break;
+        case 0:
+            return "All Purpose Bait (0)";
+            break;
+        case 1:
+            return "All Purpose Bait (1)";
+            break;
+        case 2:
+            return "All Purpose Bait (2)";
+            break;
+        case 3:
+            return "All Purpose Bait (3)";
+            break;
+        default:
+            return "All Purpose Bait (0)";
+            break;
         }
     }
 }
@@ -105,30 +105,30 @@ void BaitBagMenu::draw() {
     }
 
     switch (cursor.y) {
-        case BAITSLOT1_INDEX:
-            updateBaitBagItem(BAITSLOT1_INDEX);
-            break;
-        case BAITSLOT2_INDEX:
-            updateBaitBagItem(BAITSLOT2_INDEX);
-            break;
-        case BAITSLOT3_INDEX:
-            updateBaitBagItem(BAITSLOT3_INDEX);
-            break;
-        case BAITSLOT4_INDEX:
-            updateBaitBagItem(BAITSLOT4_INDEX);
-            break;
-        case BAITSLOT5_INDEX:
-            updateBaitBagItem(BAITSLOT5_INDEX);
-            break;
-        case BAITSLOT6_INDEX:
-            updateBaitBagItem(BAITSLOT6_INDEX);
-            break;
-        case BAITSLOT7_INDEX:
-            updateBaitBagItem(BAITSLOT7_INDEX);
-            break;
-        case BAITSLOT8_INDEX:
-            updateBaitBagItem(BAITSLOT8_INDEX);
-            break;
+    case BAITSLOT1_INDEX:
+        updateBaitBagItem(BAITSLOT1_INDEX);
+        break;
+    case BAITSLOT2_INDEX:
+        updateBaitBagItem(BAITSLOT2_INDEX);
+        break;
+    case BAITSLOT3_INDEX:
+        updateBaitBagItem(BAITSLOT3_INDEX);
+        break;
+    case BAITSLOT4_INDEX:
+        updateBaitBagItem(BAITSLOT4_INDEX);
+        break;
+    case BAITSLOT5_INDEX:
+        updateBaitBagItem(BAITSLOT5_INDEX);
+        break;
+    case BAITSLOT6_INDEX:
+        updateBaitBagItem(BAITSLOT6_INDEX);
+        break;
+    case BAITSLOT7_INDEX:
+        updateBaitBagItem(BAITSLOT7_INDEX);
+        break;
+    case BAITSLOT8_INDEX:
+        updateBaitBagItem(BAITSLOT8_INDEX);
+        break;
     }
 
     lines[BAITSLOT1_INDEX].printf(" <%s>", bait_to_str(BAITSLOT1_INDEX));

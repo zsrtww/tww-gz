@@ -90,15 +90,15 @@ void GZ_applyCheats() {
         u8 wallet_size = g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusA().getWalletSize();
 
         switch (wallet_size) {
-            case 0:
-                g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusA().setRupee(200);
-                break;
-            case 1:
-                g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusA().setRupee(1000);
-                break;
-            case 2:
-                g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusA().setRupee(5000);
-                break;
+        case 0:
+            g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusA().setRupee(200);
+            break;
+        case 1:
+            g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusA().setRupee(1000);
+            break;
+        case 2:
+            g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusA().setRupee(5000);
+            break;
         }
     }
 
