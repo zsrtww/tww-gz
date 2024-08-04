@@ -29,10 +29,10 @@ extern u8 g_geometryOpacity;
 extern u8 g_collisionRaise;
 
 namespace dCcS_Data {
-    extern int at_obj_count;
-    extern int tg_obj_count;
-    extern int co_obj_count;
-}
+extern int at_obj_count;
+extern int tg_obj_count;
+extern int co_obj_count;
+}  // namespace dCcS_Data
 
 class dCcS;
 void GZ_drawCc(dCcS* i_this);
@@ -90,7 +90,8 @@ void mDoExt_spherePacket__draw(mDoExt_spherePacket* i_this);
 
 class mDoExt_cylinderPacket {
 public:
-    mDoExt_cylinderPacket(cXyz& position, f32 radius, f32 height, const GXColor& color, u8 param_4) {
+    mDoExt_cylinderPacket(cXyz& position, f32 radius, f32 height, const GXColor& color,
+                          u8 param_4) {
         mPosition = position;
         mRadius = radius;
         mHeight = height;
@@ -205,7 +206,8 @@ void mDoExt_cylinderMPacket__draw(mDoExt_cylinderMPacket* i_this);
 
 class mDoExt_circlePacket {
 public:
-    mDoExt_circlePacket(cXyz& i_position, f32 i_radius, const GXColor& i_color, u8 param_3, u8 i_lineWidth) {
+    mDoExt_circlePacket(cXyz& i_position, f32 i_radius, const GXColor& i_color, u8 param_3,
+                        u8 i_lineWidth) {
         m_position = i_position;
         m_radius = i_radius;
         m_color = i_color;
@@ -251,10 +253,13 @@ void mDoExt_ArrowPacket__draw(mDoExt_ArrowPacket* i_this);
 
 void dDbVw_drawCubeXlu(cXyz& pos, cXyz& size, csXyz& angle, const GXColor& color);
 void dDbVw_drawSphereXlu(cXyz& position, f32 radius, const GXColor& color, u8 param_3);
-void dDbVw_drawCylinderXlu(cXyz& position, f32 radius, f32 height, const GXColor& color, u8 param_4);
+void dDbVw_drawCylinderXlu(cXyz& position, f32 radius, f32 height, const GXColor& color,
+                           u8 param_4);
 void dDbVw_drawCube8pXlu(cXyz* points, const GXColor& color);
 void dDbVw_drawTriangleXlu(cXyz* points, const GXColor& color, u8 param_2);
 void dDbVw_drawLineXlu(cXyz& pointA, cXyz& pointB, const GXColor& color, u8 param_3, u8 width);
 void dDbVw_drawCylinderMXlu(Mtx m, const GXColor& color, u8 param_2);
-void dDbVw_drawCircleXlu(cXyz& i_position, f32 i_radius, const GXColor& i_color, u8 param_3, u8 i_lineWidth);
-void dDbVw_drawArrowXlu(cXyz& i_startPos, cXyz& i_endPos, const GXColor& i_color, u8 i_clipZ, u8 i_lineWidth);
+void dDbVw_drawCircleXlu(cXyz& i_position, f32 i_radius, const GXColor& i_color, u8 param_3,
+                         u8 i_lineWidth);
+void dDbVw_drawArrowXlu(cXyz& i_startPos, cXyz& i_endPos, const GXColor& i_color, u8 i_clipZ,
+                        u8 i_lineWidth);

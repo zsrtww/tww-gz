@@ -163,8 +163,8 @@ KEEP_FUNC void GZ_handleFlags_PostLoop() {
 
 KEEP_FUNC void GZ_renderMenuTitle() {
     if (g_menuMgr->isOpen()) {
-        Font::GZ_drawStr("twwgz v" INTERNAL_GZ_VERSION, g_spriteOffsets[SPR_MENU_INDEX].x + 35.0f, 25.0f,
-                         g_cursorColor, g_dropShadows);
+        Font::GZ_drawStr("twwgz v" INTERNAL_GZ_VERSION, g_spriteOffsets[SPR_MENU_INDEX].x + 35.0f,
+                         25.0f, g_cursorColor, g_dropShadows);
         if (l_gzIconTex.loadCode == TexCode::TEX_OK) {
             Draw::drawRect(0xFFFFFFFF, {g_spriteOffsets[SPR_MENU_INDEX].x, 5.0f},
                            {30 * (isWidescreen ? 0.75f : 1.0f), 30}, &l_gzIconTex._texObj);
@@ -183,8 +183,8 @@ KEEP_FUNC void GZ_displaySplash() {
         }
 
         // Set up the splash properties
-        const char* name = "twwgz v" INTERNAL_GZ_VERSION;//MAKESTRING(PACKAGE_NAME);
-        const char* url = "github.com/zsrtww/tww-gz"; //MAKESTRING(PACKAGE_URL);
+        const char* name = "twwgz v" INTERNAL_GZ_VERSION;  // MAKESTRING(PACKAGE_NAME);
+        const char* url = "github.com/zsrtww/tww-gz";      // MAKESTRING(PACKAGE_URL);
         float splash_x = 200.0f;
         float splash_y = 440.0f;
 

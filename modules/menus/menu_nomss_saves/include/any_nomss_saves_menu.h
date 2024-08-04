@@ -19,7 +19,7 @@ enum AnyNoMssSaves {
     PG_FIGHT,
     MORTH_HOVER,
     GANONDORF,
-    
+
     ANY_NOMSS_SAVES_COUNT,
 };
 

@@ -53,7 +53,7 @@ KEEP_FUNC ToolsMenu::ToolsMenu(Cursor& cursor)
              "Change input viewer stick color if stick is in deadzone", true,
              &g_tools[DEADZONE_CHECKER_INDEX].active},
             //{"disable save checks", DISABLE_SVCHECK_INDEX, "Disables save location safety checks",
-            //true,
+            // true,
             //    &g_tools[DISABLE_SVCHECK_INDEX].active},
             {"intro skip", INTRO_SKIP_INDEX, "Skips the intro cutscenes when starting a new file",
              true, &g_tools[INTRO_SKIP_INDEX].active}} {}
@@ -62,7 +62,7 @@ ToolsMenu::~ToolsMenu() {}
 
 void ToolsMenu::draw() {
     cursor.move(0, MENU_LINE_NUM);
-    
+
     if (GZ_getButtonTrig(BACK_BUTTON)) {
         g_menuMgr->pop();
         return;
@@ -100,7 +100,8 @@ void ToolsMenu::draw() {
                 GZCmd_disable(Commands::CMD_AREA_RELOAD);
                 break;
             case INTRO_SKIP_INDEX:
-                *reinterpret_cast<u32*>(INTRO_SKIP_INST0_ADDR) = INTRO_SKIP_ORIG_INST0;  // bl dScnOpen_proc_c::proc_execute
+                *reinterpret_cast<u32*>(INTRO_SKIP_INST0_ADDR) =
+                    INTRO_SKIP_ORIG_INST0;  // bl dScnOpen_proc_c::proc_execute
                 DCFlushRange(reinterpret_cast<u32*>(INTRO_SKIP_INST0_ADDR), sizeof(u32));
                 ICInvalidateRange(reinterpret_cast<u32*>(INTRO_SKIP_INST0_ADDR), sizeof(u32));
 

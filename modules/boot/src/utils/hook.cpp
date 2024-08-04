@@ -67,7 +67,7 @@ void putSaveHook(void* addr, int stageNo) {
 
 int dScnPly__phase_1Hook(void* i_scene) {
     SaveManager::loadData();
-    
+
     return dScnPly__phase_1Trampoline(i_scene);
 }
 
@@ -75,16 +75,17 @@ int dScnPly__phase_4Hook(void* i_scene) {
     int ret = dScnPly__phase_4Trampoline(i_scene);
 
     // Only apply the `after` options now if phase 4 indicates the loading proccess is complete.
-    // If the rest of the phases need to run, the options will be applied later in `dScnPly__phase_compleate`.
+    // If the rest of the phases need to run, the options will be applied later in
+    // `dScnPly__phase_compleate`.
     if (ret == cPhs_COMPLEATE_e) {
         SaveManager::applyAfterOptions();
     }
-    
+
     return ret;
 }
 
 int dScnPly__phase_compleateHook(void* i_scene) {
-    // If execution reaches this point, it means that the loading process did not exit early in 
+    // If execution reaches this point, it means that the loading process did not exit early in
     // `dScnPly__phase_4`. So, apply the `after` options now.
     SaveManager::applyAfterOptions();
     return dScnPly__phase_compleateTrampoline(i_scene);
@@ -104,7 +105,8 @@ int dScnPly__phase_compleateHook(void* i_scene) {
 
 int dScnPly_DrawHook(void* _this) {
     // if DPAD_DOWN + Y + Z is pressed, change scene to map select
-    if (g_tools[MAP_SELECT_INDEX].active && mPadStatus.button == (CButton::DPAD_DOWN | CButton::Y | CButton::Z)) {
+    if (g_tools[MAP_SELECT_INDEX].active &&
+        mPadStatus.button == (CButton::DPAD_DOWN | CButton::Y | CButton::Z)) {
         // overwrite original path with our custom path
         strcpy(menu_data_path, "/twwgz/mn/Menu1.dat");
 
@@ -166,7 +168,8 @@ KEEP_FUNC void applyHooks() {
     APPLY_HOOK(draw, &draw_console, drawHook);
     APPLY_HOOK(PADRead, &PADRead, readControllerHook);
 
-    APPLY_HOOK(dComIfGs_setGameStartStage, &dComIfGs_setGameStartStage__Fv, dComIfGs_setGameStartStageHook);
+    APPLY_HOOK(dComIfGs_setGameStartStage, &dComIfGs_setGameStartStage__Fv,
+               dComIfGs_setGameStartStageHook);
     APPLY_HOOK(dScnPly_Draw, &dScnPly_Draw__FP13dScnPly_ply_c, dScnPly_DrawHook);
     APPLY_HOOK(putSave, &putSave__10dSv_info_cFi, putSaveHook);
     APPLY_HOOK(dScnPly__phase_1, &phase_1__FP13dScnPly_ply_c, dScnPly__phase_1Hook);

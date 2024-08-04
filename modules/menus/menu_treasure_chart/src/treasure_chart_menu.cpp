@@ -103,47 +103,79 @@ void TreasureChartMenu::draw() {
 
     updateTreasureChart(g_charts[cursor.y].byte, g_charts[cursor.y].index);
 
-    lines[MENU_TREASURE_CHART_1].printf(" <%s>", chart_to_str(g_charts[0].byte,g_charts[0].index));
-    lines[MENU_TREASURE_CHART_2].printf(" <%s>", chart_to_str(g_charts[1].byte,g_charts[1].index));
-    lines[MENU_TREASURE_CHART_3].printf(" <%s>", chart_to_str(g_charts[2].byte,g_charts[2].index));
-    lines[MENU_TREASURE_CHART_4].printf(" <%s>", chart_to_str(g_charts[3].byte,g_charts[3].index));
-    lines[MENU_TREASURE_CHART_5].printf(" <%s>", chart_to_str(g_charts[4].byte,g_charts[4].index));
-    lines[MENU_TREASURE_CHART_6].printf(" <%s>", chart_to_str(g_charts[5].byte,g_charts[5].index));
-    lines[MENU_TREASURE_CHART_7].printf(" <%s>", chart_to_str(g_charts[6].byte,g_charts[6].index));
-    lines[MENU_TREASURE_CHART_8].printf(" <%s>", chart_to_str(g_charts[7].byte,g_charts[7].index));
-    lines[MENU_TREASURE_CHART_9].printf(" <%s>", chart_to_str(g_charts[8].byte,g_charts[8].index));
-    lines[MENU_TREASURE_CHART_10].printf(" <%s>", chart_to_str(g_charts[9].byte,g_charts[9].index));
-    lines[MENU_TREASURE_CHART_11].printf(" <%s>", chart_to_str(g_charts[10].byte,g_charts[10].index));
-    lines[MENU_TREASURE_CHART_12].printf(" <%s>", chart_to_str(g_charts[11].byte,g_charts[11].index));
-    lines[MENU_TREASURE_CHART_13].printf(" <%s>", chart_to_str(g_charts[12].byte,g_charts[12].index));
-    lines[MENU_TREASURE_CHART_14].printf(" <%s>", chart_to_str(g_charts[13].byte,g_charts[13].index));
-    lines[MENU_TREASURE_CHART_15].printf(" <%s>", chart_to_str(g_charts[14].byte,g_charts[14].index));
-    lines[MENU_TREASURE_CHART_16].printf(" <%s>", chart_to_str(g_charts[15].byte,g_charts[15].index));
-    lines[MENU_TREASURE_CHART_17].printf(" <%s>", chart_to_str(g_charts[16].byte,g_charts[16].index));
-    lines[MENU_TREASURE_CHART_18].printf(" <%s>", chart_to_str(g_charts[17].byte,g_charts[17].index));
-    lines[MENU_TREASURE_CHART_19].printf(" <%s>", chart_to_str(g_charts[18].byte,g_charts[18].index));
-    lines[MENU_TREASURE_CHART_20].printf(" <%s>", chart_to_str(g_charts[19].byte,g_charts[19].index));
-    lines[MENU_TREASURE_CHART_21].printf(" <%s>", chart_to_str(g_charts[20].byte,g_charts[20].index));
-    lines[MENU_TREASURE_CHART_22].printf(" <%s>", chart_to_str(g_charts[21].byte,g_charts[21].index));
-    lines[MENU_TREASURE_CHART_23].printf(" <%s>", chart_to_str(g_charts[22].byte,g_charts[22].index));
-    lines[MENU_TREASURE_CHART_24].printf(" <%s>", chart_to_str(g_charts[23].byte,g_charts[23].index));
-    lines[MENU_TREASURE_CHART_25].printf(" <%s>", chart_to_str(g_charts[24].byte,g_charts[24].index));
-    lines[MENU_TREASURE_CHART_26].printf(" <%s>", chart_to_str(g_charts[25].byte,g_charts[25].index));
-    lines[MENU_TREASURE_CHART_27].printf(" <%s>", chart_to_str(g_charts[26].byte,g_charts[26].index));
-    lines[MENU_TREASURE_CHART_28].printf(" <%s>", chart_to_str(g_charts[27].byte,g_charts[27].index));
-    lines[MENU_TREASURE_CHART_29].printf(" <%s>", chart_to_str(g_charts[28].byte,g_charts[28].index));
-    lines[MENU_TREASURE_CHART_30].printf(" <%s>", chart_to_str(g_charts[29].byte,g_charts[29].index));
-    lines[MENU_TREASURE_CHART_31].printf(" <%s>", chart_to_str(g_charts[30].byte,g_charts[30].index));
-    lines[MENU_TREASURE_CHART_32].printf(" <%s>", chart_to_str(g_charts[31].byte,g_charts[31].index));
-    lines[MENU_TREASURE_CHART_33].printf(" <%s>", chart_to_str(g_charts[32].byte,g_charts[32].index));
-    lines[MENU_TREASURE_CHART_34].printf(" <%s>", chart_to_str(g_charts[33].byte,g_charts[33].index));
-    lines[MENU_TREASURE_CHART_35].printf(" <%s>", chart_to_str(g_charts[34].byte,g_charts[34].index));
-    lines[MENU_TREASURE_CHART_36].printf(" <%s>", chart_to_str(g_charts[35].byte,g_charts[35].index));
-    lines[MENU_TREASURE_CHART_37].printf(" <%s>", chart_to_str(g_charts[36].byte,g_charts[36].index));
-    lines[MENU_TREASURE_CHART_38].printf(" <%s>", chart_to_str(g_charts[37].byte,g_charts[37].index));
-    lines[MENU_TREASURE_CHART_39].printf(" <%s>", chart_to_str(g_charts[38].byte,g_charts[38].index));
-    lines[MENU_TREASURE_CHART_40].printf(" <%s>", chart_to_str(g_charts[39].byte,g_charts[39].index));
-    lines[MENU_TREASURE_CHART_41].printf(" <%s>", chart_to_str(g_charts[40].byte,g_charts[40].index));
+    lines[MENU_TREASURE_CHART_1].printf(" <%s>", chart_to_str(g_charts[0].byte, g_charts[0].index));
+    lines[MENU_TREASURE_CHART_2].printf(" <%s>", chart_to_str(g_charts[1].byte, g_charts[1].index));
+    lines[MENU_TREASURE_CHART_3].printf(" <%s>", chart_to_str(g_charts[2].byte, g_charts[2].index));
+    lines[MENU_TREASURE_CHART_4].printf(" <%s>", chart_to_str(g_charts[3].byte, g_charts[3].index));
+    lines[MENU_TREASURE_CHART_5].printf(" <%s>", chart_to_str(g_charts[4].byte, g_charts[4].index));
+    lines[MENU_TREASURE_CHART_6].printf(" <%s>", chart_to_str(g_charts[5].byte, g_charts[5].index));
+    lines[MENU_TREASURE_CHART_7].printf(" <%s>", chart_to_str(g_charts[6].byte, g_charts[6].index));
+    lines[MENU_TREASURE_CHART_8].printf(" <%s>", chart_to_str(g_charts[7].byte, g_charts[7].index));
+    lines[MENU_TREASURE_CHART_9].printf(" <%s>", chart_to_str(g_charts[8].byte, g_charts[8].index));
+    lines[MENU_TREASURE_CHART_10].printf(" <%s>",
+                                         chart_to_str(g_charts[9].byte, g_charts[9].index));
+    lines[MENU_TREASURE_CHART_11].printf(" <%s>",
+                                         chart_to_str(g_charts[10].byte, g_charts[10].index));
+    lines[MENU_TREASURE_CHART_12].printf(" <%s>",
+                                         chart_to_str(g_charts[11].byte, g_charts[11].index));
+    lines[MENU_TREASURE_CHART_13].printf(" <%s>",
+                                         chart_to_str(g_charts[12].byte, g_charts[12].index));
+    lines[MENU_TREASURE_CHART_14].printf(" <%s>",
+                                         chart_to_str(g_charts[13].byte, g_charts[13].index));
+    lines[MENU_TREASURE_CHART_15].printf(" <%s>",
+                                         chart_to_str(g_charts[14].byte, g_charts[14].index));
+    lines[MENU_TREASURE_CHART_16].printf(" <%s>",
+                                         chart_to_str(g_charts[15].byte, g_charts[15].index));
+    lines[MENU_TREASURE_CHART_17].printf(" <%s>",
+                                         chart_to_str(g_charts[16].byte, g_charts[16].index));
+    lines[MENU_TREASURE_CHART_18].printf(" <%s>",
+                                         chart_to_str(g_charts[17].byte, g_charts[17].index));
+    lines[MENU_TREASURE_CHART_19].printf(" <%s>",
+                                         chart_to_str(g_charts[18].byte, g_charts[18].index));
+    lines[MENU_TREASURE_CHART_20].printf(" <%s>",
+                                         chart_to_str(g_charts[19].byte, g_charts[19].index));
+    lines[MENU_TREASURE_CHART_21].printf(" <%s>",
+                                         chart_to_str(g_charts[20].byte, g_charts[20].index));
+    lines[MENU_TREASURE_CHART_22].printf(" <%s>",
+                                         chart_to_str(g_charts[21].byte, g_charts[21].index));
+    lines[MENU_TREASURE_CHART_23].printf(" <%s>",
+                                         chart_to_str(g_charts[22].byte, g_charts[22].index));
+    lines[MENU_TREASURE_CHART_24].printf(" <%s>",
+                                         chart_to_str(g_charts[23].byte, g_charts[23].index));
+    lines[MENU_TREASURE_CHART_25].printf(" <%s>",
+                                         chart_to_str(g_charts[24].byte, g_charts[24].index));
+    lines[MENU_TREASURE_CHART_26].printf(" <%s>",
+                                         chart_to_str(g_charts[25].byte, g_charts[25].index));
+    lines[MENU_TREASURE_CHART_27].printf(" <%s>",
+                                         chart_to_str(g_charts[26].byte, g_charts[26].index));
+    lines[MENU_TREASURE_CHART_28].printf(" <%s>",
+                                         chart_to_str(g_charts[27].byte, g_charts[27].index));
+    lines[MENU_TREASURE_CHART_29].printf(" <%s>",
+                                         chart_to_str(g_charts[28].byte, g_charts[28].index));
+    lines[MENU_TREASURE_CHART_30].printf(" <%s>",
+                                         chart_to_str(g_charts[29].byte, g_charts[29].index));
+    lines[MENU_TREASURE_CHART_31].printf(" <%s>",
+                                         chart_to_str(g_charts[30].byte, g_charts[30].index));
+    lines[MENU_TREASURE_CHART_32].printf(" <%s>",
+                                         chart_to_str(g_charts[31].byte, g_charts[31].index));
+    lines[MENU_TREASURE_CHART_33].printf(" <%s>",
+                                         chart_to_str(g_charts[32].byte, g_charts[32].index));
+    lines[MENU_TREASURE_CHART_34].printf(" <%s>",
+                                         chart_to_str(g_charts[33].byte, g_charts[33].index));
+    lines[MENU_TREASURE_CHART_35].printf(" <%s>",
+                                         chart_to_str(g_charts[34].byte, g_charts[34].index));
+    lines[MENU_TREASURE_CHART_36].printf(" <%s>",
+                                         chart_to_str(g_charts[35].byte, g_charts[35].index));
+    lines[MENU_TREASURE_CHART_37].printf(" <%s>",
+                                         chart_to_str(g_charts[36].byte, g_charts[36].index));
+    lines[MENU_TREASURE_CHART_38].printf(" <%s>",
+                                         chart_to_str(g_charts[37].byte, g_charts[37].index));
+    lines[MENU_TREASURE_CHART_39].printf(" <%s>",
+                                         chart_to_str(g_charts[38].byte, g_charts[38].index));
+    lines[MENU_TREASURE_CHART_40].printf(" <%s>",
+                                         chart_to_str(g_charts[39].byte, g_charts[39].index));
+    lines[MENU_TREASURE_CHART_41].printf(" <%s>",
+                                         chart_to_str(g_charts[40].byte, g_charts[40].index));
 
     cursor.move(0, MENU_LINE_NUM);
     GZ_drawMenuLines(lines, cursor.y, MENU_LINE_NUM);

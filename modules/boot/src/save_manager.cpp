@@ -20,27 +20,27 @@ bool SaveManager::s_injectSave = false;
 
 void SaveManager::injectSave(void* src) {
     memcpy(&g_dComIfG_gameInfo.info.mSavedata.mPlayer.mPlayerStatusA, src, 0x18);
-    memcpy(&g_dComIfG_gameInfo.info.mSavedata.mPlayer.mPlayerStatusB, (char*) src + 0x18, 0x18);
-    memcpy(&g_dComIfG_gameInfo.info.mSavedata.mPlayer.mReturnPlace, (char*) src + 0x30, 0xc);
-    memcpy(&g_dComIfG_gameInfo.info.mSavedata.mPlayer.mPlayerItem, (char*) src + 0x3c, 0x15);
-    memcpy(&g_dComIfG_gameInfo.info.mSavedata.mPlayer.mGetItem, (char*) src + 0x51, 0x15);
-    memcpy(&g_dComIfG_gameInfo.info.mSavedata.mPlayer.mItemRecord, (char*) src + 0x66, 8);
-    memcpy(&g_dComIfG_gameInfo.info.mSavedata.mPlayer.mItemMax, (char*) src + 0x6e, 8);
-    memcpy(&g_dComIfG_gameInfo.info.mSavedata.mPlayer.mBagItem, (char*) src + 0x76, 0x18);
-    memcpy(&g_dComIfG_gameInfo.info.mSavedata.mPlayer.mGetBagItem, (char*) src + 0x8e, 0xc);
-    memcpy(&g_dComIfG_gameInfo.info.mSavedata.mPlayer.mBagItemRecord, (char*) src + 0x9a, 0x18);
-    memcpy(&g_dComIfG_gameInfo.info.mSavedata.mPlayer.mCollect, (char*) src + 0xb2, 0xd);
-    memcpy(&g_dComIfG_gameInfo.info.mSavedata.mPlayer.mMap, (char*) src + 0xbf, 0x84);
-    memcpy(&g_dComIfG_gameInfo.info.mSavedata.mPlayer.mInfo, (char*) src + 0x143, 0x5c);
-    memcpy(&g_dComIfG_gameInfo.info.mSavedata.mPlayer.mConfig, (char*) src + 0x19f, 5);
-    memcpy((void*) &g_dComIfG_gameInfo.info.mSavedata.mPlayer.mPriest, (char*) src + 0x1a4, 0x10);
-    memcpy(&g_dComIfG_gameInfo.info.mSavedata.mPlayer.mStatusC, (char*) src + 0x1b4, 0x1c0);
+    memcpy(&g_dComIfG_gameInfo.info.mSavedata.mPlayer.mPlayerStatusB, (char*)src + 0x18, 0x18);
+    memcpy(&g_dComIfG_gameInfo.info.mSavedata.mPlayer.mReturnPlace, (char*)src + 0x30, 0xc);
+    memcpy(&g_dComIfG_gameInfo.info.mSavedata.mPlayer.mPlayerItem, (char*)src + 0x3c, 0x15);
+    memcpy(&g_dComIfG_gameInfo.info.mSavedata.mPlayer.mGetItem, (char*)src + 0x51, 0x15);
+    memcpy(&g_dComIfG_gameInfo.info.mSavedata.mPlayer.mItemRecord, (char*)src + 0x66, 8);
+    memcpy(&g_dComIfG_gameInfo.info.mSavedata.mPlayer.mItemMax, (char*)src + 0x6e, 8);
+    memcpy(&g_dComIfG_gameInfo.info.mSavedata.mPlayer.mBagItem, (char*)src + 0x76, 0x18);
+    memcpy(&g_dComIfG_gameInfo.info.mSavedata.mPlayer.mGetBagItem, (char*)src + 0x8e, 0xc);
+    memcpy(&g_dComIfG_gameInfo.info.mSavedata.mPlayer.mBagItemRecord, (char*)src + 0x9a, 0x18);
+    memcpy(&g_dComIfG_gameInfo.info.mSavedata.mPlayer.mCollect, (char*)src + 0xb2, 0xd);
+    memcpy(&g_dComIfG_gameInfo.info.mSavedata.mPlayer.mMap, (char*)src + 0xbf, 0x84);
+    memcpy(&g_dComIfG_gameInfo.info.mSavedata.mPlayer.mInfo, (char*)src + 0x143, 0x5c);
+    memcpy(&g_dComIfG_gameInfo.info.mSavedata.mPlayer.mConfig, (char*)src + 0x19f, 5);
+    memcpy((void*)&g_dComIfG_gameInfo.info.mSavedata.mPlayer.mPriest, (char*)src + 0x1a4, 0x10);
+    memcpy(&g_dComIfG_gameInfo.info.mSavedata.mPlayer.mStatusC, (char*)src + 0x1b4, 0x1c0);
 
-    memcpy(&g_dComIfG_gameInfo.info.mSavedata.mSave, (char*) src + 0x374, 0x240);
+    memcpy(&g_dComIfG_gameInfo.info.mSavedata.mSave, (char*)src + 0x374, 0x240);
 
-    memcpy(&g_dComIfG_gameInfo.info.mSavedata.mOcean, (char*) src + 0x5b4, 0x64);
+    memcpy(&g_dComIfG_gameInfo.info.mSavedata.mOcean, (char*)src + 0x5b4, 0x64);
 
-    memcpy(&g_dComIfG_gameInfo.info.mSavedata.mEvent, (char*) src + 0x618, 0x100);
+    memcpy(&g_dComIfG_gameInfo.info.mSavedata.mEvent, (char*)src + 0x618, 0x100);
 
     dComIfGs_getSave(g_dComIfG_gameInfo.info.mDan.mStageNo);
 }
@@ -69,14 +69,15 @@ void SaveManager::loadSave(uint32_t id, const char* category, special i_specials
     snprintf(l_filename, sizeof(l_filename), "twwgz/save_files/%s.bin", category);
     loadFile(l_filename, &gSaveManager.mPracticeSaveInfo, sizeof(gSaveManager.mPracticeSaveInfo),
              id * sizeof(gSaveManager.mPracticeSaveInfo));
-    
+
     snprintf(l_filename, sizeof(l_filename), "twwgz/save_files/%s/%s.bin", category,
              gSaveManager.mPracticeSaveInfo.filename);
 
     SaveManager::defaultLoad();
 
     if (gSaveManager.mPracticeSaveInfo.requirements) {
-        gSaveManager.mPracticeFileOpts.inject_options_after_counter = gSaveManager.mPracticeSaveInfo.counter;
+        gSaveManager.mPracticeFileOpts.inject_options_after_counter =
+            gSaveManager.mPracticeSaveInfo.counter;
     }
 
     // If the selected file was a special, run the special callbacks
@@ -101,14 +102,15 @@ void SaveManager::loadSavefile(const char* l_filename) {
     loadFile(l_filename, MEMFILE_BUF, sizeof(dSv_save_c), 0);
 }
 
-KEEP_FUNC void SaveManager::triggerLoad(uint32_t id, const char* category, special i_specials[], int size) {
+KEEP_FUNC void SaveManager::triggerLoad(uint32_t id, const char* category, special i_specials[],
+                                        int size) {
     loadSave(id, category, i_specials, size);
 
     SaveManager::loadSavefile(l_filename);
-    dSv_save_c* save = (dSv_save_c*) MEMFILE_BUF;
+    dSv_save_c* save = (dSv_save_c*)MEMFILE_BUF;
 
     int state = tww_getLayerNo(save->getPlayer().mReturnPlace.mName,
-                              save->getPlayer().mReturnPlace.mRoomNo, 0xFF);
+                               save->getPlayer().mReturnPlace.mRoomNo, 0xFF);
 
     g_dComIfG_gameInfo.play.mNextStage.mRoomNo = save->getPlayer().mReturnPlace.mRoomNo;
     g_dComIfG_gameInfo.play.mNextStage.mPoint = save->getPlayer().mReturnPlace.mPoint;
@@ -124,7 +126,6 @@ KEEP_FUNC void SaveManager::triggerLoad(uint32_t id, const char* category, speci
     s_injectSave = true;
 
     g_dComIfG_gameInfo.info.getRestart().mLastMode = 0;
-    
 }
 
 // runs at the beginning of phase_1 of dScnPly__phase_1 load sequence
@@ -144,7 +145,8 @@ KEEP_FUNC void SaveManager::loadData() {
                 u8 highest_priority = g_item_equip_priorities[i].high_priority;
                 u8 medium_priority = g_item_equip_priorities[i].medium_priority;
 
-                if (item_slot == NO_ITEM) continue;
+                if (item_slot == NO_ITEM)
+                    continue;
 
                 if (item_slot == cur_item_x || item_slot == cur_item_y || item_slot == cur_item_z) {
                     if (new_items[highest_priority] == NO_ITEM) {

@@ -38,20 +38,15 @@ void updateSpoilsBagItem(u8 slot) {
     Cursor::moveListSimple(new_item_id);
     if (new_item_id == NO_ITEM - 1) {
         new_item_id = NO_ITEM;
-    }
-    else if (new_item_id == 0) {
+    } else if (new_item_id == 0) {
         new_item_id = JOY_PENDANT;
-    }
-    else if (new_item_id == JOY_PENDANT - 1) {
+    } else if (new_item_id == JOY_PENDANT - 1) {
         new_item_id = NO_ITEM;
-    }
-    else if (new_item_id == JOY_PENDANT + 1) {
+    } else if (new_item_id == JOY_PENDANT + 1) {
         new_item_id = SKULL_NECKLACE;
-    }
-    else if (new_item_id == SKULL_NECKLACE - 1) {
+    } else if (new_item_id == SKULL_NECKLACE - 1) {
         new_item_id = JOY_PENDANT;
-    }
-    else if (new_item_id == BLUE_CHU_JELLY + 1) {
+    } else if (new_item_id == BLUE_CHU_JELLY + 1) {
         new_item_id = BLUE_CHU_JELLY;
     }
     updateSpoilsBagSlot(slot, new_item_id);
@@ -92,14 +87,22 @@ void SpoilsBagMenu::draw() {
         break;
     }
 
-    lines[SPOILSSLOT1_INDEX].printf(" <%s>", item_id_to_str(dComIfGs_getItemBeast(SPOILSSLOT1_INDEX)));
-    lines[SPOILSSLOT2_INDEX].printf(" <%s>", item_id_to_str(dComIfGs_getItemBeast(SPOILSSLOT2_INDEX)));
-    lines[SPOILSSLOT3_INDEX].printf(" <%s>", item_id_to_str(dComIfGs_getItemBeast(SPOILSSLOT3_INDEX)));
-    lines[SPOILSSLOT4_INDEX].printf(" <%s>", item_id_to_str(dComIfGs_getItemBeast(SPOILSSLOT4_INDEX)));
-    lines[SPOILSSLOT5_INDEX].printf(" <%s>", item_id_to_str(dComIfGs_getItemBeast(SPOILSSLOT5_INDEX)));
-    lines[SPOILSSLOT6_INDEX].printf(" <%s>", item_id_to_str(dComIfGs_getItemBeast(SPOILSSLOT6_INDEX)));
-    lines[SPOILSSLOT7_INDEX].printf(" <%s>", item_id_to_str(dComIfGs_getItemBeast(SPOILSSLOT7_INDEX)));
-    lines[SPOILSSLOT8_INDEX].printf(" <%s>", item_id_to_str(dComIfGs_getItemBeast(SPOILSSLOT8_INDEX)));
+    lines[SPOILSSLOT1_INDEX].printf(" <%s>",
+                                    item_id_to_str(dComIfGs_getItemBeast(SPOILSSLOT1_INDEX)));
+    lines[SPOILSSLOT2_INDEX].printf(" <%s>",
+                                    item_id_to_str(dComIfGs_getItemBeast(SPOILSSLOT2_INDEX)));
+    lines[SPOILSSLOT3_INDEX].printf(" <%s>",
+                                    item_id_to_str(dComIfGs_getItemBeast(SPOILSSLOT3_INDEX)));
+    lines[SPOILSSLOT4_INDEX].printf(" <%s>",
+                                    item_id_to_str(dComIfGs_getItemBeast(SPOILSSLOT4_INDEX)));
+    lines[SPOILSSLOT5_INDEX].printf(" <%s>",
+                                    item_id_to_str(dComIfGs_getItemBeast(SPOILSSLOT5_INDEX)));
+    lines[SPOILSSLOT6_INDEX].printf(" <%s>",
+                                    item_id_to_str(dComIfGs_getItemBeast(SPOILSSLOT6_INDEX)));
+    lines[SPOILSSLOT7_INDEX].printf(" <%s>",
+                                    item_id_to_str(dComIfGs_getItemBeast(SPOILSSLOT7_INDEX)));
+    lines[SPOILSSLOT8_INDEX].printf(" <%s>",
+                                    item_id_to_str(dComIfGs_getItemBeast(SPOILSSLOT8_INDEX)));
 
     cursor.move(0, MENU_LINE_NUM);
     GZ_drawMenuLines(lines, cursor.y, MENU_LINE_NUM);

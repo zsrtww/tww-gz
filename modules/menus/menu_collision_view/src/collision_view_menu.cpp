@@ -23,7 +23,7 @@ KEEP_FUNC CollisionViewMenu::CollisionViewMenu(Cursor& cursor)
                         {"wall polys", VIEW_POLYGON_WALL, "view wall polygons", true,
                          &g_collisionFlags[VIEW_POLYGON_WALL].active},
                         {"poly edges", VIEW_POLYGON_EDGES, "view polygon edges", true,
-                         &g_collisionFlags[VIEW_POLYGON_EDGES].active},                         
+                         &g_collisionFlags[VIEW_POLYGON_EDGES].active},
                         {"poly draw raise:", 7, "amount to raise the drawn polygon by"},
                         {"opacity:", 8, "opacity of drawn geometry"},
                     } {}

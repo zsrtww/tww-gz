@@ -143,7 +143,8 @@ void drawCross(uint32_t color, Vec2 pos, float size, float x_ratio) {
 }
 
 bool stickInRectRange(s8 xmin, s8 ymin, s8 xmax, s8 ymax) {
-    return ((mPadStatus.stick_x <= xmax) && (mPadStatus.stick_y <= ymax) && (mPadStatus.stick_x >= xmin) && (mPadStatus.stick_y >= ymin));
+    return ((mPadStatus.stick_x <= xmax) && (mPadStatus.stick_y <= ymax) &&
+            (mPadStatus.stick_x >= xmin) && (mPadStatus.stick_y >= ymin));
 }
 
 void InputViewer::drawViewer(Vec2 pos, float scale, bool is_shadow, bool wide_screen) {
@@ -194,8 +195,8 @@ void InputViewer::drawViewer(Vec2 pos, float scale, bool is_shadow, bool wide_sc
         col = WHITE;
     }
 
-    drawStickOutline(is_shadow ? 0x00000060 : col,
-                     {pos.x + 17.5f * scale, pos.y + 30.f * scale}, 35.0f * scale, x_ratio);
+    drawStickOutline(is_shadow ? 0x00000060 : col, {pos.x + 17.5f * scale, pos.y + 30.f * scale},
+                     35.0f * scale, x_ratio);
     drawStickOutline(is_shadow ? 0x00000060 : 0xFFD138FF,
                      {pos.x + 62.5f * scale, pos.y + 30.f * scale}, 35.0f * scale, x_ratio);
     drawEllipse(is_shadow ? 0x00000060 : col,
@@ -210,15 +211,11 @@ void InputViewer::drawViewer(Vec2 pos, float scale, bool is_shadow, bool wide_sc
     // Analog triggers
     Draw::drawRectOutline(is_shadow ? 0x00000060 : 0xFFFFFFFF, {pos.x, pos.y},
                           {35.f * scale, 7.f * scale}, OUTLINE_WIDTH);
-    Draw::drawRect(is_shadow                     ? 0x00000060 :
-                   GZ_getButtonPressed(GZPad::L) ? 0x00FF00FF :
-                                                   0xFFFFFFFF,
+    Draw::drawRect(is_shadow ? 0x00000060 : GZ_getButtonPressed(GZPad::L) ? 0x00FF00FF : 0xFFFFFFFF,
                    {pos.x, pos.y}, {35.f * mPadButton.mAnalogLf * scale, 7.f * scale});
     Draw::drawRectOutline(is_shadow ? 0x00000060 : 0xFFFFFFFF, {pos.x + 45.f * scale, pos.y},
                           {35.f * scale, 7.f * scale}, OUTLINE_WIDTH);
-    Draw::drawRect(is_shadow                     ? 0x00000060 :
-                   GZ_getButtonPressed(GZPad::R) ? 0x00FF00FF :
-                                                   0xFFFFFFFF,
+    Draw::drawRect(is_shadow ? 0x00000060 : GZ_getButtonPressed(GZPad::R) ? 0x00FF00FF : 0xFFFFFFFF,
                    {pos.x + (45.f + 35.f * (1 - mPadButton.mAnalogRf)) * scale, pos.y},
                    {35.f * mPadButton.mAnalogRf * scale, 7.f * scale});
 

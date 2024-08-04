@@ -16,7 +16,8 @@ KEEP_FUNC SceneMenu::SceneMenu(Cursor& cursor)
                         {"current hour", TIME_HOURS_INDEX, "Change the current hour"},
                         {"current minute", TIME_MINUTES_INDEX, "Change the current minute"},
                         {"current date", MODIFY_DATE_INDEX, "Change the current date/moon phase"},
-                        {"collision viewer", COLLISION_VIEW_INDEX, "Change Collision Viewer settings", false},
+                        {"collision viewer", COLLISION_VIEW_INDEX,
+                         "Change Collision Viewer settings", false},
                     } {}
 
 SceneMenu::~SceneMenu() {}

@@ -64,10 +64,10 @@ int32_t GZ_storageRead(Storage* storage, void* data, int32_t size, int32_t offse
     return result;
 }
 
-
 void GZ_storeSaveLayout(GZSaveLayout& save_layout) {
     memcpy(save_layout.mCheats, g_cheats, sizeof(g_cheats));
-    memcpy(save_layout.mItemEquipSettings, g_item_equip_priorities, sizeof(g_item_equip_priorities));
+    memcpy(save_layout.mItemEquipSettings, g_item_equip_priorities,
+           sizeof(g_item_equip_priorities));
     memcpy(save_layout.mTools, g_tools, sizeof(g_tools));
     memcpy(save_layout.mCommandStates, g_commandStates, sizeof(g_commandStates));
     memcpy(save_layout.mWatches, g_watches, sizeof(g_watches));
@@ -78,16 +78,15 @@ void GZ_storeSaveLayout(GZSaveLayout& save_layout) {
     save_layout.mFontType = g_fontType;
 }
 
-
 void GZ_loadSaveLayout(GZSaveLayout& save_layout) {
     memcpy(g_cheats, save_layout.mCheats, sizeof(g_cheats));
-    memcpy(g_item_equip_priorities, save_layout.mItemEquipSettings, sizeof(g_item_equip_priorities));
+    memcpy(g_item_equip_priorities, save_layout.mItemEquipSettings,
+           sizeof(g_item_equip_priorities));
     memcpy(g_tools, save_layout.mTools, sizeof(g_tools));
     memcpy(g_commandStates, save_layout.mCommandStates, sizeof(g_commandStates));
     memcpy(g_watches, save_layout.mWatches, sizeof(g_watches));
     memcpy(g_spriteOffsets, save_layout.mSpriteOffsets, sizeof(g_spriteOffsets));
 
-    
     g_dropShadows = save_layout.mDropShadows;
     g_cursorColorType = save_layout.mCursorColType;
     g_fontType = save_layout.mFontType;
@@ -141,7 +140,8 @@ int32_t GZ_readSaveFile(Storage* storage, GZSaveFile& save_file, int32_t sector_
                                      save_file.offsets[idx], sector_size));                        \
     }
     assert_read_entry(SV_CHEATS_INDEX, save_file.data.mCheats, sizeof(save_file.data.mCheats));
-    assert_read_entry(SV_ITEM_EQUIP_INDEX, save_file.data.mItemEquipSettings, sizeof(save_file.data.mItemEquipSettings));
+    assert_read_entry(SV_ITEM_EQUIP_INDEX, save_file.data.mItemEquipSettings,
+                      sizeof(save_file.data.mItemEquipSettings));
     assert_read_entry(SV_TOOLS_INDEX, save_file.data.mTools, sizeof(save_file.data.mTools));
     assert_read_entry(SV_WATCHES_INDEX, save_file.data.mWatches, sizeof(save_file.data.mWatches));
     assert_read_entry(SV_COMMANDS, save_file.data.mCommandStates,

@@ -33,14 +33,14 @@ void updateSpoilsBagAmount(u8 index) {
         amount = 99;
     }
     if (amount > 99) {
-        amount = 0;    
+        amount = 0;
     }
     dComIfGs_setBeastNum(index, amount);
 }
 
 void AmountMenu::draw() {
     cursor.setMode(Cursor::MODE_LIST);
-    
+
     u16 g_healthNum = dComIfGs_getLife();
     u8 g_bombNum = dComIfGs_getBombNum();
     u8 g_arrowNum = dComIfGs_getArrowNum();

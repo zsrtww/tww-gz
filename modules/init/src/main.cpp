@@ -38,7 +38,7 @@ void main() {
     g_drawListener->addListener(GZ_displayZombieHoverInfo);
     g_drawListener->addListener(GZ_displaySplash);
     g_drawListener->addListener(GZ_drawWatches);
-    
+
     // Init the pre-loop listener
     g_PreLoopListener = new PreLoopListener();
     g_PreLoopListener->addListener(GZ_handleCardLoad);
@@ -47,7 +47,7 @@ void main() {
     g_PreLoopListener->addListener(GZ_setCursorColor);
     g_PreLoopListener->addListener(GZ_handleRelTools);
     g_PreLoopListener->addListener(GZ_drawPolygons);
-    
+
     // Init the post-loop listener
     g_PostLoopListener = new PostLoopListener();
     g_PostLoopListener->addListener(GZ_handleFlags_PostLoop);

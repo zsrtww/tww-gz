@@ -7,18 +7,19 @@
 #define LINE_NUM 4
 
 KEEP_FUNC TunerFlagMenu::TunerFlagMenu(Cursor& cursor)
-    : Menu(cursor),
-      lines{
-          {"Kooloo-Limpah 10s Balloon+Shield", 0,
-           "Adds the 10s Balloon+Shield to the Kooloo-Limpah pool", true, &g_flags[KOOLOO_LIMPAH]},
-          {"Tingle Balloon Discount", 1, "Gives Tingle Balloon Discount from 30 to 20 rupees", true,
-           &g_flags[BALLOON_DISCOUNT]},
-          {"Tings Discount", 2, "Gives 50 percent off discount for all tings", true,
-           &g_flags[TINGS_DISCOUNT]},
-          {"Hand-Me-Down Tingle Tuner", 3,
-           "Unlocks the Hand-Me-Down Tingle Tuner item in the tuner shop", true,
-           &g_flags[HAND_ME_DOWN_TUNER]},
-      } {}
+    : Menu(cursor), lines{
+                        {"Kooloo-Limpah 10s Balloon+Shield", 0,
+                         "Adds the 10s Balloon+Shield to the Kooloo-Limpah pool", true,
+                         &g_flags[KOOLOO_LIMPAH]},
+                        {"Tingle Balloon Discount", 1,
+                         "Gives Tingle Balloon Discount from 30 to 20 rupees", true,
+                         &g_flags[BALLOON_DISCOUNT]},
+                        {"Tings Discount", 2, "Gives 50 percent off discount for all tings", true,
+                         &g_flags[TINGS_DISCOUNT]},
+                        {"Hand-Me-Down Tingle Tuner", 3,
+                         "Unlocks the Hand-Me-Down Tingle Tuner item in the tuner shop", true,
+                         &g_flags[HAND_ME_DOWN_TUNER]},
+                    } {}
 
 TunerFlagMenu::~TunerFlagMenu() {}
 

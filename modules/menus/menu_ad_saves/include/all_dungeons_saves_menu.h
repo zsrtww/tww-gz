@@ -49,7 +49,7 @@ enum AllDungeonsSaves {
     PG_SKIP_AD,
     PUPPET_GANON_AD,
     GANONDORF_AD,
-    
+
     ALL_DUNGEONS_SAVES_COUNT,
 };
 

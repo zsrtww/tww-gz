@@ -255,14 +255,16 @@ void WatchesMenu::drawMemoryLines() {
                     if (GZ_getButtonRepeat(GZPad::DPAD_RIGHT)) {
                         if (g_watches[i].type == MEM_TYPE_STR) {
                             g_watches[i].type = MEM_TYPE_U8;
-                        } else if (g_watches[i].type >= MEM_TYPE_U8 && g_watches[i].type < MEM_TYPE_STR) {
+                        } else if (g_watches[i].type >= MEM_TYPE_U8 &&
+                                   g_watches[i].type < MEM_TYPE_STR) {
                             g_watches[i].type++;
                         }
                     }
                     if (GZ_getButtonRepeat(GZPad::DPAD_LEFT)) {
                         if (g_watches[i].type == MEM_TYPE_U8) {
                             g_watches[i].type = MEM_TYPE_STR;
-                        } else if (g_watches[i].type > MEM_TYPE_U8 && g_watches[i].type <= MEM_TYPE_STR) {
+                        } else if (g_watches[i].type > MEM_TYPE_U8 &&
+                                   g_watches[i].type <= MEM_TYPE_STR) {
                             g_watches[i].type--;
                         }
                     }
