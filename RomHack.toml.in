@@ -13,11 +13,6 @@ map = "@TWWGZ_CFG_SRC_MAP@"
 map = "@TWWGZ_CFG_BLD_MAP@"
 iso = "@TWWGZ_CFG_BLD_ISO@"
 
-[link]
-entries = ["apply_lib_hooks"]
-base = "@TWWGZ_CFG_LINK_BASE@"
-libs = ["libtwwgz.a"]
-
 [files]
 # textures
 "twwgz/tex" = "../res/tex"

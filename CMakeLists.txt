@@ -57,7 +57,7 @@ file(MAKE_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/isos)
 file(MAKE_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/bin)
 
 # Set compiler stuff
-include_directories(include external)
+include_directories(external)
 add_definitions(-D${REGION} -DGZ_VERSION=${CMAKE_PROJECT_VERSION} -D_PROJECT_NAME="${CMAKE_PROJECT_NAME}" -D_VERSION="${CMAKE_PROJECT_VERSION}" -D_VARIANT="public" -D_BUILDID="${CMAKE_PROJECT_VERSION}" ${DEBUG} ${RUN_PR_TEST})
 add_compile_options(-fdiagnostics-color=always -fvisibility=hidden)
 
@@ -74,10 +74,9 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/RomHack.toml.in ${CMAKE_CURRENT_BINAR
 
 include_directories(${CMAKE_CURRENT_BINARY_DIR}/include)
 
-add_subdirectory(src)
 add_subdirectory(modules)
 
-add_library(twwgz STATIC "${CPPFILES}")
+add_custom_target(twwgz ALL)
 add_dependencies(twwgz tww_c gcn_c modules)
 set_property(TARGET twwgz PROPERTY COMPILE_FLAGS "-g -c -Oz -std=gnu++20 -Wall ${DEVKITPRO_MACHDEP}")
 
