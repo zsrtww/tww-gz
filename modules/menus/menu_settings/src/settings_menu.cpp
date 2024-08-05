@@ -15,28 +15,26 @@ KEEP_VAR f32 waterSpeed = 1500.0f;
 KEEP_VAR f32 landSpeed = 150.0f;
 
 KEEP_FUNC SettingsMenu::SettingsMenu(Cursor& cursor)
-    : Menu(cursor), lines{
-                        {"cursor color:", CURSOR_COLOR_INDEX, "Change cursor color", false, nullptr,
-                         MAX_CURSOR_COLOR_OPTIONS},
-                        {"font:", FONT_INDEX, "Change font", false, nullptr, FONT_OPTIONS_COUNT},
-                        {"drop shadows", DROP_SHADOWS_INDEX, "Adds shadows to all font letters",
-                         true, &g_dropShadows},
-                        {"item equip priorities", ITEM_EQUIP_PRIORITY_INDEX, "Adjust priorities on item equips in practice saves", false},
-                        {"save card", SAVE_CARD_INDEX, "Save settings to memory card"},
-                        {"load card", LOAD_CARD_INDEX, "Load settings from memory card"},
-                        {"delete card", DELETE_CARD_INDEX, "Delete settings from memory card"},
-                        {"menu positions", POS_SETTINGS_MENU_INDEX,
-                         "Change menu object positions (A to toggle selection, DPad to move)",
-                         false},
-                        {"fast swimming speed: ", WATER_SPEED_INDEX, "Change max speed of fast movement cheat for swimming"},
-                        {"fast running speed: ", LAND_SPEED_INDEX, "change max speed of Fast Movement cheat for running"},
-                    } {}
+    : Menu(cursor),
+      lines{
+          {"cursor color:", CURSOR_COLOR_INDEX, "Change cursor color", false, nullptr, MAX_CURSOR_COLOR_OPTIONS},
+          {"font:", FONT_INDEX, "Change font", false, nullptr, FONT_OPTIONS_COUNT},
+          {"drop shadows", DROP_SHADOWS_INDEX, "Adds shadows to all font letters", true, &g_dropShadows},
+          {"item equip priorities", ITEM_EQUIP_PRIORITY_INDEX, "Adjust priorities on item equips in practice saves",
+           false},
+          {"save card", SAVE_CARD_INDEX, "Save settings to memory card"},
+          {"load card", LOAD_CARD_INDEX, "Load settings from memory card"},
+          {"delete card", DELETE_CARD_INDEX, "Delete settings from memory card"},
+          {"menu positions", POS_SETTINGS_MENU_INDEX,
+           "Change menu object positions (A to toggle selection, DPad to move)", false},
+          {"fast swimming speed: ", WATER_SPEED_INDEX, "Change max speed of fast movement cheat for swimming"},
+          {"fast running speed: ", LAND_SPEED_INDEX, "change max speed of Fast Movement cheat for running"},
+      } {}
 
 SettingsMenu::~SettingsMenu() {}
 
 void SettingsMenu::draw() {
     cursor.setMode(Cursor::MODE_LIST);
-
 
     if (GZ_getButtonTrig(BACK_BUTTON)) {
         g_menuMgr->pop();
@@ -59,7 +57,7 @@ void SettingsMenu::draw() {
             storage.file_name = "twwgz01";
             storage.sector_size = SECTOR_SIZE;
             snprintf(storage.file_name_buffer, sizeof(storage.file_name_buffer), storage.file_name);
-            
+
             storage.result = CARDProbeEx(0, nullptr, &storage.sector_size);
             if (storage.result == Ready) {
                 GZ_storeMemCard(storage);
@@ -93,8 +91,7 @@ void SettingsMenu::draw() {
         }
     }
 
-    ListMember cursorCol_opt[MAX_CURSOR_COLOR_OPTIONS] = {"green",  "blue",   "red",
-                                                          "orange", "yellow", "purple"};
+    ListMember cursorCol_opt[MAX_CURSOR_COLOR_OPTIONS] = {"green", "blue", "red", "orange", "yellow", "purple"};
 
     // handle list rendering
     switch (cursor.y) {
@@ -124,21 +121,21 @@ void SettingsMenu::draw() {
         break;
     }
 
-    // Controls the constant speed for link's fast movement cheat. moveList to set and cycle through the numbers, and
-    // cursor.move so that the list does not stick once option is selected.
+    // Controls the constant speed for link's fast movement cheat. moveList to set and cycle through
+    // the numbers, and cursor.move so that the list does not stick once option is selected.
     case WATER_SPEED_INDEX: {
         waterSpeed = getWaterSpeed();
         Cursor::moveList(waterSpeed);
         if (GZ_getButtonRepeat(GZPad::A)) {
-            waterSpeed += 100.0f;  
+            waterSpeed += 100.0f;
         }
         if (GZ_getButtonRepeat(GZPad::R)) {
-            waterSpeed -= 100.0f;  
+            waterSpeed -= 100.0f;
         }
-        if (waterSpeed < 1.0f){
+        if (waterSpeed < 1.0f) {
             waterSpeed = 5000.0f;
         }
-        if (waterSpeed > 5000.0f){
+        if (waterSpeed > 5000.0f) {
             waterSpeed = 1.0f;
         }
         setWaterSpeed(waterSpeed);
@@ -149,15 +146,15 @@ void SettingsMenu::draw() {
         landSpeed = getLandSpeed();
         Cursor::moveList(landSpeed);
         if (GZ_getButtonRepeat(GZPad::A)) {
-            landSpeed += 100.0f;  
+            landSpeed += 100.0f;
         }
         if (GZ_getButtonRepeat(GZPad::R)) {
-            landSpeed -= 100.0f;  
+            landSpeed -= 100.0f;
         }
-        if (landSpeed < 1.0f){
+        if (landSpeed < 1.0f) {
             landSpeed = 5000.0f;
         }
-        if (landSpeed > 5000.0f){
+        if (landSpeed > 5000.0f) {
             landSpeed = 1.0f;
         }
         setLandSpeed(landSpeed);

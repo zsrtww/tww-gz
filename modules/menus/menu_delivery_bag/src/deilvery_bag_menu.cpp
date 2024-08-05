@@ -74,14 +74,14 @@ void DeliveryBagMenu::draw() {
         break;
     }
 
-    lines[SLOT1_INDEX].printf(" <%s>",item_id_to_str(dComIfGs_getItemReserve(SLOT1_INDEX)));
-    lines[SLOT2_INDEX].printf(" <%s>",item_id_to_str(dComIfGs_getItemReserve(SLOT2_INDEX)));
-    lines[SLOT3_INDEX].printf(" <%s>",item_id_to_str(dComIfGs_getItemReserve(SLOT3_INDEX)));
-    lines[SLOT4_INDEX].printf(" <%s>",item_id_to_str(dComIfGs_getItemReserve(SLOT4_INDEX)));
-    lines[SLOT5_INDEX].printf(" <%s>",item_id_to_str(dComIfGs_getItemReserve(SLOT5_INDEX)));
-    lines[SLOT6_INDEX].printf(" <%s>",item_id_to_str(dComIfGs_getItemReserve(SLOT6_INDEX)));
-    lines[SLOT7_INDEX].printf(" <%s>",item_id_to_str(dComIfGs_getItemReserve(SLOT7_INDEX)));
-    lines[SLOT8_INDEX].printf(" <%s>",item_id_to_str(dComIfGs_getItemReserve(SLOT8_INDEX)));
+    lines[SLOT1_INDEX].printf(" <%s>", item_id_to_str(dComIfGs_getItemReserve(SLOT1_INDEX)));
+    lines[SLOT2_INDEX].printf(" <%s>", item_id_to_str(dComIfGs_getItemReserve(SLOT2_INDEX)));
+    lines[SLOT3_INDEX].printf(" <%s>", item_id_to_str(dComIfGs_getItemReserve(SLOT3_INDEX)));
+    lines[SLOT4_INDEX].printf(" <%s>", item_id_to_str(dComIfGs_getItemReserve(SLOT4_INDEX)));
+    lines[SLOT5_INDEX].printf(" <%s>", item_id_to_str(dComIfGs_getItemReserve(SLOT5_INDEX)));
+    lines[SLOT6_INDEX].printf(" <%s>", item_id_to_str(dComIfGs_getItemReserve(SLOT6_INDEX)));
+    lines[SLOT7_INDEX].printf(" <%s>", item_id_to_str(dComIfGs_getItemReserve(SLOT7_INDEX)));
+    lines[SLOT8_INDEX].printf(" <%s>", item_id_to_str(dComIfGs_getItemReserve(SLOT8_INDEX)));
 
     cursor.move(0, MENU_LINE_NUM);
     GZ_drawMenuLines(lines, cursor.y, MENU_LINE_NUM);

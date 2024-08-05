@@ -12,15 +12,15 @@
 #define FONT_DEFAULT_SIZE 17.f
 
 enum ColorPalette {
-	RED    = 0xCC0000FF,
-	ORANGE = 0xEE8000FF,
-	YELLOW = 0xFFCC00FF,
-	GREEN  = 0x00CC00FF,
-	BLUE   = 0x0080FFFF,
-	PURPLE = 0x6600CCFF,
-	WHITE  = 0xFFFFFFFF,
-	GRAY   = 0xBABABAFF,
-	BLACK  = 0x000000FF,
+    RED = 0xCC0000FF,
+    ORANGE = 0xEE8000FF,
+    YELLOW = 0xFFCC00FF,
+    GREEN = 0x00CC00FF,
+    BLUE = 0x0080FFFF,
+    PURPLE = 0x6600CCFF,
+    WHITE = 0xFFFFFFFF,
+    GRAY = 0xBABABAFF,
+    BLACK = 0x000000FF,
 };
 
 enum FontCode {
@@ -80,10 +80,8 @@ public:
     static FontCode loadFont(const char* path);
     static void free_font();
     static bool lookupGlyph(char c, DecodedGlyph& glyph);
-    static float renderChar(char c, float x, float y, uint32_t color,
-                            float size = FONT_DEFAULT_SIZE);
-    static void renderChars(const char* str, float x, float y, uint32_t color,
-                            float size = FONT_DEFAULT_SIZE);
+    static float renderChar(char c, float x, float y, uint32_t color, float size = FONT_DEFAULT_SIZE);
+    static void renderChars(const char* str, float x, float y, uint32_t color, float size = FONT_DEFAULT_SIZE);
     static void GZ_drawChar(char c, float x, float y, uint32_t color, bool drop_shawdows,
                             float size = FONT_DEFAULT_SIZE);
     static void GZ_drawStr(const char* str, float x, float y, uint32_t color, bool drop_shadows,
@@ -92,8 +90,7 @@ public:
     static float getStrWidth(const char* str, float size = FONT_DEFAULT_SIZE);
 };
 
-float GZ_drawSelectChar(const char* str, float x, float y, size_t char_idx, size_t max_char,
-                        uint32_t color);
+float GZ_drawSelectChar(const char* str, float x, float y, size_t char_idx, size_t max_char, uint32_t color);
 
 inline void GZ_drawText(const char* str, float x, float y, uint32_t color, bool shadows) {
     Font::GZ_drawStr(str, x, y, color, shadows);

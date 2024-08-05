@@ -38,20 +38,15 @@ void updateSpoilsBagItem(u8 slot) {
     Cursor::moveListSimple(new_item_id);
     if (new_item_id == NO_ITEM - 1) {
         new_item_id = NO_ITEM;
-    }
-    else if (new_item_id == 0) {
+    } else if (new_item_id == 0) {
         new_item_id = JOY_PENDANT;
-    }
-    else if (new_item_id == JOY_PENDANT - 1) {
+    } else if (new_item_id == JOY_PENDANT - 1) {
         new_item_id = NO_ITEM;
-    }
-    else if (new_item_id == JOY_PENDANT + 1) {
+    } else if (new_item_id == JOY_PENDANT + 1) {
         new_item_id = SKULL_NECKLACE;
-    }
-    else if (new_item_id == SKULL_NECKLACE - 1) {
+    } else if (new_item_id == SKULL_NECKLACE - 1) {
         new_item_id = JOY_PENDANT;
-    }
-    else if (new_item_id == BLUE_CHU_JELLY + 1) {
+    } else if (new_item_id == BLUE_CHU_JELLY + 1) {
         new_item_id = BLUE_CHU_JELLY;
     }
     updateSpoilsBagSlot(slot, new_item_id);

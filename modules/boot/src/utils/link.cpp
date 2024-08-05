@@ -70,27 +70,40 @@ KEEP_FUNC void GZ_displayTimeInfo() {
     sprintf(Date, "date: %d", date);
     sprintf(Moon, "moon: %s", moonphases[moonid]);
 
-    Font::GZ_drawStr(Time, g_spriteOffsets[SPR_TIME_DISP_INDEX].x, g_spriteOffsets[SPR_TIME_DISP_INDEX].y, ColorPalette::WHITE, g_dropShadows);
-    Font::GZ_drawStr(Date, g_spriteOffsets[SPR_TIME_DISP_INDEX].x, g_spriteOffsets[SPR_TIME_DISP_INDEX].y + 20.0f, ColorPalette::WHITE, g_dropShadows);
-    Font::GZ_drawStr(Moon, g_spriteOffsets[SPR_TIME_DISP_INDEX].x, g_spriteOffsets[SPR_TIME_DISP_INDEX].y + 40.0f, ColorPalette::WHITE, g_dropShadows);
+    Font::GZ_drawStr(Time, g_spriteOffsets[SPR_TIME_DISP_INDEX].x, g_spriteOffsets[SPR_TIME_DISP_INDEX].y,
+                     ColorPalette::WHITE, g_dropShadows);
+    Font::GZ_drawStr(Date, g_spriteOffsets[SPR_TIME_DISP_INDEX].x, g_spriteOffsets[SPR_TIME_DISP_INDEX].y + 20.0f,
+                     ColorPalette::WHITE, g_dropShadows);
+    Font::GZ_drawStr(Moon, g_spriteOffsets[SPR_TIME_DISP_INDEX].x, g_spriteOffsets[SPR_TIME_DISP_INDEX].y + 40.0f,
+                     ColorPalette::WHITE, g_dropShadows);
 }
 
 int rainbow() {
-	switch(cCt_getFrameCount() % 6) {
-		case 0: return ColorPalette::RED;
-		case 1: return ColorPalette::ORANGE;
-		case 2: return ColorPalette::YELLOW;
-		case 3: return ColorPalette::GREEN;
-		case 4: return ColorPalette::BLUE;
-		default: return ColorPalette::PURPLE;
-	}
+    switch (cCt_getFrameCount() % 6) {
+    case 0:
+        return ColorPalette::RED;
+    case 1:
+        return ColorPalette::ORANGE;
+    case 2:
+        return ColorPalette::YELLOW;
+    case 3:
+        return ColorPalette::GREEN;
+    case 4:
+        return ColorPalette::BLUE;
+    default:
+        return ColorPalette::PURPLE;
+    }
 }
 
 int zombieHoverColor(u8 buttonPressesPerWindow) {
-    if (buttonPressesPerWindow == 15) return rainbow();
-    if (buttonPressesPerWindow >= 11) return ColorPalette::GREEN;
-    if (buttonPressesPerWindow >= 9) return ColorPalette::YELLOW;
-    if (buttonPressesPerWindow >= 1) return ColorPalette::RED;
+    if (buttonPressesPerWindow == 15)
+        return rainbow();
+    if (buttonPressesPerWindow >= 11)
+        return ColorPalette::GREEN;
+    if (buttonPressesPerWindow >= 9)
+        return ColorPalette::YELLOW;
+    if (buttonPressesPerWindow >= 1)
+        return ColorPalette::RED;
     return ColorPalette::WHITE;
 }
 
@@ -109,6 +122,8 @@ KEEP_FUNC void GZ_displayZombieHoverInfo() {
     sprintf(a_presses_str, "A: %d", numAPressesPerWindow);
     sprintf(b_presses_str, "B: %d", numBPressesPerWindow);
 
-    Font::GZ_drawStr(a_presses_str, g_spriteOffsets[SPR_ZH_INFO_INDEX].x, g_spriteOffsets[SPR_ZH_INFO_INDEX].y, zombieHoverColor(numAPressesPerWindow), g_dropShadows);
-    Font::GZ_drawStr(b_presses_str, g_spriteOffsets[SPR_ZH_INFO_INDEX].x, g_spriteOffsets[SPR_ZH_INFO_INDEX].y + 20.0f, zombieHoverColor(numBPressesPerWindow), g_dropShadows);
+    Font::GZ_drawStr(a_presses_str, g_spriteOffsets[SPR_ZH_INFO_INDEX].x, g_spriteOffsets[SPR_ZH_INFO_INDEX].y,
+                     zombieHoverColor(numAPressesPerWindow), g_dropShadows);
+    Font::GZ_drawStr(b_presses_str, g_spriteOffsets[SPR_ZH_INFO_INDEX].x, g_spriteOffsets[SPR_ZH_INFO_INDEX].y + 20.0f,
+                     zombieHoverColor(numBPressesPerWindow), g_dropShadows);
 }

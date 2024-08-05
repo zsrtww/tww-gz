@@ -94,8 +94,7 @@ public:
 
     void pop() {
         Node* oldTop = top.load();
-        while (oldTop != nullptr &&
-               !std::atomic_compare_exchange_strong(&top, &oldTop, oldTop->next)) {
+        while (oldTop != nullptr && !std::atomic_compare_exchange_strong(&top, &oldTop, oldTop->next)) {
             oldTop = top.load();
         }
         if (oldTop != nullptr) {

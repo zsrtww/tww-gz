@@ -60,7 +60,7 @@ KEEP_FUNC void SaveMngSpecial_HelmarocKing() {
 
 KEEP_FUNC void SaveMngSpecial_Hyrule2_BarrierSkip() {
     gSaveManager.injectDefault_during();
-    g_dComIfG_gameInfo.play.mNextStage.setName((char*) "Hyrule");
+    g_dComIfG_gameInfo.play.mNextStage.setName((char*)"Hyrule");
     g_dComIfG_gameInfo.play.mNextStage.setPoint(3);
     g_dComIfG_gameInfo.play.mNextStage.setLayer(2);
 }
@@ -70,7 +70,6 @@ KEEP_FUNC void SaveMngSpecial_Hyrule2_BarrierSkip_After() {
     g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusA().setLife(6);
     g_dComIfG_gameInfo.info.getPlayer().getItemRecord().setBombNum(19);
 }
-
 
 KEEP_FUNC void SaveMngSpecial_TrialsSkip() {
     gSaveManager.injectDefault_during();
@@ -165,7 +164,7 @@ KEEP_FUNC void SaveMngSpecial_PGSkip_After() {
 
 KEEP_FUNC void SaveMngSpecial_FF1_CS_AD() {
     gSaveManager.injectDefault_during();
-    g_dComIfG_gameInfo.play.mNextStage.setName((char*) "majroom");
+    g_dComIfG_gameInfo.play.mNextStage.setName((char*)"majroom");
     g_dComIfG_gameInfo.play.mNextStage.setRoomNo(4);
     g_dComIfG_gameInfo.play.mNextStage.setPoint(5);
 }
@@ -205,7 +204,7 @@ KEEP_FUNC void SaveMngSpecial_Enter_DRC_AD_After() {
 
 KEEP_FUNC void SaveMngSpecial_DRC_MB_AD() {
     gSaveManager.injectDefault_during();
-    g_dComIfG_gameInfo.play.mNextStage.setName((char*) "M_Dra09");
+    g_dComIfG_gameInfo.play.mNextStage.setName((char*)"M_Dra09");
     g_dComIfG_gameInfo.play.mNextStage.setRoomNo(9);
     g_dComIfG_gameInfo.play.mNextStage.setPoint(1);
 }
@@ -238,7 +237,7 @@ KEEP_FUNC void SaveMngSpecial_TOTG_AD_After() {
 
 KEEP_FUNC void SaveMngSpecial_Darknut_AD() {
     gSaveManager.injectDefault_during();
-    g_dComIfG_gameInfo.play.mNextStage.setName((char*) "SirenMB");
+    g_dComIfG_gameInfo.play.mNextStage.setName((char*)"SirenMB");
     g_dComIfG_gameInfo.play.mNextStage.setRoomNo(23);
     g_dComIfG_gameInfo.play.mNextStage.setPoint(0);
 }
@@ -256,14 +255,14 @@ KEEP_FUNC void SaveMngSpecial_After_Statue2_AD_After() {
 
 KEEP_FUNC void SaveMngSpecial_Hyrule_Escape_AD() {
     gSaveManager.injectDefault_during();
-    g_dComIfG_gameInfo.play.mNextStage.setName((char*) "Hyroom");
+    g_dComIfG_gameInfo.play.mNextStage.setName((char*)"Hyroom");
     g_dComIfG_gameInfo.play.mNextStage.setRoomNo(0);
     g_dComIfG_gameInfo.play.mNextStage.setPoint(2);
 }
 
 KEEP_FUNC void SaveMngSpecial_Hyrule1_BarrierSkip_AD() {
     gSaveManager.injectDefault_during();
-    g_dComIfG_gameInfo.play.mNextStage.setName((char*) "Hyrule");
+    g_dComIfG_gameInfo.play.mNextStage.setName((char*)"Hyrule");
     g_dComIfG_gameInfo.play.mNextStage.setPoint(3);
     g_dComIfG_gameInfo.play.mNextStage.setLayer(0);
 }
@@ -359,7 +358,7 @@ KEEP_FUNC void SaveMngSpecial_WT_AD_After() {
 
 KEEP_FUNC void SaveMngSpecial_Wizzrobe_AD() {
     gSaveManager.injectDefault_during();
-    g_dComIfG_gameInfo.play.mNextStage.setName((char*) "kazeMB");
+    g_dComIfG_gameInfo.play.mNextStage.setName((char*)"kazeMB");
     g_dComIfG_gameInfo.play.mNextStage.setRoomNo(6);
     g_dComIfG_gameInfo.play.mNextStage.setPoint(0);
 }
@@ -373,7 +372,7 @@ KEEP_FUNC void SaveMngSpecial_After_HS_AD() {
 KEEP_FUNC void SaveMngSpecial_Swim_2_FCP_AD() {
     gSaveManager.injectDefault_during();
     gSaveManager.injectDefault_during();
-    g_dComIfG_gameInfo.play.mNextStage.setName((char*) "sea");
+    g_dComIfG_gameInfo.play.mNextStage.setName((char*)"sea");
     g_dComIfG_gameInfo.play.mNextStage.setRoomNo(4);
     g_dComIfG_gameInfo.play.mNextStage.setPoint(1);
 }

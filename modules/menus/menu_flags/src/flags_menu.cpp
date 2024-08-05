@@ -4,13 +4,12 @@
 #include "menus/utils/menu_mgr.h"
 
 KEEP_FUNC FlagsMenu::FlagsMenu(Cursor& cursor)
-    : Menu(cursor),
-      lines{
-          {"general", GENERAL_FLAGS_INDEX, "General Flags"},
-          {"dungeons", DUNGEON_FLAGS_INDEX, "dungeon flags"},
-          {"savewarp", SAVEWARP_FLAG_INDEX, "Savewarp Flags"},
-          {"tuner", TUNER_FLAG_INDEX, "Tuner Flags (flags must be set before connection)"},
-      } {}
+    : Menu(cursor), lines{
+                        {"general", GENERAL_FLAGS_INDEX, "General Flags"},
+                        {"dungeons", DUNGEON_FLAGS_INDEX, "dungeon flags"},
+                        {"savewarp", SAVEWARP_FLAG_INDEX, "Savewarp Flags"},
+                        {"tuner", TUNER_FLAG_INDEX, "Tuner Flags (flags must be set before connection)"},
+                    } {}
 
 FlagsMenu::~FlagsMenu() {}
 

@@ -30,8 +30,7 @@ KEEP_FUNC DungeonFlagsMenu::DungeonFlagsMenu(Cursor& cursor)
 DungeonFlagsMenu::~DungeonFlagsMenu() {}
 
 inline bool isStageDungeonItem(int stage, int flag) {
-    return isDungeonItem__12dSv_memBit_cFi(&g_dComIfG_gameInfo.info.mSavedata.mSave[stage].mBit,
-                                           flag);
+    return isDungeonItem__12dSv_memBit_cFi(&g_dComIfG_gameInfo.info.mSavedata.mSave[stage].mBit, flag);
 }
 
 inline void onStageDungeonItem(int stage, int flag) {
@@ -126,10 +125,9 @@ void DungeonFlagsMenu::draw() {
     l_mapFlag = isStageDungeonItem(area_id, dSv_memBit_c::MAP);
     l_compassFlag = isStageDungeonItem(area_id, dSv_memBit_c::COMPASS);
     l_bosskeyFlag = isStageDungeonItem(area_id, dSv_memBit_c::BOSS_KEY);
-    l_medli = (dComIfGs_isEventBit(0x1620) && dComIfGs_isEventBit(0x1608) &&
-               dComIfGs_isEventBit(0x2920) && dComIfGs_isEventBit(0x2E04));
-    l_makar =
-        (dComIfGs_isEventBit(0x1610) && dComIfGs_isEventBit(0x1604) && dComIfGs_isEventBit(0x2910));
+    l_medli = (dComIfGs_isEventBit(0x1620) && dComIfGs_isEventBit(0x1608) && dComIfGs_isEventBit(0x2920) &&
+               dComIfGs_isEventBit(0x2E04));
+    l_makar = (dComIfGs_isEventBit(0x1610) && dComIfGs_isEventBit(0x1604) && dComIfGs_isEventBit(0x2910));
 
     if (area_id == 6) {
         l_partner = l_medli;

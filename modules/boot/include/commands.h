@@ -1,7 +1,6 @@
 #pragma once
 #include "libtww/include/dolphin/gctypes.h"
 
-
 #define COMMANDS_AMNT 13
 
 extern bool g_commandStates[COMMANDS_AMNT];

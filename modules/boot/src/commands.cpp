@@ -88,8 +88,7 @@ void GZCmd_fastMovement() {
 
     if (player_p != nullptr) {
         if (player_p->mCurProcID == daPy_lk_c::PROC_SWIM_UP_e || player_p->mCurProcID == daPy_lk_c::PROC_SWIM_WAIT_e ||
-            player_p->mCurProcID == daPy_lk_c::PROC_SWIM_MOVE_e)
-        {
+            player_p->mCurProcID == daPy_lk_c::PROC_SWIM_MOVE_e) {
             player_p->mVelocity = getWaterSpeed();
         } else {
             player_p->mVelocity = getLandSpeed();
@@ -167,18 +166,18 @@ void GZCmd_disable(int idx) {
     sCommands[idx].active = false;
 }
 
-KEEP_FUNC f32 getWaterSpeed(){
+KEEP_FUNC f32 getWaterSpeed() {
     return g_waterSpeed;
 }
 
-KEEP_FUNC void setWaterSpeed(f32 speed){
+KEEP_FUNC void setWaterSpeed(f32 speed) {
     g_waterSpeed = speed;
 }
 
-KEEP_FUNC f32 getLandSpeed(){
+KEEP_FUNC f32 getLandSpeed() {
     return g_landSpeed;
 }
 
-KEEP_FUNC void setLandSpeed(f32 speed){
+KEEP_FUNC void setLandSpeed(f32 speed) {
     g_landSpeed = speed;
 }

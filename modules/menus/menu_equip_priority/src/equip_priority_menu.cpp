@@ -32,16 +32,13 @@ bool checkLineValSelected() {
 
 void ItemEquipPriorityMenu::drawItemEquipLines() {
     const float item_equip_high_pos_x_offset =
-        ITEM_X_OFFSET + maxF(GZ_getTextWidth("Item"), GZ_getTextWidth("<Progressive Picto Box>")) +
-        5.0f;
+        ITEM_X_OFFSET + maxF(GZ_getTextWidth("Item"), GZ_getTextWidth("<Progressive Picto Box>")) + 5.0f;
     const float item_equip_medium_pos_x_offset =
-        item_equip_high_pos_x_offset +
-        maxF(GZ_getTextWidth("High Priority"), GZ_getTextWidth("<X>")) + 5.0f;
+        item_equip_high_pos_x_offset + maxF(GZ_getTextWidth("High Priority"), GZ_getTextWidth("<X>")) + 5.0f;
 
     Font::GZ_drawStr("Item", ITEM_X_OFFSET, 60.0f, WHITE, g_dropShadows);
     Font::GZ_drawStr("High Priority", item_equip_high_pos_x_offset, 60.0f, WHITE, g_dropShadows);
-    Font::GZ_drawStr("Medium Priority", item_equip_medium_pos_x_offset, 60.0f, WHITE,
-                     g_dropShadows);
+    Font::GZ_drawStr("Medium Priority", item_equip_medium_pos_x_offset, 60.0f, WHITE, g_dropShadows);
 
     for (int i = 0; i < NUM_EQUIPPABLE_ITEMS; i++) {
         const float line_y_offset = (80.0f + (i * 20.0f));
@@ -51,11 +48,9 @@ void ItemEquipPriorityMenu::drawItemEquipLines() {
 
         sprintf(item_name, "<%s>", item_enum_to_name(g_item_equip_priorities[i].item_name));
         sprintf(high_priority, "<%c>",
-                button_enum_to_name(g_item_equip_priorities[i].high_priority,
-                                    g_item_equip_priorities[i].item_name));
+                button_enum_to_name(g_item_equip_priorities[i].high_priority, g_item_equip_priorities[i].item_name));
         sprintf(medium_priority, "<%c>",
-                button_enum_to_name(g_item_equip_priorities[i].medium_priority,
-                                    g_item_equip_priorities[i].item_name));
+                button_enum_to_name(g_item_equip_priorities[i].medium_priority, g_item_equip_priorities[i].item_name));
 
         if (g_item_equip_priorities[i].line_selected) {
             switch ((ItemEquipColumns)cursor.x) {
@@ -75,18 +70,13 @@ void ItemEquipPriorityMenu::drawItemEquipLines() {
                             g_item_equip_priorities[i].item_name--;
                         }
                     }
-                    sprintf(item_name, "<%s>",
-                            item_enum_to_name(g_item_equip_priorities[i].item_name));
-                    Font::GZ_drawStr(item_name, ITEM_X_OFFSET - 8.0f, line_y_offset, CURSOR_RGBA,
-                                     g_dropShadows);
+                    sprintf(item_name, "<%s>", item_enum_to_name(g_item_equip_priorities[i].item_name));
+                    Font::GZ_drawStr(item_name, ITEM_X_OFFSET - 8.0f, line_y_offset, CURSOR_RGBA, g_dropShadows);
                 } else {
-                    Font::GZ_drawStr(item_name, ITEM_X_OFFSET, line_y_offset, CURSOR_RGBA,
-                                     g_dropShadows);
+                    Font::GZ_drawStr(item_name, ITEM_X_OFFSET, line_y_offset, CURSOR_RGBA, g_dropShadows);
                 }
-                Font::GZ_drawStr(high_priority, item_equip_high_pos_x_offset, line_y_offset, WHITE,
-                                 g_dropShadows);
-                Font::GZ_drawStr(medium_priority, item_equip_medium_pos_x_offset, line_y_offset,
-                                 WHITE, g_dropShadows);
+                Font::GZ_drawStr(high_priority, item_equip_high_pos_x_offset, line_y_offset, WHITE, g_dropShadows);
+                Font::GZ_drawStr(medium_priority, item_equip_medium_pos_x_offset, line_y_offset, WHITE, g_dropShadows);
                 break;
             case HighPriority:
                 if (g_item_equip_priorities[i].value_selected) {
@@ -107,15 +97,14 @@ void ItemEquipPriorityMenu::drawItemEquipLines() {
                     sprintf(high_priority, "<%c>",
                             button_enum_to_name(g_item_equip_priorities[i].high_priority,
                                                 g_item_equip_priorities[i].item_name));
-                    Font::GZ_drawStr(high_priority, item_equip_high_pos_x_offset - 8.0f,
-                                     line_y_offset, CURSOR_RGBA, g_dropShadows);
+                    Font::GZ_drawStr(high_priority, item_equip_high_pos_x_offset - 8.0f, line_y_offset, CURSOR_RGBA,
+                                     g_dropShadows);
                 } else {
-                    Font::GZ_drawStr(high_priority, item_equip_high_pos_x_offset, line_y_offset,
-                                     CURSOR_RGBA, g_dropShadows);
+                    Font::GZ_drawStr(high_priority, item_equip_high_pos_x_offset, line_y_offset, CURSOR_RGBA,
+                                     g_dropShadows);
                 }
                 Font::GZ_drawStr(item_name, ITEM_X_OFFSET, line_y_offset, WHITE, g_dropShadows);
-                Font::GZ_drawStr(medium_priority, item_equip_medium_pos_x_offset, line_y_offset,
-                                 WHITE, g_dropShadows);
+                Font::GZ_drawStr(medium_priority, item_equip_medium_pos_x_offset, line_y_offset, WHITE, g_dropShadows);
                 break;
             case MediumPriority:
                 if (g_item_equip_priorities[i].value_selected) {
@@ -160,23 +149,21 @@ void ItemEquipPriorityMenu::drawItemEquipLines() {
                     sprintf(medium_priority, "<%c>",
                             button_enum_to_name(g_item_equip_priorities[i].medium_priority,
                                                 g_item_equip_priorities[i].item_name));
-                    Font::GZ_drawStr(medium_priority, item_equip_medium_pos_x_offset - 8.0f,
-                                     line_y_offset, CURSOR_RGBA, g_dropShadows);
+                    Font::GZ_drawStr(medium_priority, item_equip_medium_pos_x_offset - 8.0f, line_y_offset, CURSOR_RGBA,
+                                     g_dropShadows);
                 } else {
-                    Font::GZ_drawStr(medium_priority, item_equip_medium_pos_x_offset, line_y_offset,
-                                     CURSOR_RGBA, g_dropShadows);
+                    Font::GZ_drawStr(medium_priority, item_equip_medium_pos_x_offset, line_y_offset, CURSOR_RGBA,
+                                     g_dropShadows);
                 }
                 Font::GZ_drawStr(item_name, ITEM_X_OFFSET, line_y_offset, WHITE, g_dropShadows);
-                Font::GZ_drawStr(high_priority, item_equip_high_pos_x_offset, line_y_offset, WHITE,
-                                 g_dropShadows);
+                Font::GZ_drawStr(high_priority, item_equip_high_pos_x_offset, line_y_offset, WHITE, g_dropShadows);
                 break;
             }
         } else {
             int y = cursor.y;
-            Font::GZ_drawStr(item_name, ITEM_X_OFFSET, line_y_offset,
-                             (y == i ? CURSOR_RGBA : WHITE), g_dropShadows);
-            Font::GZ_drawStr(high_priority, item_equip_high_pos_x_offset, line_y_offset,
-                             (y == i ? CURSOR_RGBA : WHITE), g_dropShadows);
+            Font::GZ_drawStr(item_name, ITEM_X_OFFSET, line_y_offset, (y == i ? CURSOR_RGBA : WHITE), g_dropShadows);
+            Font::GZ_drawStr(high_priority, item_equip_high_pos_x_offset, line_y_offset, (y == i ? CURSOR_RGBA : WHITE),
+                             g_dropShadows);
             Font::GZ_drawStr(medium_priority, item_equip_medium_pos_x_offset, line_y_offset,
                              (y == i ? CURSOR_RGBA : WHITE), g_dropShadows);
         }
@@ -192,8 +179,7 @@ void ItemEquipPriorityMenu::draw() {
                 g_item_equip_priorities[i].value_selected = false;
             }
             g_item_equip_priorities[cursor.y].value_selected = false;
-            if (g_item_equip_priorities[cursor.y].high_priority ==
-                g_item_equip_priorities[cursor.y].medium_priority) {
+            if (g_item_equip_priorities[cursor.y].high_priority == g_item_equip_priorities[cursor.y].medium_priority) {
                 if (g_item_equip_priorities[cursor.y].medium_priority == name_Z) {
                     g_item_equip_priorities[cursor.y].medium_priority = name_X;
                 } else {

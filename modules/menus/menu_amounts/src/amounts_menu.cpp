@@ -6,23 +6,22 @@
 #include "menus/utils/menu_mgr.h"
 
 KEEP_FUNC AmountMenu::AmountMenu(Cursor& cursor)
-    : Menu(cursor),
-      lines{
-          {"health:", HEALTH_INDEX, "Modify the current health by quarter"},
-          {"bombs:", BOMB_INDEX, "Modify the current bomb count"},
-          {"arrows:", ARROW_INDEX, "Modify the current arrow count"},
-          {"rupees:", RUPEE_INDEX, "Modify the current rupee count"},
-          {"magic:", MAGIC_INDEX, "Modify the current magic amount"},
-          {"heart pieces:", HEART_PIECE_INDEX, "Modify the current heart pieces collected"},
-          {"joy pendants:", JOY_PENDANT_INDEX, "Modify the current joy pendant count"},
-          {"skull necklaces:", SKULL_NECKLACE_INDEX, "Modify the current skull necklace count"},
-          {"boko baba seeds:", BOKO_BABA_SEED_INDEX, "Modify the current boko baba seed count"},
-          {"golden feathers:", GOLDEN_FEATHER_INDEX, "Modify the current golden feather count"},
-          {"knights crests:", KNIGHTS_CREST_INDEX, "Modify the current knights crest count"},
-          {"red chu jelly:", RED_CHU_JELLY_INDEX, "Modify the current red chu jelly count"},
-          {"green chu jelly:", GREEN_CHU_JELLY_INDEX, "Modify the current green chu jelly count"},
-          {"blue chu jelly:", BLUE_CHU_JELLY_INDEX, "Modify the current blue chu jelly count"},
-      } {}
+    : Menu(cursor), lines{
+                        {"health:", HEALTH_INDEX, "Modify the current health by quarter"},
+                        {"bombs:", BOMB_INDEX, "Modify the current bomb count"},
+                        {"arrows:", ARROW_INDEX, "Modify the current arrow count"},
+                        {"rupees:", RUPEE_INDEX, "Modify the current rupee count"},
+                        {"magic:", MAGIC_INDEX, "Modify the current magic amount"},
+                        {"heart pieces:", HEART_PIECE_INDEX, "Modify the current heart pieces collected"},
+                        {"joy pendants:", JOY_PENDANT_INDEX, "Modify the current joy pendant count"},
+                        {"skull necklaces:", SKULL_NECKLACE_INDEX, "Modify the current skull necklace count"},
+                        {"boko baba seeds:", BOKO_BABA_SEED_INDEX, "Modify the current boko baba seed count"},
+                        {"golden feathers:", GOLDEN_FEATHER_INDEX, "Modify the current golden feather count"},
+                        {"knights crests:", KNIGHTS_CREST_INDEX, "Modify the current knights crest count"},
+                        {"red chu jelly:", RED_CHU_JELLY_INDEX, "Modify the current red chu jelly count"},
+                        {"green chu jelly:", GREEN_CHU_JELLY_INDEX, "Modify the current green chu jelly count"},
+                        {"blue chu jelly:", BLUE_CHU_JELLY_INDEX, "Modify the current blue chu jelly count"},
+                    } {}
 
 AmountMenu::~AmountMenu() {}
 
@@ -33,14 +32,14 @@ void updateSpoilsBagAmount(u8 index) {
         amount = 99;
     }
     if (amount > 99) {
-        amount = 0;    
+        amount = 0;
     }
     dComIfGs_setBeastNum(index, amount);
 }
 
 void AmountMenu::draw() {
     cursor.setMode(Cursor::MODE_LIST);
-    
+
     u16 g_healthNum = dComIfGs_getLife();
     u8 g_bombNum = dComIfGs_getBombNum();
     u8 g_arrowNum = dComIfGs_getArrowNum();

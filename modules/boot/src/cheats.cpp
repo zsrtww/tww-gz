@@ -7,12 +7,10 @@
 #include "menus/utils/menu_mgr.h"
 
 Cheat g_cheats[CHEAT_AMNT] = {
-    {InfiniteAir, false},       {InfiniteArrows, false},    {InfiniteBombs, false},
-    {InfiniteHearts, false},    {RefillHealth, false},      {InfiniteMagic, false},
-    {RefillMagic, false},       {InfiniteRupees, false},    {MoonJump, false},          
-    {StorageCheat, false},      {NormalCollision, false},   {ChestStorage, false},
-    {DoorCancel, false},        {QuarterHeart, false},      {FastMovement, false}, 
-    {Upcharge, false},
+    {InfiniteAir, false},  {InfiniteArrows, false}, {InfiniteBombs, false},   {InfiniteHearts, false},
+    {RefillHealth, false}, {InfiniteMagic, false},  {RefillMagic, false},     {InfiniteRupees, false},
+    {MoonJump, false},     {StorageCheat, false},   {NormalCollision, false}, {ChestStorage, false},
+    {DoorCancel, false},   {QuarterHeart, false},   {FastMovement, false},    {Upcharge, false},
 };
 
 inline bool GZ_checkCheat(int cheatIdx) {
@@ -75,7 +73,8 @@ void GZ_applyCheats() {
 
     if (GZ_checkCheat(InfiniteMagic)) {
         uint8_t max_magic = dComIfGs_getMaxMagic();
-        if (max_magic == 0) max_magic = 2;
+        if (max_magic == 0)
+            max_magic = 2;
         dComIfGs_setMagic(max_magic);
     }
 

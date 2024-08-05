@@ -117,10 +117,7 @@ KEEP_FUNC void drawRect(uint32_t color, Vec2 pos, Vec2 dim, Vec2 tex[4]) {
 }
 
 KEEP_FUNC void drawRect(uint32_t color, Vec2 pos, Vec2 dim, Vec2 tex[4], GXTexObj* texture) {
-    Vec2 vertices[4] = {{pos.x, pos.y},
-                        {pos.x + dim.x, pos.y},
-                        {pos.x + dim.x, pos.y + dim.y},
-                        {pos.x, pos.y + dim.y}};
+    Vec2 vertices[4] = {{pos.x, pos.y}, {pos.x + dim.x, pos.y}, {pos.x + dim.x, pos.y + dim.y}, {pos.x, pos.y + dim.y}};
     drawQuad(color, vertices, tex, texture);
 }
 
@@ -129,10 +126,7 @@ KEEP_FUNC void drawRectOutline(uint32_t color, Vec2 pos, Vec2 dim) {
 }
 
 KEEP_FUNC void drawRectOutline(uint32_t color, Vec2 pos, Vec2 dim, uint8_t width) {
-    Vec2 vertices[4] = {{pos.x, pos.y},
-                        {pos.x + dim.x, pos.y},
-                        {pos.x + dim.x, pos.y + dim.y},
-                        {pos.x, pos.y + dim.y}};
+    Vec2 vertices[4] = {{pos.x, pos.y}, {pos.x + dim.x, pos.y}, {pos.x + dim.x, pos.y + dim.y}, {pos.x, pos.y + dim.y}};
     drawQuadOutline(color, vertices, width);
 }
 

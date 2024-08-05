@@ -147,9 +147,8 @@ u8 arraySum(const u8 (&myArray)[WINDOW_LENGTH]) {
     return myArraySum;
 }
 
-void updateButtonPressesInWindow(u8 (&buttonPressesInWindow)[WINDOW_LENGTH],
-                                 const u32& current_frame, const u16& cButton,
-                                 const int& gzButton) {
+void updateButtonPressesInWindow(u8 (&buttonPressesInWindow)[WINDOW_LENGTH], const u32& current_frame,
+                                 const u16& cButton, const int& gzButton) {
     u16 current_input = GZ_getButtonStatus();
 
     if ((current_input & cButton) && (buttonStates[gzButton].button & sButtonsPressed) != 0) {

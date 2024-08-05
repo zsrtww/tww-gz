@@ -73,7 +73,8 @@ TexCode load_texture_offset(const char* path, Texture* tex, uint32_t offset) {
     default: {
         DVDClose(&fileInfo);
         tex->loadCode = TexCode::TEX_ERR_INVALID_FORMAT;
-        OSReport_Warning("Texture not loaded \"%s\"; Invalid texture format id (%d) [%d]\n", path, tex->header.format, tex->loadCode);
+        OSReport_Warning("Texture not loaded \"%s\"; Invalid texture format id (%d) [%d]\n", path, tex->header.format,
+                         tex->loadCode);
         return tex->loadCode;
     }
     }
@@ -83,7 +84,8 @@ TexCode load_texture_offset(const char* path, Texture* tex, uint32_t offset) {
     if (tex->data == nullptr) {
         DVDClose(&fileInfo);
         tex->loadCode = TexCode::TEX_ERR_MEM;
-        OSReport_Warning("Texture not loaded \"%s\"; Couldn't allocate 0x%x bytes for data [%d]\n", path, size, tex->loadCode);
+        OSReport_Warning("Texture not loaded \"%s\"; Couldn't allocate 0x%x bytes for data [%d]\n", path, size,
+                         tex->loadCode);
         return tex->loadCode;
     }
 
@@ -97,8 +99,8 @@ TexCode load_texture_offset(const char* path, Texture* tex, uint32_t offset) {
     DVDClose(&fileInfo);
 
     memset(&tex->_texObj, 0, sizeof(GXTexObj));
-    GXInitTexObj(&tex->_texObj, tex->data, tex->header.width, tex->header.height, (GXTexFmt)fmt, GX_CLAMP,
-                 GX_CLAMP, GX_FALSE);
+    GXInitTexObj(&tex->_texObj, tex->data, tex->header.width, tex->header.height, (GXTexFmt)fmt, GX_CLAMP, GX_CLAMP,
+                 GX_FALSE);
     tex->loadCode = TexCode::TEX_OK;
     return tex->loadCode;
 }
@@ -126,8 +128,7 @@ void setupRendering() {
     GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_TEX0, GX_TEX_ST, GX_F32, 0);
 
     GXSetNumTexGens(1);
-    GXSetTexCoordGen2(GX_TEXCOORD0, GX_TG_MTX2x4, GX_TG_TEX0, GX_IDENTITY, GX_FALSE,
-                      GX_PTIDENTITY);
+    GXSetTexCoordGen2(GX_TEXCOORD0, GX_TG_MTX2x4, GX_TG_TEX0, GX_IDENTITY, GX_FALSE, GX_PTIDENTITY);
 
     GXSetTevColorIn(GX_TEVSTAGE0, GX_CC_ZERO, GX_CC_RASC, GX_CC_TEXC, GX_CC_ZERO);
     GXSetTevAlphaIn(GX_TEVSTAGE0, GX_CA_ZERO, GX_CA_RASA, GX_CA_TEXA, GX_CA_ZERO);

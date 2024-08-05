@@ -29,10 +29,10 @@ extern u8 g_geometryOpacity;
 extern u8 g_collisionRaise;
 
 namespace dCcS_Data {
-    extern int at_obj_count;
-    extern int tg_obj_count;
-    extern int co_obj_count;
-}
+extern int at_obj_count;
+extern int tg_obj_count;
+extern int co_obj_count;
+}  // namespace dCcS_Data
 
 class dCcS;
 void GZ_drawCc(dCcS* i_this);

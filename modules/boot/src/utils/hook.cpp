@@ -13,8 +13,8 @@
 #include "rels/include/cxx.h"
 #include "rels/include/defines.h"
 
-#define HOOK_DEF(rettype, name, params)                                                            \
-    typedef rettype(*tww_##name##_t) params;                                                       \
+#define HOOK_DEF(rettype, name, params)                                                                                \
+    typedef rettype(*tww_##name##_t) params;                                                                           \
     tww_##name##_t name##Trampoline;
 
 HOOK_DEF(void, draw, (void*));
@@ -67,7 +67,7 @@ void putSaveHook(void* addr, int stageNo) {
 
 int dScnPly__phase_1Hook(void* i_scene) {
     SaveManager::loadData();
-    
+
     return dScnPly__phase_1Trampoline(i_scene);
 }
 
@@ -75,16 +75,17 @@ int dScnPly__phase_4Hook(void* i_scene) {
     int ret = dScnPly__phase_4Trampoline(i_scene);
 
     // Only apply the `after` options now if phase 4 indicates the loading proccess is complete.
-    // If the rest of the phases need to run, the options will be applied later in `dScnPly__phase_compleate`.
+    // If the rest of the phases need to run, the options will be applied later in
+    // `dScnPly__phase_compleate`.
     if (ret == cPhs_COMPLEATE_e) {
         SaveManager::applyAfterOptions();
     }
-    
+
     return ret;
 }
 
 int dScnPly__phase_compleateHook(void* i_scene) {
-    // If execution reaches this point, it means that the loading process did not exit early in 
+    // If execution reaches this point, it means that the loading process did not exit early in
     // `dScnPly__phase_4`. So, apply the `after` options now.
     SaveManager::applyAfterOptions();
     return dScnPly__phase_compleateTrampoline(i_scene);

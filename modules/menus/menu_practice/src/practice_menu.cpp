@@ -6,8 +6,8 @@
 KEEP_FUNC PracticeMenu::PracticeMenu(Cursor& cursor)
     : Menu(cursor), lines{
                         {"any\% no mss", ANY_NO_MSS, "Load an any\% no mss save", false},
-                        {"any\%", ANY_PERCENT,
-                         "Load an any\% save (asterisks are for sail/pg skip route files)", false},
+                        {"any\%", ANY_PERCENT, "Load an any\% save (asterisks are for sail/pg skip route files)",
+                         false},
                         {"ad", ALL_DUNGEONS, "Load an all dungeons save", false},
                     } {}
 

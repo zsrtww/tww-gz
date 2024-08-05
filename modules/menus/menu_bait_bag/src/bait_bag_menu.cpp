@@ -8,22 +8,14 @@
 
 KEEP_FUNC BaitBagMenu::BaitBagMenu(Cursor& cursor)
     : Menu(cursor), lines{
-                        {"slot 1:", BAITSLOT1_INDEX,
-                         "Modify the item in bait bag slot 1"},
-                        {"slot 2:", BAITSLOT2_INDEX,
-                         "Modify the item in bait bag slot 2"},
-                        {"slot 3:", BAITSLOT3_INDEX,
-                         "Modify the item in bait bag slot 3"},
-                        {"slot 4:", BAITSLOT4_INDEX,
-                         "Modify the item in bait bag slot 4"},
-                        {"slot 5:", BAITSLOT5_INDEX,
-                         "Modify the item in bait bag slot 5"},
-                        {"slot 6:", BAITSLOT6_INDEX,
-                         "Modify the item in bait bag slot 6"},
-                        {"slot 7:", BAITSLOT7_INDEX,
-                         "Modify the item in bait bag slot 7"},
-                        {"slot 8:", BAITSLOT8_INDEX,
-                         "Modify the item in bait bag slot 8"},
+                        {"slot 1:", BAITSLOT1_INDEX, "Modify the item in bait bag slot 1"},
+                        {"slot 2:", BAITSLOT2_INDEX, "Modify the item in bait bag slot 2"},
+                        {"slot 3:", BAITSLOT3_INDEX, "Modify the item in bait bag slot 3"},
+                        {"slot 4:", BAITSLOT4_INDEX, "Modify the item in bait bag slot 4"},
+                        {"slot 5:", BAITSLOT5_INDEX, "Modify the item in bait bag slot 5"},
+                        {"slot 6:", BAITSLOT6_INDEX, "Modify the item in bait bag slot 6"},
+                        {"slot 7:", BAITSLOT7_INDEX, "Modify the item in bait bag slot 7"},
+                        {"slot 8:", BAITSLOT8_INDEX, "Modify the item in bait bag slot 8"},
                     } {}
 
 BaitBagMenu::~BaitBagMenu() {}

@@ -11,36 +11,30 @@
 #define DEFAULT_ARROW_CAPACITY 30
 #define DEFAULT_BOMB_CAPACITY 30
 
-enum BottleSlotIndex {
-    SLOT_BOTTLE_1 = 14,
-    SLOT_BOTTLE_2 = 15,
-    SLOT_BOTTLE_3 = 16,
-    SLOT_BOTTLE_4 = 17
-};
+enum BottleSlotIndex { SLOT_BOTTLE_1 = 14, SLOT_BOTTLE_2 = 15, SLOT_BOTTLE_3 = 16, SLOT_BOTTLE_4 = 17 };
 
 KEEP_FUNC ItemInventoryMenu::ItemInventoryMenu(Cursor& cursor)
-    : Menu(cursor),
-      lines{{"Telescope:", SLOT_TELESCOPE, "Add/remove telescope to/from inventory"},
-            {"Sail:", SLOT_SAIL, "Add/remove sail to/from inventory"},
-            {"Wind Waker:", SLOT_WIND_WAKER, "Add/remove wind waker to/from inventory"},
-            {"Grappling Hook:", SLOT_ROPE, "Add/remove grappling hook to/from inventory"},
-            {"Spoils Bag:", SLOT_SPOILS_BAG, "Add/remove spoils bag to/from inventory"},
-            {"Boomerang:", SLOT_BOOMERANG, "Add/remove boomerang to/from inventory"},
-            {"Deku Leaf:", SLOT_DEKU_LEAF, "Add/remove deku leaf to/from inventory"},
-            {"Tingle Tuner:", SLOT_TUNER, "Add/remove tingle tuner to/from inventory"},
-            {"Progressive Picto Box:", SLOT_CAMERA, "Add/remove/upgrade picto box"},
-            {"Iron Boots:", SLOT_IRON_BOOTS, "Add/remove iron boots to/from inventory"},
-            {"Magic Armor:", SLOT_MAGIC_ARMOR, "Add/remove magic armor to/from inventory"},
-            {"Bait Bag:", SLOT_BAIT_BAG, "Add/remove bait bag to/from inventory"},
-            {"Progressive Bow:", SLOT_BOW, "Add/remove/upgrade bow"},
-            {"Bombs:", SLOT_BOMB, "Add/remove bombs to/from inventory"},
-            {"Bottle 1:", SLOT_BOTTLE_1, "Add/remove bottle 1 to/from inventory"},
-            {"Bottle 2:", SLOT_BOTTLE_2, "Add/remove bottle 2 to/from inventory"},
-            {"Bottle 3:", SLOT_BOTTLE_3, "Add/remove bottle 3 to/from inventory"},
-            {"Bottle 4:", SLOT_BOTTLE_4, "Add/remove bottle 4 to/from inventory"},
-            {"Delivery Bag:", SLOT_TRADE_ITEM, "Add/remove delivery bag to/from inventory"},
-            {"Hookshot:", SLOT_HOOKSHOT, "Add/remove hookshot to/from inventory"},
-            {"Skull Hammer:", SLOT_HAMMER, "Add/remove skull hammer to/from inventory"}} {}
+    : Menu(cursor), lines{{"Telescope:", SLOT_TELESCOPE, "Add/remove telescope to/from inventory"},
+                          {"Sail:", SLOT_SAIL, "Add/remove sail to/from inventory"},
+                          {"Wind Waker:", SLOT_WIND_WAKER, "Add/remove wind waker to/from inventory"},
+                          {"Grappling Hook:", SLOT_ROPE, "Add/remove grappling hook to/from inventory"},
+                          {"Spoils Bag:", SLOT_SPOILS_BAG, "Add/remove spoils bag to/from inventory"},
+                          {"Boomerang:", SLOT_BOOMERANG, "Add/remove boomerang to/from inventory"},
+                          {"Deku Leaf:", SLOT_DEKU_LEAF, "Add/remove deku leaf to/from inventory"},
+                          {"Tingle Tuner:", SLOT_TUNER, "Add/remove tingle tuner to/from inventory"},
+                          {"Progressive Picto Box:", SLOT_CAMERA, "Add/remove/upgrade picto box"},
+                          {"Iron Boots:", SLOT_IRON_BOOTS, "Add/remove iron boots to/from inventory"},
+                          {"Magic Armor:", SLOT_MAGIC_ARMOR, "Add/remove magic armor to/from inventory"},
+                          {"Bait Bag:", SLOT_BAIT_BAG, "Add/remove bait bag to/from inventory"},
+                          {"Progressive Bow:", SLOT_BOW, "Add/remove/upgrade bow"},
+                          {"Bombs:", SLOT_BOMB, "Add/remove bombs to/from inventory"},
+                          {"Bottle 1:", SLOT_BOTTLE_1, "Add/remove bottle 1 to/from inventory"},
+                          {"Bottle 2:", SLOT_BOTTLE_2, "Add/remove bottle 2 to/from inventory"},
+                          {"Bottle 3:", SLOT_BOTTLE_3, "Add/remove bottle 3 to/from inventory"},
+                          {"Bottle 4:", SLOT_BOTTLE_4, "Add/remove bottle 4 to/from inventory"},
+                          {"Delivery Bag:", SLOT_TRADE_ITEM, "Add/remove delivery bag to/from inventory"},
+                          {"Hookshot:", SLOT_HOOKSHOT, "Add/remove hookshot to/from inventory"},
+                          {"Skull Hammer:", SLOT_HAMMER, "Add/remove skull hammer to/from inventory"}} {}
 
 ItemInventoryMenu::~ItemInventoryMenu() {}
 

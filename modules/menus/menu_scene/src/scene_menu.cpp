@@ -7,8 +7,8 @@
 
 KEEP_FUNC SceneMenu::SceneMenu(Cursor& cursor)
     : Menu(cursor), lines{
-                        {"disable bg music", MUTE_BGM_INDEX, "Disables background and enemy music",
-                         true, &g_sceneFlags[MUTE_BGM_INDEX].active},
+                        {"disable bg music", MUTE_BGM_INDEX, "Disables background and enemy music", true,
+                         &g_sceneFlags[MUTE_BGM_INDEX].active},
                         {"freeze time", FREEZE_TIME_INDEX, "Freezes ingame time", true,
                          &g_sceneFlags[FREEZE_TIME_INDEX].active},
                         {"wind direction", MODIFY_WIND_INDEX, "Change the current wind direction"},
@@ -30,8 +30,7 @@ SceneMenu::~SceneMenu() {}
 #define WIND_DIR_N -0x4000
 #define WIND_DIR_NE -0x2000
 
-s16 windDirs[8] = {WIND_DIR_W, WIND_DIR_NW, WIND_DIR_N, WIND_DIR_NE,
-                   WIND_DIR_E, WIND_DIR_SE, WIND_DIR_S, WIND_DIR_SW};
+s16 windDirs[8] = {WIND_DIR_W, WIND_DIR_NW, WIND_DIR_N, WIND_DIR_NE, WIND_DIR_E, WIND_DIR_SE, WIND_DIR_S, WIND_DIR_SW};
 
 const char* get_wind_str() {
     s16 wind = dkankyo_getWindDir();
