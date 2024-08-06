@@ -128,7 +128,7 @@ KEEP_FUNC void SaveManager::loadData() {
     if (s_injectSave) {
         SaveManager::injectSave(MEMFILE_BUF);
 
-        if (g_enable_item_equip_menu) {
+        if (g_equipPriorityEnabled) {
             u8 cur_item_x = dComIfGs_getSelectItem(0);
             u8 cur_item_y = dComIfGs_getSelectItem(1);
             u8 cur_item_z = dComIfGs_getSelectItem(2);
