@@ -213,7 +213,7 @@ void ItemEquipPriorityMenu::draw() {
     }
 
     if (GZ_getButtonTrig(GZPad::Z)) {
-        g_enable_item_equip_menu = !g_enable_item_equip_menu;
+        g_equipPriorityEnabled = !g_equipPriorityEnabled;
     }
 
     if (GZ_getButtonTrig(GZPad::START)) {
@@ -229,7 +229,7 @@ void ItemEquipPriorityMenu::draw() {
 
     cursor.move(3, NUM_EQUIPPABLE_ITEMS);
 
-    if (g_enable_item_equip_menu) {
+    if (g_equipPriorityEnabled) {
         Font::GZ_drawStr("enable/disable [X]", ITEM_X_OFFSET, 400.f, WHITE, g_dropShadows);
     } else {
         Font::GZ_drawStr("enable/disable [ ]", ITEM_X_OFFSET, 400.f, WHITE, g_dropShadows);

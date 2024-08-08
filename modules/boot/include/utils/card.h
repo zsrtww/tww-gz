@@ -15,20 +15,23 @@ static_assert(sizeof(CARDDir) == 0x40);
 static_assert(sizeof(CARDControl) == 0x110);
 
 #define GZ_SAVE_VERSION_NUMBER 0
-#define GZ_SAVE_ENTRIES_AMNT 9
 
 // These numbers can only change when we change the GZ_SAVE_VERSION_NUMBER,
 // otherwise, only new entries can be added.
 enum GZSaveIndex {
-    SV_CHEATS_INDEX = 0,
-    SV_ITEM_EQUIP_INDEX = 1,
-    SV_TOOLS_INDEX = 2,
-    SV_WATCHES_INDEX = 3,
-    SV_COMMANDS = 4,
-    SV_DROP_SHADOW_INDEX = 5,
-    SV_CURSOR_COLOR_INDEX = 6,
-    SV_FONT_INDEX = 7,
-    SV_SPRITES_INDEX = 8,
+    SV_CHEATS_INDEX,
+    SV_ITEM_EQUIP_INDEX,
+    SV_TOOLS_INDEX,
+    SV_WATCHES_INDEX,
+    SV_COMMANDS,
+    SV_DROP_SHADOW_INDEX,
+    SV_CURSOR_COLOR_INDEX,
+    SV_FONT_INDEX,
+    SV_SPRITES_INDEX,
+    SV_EQUIP_PRIORITY_INDEX,
+    // ONLY append entries to the end of this enum, unless absolutely necessary
+
+    SV_ENTRY_AMNT
 };
 
 struct GZSaveHeader {
@@ -48,12 +51,13 @@ struct GZSaveLayout {
     int mCursorColType;
     int mFontType;
     Vec2 mSpriteOffsets[SPRITES_AMNT];
+    bool mEquipPriorityEnabled;
 };
 
 struct GZSaveFile {
     GZSaveHeader header;
-    uint32_t offsets[GZ_SAVE_ENTRIES_AMNT];
-    uint32_t sizes[GZ_SAVE_ENTRIES_AMNT];
+    uint32_t offsets[SV_ENTRY_AMNT];
+    uint32_t sizes[SV_ENTRY_AMNT];
     GZSaveLayout data;
 };
 
