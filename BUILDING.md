@@ -25,33 +25,28 @@ After WSL and VSCode is installed, and a terminal is available, the following in
     ```
 <br/>  
 
-2. Download the [ROM Hack Compiler](https://github.com/zsrtp/romhack-compiler/releases).  
-  Even though the host OS is Windows, we will need the Linux version for WSL
-    - `romhack-vx.x.x-r2-linux-x64-gc.zip`  
-<br/>  
-
-3. Place the ROM Hack Compiler executeable into the root `tww-gz/` folder.
+2. Place the ROM Hack Compiler executeable into the root `tww-gz/` folder.
     - You can open a File Explorer window in the current WSL location by typing `explorer.exe .`  
 <br/>  
 
-4. Place a TWW ISO into the root `tww-gz/` folder, and rename it according to the following:  
+3. Place a TWW ISO into the `isos` folder, and rename it according to the following:  
     - NTSCJ: `GZLJ01.iso`
     - NTSCE: `GZLE01.iso`
     - PAL: `GZLP01.iso`  
 <br/>  
 
-5. Type `code .` to open a VSCode Window from the `tww-gz/` root folder. Opening VSCode from WSL will open VSCode in a linked "WSL Mode", which is required for building.
+4. Type `code .` to open a VSCode Window from the `tww-gz/` root folder. Opening VSCode from WSL will open VSCode in a linked "WSL Mode", which is required for building.
 <br/>  
 
-6. After VSCode opens, there should be a pop-up in the bottom right corner of the screen that prompts you to restart VSCode in Dev Container mode. 
+5. After VSCode opens, there should be a pop-up in the bottom right corner of the screen that prompts you to restart VSCode in Dev Container mode. 
     - If this pop up does not appear, make sure all previous steps were followed correctly, including installing Docker and the proper VSCode extensions.  
 <br/>  
 
-7. At this point, VSCode tasks can be used to Build the project. This can be done by
+6. At this point, VSCode tasks can be used to Build the project. This can be done by
     - Clicking Terminal > Run Task... > Select Task > Select Version
     - Running contrl+P, typing "task " and then typing or selecting an appropriate task  
 
     Note that the first time the task runs, the setup process can take a long time.  
 <br/>
 
-8. The resulting build artifacts will be generated in a corresponding build folder, for example in `build_ntscj/`
+7. The resulting build artifacts will be generated in a corresponding build folder, for example in `build_ntscj/`
