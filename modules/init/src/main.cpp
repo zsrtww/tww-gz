@@ -41,7 +41,6 @@ void main() {
 
     // Init the pre-loop listener
     g_PreLoopListener = new PreLoopListener();
-    g_PreLoopListener->addListener(GZ_handleCardLoad);
     g_PreLoopListener->addListener(GZ_handleMenu);
     g_PreLoopListener->addListener(GZ_handleFlags_PreLoop);
     g_PreLoopListener->addListener(GZ_setCursorColor);

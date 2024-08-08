@@ -202,12 +202,10 @@ KEEP_FUNC void GZ_loadMemCard(Storage& storage) {
     }
 }
 
-#define FRAME_COUNT 300
 #define FILE_NAME "twwgz01"
 
 KEEP_FUNC void GZ_loadGZSave(bool& card_load) {
-    uint8_t frame_count = cCt_getFrameCount();
-    if (card_load && frame_count > FRAME_COUNT) {
+    if (card_load) {
         static Storage storage;
         storage.file_name = FILE_NAME;
         storage.sector_size = SECTOR_SIZE;

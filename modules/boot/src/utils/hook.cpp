@@ -31,6 +31,7 @@ HOOK_DEF(void, setDaytime, (void*));
 HOOK_DEF(void, BeforeOfPaint, (void));
 HOOK_DEF(void, dCcS__draw, (dCcS*));
 HOOK_DEF(void, dCcS__MoveAfterCheck, (dCcS*));
+HOOK_DEF(BOOL, dScnLogo_Delete, (void*));
 
 namespace Hook {
 void gameLoopHook(void) {
@@ -142,6 +143,11 @@ void dCcSMoveAfterCheckHook(dCcS* i_this) {
     return dCcS__MoveAfterCheckTrampoline(i_this);
 }
 
+BOOL dScnLogo_DeleteHook(void* i_this) {
+    GZ_handleCardLoad();
+    return dScnLogo_DeleteTrampoline(i_this);
+}
+
 #define draw_console draw__17JUTConsoleManagerCFv
 #define f_fapGm_Execute fapGm_Execute__Fv
 
@@ -159,6 +165,7 @@ void setDaytime__18dScnKy_env_light_cFv(void*);
 void dScnPly_BeforeOfPaint__Fv();
 void Draw__4dCcSFv(dCcS*);
 void MoveAfterCheck__4dCcSFv(dCcS*);
+BOOL dScnLogo_Delete__FP10dScnLogo_c(void*);
 }
 
 KEEP_FUNC void applyHooks() {
@@ -177,6 +184,7 @@ KEEP_FUNC void applyHooks() {
     APPLY_HOOK(BeforeOfPaint, &dScnPly_BeforeOfPaint__Fv, beforeOfPaintHook);
     APPLY_HOOK(dCcS__draw, &Draw__4dCcSFv, dCcSDrawHook);
     APPLY_HOOK(dCcS__MoveAfterCheck, &MoveAfterCheck__4dCcSFv, dCcSMoveAfterCheckHook);
+    APPLY_HOOK(dScnLogo_Delete, &dScnLogo_Delete__FP10dScnLogo_c, dScnLogo_DeleteHook);
 
 #undef APPLY_HOOK
 }
