@@ -6,6 +6,7 @@
 #include "scene.h"
 #include "save_manager.h"
 #include "geometry_draw.h"
+#include "events/pre_loop_listener.h"
 #include "libtww/include/addrs.h"
 #include "libtww/include/d/d_procname.h"
 #include "libtww/include/f_op/f_op_scene_req.h"
@@ -28,6 +29,7 @@ HOOK_DEF(void, putSave, (void*, int));
 HOOK_DEF(int, dScnPly__phase_1, (void*));
 HOOK_DEF(int, dScnPly__phase_4, (void*));
 HOOK_DEF(int, dScnPly__phase_compleate, (void*));
+HOOK_DEF(int, dScnPly_Delete, (void*));
 HOOK_DEF(void, setDaytime, (void*));
 HOOK_DEF(void, BeforeOfPaint, (void));
 HOOK_DEF(void, dCcS__draw, (dCcS*));
@@ -84,7 +86,7 @@ int dScnPly__phase_4Hook(void* i_scene) {
     }
 
     if (fpcM_GetName(i_scene) == PROC_OPENING_SCENE) {
-        
+        g_PreLoopListener->addListener(GZ_endlessNightOnTitle);
     }
 
     return ret;
@@ -95,6 +97,14 @@ int dScnPly__phase_compleateHook(void* i_scene) {
     // `dScnPly__phase_4`. So, apply the `after` options now.
     SaveManager::applyAfterOptions();
     return dScnPly__phase_compleateTrampoline(i_scene);
+}
+
+int dScnPly_DeleteHook(void* i_scene) {
+    if (fpcM_GetName(i_scene) == PROC_OPENING_SCENE) {
+        g_PreLoopListener->removeListener(GZ_endlessNightOnTitle);
+    }
+
+    return dScnPly_DeleteTrampoline(i_scene);
 }
 
 #ifdef NTSCU
@@ -166,6 +176,7 @@ void putSave__10dSv_info_cFi(void*, int);
 int phase_1__FP13dScnPly_ply_c(void*);
 int phase_4__FP13dScnPly_ply_c(void*);
 int phase_compleate__FPv(void*);
+int dScnPly_Delete__FP13dScnPly_ply_c(void*);
 void setDaytime__18dScnKy_env_light_cFv(void*);
 void dScnPly_BeforeOfPaint__Fv();
 void Draw__4dCcSFv(dCcS*);
@@ -185,6 +196,7 @@ KEEP_FUNC void applyHooks() {
     APPLY_HOOK(dScnPly__phase_1, &phase_1__FP13dScnPly_ply_c, dScnPly__phase_1Hook);
     APPLY_HOOK(dScnPly__phase_4, &phase_4__FP13dScnPly_ply_c, dScnPly__phase_4Hook);
     APPLY_HOOK(dScnPly__phase_compleate, &phase_compleate__FPv, dScnPly__phase_compleateHook);
+    APPLY_HOOK(dScnPly_Delete, &dScnPly_Delete__FP13dScnPly_ply_c, dScnPly_DeleteHook);
     APPLY_HOOK(setDaytime, &setDaytime__18dScnKy_env_light_cFv, setDaytimeHook);
     APPLY_HOOK(BeforeOfPaint, &dScnPly_BeforeOfPaint__Fv, beforeOfPaintHook);
     APPLY_HOOK(dCcS__draw, &Draw__4dCcSFv, dCcSDrawHook);

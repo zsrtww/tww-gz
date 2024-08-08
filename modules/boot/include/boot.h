@@ -25,6 +25,7 @@ void GZ_handleCardLoad();
 void GZ_handleMenu();
 void GZ_renderMenuTitle();
 void GZ_displaySplash();
+void GZ_endlessNightOnTitle();
 void GZ_handleFlags_PreLoop();
 void GZ_handleFlags_PostLoop();
 
