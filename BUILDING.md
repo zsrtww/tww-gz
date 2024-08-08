@@ -29,7 +29,7 @@ After WSL and VSCode is installed, and a terminal is available, the following in
     - You can open a File Explorer window in the current WSL location by typing `explorer.exe .`  
 <br/>  
 
-3. Place a TWW ISO into the `isos` folder, and rename it according to the following:  
+3. Make a folder called `isos` and place a TWW ISO there. Rename the file according to the following:  
     - NTSCJ: `GZLJ01.iso`
     - NTSCE: `GZLE01.iso`
     - PAL: `GZLP01.iso`  
