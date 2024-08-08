@@ -10,6 +10,8 @@
 #include "tools.h"
 #include "rels/include/defines.h"
 
+u32 t = 0;
+bool COUNT_STOP = 0;
 KEEP_FUNC void GZ_displayLinkInfo() {
     if (!g_tools[DEBUG_INDEX].active) {
         return;
@@ -75,6 +77,32 @@ KEEP_FUNC void GZ_displayTimeInfo() {
     Font::GZ_drawStr(Date, g_spriteOffsets[SPR_TIME_DISP_INDEX].x, g_spriteOffsets[SPR_TIME_DISP_INDEX].y + 20.0f,
                      ColorPalette::WHITE, g_dropShadows);
     Font::GZ_drawStr(Moon, g_spriteOffsets[SPR_TIME_DISP_INDEX].x, g_spriteOffsets[SPR_TIME_DISP_INDEX].y + 40.0f,
+                     ColorPalette::WHITE, g_dropShadows);
+}
+
+KEEP_FUNC void GZ_frameCounter() {
+    if (!g_tools[FRAME_COUNT_INDEX].active) {
+        t = 0;
+        return;
+    }
+
+    if (GZ_getButtonTrig(GZPad::DPAD_UP) | GZ_getButtonTrig(GZPad::Z)) {
+        if (!COUNT_STOP) {
+            COUNT_STOP = 1;
+        }
+        else {
+            COUNT_STOP = 0;
+        }
+    }
+    char tm[10];
+
+    if (!COUNT_STOP) {
+        t = t + 1;
+    }
+
+    sprintf(tm, "count: %d", t);
+
+    Font::GZ_drawStr(tm, g_spriteOffsets[SPR_COUNT_INDEX].x, g_spriteOffsets[SPR_COUNT_INDEX].y + 60.0f,
                      ColorPalette::WHITE, g_dropShadows);
 }
 
