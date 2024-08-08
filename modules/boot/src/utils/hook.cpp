@@ -7,6 +7,7 @@
 #include "save_manager.h"
 #include "geometry_draw.h"
 #include "libtww/include/addrs.h"
+#include "libtww/include/d/d_procname.h"
 #include "libtww/include/f_op/f_op_scene_req.h"
 #include "libtww/include/SSystem/SComponent/c_phase.h"
 #include "rels/include/patch.h"
@@ -79,6 +80,10 @@ int dScnPly__phase_4Hook(void* i_scene) {
     // `dScnPly__phase_compleate`.
     if (ret == cPhs_COMPLEATE_e) {
         SaveManager::applyAfterOptions();
+    }
+
+    if (fpcM_GetName(i_scene) == PROC_OPENING_SCENE) {
+        
     }
 
     return ret;
