@@ -204,3 +204,11 @@ KEEP_FUNC void GZ_displaySplash() {
         splash_time--;
     }
 }
+
+KEEP_FUNC void GZ_endlessNightOnTitle() {
+    g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusB().mTime = 1.0f;
+    g_env_light.mCurTime = 1.0f;
+    g_env_light.mColpatCurr = 1;
+    g_env_light.mThunderEff.mMode = 1;
+    g_env_light.mRainCount = 250;
+}
