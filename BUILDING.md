@@ -25,28 +25,24 @@ After WSL and VSCode is installed, and a terminal is available, the following in
     ```
 <br/>  
 
-2. Place the ROM Hack Compiler executeable into the root `tww-gz/` folder.
-    - You can open a File Explorer window in the current WSL location by typing `explorer.exe .`  
-<br/>  
-
-3. Make a folder called `isos` and place a TWW ISO there. Rename the file according to the following:  
+2. Make a folder called `isos` and place a TWW ISO there. Rename the file according to the following:  
     - NTSCJ: `GZLJ01.iso`
     - NTSCE: `GZLE01.iso`
     - PAL: `GZLP01.iso`  
 <br/>  
 
-4. Type `code .` to open a VSCode Window from the `tww-gz/` root folder. Opening VSCode from WSL will open VSCode in a linked "WSL Mode", which is required for building.
+3. Type `code .` to open a VSCode Window from the `tww-gz/` root folder. Opening VSCode from WSL will open VSCode in a linked "WSL Mode", which is required for building.
 <br/>  
 
-5. After VSCode opens, there should be a pop-up in the bottom right corner of the screen that prompts you to restart VSCode in Dev Container mode. 
+4. After VSCode opens, there should be a pop-up in the bottom right corner of the screen that prompts you to restart VSCode in Dev Container mode. 
     - If this pop up does not appear, make sure all previous steps were followed correctly, including installing Docker and the proper VSCode extensions.  
 <br/>  
 
-6. At this point, VSCode tasks can be used to Build the project. This can be done by
+5. At this point, VSCode tasks can be used to Build the project. This can be done by
     - Clicking Terminal > Run Task... > Select Task > Select Version
     - Running contrl+P, typing "task " and then typing or selecting an appropriate task  
 
     Note that the first time the task runs, the setup process can take a long time.  
 <br/>
 
-7. The resulting build artifacts will be generated in a corresponding build folder, for example in `build_ntscj/`
+6. The resulting build artifacts will be generated in a corresponding build folder, for example in `build_ntscj/`
