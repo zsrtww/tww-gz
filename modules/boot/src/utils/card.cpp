@@ -11,6 +11,7 @@
 #include "menus/utils/menu_mgr.h"
 #include "rels/include/defines.h"
 #include "boot/include/commands.h"
+#include "boot/include/equip_priority.h"
 #include "menus/menu_settings/include/settings_menu.h"
 
 /**
@@ -71,6 +72,7 @@ void GZ_storeSaveLayout(GZSaveLayout& save_layout) {
     save_layout.mDropShadows = g_dropShadows;
     save_layout.mCursorColType = g_cursorColorType;
     save_layout.mFontType = g_fontType;
+    save_layout.mEquipPriorityEnabled = g_equipPriorityEnabled;
 }
 
 void GZ_loadSaveLayout(GZSaveLayout& save_layout) {
@@ -84,11 +86,12 @@ void GZ_loadSaveLayout(GZSaveLayout& save_layout) {
     g_dropShadows = save_layout.mDropShadows;
     g_cursorColorType = save_layout.mCursorColType;
     g_fontType = save_layout.mFontType;
+    g_equipPriorityEnabled = save_layout.mEquipPriorityEnabled;
 }
 
 void GZ_setupSaveFile(GZSaveFile& save_file) {
     save_file.header.version = GZ_SAVE_VERSION_NUMBER;
-    save_file.header.entries = GZ_SAVE_ENTRIES_AMNT;
+    save_file.header.entries = SV_ENTRY_AMNT;
     save_file.header.offsetsLoc = offsetof(GZSaveFile, offsets);
     save_file.header.sizesLoc = offsetof(GZSaveFile, sizes);
 #define set_entry(idx, attr)                                                                                           \
@@ -104,6 +107,7 @@ void GZ_setupSaveFile(GZSaveFile& save_file) {
     set_entry(SV_CURSOR_COLOR_INDEX, mCursorColType);
     set_entry(SV_FONT_INDEX, mFontType);
     set_entry(SV_SPRITES_INDEX, mSpriteOffsets);
+    set_entry(SV_EQUIP_PRIORITY_INDEX, mEquipPriorityEnabled);
 #undef set_entry
 }
 
@@ -140,6 +144,8 @@ int32_t GZ_readSaveFile(Storage* storage, GZSaveFile& save_file, int32_t sector_
     assert_read_entry(SV_CURSOR_COLOR_INDEX, &save_file.data.mCursorColType, sizeof(save_file.data.mCursorColType));
     assert_read_entry(SV_FONT_INDEX, &save_file.data.mFontType, sizeof(save_file.data.mFontType));
     assert_read_entry(SV_SPRITES_INDEX, save_file.data.mSpriteOffsets, sizeof(save_file.data.mSpriteOffsets));
+    assert_read_entry(SV_EQUIP_PRIORITY_INDEX, &save_file.data.mEquipPriorityEnabled,
+                      sizeof(save_file.data.mEquipPriorityEnabled));
 #undef assert_read_entry
 #undef assert_result
 
