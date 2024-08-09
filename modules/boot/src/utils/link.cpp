@@ -78,6 +78,29 @@ KEEP_FUNC void GZ_displayTimeInfo() {
                      ColorPalette::WHITE, g_dropShadows);
 }
 
+KEEP_FUNC void GZ_frameCounter() {
+    static u32 l_frameCount;
+    static bool l_counterStopped;
+    if (!g_tools[FRAME_COUNT_INDEX].active) {
+        l_frameCount = 0;
+        return;
+    }
+
+    if (GZ_getButtonTrig(GZPad::DPAD_UP)) {
+        l_counterStopped = !l_counterStopped;
+    }
+    char framecount[40];
+
+    if (!l_counterStopped) {
+        l_frameCount = l_frameCount + 1;
+    }
+
+    sprintf(framecount, "count: %d", l_frameCount);
+
+    Font::GZ_drawStr(framecount, g_spriteOffsets[SPR_COUNT_INDEX].x, g_spriteOffsets[SPR_COUNT_INDEX].y + 60.0f,
+                     ColorPalette::WHITE, g_dropShadows);
+}
+
 int rainbow() {
     switch (cCt_getFrameCount() % 6) {
     case 0:
