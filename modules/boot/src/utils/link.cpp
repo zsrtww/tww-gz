@@ -86,11 +86,10 @@ KEEP_FUNC void GZ_frameCounter() {
         return;
     }
 
-    if (GZ_getButtonTrig(GZPad::DPAD_UP) | GZ_getButtonTrig(GZPad::Z)) {
+    if (GZ_getButtonTrig(GZPad::DPAD_UP)) {
         if (!COUNT_STOP) {
             COUNT_STOP = 1;
-        }
-        else {
+        } else {
             COUNT_STOP = 0;
         }
     }
