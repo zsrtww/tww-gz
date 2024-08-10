@@ -9,6 +9,7 @@
 #include "../bg/d_bg_s_acch.h"
 #include "../bg/d_bg_s_lin_chk.h"
 #include "../cc/d_cc_d.h"
+#include "../com/d_com_inf_game.h"
 
 class mDoExt_MtxCalcOldFrame;
 class mDoExt_McaMorf;

@@ -78,7 +78,7 @@ KEEP_FUNC void SaveMngSpecial_TrialsSkip_After() {
     gSaveManager.injectDefault_after();
     g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusA().setLife(6);
     g_dComIfG_gameInfo.info.getPlayer().getItemRecord().setBombNum(17);
-    gActorMoveMgr.SetPosYaw(PROC_PLAYER, 25.0f, 943.0f, -5143.0f, 0x0);
+    gActorMoveMgr.SetPosYaw(PROC_PLAYER, -6.0f, 750.0f, -8700.0f, 0x4000);
 }
 
 KEEP_FUNC void SaveMngSpecial_PuppetGanon() {

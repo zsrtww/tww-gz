@@ -3,6 +3,7 @@
 #include <boot/include/utils/containers/deque.h>
 #include "libtww/include/dolphin/mtx/vec.h"
 #include "libtww/include/dolphin/gctypes.h"
+#include "libtww/include/f_op/f_op_actor.h"
 
 typedef enum {
     ACTORMOVE_POS_YAW,
@@ -16,6 +17,7 @@ struct ActorMoveEntry {
     Vec pos;
     s16 yaw;
     ActorMoveType type;
+    fopAc_ac_c* actor;
 };
 
 class ActorMoveManager {
@@ -36,7 +38,8 @@ private:
 
     void AddRequest(s16 procName, f32 x, f32 y, f32 z, s16 yRot, ActorMoveType type);
     void RemoveRequest(u32 id);
-    bool TryMovingActor(ActorMoveEntry entry);
+    fopAc_ac_c* CheckForActor(ActorMoveEntry entry);
+    void MoveActor(ActorMoveEntry entry);
 };
 
 extern ActorMoveManager gActorMoveMgr;
