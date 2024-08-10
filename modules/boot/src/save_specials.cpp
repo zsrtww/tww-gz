@@ -36,7 +36,7 @@ KEEP_FUNC void SaveMngSpecial_Windfall_Day0() {
 KEEP_FUNC void SaveMngSpecial_BombsSwim_After() {
     gSaveManager.injectDefault_after();
 
-    // Set KorL's pos and angle to be the same as when the Wind Waker cutscene ends
+    // Set KoRL's pos and angle to be the same as when the Wind Waker cutscene ends
     gActorMoveMgr.SetPosYaw(PROC_SHIP, 196459.0f, 0.0f, -199693.0f, 0x623E);
 }
 
@@ -78,7 +78,6 @@ KEEP_FUNC void SaveMngSpecial_TrialsSkip_After() {
     gSaveManager.injectDefault_after();
     g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusA().setLife(6);
     g_dComIfG_gameInfo.info.getPlayer().getItemRecord().setBombNum(17);
-    gActorMoveMgr.SetPosYaw(PROC_PLAYER, -6.0f, 750.0f, -8700.0f, 0x4000);
 }
 
 KEEP_FUNC void SaveMngSpecial_PuppetGanon() {
