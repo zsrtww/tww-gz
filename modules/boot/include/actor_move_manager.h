@@ -26,12 +26,10 @@ public:
         AddRequest(procName, x, y, z, yaw, ACTORMOVE_POS_YAW);
     }
 
-    inline void SetPos(s16 procName, f32 x, f32 y, f32 z) {
-        AddRequest(procName, x, y, z, 0, ACTORMOVE_POS);
-    }
+    inline void SetPos(s16 procName, f32 x, f32 y, f32 z) { AddRequest(procName, x, y, z, 0, ACTORMOVE_POS); }
 
     void ProcessRequests();
-    
+
 private:
     u32 mCurId;
     twwgz::containers::deque<ActorMoveEntry> mDeque;
