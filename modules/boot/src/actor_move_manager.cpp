@@ -35,11 +35,6 @@ KEEP_FUNC void ActorMoveManager::MoveActor(ActorMoveEntry entry) {
             l_debug_keep_pos.z = entry.pos.z;
         }
     }
-    
-}
-
-KEEP_FUNC fopAc_ac_c* ActorMoveManager::CheckForActor(ActorMoveEntry entry) {
-    return (fopAc_ac_c*)fopAcM_SearchByName(entry.procName);
 }
 
 KEEP_FUNC void ActorMoveManager::ProcessRequests() {
@@ -53,10 +48,12 @@ KEEP_FUNC void ActorMoveManager::ProcessRequests() {
             return;
         }
 
-        // Separating the check and set phases introduces a purposeful 1 frame delay.
-        // This is necessary, for whatever reason, for 
+        // Separating the "actor check" and "actor move" phases induces a purposeful
+        // 1 frame delay between these two steps.
+        // For whatever reason, this is necessary in some cases to allow for moving an actor's 
+        // position. I wish I knew why.
         if (req->actor == nullptr) {
-            req->actor = CheckForActor(*req);
+            req->actor = (fopAc_ac_c*)fopAcM_SearchByName(req->procName);
         } else {
             MoveActor(*req);
         }

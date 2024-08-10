@@ -38,7 +38,6 @@ private:
 
     void AddRequest(s16 procName, f32 x, f32 y, f32 z, s16 yRot, ActorMoveType type);
     void RemoveRequest(u32 id);
-    fopAc_ac_c* CheckForActor(ActorMoveEntry entry);
     void MoveActor(ActorMoveEntry entry);
 };
 
