@@ -1,9 +1,11 @@
 #include "libtww/include/d/com/d_com_inf_game.h"
 #include "libtww/include/d/com/d_com_static.h"
+#include "libtww/include/d/d_procname.h"
 
 #include "flags.h"
 #include "save_manager.h"
 #include "save_specials.h"
+#include "actor_move_manager.h"
 #include "rels/include/defines.h"
 
 KEEP_FUNC void SaveMngSpecial_ForestOfFairies_FirstVisit() {
@@ -34,13 +36,8 @@ KEEP_FUNC void SaveMngSpecial_Windfall_Day0() {
 KEEP_FUNC void SaveMngSpecial_BombsSwim_After() {
     gSaveManager.injectDefault_after();
 
-    fopAc_ac_c* ship_p = g_dComIfG_gameInfo.play.mpPlayerPtr[2];
-
-    if (ship_p != nullptr) {
-        // set KorL's pos and angle to be the same as when the Wind Waker cutscene ends
-        ship_p->current.pos.set(196459.0f, 0.0f, -199693.0f);
-        ship_p->current.angle.y = ship_p->shape_angle.y = 0x623E;
-    }
+    // Set KorL's pos and angle to be the same as when the Wind Waker cutscene ends
+    gActorMoveMgr.SetPosYaw(PROC_SHIP, 196459.0f, 0.0f, -199693.0f, 0x623E);
 }
 
 KEEP_FUNC void SaveMngSpecial_DTCS() {
@@ -81,6 +78,7 @@ KEEP_FUNC void SaveMngSpecial_TrialsSkip_After() {
     gSaveManager.injectDefault_after();
     g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusA().setLife(6);
     g_dComIfG_gameInfo.info.getPlayer().getItemRecord().setBombNum(17);
+    gActorMoveMgr.SetPosYaw(PROC_PLAYER, 25.0f, 943.0f, -5143.0f, 0x0);
 }
 
 KEEP_FUNC void SaveMngSpecial_PuppetGanon() {
