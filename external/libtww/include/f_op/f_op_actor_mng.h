@@ -62,4 +62,7 @@ inline csXyz* fopAcM_GetAngle_p(fopAc_ac_c* i_actor) {
     return &i_actor->current.angle;
 }
 
+extern "C" {
+extern node_list_class g_fopAcTg_Queue;
+}
 #endif

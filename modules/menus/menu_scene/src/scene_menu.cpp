@@ -17,6 +17,7 @@ KEEP_FUNC SceneMenu::SceneMenu(Cursor& cursor)
                         {"current minute", TIME_MINUTES_INDEX, "Change the current minute"},
                         {"current date", MODIFY_DATE_INDEX, "Change the current date/moon phase"},
                         {"collision viewer", COLLISION_VIEW_INDEX, "Change Collision Viewer settings", false},
+                        {"actor list", ACTOR_LIST_INDEX, "Display info from the actor list", false},
                     } {}
 
 SceneMenu::~SceneMenu() {}
@@ -138,6 +139,9 @@ void SceneMenu::draw() {
         switch (cursor.y) {
         case COLLISION_VIEW_INDEX:
             g_menuMgr->push(MN_COLLISION_VIEW_INDEX);
+            return;
+        case ACTOR_LIST_INDEX:
+            g_menuMgr->push(MN_ACTOR_LIST_INDEX);
             return;
         }
     }
