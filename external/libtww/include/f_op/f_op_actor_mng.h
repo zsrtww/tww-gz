@@ -61,6 +61,9 @@ inline void fopAcM_OffStatus(fopAc_ac_c* pActor, u32 flag) {
 inline csXyz* fopAcM_GetAngle_p(fopAc_ac_c* i_actor) {
     return &i_actor->current.angle;
 }
+LIBTWW_DEFINE_FUNC(fopAcM_delete__FP10fopAc_ac_c,
+                  void, fopAcM_delete, (fopAc_ac_c*))
+
 
 extern "C" {
 extern node_list_class g_fopAcTg_Queue;
