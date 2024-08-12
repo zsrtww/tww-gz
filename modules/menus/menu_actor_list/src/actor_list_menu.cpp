@@ -36,10 +36,11 @@ procBinData l_procData;
 
 /**
  * @brief Checks and closes any menu that's currently open.
- * 
- * @details This function is used to close any menu that's currently open. 
- * It stores the current menu status and then closes the menu by setting the status to none and running the currently open menu's closer function via move_proc function table.
- * 
+ *
+ * @details This function is used to close any menu that's currently open.
+ * It stores the current menu status and then closes the menu by setting the status to none and running the currently
+ * open menu's closer function via move_proc function table.
+ *
  */
 
 /*
@@ -58,19 +59,20 @@ void ActorListMenu::checkAndCloseMenu() {
             g_dComIfG_gameInfo.play.mPauseFlag = false;
             break;
         }
-    }       
+    }
 }
 */
 
 /**
  * @brief Checks and restores any menu that was previously open.
- * 
- * @details This function is used to restore any menu that was previously open. 
- * It restores the menu by setting the status to the stored status and setting the currently stored menu status's corresponding window status.
- * 
+ *
+ * @details This function is used to restore any menu that was previously open.
+ * It restores the menu by setting the status to the stored status and setting the currently stored menu status's
+ * corresponding window status.
+ *
  * @note There doesn't seem to be the need to run the opener function like there is with the checkAndCloseMenu function.
  * Just restoring the menu status and window status seems to be enough.
- * 
+ *
  */
 /*
 void ActorListMenu::checkAndRestoreMenu() {
@@ -78,7 +80,7 @@ void ActorListMenu::checkAndRestoreMenu() {
         g_dComIfG_gameInfo.play.mPauseFlag = true;
 
         switch (l_menuStatus) {
-        case dMw_c::RING_MOVE: 
+        case dMw_c::RING_MOVE:
         case dMw_c::COLLECT_MOVE:
         case dMw_c::FMAP_MOVE:
         case dMw_c::SAVE_MOVE:
@@ -98,38 +100,43 @@ void ActorListMenu::checkAndRestoreMenu() {
 */
 
 KEEP_FUNC ActorListMenu::ActorListMenu(Cursor& cursor, ActorListData& data)
-        : Menu(cursor),
-          l_index(data.l_index),
-          lines{
-            {"", ACTOR_NAME_INDEX, "Z+A: freeze actor, Z+" DELETE_TEXT ": delete actor, " MEM_TEXT " view memory", false},
-            {"", ACTOR_PARAMS_INDEX, "current actor parameters", false},
-            {"", ACTOR_ADDRESS_INDEX, "current actor address", false},
-            {"", ACTOR_POSITION_X_INDEX, "dpad: +/-100.0, " SLOW_INC_TEXT "+dpad: +/-1.0, " FAST_INC_TEXT "+dpad: +/-1000.0", false},
-            {"", ACTOR_POSITION_Y_INDEX, "dpad: +/-100.0, " SLOW_INC_TEXT "+dpad: +/-1.0, " FAST_INC_TEXT "+dpad: +/-1000.0", false},
-            {"", ACTOR_POSITION_Z_INDEX, "dpad: +/-100.0, " SLOW_INC_TEXT "+dpad: +/-1.0, " FAST_INC_TEXT "+dpad: +/-1000.0", false},
-            {"", ACTOR_ANGLE_X_INDEX, "dpad: +/-100, " SLOW_INC_TEXT "+dpad: +/-1, " FAST_INC_TEXT "+dpad: +/-1000", false},
-            {"", ACTOR_ANGLE_Y_INDEX, "dpad: +/-100, " SLOW_INC_TEXT "+dpad: +/-1, " FAST_INC_TEXT "+dpad: +/-1000", false},
-            {"", ACTOR_ANGLE_Z_INDEX, "dpad: +/-100, " SLOW_INC_TEXT "+dpad: +/-1, " FAST_INC_TEXT "+dpad: +/-1000", false}, 
-        } {
-            // store camera position and target
-        // l_cameraPos = matrixInfo.matrix_info->pos;
-          //  l_cameraTarget = matrixInfo.matrix_info->target;
+    : Menu(cursor), l_index(data.l_index),
+      lines{
+          {"", ACTOR_NAME_INDEX, "Z+A: freeze actor, Z+" DELETE_TEXT ": delete actor, " MEM_TEXT " view memory", false},
+          {"", ACTOR_PARAMS_INDEX, "current actor parameters", false},
+          {"", ACTOR_ADDRESS_INDEX, "current actor address", false},
+          {"", ACTOR_POSITION_X_INDEX,
+           "dpad: +/-100.0, " SLOW_INC_TEXT "+dpad: +/-1.0, " FAST_INC_TEXT "+dpad: +/-1000.0", false},
+          {"", ACTOR_POSITION_Y_INDEX,
+           "dpad: +/-100.0, " SLOW_INC_TEXT "+dpad: +/-1.0, " FAST_INC_TEXT "+dpad: +/-1000.0", false},
+          {"", ACTOR_POSITION_Z_INDEX,
+           "dpad: +/-100.0, " SLOW_INC_TEXT "+dpad: +/-1.0, " FAST_INC_TEXT "+dpad: +/-1000.0", false},
+          {"", ACTOR_ANGLE_X_INDEX, "dpad: +/-100, " SLOW_INC_TEXT "+dpad: +/-1, " FAST_INC_TEXT "+dpad: +/-1000",
+           false},
+          {"", ACTOR_ANGLE_Y_INDEX, "dpad: +/-100, " SLOW_INC_TEXT "+dpad: +/-1, " FAST_INC_TEXT "+dpad: +/-1000",
+           false},
+          {"", ACTOR_ANGLE_Z_INDEX, "dpad: +/-100, " SLOW_INC_TEXT "+dpad: +/-1, " FAST_INC_TEXT "+dpad: +/-1000",
+           false},
+      } {
+    // store camera position and target
+    l_cameraPos = g_dComIfG_gameInfo.play.mCameraInfo->mCameraPos;
+    l_cameraTarget = g_dComIfG_gameInfo.play.mCameraInfo->mCameraTarget;
 
-            // remove any currently open menus
-            //checkAndCloseMenu();
+    // remove any currently open menus
+    // checkAndCloseMenu();
 
-            // initial data load from procs.bin
-            updateActorData();
-            loadActorName();
-        }
+    // initial data load from procs.bin
+    updateActorData();
+    loadActorName();
+}
 
 ActorListMenu::~ActorListMenu() {
     // restore any previously open menu
-    //checkAndRestoreMenu();
+    // checkAndRestoreMenu();
 
     // restore camera position and target
-   // matrixInfo.matrix_info->pos = l_cameraPos;
-    //matrixInfo.matrix_info->target = l_cameraTarget;
+    g_dComIfG_gameInfo.play.mCameraInfo->mCameraPos = l_cameraPos;
+    g_dComIfG_gameInfo.play.mCameraInfo->mCameraTarget = l_cameraTarget;
 
     dComIfGp_getPEvtManager()->mCameraPlay = 0;
     g_meterHIO.field_0x18 = 1.0f;
@@ -139,7 +146,9 @@ template <typename T>
 void ActorListMenu::updateValue(T* value, bool increase) {
     if (value != NULL) {
         f32 change;
-        GZ_getButtonPressed(FAST_INC_BTN) ? change = 1000.0f : GZ_getButtonPressed(SLOW_INC_BTN) ? change = 1.0f : change = 100.0f;
+        GZ_getButtonPressed(FAST_INC_BTN) ? change = 1000.0f :
+        GZ_getButtonPressed(SLOW_INC_BTN) ? change = 1.0f :
+                                            change = 100.0f;
 
         *value += (increase ? 1 : -1) * change;
     }
@@ -164,11 +173,10 @@ void ActorListMenu::updateActorData() {
 
 void ActorListMenu::loadActorName() {
     if (g_currentActor) {
-        int offset = (g_currentActor->mBase.mProcName*32);
+        int offset = (g_currentActor->mBase.mProcName * 32);
         loadFile("twwgz/procs.bin", &l_procData, sizeof(l_procData), offset);
     }
 }
-
 
 void ActorListMenu::draw() {
     g_actorViewEnabled = true;
@@ -181,9 +189,8 @@ void ActorListMenu::draw() {
         return;
     }
 
-    bool rightPressed = GZ_getButtonRepeat(CONTROLLER_RIGHT,1);
-    bool leftPressed = GZ_getButtonRepeat(CONTROLLER_LEFT,1);
-    
+    bool rightPressed = GZ_getButtonRepeat(CONTROLLER_RIGHT, 1);
+    bool leftPressed = GZ_getButtonRepeat(CONTROLLER_LEFT, 1);
 
     switch (cursor.y) {
     case ACTOR_NAME_INDEX:
@@ -194,8 +201,8 @@ void ActorListMenu::draw() {
 
             updateActorData();
             loadActorName();
-        } 
-        
+        }
+
         if (GZ_getButtonRepeat(CONTROLLER_LEFT)) {
             l_index--;
             if (l_index > g_fopAcTg_Queue.mSize - 1)
@@ -204,7 +211,7 @@ void ActorListMenu::draw() {
             updateActorData();
             loadActorName();
         }
-        
+
         if (GZ_getButtonRepeat(DELETE_BUTTON)) {
             if (g_currentActor) {
                 if (g_currentActor->mBase.mProcName != PROC_PLAYER) {
@@ -273,7 +280,7 @@ void ActorListMenu::draw() {
         lines[ACTOR_POSITION_Z_INDEX].printf("pos-z: <%.1f>", g_currentActor->current.pos.z);
         lines[ACTOR_ANGLE_X_INDEX].printf("rot-x: <0x%04X>", static_cast<u16>(g_currentActor->shape_angle.x));
         lines[ACTOR_ANGLE_Y_INDEX].printf("rot-y: <0x%04X>", static_cast<u16>(g_currentActor->shape_angle.y));
-        lines[ACTOR_ANGLE_Z_INDEX].printf("rot-z: <0x%04X>", static_cast<u16>(g_currentActor->shape_angle.z));     
+        lines[ACTOR_ANGLE_Z_INDEX].printf("rot-z: <0x%04X>", static_cast<u16>(g_currentActor->shape_angle.z));
     }
 
     cursor.move(0, ACTOR_LIST_LINE_COUNT);

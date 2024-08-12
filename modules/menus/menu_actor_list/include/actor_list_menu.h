@@ -12,7 +12,7 @@ struct ActorListData {
 struct procBinData {
     s16 procId;
     char procName[30];
-}__attribute__((aligned(32)));
+} __attribute__((aligned(32)));
 
 enum {
     ACTOR_NAME_INDEX,
@@ -24,7 +24,6 @@ enum {
     ACTOR_ANGLE_X_INDEX,
     ACTOR_ANGLE_Y_INDEX,
     ACTOR_ANGLE_Z_INDEX,
-
 
     ACTOR_LIST_LINE_COUNT,
 };
@@ -42,7 +41,7 @@ private:
     void loadActorName();
     void checkAndCloseMenu();
     void checkAndRestoreMenu();
-    
+
     u16& l_index;
 
     Line lines[ACTOR_LIST_LINE_COUNT];
