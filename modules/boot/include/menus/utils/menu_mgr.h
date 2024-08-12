@@ -53,7 +53,14 @@ struct MenuState {
     void del();
 };
 
-enum MenuCommandId { MC_NONE, MC_OPEN, MC_HIDE, MC_PUSH, MC_POP, MC_CLEAR };
+enum MenuCommandId {
+    MC_NONE,
+    MC_OPEN,
+    MC_HIDE,
+    MC_PUSH,
+    MC_POP,
+    MC_CLEAR
+};
 
 struct MenuCommand {
     MenuCommandId cmd_id;

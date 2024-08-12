@@ -7,17 +7,43 @@ enum Sword {
     FULLY_CHARGED_MASTER_SWORD_OWNED
 };
 
-enum Shield { NO_SHIELD_OWNED = 0, HEROS_SHIELD_OWNED = 1, MIRROR_SHIELD_OWNED = 2 };
+enum Shield {
+    NO_SHIELD_OWNED = 0,
+    HEROS_SHIELD_OWNED = 1,
+    MIRROR_SHIELD_OWNED = 2
+};
 
-enum Magic { NO_MAGIC = 0, SINGLE_MAGIC = 16, DOUBLE_MAGIC = 32 };
+enum Magic {
+    NO_MAGIC = 0,
+    SINGLE_MAGIC = 16,
+    DOUBLE_MAGIC = 32
+};
 
-enum WalletSize { WALLET_200 = 0, WALLET_1000 = 1, WALLET_5000 = 2 };
+enum WalletSize {
+    WALLET_200 = 0,
+    WALLET_1000 = 1,
+    WALLET_5000 = 2
+};
 
-enum Quiver { NO_QUIVER = 0, ARROWS_30 = 30, ARROWS_60 = 60, ARROWS_99 = 99 };
+enum Quiver {
+    NO_QUIVER = 0,
+    ARROWS_30 = 30,
+    ARROWS_60 = 60,
+    ARROWS_99 = 99
+};
 
-enum BombBag { NO_BOMBBAG = 0, BOMBS_30 = 30, BOMBS_60 = 60, BOMBS_99 = 99 };
+enum BombBag {
+    NO_BOMBBAG = 0,
+    BOMBS_30 = 30,
+    BOMBS_60 = 60,
+    BOMBS_99 = 99
+};
 
-enum HerosCharm { NO_HEROS_CHARM = 0, HEROS_CHARM_DISABLED = 1, HEROS_CHARM_ENABLED = 2 };
+enum HerosCharm {
+    NO_HEROS_CHARM = 0,
+    HEROS_CHARM_DISABLED = 1,
+    HEROS_CHARM_ENABLED = 2
+};
 
 enum Song {
     WINDS_REQUIEM_VALUE,
@@ -28,7 +54,11 @@ enum Song {
     SONG_OF_PASSING_VALUE
 };
 
-enum Pearl { NAYRUS_PEARL_VALUE, DINS_PEARL_VALUE, FARORES_PEARL_VALUE };
+enum Pearl {
+    NAYRUS_PEARL_VALUE,
+    DINS_PEARL_VALUE,
+    FARORES_PEARL_VALUE
+};
 
 enum TriforcePiece {
     TRIFORCE_PIECE_1_VALUE,

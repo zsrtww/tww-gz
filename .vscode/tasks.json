@@ -150,7 +150,7 @@
         {
             "label": "Formatting",
             "type": "shell",
-            "detail": "Formats the code using clang-format-10",
+            "detail": "Formats the code using clang-format-14",
             "group": "none",
             "icon": {
                 "id": "file-code",
@@ -158,7 +158,7 @@
             },
             "command": [
                 "sh",
-                "${workspaceFolder}/external/misc/run-clang-format.sh"
+                "${workspaceFolder}/tools/run-clang-format.sh"
             ],
             "runOptions": {
                 "instanceLimit": 1

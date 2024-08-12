@@ -16,6 +16,13 @@ extern ListMember g_font_opt[7];
 extern f32 g_landSpeed;
 extern f32 g_waterSpeed;
 
-enum cursor_colors { CURSOR_GREEN, CURSOR_BLUE, CURSOR_RED, CURSOR_ORANGE, CURSOR_YELLOW, CURSOR_PURPLE };
+enum cursor_colors {
+    CURSOR_GREEN,
+    CURSOR_BLUE,
+    CURSOR_RED,
+    CURSOR_ORANGE,
+    CURSOR_YELLOW,
+    CURSOR_PURPLE
+};
 
 void GZ_initFont();
