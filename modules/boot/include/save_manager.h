@@ -82,7 +82,7 @@ public:
 
     void setSaveAngle(int16_t angle) { mPracticeSaveInfo.angle = angle; }
 
-    void setAfter(LoadingCallback cb) { mPracticeFileOpts.inject_options_after_load = cb; }
+    void modifySave(LoadingCallback cb) { mPracticeFileOpts.inject_options_after_load = cb; }
 };
 
 extern SaveManager gSaveManager;

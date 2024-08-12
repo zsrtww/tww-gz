@@ -49,7 +49,7 @@ KEEP_FUNC void SaveMngSpecial_LeafHover() {
     gSaveManager.injectDefault_during();
     g_dComIfG_gameInfo.play.mNextStage.setPoint(6);
 
-    gSaveManager.setAfter([](){
+    gSaveManager.modifySave([](){
         SaveMngSpecial_SetBombCount(20);
         SaveMngSpecial_SetHealth(1);
     });
@@ -58,7 +58,7 @@ KEEP_FUNC void SaveMngSpecial_LeafHover() {
 KEEP_FUNC void SaveMngSpecial_PostLeafHover() {
     gSaveManager.injectDefault_after();
 
-    gSaveManager.setAfter([](){
+    gSaveManager.modifySave([](){
         SaveMngSpecial_SetBombCount(19);
     });
 }
@@ -67,7 +67,7 @@ KEEP_FUNC void SaveMngSpecial_ExitThornedFairy() {
     gSaveManager.injectDefault_during();
     g_dComIfG_gameInfo.play.mNextStage.setPoint(1);
 
-    gSaveManager.setAfter([](){
+    gSaveManager.modifySave([](){
         SaveMngSpecial_SetBombCount(19);
     });
 }
@@ -77,7 +77,7 @@ KEEP_FUNC void SaveMngSpecial_BarrierSkip() {
     g_dComIfG_gameInfo.play.mNextStage.setName((char*)"Hyrule");
     g_dComIfG_gameInfo.play.mNextStage.setPoint(3);
 
-    gSaveManager.setAfter([](){
+    gSaveManager.modifySave([](){
         SaveMngSpecial_SetHealth(6);
         SaveMngSpecial_SetBombCount(19);
     });
@@ -88,7 +88,7 @@ KEEP_FUNC void SaveMngSpecial_TrialsSkip() {
     g_dComIfG_gameInfo.play.mNextStage.setRoomNo(1);
     g_dComIfG_gameInfo.play.mNextStage.setPoint(0);
 
-    gSaveManager.setAfter([](){
+    gSaveManager.modifySave([](){
         SaveMngSpecial_SetHealth(6);
         SaveMngSpecial_SetBombCount(17);
     });
@@ -98,7 +98,7 @@ KEEP_FUNC void SaveMngSpecial_PuppetGanon() {
     SaveMngSpecial_SetLayer1();
     daArrow_c__m_keep_type = 3;
 
-    gSaveManager.setAfter([](){
+    gSaveManager.modifySave([](){
         SaveMngSpecial_SetHealth(10);
         SaveMngSpecial_SetBombCount(17);
     });
@@ -109,7 +109,7 @@ KEEP_FUNC void SaveMngSpecial_MorthHover() {
     SaveMngSpecial_SetLayer1();
     daArrow_c__m_keep_type = 3;
 
-    gSaveManager.setAfter([](){
+    gSaveManager.modifySave([](){
         SaveMngSpecial_SetHealth(1);
         SaveMngSpecial_SetMagic(8);
         SaveMngSpecial_SetBombCount(12);
@@ -119,7 +119,7 @@ KEEP_FUNC void SaveMngSpecial_MorthHover() {
 KEEP_FUNC void SaveMngSpecial_Ganondorf() {
     SaveMngSpecial_SetLayer1();
 
-    gSaveManager.setAfter([](){
+    gSaveManager.modifySave([](){
         SaveMngSpecial_SetHealth(4);
         SaveMngSpecial_SetBombCount(10);
     });
@@ -128,7 +128,7 @@ KEEP_FUNC void SaveMngSpecial_Ganondorf() {
 // =================== ANY% FUNCTIONS ===================
 
 KEEP_FUNC void SaveMngSpecial_LightArrowSkip_Any() {
-    gSaveManager.setAfter([](){
+    gSaveManager.modifySave([](){
         SaveMngSpecial_SetBombCount(17);
         SaveMngSpecial_SetHealth(6);
         SaveMngSpecial_SetMagic(6);
@@ -136,7 +136,7 @@ KEEP_FUNC void SaveMngSpecial_LightArrowSkip_Any() {
 }
 
 KEEP_FUNC void SaveMngSpecial_PGCutsceneSkip_Any() {
-    gSaveManager.setAfter([](){
+    gSaveManager.modifySave([](){
         SaveMngSpecial_SetBombCount(16);
         SaveMngSpecial_SetHealth(6);
         SaveMngSpecial_SetMagic(10);
@@ -146,7 +146,7 @@ KEEP_FUNC void SaveMngSpecial_PGCutsceneSkip_Any() {
 KEEP_FUNC void SaveMngSpecial_PGSkip_Any() {
     g_dComIfG_gameInfo.play.mNextStage.setLayer(8);
 
-    gSaveManager.setAfter([](){
+    gSaveManager.modifySave([](){
         SaveMngSpecial_SetBombCount(15);
         SaveMngSpecial_SetHealth(1);
         SaveMngSpecial_SetMagic(13);
@@ -177,34 +177,36 @@ KEEP_FUNC void SaveMngSpecial_FF1_CS_AD() {
     g_dComIfG_gameInfo.play.mNextStage.setPoint(5);
 }
 
-KEEP_FUNC void SaveMngSpecial_Early_Leaf_Hover_AD_During() {
+KEEP_FUNC void SaveMngSpecial_EarlyLeafHover_AD() {
     gSaveManager.injectDefault_during();
     g_dComIfG_gameInfo.play.mNextStage.setPoint(5);
+
+    gSaveManager.modifySave([](){
+        SaveMngSpecial_SetHealth(4);
+    });
 }
 
-KEEP_FUNC void SaveMngSpecial_Early_Leaf_Hover_AD_After() {
-    SaveMngSpecial_SetHealth(4);
-}
-
-KEEP_FUNC void SaveMngSpecial_Deku_Tree_CS_AD() {
+KEEP_FUNC void SaveMngSpecial_DTCS_AD() {
     gSaveManager.injectDefault_during();
     g_dComIfG_gameInfo.play.mNextStage.setPoint(1);
 }
 
-KEEP_FUNC void SaveMngSpecial_Kalle_Demons_AD_After() {
-    SaveMngSpecial_SetHealth(7);
-    SaveMngSpecial_SetMagic(16);
+KEEP_FUNC void SaveMngSpecial_KalleDemos_AD() {
+    gSaveManager.modifySave([](){
+        SaveMngSpecial_SetHealth(7);
+        SaveMngSpecial_SetMagic(16);
+    });
 }
 
 KEEP_FUNC void SaveMngSpecial_Enter_DRC_AD_During() {
     gSaveManager.injectDefault_during();
     g_dComIfG_gameInfo.play.mNextStage.setPoint(5);
-}
 
-KEEP_FUNC void SaveMngSpecial_Enter_DRC_AD_After() {
-    SaveMngSpecial_SetBombCount(15);
-    SaveMngSpecial_SetHealth(6);
-    SaveMngSpecial_SetMagic(16);
+    gSaveManager.modifySave([](){
+        SaveMngSpecial_SetBombCount(15);
+        SaveMngSpecial_SetHealth(6);
+        SaveMngSpecial_SetMagic(16);
+    });
 }
 
 KEEP_FUNC void SaveMngSpecial_DRC_MB_AD() {
@@ -228,13 +230,14 @@ KEEP_FUNC void SaveMngSpecial_Nayrus_Pearl_AD() {
 KEEP_FUNC void SaveMngSpecial_Enter_TOTG_AD_During() {
     gSaveManager.injectDefault_during();
     g_dComIfG_gameInfo.play.mNextStage.setPoint(9);
+
+    gSaveManager.modifySave([](){
+        SaveMngSpecial_SetHealth(10);
+    });
 }
 
-KEEP_FUNC void SaveMngSpecial_Enter_TOTG_AD_After() {
-    SaveMngSpecial_SetHealth(10);
-}
-
-KEEP_FUNC void SaveMngSpecial_TOTG_AD_After() {
+KEEP_FUNC void SaveMngSpecial_TOTG_AD() {
+    gSaveManager.injectDefault_during();
     SaveMngSpecial_SetHealth(10);
 }
 
@@ -249,10 +252,10 @@ KEEP_FUNC void SaveMngSpecial_After_Statue2_AD_During() {
     gSaveManager.injectDefault_during();
     g_dComIfG_gameInfo.play.mNextStage.setRoomNo(8);
     g_dComIfG_gameInfo.play.mNextStage.setPoint(0);
-}
 
-KEEP_FUNC void SaveMngSpecial_After_Statue2_AD_After() {
-    SaveMngSpecial_SetMagic(8);
+    gSaveManager.modifySave([](){
+        SaveMngSpecial_SetMagic(8);
+    });
 }
 
 KEEP_FUNC void SaveMngSpecial_Hyrule_Escape_AD() {
@@ -276,23 +279,27 @@ KEEP_FUNC void SaveMngSpecial_Boomerang_Skip_AD() {
 KEEP_FUNC void SaveMngSpecial_Phantom_Ganon_AD_During() {
     gSaveManager.injectDefault_during();
     g_dComIfG_gameInfo.play.mNextStage.setPoint(15);
+
+    gSaveManager.modifySave([](){
+        SaveMngSpecial_SetHealth(6);
+    });
 }
 
-KEEP_FUNC void SaveMngSpecial_Phantom_Ganon_AD_After() {
-    SaveMngSpecial_SetHealth(6);
-}
+KEEP_FUNC void SaveMngSpecial_EnterHelmaroc_AD() {
+    gSaveManager.injectDefault_during();
+    g_dComIfG_gameInfo.play.mNextStage.setPoint(15);
 
-KEEP_FUNC void SaveMngSpecial_Enter_Helm_AD_After() {
-    SaveMngSpecial_SetHealth(2);
+    gSaveManager.modifySave([](){
+        SaveMngSpecial_SetHealth(2);
+    });
 }
 
 KEEP_FUNC void SaveMngSpecial_Hyrule2Skip() {
     SaveMngSpecial_SetLayer3();
 
-    gSaveManager.setAfter([](){
+    gSaveManager.modifySave([](){
         SaveMngSpecial_SetHealth(2);
     });
-    
 }
 
 KEEP_FUNC void SaveMngSpecial_FireMountain_AD() {
@@ -327,32 +334,34 @@ KEEP_FUNC void SaveMngSpecial_IceRing_AD_During() {
     gSaveManager.injectDefault_during();
     g_dComIfG_gameInfo.play.mNextStage.setPoint(1);
     daArrow_c__m_keep_type = 3;
-}
 
-KEEP_FUNC void SaveMngSpecial_IceRing_AD_After() {
-    SaveMngSpecial_SetHealth(2);
+    gSaveManager.modifySave([](){
+        SaveMngSpecial_SetHealth(2);
+    });
 }
 
 KEEP_FUNC void SaveMngSpecial_Makar_AD_During() {
     gSaveManager.injectDefault_during();
     g_dComIfG_gameInfo.play.mNextStage.setPoint(1);
-}
 
-KEEP_FUNC void SaveMngSpecial_Makar_AD_After() {
-    SaveMngSpecial_SetHealth(1);
+    gSaveManager.modifySave([](){
+        SaveMngSpecial_SetHealth(1);
+    });
 }
 
 KEEP_FUNC void SaveMngSpecial_Enter_WT_AD_During() {
     gSaveManager.injectDefault_during();
     g_dComIfG_gameInfo.play.mNextStage.setPoint(9);
+
+    gSaveManager.modifySave([](){
+        SaveMngSpecial_SetHealth(1);
+    });
 }
 
-KEEP_FUNC void SaveMngSpecial_Enter_WT_AD_After() {
-    SaveMngSpecial_SetHealth(1);
-}
-
-KEEP_FUNC void SaveMngSpecial_WT_AD_After() {
-    SaveMngSpecial_SetHealth(1);
+KEEP_FUNC void SaveMngSpecial_WT_AD() {
+    gSaveManager.modifySave([](){
+        SaveMngSpecial_SetHealth(1);
+    });
 }
 
 KEEP_FUNC void SaveMngSpecial_Wizzrobe_AD() {
