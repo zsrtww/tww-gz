@@ -102,15 +102,14 @@ KEEP_FUNC ActorListMenu::ActorListMenu(Cursor& cursor, ActorListData& data)
           l_index(data.l_index),
           lines{
             {"", ACTOR_NAME_INDEX, "Z+A: freeze actor, Z+" DELETE_TEXT ": delete actor, " MEM_TEXT " view memory", false},
+            {"", ACTOR_PARAMS_INDEX, "current actor parameters", false},
+            {"", ACTOR_ADDRESS_INDEX, "current actor address", false},
             {"", ACTOR_POSITION_X_INDEX, "dpad: +/-100.0, " SLOW_INC_TEXT "+dpad: +/-1.0, " FAST_INC_TEXT "+dpad: +/-1000.0", false},
             {"", ACTOR_POSITION_Y_INDEX, "dpad: +/-100.0, " SLOW_INC_TEXT "+dpad: +/-1.0, " FAST_INC_TEXT "+dpad: +/-1000.0", false},
             {"", ACTOR_POSITION_Z_INDEX, "dpad: +/-100.0, " SLOW_INC_TEXT "+dpad: +/-1.0, " FAST_INC_TEXT "+dpad: +/-1000.0", false},
             {"", ACTOR_ANGLE_X_INDEX, "dpad: +/-100, " SLOW_INC_TEXT "+dpad: +/-1, " FAST_INC_TEXT "+dpad: +/-1000", false},
             {"", ACTOR_ANGLE_Y_INDEX, "dpad: +/-100, " SLOW_INC_TEXT "+dpad: +/-1, " FAST_INC_TEXT "+dpad: +/-1000", false},
-            {"", ACTOR_ANGLE_Z_INDEX, "dpad: +/-100, " SLOW_INC_TEXT "+dpad: +/-1, " FAST_INC_TEXT "+dpad: +/-1000", false},
-            {"", ACTOR_ADDRESS_INDEX, "current actor address", false},
-            {"", ACTOR_PROC_INDEX, "current actor proc id", false},
-            {"", ACTOR_PARAMS_INDEX, "current actor parameters", false},
+            {"", ACTOR_ANGLE_Z_INDEX, "dpad: +/-100, " SLOW_INC_TEXT "+dpad: +/-1, " FAST_INC_TEXT "+dpad: +/-1000", false}, 
         } {
             // store camera position and target
         // l_cameraPos = matrixInfo.matrix_info->pos;
@@ -260,7 +259,6 @@ void ActorListMenu::draw() {
             updateValue(&g_currentActor->shape_angle.z, rightPressed);
         }
         break;
-    case ACTOR_PROC_INDEX:
     case ACTOR_PARAMS_INDEX:
         // allowing arbitrary updates here causes frequent crashes. removing for now.
         break;
@@ -268,15 +266,14 @@ void ActorListMenu::draw() {
 
     if (g_currentActor) {
         lines[ACTOR_NAME_INDEX].printf("name:  <%s>", l_procData.procName);
+        lines[ACTOR_PARAMS_INDEX].printf("params: 0x%08X", g_currentActor->mBase.mParameters);
+        lines[ACTOR_ADDRESS_INDEX].printf("addr: 0x%08X", g_currentActor);
         lines[ACTOR_POSITION_X_INDEX].printf("pos-x: <%.1f>", g_currentActor->current.pos.x);
         lines[ACTOR_POSITION_Y_INDEX].printf("pos-y: <%.1f>", g_currentActor->current.pos.y);
         lines[ACTOR_POSITION_Z_INDEX].printf("pos-z: <%.1f>", g_currentActor->current.pos.z);
         lines[ACTOR_ANGLE_X_INDEX].printf("rot-x: <0x%04X>", static_cast<u16>(g_currentActor->shape_angle.x));
         lines[ACTOR_ANGLE_Y_INDEX].printf("rot-y: <0x%04X>", static_cast<u16>(g_currentActor->shape_angle.y));
-        lines[ACTOR_ANGLE_Z_INDEX].printf("rot-z: <0x%04X>", static_cast<u16>(g_currentActor->shape_angle.z));
-        lines[ACTOR_ADDRESS_INDEX].printf("addr: 0x%08X", g_currentActor);
-        lines[ACTOR_PROC_INDEX].printf("proc id: %d", g_currentActor->mBase.mProcName);
-        lines[ACTOR_PARAMS_INDEX].printf("params: 0x%08X", g_currentActor->mBase.mParameters);
+        lines[ACTOR_ANGLE_Z_INDEX].printf("rot-z: <0x%04X>", static_cast<u16>(g_currentActor->shape_angle.z));     
     }
 
     cursor.move(0, ACTOR_LIST_LINE_COUNT);
