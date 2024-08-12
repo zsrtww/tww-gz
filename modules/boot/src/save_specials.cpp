@@ -10,7 +10,7 @@
 
 // =================== UTILITIES ===================
 
-inline void SaveMngSpecial_SetActorPos(fopAc_ac_c* actor, f32 x, f32 y, f32 z) {
+void SaveMngSpecial_SetActorPos(fopAc_ac_c* actor, f32 x, f32 y, f32 z) {
     actor->current.pos.set(x, y, z);
 
     if (actor->mBase.mProcName == PROC_PLAYER) {
