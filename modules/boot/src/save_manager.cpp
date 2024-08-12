@@ -10,6 +10,7 @@
 #include "equip_priority.h"
 #include "menus/utils/menu_mgr.h"
 #include "libtww/include/d/com/d_com_inf_game.h"
+#include "libtww/include/d/com/d_com_static.h"
 #include "libtww/include/f_op/f_op_scene_req.h"
 #include "libtww/include/m_Do/m_Do_printf.h"
 
@@ -83,11 +84,8 @@ void SaveManager::loadSave(uint32_t id, const char* category, special i_specials
     if (i_specials) {
         for (int i = 0; i < size; ++i) {
             if (id == i_specials[i].idx) {
-                if (i_specials[i].CallbackDuring) {
-                    gSaveManager.mPracticeFileOpts.inject_options_during_load = i_specials[i].CallbackDuring;
-                }
-                if (i_specials[i].CallbackAfter) {
-                    gSaveManager.mPracticeFileOpts.inject_options_after_load = i_specials[i].CallbackAfter;
+                if (i_specials[i].loadingCallback) {
+                    gSaveManager.mPracticeFileOpts.inject_options_during_load = i_specials[i].loadingCallback;
                 }
                 break;
             }
@@ -104,6 +102,9 @@ KEEP_FUNC void SaveManager::triggerLoad(uint32_t id, const char* category, speci
 
     SaveManager::loadSavefile(l_filename);
     dSv_save_c* save = (dSv_save_c*)MEMFILE_BUF;
+
+    // Default to normal arrow. The special callbacks will handle other cases.
+    daArrow_c__m_keep_type = 0;
 
     int state = tww_getLayerNo(save->getPlayer().mReturnPlace.mName, save->getPlayer().mReturnPlace.mRoomNo, 0xFF);
 
@@ -127,6 +128,10 @@ KEEP_FUNC void SaveManager::triggerLoad(uint32_t id, const char* category, speci
 KEEP_FUNC void SaveManager::loadData() {
     if (s_injectSave) {
         SaveManager::injectSave(MEMFILE_BUF);
+
+        if (gSaveManager.mPracticeFileOpts.inject_options_after_load) {
+            gSaveManager.mPracticeFileOpts.inject_options_after_load();
+        }
 
         if (g_equipPriorityEnabled) {
             u8 cur_item_x = dComIfGs_getSelectItem(0);
@@ -157,14 +162,6 @@ KEEP_FUNC void SaveManager::loadData() {
             dComIfGs_setSelectItem(0, new_items[name_X]);
             dComIfGs_setSelectItem(1, new_items[name_Y]);
             dComIfGs_setSelectItem(2, new_items[name_Z]);
-        }
-    }
-}
-
-KEEP_FUNC void SaveManager::applyAfterOptions() {
-    if (s_injectSave) {
-        if (gSaveManager.mPracticeFileOpts.inject_options_after_load) {
-            gSaveManager.mPracticeFileOpts.inject_options_after_load();
         }
 
         s_injectSave = false;
