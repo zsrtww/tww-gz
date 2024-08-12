@@ -69,8 +69,8 @@ void AllDungeonsSavesMenu::draw() {
     if (GZ_getButtonTrig(SELECTION_BUTTON)) {
         special AllDungeonsSpecials[] = {
             special(FF1_CS_AD, SaveMngSpecial_FF1_CS_AD, nullptr),
-            special(WINDFALL_AD, SaveMngSpecial_Windfall_Day0, nullptr),
-            special(ROPES_2_AD, SaveMngSpecial_Ropes2, nullptr),
+            special(WINDFALL_AD, SaveMngSpecial_SetLayer0, nullptr),
+            special(ROPES_2_AD, SaveMngSpecial_SetLayer2, nullptr),
             special(EARLY_LEAF_HOVER_AD, SaveMngSpecial_Early_Leaf_Hover_AD_During,
                     SaveMngSpecial_Early_Leaf_Hover_AD_After),
             special(DEKU_TREE_CS_AD, SaveMngSpecial_Deku_Tree_CS_AD, nullptr),
@@ -86,11 +86,11 @@ void AllDungeonsSavesMenu::draw() {
                     SaveMngSpecial_After_Statue2_AD_After),
             special(HYRULE_ESCAPE_AD, SaveMngSpecial_Hyrule_Escape_AD, nullptr),
             special(BARRIER_SKIP_AD, SaveMngSpecial_Hyrule1_BarrierSkip_AD, nullptr),
-            special(TRIAL_SKIP_AD, SaveMngSpecial_TrialsSkip, nullptr),
+            special(TRIAL_SKIP_AD, SaveMngSpecial_TrialsSkip_AD, nullptr),
             special(BOOMERANG_SKIP_AD, SaveMngSpecial_Boomerang_Skip_AD, nullptr),
             special(PHANTOM_GANON_AD, SaveMngSpecial_Phantom_Ganon_AD_During, SaveMngSpecial_Phantom_Ganon_AD_After),
             special(ENTER_HELM_AD, SaveMngSpecial_Phantom_Ganon_AD_During, SaveMngSpecial_Enter_Helm_AD_After),
-            special(HYRULE2_SKIP_AD, SaveMngSpecial_HelmarocKing, SaveMngSpecial_Hyrule2_Skip_AD_After),
+            special(HYRULE2_SKIP_AD, SaveMngSpecial_Hyrule2Skip, nullptr),
             special(FIRE_MOUNTAIN_AD, SaveMngSpecial_FireMountain_AD, nullptr),
             special(EARLY_ET_AD, SaveMngSpecial_Early_ET_AD, nullptr),
             special(ET_AD, SaveMngSpecial_ET_AD, nullptr),
@@ -103,7 +103,7 @@ void AllDungeonsSavesMenu::draw() {
             special(WIZZROBE_AD, SaveMngSpecial_Wizzrobe_AD, nullptr),
             special(AFTER_HS_AD, SaveMngSpecial_After_HS_AD, nullptr),
             special(SWIM_2_FCP_AD, SaveMngSpecial_Swim_2_FCP_AD, nullptr),
-            special(PG_SKIP_AD, SaveMngSpecial_PGSkip, nullptr),
+            special(PG_SKIP_AD, SaveMngSpecial_PGSkip_AD, nullptr),
             special(PUPPET_GANON_AD, SaveMngSpecial_PuppetGanon, nullptr),
         };
 

@@ -40,21 +40,21 @@ void AnySavesMenu::draw() {
 
     if (GZ_getButtonTrig(SELECTION_BUTTON)) {
         special AnySpecials[] = {
-            special(BOMBS_ANY, SaveMngSpecial_Windfall_Day0, nullptr),
-            special(ROPES_2_ANY, SaveMngSpecial_Ropes2, nullptr),
+            special(BOMBS_ANY, SaveMngSpecial_SetLayer0, nullptr),
+            special(ROPES_2_ANY, SaveMngSpecial_SetLayer2, nullptr),
             special(DTCS_ANY, SaveMngSpecial_DTCS, nullptr),
-            special(LEAF_HOVER, SaveMngSpecial_LeafHover, SaveMngSpecial_LeafHover_After),
-            special(QUIVER_FF2, nullptr, SaveMngSpecial_QuiverAny_After),
-            special(FF2_SWIM_ANY, SaveMngSpecial_ExitThornedFairy, SaveMngSpecial_QuiverAny_After),
-            special(HELM_SKIP, SaveMngSpecial_HelmarocKing, nullptr),
-            special(BARRIER_SKIP_ANY, SaveMngSpecial_Hyrule2_BarrierSkip, SaveMngSpecial_Hyrule2_BarrierSkip_After),
-            special(TRIALS_SKIP_ANY, SaveMngSpecial_TrialsSkip, SaveMngSpecial_TrialsSkip_After),
-            special(LIGHT_ARROW_SKIP, nullptr, SaveMngSpecial_LightArrowSkip_After),
-            special(PGCS_SKIP, nullptr, SaveMngSpecial_PGCutsceneSkip_After),
-            special(PG_SKIP, SaveMngSpecial_PGSkip, SaveMngSpecial_PGSkip_After),
-            special(PG_FIGHT_ANY, SaveMngSpecial_PuppetGanon, SaveMngSpecial_PuppetGanon_After),
-            special(MORTH_HOVER_ANY, SaveMngSpecial_MorthHover_during, SaveMngSpecial_MorthHover_after),
-            special(GANONDORF_ANY, SaveMngSpecial_Ganondorf, SaveMngSpecial_Ganondorf_After),
+            special(LEAF_HOVER, SaveMngSpecial_LeafHover, nullptr),
+            special(QUIVER_FF2, SaveMngSpecial_PostLeafHover, nullptr),
+            special(FF2_SWIM_ANY, SaveMngSpecial_ExitThornedFairy, nullptr),
+            special(HELM_SKIP, SaveMngSpecial_SetLayer3, nullptr),
+            special(BARRIER_SKIP_ANY, SaveMngSpecial_BarrierSkip, nullptr),
+            special(TRIALS_SKIP_ANY, SaveMngSpecial_TrialsSkip, nullptr),
+            special(LIGHT_ARROW_SKIP, SaveMngSpecial_LightArrowSkip_Any, nullptr),
+            special(PGCS_SKIP, SaveMngSpecial_PGCutsceneSkip_Any, nullptr),
+            special(PG_SKIP, SaveMngSpecial_PGSkip_Any, nullptr),
+            special(PG_FIGHT_ANY, SaveMngSpecial_PuppetGanon, nullptr),
+            special(MORTH_HOVER_ANY, SaveMngSpecial_MorthHover, nullptr),
+            special(GANONDORF_ANY, SaveMngSpecial_Ganondorf, nullptr),
         };
 
         SaveManager::triggerLoad(cursor.y, "any_percent", AnySpecials, sizeof(AnySpecials) / sizeof(AnySpecials[0]));

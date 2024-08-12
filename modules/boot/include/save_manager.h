@@ -73,7 +73,6 @@ public:
     static void defaultLoad();
 
     static void loadData();
-    static void applyAfterOptions();
 
     void setSavePosition(float x, float y, float z) {
         mPracticeSaveInfo.position.x = x;
@@ -82,6 +81,8 @@ public:
     }
 
     void setSaveAngle(int16_t angle) { mPracticeSaveInfo.angle = angle; }
+
+    void setAfter(LoadingCallback cb) { mPracticeFileOpts.inject_options_after_load = cb; }
 };
 
 extern SaveManager gSaveManager;

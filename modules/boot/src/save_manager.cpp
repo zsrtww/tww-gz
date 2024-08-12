@@ -128,6 +128,10 @@ KEEP_FUNC void SaveManager::loadData() {
     if (s_injectSave) {
         SaveManager::injectSave(MEMFILE_BUF);
 
+        if (gSaveManager.mPracticeFileOpts.inject_options_after_load) {
+            gSaveManager.mPracticeFileOpts.inject_options_after_load();
+        }
+
         if (g_equipPriorityEnabled) {
             u8 cur_item_x = dComIfGs_getSelectItem(0);
             u8 cur_item_y = dComIfGs_getSelectItem(1);
@@ -158,15 +162,7 @@ KEEP_FUNC void SaveManager::loadData() {
             dComIfGs_setSelectItem(1, new_items[name_Y]);
             dComIfGs_setSelectItem(2, new_items[name_Z]);
         }
-    }
-}
-
-KEEP_FUNC void SaveManager::applyAfterOptions() {
-    if (s_injectSave) {
-        if (gSaveManager.mPracticeFileOpts.inject_options_after_load) {
-            gSaveManager.mPracticeFileOpts.inject_options_after_load();
-        }
-
+        
         s_injectSave = false;
     }
 }
