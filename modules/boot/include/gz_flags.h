@@ -15,7 +15,10 @@ struct GZFlag {
 
 extern bool g_framePaused;
 
-enum LoopPhase { GAME_LOOP, POST_GAME_LOOP };
+enum LoopPhase {
+    GAME_LOOP,
+    POST_GAME_LOOP
+};
 
 inline bool GZ_checkDropShadows() {
     return g_dropShadows;

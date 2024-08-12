@@ -4,7 +4,7 @@ clangFormatTargets=$(find . -type f ! -path './external/*' ! -path './build*' ! 
 
 for inputFile in $clangFormatTargets
 do
-    clang-format-10 -style=file $inputFile > $inputFile-formatted
+    clang-format-14 -style=file $inputFile > $inputFile-formatted
     diff $inputFile $inputFile-formatted
     if [ $? != 0 ] ; then
         echo "ERROR: Found an unformatted file, please run tools/run-clang-format.sh"

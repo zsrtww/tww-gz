@@ -4,8 +4,16 @@
 
 #define NUM_EQUIPPABLE_ITEMS 14
 
-enum ItemEquipColumns { ItemName, HighPriority, MediumPriority };
-enum ButtonNames { name_X, name_Y, name_Z };
+enum ItemEquipColumns {
+    ItemName,
+    HighPriority,
+    MediumPriority
+};
+enum ButtonNames {
+    name_X,
+    name_Y,
+    name_Z
+};
 enum ItemEquipNames {
     NO_ITEM_EQUIP,
     TELESCOPE_EQUIP,
