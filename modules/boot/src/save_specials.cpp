@@ -170,7 +170,7 @@ KEEP_FUNC void SaveMngSpecial_BombsSwim_NoMSS() {
 
 // =================== ALL DUNGEONS FUNCTIONS ===================
 
-KEEP_FUNC void SaveMngSpecial_FF1_CS_AD() {
+KEEP_FUNC void SaveMngSpecial_FF1CS_AD() {
     gSaveManager.injectDefault_during();
     g_dComIfG_gameInfo.play.mNextStage.setName((char*)"majroom");
     g_dComIfG_gameInfo.play.mNextStage.setRoomNo(4);
@@ -198,7 +198,7 @@ KEEP_FUNC void SaveMngSpecial_KalleDemos_AD() {
     });
 }
 
-KEEP_FUNC void SaveMngSpecial_Enter_DRC_AD_During() {
+KEEP_FUNC void SaveMngSpecial_EnterDRC_AD() {
     gSaveManager.injectDefault_during();
     g_dComIfG_gameInfo.play.mNextStage.setPoint(5);
 
@@ -209,25 +209,25 @@ KEEP_FUNC void SaveMngSpecial_Enter_DRC_AD_During() {
     });
 }
 
-KEEP_FUNC void SaveMngSpecial_DRC_MB_AD() {
+KEEP_FUNC void SaveMngSpecial_DRCMiniboss_AD() {
     gSaveManager.injectDefault_during();
     g_dComIfG_gameInfo.play.mNextStage.setName((char*)"M_Dra09");
     g_dComIfG_gameInfo.play.mNextStage.setRoomNo(9);
     g_dComIfG_gameInfo.play.mNextStage.setPoint(1);
 }
 
-KEEP_FUNC void SaveMngSpecial_DRC_BKS_AD() {
+KEEP_FUNC void SaveMngSpecial_DRCBossKeySkip_AD() {
     gSaveManager.injectDefault_during();
     g_dComIfG_gameInfo.play.mNextStage.setRoomNo(10);
     g_dComIfG_gameInfo.play.mNextStage.setPoint(0);
 }
 
-KEEP_FUNC void SaveMngSpecial_Nayrus_Pearl_AD() {
+KEEP_FUNC void SaveMngSpecial_NayrusPearl_AD() {
     gSaveManager.injectDefault_during();
     g_dComIfG_gameInfo.play.mNextStage.setPoint(212);
 }
 
-KEEP_FUNC void SaveMngSpecial_Enter_TOTG_AD_During() {
+KEEP_FUNC void SaveMngSpecial_EnterTOTG_AD() {
     gSaveManager.injectDefault_during();
     g_dComIfG_gameInfo.play.mNextStage.setPoint(9);
 
@@ -248,7 +248,7 @@ KEEP_FUNC void SaveMngSpecial_Darknut_AD() {
     g_dComIfG_gameInfo.play.mNextStage.setPoint(0);
 }
 
-KEEP_FUNC void SaveMngSpecial_After_Statue2_AD_During() {
+KEEP_FUNC void SaveMngSpecial_AfterStatue2_AD() {
     gSaveManager.injectDefault_during();
     g_dComIfG_gameInfo.play.mNextStage.setRoomNo(8);
     g_dComIfG_gameInfo.play.mNextStage.setPoint(0);
@@ -258,25 +258,25 @@ KEEP_FUNC void SaveMngSpecial_After_Statue2_AD_During() {
     });
 }
 
-KEEP_FUNC void SaveMngSpecial_Hyrule_Escape_AD() {
+KEEP_FUNC void SaveMngSpecial_HyruleEscape_AD() {
     gSaveManager.injectDefault_during();
     g_dComIfG_gameInfo.play.mNextStage.setName((char*)"Hyroom");
     g_dComIfG_gameInfo.play.mNextStage.setRoomNo(0);
     g_dComIfG_gameInfo.play.mNextStage.setPoint(2);
 }
 
-KEEP_FUNC void SaveMngSpecial_Hyrule1_BarrierSkip_AD() {
+KEEP_FUNC void SaveMngSpecial_BarrierSkip_AD() {
     SaveMngSpecial_SetLayer0();
     g_dComIfG_gameInfo.play.mNextStage.setName((char*)"Hyrule");
     g_dComIfG_gameInfo.play.mNextStage.setPoint(3);
 }
 
-KEEP_FUNC void SaveMngSpecial_Boomerang_Skip_AD() {
+KEEP_FUNC void SaveMngSpecial_BoomerangSkip_AD() {
     gSaveManager.injectDefault_during();
     g_dComIfG_gameInfo.play.mNextStage.setPoint(0);
 }
 
-KEEP_FUNC void SaveMngSpecial_Phantom_Ganon_AD_During() {
+KEEP_FUNC void SaveMngSpecial_PhantomGanon_AD() {
     gSaveManager.injectDefault_during();
     g_dComIfG_gameInfo.play.mNextStage.setPoint(15);
 
@@ -294,7 +294,7 @@ KEEP_FUNC void SaveMngSpecial_EnterHelmaroc_AD() {
     });
 }
 
-KEEP_FUNC void SaveMngSpecial_Hyrule2Skip() {
+KEEP_FUNC void SaveMngSpecial_Hyrule2Skip_AD() {
     SaveMngSpecial_SetLayer3();
 
     gSaveManager.modifySave([](){
@@ -307,7 +307,7 @@ KEEP_FUNC void SaveMngSpecial_FireMountain_AD() {
     daArrow_c__m_keep_type = 2;
 }
 
-KEEP_FUNC void SaveMngSpecial_Early_ET_AD() {
+KEEP_FUNC void SaveMngSpecial_EarlyET_AD() {
     gSaveManager.injectDefault_during();
     g_dComIfG_gameInfo.play.mNextStage.setPoint(1);
     daArrow_c__m_keep_type = 2;
@@ -318,7 +318,7 @@ KEEP_FUNC void SaveMngSpecial_ET_AD() {
     daArrow_c__m_keep_type = 2;
 }
 
-KEEP_FUNC void SaveMngSpecial_Songstone_Skip_AD() {
+KEEP_FUNC void SaveMngSpecial_SongstoneSkip_AD() {
     gSaveManager.injectDefault_during();
     g_dComIfG_gameInfo.play.mNextStage.setRoomNo(9);
     g_dComIfG_gameInfo.play.mNextStage.setPoint(11);
@@ -330,7 +330,7 @@ KEEP_FUNC void SaveMngSpecial_Jalhalla_AD() {
     daArrow_c__m_keep_type = 3;
 }
 
-KEEP_FUNC void SaveMngSpecial_IceRing_AD_During() {
+KEEP_FUNC void SaveMngSpecial_IceRing_AD() {
     gSaveManager.injectDefault_during();
     g_dComIfG_gameInfo.play.mNextStage.setPoint(1);
     daArrow_c__m_keep_type = 3;
@@ -340,7 +340,7 @@ KEEP_FUNC void SaveMngSpecial_IceRing_AD_During() {
     });
 }
 
-KEEP_FUNC void SaveMngSpecial_Makar_AD_During() {
+KEEP_FUNC void SaveMngSpecial_Makar_AD() {
     gSaveManager.injectDefault_during();
     g_dComIfG_gameInfo.play.mNextStage.setPoint(1);
 
@@ -349,7 +349,7 @@ KEEP_FUNC void SaveMngSpecial_Makar_AD_During() {
     });
 }
 
-KEEP_FUNC void SaveMngSpecial_Enter_WT_AD_During() {
+KEEP_FUNC void SaveMngSpecial_EnterWT_AD() {
     gSaveManager.injectDefault_during();
     g_dComIfG_gameInfo.play.mNextStage.setPoint(9);
 
@@ -371,13 +371,13 @@ KEEP_FUNC void SaveMngSpecial_Wizzrobe_AD() {
     g_dComIfG_gameInfo.play.mNextStage.setPoint(0);
 }
 
-KEEP_FUNC void SaveMngSpecial_After_HS_AD() {
+KEEP_FUNC void SaveMngSpecial_AfterHS_AD() {
     gSaveManager.injectDefault_during();
     g_dComIfG_gameInfo.play.mNextStage.setRoomNo(2);
     g_dComIfG_gameInfo.play.mNextStage.setPoint(20);
 }
 
-KEEP_FUNC void SaveMngSpecial_Swim_2_FCP_AD() {
+KEEP_FUNC void SaveMngSpecial_Swim2FCP_AD() {
     gSaveManager.injectDefault_during();
     g_dComIfG_gameInfo.play.mNextStage.setName((char*)"sea");
     g_dComIfG_gameInfo.play.mNextStage.setRoomNo(4);
