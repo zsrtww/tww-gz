@@ -1,6 +1,7 @@
 #pragma once
 
 #include "commands.h"
+#include <boot/include/utils/containers/deque.h>
 #include "libtww/include/dolphin/mtx/vec.h"
 #include "libtww/include/d/com/d_com_inf_game.h"
 
@@ -52,6 +53,15 @@ struct PracticeSaveInfo {
     uint8_t _p1[4];
 } __attribute__((packed));
 
+typedef void (*ActorModCallback)(fopAc_ac_c* actor);
+
+struct ActorModEntry {
+    u32 id;
+    u16 attempts;
+    s16 procName;
+    ActorModCallback callback;
+    fopAc_ac_c* actor;
+};
 class SaveManager {
 public:
     PracticeFileOpts mPracticeFileOpts;
@@ -72,15 +82,19 @@ public:
 
     static void loadData();
 
-    void setSavePosition(float x, float y, float z) {
-        mPracticeSaveInfo.position.x = x;
-        mPracticeSaveInfo.position.y = y;
-        mPracticeSaveInfo.position.z = z;
+    void modifySave(LoadingCallback cb) { mPracticeFileOpts.inject_options_after_load = cb; }
+
+    void modifyActor(s16 procName, ActorModCallback callback) {
+        mDeque.push_back({mCurEntryId, 0, procName, callback});
+        mCurEntryId++;
     }
 
-    void setSaveAngle(int16_t angle) { mPracticeSaveInfo.angle = angle; }
+    void RemoveActorModRequest(u32 id);
+    void ProcessActorModRequests();
 
-    void modifySave(LoadingCallback cb) { mPracticeFileOpts.inject_options_after_load = cb; }
+private:
+    u32 mCurEntryId;
+    twwgz::containers::deque<ActorModEntry> mDeque;
 };
 
 extern SaveManager gSaveManager;

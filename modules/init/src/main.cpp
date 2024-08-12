@@ -52,6 +52,7 @@ void main() {
     g_PostLoopListener = new PostLoopListener();
     g_PostLoopListener->addListener(GZ_handleFlags_PostLoop);
     g_PostLoopListener->addListener(GZ_setCursorColor);
+    g_PostLoopListener->addListener(GZ_processActorModRequests);
 }
 void exit() {}
 

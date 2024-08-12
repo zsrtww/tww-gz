@@ -12,6 +12,7 @@
 #include "libtww/include/d/com/d_com_inf_game.h"
 #include "libtww/include/d/com/d_com_static.h"
 #include "libtww/include/f_op/f_op_scene_req.h"
+#include "libtww/include/f_op/f_op_actor_iter.h"
 #include "libtww/include/m_Do/m_Do_printf.h"
 
 static char l_filename[128];
@@ -113,15 +114,15 @@ KEEP_FUNC void SaveManager::triggerLoad(uint32_t id, const char* category, speci
     strcpy(g_dComIfG_gameInfo.play.mNextStage.mName, save->getPlayer().mReturnPlace.mName);
     g_dComIfG_gameInfo.play.mNextStage.mLayer = state;
 
+    g_dComIfG_gameInfo.info.getRestart().mLastMode = 0;
+    g_dComIfG_gameInfo.play.mNextStage.mEnable = true;
+
     // inject options after initial stage set since some options change stage location
     if (gSaveManager.mPracticeFileOpts.inject_options_during_load) {
         gSaveManager.mPracticeFileOpts.inject_options_during_load();
     }
 
-    g_dComIfG_gameInfo.play.mNextStage.mEnable = true;
     s_injectSave = true;
-
-    g_dComIfG_gameInfo.info.getRestart().mLastMode = 0;
 }
 
 // runs at the beginning of phase_1 of dScnPly__phase_1 load sequence
@@ -165,5 +166,57 @@ KEEP_FUNC void SaveManager::loadData() {
         }
 
         s_injectSave = false;
+    }
+}
+
+KEEP_FUNC void SaveManager::RemoveActorModRequest(u32 id) {
+    for (auto req = mDeque.begin(); req != mDeque.end(); ++req) {
+        if (req->id == id) {
+            mDeque.erase(req);
+        }
+    }
+}
+
+KEEP_FUNC void SaveManager::ProcessActorModRequests() {
+    if (!g_dComIfG_gameInfo.play.mNextStage.mEnable) {
+        for (auto req = mDeque.begin(); req != mDeque.end(); ++req) {
+            fopAc_ac_c* actor;
+            
+            // This version of `fopAcM_SearchByName` has an IsCreating check which
+            // the inline version does not have.
+            fopAcM_SearchByName(req->procName, &actor);
+
+            if (actor != nullptr) {
+                req->callback(actor);
+                RemoveActorModRequest(req->id);
+            } else {
+                req->attempts++;
+
+                // Dont allow attempts to last longer than 5 seconds
+                if (req->attempts >= 150) {
+                    OSReport("Couldn't find actor:%d, deleting move request:%d\n", req->procName, req->id);
+                    RemoveActorModRequest(req->id);
+                }                
+            }
+
+            // ================================================
+
+            // if (req->actor != nullptr) {
+            //     req->callback(req->actor);
+            //     RemoveActorModRequest(req->id);
+            // } else {
+            //     req->actor = (fopAc_ac_c*)fopAcM_SearchByName(req->procName);
+
+            //     req->attempts++;
+
+            //     // Dont allow attempts to last longer than 5 seconds
+            //     if (req->attempts >= 150) {
+            //         OSReport("Couldn't find actor:%d, deleting move request:%d\n", req->procName, req->id);
+            //         RemoveActorModRequest(req->id);
+            //     }
+            // }
+
+
+        }
     }
 }

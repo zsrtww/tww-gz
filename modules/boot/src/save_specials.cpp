@@ -4,9 +4,30 @@
 #include "flags.h"
 #include "save_manager.h"
 #include "save_specials.h"
+#include "libtww/include/d/d_procname.h"
+#include "libtww/include/d/a/d_a_player_main.h"
 #include "rels/include/defines.h"
 
 // =================== UTILITIES ===================
+
+inline void SaveMngSpecial_SetActorPos(fopAc_ac_c* actor, f32 x, f32 y, f32 z) {
+    actor->current.pos.set(x, y, z);
+
+    if (actor->mBase.mProcName == PROC_PLAYER) {
+        l_debug_keep_pos.x = x;
+        l_debug_keep_pos.y = y;
+        l_debug_keep_pos.z = z;
+    }
+}
+
+inline void SaveMngSpecial_SetActorRot(fopAc_ac_c* actor, s16 xRot, s16 yRot, s16 zRot) {
+    actor->current.angle.set(xRot, yRot, zRot);
+    actor->shape_angle.set(xRot, yRot, zRot);
+}
+
+inline void SaveMngSpecial_SetActorYaw(fopAc_ac_c* actor, s16 yRot) {
+    actor->current.angle.y = actor->shape_angle.y = yRot;
+}
 
 inline void SaveMngSpecial_SetHealth(u16 health) {
     g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusA().setLife(health);
@@ -148,14 +169,11 @@ KEEP_FUNC void SaveMngSpecial_PGSkip_Any() {
 KEEP_FUNC void SaveMngSpecial_BombsSwim_NoMSS() {
     SaveMngSpecial_SetLayer0();
 
-    // TODO replace with actor mod system later when it exists
-    fopAc_ac_c* ship_p = g_dComIfG_gameInfo.play.mpPlayerPtr[2];
-
-    if (ship_p != nullptr) {
-        // set KorL's pos and angle to be the same as when the Wind Waker cutscene ends
-        ship_p->current.pos.set(196459.0f, 0.0f, -199693.0f);
-        ship_p->current.angle.y = ship_p->shape_angle.y = 0x623E;
-    }
+    gSaveManager.modifyActor(PROC_SHIP, [](fopAc_ac_c* actor) {
+        OSReport("korlX:%8X\n", &actor->current.pos.x);
+        SaveMngSpecial_SetActorPos(actor, 196459.0f, 0.0f, -199693.0f);
+        SaveMngSpecial_SetActorYaw(actor, 0x623E);
+    });
 }
 
 // =================== ALL DUNGEONS FUNCTIONS ===================
