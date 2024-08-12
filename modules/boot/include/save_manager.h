@@ -22,15 +22,13 @@ typedef void (*LoadingCallback)(void);
 
 class special {
 public:
-    special(int i_idx, LoadingCallback cb_during, LoadingCallback cb_after) {
+    special(int i_idx, LoadingCallback cb) {
         idx = i_idx;
-        CallbackDuring = cb_during;
-        CallbackAfter = cb_after;
+        loadingCallback = cb;
     }
 
     uint32_t idx;
-    LoadingCallback CallbackDuring;
-    LoadingCallback CallbackAfter;
+    LoadingCallback loadingCallback;
 
 private:
 };
@@ -73,7 +71,6 @@ public:
     static void defaultLoad();
 
     static void loadData();
-    static void applyAfterOptions();
 
     void setSavePosition(float x, float y, float z) {
         mPracticeSaveInfo.position.x = x;
@@ -82,6 +79,8 @@ public:
     }
 
     void setSaveAngle(int16_t angle) { mPracticeSaveInfo.angle = angle; }
+
+    void modifySave(LoadingCallback cb) { mPracticeFileOpts.inject_options_after_load = cb; }
 };
 
 extern SaveManager gSaveManager;
