@@ -15,7 +15,14 @@ enum MemoryType {
     MEM_TYPE_STR
 };
 
-enum MemoryColumns { WatchAddress, WatchX, WatchY, WatchHex, WatchType, WatchOffset };
+enum MemoryColumns {
+    WatchAddress,
+    WatchX,
+    WatchY,
+    WatchHex,
+    WatchType,
+    WatchOffset
+};
 
 struct MemoryWatch {
     uint32_t address = 0x80000000;
