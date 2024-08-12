@@ -22,6 +22,7 @@ enum {
     ACTOR_ANGLE_X_INDEX,
     ACTOR_ANGLE_Y_INDEX,
     ACTOR_ANGLE_Z_INDEX,
+    ACTOR_ADDRESS_INDEX,
     ACTOR_PROC_INDEX,
     ACTOR_PARAMS_INDEX,
 
@@ -37,7 +38,7 @@ public:
 private:
     void updateActorData();
     template <typename T>
-    void updateValue(T*, bool, bool, bool);
+    void updateValue(T*, bool);
     void loadActorName();
     void checkAndCloseMenu();
     void checkAndRestoreMenu();
