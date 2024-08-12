@@ -10,6 +10,7 @@
 #include "equip_priority.h"
 #include "menus/utils/menu_mgr.h"
 #include "libtww/include/d/com/d_com_inf_game.h"
+#include "libtww/include/d/com/d_com_static.h"
 #include "libtww/include/f_op/f_op_scene_req.h"
 #include "libtww/include/m_Do/m_Do_printf.h"
 
@@ -101,6 +102,9 @@ KEEP_FUNC void SaveManager::triggerLoad(uint32_t id, const char* category, speci
 
     SaveManager::loadSavefile(l_filename);
     dSv_save_c* save = (dSv_save_c*)MEMFILE_BUF;
+
+    // Default to normal arrow. The special callbacks will handle other cases.
+    daArrow_c__m_keep_type = 0;
 
     int state = tww_getLayerNo(save->getPlayer().mReturnPlace.mName, save->getPlayer().mReturnPlace.mRoomNo, 0xFF);
 
