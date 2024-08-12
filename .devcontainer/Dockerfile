@@ -6,10 +6,19 @@ USER vscode
 
 RUN sudo dpkg --add-architecture i386
 RUN sudo apt-get update
-RUN sudo apt-get install -y clang-format-10
 RUN sudo apt-get install -y python3-pip
 RUN sudo apt-get install -y cmake
 RUN sudo apt-get install -y ninja-build
+RUN sudo apt-get install -y wget 
+RUN sudo apt-get install -y lsb-release 
+RUN sudo apt-get install -y software-properties-common 
+RUN sudo apt-get install -y gnupg
+
+# clang format
+RUN sudo wget https://apt.llvm.org/llvm.sh
+RUN sudo chmod +x llvm.sh
+RUN sudo ./llvm.sh 14
+RUN sudo apt install -y clang-format-14
 
 RUN python3 -m pip install Pillow
 

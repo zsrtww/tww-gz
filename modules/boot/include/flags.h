@@ -32,7 +32,6 @@ enum FlagId {
     BALLOON_DISCOUNT,
     TINGS_DISCOUNT,
     HAND_ME_DOWN_TUNER,
-
 };
 
 void setEventFlag(uint16_t flag);

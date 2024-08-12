@@ -196,11 +196,15 @@ void InputViewer::drawViewer(Vec2 pos, float scale, bool is_shadow, bool wide_sc
     // Analog triggers
     Draw::drawRectOutline(is_shadow ? 0x00000060 : 0xFFFFFFFF, {pos.x, pos.y}, {35.f * scale, 7.f * scale},
                           OUTLINE_WIDTH);
-    Draw::drawRect(is_shadow ? 0x00000060 : GZ_getButtonPressed(GZPad::L) ? 0x00FF00FF : 0xFFFFFFFF, {pos.x, pos.y},
-                   {35.f * mPadButton.mAnalogLf * scale, 7.f * scale});
+    Draw::drawRect(is_shadow                     ? 0x00000060 :
+                   GZ_getButtonPressed(GZPad::L) ? 0x00FF00FF :
+                                                   0xFFFFFFFF,
+                   {pos.x, pos.y}, {35.f * mPadButton.mAnalogLf * scale, 7.f * scale});
     Draw::drawRectOutline(is_shadow ? 0x00000060 : 0xFFFFFFFF, {pos.x + 45.f * scale, pos.y},
                           {35.f * scale, 7.f * scale}, OUTLINE_WIDTH);
-    Draw::drawRect(is_shadow ? 0x00000060 : GZ_getButtonPressed(GZPad::R) ? 0x00FF00FF : 0xFFFFFFFF,
+    Draw::drawRect(is_shadow                     ? 0x00000060 :
+                   GZ_getButtonPressed(GZPad::R) ? 0x00FF00FF :
+                                                   0xFFFFFFFF,
                    {pos.x + (45.f + 35.f * (1 - mPadButton.mAnalogRf)) * scale, pos.y},
                    {35.f * mPadButton.mAnalogRf * scale, 7.f * scale});
 

@@ -11,7 +11,12 @@
 #define DEFAULT_ARROW_CAPACITY 30
 #define DEFAULT_BOMB_CAPACITY 30
 
-enum BottleSlotIndex { SLOT_BOTTLE_1 = 14, SLOT_BOTTLE_2 = 15, SLOT_BOTTLE_3 = 16, SLOT_BOTTLE_4 = 17 };
+enum BottleSlotIndex {
+    SLOT_BOTTLE_1 = 14,
+    SLOT_BOTTLE_2 = 15,
+    SLOT_BOTTLE_3 = 16,
+    SLOT_BOTTLE_4 = 17
+};
 
 KEEP_FUNC ItemInventoryMenu::ItemInventoryMenu(Cursor& cursor)
     : Menu(cursor), lines{{"Telescope:", SLOT_TELESCOPE, "Add/remove telescope to/from inventory"},
