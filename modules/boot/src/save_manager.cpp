@@ -159,7 +159,7 @@ KEEP_FUNC void SaveManager::loadData() {
             dComIfGs_setSelectItem(1, new_items[name_Y]);
             dComIfGs_setSelectItem(2, new_items[name_Z]);
         }
-        
+
         s_injectSave = false;
     }
 }
