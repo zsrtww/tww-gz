@@ -22,15 +22,13 @@ typedef void (*LoadingCallback)(void);
 
 class special {
 public:
-    special(int i_idx, LoadingCallback cb_during, LoadingCallback cb_after) {
+    special(int i_idx, LoadingCallback cb) {
         idx = i_idx;
-        CallbackDuring = cb_during;
-        CallbackAfter = cb_after;
+        loadingCallback = cb;
     }
 
     uint32_t idx;
-    LoadingCallback CallbackDuring;
-    LoadingCallback CallbackAfter;
+    LoadingCallback loadingCallback;
 
 private:
 };

@@ -83,11 +83,8 @@ void SaveManager::loadSave(uint32_t id, const char* category, special i_specials
     if (i_specials) {
         for (int i = 0; i < size; ++i) {
             if (id == i_specials[i].idx) {
-                if (i_specials[i].CallbackDuring) {
-                    gSaveManager.mPracticeFileOpts.inject_options_during_load = i_specials[i].CallbackDuring;
-                }
-                if (i_specials[i].CallbackAfter) {
-                    gSaveManager.mPracticeFileOpts.inject_options_after_load = i_specials[i].CallbackAfter;
+                if (i_specials[i].loadingCallback) {
+                    gSaveManager.mPracticeFileOpts.inject_options_during_load = i_specials[i].loadingCallback;
                 }
                 break;
             }
