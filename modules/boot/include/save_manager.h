@@ -4,6 +4,7 @@
 #include <boot/include/utils/containers/deque.h>
 #include "libtww/include/dolphin/mtx/vec.h"
 #include "libtww/include/d/com/d_com_inf_game.h"
+#include "libtww/include/f_op/f_op_actor_iter.h"
 
 #ifdef NTSCJ
 #define sTmpBuf 0x803a8540
@@ -59,9 +60,10 @@ struct ActorModEntry {
     u32 id;
     u16 attempts;
     s16 procName;
+    fopAcIt_JudgeFunc judgeFunc;
     ActorModCallback callback;
-    fopAc_ac_c* actor;
 };
+
 class SaveManager {
 public:
     PracticeFileOpts mPracticeFileOpts;
@@ -79,22 +81,29 @@ public:
     static void loadSavefile(const char* fileName);
     static void triggerLoad(uint32_t id, const char* category, special i_specials[], int size);
     static void defaultLoad();
-
     static void loadData();
 
     void modifySave(LoadingCallback cb) { mPracticeFileOpts.inject_options_after_load = cb; }
 
+    // Variant that takes a proc name only
     void modifyActor(s16 procName, ActorModCallback callback) {
-        mDeque.push_back({mCurEntryId, 0, procName, callback});
-        mCurEntryId++;
+        mDeque.push_back({mActorModId, 0, procName, nullptr, callback});
+        mActorModId++;
     }
 
-    void RemoveActorModRequest(u32 id);
+    // Variant that takes a "judge" search function callback instead of a proc name
+    void modifyActor(fopAcIt_JudgeFunc judgeFunc, ActorModCallback callback) {
+        mDeque.push_back({mActorModId, 0, -1, judgeFunc, callback});
+        mActorModId++;
+    }
+
     void ProcessActorModRequests();
 
 private:
-    u32 mCurEntryId;
+    u32 mActorModId;
     twwgz::containers::deque<ActorModEntry> mDeque;
+
+    void RemoveActorModRequest(u32 id);
 };
 
 extern SaveManager gSaveManager;

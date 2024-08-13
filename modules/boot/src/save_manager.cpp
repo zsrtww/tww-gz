@@ -12,7 +12,6 @@
 #include "libtww/include/d/com/d_com_inf_game.h"
 #include "libtww/include/d/com/d_com_static.h"
 #include "libtww/include/f_op/f_op_scene_req.h"
-#include "libtww/include/f_op/f_op_actor_iter.h"
 #include "libtww/include/m_Do/m_Do_printf.h"
 
 static char l_filename[128];
@@ -178,45 +177,42 @@ KEEP_FUNC void SaveManager::RemoveActorModRequest(u32 id) {
 }
 
 KEEP_FUNC void SaveManager::ProcessActorModRequests() {
-    if (!g_dComIfG_gameInfo.play.mNextStage.mEnable) {
+    // Actor modification requests get added as soon as the practice save is selected.
+    // To prevent the requests from being processed immediately while the game is still fading out,
+    // first `mNextStage.mEnable` is checked.
+    // Then on the other side of the load, it is necessary to wait for the scene/stage/room to finish
+    // processing, because these creation steps can sometimes modify actors.
+    // `l_fopScnRq_IsUsingOfOverlap` indicates if the scene request is about to fade back in, which
+    // will only happen when the room is initialized and ready to be played.
+
+    if (!g_dComIfG_gameInfo.play.mNextStage.mEnable && !l_fopScnRq_IsUsingOfOverlap) {
         for (auto req = mDeque.begin(); req != mDeque.end(); ++req) {
             fopAc_ac_c* actor;
-            
-            // This version of `fopAcM_SearchByName` has an IsCreating check which
-            // the inline version does not have.
-            fopAcM_SearchByName(req->procName, &actor);
+
+            if (req->judgeFunc != nullptr) {
+                // Use the "judge" search function supplied by the request to find a specific actor
+                actor = (fopAc_ac_c*)fopAcIt_Judge(req->judgeFunc, nullptr);
+            } else {
+                // This version of `fopAcM_SearchByName` has an `IsCreating` check which
+                // the inline version does not have.
+                fopAcM_SearchByName(req->procName, &actor);
+            }
 
             if (actor != nullptr) {
+                // Actor was found, process the modification request
                 req->callback(actor);
                 RemoveActorModRequest(req->id);
             } else {
+                // Actor not found, try again next frame
                 req->attempts++;
 
                 // Dont allow attempts to last longer than 5 seconds
                 if (req->attempts >= 150) {
-                    OSReport("Couldn't find actor:%d, deleting move request:%d\n", req->procName, req->id);
+                    OSReport("ProcessActorModRequests: Couldn't find actor:%d, deleting req:%d\n", req->procName,
+                             req->id);
                     RemoveActorModRequest(req->id);
-                }                
+                }
             }
-
-            // ================================================
-
-            // if (req->actor != nullptr) {
-            //     req->callback(req->actor);
-            //     RemoveActorModRequest(req->id);
-            // } else {
-            //     req->actor = (fopAc_ac_c*)fopAcM_SearchByName(req->procName);
-
-            //     req->attempts++;
-
-            //     // Dont allow attempts to last longer than 5 seconds
-            //     if (req->attempts >= 150) {
-            //         OSReport("Couldn't find actor:%d, deleting move request:%d\n", req->procName, req->id);
-            //         RemoveActorModRequest(req->id);
-            //     }
-            // }
-
-
         }
     }
 }

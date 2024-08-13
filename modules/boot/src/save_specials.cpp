@@ -170,7 +170,6 @@ KEEP_FUNC void SaveMngSpecial_BombsSwim_NoMSS() {
     SaveMngSpecial_SetLayer0();
 
     gSaveManager.modifyActor(PROC_SHIP, [](fopAc_ac_c* actor) {
-        OSReport("korlX:%8X\n", &actor->current.pos.x);
         SaveMngSpecial_SetActorPos(actor, 196459.0f, 0.0f, -199693.0f);
         SaveMngSpecial_SetActorYaw(actor, 0x623E);
     });
