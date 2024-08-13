@@ -30,7 +30,7 @@
 procBinData l_procData;
 
 /**
- * This need to be figreout out onc d_menu_windows is decompiled
+ * This need to be figure out once d_menu_windows is decompiled
  *
 /**
  * @brief Checks and closes any menu that's currently open.
