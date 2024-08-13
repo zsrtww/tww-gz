@@ -4,18 +4,13 @@
 #include "settings.h"
 #include "libtww/include/d/com/d_com_inf_game.h"
 #include "libtww/include/d/d_meter.h"
-//#include "libtp_c/include/f_op/f_op_draw_tag.h"
 #include "libtww/include/f_op/f_op_actor_mng.h"
 #include "libtww/include/d/d_procname.h"
-//#include "libtww/include/d/menu/d_menu_window.h"
 #include "gz_flags.h"
 #include "rels/include/defines.h"
 #include "menus/utils/menu_mgr.h"
 #include "fs.h"
 #include "global_data.h"
-//#include "boot/include/collision_view.h"
-//#include "libtww/include/m_Do/m_Do_printf.h"
-//#include "libtww/include/m_Do/m_Re_controller_pad.h"
 
 #define CONTROLLER_RIGHT GZPad::DPAD_RIGHT
 #define CONTROLLER_LEFT GZPad::DPAD_LEFT
@@ -34,6 +29,9 @@
  */
 procBinData l_procData;
 
+/**
+ * This need to be figreout out onc d_menu_windows is decompiled
+ *
 /**
  * @brief Checks and closes any menu that's currently open.
  *
@@ -119,8 +117,8 @@ KEEP_FUNC ActorListMenu::ActorListMenu(Cursor& cursor, ActorListData& data)
            false},
       } {
     // store camera position and target
-    l_cameraPos = g_dComIfG_gameInfo.play.mCameraInfo->mCameraPos;
-    l_cameraTarget = g_dComIfG_gameInfo.play.mCameraInfo->mCameraTarget;
+    // l_cameraPos = g_dComIfG_gameInfo.play.mCameraInfo->mCameraPos;
+    // l_cameraTarget = g_dComIfG_gameInfo.play.mCameraInfo->mCameraTarget;
 
     // remove any currently open menus
     // checkAndCloseMenu();
@@ -135,11 +133,11 @@ ActorListMenu::~ActorListMenu() {
     // checkAndRestoreMenu();
 
     // restore camera position and target
-    g_dComIfG_gameInfo.play.mCameraInfo->mCameraPos = l_cameraPos;
-    g_dComIfG_gameInfo.play.mCameraInfo->mCameraTarget = l_cameraTarget;
+    //  g_dComIfG_gameInfo.play.mCameraInfo->mCameraPos = l_cameraPos;
+    // g_dComIfG_gameInfo.play.mCameraInfo->mCameraTarget = l_cameraTarget;
 
-    dComIfGp_getPEvtManager()->mCameraPlay = 0;
-    g_meterHIO.field_0x18 = 1.0f;
+    // dComIfGp_getPEvtManager()->mCameraPlay = 0;
+    //  g_meterHIO.field_0x18 = 1.0f;
 }
 
 template <typename T>
