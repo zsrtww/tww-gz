@@ -182,8 +182,8 @@ KEEP_FUNC void SaveManager::ProcessActorModRequests() {
     // first `mNextStage.mEnable` is checked.
     // Then on the other side of the load, it is necessary to wait for the scene/stage/room to finish
     // processing, because these creation steps can sometimes modify actors.
-    // `l_fopScnRq_IsUsingOfOverlap` indicates if the scene request is about to fade back in, which
-    // will only happen when the room is initialized and ready to be played.
+    // When `l_fopScnRq_IsUsingOfOverlap` is false, the scene is done loading and the fade in
+    // will begin. This gurantees that the stage/room is ready and actors can be modified.
 
     if (!g_dComIfG_gameInfo.play.mNextStage.mEnable && !l_fopScnRq_IsUsingOfOverlap) {
         for (auto req = mDeque.begin(); req != mDeque.end(); ++req) {
@@ -208,8 +208,7 @@ KEEP_FUNC void SaveManager::ProcessActorModRequests() {
 
                 // Dont allow attempts to last longer than 5 seconds
                 if (req->attempts >= 150) {
-                    OSReport("ProcessActorModRequests: Couldn't find actor:%d, deleting req:%d\n", req->procName,
-                             req->id);
+                    OSReport("Couldn't find actor:%d, deleting req:%d\n", req->procName, req->id);
                     RemoveActorModRequest(req->id);
                 }
             }
