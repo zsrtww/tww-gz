@@ -113,15 +113,15 @@ KEEP_FUNC void SaveManager::triggerLoad(uint32_t id, const char* category, speci
     strcpy(g_dComIfG_gameInfo.play.mNextStage.mName, save->getPlayer().mReturnPlace.mName);
     g_dComIfG_gameInfo.play.mNextStage.mLayer = state;
 
+    g_dComIfG_gameInfo.info.getRestart().mLastMode = 0;
+    g_dComIfG_gameInfo.play.mNextStage.mEnable = true;
+
     // inject options after initial stage set since some options change stage location
     if (gSaveManager.mPracticeFileOpts.inject_options_during_load) {
         gSaveManager.mPracticeFileOpts.inject_options_during_load();
     }
 
-    g_dComIfG_gameInfo.play.mNextStage.mEnable = true;
     s_injectSave = true;
-
-    g_dComIfG_gameInfo.info.getRestart().mLastMode = 0;
 }
 
 // runs at the beginning of phase_1 of dScnPly__phase_1 load sequence
@@ -165,5 +165,53 @@ KEEP_FUNC void SaveManager::loadData() {
         }
 
         s_injectSave = false;
+    }
+}
+
+KEEP_FUNC void SaveManager::RemoveActorModRequest(u32 id) {
+    for (auto req = mDeque.begin(); req != mDeque.end(); ++req) {
+        if (req->id == id) {
+            mDeque.erase(req);
+        }
+    }
+}
+
+KEEP_FUNC void SaveManager::ProcessActorModRequests() {
+    // Actor modification requests get added as soon as the practice save is selected.
+    // To prevent the requests from being processed immediately while the game is still fading out,
+    // first `mNextStage.mEnable` is checked.
+    // Then on the other side of the load, it is necessary to wait for the scene/stage/room to finish
+    // processing, because these creation steps can sometimes modify actors.
+    // When `l_fopScnRq_IsUsingOfOverlap` is false, the scene is done loading and the fade in
+    // will begin. This gurantees that the stage/room is ready and actors can be modified.
+
+    if (!g_dComIfG_gameInfo.play.mNextStage.mEnable && !l_fopScnRq_IsUsingOfOverlap) {
+        for (auto req = mDeque.begin(); req != mDeque.end(); ++req) {
+            fopAc_ac_c* actor;
+
+            if (req->judgeFunc != nullptr) {
+                // Use the "judge" search function supplied by the request to find a specific actor
+                actor = (fopAc_ac_c*)fopAcIt_Judge(req->judgeFunc, nullptr);
+            } else {
+                // This version of `fopAcM_SearchByName` has an `IsCreating` check which
+                // the inline version does not have.
+                fopAcM_SearchByName(req->procName, &actor);
+            }
+
+            if (actor != nullptr) {
+                // Actor was found, process the modification request
+                req->callback(actor);
+                RemoveActorModRequest(req->id);
+            } else {
+                // Actor not found, try again next frame
+                req->attempts++;
+
+                // Dont allow attempts to last longer than 5 seconds
+                if (req->attempts >= 150) {
+                    OSReport("Couldn't find actor:%d, deleting req:%d\n", req->procName, req->id);
+                    RemoveActorModRequest(req->id);
+                }
+            }
+        }
     }
 }
