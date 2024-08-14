@@ -35,5 +35,8 @@ iso = "@TWWGZ_CFG_BLD_ISO@"
 # menu
 "twwgz/mn/Menu1.dat" = "../res/menu/EN_Menu1.dat"
 
+# actor info
+"twwgz/procs.bin" = "../res/proc_info/procs.bin"
+
 # REL modules
 "twwgz/rels" = "modules/rels"
