@@ -12,17 +12,10 @@
 #include "fs.h"
 #include "global_data.h"
 
-#define CONTROLLER_RIGHT GZPad::DPAD_RIGHT
-#define CONTROLLER_LEFT GZPad::DPAD_LEFT
-#define CONTROLLER_A GZPad::A
-#define MEM_SWITCH_BTN GZPad::Z
-#define SLOW_INC_BTN GZPad::X
-#define FAST_INC_BTN GZPad::Y
 #define MEM_TEXT "Z"
 #define SLOW_INC_TEXT "X"
 #define FAST_INC_TEXT "Y"
 #define DELETE_TEXT "START"
-#define DELETE_BUTTON GZPad::START
 
 /**
  * @brief Used for storing entries from procs.bin
@@ -98,7 +91,7 @@ void ActorListMenu::checkAndRestoreMenu() {
 KEEP_FUNC ActorListMenu::ActorListMenu(Cursor& cursor, ActorListData& data)
     : Menu(cursor), l_index(data.l_index),
       lines{
-          {"", ACTOR_NAME_INDEX, "Z+A: freeze actor, Z+" DELETE_TEXT ": delete actor, " MEM_TEXT " view memory", false},
+          {"", ACTOR_NAME_INDEX, "A: freeze actor, " DELETE_TEXT ": delete actor, " MEM_TEXT " view memory", false},
           {"", ACTOR_PARAMS_INDEX, "current actor parameters", false},
           {"", ACTOR_ADDRESS_INDEX, "current actor address", false},
           {"", ACTOR_POSITION_X_INDEX,
@@ -142,8 +135,8 @@ template <typename T>
 void ActorListMenu::updateValue(T* value, bool increase) {
     if (value != NULL) {
         f32 change;
-        GZ_getButtonPressed(FAST_INC_BTN) ? change = 1000.0f :
-        GZ_getButtonPressed(SLOW_INC_BTN) ? change = 1.0f :
+        GZ_getButtonPressed(GZPad::Y) ? change = 1000.0f :
+        GZ_getButtonPressed(GZPad::X) ? change = 1.0f :
                                             change = 100.0f;
 
         *value += (increase ? 1 : -1) * change;
@@ -185,12 +178,12 @@ void ActorListMenu::draw() {
         return;
     }
 
-    bool rightPressed = GZ_getButtonRepeat(CONTROLLER_RIGHT, 1);
-    bool leftPressed = GZ_getButtonRepeat(CONTROLLER_LEFT, 1);
+    bool rightPressed = GZ_getButtonRepeat(GZPad::DPAD_RIGHT, 1);
+    bool leftPressed = GZ_getButtonRepeat(GZPad::DPAD_LEFT, 1);
 
     switch (cursor.y) {
     case ACTOR_NAME_INDEX:
-        if (GZ_getButtonRepeat(CONTROLLER_RIGHT)) {
+        if (GZ_getButtonRepeat(GZPad::DPAD_RIGHT)) {
             l_index++;
             if (l_index > g_fopAcTg_Queue.mSize - 1)
                 l_index = 0;
@@ -199,7 +192,7 @@ void ActorListMenu::draw() {
             loadActorName();
         }
 
-        if (GZ_getButtonRepeat(CONTROLLER_LEFT)) {
+        if (GZ_getButtonRepeat(GZPad::DPAD_LEFT)) {
             l_index--;
             if (l_index > g_fopAcTg_Queue.mSize - 1)
                 l_index = g_fopAcTg_Queue.mSize - 1;
@@ -208,7 +201,7 @@ void ActorListMenu::draw() {
             loadActorName();
         }
 
-        if (GZ_getButtonRepeat(DELETE_BUTTON)) {
+        if (GZ_getButtonRepeat(GZPad::START)) {
             if (g_currentActor) {
                 if (g_currentActor->mBase.mProcName != PROC_PLAYER) {
                     fopAcM_delete(g_currentActor);
@@ -216,13 +209,13 @@ void ActorListMenu::draw() {
             }
         }
 
-        if (GZ_getButtonRepeat(CONTROLLER_A)) {
+        if (GZ_getButtonRepeat(GZPad::A)) {
             if (g_currentActor) {
                 g_currentActor->mBase.mPauseFlag = !g_currentActor->mBase.mPauseFlag;
             }
         }
 
-        if (GZ_getButtonTrig(MEM_SWITCH_BTN)) {
+        if (GZ_getButtonTrig(GZPad::Z)) {
             switch (cursor.y) {
             case ACTOR_NAME_INDEX:
                 g_memoryEditor_addressIndex = (uint32_t)g_currentActor;
