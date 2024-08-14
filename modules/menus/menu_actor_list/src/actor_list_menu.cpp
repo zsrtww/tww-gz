@@ -137,7 +137,7 @@ void ActorListMenu::updateValue(T* value, bool increase) {
         f32 change;
         GZ_getButtonPressed(GZPad::Y) ? change = 1000.0f :
         GZ_getButtonPressed(GZPad::X) ? change = 1.0f :
-                                            change = 100.0f;
+                                        change = 100.0f;
 
         *value += (increase ? 1 : -1) * change;
     }

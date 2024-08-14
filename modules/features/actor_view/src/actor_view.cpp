@@ -35,7 +35,6 @@ void drawGizmo(fopAc_ac_c* actor) {
     cXyz point_y_b = {actor->current.pos.x, actor->current.pos.y - grid_line_length, actor->current.pos.z};
     cXyz point_z_a = {actor->current.pos.x, actor->current.pos.y, actor->current.pos.z + grid_line_length};
     cXyz point_z_b = {actor->current.pos.x, actor->current.pos.y, actor->current.pos.z - grid_line_length};
-    
 
     // Gizmo axis lines
     dDbVw_drawLineXlu(point_x_a, point_x_b, red, 0, line_width);
