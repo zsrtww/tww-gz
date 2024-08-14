@@ -77,7 +77,7 @@ int dScnPly__phase_1Hook(void* i_scene) {
 int dScnPly__phase_4Hook(void* i_scene) {
     int ret = dScnPly__phase_4Trampoline(i_scene);
 
-    if (fpcM_GetName(i_scene) == PROC_OPENING_SCENE) {
+    if (fpcM_GetName(i_scene) == PROC_OPENING_SCENE || fpcM_GetName(i_scene) == PROC_OPENING2_SCENE) {
         g_PreLoopListener->addListener(GZ_endlessNightOnTitle);
     }
 
@@ -85,7 +85,7 @@ int dScnPly__phase_4Hook(void* i_scene) {
 }
 
 int dScnPly_DeleteHook(void* i_scene) {
-    if (fpcM_GetName(i_scene) == PROC_OPENING_SCENE) {
+    if (fpcM_GetName(i_scene) == PROC_OPENING_SCENE || fpcM_GetName(i_scene) == PROC_OPENING2_SCENE) {
         g_PreLoopListener->removeListener(GZ_endlessNightOnTitle);
     }
 
