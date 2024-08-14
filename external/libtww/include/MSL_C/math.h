@@ -41,6 +41,7 @@ extern "C" {
     double cos(double x);
     double sin(double x);
     double ceil(double);
+    double atan2(double x, double y);
 }
 
 inline float fcos(float v) {
