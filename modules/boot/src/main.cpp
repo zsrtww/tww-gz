@@ -21,6 +21,7 @@
 #include "events/draw_listener.h"
 #include "events/pre_loop_listener.h"
 #include "events/post_loop_listener.h"
+#include "save_manager.h"
 
 #define isWidescreen (false)
 
@@ -211,4 +212,8 @@ KEEP_FUNC void GZ_endlessNightOnTitle() {
     g_env_light.mColpatCurr = 1;
     g_env_light.mThunderEff.mMode = 1;
     g_env_light.mRainCount = 250;
+}
+
+KEEP_FUNC void GZ_processActorModRequests() {
+    gSaveManager.ProcessActorModRequests();
 }

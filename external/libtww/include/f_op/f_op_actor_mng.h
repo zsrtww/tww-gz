@@ -3,6 +3,7 @@
 
 #include "f_op_actor.h"
 #include "../f_pc/f_pc_manager.h"
+#include "../defines.h"
 
 struct fopAcM_prmBase_class {
     /* 0x00 */ u32 field_0x00;
@@ -65,7 +66,11 @@ LIBTWW_DEFINE_FUNC(fopAcM_delete__FP10fopAc_ac_c,
                   void, fopAcM_delete, (fopAc_ac_c*))
 
 
+LIBTWW_DEFINE_FUNC(fopAcM_SearchByName__FsPP10fopAc_ac_c, s32, fopAcM_SearchByName, (u32, fopAc_ac_c**))
+
+  
 extern "C" {
 extern node_list_class g_fopAcTg_Queue;
 }
+
 #endif
