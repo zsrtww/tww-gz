@@ -46,7 +46,7 @@ struct GZSaveLayout {
     ItemEquipSettings mItemEquipSettings[NUM_EQUIPPABLE_ITEMS];
     Tool mTools[TOOLS_COUNT];
     MemoryWatch mWatches[MAX_WATCHES];
-    bool mCommandStates[COMMANDS_AMNT];
+    bool mCommandStates[CMD_AMNT];
     bool mDropShadows;
     int mCursorColType;
     int mFontType;
