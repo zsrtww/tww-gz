@@ -3,6 +3,7 @@
 #include "controller.h"
 #include "scene.h"
 #include "rels/include/defines.h"
+#include "libtww/include/m_Do/m_Do_printf.h"
 #include "libtww/include/d/d_s_play.h"
 
 bool g_framePaused = false;
@@ -35,6 +36,7 @@ KEEP_FUNC void GZ_frameAdvance() {
     static uint32_t buttonsPrev = 0;
     dScnPlay_nextPauseTimer = 1;
 
+    OSReport("FRAME ADV ON\n");
     TRIG_BTNS = HOLD_BTNS & ~buttonsPrev;
 
     if (HOLD_BTNS & FRAME_ADVANCE_BTN) {

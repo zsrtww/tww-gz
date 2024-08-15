@@ -6,6 +6,7 @@ KEEP_VAR Tool g_tools[TOOLS_COUNT] = {
     {TELEPORT_INDEX, false},     {AREA_RELOAD_INDEX, false},
     {MAP_SELECT_INDEX, false},   {ZH_INDEX, false},
     {INPUT_VIEWER_INDEX, false}, {FRAME_COUNT_INDEX, false},
-    {ESS_CHECKER_INDEX, false},  {DEADZONE_CHECKER_INDEX, false},
-    {INTRO_SKIP_INDEX, false},  //{DISABLE_SVCHECK_INDEX, false},
+    {FRAME_ADVANCE_INDEX, false}, {ESS_CHECKER_INDEX, false},
+    {DEADZONE_CHECKER_INDEX, false}, {INTRO_SKIP_INDEX, false},
+    //{DISABLE_SVCHECK_INDEX, false},
 };

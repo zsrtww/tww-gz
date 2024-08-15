@@ -8,6 +8,7 @@
 #include "libtww/include/d/com/d_com_inf_game.h"
 #include "libtww/include/d/a/d_a_player_main.h"
 #include "gz_flags.h"
+#include "tools.h"
 #include "rels/include/defines.h"
 
 bool g_commandStates[CMD_AMNT];
@@ -140,7 +141,7 @@ static Command sCommands[CMD_AMNT] = {
     {g_commandStates[CMD_AREA_RELOAD], (CButton::L | CButton::R | CButton::A | CButton::START), GZCmd_areaReload},
     {g_commandStates[CMD_REFILL_HEALTH], (CButton::R | CButton::DPAD_RIGHT), GZCmd_full_health},
     {g_commandStates[CMD_REFILL_MAGIC], (CButton::L | CButton::DPAD_UP), GZCmd_full_magic},
-    {g_commandStates[CMD_FRAME_ADVANCE], (CButton::R | CButton::DPAD_LEFT), GZCmd_pauseFrame},
+    {g_commandStates[CMD_FRAME_ADVANCE], (CButton::R | CButton::DPAD_UP), GZCmd_pauseFrame},
 };
 
 void GZCmd_processInputs() {
