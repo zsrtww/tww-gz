@@ -10,7 +10,7 @@
 #include "gz_flags.h"
 #include "rels/include/defines.h"
 
-bool g_commandStates[COMMANDS_AMNT];
+bool g_commandStates[CMD_AMNT];
 
 static Vec sSavePlayerPos = {0.0f, 0.0f, 0.0f};
 static int16_t sSavePlayerAngle = 0;
@@ -30,11 +30,9 @@ bool GZCmd_checkTrig(int combo) {
     return false;
 }
 
-/* void GZCmd_pauseFrame() {
-    if (GZCmd_checkTrig(FRAME_PAUSE_BUTTONS)) {
-        g_framePaused = !g_framePaused;
-    }
-} */
+void GZCmd_pauseFrame() {
+    g_framePaused = !g_framePaused;
+}
 
 void GZCmd_storePosition() {
     if (dComIfGp_getPlayer(0)) {
@@ -128,9 +126,9 @@ void GZCmd_full_magic() {
     dComIfGs_setMagic(max_magic);
 }
 
-static Command sCommands[COMMANDS_AMNT] = {
-    {g_commandStates[CMD_STORE_POSITION], (CButton::DPAD_UP | CButton::R), GZCmd_storePosition},
-    {g_commandStates[CMD_LOAD_POSITION], (CButton::DPAD_DOWN | CButton::R), GZCmd_loadPosition},
+static Command sCommands[CMD_AMNT] = {
+    {g_commandStates[CMD_STORE_POSITION], (CButton::R | CButton::DPAD_UP), GZCmd_storePosition},
+    {g_commandStates[CMD_LOAD_POSITION], (CButton::R | CButton::DPAD_DOWN), GZCmd_loadPosition},
     {g_commandStates[CMD_MOON_JUMP], (CButton::R | CButton::A), GZCmd_moonJump},
     {g_commandStates[CMD_STORAGE], (CButton::DPAD_RIGHT), GZCmd_storage},
     {g_commandStates[CMD_NORMAL_COLLISION], (CButton::L | CButton::DPAD_DOWN), GZCmd_normalCollision},
@@ -142,6 +140,7 @@ static Command sCommands[COMMANDS_AMNT] = {
     {g_commandStates[CMD_AREA_RELOAD], (CButton::L | CButton::R | CButton::A | CButton::START), GZCmd_areaReload},
     {g_commandStates[CMD_REFILL_HEALTH], (CButton::R | CButton::DPAD_RIGHT), GZCmd_full_health},
     {g_commandStates[CMD_REFILL_MAGIC], (CButton::L | CButton::DPAD_UP), GZCmd_full_magic},
+    {g_commandStates[CMD_FRAME_ADVANCE], (CButton::R | CButton::DPAD_LEFT), GZCmd_pauseFrame},
 };
 
 void GZCmd_processInputs() {

@@ -13,6 +13,7 @@
 #include "utils/draw.h"
 #include "utils/hook.h"
 #include "utils/link.h"
+#include "gz_flags.h"
 #include "rels/include/cxx.h"
 #include "events/draw_listener.h"
 #include "events/pre_loop_listener.h"
@@ -44,6 +45,7 @@ void main() {
     g_PreLoopListener = new PreLoopListener();
     g_PreLoopListener->addListener(GZ_handleMenu);
     g_PreLoopListener->addListener(GZ_handleFlags_PreLoop);
+    g_PreLoopListener->addListener(GZ_frameAdvance);
     g_PreLoopListener->addListener(GZ_setCursorColor);
     g_PreLoopListener->addListener(GZ_handleRelTools);
     g_PreLoopListener->addListener(GZ_drawPolygons);
