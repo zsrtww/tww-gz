@@ -18,7 +18,6 @@ enum Commands {
     CMD_AREA_RELOAD,
     CMD_REFILL_HEALTH,
     CMD_REFILL_MAGIC,
-    CMD_FRAME_ADVANCE,
 
     CMD_AMNT
 };

@@ -2,11 +2,12 @@
 #include <cstring>
 #include "controller.h"
 #include "scene.h"
+#include "tools.h"
 #include "rels/include/defines.h"
 #include "libtww/include/m_Do/m_Do_printf.h"
+#include "libtww/include/m_Do/m_Do_controller_pad.h"
 #include "libtww/include/d/d_s_play.h"
 
-bool g_framePaused = false;
 
 GZFlag g_gzFlags[MAX_GZ_FLAGS] = {
     {&g_sceneFlags[MUTE_BGM_INDEX].active, GAME_LOOP, GZ_disableBGM, GZ_enableBGM},
@@ -24,39 +25,40 @@ void GZ_execute(int phase) {
     }
 }
 
-#define HOLD_BTNS g_mDoCPd_cpadInfo[0].mButtonFlags
-#define TRIG_BTNS g_mDoCPd_cpadInfo[0].mPressedButtonFlags
-#define FRAME_ADVANCE_BTN GZPad::R
-
 KEEP_FUNC void GZ_frameAdvance() {
-    if (!g_framePaused) {
-        return;
-    }
-    static int holdCounter = 0;
-    static uint32_t buttonsPrev = 0;
-    dScnPlay_nextPauseTimer = 1;
+    static bool sFrameAdvEnabled = false;
+    static u16 sPrevHold;
+    static int sHoldCounter = 0;
 
-    OSReport("FRAME ADV ON\n");
-    TRIG_BTNS = HOLD_BTNS & ~buttonsPrev;
+    if (g_tools[FRAME_ADVANCE_INDEX].active) {
+        if (CPad_CHECK_TRIG_DOWN(CONTROLLER_1)) {
+            sFrameAdvEnabled = !sFrameAdvEnabled;
+        } else if (sFrameAdvEnabled) {
+            dScnPlay_nextPauseTimer = 1;
 
-    if (HOLD_BTNS & FRAME_ADVANCE_BTN) {
-        holdCounter++;
-    } else {
-        holdCounter = 0;
-    }
+            // Working with bitfields is awkward. Have to use memcpy to move values in an out of 
+            // the whole bitfield at once.
+            // The point here is to save buttons on the current and previous frame to allow
+            // for input buffering between frames.
+            u16 curFrameHold;
+            memcpy(&curFrameHold, &g_mDoCPd_cpadInfo[CONTROLLER_1].mButtonHold, sizeof(curFrameHold));
 
-    if (TRIG_BTNS & FRAME_ADVANCE_BTN) {
-        // this sets pause timer to 0 for 1 frame,
-        // which lets 1 frame pass before pausing again
-        dScnPlay_nextPauseTimer = 0;
-        buttonsPrev = HOLD_BTNS;
-        HOLD_BTNS &= ~FRAME_ADVANCE_BTN;
-    }
+            u16 newTrig = curFrameHold & ~sPrevHold;
+            memcpy(&g_mDoCPd_cpadInfo[CONTROLLER_1].mButtonTrig, &newTrig, sizeof(newTrig));
 
-    // frames start passing at normal speed after holding for 30 frames
-    if (holdCounter >= 30) {
-        dScnPlay_nextPauseTimer = 0;
-        buttonsPrev = HOLD_BTNS;
-        HOLD_BTNS &= ~FRAME_ADVANCE_BTN;
+            if (CPad_CHECK_HOLD_UP(CONTROLLER_1)) {
+                sHoldCounter++;
+            } else {
+                sHoldCounter = 0;
+            }
+
+            if (CPad_CHECK_TRIG_UP(CONTROLLER_1) || sHoldCounter >= 30) {
+                dScnPlay_nextPauseTimer = 0;
+                sPrevHold = curFrameHold;
+            }
+
+            // unset dpad up to prevent opening the map
+            g_mDoCPd_cpadInfo[CONTROLLER_1].mButtonTrig.up = 0;
+        }
     }
 }

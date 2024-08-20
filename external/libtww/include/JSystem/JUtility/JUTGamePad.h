@@ -142,7 +142,6 @@ public:
 #define mPadButton (*(JUTGamePad::CButton*)tww_mPadButton_addr)
 #define mPadMStick (*(JUTGamePad::CStick*)tww_mPadMStick_addr)
 #define mPadSStick (*(JUTGamePad::CStick*)tww_mPadSStick_addr)
-#define g_mDoCPd_cpadInfo ((interface_of_controller_pad*)g_mDoCPd_cpadInfo_addr)
 
 /* typedef void (*tww_JUTGamePadRead_t)(void);
 #define tww_JUTGamePadRead ((tww_JUTGamePadRead_t)tww_JUTGamePadRead_addr) */

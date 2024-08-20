@@ -31,10 +31,6 @@ bool GZCmd_checkTrig(int combo) {
     return false;
 }
 
-void GZCmd_pauseFrame() {
-    g_framePaused = !g_framePaused;
-}
-
 void GZCmd_storePosition() {
     if (dComIfGp_getPlayer(0)) {
         sSavePlayerPos = dComIfGp_getPlayer(0)->current.pos;
@@ -141,7 +137,6 @@ static Command sCommands[CMD_AMNT] = {
     {g_commandStates[CMD_AREA_RELOAD], (CButton::L | CButton::R | CButton::A | CButton::START), GZCmd_areaReload},
     {g_commandStates[CMD_REFILL_HEALTH], (CButton::R | CButton::DPAD_RIGHT), GZCmd_full_health},
     {g_commandStates[CMD_REFILL_MAGIC], (CButton::L | CButton::DPAD_UP), GZCmd_full_magic},
-    {g_commandStates[CMD_FRAME_ADVANCE], (CButton::R | CButton::DPAD_UP), GZCmd_pauseFrame},
 };
 
 void GZCmd_processInputs() {

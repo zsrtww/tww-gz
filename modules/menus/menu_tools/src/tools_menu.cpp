@@ -46,7 +46,7 @@ KEEP_FUNC ToolsMenu::ToolsMenu(Cursor& cursor)
           {"input viewer", INPUT_VIEWER_INDEX, "Show current inputs", true, &g_tools[INPUT_VIEWER_INDEX].active},
           {"frame counter", FRAME_COUNT_INDEX, "Start and stop frame counter with D-pad Up", true,
            &g_tools[FRAME_COUNT_INDEX].active},
-          {"frame advance", FRAME_ADVANCE_INDEX, "R+Dpad Up to pause/unpause, R to advance frames", true,
+          {"frame advance", FRAME_ADVANCE_INDEX, "Dpad Up to pause/unpause, Dpad Down to advance frames", true,
            &g_tools[FRAME_ADVANCE_INDEX].active},
           {"ess checker", ESS_CHECKER_INDEX, "Change input stick color based on distance from ideal ESS", true,
            &g_tools[ESS_CHECKER_INDEX].active},
@@ -73,9 +73,6 @@ void ToolsMenu::draw() {
 
         if (g_tools[cursor.y].active) {
             switch (cursor.y) {
-            case FRAME_ADVANCE_INDEX:
-                GZCmd_enable(Commands::CMD_FRAME_ADVANCE);
-                break;
             case TELEPORT_INDEX:
                 GZCmd_enable(Commands::CMD_STORE_POSITION);
                 GZCmd_enable(Commands::CMD_LOAD_POSITION);
@@ -95,9 +92,6 @@ void ToolsMenu::draw() {
             }
         } else {
             switch (cursor.y) {
-            case FRAME_ADVANCE_INDEX:
-                GZCmd_disable(Commands::CMD_FRAME_ADVANCE);
-                break;
             case TELEPORT_INDEX:
                 GZCmd_disable(Commands::CMD_STORE_POSITION);
                 GZCmd_disable(Commands::CMD_LOAD_POSITION);
