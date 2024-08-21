@@ -1,7 +1,6 @@
 #include "features/actor_view/include/actor_view.h"
 #include "menus/utils/menu_mgr.h"
 #include "libtww/include/f_op/f_op_actor_mng.h"
-//#include "libtww/include/f_op/f_op_draw_tag.h"
 #include "menus/menu_actor_list/include/actor_list_menu.h"
 #include "geometry_draw.h"
 #include "global_data.h"
