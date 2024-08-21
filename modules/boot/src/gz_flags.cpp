@@ -8,7 +8,6 @@
 #include "libtww/include/m_Do/m_Do_controller_pad.h"
 #include "libtww/include/d/d_s_play.h"
 
-
 GZFlag g_gzFlags[MAX_GZ_FLAGS] = {
     {&g_sceneFlags[MUTE_BGM_INDEX].active, GAME_LOOP, GZ_disableBGM, GZ_enableBGM},
 };
@@ -36,7 +35,7 @@ KEEP_FUNC void GZ_frameAdvance() {
         if (!openingMenu && CPad_CHECK_TRIG_DOWN(CONTR_1)) {
             sFrameAdvEnabled = !sFrameAdvEnabled;
         } else if (sFrameAdvEnabled) {
-            dScnPlay_nextPauseTimer = 1; // constantly set the timer to 1 to freeze the game
+            dScnPlay_nextPauseTimer = 1;  // constantly set the timer to 1 to freeze the game
 
             if (CPad_CHECK_HOLD_UP(CONTR_1)) {
                 sAdvHoldCounter++;
@@ -53,15 +52,14 @@ KEEP_FUNC void GZ_frameAdvance() {
                 // copy buffered inputs to controller
                 memcpy(&g_mDoCPd_cpadInfo[CONTR_1].mButtonTrig, &sBufferedInputs, sizeof(sBufferedInputs));
                 memcpy(&g_mDoCPd_cpadInfo[CONTR_1].mButtonHold, &sBufferedInputs, sizeof(sBufferedInputs));
-                sBufferedInputs = 0; // clear stored inputs
+                sBufferedInputs = 0;  // clear stored inputs
 
                 // unset dpad up to prevent opening the map
                 g_mDoCPd_cpadInfo[CONTR_1].mButtonTrig.up = 0;
                 g_mDoCPd_cpadInfo[CONTR_1].mButtonHold.up = 0;
 
-                dScnPlay_nextPauseTimer = 0; // set pause timer to 0 to advance 1 frame
+                dScnPlay_nextPauseTimer = 0;  // set pause timer to 0 to advance 1 frame
             }
-
         }
     }
 }
