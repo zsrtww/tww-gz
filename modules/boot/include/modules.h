@@ -13,3 +13,4 @@ extern twwgz::containers::deque<Module*> g_modules;
 void GZ_handleModules();
 
 bool inputViewer_active();
+bool actorView_active();

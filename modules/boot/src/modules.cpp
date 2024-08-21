@@ -26,3 +26,7 @@ KEEP_FUNC void GZ_handleModules() {
 KEEP_FUNC bool inputViewer_active() {
     return g_tools[INPUT_VIEWER_INDEX].active;
 }
+
+KEEP_FUNC bool actorView_active() {
+    return g_actorViewEnabled;
+}
