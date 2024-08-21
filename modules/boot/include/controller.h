@@ -20,10 +20,10 @@ enum GZPad {
 };
 
 enum Controller {
-    CONTROLLER_1,
-    CONTROLLER_2,
-    CONTROLLER_3,
-    CONTROLLER_4
+    CONTR_1,
+    CONTR_2,
+    CONTR_3,
+    CONTR_4
 };
 
 bool GZ_getButtonRepeat(int idx);
