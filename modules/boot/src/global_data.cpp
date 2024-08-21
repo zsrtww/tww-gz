@@ -6,6 +6,7 @@ KEEP_VAR u8 g_geometryOpacity = 0x80;
 KEEP_VAR u8 g_collisionRaise = 1;
 
 KEEP_VAR fopAc_ac_c* g_currentActor;
+KEEP_VAR bool g_moveLinkEnabled;
 KEEP_VAR bool g_actorViewEnabled;
 
 KEEP_VAR CollisionItem g_collisionFlags[VIEW_COLLISION_MAX] = {
