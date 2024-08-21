@@ -5,6 +5,7 @@
 #include "menu.h"
 #include "pos_settings.h"
 #include "geometry_draw.h"
+#include "modules.h"
 #include "menus/utils/menu_mgr.h"
 #include "libtww/include/m_Do/m_Do_ext.h"
 
@@ -45,14 +46,17 @@ void main() {
     g_PreLoopListener->addListener(GZ_handleMenu);
     g_PreLoopListener->addListener(GZ_handleFlags_PreLoop);
     g_PreLoopListener->addListener(GZ_setCursorColor);
-    g_PreLoopListener->addListener(GZ_handleRelTools);
     g_PreLoopListener->addListener(GZ_drawPolygons);
+    g_PreLoopListener->addListener(GZ_handleModules);
 
     // Init the post-loop listener
     g_PostLoopListener = new PostLoopListener();
     g_PostLoopListener->addListener(GZ_handleFlags_PostLoop);
     g_PostLoopListener->addListener(GZ_setCursorColor);
     g_PostLoopListener->addListener(GZ_processActorModRequests);
+
+    // Init the module list
+    g_modules.push_back(new Module{inputViewer_active, "/twwgz/rels/features/input_viewer.rel"});
 }
 void exit() {}
 
