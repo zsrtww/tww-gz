@@ -67,7 +67,7 @@ void move(fopAc_ac_c* actor) {
     // Calculate the pitch and yaw
     yaw = atan2(cam_target.z - cam_pos.z, cam_target.x - cam_pos.x);
     double horizontal = sqrtf((cam_target.x - cam_pos.x) * (cam_target.x - cam_pos.x) +
-                             (cam_target.z - cam_pos.z) * (cam_target.z - cam_pos.z));
+                              (cam_target.z - cam_pos.z) * (cam_target.z - cam_pos.z));
     pitch = atan2(cam_target.y - cam_pos.y, horizontal);
 
     // Calculate the translation
@@ -124,7 +124,7 @@ KEEP_FUNC void execute() {
         if (event_halt) {
             if (player_p) {
                 player_p->mAcch.ClrGrndNone();
-               player_p->mAcch.ClrWallNone();
+                player_p->mAcch.ClrWallNone();
                 player_p->mAcch.ClrRoofNone();
                 player_p->mAcch.OffLineCheckNone();
             }
