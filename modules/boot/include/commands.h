@@ -1,9 +1,10 @@
 #pragma once
 #include "libtww/include/dolphin/gctypes.h"
 
+#define COMMANDS_AMNT 13
 
-// WARNING: adding an entry to this list shifts the save data 
-// and requires a save version bump
+extern bool g_commandStates[COMMANDS_AMNT];
+
 enum Commands {
     CMD_STORE_POSITION,
     CMD_LOAD_POSITION,
@@ -18,11 +19,7 @@ enum Commands {
     CMD_AREA_RELOAD,
     CMD_REFILL_HEALTH,
     CMD_REFILL_MAGIC,
-
-    CMD_AMNT
 };
-
-extern bool g_commandStates[CMD_AMNT];
 
 struct Command {
     bool& active;

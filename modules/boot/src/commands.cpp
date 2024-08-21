@@ -8,10 +8,9 @@
 #include "libtww/include/d/com/d_com_inf_game.h"
 #include "libtww/include/d/a/d_a_player_main.h"
 #include "gz_flags.h"
-#include "tools.h"
 #include "rels/include/defines.h"
 
-bool g_commandStates[CMD_AMNT];
+bool g_commandStates[COMMANDS_AMNT];
 
 static Vec sSavePlayerPos = {0.0f, 0.0f, 0.0f};
 static int16_t sSavePlayerAngle = 0;
@@ -123,9 +122,9 @@ void GZCmd_full_magic() {
     dComIfGs_setMagic(max_magic);
 }
 
-static Command sCommands[CMD_AMNT] = {
-    {g_commandStates[CMD_STORE_POSITION], (CButton::R | CButton::DPAD_UP), GZCmd_storePosition},
-    {g_commandStates[CMD_LOAD_POSITION], (CButton::R | CButton::DPAD_DOWN), GZCmd_loadPosition},
+static Command sCommands[COMMANDS_AMNT] = {
+    {g_commandStates[CMD_STORE_POSITION], (CButton::DPAD_UP | CButton::R), GZCmd_storePosition},
+    {g_commandStates[CMD_LOAD_POSITION], (CButton::DPAD_DOWN | CButton::R), GZCmd_loadPosition},
     {g_commandStates[CMD_MOON_JUMP], (CButton::R | CButton::A), GZCmd_moonJump},
     {g_commandStates[CMD_STORAGE], (CButton::DPAD_RIGHT), GZCmd_storage},
     {g_commandStates[CMD_NORMAL_COLLISION], (CButton::L | CButton::DPAD_DOWN), GZCmd_normalCollision},
