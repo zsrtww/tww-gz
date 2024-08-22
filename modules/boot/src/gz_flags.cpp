@@ -4,11 +4,9 @@
 #include "scene.h"
 #include "tools.h"
 #include "rels/include/defines.h"
-#include "geometry_draw.h"
 #include "libtww/include/m_Do/m_Do_printf.h"
 #include "libtww/include/m_Do/m_Do_controller_pad.h"
 #include "libtww/include/d/d_s_play.h"
-#include "libtww/include/d/com/d_com_inf_game.h"
 
 GZFlag g_gzFlags[MAX_GZ_FLAGS] = {
     {&g_sceneFlags[MUTE_BGM_INDEX].active, GAME_LOOP, GZ_disableBGM, GZ_enableBGM},
@@ -48,8 +46,6 @@ KEEP_FUNC void GZ_frameAdvance() {
             }
         } else if (g_FrameAdvEnabled) {
             dScnPlay_nextPauseTimer = 1;  // constantly set the timer to 1 to freeze the game
-
-            GZ_drawCc(g_dCcSCopy);
 
             if (CPad_CHECK_HOLD_UP(CONTR_1)) {
                 sAdvHoldCounter++;
