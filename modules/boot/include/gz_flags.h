@@ -3,6 +3,7 @@
 #include "font.h"
 #include "settings.h"
 #include "fifo_queue.h"
+#include "libtww/include/d/com/d_com_inf_game.h"
 
 #define MAX_GZ_FLAGS 1
 
@@ -13,7 +14,9 @@ struct GZFlag {
     void (*mpDeactiveFunc)();
 };
 
-extern bool g_framePaused;
+extern bool g_FrameAdvEnabled;
+extern bool g_FrameTriggered;
+extern dCcS* g_dCcSCopy;
 
 enum LoopPhase {
     GAME_LOOP,
