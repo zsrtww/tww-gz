@@ -59,6 +59,7 @@ void main() {
 
     // Init the module list
     g_modules.push_back(new Module{inputViewer_active, "/twwgz/rels/features/input_viewer.rel"});
+    g_modules.push_back(new Module{actorView_active, "/twwgz/rels/features/actor_view.rel"});
 }
 void exit() {}
 

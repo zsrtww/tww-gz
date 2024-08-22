@@ -57,6 +57,7 @@ enum MenuIndex {
 
     // Scene menu's sub menus
     MN_COLLISION_VIEW_INDEX,
+    MN_ACTOR_LIST_INDEX,
 
     // Settings sub menus
     MN_EQUIP_PRIORITY_INDEX,
