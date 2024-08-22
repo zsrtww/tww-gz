@@ -30,12 +30,6 @@ bool GZCmd_checkTrig(int combo) {
     return false;
 }
 
-/* void GZCmd_pauseFrame() {
-    if (GZCmd_checkTrig(FRAME_PAUSE_BUTTONS)) {
-        g_framePaused = !g_framePaused;
-    }
-} */
-
 void GZCmd_storePosition() {
     if (dComIfGp_getPlayer(0)) {
         sSavePlayerPos = dComIfGp_getPlayer(0)->current.pos;

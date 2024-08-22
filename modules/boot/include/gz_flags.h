@@ -31,5 +31,3 @@ inline void GZ_setFifoVisible(bool visible) {
 void GZ_frameAdvance();
 void GZ_execute(int phase);
 void GZ_drawFrameTex(Texture* pauseTex, Texture* playTex);
-
-extern volatile uint8_t sPauseTimer;

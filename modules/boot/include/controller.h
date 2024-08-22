@@ -19,6 +19,13 @@ enum GZPad {
     START = 11,
 };
 
+enum Controller {
+    CONTR_1,
+    CONTR_2,
+    CONTR_3,
+    CONTR_4
+};
+
 bool GZ_getButtonRepeat(int idx);
 bool GZ_getButtonRepeat(int idx, uint16_t repeat_time);
 bool GZ_getButtonPressed(int idx);
