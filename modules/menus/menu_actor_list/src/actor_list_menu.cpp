@@ -6,7 +6,6 @@
 #include "libtww/include/d/d_meter.h"
 #include "libtww/include/f_op/f_op_actor_mng.h"
 #include "libtww/include/d/d_procname.h"
-#include "libtww/include/MSL_C/string.h"
 #include "gz_flags.h"
 #include "rels/include/defines.h"
 #include "menus/utils/menu_mgr.h"
