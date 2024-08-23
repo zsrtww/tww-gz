@@ -91,7 +91,11 @@ void ActorListMenu::checkAndRestoreMenu() {
 KEEP_FUNC ActorListMenu::ActorListMenu(Cursor& cursor, ActorListData& data)
     : Menu(cursor), l_index(data.l_index),
       lines{
-          {"", ACTOR_NAME_INDEX, "A: freeze actor, " DELETE_TEXT ": delete actor, " MEM_TEXT " view memory", false},
+          {"", ACTOR_PROC_NAME_INDEX, "A: freeze actor, " DELETE_TEXT ": delete actor, " MEM_TEXT " view memory",
+           false},
+          {"", ACTOR_OBJECT_NAME_INDEX, "current actor's object name", false},
+          {"", ACTOR_PROC_ID_INDEX, "current actor's process ID", false},
+          {"", ACTOR_GROUP_INDEX, "current actor's group name", false},
           {"", ACTOR_PARAMS_INDEX, "current actor parameters", false},
           {"", ACTOR_ADDRESS_INDEX, "current actor address", false},
           {"", ACTOR_POSITION_X_INDEX,
@@ -167,6 +171,47 @@ void ActorListMenu::loadActorName() {
     }
 }
 
+const char* ActorListMenu::getGroup(fopAc_ac_c* actor) {
+    const char* group = "";
+
+    if (actor != nullptr) {
+        switch (actor->mGroup) {
+        case 0:
+            group = "ACTOR";
+            break;
+        case 1:
+            group = "PLAYER";
+            break;
+        case 2:
+            group = "ENEMY";
+            break;
+        case 3:
+            group = "ENV";
+            break;
+        case 4:
+            group = "NPC";
+            break;
+        }
+    }
+    return group;
+}
+
+const char* ActorListMenu::getObjectName(fopAc_ac_c* actor) {
+    const char* object = "";
+
+    if (actor != nullptr) {
+        object = fopAcM_getProcNameString(actor);
+
+        // Check for the error message of "誰？" or "who?", to translate it.
+        // strcmp with the japanese text doesnt work because of encoding issues.
+        if (object[0] == 0x92 && object[1] == 0x4E) {
+            object = "n/a";
+        }
+    }
+
+    return object;
+}
+
 void ActorListMenu::draw() {
     g_actorViewEnabled = true;
     cursor.setMode(Cursor::MODE_LIST);
@@ -182,7 +227,7 @@ void ActorListMenu::draw() {
     bool leftPressed = GZ_getButtonRepeat(GZPad::DPAD_LEFT, 1);
 
     switch (cursor.y) {
-    case ACTOR_NAME_INDEX:
+    case ACTOR_PROC_NAME_INDEX:
         if (GZ_getButtonRepeat(GZPad::DPAD_RIGHT)) {
             l_index++;
             if (l_index > g_fopAcTg_Queue.mSize - 1)
@@ -217,7 +262,7 @@ void ActorListMenu::draw() {
 
         if (GZ_getButtonTrig(GZPad::Z)) {
             switch (cursor.y) {
-            case ACTOR_NAME_INDEX:
+            case ACTOR_PROC_NAME_INDEX:
                 g_memoryEditor_addressIndex = (uint32_t)g_currentActor;
                 g_menuMgr->push(MN_MEMORY_EDITOR_INDEX);
                 return;
@@ -225,45 +270,63 @@ void ActorListMenu::draw() {
         }
 
         break;
+
+    case ACTOR_OBJECT_NAME_INDEX:
+        break;
+
+    case ACTOR_PROC_ID_INDEX:
+        break;
+
+    case ACTOR_GROUP_INDEX:
+        break;
+
+    case ACTOR_PARAMS_INDEX:
+        break;
+
     case ACTOR_POSITION_X_INDEX:
         if (rightPressed || leftPressed) {
             updateValue(&g_currentActor->current.pos.x, rightPressed);
         }
         break;
+
     case ACTOR_POSITION_Y_INDEX:
         if (rightPressed || leftPressed) {
             updateValue(&g_currentActor->current.pos.y, rightPressed);
         }
         break;
+
     case ACTOR_POSITION_Z_INDEX:
         if (rightPressed || leftPressed) {
             updateValue(&g_currentActor->current.pos.z, rightPressed);
         }
         break;
+
     case ACTOR_ANGLE_X_INDEX:
         if (rightPressed || leftPressed) {
             updateValue(&g_currentActor->shape_angle.x, rightPressed);
         }
         break;
+
     case ACTOR_ANGLE_Y_INDEX:
         if (rightPressed || leftPressed) {
             updateValue(&g_currentActor->shape_angle.y, rightPressed);
         }
         break;
+
     case ACTOR_ANGLE_Z_INDEX:
         if (rightPressed || leftPressed) {
             updateValue(&g_currentActor->shape_angle.z, rightPressed);
         }
         break;
-    case ACTOR_PARAMS_INDEX:
-        // allowing arbitrary updates here causes frequent crashes. removing for now.
-        break;
     }
 
     if (g_currentActor) {
-        lines[ACTOR_NAME_INDEX].printf("name:  <%s>", l_procData.procName);
-        lines[ACTOR_PARAMS_INDEX].printf("params: 0x%08X", g_currentActor->mBase.mParameters);
-        lines[ACTOR_ADDRESS_INDEX].printf("addr: 0x%08X", g_currentActor);
+        lines[ACTOR_PROC_NAME_INDEX].printf("proc name:  <%s>", l_procData.procName);
+        lines[ACTOR_OBJECT_NAME_INDEX].printf("object name: %s", getObjectName(g_currentActor));
+        lines[ACTOR_PROC_ID_INDEX].printf("proc id: %d", g_currentActor->mBase.mBsPcId);
+        lines[ACTOR_GROUP_INDEX].printf("group: %s", getGroup(g_currentActor));
+        lines[ACTOR_PARAMS_INDEX].printf("params:  0x%08X", g_currentActor->mBase.mParameters);
+        lines[ACTOR_ADDRESS_INDEX].printf("address: 0x%08X", g_currentActor);
         lines[ACTOR_POSITION_X_INDEX].printf("pos-x: <%.1f>", g_currentActor->current.pos.x);
         lines[ACTOR_POSITION_Y_INDEX].printf("pos-y: <%.1f>", g_currentActor->current.pos.y);
         lines[ACTOR_POSITION_Z_INDEX].printf("pos-z: <%.1f>", g_currentActor->current.pos.z);

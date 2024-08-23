@@ -15,7 +15,10 @@ struct procBinData {
 } __attribute__((aligned(32)));
 
 enum {
-    ACTOR_NAME_INDEX,
+    ACTOR_PROC_NAME_INDEX,
+    ACTOR_OBJECT_NAME_INDEX,
+    ACTOR_PROC_ID_INDEX,
+    ACTOR_GROUP_INDEX,
     ACTOR_PARAMS_INDEX,
     ACTOR_ADDRESS_INDEX,
     ACTOR_POSITION_X_INDEX,
@@ -39,6 +42,8 @@ private:
     template <typename T>
     void updateValue(T*, bool);
     void loadActorName();
+    const char* getGroup(fopAc_ac_c* actor);
+    const char* getObjectName(fopAc_ac_c* actor);
     void checkAndCloseMenu();
     void checkAndRestoreMenu();
 
