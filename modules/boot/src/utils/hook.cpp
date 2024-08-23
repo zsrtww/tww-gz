@@ -6,6 +6,7 @@
 #include "scene.h"
 #include "save_manager.h"
 #include "geometry_draw.h"
+#include "gz_flags.h"
 #include "events/pre_loop_listener.h"
 #include "libtww/include/addrs.h"
 #include "libtww/include/d/d_procname.h"
@@ -135,14 +136,32 @@ void beforeOfPaintHook() {
 }
 
 void dCcSDrawHook(dCcS* i_this) {
-    GZ_drawCc(i_this);
+    if (g_FrameAdvEnabled && g_dCcSCopy != nullptr) {
+        // Draw the dCcS copy instead of the real instance, when frame advance is active
+        GZ_drawCc(g_dCcSCopy);
+    } else {
+        GZ_drawCc(i_this);
+    }
+
     return dCcS__drawTrampoline(i_this);
 }
 
 void dCcSMoveAfterCheckHook(dCcS* i_this) {
-    dCcS_Data::at_obj_count = i_this->mObjAtCount;
-    dCcS_Data::tg_obj_count = i_this->mObjTgCount;
-    dCcS_Data::co_obj_count = i_this->mObjCoCount;
+    if (g_FrameAdvEnabled && g_dCcSCopy != nullptr) {
+        // Copy dCcS data every time a frame is advanced, to draw later
+        if (g_FrameTriggered) {
+            memcpy(g_dCcSCopy, dComIfG_Ccsp(), sizeof(dCcS));
+        }
+
+        dCcS_Data::at_obj_count = g_dCcSCopy->mObjAtCount;
+        dCcS_Data::tg_obj_count = g_dCcSCopy->mObjTgCount;
+        dCcS_Data::co_obj_count = g_dCcSCopy->mObjCoCount;
+    } else {
+        dCcS_Data::at_obj_count = i_this->mObjAtCount;
+        dCcS_Data::tg_obj_count = i_this->mObjTgCount;
+        dCcS_Data::co_obj_count = i_this->mObjCoCount;
+    }
+
     return dCcS__MoveAfterCheckTrampoline(i_this);
 }
 
