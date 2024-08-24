@@ -58,7 +58,8 @@ void GZCmd_storage() {
 }
 
 void GZCmd_quarterHeart() {
-    dComIfGs_setLife(1);
+    dComIfGs_setLife(2);
+    dComIfGp_setItemLifeCount(-1);
 }
 
 /*Temporary functions to fix bug with collision codes from inline function*/
@@ -114,7 +115,9 @@ void GZCmd_areaReload() {
 
 void GZCmd_full_health() {
     u16 max_life = dComIfGs_getMaxLife();
-    dComIfGs_setLife(max_life);
+    u16 life = max_life - dComIfGs_getLife();
+    dComIfGs_setLife((max_life));
+    dComIfGp_setItemLifeCount(static_cast<f32>(life));
 }
 
 void GZCmd_full_magic() {

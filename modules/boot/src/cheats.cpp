@@ -68,7 +68,9 @@ void GZ_applyCheats() {
 
     if (GZ_checkCheat(InfiniteHearts)) {
         uint16_t max_life = dComIfGs_getMaxLife();
+        uint16_t life = max_life - dComIfGs_getLife();
         dComIfGs_setLife(max_life);
+        dComIfGp_setItemLifeCount(static_cast<f32>(life));
     }
 
     if (GZ_checkCheat(InfiniteMagic)) {
