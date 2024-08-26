@@ -12,6 +12,8 @@
 #include "libtww/include/d/d_procname.h"
 #include "libtww/include/f_op/f_op_scene_req.h"
 #include "libtww/include/SSystem/SComponent/c_phase.h"
+#include "libtww/include/d/d_s_menu.h"
+#include "libtww/include/JSystem/JUtility/JUTReport.h"
 #include "rels/include/patch.h"
 #include "rels/include/cxx.h"
 #include "rels/include/defines.h"
@@ -35,6 +37,7 @@ HOOK_DEF(void, BeforeOfPaint, (void));
 HOOK_DEF(void, dCcS__draw, (dCcS*));
 HOOK_DEF(void, dCcS__MoveAfterCheck, (dCcS*));
 HOOK_DEF(BOOL, dScnLogo_Delete, (void*));
+HOOK_DEF(BOOL, dScnMenu_Draw, (menu_of_scene_class*));
 
 namespace Hook {
 void gameLoopHook(void) {
@@ -108,18 +111,18 @@ int dScnPly_DeleteHook(void* i_scene) {
 #define menu_data_path (char*)0x80369919
 #endif
 
-int dScnPly_DrawHook(void* _this) {
+f32 g_savedMapSelectTime = 120.0f;
+
+int dScnPly_DrawHook(void* i_this) {
     // if DPAD_DOWN + Y + Z is pressed, change scene to map select
     if (g_tools[MAP_SELECT_INDEX].active && mPadStatus.button == (CButton::DPAD_DOWN | CButton::Y | CButton::Z)) {
         // overwrite original path with our custom path
         strcpy(menu_data_path, "/twwgz/mn/Menu1.dat");
-
-        // 6 is the process ID for map select menu
-        fopScnM_ChangeReq(_this, 6, 0, 5);
-        return 1;
-    } else {
-        return dScnPly_DrawTrampoline(_this);
+        fopScnM_ChangeReq(i_this, PROC_MENU_SCENE, 0, 5);
+        g_savedMapSelectTime = dComIfGs_getTime();
     }
+
+    return dScnPly_DrawTrampoline(i_this);
 }
 
 void setDaytimeHook(void* i_this) {
@@ -170,6 +173,64 @@ BOOL dScnLogo_DeleteHook(void* i_this) {
     return dScnLogo_DeleteTrampoline(i_this);
 }
 
+BOOL dScnMenu_DrawHook(menu_of_scene_class* i_this) {
+    const char* time_strings[] = {
+        // Note these are not direct translations.
+        // The time speed features of the original map select are broken.
+        "default",  // this redunant morning option is repurposed
+        "Morning", "Morning 2", "Afternoon", "Evening", "Night",
+    };
+    const char* day_strings[] = {
+        "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday",
+    };
+    BOOL ret = dScnMenu_DrawTrampoline(i_this);
+
+    JUTReport(40, 40, "Map Select - tww-gz");
+
+#ifdef PAL
+    const char* language_strings[] = {
+        "English", "German", "French", "Spanish", "Italian",
+    };
+    JUTReport(350, 20, "Z (Ctrl 4)");
+    JUTReport(350, 40, "Language: %s", language_strings[l_languageType]);
+#endif
+
+    JUTReport(40, 410, "Day (dpad-r/l): %s", day_strings[l_weekpat]);
+
+    if (l_timepat <= 5) {
+        JUTReport(40, 430, "Time (X/Y): %s", time_strings[l_timepat]);
+
+        if (l_timepat == 0) {
+            // restore saved time for "default"
+            dComIfGs_setTime(g_savedMapSelectTime);
+            g_env_light.mCurTime = g_savedMapSelectTime;
+        }
+    } else if (l_timepat == 6) {
+        JUTReport(40, 430, "Time (X/Y): 12:00am");
+    } else if (l_timepat >= 7 && l_timepat <= 17) {
+        JUTReport(40, 430, "Time (X/Y): %d:00am", l_timepat - 6);
+    } else if (l_timepat == 18) {
+        JUTReport(40, 430, "Time (X/Y): 12:00pm");
+    } else {
+        JUTReport(40, 430, "Time (X/Y): %d:00pm", l_timepat - 18);
+    }
+
+    if (i_this->startCode == 0) {
+        JUTReport(40, 450, "Spawn Point (R/L): default");
+    } else {
+        JUTReport(40, 450, "Spawn Point (R/L): %d", i_this->startCode - 1);
+    }
+
+    JUTReport(400, 410, "A (Ctrl 3)");
+    if (dComIfGs_isEventBit(0x2d01)) {
+        JUTReport(400, 430, "FF2 CS Flag: ON");
+    } else {
+        JUTReport(400, 430, "FF2 CS Flag: OFF");
+    }
+
+    return ret;
+}
+
 #define draw_console draw__17JUTConsoleManagerCFv
 #define f_fapGm_Execute fapGm_Execute__Fv
 
@@ -188,6 +249,7 @@ void dScnPly_BeforeOfPaint__Fv();
 void Draw__4dCcSFv(dCcS*);
 void MoveAfterCheck__4dCcSFv(dCcS*);
 BOOL dScnLogo_Delete__FP10dScnLogo_c(void*);
+BOOL dScnMenu_Draw__FP19menu_of_scene_class(menu_of_scene_class*);
 }
 
 KEEP_FUNC void applyHooks() {
@@ -207,6 +269,7 @@ KEEP_FUNC void applyHooks() {
     APPLY_HOOK(dCcS__draw, &Draw__4dCcSFv, dCcSDrawHook);
     APPLY_HOOK(dCcS__MoveAfterCheck, &MoveAfterCheck__4dCcSFv, dCcSMoveAfterCheckHook);
     APPLY_HOOK(dScnLogo_Delete, &dScnLogo_Delete__FP10dScnLogo_c, dScnLogo_DeleteHook);
+    APPLY_HOOK(dScnMenu_Draw, &dScnMenu_Draw__FP19menu_of_scene_class, dScnMenu_DrawHook);
 
 #undef APPLY_HOOK
 }

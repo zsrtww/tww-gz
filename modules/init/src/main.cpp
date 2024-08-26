@@ -20,6 +20,11 @@
 #include "events/pre_loop_listener.h"
 #include "events/post_loop_listener.h"
 
+#define NOP_INSTRUCTION(addr)                                                                                          \
+    *reinterpret_cast<u32*>(addr) = 0x60000000;                                                                        \
+    DCFlushRange((void*)addr, sizeof(u32));                                                                            \
+    ICInvalidateRange((void*)addr, sizeof(u32));
+
 namespace twwgz::modules {
 void main() {
     // Utilities initialization
@@ -60,6 +65,48 @@ void main() {
     // Init the module list
     g_modules.push_back(new Module{inputViewer_active, "/twwgz/rels/features/input_viewer.rel"});
     g_modules.push_back(new Module{actorView_active, "/twwgz/rels/features/actor_view.rel"});
+
+    // Manually nop calls to JUTReport in Map Select, so we can replace them later.
+    // This sucks, especially because of multiversion. But it works.
+
+#ifdef NTSCJ
+    NOP_INSTRUCTION(0x8022c19c);
+    NOP_INSTRUCTION(0x8022c1c8);
+    NOP_INSTRUCTION(0x8022c2e4);
+    NOP_INSTRUCTION(0x8022c37c);
+    NOP_INSTRUCTION(0x8022c3a8);
+    NOP_INSTRUCTION(0x8022c3c4);
+    NOP_INSTRUCTION(0x8022c3f0);
+    NOP_INSTRUCTION(0x8022c428);
+    NOP_INSTRUCTION(0x8022c448);
+    NOP_INSTRUCTION(0x8022c470);
+#endif
+#ifdef NTSCU
+    NOP_INSTRUCTION(0x8022ea24);
+    NOP_INSTRUCTION(0x8022ea50);
+    NOP_INSTRUCTION(0x8022eb6c);
+    NOP_INSTRUCTION(0x8022ec04);
+    NOP_INSTRUCTION(0x8022ec30);
+    NOP_INSTRUCTION(0x8022ec4c);
+    NOP_INSTRUCTION(0x8022ec78);
+    NOP_INSTRUCTION(0x8022ecb0);
+    NOP_INSTRUCTION(0x8022ece8);
+    NOP_INSTRUCTION(0x8022ed08);
+    NOP_INSTRUCTION(0x8022ed30);
+#endif
+#ifdef PAL
+    NOP_INSTRUCTION(0x80232dfc);
+    NOP_INSTRUCTION(0x80232e28);
+    NOP_INSTRUCTION(0x80232f44);
+    NOP_INSTRUCTION(0x80232fdc);
+    NOP_INSTRUCTION(0x80233008);
+    NOP_INSTRUCTION(0x80233024);
+    NOP_INSTRUCTION(0x80233050);
+    NOP_INSTRUCTION(0x80233088);
+    NOP_INSTRUCTION(0x802330c0);
+    NOP_INSTRUCTION(0x802330e0);
+    NOP_INSTRUCTION(0x80233108);
+#endif
 }
 void exit() {}
 
