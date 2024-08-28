@@ -81,12 +81,24 @@ KEEP_FUNC void GZ_displayTimeInfo() {
 }
 
 KEEP_FUNC void GZ_frameCounter() {
-    int frame_number = getFrameCount();
+    bool frame_toggle = getFrameToggle();
+    /*bool reset_timer = getTimerReset();*/
+    static u32 l_frameCount;
+    
+    /*if (reset_timer) {
+        l_frameCount = 0;
+        reset_timer = false;
+        frame_toggle= false;
+    }*/
 
     char framecount[40];
 
+    if (!frame_toggle && g_tools[FRAME_COUNT_INDEX].active) {
+        l_frameCount++;
+    }
+
     if (g_tools[FRAME_COUNT_INDEX].active) {
-        sprintf(framecount, "frames: %d", frame_number);
+        sprintf(framecount, "frames: %d", l_frameCount);
 
         Font::GZ_drawStr(framecount, g_spriteOffsets[SPR_COUNT_INDEX].x, g_spriteOffsets[SPR_COUNT_INDEX].y + 60.0f,
                          ColorPalette::WHITE, g_dropShadows);

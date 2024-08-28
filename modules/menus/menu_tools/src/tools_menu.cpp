@@ -79,9 +79,8 @@ void ToolsMenu::draw() {
                 GZCmd_enable(Commands::CMD_LOAD_POSITION);
                 break;
             case FRAME_COUNT_INDEX:
-                GZCmd_enable(Commands::CMD_START_TIMER);
+                GZCmd_enable(Commands::CMD_TOGGLE_TIMER);
                 GZCmd_enable(Commands::CMD_RESET_TIMER);
-                GZCmd_enable(Commands::CMD_PAUSE_TIMER);
                 break;
             case AREA_RELOAD_INDEX:
                 GZCmd_enable(Commands::CMD_AREA_RELOAD);
@@ -103,9 +102,8 @@ void ToolsMenu::draw() {
                 GZCmd_disable(Commands::CMD_LOAD_POSITION);
                 break;
             case FRAME_COUNT_INDEX:
-                GZCmd_disable(Commands::CMD_START_TIMER);
+                GZCmd_disable(Commands::CMD_TOGGLE_TIMER);
                 GZCmd_disable(Commands::CMD_RESET_TIMER);
-                GZCmd_disable(Commands::CMD_PAUSE_TIMER);
                 break;
             case AREA_RELOAD_INDEX:
                 GZCmd_disable(Commands::CMD_AREA_RELOAD);

@@ -20,8 +20,8 @@ static Vec sSaveCamTarget = {0.0f, 0.0f, 0.0f}; */
 static int sLastInputs;
 static int sCurInputs;
 
-static u32 l_frameCount;
-static bool l_counterStopped;
+static bool l_counterToggle;
+static bool l_resetTimer;
 
 KEEP_VAR f32 g_waterSpeed = 1500.0f;
 KEEP_VAR f32 g_landSpeed = 150.0f;
@@ -128,22 +128,14 @@ void GZCmd_full_magic() {
     dComIfGs_setMagic(max_magic);
 }
 
-void GZCmd_startTimer() {
-    if (!l_counterStopped) {
-        l_frameCount++;
-        return;
-    }
-}
-
-void GZCmd_stopTimer() {
-    l_counterStopped = !l_counterStopped;
-    return;
+void GZCmd_toggleTimer() {
+    l_counterToggle = !l_counterToggle;
 }
 
 void GZCmd_resetTimer() {
-    l_frameCount = 0;
-    return;
+    l_resetTimer = !l_resetTimer;
 }
+
 
 static Command sCommands[COMMANDS_AMNT] = {
     {g_commandStates[CMD_STORE_POSITION], (CButton::DPAD_UP | CButton::R), GZCmd_storePosition},
@@ -159,9 +151,8 @@ static Command sCommands[COMMANDS_AMNT] = {
     {g_commandStates[CMD_AREA_RELOAD], (CButton::L | CButton::R | CButton::A | CButton::START), GZCmd_areaReload},
     {g_commandStates[CMD_REFILL_HEALTH], (CButton::R | CButton::DPAD_RIGHT), GZCmd_full_health},
     {g_commandStates[CMD_REFILL_MAGIC], (CButton::L | CButton::DPAD_UP), GZCmd_full_magic},
-    {g_commandStates[CMD_START_TIMER], (CButton::DPAD_LEFT | CButton::R | CButton::L), GZCmd_startTimer},
-    {g_commandStates[CMD_PAUSE_TIMER], (CButton::DPAD_RIGHT | CButton::R | CButton::L), GZCmd_stopTimer},
-    {g_commandStates[CMD_RESET_TIMER], (CButton::DPAD_UP | CButton::R | CButton::L), GZCmd_resetTimer},
+    {g_commandStates[CMD_TOGGLE_TIMER], (CButton::DPAD_RIGHT | CButton::R | CButton::L), GZCmd_toggleTimer},
+    {g_commandStates[CMD_RESET_TIMER], (CButton::DPAD_LEFT | CButton::R | CButton::L), GZCmd_resetTimer},
 
 };
 
@@ -203,6 +194,11 @@ KEEP_FUNC void setLandSpeed(f32 speed) {
     g_landSpeed = speed;
 }
 
-KEEP_FUNC f32 getFrameCount() {
-    return l_frameCount;
+
+KEEP_FUNC bool getFrameToggle() {
+    return l_counterToggle;
+}
+
+KEEP_FUNC bool getTimerReset() {
+    return l_resetTimer;
 }
