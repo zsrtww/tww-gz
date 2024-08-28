@@ -85,11 +85,11 @@ KEEP_FUNC void GZ_frameCounter() {
 
     char framecount[40];
 
-    if(g_tools[FRAME_COUNT_INDEX].active){
-    sprintf(framecount, "frames: %d", frame_number);
+    if (g_tools[FRAME_COUNT_INDEX].active) {
+        sprintf(framecount, "frames: %d", frame_number);
 
-    Font::GZ_drawStr(framecount, g_spriteOffsets[SPR_COUNT_INDEX].x, g_spriteOffsets[SPR_COUNT_INDEX].y + 60.0f,
-                     ColorPalette::WHITE, g_dropShadows); 
+        Font::GZ_drawStr(framecount, g_spriteOffsets[SPR_COUNT_INDEX].x, g_spriteOffsets[SPR_COUNT_INDEX].y + 60.0f,
+                         ColorPalette::WHITE, g_dropShadows);
     }
 }
 

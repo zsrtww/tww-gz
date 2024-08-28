@@ -133,17 +133,17 @@ void GZCmd_startTimer() {
         l_frameCount++;
         return;
     }
-} 
+}
 
 void GZCmd_stopTimer() {
     l_counterStopped = !l_counterStopped;
     return;
-} 
+}
 
 void GZCmd_resetTimer() {
     l_frameCount = 0;
-    return; 
-} 
+    return;
+}
 
 static Command sCommands[COMMANDS_AMNT] = {
     {g_commandStates[CMD_STORE_POSITION], (CButton::DPAD_UP | CButton::R), GZCmd_storePosition},
@@ -162,7 +162,7 @@ static Command sCommands[COMMANDS_AMNT] = {
     {g_commandStates[CMD_START_TIMER], (CButton::DPAD_LEFT | CButton::R | CButton::L), GZCmd_startTimer},
     {g_commandStates[CMD_PAUSE_TIMER], (CButton::DPAD_RIGHT | CButton::R | CButton::L), GZCmd_stopTimer},
     {g_commandStates[CMD_RESET_TIMER], (CButton::DPAD_UP | CButton::R | CButton::L), GZCmd_resetTimer},
-    
+
 };
 
 void GZCmd_processInputs() {
@@ -206,8 +206,3 @@ KEEP_FUNC void setLandSpeed(f32 speed) {
 KEEP_FUNC f32 getFrameCount() {
     return l_frameCount;
 }
-
-
-
-
-
