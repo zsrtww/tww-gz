@@ -136,7 +136,6 @@ void GZCmd_resetTimer() {
     l_resetTimer = !l_resetTimer;
 }
 
-
 static Command sCommands[COMMANDS_AMNT] = {
     {g_commandStates[CMD_STORE_POSITION], (CButton::DPAD_UP | CButton::R), GZCmd_storePosition},
     {g_commandStates[CMD_LOAD_POSITION], (CButton::DPAD_DOWN | CButton::R), GZCmd_loadPosition},
@@ -193,7 +192,6 @@ KEEP_FUNC f32 getLandSpeed() {
 KEEP_FUNC void setLandSpeed(f32 speed) {
     g_landSpeed = speed;
 }
-
 
 KEEP_FUNC bool getFrameToggle() {
     return l_counterToggle;

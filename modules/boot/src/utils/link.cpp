@@ -84,7 +84,7 @@ KEEP_FUNC void GZ_frameCounter() {
     bool frame_toggle = getFrameToggle();
     /*bool reset_timer = getTimerReset();*/
     static u32 l_frameCount;
-    
+
     /*if (reset_timer) {
         l_frameCount = 0;
         reset_timer = false;
