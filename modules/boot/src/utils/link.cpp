@@ -9,6 +9,8 @@
 #include "controller.h"
 #include "tools.h"
 #include "rels/include/defines.h"
+#include "commands.h"
+#include "menus/menu_tools/include/tools_menu.h"
 
 KEEP_FUNC void GZ_displayLinkInfo() {
     if (!g_tools[DEBUG_INDEX].active) {
@@ -79,26 +81,16 @@ KEEP_FUNC void GZ_displayTimeInfo() {
 }
 
 KEEP_FUNC void GZ_frameCounter() {
-    static u32 l_frameCount;
-    static bool l_counterStopped;
-    if (!g_tools[FRAME_COUNT_INDEX].active) {
-        l_frameCount = 0;
-        return;
-    }
+    int frame_number = getFrameCount();
 
-    if (GZ_getButtonTrig(GZPad::DPAD_UP)) {
-        l_counterStopped = !l_counterStopped;
-    }
     char framecount[40];
 
-    if (!l_counterStopped) {
-        l_frameCount = l_frameCount + 1;
-    }
-
-    sprintf(framecount, "count: %d", l_frameCount);
+    if(g_tools[FRAME_COUNT_INDEX].active){
+    sprintf(framecount, "frames: %d", frame_number);
 
     Font::GZ_drawStr(framecount, g_spriteOffsets[SPR_COUNT_INDEX].x, g_spriteOffsets[SPR_COUNT_INDEX].y + 60.0f,
-                     ColorPalette::WHITE, g_dropShadows);
+                     ColorPalette::WHITE, g_dropShadows); 
+    }
 }
 
 int rainbow() {

@@ -1,7 +1,7 @@
 #pragma once
 #include "libtww/include/dolphin/gctypes.h"
 
-#define COMMANDS_AMNT 13
+#define COMMANDS_AMNT 16
 
 extern bool g_commandStates[COMMANDS_AMNT];
 
@@ -19,6 +19,9 @@ enum Commands {
     CMD_AREA_RELOAD,
     CMD_REFILL_HEALTH,
     CMD_REFILL_MAGIC,
+    CMD_START_TIMER,
+    CMD_PAUSE_TIMER,
+    CMD_RESET_TIMER,
 };
 
 struct Command {
@@ -35,3 +38,5 @@ f32 getWaterSpeed();
 void setWaterSpeed(f32 speedNum);
 f32 getLandSpeed();
 void setLandSpeed(f32 speedNum);
+
+f32 getFrameCount();
