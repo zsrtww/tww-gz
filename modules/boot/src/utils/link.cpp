@@ -87,20 +87,9 @@ KEEP_FUNC void GZ_frameCounter() {
     static OSCalendarTime ctime;
     static bool init_start_time = false;
 
-    if (g_timer_reset) {
-        g_counterToggle = false;
-        g_timer_reset = false;
-        l_frameCount = 0;
-        timer = 0;
-        start_time = 0;
-        ctime.hours = 0;
-        ctime.minutes = 0;
-        ctime.seconds = 0;
-        ctime.milliseconds = 0;
+    if (!g_tools[FRAME_COUNT_INDEX].active) {
+        init_start_time = false;
     }
-
-    char framecount[40];
-    char secondcount[40];
 
     if (g_counterToggle && g_tools[FRAME_COUNT_INDEX].active) {
         l_frameCount++;
@@ -113,14 +102,30 @@ KEEP_FUNC void GZ_frameCounter() {
         OSTicksToCalendarTime(timer, &ctime);
     }
 
+    if (g_timer_reset) {
+        g_counterToggle = false;
+        g_timer_reset = false;
+        init_start_time = false;
+        l_frameCount = 0;
+        timer = 0;
+        start_time = 0;
+        ctime.hours = 0;
+        ctime.minutes = 0;
+        ctime.seconds = 0;
+        ctime.milliseconds = 0;
+    }
+
+    char framecount[40];
+    char secondcount[40];
+
     if (g_tools[FRAME_COUNT_INDEX].active) {
         sprintf(framecount, "frames: %d", l_frameCount);
         snprintf(secondcount, sizeof(secondcount), "%02d:%02d:%02d.%03d", ctime.hours, ctime.minutes, ctime.seconds,
                  ctime.milliseconds);
 
-        Font::GZ_drawStr(framecount, g_spriteOffsets[SPR_COUNT_INDEX].x, g_spriteOffsets[SPR_COUNT_INDEX].y + 60.0f,
+        Font::GZ_drawStr(framecount, g_spriteOffsets[SPR_COUNT_INDEX].x, g_spriteOffsets[SPR_COUNT_INDEX].y,
                          ColorPalette::WHITE, g_dropShadows);
-        Font::GZ_drawStr(secondcount, g_spriteOffsets[SPR_COUNT_INDEX].x, g_spriteOffsets[SPR_COUNT_INDEX].y + 80.0f,
+        Font::GZ_drawStr(secondcount, g_spriteOffsets[SPR_COUNT_INDEX].x, g_spriteOffsets[SPR_COUNT_INDEX].y + 20.0f,
                          ColorPalette::WHITE, g_dropShadows);
     }
 }
