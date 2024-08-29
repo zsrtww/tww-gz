@@ -11,6 +11,7 @@
 #include "rels/include/defines.h"
 #include "commands.h"
 #include "menus/menu_tools/include/tools_menu.h"
+#include "gz_flags.h"
 
 KEEP_FUNC void GZ_displayLinkInfo() {
     if (!g_tools[DEBUG_INDEX].active) {
@@ -81,25 +82,34 @@ KEEP_FUNC void GZ_displayTimeInfo() {
 }
 
 KEEP_FUNC void GZ_frameCounter() {
-    static u32 l_frameCount;
+    static bool init_start_time = false;
     static OSTime timer = 0;
     static OSTime start_time = 0;
     static OSCalendarTime ctime;
-    static bool init_start_time = false;
+    static u32 l_frameCount;
 
     if (!g_tools[FRAME_COUNT_INDEX].active) {
         init_start_time = false;
     }
 
-    if (g_counterToggle && g_tools[FRAME_COUNT_INDEX].active) {
-        l_frameCount++;
-
+    if (g_counterToggle && g_tools[FRAME_COUNT_INDEX].active && !g_FrameAdvEnabled) {
         if (!init_start_time) {
             start_time = OSGetTime();
             init_start_time = true;
         }
         timer = (OSGetTime() - start_time);
         OSTicksToCalendarTime(timer, &ctime);
+        l_frameCount++;
+    }
+
+    if (g_FrameTriggered) {
+        if (!init_start_time) {
+            start_time = OSGetTime();
+            init_start_time = true;
+        }
+        timer = (OSGetTime() - start_time);
+        OSTicksToCalendarTime(timer, &ctime);
+        l_frameCount++;
     }
 
     if (g_timer_reset) {
