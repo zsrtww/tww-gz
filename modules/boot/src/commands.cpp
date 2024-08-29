@@ -11,6 +11,8 @@
 #include "rels/include/defines.h"
 
 bool g_commandStates[COMMANDS_AMNT];
+bool g_timer_reset = false;
+bool g_counterToggle = false;
 
 static Vec sSavePlayerPos = {0.0f, 0.0f, 0.0f};
 static int16_t sSavePlayerAngle = 0;
@@ -19,9 +21,6 @@ static Vec sSaveCamTarget = {0.0f, 0.0f, 0.0f}; */
 
 static int sLastInputs;
 static int sCurInputs;
-
-static bool l_counterToggle;
-static bool l_resetTimer;
 
 KEEP_VAR f32 g_waterSpeed = 1500.0f;
 KEEP_VAR f32 g_landSpeed = 150.0f;
@@ -129,11 +128,13 @@ void GZCmd_full_magic() {
 }
 
 void GZCmd_toggleTimer() {
-    l_counterToggle = !l_counterToggle;
+    if (GZCmd_checkTrig(CButton::DPAD_RIGHT | CButton::R | CButton::L)){
+    g_counterToggle = !g_counterToggle;
+    }
 }
 
 void GZCmd_resetTimer() {
-    l_resetTimer = !l_resetTimer;
+    g_timer_reset = !g_timer_reset;
 }
 
 static Command sCommands[COMMANDS_AMNT] = {
@@ -193,10 +194,4 @@ KEEP_FUNC void setLandSpeed(f32 speed) {
     g_landSpeed = speed;
 }
 
-KEEP_FUNC bool getFrameToggle() {
-    return l_counterToggle;
-}
 
-KEEP_FUNC bool getTimerReset() {
-    return l_resetTimer;
-}

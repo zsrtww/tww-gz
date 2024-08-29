@@ -4,6 +4,8 @@
 #define COMMANDS_AMNT 15
 
 extern bool g_commandStates[COMMANDS_AMNT];
+extern bool g_timer_reset;
+extern bool g_counterToggle;
 
 enum Commands {
     CMD_STORE_POSITION,
@@ -37,6 +39,3 @@ f32 getWaterSpeed();
 void setWaterSpeed(f32 speedNum);
 f32 getLandSpeed();
 void setLandSpeed(f32 speedNum);
-
-bool getFrameToggle();
-bool getTimerReset();

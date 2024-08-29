@@ -81,19 +81,18 @@ KEEP_FUNC void GZ_displayTimeInfo() {
 }
 
 KEEP_FUNC void GZ_frameCounter() {
-    bool frame_toggle = getFrameToggle();
-    /*bool reset_timer = getTimerReset();*/
+    
     static u32 l_frameCount;
 
-    /*if (reset_timer) {
+    if (g_timer_reset) {
+        g_counterToggle= false;
+        g_timer_reset = false;
         l_frameCount = 0;
-        reset_timer = false;
-        frame_toggle= false;
-    }*/
+    }
 
     char framecount[40];
 
-    if (!frame_toggle && g_tools[FRAME_COUNT_INDEX].active) {
+    if (g_counterToggle && g_tools[FRAME_COUNT_INDEX].active) {
         l_frameCount++;
     }
 
