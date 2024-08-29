@@ -35,17 +35,17 @@ KEEP_FUNC void GZ_displayLinkInfo() {
         snprintf(link_z, sizeof(link_z), "z-pos: %.4f", player->current.pos.z);
 
         Font::GZ_drawStr(link_angle, g_spriteOffsets[SPR_DEBUG_INFO_INDEX].x,
-                         g_spriteOffsets[SPR_DEBUG_INFO_INDEX].y + 20.0f, 0xFFFFFFFF, g_dropShadows);
-        Font::GZ_drawStr(y_angle, g_spriteOffsets[SPR_DEBUG_INFO_INDEX].x,
-                         g_spriteOffsets[SPR_DEBUG_INFO_INDEX].y + 40.0f, 0xFFFFFFFF, g_dropShadows);
+                         g_spriteOffsets[SPR_DEBUG_INFO_INDEX].y - 20.0f, 0xFFFFFFFF, g_dropShadows);
+        Font::GZ_drawStr(y_angle, g_spriteOffsets[SPR_DEBUG_INFO_INDEX].x, g_spriteOffsets[SPR_DEBUG_INFO_INDEX].y,
+                         0xFFFFFFFF, g_dropShadows);
         Font::GZ_drawStr(link_speed, g_spriteOffsets[SPR_DEBUG_INFO_INDEX].x,
-                         g_spriteOffsets[SPR_DEBUG_INFO_INDEX].y + 60.0f, 0xFFFFFFFF, g_dropShadows);
+                         g_spriteOffsets[SPR_DEBUG_INFO_INDEX].y + 20.0f, 0xFFFFFFFF, g_dropShadows);
         Font::GZ_drawStr(link_x, g_spriteOffsets[SPR_DEBUG_INFO_INDEX].x,
-                         g_spriteOffsets[SPR_DEBUG_INFO_INDEX].y + 80.0f, 0xFFFFFFFF, g_dropShadows);
+                         g_spriteOffsets[SPR_DEBUG_INFO_INDEX].y + 40.0f, 0xFFFFFFFF, g_dropShadows);
         Font::GZ_drawStr(link_y, g_spriteOffsets[SPR_DEBUG_INFO_INDEX].x,
-                         g_spriteOffsets[SPR_DEBUG_INFO_INDEX].y + 100.0f, 0xFFFFFFFF, g_dropShadows);
+                         g_spriteOffsets[SPR_DEBUG_INFO_INDEX].y + 60.0f, 0xFFFFFFFF, g_dropShadows);
         Font::GZ_drawStr(link_z, g_spriteOffsets[SPR_DEBUG_INFO_INDEX].x,
-                         g_spriteOffsets[SPR_DEBUG_INFO_INDEX].y + 120.0f, 0xFFFFFFFF, g_dropShadows);
+                         g_spriteOffsets[SPR_DEBUG_INFO_INDEX].y + 80.0f, 0xFFFFFFFF, g_dropShadows);
     }
 }
 
@@ -81,25 +81,46 @@ KEEP_FUNC void GZ_displayTimeInfo() {
 }
 
 KEEP_FUNC void GZ_frameCounter() {
-    
     static u32 l_frameCount;
+    static OSTime timer = 0;
+    static OSTime start_time = 0;
+    static OSCalendarTime ctime;
+    static bool init_start_time = false;
 
     if (g_timer_reset) {
-        g_counterToggle= false;
+        g_counterToggle = false;
         g_timer_reset = false;
         l_frameCount = 0;
+        timer = 0;
+        start_time = 0;
+        ctime.hours = 0;
+        ctime.minutes = 0;
+        ctime.seconds = 0;
+        ctime.milliseconds = 0;
     }
 
     char framecount[40];
+    char secondcount[40];
 
     if (g_counterToggle && g_tools[FRAME_COUNT_INDEX].active) {
         l_frameCount++;
+
+        if (!init_start_time) {
+            start_time = OSGetTime();
+            init_start_time = true;
+        }
+        timer = (OSGetTime() - start_time);
+        OSTicksToCalendarTime(timer, &ctime);
     }
 
     if (g_tools[FRAME_COUNT_INDEX].active) {
         sprintf(framecount, "frames: %d", l_frameCount);
+        snprintf(secondcount, sizeof(secondcount), "%02d:%02d:%02d.%03d", ctime.hours, ctime.minutes, ctime.seconds,
+                 ctime.milliseconds);
 
         Font::GZ_drawStr(framecount, g_spriteOffsets[SPR_COUNT_INDEX].x, g_spriteOffsets[SPR_COUNT_INDEX].y + 60.0f,
+                         ColorPalette::WHITE, g_dropShadows);
+        Font::GZ_drawStr(secondcount, g_spriteOffsets[SPR_COUNT_INDEX].x, g_spriteOffsets[SPR_COUNT_INDEX].y + 80.0f,
                          ColorPalette::WHITE, g_dropShadows);
     }
 }

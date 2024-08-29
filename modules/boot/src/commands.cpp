@@ -128,8 +128,8 @@ void GZCmd_full_magic() {
 }
 
 void GZCmd_toggleTimer() {
-    if (GZCmd_checkTrig(CButton::DPAD_RIGHT | CButton::R | CButton::L)){
-    g_counterToggle = !g_counterToggle;
+    if (GZCmd_checkTrig(CButton::DPAD_RIGHT | CButton::R | CButton::L)) {
+        g_counterToggle = !g_counterToggle;
     }
 }
 
@@ -193,5 +193,3 @@ KEEP_FUNC f32 getLandSpeed() {
 KEEP_FUNC void setLandSpeed(f32 speed) {
     g_landSpeed = speed;
 }
-
-
