@@ -18,6 +18,7 @@ KEEP_FUNC PosSettingsMenu::PosSettingsMenu(Cursor& cursor, PosSettingsData& data
             {"link debug info", SpritesIndex::SPR_DEBUG_INFO_INDEX, "Change link debug info position", false},
             {"time display", SpritesIndex::SPR_TIME_DISP_INDEX, "Change Time Display position", false},
             {"input viewer", SpritesIndex::SPR_VIEWER_INDEX, "Change input viewer position", false},
+            {"frame timer", SpritesIndex::SPR_COUNT_INDEX, "Change frame timer position", false},
             {"zombie hover info", SpritesIndex::SPR_ZH_INFO_INDEX, "Change zombie hover info position", false}} {}
 
 PosSettingsMenu::~PosSettingsMenu() {}

@@ -1,9 +1,11 @@
 #pragma once
 #include "libtww/include/dolphin/gctypes.h"
 
-#define COMMANDS_AMNT 13
+#define COMMANDS_AMNT 15
 
 extern bool g_commandStates[COMMANDS_AMNT];
+extern bool g_timer_reset;
+extern bool g_counterToggle;
 
 enum Commands {
     CMD_STORE_POSITION,
@@ -19,6 +21,8 @@ enum Commands {
     CMD_AREA_RELOAD,
     CMD_REFILL_HEALTH,
     CMD_REFILL_MAGIC,
+    CMD_TOGGLE_TIMER,
+    CMD_RESET_TIMER,
 };
 
 struct Command {
