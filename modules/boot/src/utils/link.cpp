@@ -13,6 +13,12 @@
 #include "menus/menu_tools/include/tools_menu.h"
 #include "gz_flags.h"
 
+#if defined(NTSCJ) || defined(NTSCU)
+#define FRAME_RATE 29.97
+#else
+#define FRAME_RATE 25
+#endif
+
 KEEP_FUNC void GZ_displayLinkInfo() {
     if (!g_tools[DEBUG_INDEX].active) {
         return;
@@ -82,56 +88,33 @@ KEEP_FUNC void GZ_displayTimeInfo() {
 }
 
 KEEP_FUNC void GZ_frameCounter() {
-    static bool init_start_time = false;
-    static OSTime timer = 0;
-    static OSTime start_time = 0;
-    static OSCalendarTime ctime;
-    static u32 l_frameCount;
-
-    if (!g_tools[FRAME_COUNT_INDEX].active) {
-        init_start_time = false;
-    }
+    static int l_frameCount = 0;
+    static float sTimerSec = 0.0f;
 
     if (g_counterToggle && g_tools[FRAME_COUNT_INDEX].active && !g_FrameAdvEnabled) {
-        if (!init_start_time) {
-            start_time = OSGetTime();
-            init_start_time = true;
-        }
-        timer = (OSGetTime() - start_time);
-        OSTicksToCalendarTime(timer, &ctime);
         l_frameCount++;
+        sTimerSec = l_frameCount / FRAME_RATE;
     }
 
-    if (g_FrameTriggered) {
-        if (!init_start_time) {
-            start_time = OSGetTime();
-            init_start_time = true;
-        }
-        timer = (OSGetTime() - start_time);
-        OSTicksToCalendarTime(timer, &ctime);
+    if (g_FrameTriggered && g_counterToggle) {
         l_frameCount++;
+        sTimerSec = l_frameCount / FRAME_RATE;
     }
 
     if (g_timer_reset) {
         g_counterToggle = false;
         g_timer_reset = false;
-        init_start_time = false;
         l_frameCount = 0;
-        timer = 0;
-        start_time = 0;
-        ctime.hours = 0;
-        ctime.minutes = 0;
-        ctime.seconds = 0;
-        ctime.milliseconds = 0;
+        sTimerSec = 0.0f;
     }
 
-    char framecount[40];
-    char secondcount[40];
+    char framecount[5] = {0};
+    char secondcount[8] = {0};
+    ;
 
     if (g_tools[FRAME_COUNT_INDEX].active) {
         sprintf(framecount, "frames: %d", l_frameCount);
-        snprintf(secondcount, sizeof(secondcount), "%02d:%02d:%02d.%03d", ctime.hours, ctime.minutes, ctime.seconds,
-                 ctime.milliseconds);
+        sprintf(secondcount, "%.2f", sTimerSec);
 
         Font::GZ_drawStr(framecount, g_spriteOffsets[SPR_COUNT_INDEX].x, g_spriteOffsets[SPR_COUNT_INDEX].y,
                          ColorPalette::WHITE, g_dropShadows);
