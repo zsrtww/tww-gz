@@ -18,6 +18,7 @@ KEEP_FUNC SceneMenu::SceneMenu(Cursor& cursor)
                         {"current date", MODIFY_DATE_INDEX, "Change the current date/moon phase"},
                         {"collision viewer", COLLISION_VIEW_INDEX, "Change Collision Viewer settings", false},
                         {"actor list", ACTOR_LIST_INDEX, "Display info from the actor list", false},
+                        {"actor spawner", ACTOR_SPAWNER_INDEX, "Spawn Actors at current position", false},
                     } {}
 
 SceneMenu::~SceneMenu() {}
@@ -142,6 +143,9 @@ void SceneMenu::draw() {
             return;
         case ACTOR_LIST_INDEX:
             g_menuMgr->push(MN_ACTOR_LIST_INDEX);
+            return;
+        case ACTOR_SPAWNER_INDEX:
+            g_menuMgr->push(MN_ACTOR_SPAWNER_INDEX);
             return;
         }
     }
