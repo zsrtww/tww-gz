@@ -9,6 +9,15 @@
 #include "controller.h"
 #include "tools.h"
 #include "rels/include/defines.h"
+#include "commands.h"
+#include "menus/menu_tools/include/tools_menu.h"
+#include "gz_flags.h"
+
+#if defined(NTSCJ) || defined(NTSCU)
+#define FRAME_RATE 29.97
+#else
+#define FRAME_RATE 25
+#endif
 
 KEEP_FUNC void GZ_displayLinkInfo() {
     if (!g_tools[DEBUG_INDEX].active) {
@@ -33,17 +42,17 @@ KEEP_FUNC void GZ_displayLinkInfo() {
         snprintf(link_z, sizeof(link_z), "z-pos: %.4f", player->current.pos.z);
 
         Font::GZ_drawStr(link_angle, g_spriteOffsets[SPR_DEBUG_INFO_INDEX].x,
-                         g_spriteOffsets[SPR_DEBUG_INFO_INDEX].y + 20.0f, 0xFFFFFFFF, g_dropShadows);
-        Font::GZ_drawStr(y_angle, g_spriteOffsets[SPR_DEBUG_INFO_INDEX].x,
-                         g_spriteOffsets[SPR_DEBUG_INFO_INDEX].y + 40.0f, 0xFFFFFFFF, g_dropShadows);
+                         g_spriteOffsets[SPR_DEBUG_INFO_INDEX].y - 20.0f, 0xFFFFFFFF, g_dropShadows);
+        Font::GZ_drawStr(y_angle, g_spriteOffsets[SPR_DEBUG_INFO_INDEX].x, g_spriteOffsets[SPR_DEBUG_INFO_INDEX].y,
+                         0xFFFFFFFF, g_dropShadows);
         Font::GZ_drawStr(link_speed, g_spriteOffsets[SPR_DEBUG_INFO_INDEX].x,
-                         g_spriteOffsets[SPR_DEBUG_INFO_INDEX].y + 60.0f, 0xFFFFFFFF, g_dropShadows);
+                         g_spriteOffsets[SPR_DEBUG_INFO_INDEX].y + 20.0f, 0xFFFFFFFF, g_dropShadows);
         Font::GZ_drawStr(link_x, g_spriteOffsets[SPR_DEBUG_INFO_INDEX].x,
-                         g_spriteOffsets[SPR_DEBUG_INFO_INDEX].y + 80.0f, 0xFFFFFFFF, g_dropShadows);
+                         g_spriteOffsets[SPR_DEBUG_INFO_INDEX].y + 40.0f, 0xFFFFFFFF, g_dropShadows);
         Font::GZ_drawStr(link_y, g_spriteOffsets[SPR_DEBUG_INFO_INDEX].x,
-                         g_spriteOffsets[SPR_DEBUG_INFO_INDEX].y + 100.0f, 0xFFFFFFFF, g_dropShadows);
+                         g_spriteOffsets[SPR_DEBUG_INFO_INDEX].y + 60.0f, 0xFFFFFFFF, g_dropShadows);
         Font::GZ_drawStr(link_z, g_spriteOffsets[SPR_DEBUG_INFO_INDEX].x,
-                         g_spriteOffsets[SPR_DEBUG_INFO_INDEX].y + 120.0f, 0xFFFFFFFF, g_dropShadows);
+                         g_spriteOffsets[SPR_DEBUG_INFO_INDEX].y + 80.0f, 0xFFFFFFFF, g_dropShadows);
     }
 }
 
@@ -79,26 +88,39 @@ KEEP_FUNC void GZ_displayTimeInfo() {
 }
 
 KEEP_FUNC void GZ_frameCounter() {
-    static u32 l_frameCount;
-    static bool l_counterStopped;
-    if (!g_tools[FRAME_COUNT_INDEX].active) {
+    static int l_frameCount = 0;
+    static float sTimerSec = 0.0f;
+
+    if (g_counterToggle && g_tools[FRAME_COUNT_INDEX].active && !g_FrameAdvEnabled) {
+        l_frameCount++;
+        sTimerSec = l_frameCount / FRAME_RATE;
+    }
+
+    if (g_FrameTriggered && g_counterToggle) {
+        l_frameCount++;
+        sTimerSec = l_frameCount / FRAME_RATE;
+    }
+
+    if (g_timer_reset) {
+        g_counterToggle = false;
+        g_timer_reset = false;
         l_frameCount = 0;
-        return;
+        sTimerSec = 0.0f;
     }
 
-    if (GZ_getButtonTrig(GZPad::DPAD_UP)) {
-        l_counterStopped = !l_counterStopped;
+    char framecount[5] = {0};
+    char secondcount[8] = {0};
+    ;
+
+    if (g_tools[FRAME_COUNT_INDEX].active) {
+        sprintf(framecount, "frames: %d", l_frameCount);
+        sprintf(secondcount, "%.2f", sTimerSec);
+
+        Font::GZ_drawStr(framecount, g_spriteOffsets[SPR_COUNT_INDEX].x, g_spriteOffsets[SPR_COUNT_INDEX].y,
+                         ColorPalette::WHITE, g_dropShadows);
+        Font::GZ_drawStr(secondcount, g_spriteOffsets[SPR_COUNT_INDEX].x, g_spriteOffsets[SPR_COUNT_INDEX].y + 20.0f,
+                         ColorPalette::WHITE, g_dropShadows);
     }
-    char framecount[40];
-
-    if (!l_counterStopped) {
-        l_frameCount = l_frameCount + 1;
-    }
-
-    sprintf(framecount, "count: %d", l_frameCount);
-
-    Font::GZ_drawStr(framecount, g_spriteOffsets[SPR_COUNT_INDEX].x, g_spriteOffsets[SPR_COUNT_INDEX].y + 60.0f,
-                     ColorPalette::WHITE, g_dropShadows);
 }
 
 int rainbow() {

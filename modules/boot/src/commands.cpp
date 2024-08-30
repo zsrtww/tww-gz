@@ -11,6 +11,8 @@
 #include "rels/include/defines.h"
 
 bool g_commandStates[COMMANDS_AMNT];
+bool g_timer_reset = false;
+bool g_counterToggle = false;
 
 static Vec sSavePlayerPos = {0.0f, 0.0f, 0.0f};
 static int16_t sSavePlayerAngle = 0;
@@ -125,6 +127,16 @@ void GZCmd_full_magic() {
     dComIfGs_setMagic(max_magic);
 }
 
+void GZCmd_toggleTimer() {
+    if (GZCmd_checkTrig(CButton::DPAD_RIGHT | CButton::R | CButton::L)) {
+        g_counterToggle = !g_counterToggle;
+    }
+}
+
+void GZCmd_resetTimer() {
+    g_timer_reset = !g_timer_reset;
+}
+
 static Command sCommands[COMMANDS_AMNT] = {
     {g_commandStates[CMD_STORE_POSITION], (CButton::DPAD_UP | CButton::R), GZCmd_storePosition},
     {g_commandStates[CMD_LOAD_POSITION], (CButton::DPAD_DOWN | CButton::R), GZCmd_loadPosition},
@@ -139,6 +151,9 @@ static Command sCommands[COMMANDS_AMNT] = {
     {g_commandStates[CMD_AREA_RELOAD], (CButton::L | CButton::R | CButton::A | CButton::START), GZCmd_areaReload},
     {g_commandStates[CMD_REFILL_HEALTH], (CButton::R | CButton::DPAD_RIGHT), GZCmd_full_health},
     {g_commandStates[CMD_REFILL_MAGIC], (CButton::L | CButton::DPAD_UP), GZCmd_full_magic},
+    {g_commandStates[CMD_TOGGLE_TIMER], (CButton::DPAD_RIGHT | CButton::R | CButton::L), GZCmd_toggleTimer},
+    {g_commandStates[CMD_RESET_TIMER], (CButton::DPAD_LEFT | CButton::R | CButton::L), GZCmd_resetTimer},
+
 };
 
 void GZCmd_processInputs() {

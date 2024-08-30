@@ -44,7 +44,7 @@ KEEP_FUNC ToolsMenu::ToolsMenu(Cursor& cursor)
            &g_tools[MAP_SELECT_INDEX].active},
           {"zombie hover info", ZH_INDEX, "Display A and B button presses per second", true, &g_tools[ZH_INDEX].active},
           {"input viewer", INPUT_VIEWER_INDEX, "Show current inputs", true, &g_tools[INPUT_VIEWER_INDEX].active},
-          {"frame counter", FRAME_COUNT_INDEX, "Start and stop frame counter with D-pad Up", true,
+          {"timers", FRAME_COUNT_INDEX, "Toggle timers with L+R+D-pad Right, reset with L+R+D-pad Left", true,
            &g_tools[FRAME_COUNT_INDEX].active},
           {"frame advance", FRAME_ADVANCE_INDEX, "D-pad Down to pause/unpause, D-pad Up to advance frames", true,
            &g_tools[FRAME_ADVANCE_INDEX].active},
@@ -77,6 +77,10 @@ void ToolsMenu::draw() {
                 GZCmd_enable(Commands::CMD_STORE_POSITION);
                 GZCmd_enable(Commands::CMD_LOAD_POSITION);
                 break;
+            case FRAME_COUNT_INDEX:
+                GZCmd_enable(Commands::CMD_TOGGLE_TIMER);
+                GZCmd_enable(Commands::CMD_RESET_TIMER);
+                break;
             case AREA_RELOAD_INDEX:
                 GZCmd_enable(Commands::CMD_AREA_RELOAD);
                 break;
@@ -95,6 +99,10 @@ void ToolsMenu::draw() {
             case TELEPORT_INDEX:
                 GZCmd_disable(Commands::CMD_STORE_POSITION);
                 GZCmd_disable(Commands::CMD_LOAD_POSITION);
+                break;
+            case FRAME_COUNT_INDEX:
+                GZCmd_disable(Commands::CMD_TOGGLE_TIMER);
+                GZCmd_disable(Commands::CMD_RESET_TIMER);
                 break;
             case AREA_RELOAD_INDEX:
                 GZCmd_disable(Commands::CMD_AREA_RELOAD);
