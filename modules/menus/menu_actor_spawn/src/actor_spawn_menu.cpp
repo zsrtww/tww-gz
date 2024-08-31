@@ -8,6 +8,7 @@
 #include "pos_settings.h"
 #include "rels/include/defines.h"
 #include "menus/utils/menu_mgr.h"
+#include "menus/menu_actor_list/include/actor_list_menu.h"
 #include "global_data.h"
 #include "fs.h"
 

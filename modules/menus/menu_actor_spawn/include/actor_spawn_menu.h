@@ -6,10 +6,6 @@
  * @struct procBinData
  * @brief Structure for entries in res/proc_info/procs.bin
  */
-struct procBinData {
-    s16 procId;
-    char procName[30];
-} __attribute__((aligned(32)));
 
 struct ActorSpawnData {
     Cursor cursor;
