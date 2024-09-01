@@ -11,16 +11,12 @@
 #include "menus/utils/menu_mgr.h"
 #include "fs.h"
 #include "global_data.h"
+#include "actor_loader.h"
 
 #define MEM_TEXT "Z"
 #define SLOW_INC_TEXT "X"
 #define FAST_INC_TEXT "Y"
 #define DELETE_TEXT "START"
-
-/**
- * @brief Used for storing entries from procs.bin
- */
-procBinData l_procData;
 
 // This needs to be figured out after d_menu_windows is decompiled
 /**
@@ -162,13 +158,6 @@ void ActorListMenu::updateActorData() {
     }
 
     g_currentActor = actorData;
-}
-
-void ActorListMenu::loadActorName() {
-    if (g_currentActor) {
-        int offset = (g_currentActor->mBase.mProcName * 32);
-        loadFile("twwgz/procs.bin", &l_procData, sizeof(l_procData), offset);
-    }
 }
 
 const char* ActorListMenu::getGroup(fopAc_ac_c* actor) {
@@ -321,7 +310,7 @@ void ActorListMenu::draw() {
     }
 
     if (g_currentActor) {
-        lines[ACTOR_PROC_NAME_INDEX].printf("proc name:  <%s>", l_procData.procName);
+        lines[ACTOR_PROC_NAME_INDEX].printf("proc name:  <%s>", g_procData.procName);
         lines[ACTOR_OBJECT_NAME_INDEX].printf("object name: %s", getObjectName(g_currentActor));
         lines[ACTOR_PROC_ID_INDEX].printf("proc id: %d", g_currentActor->mBase.mBsPcId);
         lines[ACTOR_GROUP_INDEX].printf("group: %s", getGroup(g_currentActor));

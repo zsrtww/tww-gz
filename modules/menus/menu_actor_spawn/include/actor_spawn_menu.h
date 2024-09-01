@@ -2,11 +2,6 @@
 
 #define MAX_ACTORS 10
 
-/**
- * @struct procBinData
- * @brief Structure for entries in res/proc_info/procs.bin
- */
-
 struct ActorSpawnData {
     Cursor cursor;
     s16 l_actorID;
@@ -35,13 +30,12 @@ public:
     virtual void draw();
 
 private:
-    void loadActorName(s16&);
-    s16& l_actorID;
-    uint32_t& l_actorParams;
-    int8_t& l_actorType;
-    uint8_t& l_paramIdx;
-    bool l_paramsSelected;
-    ActorSpawn l_actorQueue[MAX_ACTORS];
+    s16& mActorID;
+    uint32_t& mActorParams;
+    int8_t& mActorType;
+    uint8_t& mParamIdx;
+    bool mParamsSelected;
+    ActorSpawn mActorQueue[MAX_ACTORS];
 
     Line lines[4];
 };
