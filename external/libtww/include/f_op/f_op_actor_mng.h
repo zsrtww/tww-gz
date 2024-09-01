@@ -68,7 +68,9 @@ LIBTWW_DEFINE_FUNC(fopAcM_delete__FP10fopAc_ac_c, void, fopAcM_delete, (fopAc_ac
 LIBTWW_DEFINE_FUNC(fopAcM_SearchByName__FsPP10fopAc_ac_c, s32, fopAcM_SearchByName, (u32, fopAc_ac_c**))
 
 LIBTWW_DEFINE_FUNC(fopAcM_getProcNameString__FP10fopAc_ac_c, const char*, fopAcM_getProcNameString, (fopAc_ac_c*))
- 
+
+LIBTWW_DEFINE_FUNC(fopAcM_create__FsUlP4cXyziP5csXyzP4cXyzScPFPv_i, void, fopAcM_create, (s16, u32, const cXyz*, int, const csXyz*, const cXyz*, s8, createFunc))
+
 extern "C" {
 extern node_list_class g_fopAcTg_Queue;
 }

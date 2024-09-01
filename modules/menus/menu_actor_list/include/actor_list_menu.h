@@ -5,15 +5,6 @@ struct ActorListData {
     uint16_t l_index;
 };
 
-/**
- * @struct procBinData
- * @brief Structure for entries in res/proc_info/procs.bin
- */
-struct procBinData {
-    s16 procId;
-    char procName[30];
-} __attribute__((aligned(32)));
-
 enum {
     ACTOR_PROC_NAME_INDEX,
     ACTOR_OBJECT_NAME_INDEX,
@@ -41,7 +32,6 @@ private:
     void updateActorData();
     template <typename T>
     void updateValue(T*, bool);
-    void loadActorName();
     const char* getGroup(fopAc_ac_c* actor);
     const char* getObjectName(fopAc_ac_c* actor);
     void checkAndCloseMenu();
