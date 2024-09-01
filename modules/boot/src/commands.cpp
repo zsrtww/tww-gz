@@ -22,8 +22,8 @@ static Vec sSaveCamTarget = {0.0f, 0.0f, 0.0f}; */
 static int sLastInputs;
 static int sCurInputs;
 
-KEEP_VAR f32 g_waterSpeed = 1500.0f;
-KEEP_VAR f32 g_landSpeed = 150.0f;
+f32 g_waterSpeed = 1500.0f;
+f32 g_landSpeed = 150.0f;
 
 bool GZCmd_checkTrig(int combo) {
     if (sCurInputs == combo && sLastInputs != combo) {
@@ -86,9 +86,9 @@ void GZCmd_fastMovement() {
     if (player_p != nullptr) {
         if (player_p->mCurProcID == daPy_lk_c::PROC_SWIM_UP_e || player_p->mCurProcID == daPy_lk_c::PROC_SWIM_WAIT_e ||
             player_p->mCurProcID == daPy_lk_c::PROC_SWIM_MOVE_e) {
-            player_p->mVelocity = getWaterSpeed();
+            player_p->mVelocity = g_waterSpeed;
         } else {
-            player_p->mVelocity = getLandSpeed();
+            player_p->mVelocity = g_landSpeed;
         }
     }
 }
@@ -176,20 +176,4 @@ void GZCmd_enable(int idx) {
 
 void GZCmd_disable(int idx) {
     sCommands[idx].active = false;
-}
-
-KEEP_FUNC f32 getWaterSpeed() {
-    return g_waterSpeed;
-}
-
-KEEP_FUNC void setWaterSpeed(f32 speed) {
-    g_waterSpeed = speed;
-}
-
-KEEP_FUNC f32 getLandSpeed() {
-    return g_landSpeed;
-}
-
-KEEP_FUNC void setLandSpeed(f32 speed) {
-    g_landSpeed = speed;
 }

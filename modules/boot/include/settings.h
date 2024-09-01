@@ -13,8 +13,6 @@ extern bool g_dropShadows;
 extern uint32_t g_fontType;
 extern uint32_t g_cursorColorType;
 extern ListMember g_font_opt[7];
-extern f32 g_landSpeed;
-extern f32 g_waterSpeed;
 
 enum cursor_colors {
     CURSOR_GREEN,
