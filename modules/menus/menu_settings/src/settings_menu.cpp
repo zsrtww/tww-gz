@@ -7,6 +7,7 @@
 #include "rels/include/defines.h"
 #include "menus/utils/menu_mgr.h"
 #include "boot/include/commands.h"
+#include "utils/hook.h"
 
 #define MAX_RELOAD_OPTIONS 2
 #define MAX_CURSOR_COLOR_OPTIONS 6
@@ -26,6 +27,7 @@ KEEP_FUNC SettingsMenu::SettingsMenu(Cursor& cursor)
            "Change menu object positions (A to toggle selection, DPad to move)", false},
           {"fast swimming speed: ", WATER_SPEED_INDEX, "Change max speed of fast movement cheat for swimming"},
           {"fast running speed: ", LAND_SPEED_INDEX, "change max speed of Fast Movement cheat for running"},
+          {"spawn id: ", SPAWN_ID_INDEX, "set spawn id for disable save checks tool"},
       } {}
 
 SettingsMenu::~SettingsMenu() {}
@@ -155,6 +157,24 @@ void SettingsMenu::draw() {
         break;
     }
 
+    case SPAWN_ID_INDEX: {
+        Cursor::moveList(spawn_id_input);
+        if (GZ_getButtonRepeat(GZPad::A)) {
+            spawn_id_input += 10;
+        }
+        if (GZ_getButtonRepeat(GZPad::R)) {
+            spawn_id_input -= 10;
+        }
+        if (spawn_id_input < 0) {
+            spawn_id_input = 255;
+        }
+        if (spawn_id_input > 255) {
+            spawn_id_input = 0;
+        }
+        cursor.move(0, MENU_LINE_NUM);
+        break;
+    }
+
     default:
         cursor.move(0, MENU_LINE_NUM);
         break;
@@ -164,6 +184,7 @@ void SettingsMenu::draw() {
     lines[FONT_INDEX].printf(" <%s>", g_font_opt[g_fontType].member);
     lines[WATER_SPEED_INDEX].printf(" <%4.0f>", g_waterSpeed);
     lines[LAND_SPEED_INDEX].printf(" <%4.0f>", g_landSpeed);
+    lines[SPAWN_ID_INDEX].printf(" <%d>", spawn_id_input);
 
     GZ_drawMenuLines(lines, cursor.y, MENU_LINE_NUM);
 }

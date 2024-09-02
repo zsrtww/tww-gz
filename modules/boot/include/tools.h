@@ -12,7 +12,7 @@ enum ToolsIndex {
     FRAME_ADVANCE_INDEX,
     ESS_CHECKER_INDEX,
     DEADZONE_CHECKER_INDEX,
-    // DISABLE_SVCHECK_INDEX,
+    DISABLE_SVCHECK_INDEX,
     INTRO_SKIP_INDEX,
 
     // Entry used as a counter

@@ -17,6 +17,7 @@
 #include "rels/include/patch.h"
 #include "rels/include/cxx.h"
 #include "rels/include/defines.h"
+#include "menus/menu_settings/include/settings_menu.h"
 
 #define HOOK_DEF(rettype, name, params)                                                                                \
     typedef rettype(*tww_##name##_t) params;                                                                           \
@@ -39,6 +40,8 @@ HOOK_DEF(void, dCcS__MoveAfterCheck, (dCcS*));
 HOOK_DEF(BOOL, dScnLogo_Delete, (void*));
 HOOK_DEF(BOOL, dScnMenu_Draw, (menu_of_scene_class*));
 
+int spawn_id_input = 0;
+
 namespace Hook {
 void gameLoopHook(void) {
     game_loop();
@@ -58,14 +61,11 @@ uint32_t readControllerHook(uint16_t* p1) {
 }
 
 void dComIfGs_setGameStartStageHook() {
-    /*if (g_tools[DISABLE_SVCHECK_INDEX].active) {
-        dComIfGs_setReturnPlace(dComIfGp_getStartStageName(), dComIfGp_roomControl_getStayNo(),
-                                0); // fix this to use proper last save point later
+    if (g_tools[DISABLE_SVCHECK_INDEX].active) {
+        dComIfGs_setReturnPlace(dComIfGp_getStartStageName(), dComIfGp_roomControl_getStayNo(), spawn_id_input);
     } else {
         dComIfGs_setGameStartStageTrampoline();
-    }   */
-
-    dComIfGs_setGameStartStageTrampoline();
+    }
 }
 
 void putSaveHook(void* addr, int stageNo) {
