@@ -1,3 +1,4 @@
+#include "libtww/include/dolphin/gctypes.h"
 
 #define HOOK_AMNT 18
 enum HookIndex {
@@ -16,6 +17,8 @@ enum HookIndex {
     HK_PUTSAVE_INDEX = 12,
     HK_MYEXCEPTIONCALLBACK_INDEX = 13
 };
+
+extern int spawn_id_input;
 
 namespace Hook {
 void applyHooks();
