@@ -13,6 +13,8 @@
 bool g_commandStates[COMMANDS_AMNT];
 bool g_timer_reset = false;
 bool g_counterToggle = false;
+bool g_medli_room = false;
+bool g_makar_room = false;
 
 static Vec sSavePlayerPos = {0.0f, 0.0f, 0.0f};
 static int16_t sSavePlayerAngle = 0;
@@ -106,6 +108,14 @@ void GZCmd_areaReload() {
     s16 entrance = g_dComIfG_gameInfo.play.mStartStage.getPoint();
     s8 room = g_dComIfG_gameInfo.play.mStartStage.getRoomNo();
     s8 layer = g_dComIfG_gameInfo.play.mStartStage.getLayer();
+
+    if (g_medli_room == 1) {
+        dSv_player_priest_c_set(2, dComIfGp_getPlayer(0)->current.pos, dComIfGp_getPlayer(0)->current.angle.y, room);
+    }
+
+    if (g_makar_room == 1) {
+        dSv_player_priest_c_set(1, dComIfGp_getPlayer(0)->current.pos, dComIfGp_getPlayer(0)->current.angle.y, room);
+    }
 
     g_dComIfG_gameInfo.play.mNextStage.setName(stage);
     g_dComIfG_gameInfo.play.mNextStage.setPoint(entrance);

@@ -8,6 +8,8 @@ extern bool g_timer_reset;
 extern bool g_counterToggle;
 extern f32 g_landSpeed;
 extern f32 g_waterSpeed;
+extern bool g_medli_room;
+extern bool g_makar_room;
 
 enum Commands {
     CMD_STORE_POSITION,

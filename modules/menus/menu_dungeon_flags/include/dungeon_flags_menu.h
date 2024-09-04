@@ -8,6 +8,7 @@ enum DungeonMenuIndex {
     MAP_INDEX,
     COMPASS_INDEX,
     PARTNER_INDEX,
+    PARTNER_ROOM_INDEX,
 
     DUNGEON_FLAGS_MAX
 };
