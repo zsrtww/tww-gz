@@ -403,6 +403,7 @@ static_assert(sizeof(dSv_player_config_c) == 0x5);
 
 class dSv_player_priest_c {
 public:
+    
     u8 getFlag() { return field_0xf; }
     cXyz& getPos() { return field_0x0; }
     s16 getRotate() { return field_0xc; }
