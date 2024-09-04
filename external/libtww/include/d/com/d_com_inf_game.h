@@ -1614,7 +1614,4 @@ inline u16* dComIfGs_getCollision() {
     return &collision_base_address[0x24B];
 }
 
-LIBTWW_DEFINE_FUNC(set__19dSv_player_priest_cFUcR4cXyzsSc, void, dSv_player_priest_c_set, (u8, cXyz&, s16, s8))
-
-
 #endif /* D_COM_D_COM_INF_GAME_H */
