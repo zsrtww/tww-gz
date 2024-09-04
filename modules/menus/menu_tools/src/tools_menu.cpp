@@ -52,7 +52,7 @@ KEEP_FUNC ToolsMenu::ToolsMenu(Cursor& cursor)
            &g_tools[ESS_CHECKER_INDEX].active},
           {"deadzone checker", DEADZONE_CHECKER_INDEX, "Change input viewer stick color if stick is in deadzone", true,
            &g_tools[DEADZONE_CHECKER_INDEX].active},
-          {"disable save checks", DISABLE_SVCHECK_INDEX, "Disables save location safety checks", true,
+          {"disable save checks", DISABLE_SVCHECK_INDEX, "Disables save location checks, set used spawn ID in settings", true,
            &g_tools[DISABLE_SVCHECK_INDEX].active},
           {"intro skip", INTRO_SKIP_INDEX, "Skips the intro cutscenes when starting a new file", true,
            &g_tools[INTRO_SKIP_INDEX].active}} {}
