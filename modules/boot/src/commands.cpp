@@ -110,11 +110,11 @@ void GZCmd_areaReload() {
     s8 room = g_dComIfG_gameInfo.play.mStartStage.getRoomNo();
     s8 layer = g_dComIfG_gameInfo.play.mStartStage.getLayer();
 
-    if (g_medli_room == 1) {
+    if (g_medli_room && strcmp(stage, "M_Dai") == 0) {
         dComIfGs_getpPriest()->set(2, dComIfGp_getPlayer(0)->current.pos, dComIfGp_getPlayer(0)->current.angle.y, room);
     }
 
-    if (g_makar_room == 1) {
+    if (g_makar_room && strcmp(stage, "kaze") == 0) {
         dComIfGs_getpPriest()->set(1, dComIfGp_getPlayer(0)->current.pos, dComIfGp_getPlayer(0)->current.angle.y, room);
     }
 

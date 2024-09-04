@@ -194,8 +194,7 @@ void DungeonFlagsMenu::draw() {
                     setEventFlag(0x1604);
                     setEventFlag(0x2910);
                 }
-            }
-            if ((area_id == 6) || (area_id == 7)) {
+                break;
             case PARTNER_ROOM_INDEX:
                 if (area_id == 6) {
                     g_medli_room = !g_medli_room;
@@ -203,6 +202,7 @@ void DungeonFlagsMenu::draw() {
                 if (area_id == 7) {
                     g_makar_room = !g_makar_room;
                 }
+                break;
             }
         }
     }
