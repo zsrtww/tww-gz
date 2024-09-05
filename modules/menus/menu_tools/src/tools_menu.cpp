@@ -55,7 +55,9 @@ KEEP_FUNC ToolsMenu::ToolsMenu(Cursor& cursor)
           {"disable save checks", DISABLE_SVCHECK_INDEX, "Disables save location checks, set used spawn ID in settings",
            true, &g_tools[DISABLE_SVCHECK_INDEX].active},
           {"intro skip", INTRO_SKIP_INDEX, "Skips the intro cutscenes when starting a new file", true,
-           &g_tools[INTRO_SKIP_INDEX].active}} {}
+           &g_tools[INTRO_SKIP_INDEX].active},
+          {"void out", VOID_INDEX, "Trigger a void out by pressing L + R + B + Start", true,
+           &g_tools[VOID_INDEX].active}} {}
 
 ToolsMenu::~ToolsMenu() {}
 
@@ -83,6 +85,9 @@ void ToolsMenu::draw() {
             case AREA_RELOAD_INDEX:
                 GZCmd_enable(Commands::CMD_AREA_RELOAD);
                 break;
+            case VOID_INDEX:
+                GZCmd_enable(Commands::CMD_VOID);
+                break;
             case INTRO_SKIP_INDEX:
                 *reinterpret_cast<u32*>(INTRO_SKIP_INST0_ADDR) = 0x60000000;  // nop
                 DCFlushRange(reinterpret_cast<u32*>(INTRO_SKIP_INST0_ADDR), sizeof(u32));
@@ -105,6 +110,9 @@ void ToolsMenu::draw() {
                 break;
             case AREA_RELOAD_INDEX:
                 GZCmd_disable(Commands::CMD_AREA_RELOAD);
+                break;
+            case VOID_INDEX:
+                GZCmd_disable(Commands::CMD_VOID);
                 break;
             case INTRO_SKIP_INDEX:
                 *reinterpret_cast<u32*>(INTRO_SKIP_INST0_ADDR) =

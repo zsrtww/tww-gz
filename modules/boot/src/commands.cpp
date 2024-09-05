@@ -110,14 +110,6 @@ void GZCmd_areaReload() {
     s8 room = g_dComIfG_gameInfo.play.mStartStage.getRoomNo();
     s8 layer = g_dComIfG_gameInfo.play.mStartStage.getLayer();
 
-    if (g_medli_room && strcmp(stage, "M_Dai") == 0) {
-        dComIfGs_getpPriest()->set(2, dComIfGp_getPlayer(0)->current.pos, dComIfGp_getPlayer(0)->current.angle.y, room);
-    }
-
-    if (g_makar_room && strcmp(stage, "kaze") == 0) {
-        dComIfGs_getpPriest()->set(1, dComIfGp_getPlayer(0)->current.pos, dComIfGp_getPlayer(0)->current.angle.y, room);
-    }
-
     g_dComIfG_gameInfo.play.mNextStage.setName(stage);
     g_dComIfG_gameInfo.play.mNextStage.setPoint(entrance);
     g_dComIfG_gameInfo.play.mNextStage.setRoomNo(room);
@@ -148,6 +140,24 @@ void GZCmd_resetTimer() {
     g_timer_reset = !g_timer_reset;
 }
 
+void GZCmd_void() {
+    const char* stage_partner = g_dComIfG_gameInfo.play.mStartStage.getName();
+
+    daPy_getPlayerLinkActorClass()->set_void(5, 0xC9, -1.0f, 0);
+
+    if (g_medli_room && strcmp(stage_partner, "M_Dai") == 0) {
+        dComIfGs_getpPriest()->set_partner_room(2, dComIfGp_getPlayer(0)->current.pos,
+                                                dComIfGp_getPlayer(0)->current.angle.y,
+                                                g_dComIfG_gameInfo.play.mNextStage.getRoomNo());
+    }
+
+    if (g_makar_room && strcmp(stage_partner, "kaze") == 0) {
+        dComIfGs_getpPriest()->set_partner_room(1, dComIfGp_getPlayer(0)->current.pos,
+                                                dComIfGp_getPlayer(0)->current.angle.y,
+                                                g_dComIfG_gameInfo.play.mNextStage.getRoomNo());
+    }
+}
+
 static Command sCommands[COMMANDS_AMNT] = {
     {g_commandStates[CMD_STORE_POSITION], (CButton::DPAD_UP | CButton::R), GZCmd_storePosition},
     {g_commandStates[CMD_LOAD_POSITION], (CButton::DPAD_DOWN | CButton::R), GZCmd_loadPosition},
@@ -164,6 +174,7 @@ static Command sCommands[COMMANDS_AMNT] = {
     {g_commandStates[CMD_REFILL_MAGIC], (CButton::L | CButton::DPAD_UP), GZCmd_full_magic},
     {g_commandStates[CMD_TOGGLE_TIMER], (CButton::DPAD_RIGHT | CButton::R | CButton::L), GZCmd_toggleTimer},
     {g_commandStates[CMD_RESET_TIMER], (CButton::DPAD_LEFT | CButton::R | CButton::L), GZCmd_resetTimer},
+    {g_commandStates[CMD_VOID], (CButton::L | CButton::R | CButton::B | CButton::START), GZCmd_void},
 
 };
 

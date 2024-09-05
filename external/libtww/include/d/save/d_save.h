@@ -407,7 +407,7 @@ LIBTWW_DEFINE_FUNC(set__19dSv_player_priest_cFUcR4cXyzsSc, void, dSv_player_prie
 
 class dSv_player_priest_c {
 public:
-    inline void set(u8 i_option, cXyz& i_pos, s16 i_angle, s8 i_roomNo) {
+    inline void set_partner_room(u8 i_option, cXyz& i_pos, s16 i_angle, s8 i_roomNo) {
     dSv_player_priest_c_set(this, i_option, i_pos, i_angle, i_roomNo);
 }
 

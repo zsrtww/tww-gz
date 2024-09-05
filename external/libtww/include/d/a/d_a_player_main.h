@@ -941,8 +941,17 @@ enum LKANM_RES_FILE_ID { // IDs and indexes are synced
     LKANM__WEAPONTURN_POS=0x28C,
 };
 
+class daPy_lk_c;
+
+LIBTWW_DEFINE_FUNC(startRestartRoom__9daPy_lk_cFUlifi, void, startRestartRoom, (daPy_lk_c*, u32 mode, int eventInfoIdx, f32 param_3, int i_point));
+
 class daPy_lk_c : public daPy_py_c {
 public:
+    
+    inline void set_void(u32 mode, int eventInfoIdx, f32 param_3, int i_point) {
+    startRestartRoom(this, mode, eventInfoIdx, param_3, i_point);
+    }
+    
     enum daPy_PROC {
         PROC_SCOPE_e = 0x00,
         PROC_SUBJECTIVITY_e = 0x01,
