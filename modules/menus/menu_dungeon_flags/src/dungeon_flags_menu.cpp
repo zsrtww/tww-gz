@@ -26,8 +26,8 @@ KEEP_FUNC DungeonFlagsMenu::DungeonFlagsMenu(Cursor& cursor)
                         {"boss key", BOSS_KEY_INDEX, "get the boss key", true, &l_bosskeyFlag},
                         {"map", MAP_INDEX, "get the map", true, &l_mapFlag},
                         {"compass", COMPASS_INDEX, "get the compass", true, &l_compassFlag},
-                        {"partner", PARTNER_INDEX, "Medli/Makar in ET/WT", true, &l_partner},
-                        {"partner room", PARTNER_ROOM_INDEX, "Spawn Medli/Makar in current room in ET/WT", true,
+                        {"partner", PARTNER_INDEX, "Spawn Medli/Makar in ET/WT", true, &l_partner},
+                        {"partner room", PARTNER_ROOM_INDEX, "Spawn Medli/Makar in current room on area reload", true,
                          &l_partner_room},
                     } {}
 
