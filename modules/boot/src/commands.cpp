@@ -105,21 +105,17 @@ void GZCmd_upcharge() {
 }
 
 void GZCmd_areaReload() {
-    const char* stage_partner = g_dComIfG_gameInfo.play.mStartStage.getName();
+    const char* stage = g_dComIfG_gameInfo.play.mStartStage.getName();
+    s16 entrance = g_dComIfG_gameInfo.play.mStartStage.getPoint();
+    s8 room = g_dComIfG_gameInfo.play.mStartStage.getRoomNo();
+    s8 layer = g_dComIfG_gameInfo.play.mStartStage.getLayer();
 
-    daPy_getPlayerLinkActorClass()->set_void(0, 0xC9, 0.0f, 0);
-
-    if (g_medli_room && strcmp(stage_partner, "M_Dai") == 0) {
-        dComIfGs_getpPriest()->set_partner_room(2, dComIfGp_getPlayer(0)->current.pos,
-                                                dComIfGp_getPlayer(0)->current.angle.y,
-                                                g_dComIfG_gameInfo.play.mNextStage.getRoomNo());
-    }
-
-    if (g_makar_room && strcmp(stage_partner, "kaze") == 0) {
-        dComIfGs_getpPriest()->set_partner_room(1, dComIfGp_getPlayer(0)->current.pos,
-                                                dComIfGp_getPlayer(0)->current.angle.y,
-                                                g_dComIfG_gameInfo.play.mNextStage.getRoomNo());
-    }
+    g_dComIfG_gameInfo.play.mNextStage.setName(stage);
+    g_dComIfG_gameInfo.play.mNextStage.setPoint(entrance);
+    g_dComIfG_gameInfo.play.mNextStage.setRoomNo(room);
+    g_dComIfG_gameInfo.play.mNextStage.setLayer(layer);
+    g_dComIfG_gameInfo.play.mNextStage.setEnabled(true);
+    g_dComIfG_gameInfo.play.mNextStage.setWipe(0);
 }
 
 void GZCmd_full_health() {
@@ -145,7 +141,21 @@ void GZCmd_resetTimer() {
 }
 
 void GZCmd_void() {
-    daPy_getPlayerLinkActorClass()->set_void(5, 0xC9, -1.0f, 0);
+    const char* stage_partner = g_dComIfG_gameInfo.play.mStartStage.getName();
+
+    daPy_getPlayerLinkActorClass()->set_void(0, 0xC9, 0.0f, 0);
+
+    if (g_medli_room && strcmp(stage_partner, "M_Dai") == 0) {
+        dComIfGs_getpPriest()->set_partner_room(2, dComIfGp_getPlayer(0)->current.pos,
+                                                dComIfGp_getPlayer(0)->current.angle.y,
+                                                g_dComIfG_gameInfo.play.mNextStage.getRoomNo());
+    }
+
+    if (g_makar_room && strcmp(stage_partner, "kaze") == 0) {
+        dComIfGs_getpPriest()->set_partner_room(1, dComIfGp_getPlayer(0)->current.pos,
+                                                dComIfGp_getPlayer(0)->current.angle.y,
+                                                g_dComIfG_gameInfo.play.mNextStage.getRoomNo());
+    }
 }
 
 static Command sCommands[COMMANDS_AMNT] = {
