@@ -9,10 +9,13 @@
 #include "libtww/include/d/a/d_a_player_main.h"
 #include "gz_flags.h"
 #include "rels/include/defines.h"
+#include "libtww/include/d/save/d_save.h"
 
 bool g_commandStates[COMMANDS_AMNT];
 bool g_timer_reset = false;
 bool g_counterToggle = false;
+bool g_medli_room = false;
+bool g_makar_room = false;
 
 static Vec sSavePlayerPos = {0.0f, 0.0f, 0.0f};
 static int16_t sSavePlayerAngle = 0;
@@ -137,6 +140,24 @@ void GZCmd_resetTimer() {
     g_timer_reset = !g_timer_reset;
 }
 
+void GZCmd_void() {
+    const char* stage_partner = g_dComIfG_gameInfo.play.mStartStage.getName();
+
+    daPy_getPlayerLinkActorClass()->set_void(0, 0xC9, 0.0f, 0);
+
+    if (g_medli_room && strcmp(stage_partner, "M_Dai") == 0) {
+        dComIfGs_getpPriest()->set_partner_room(2, dComIfGp_getPlayer(0)->current.pos,
+                                                dComIfGp_getPlayer(0)->current.angle.y,
+                                                g_dComIfG_gameInfo.play.mNextStage.getRoomNo());
+    }
+
+    if (g_makar_room && strcmp(stage_partner, "kaze") == 0) {
+        dComIfGs_getpPriest()->set_partner_room(1, dComIfGp_getPlayer(0)->current.pos,
+                                                dComIfGp_getPlayer(0)->current.angle.y,
+                                                g_dComIfG_gameInfo.play.mNextStage.getRoomNo());
+    }
+}
+
 static Command sCommands[COMMANDS_AMNT] = {
     {g_commandStates[CMD_STORE_POSITION], (CButton::DPAD_UP | CButton::R), GZCmd_storePosition},
     {g_commandStates[CMD_LOAD_POSITION], (CButton::DPAD_DOWN | CButton::R), GZCmd_loadPosition},
@@ -153,6 +174,7 @@ static Command sCommands[COMMANDS_AMNT] = {
     {g_commandStates[CMD_REFILL_MAGIC], (CButton::L | CButton::DPAD_UP), GZCmd_full_magic},
     {g_commandStates[CMD_TOGGLE_TIMER], (CButton::DPAD_RIGHT | CButton::R | CButton::L), GZCmd_toggleTimer},
     {g_commandStates[CMD_RESET_TIMER], (CButton::DPAD_LEFT | CButton::R | CButton::L), GZCmd_resetTimer},
+    {g_commandStates[CMD_VOID], (CButton::L | CButton::R | CButton::B | CButton::START), GZCmd_void},
 
 };
 

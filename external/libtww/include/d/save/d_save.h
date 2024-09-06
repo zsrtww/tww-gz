@@ -401,8 +401,16 @@ public:
 
 static_assert(sizeof(dSv_player_config_c) == 0x5);
 
+class dSv_player_priest_c;
+
+LIBTWW_DEFINE_FUNC(set__19dSv_player_priest_cFUcR4cXyzsSc, void, dSv_player_priest_c_set, (dSv_player_priest_c*, u8, cXyz&, s16, s8));
+
 class dSv_player_priest_c {
 public:
+    inline void set_partner_room(u8 i_option, cXyz& i_pos, s16 i_angle, s8 i_roomNo) {
+    dSv_player_priest_c_set(this, i_option, i_pos, i_angle, i_roomNo);
+}
+
     u8 getFlag() { return field_0xf; }
     cXyz& getPos() { return field_0x0; }
     s16 getRotate() { return field_0xc; }

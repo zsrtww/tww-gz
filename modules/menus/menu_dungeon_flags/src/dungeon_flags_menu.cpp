@@ -5,8 +5,9 @@
 #include "gz_flags.h"
 #include "rels/include/defines.h"
 #include "menus/utils/menu_mgr.h"
+#include "commands.h"
 
-#define LINE_NUM 6
+#define LINE_NUM 7
 
 u8 l_selDun = 0;
 u8 l_keyNum;
@@ -16,6 +17,7 @@ bool l_bosskeyFlag;
 bool l_medli;
 bool l_makar;
 bool l_partner;
+bool l_partner_room;
 
 KEEP_FUNC DungeonFlagsMenu::DungeonFlagsMenu(Cursor& cursor)
     : Menu(cursor), lines{
@@ -24,7 +26,9 @@ KEEP_FUNC DungeonFlagsMenu::DungeonFlagsMenu(Cursor& cursor)
                         {"boss key", BOSS_KEY_INDEX, "get the boss key", true, &l_bosskeyFlag},
                         {"map", MAP_INDEX, "get the map", true, &l_mapFlag},
                         {"compass", COMPASS_INDEX, "get the compass", true, &l_compassFlag},
-                        {"partner", PARTNER_INDEX, "Medli/Makar in ET/WT", true, &l_partner},
+                        {"partner", PARTNER_INDEX, "Spawn Medli/Makar in ET/WT", true, &l_partner},
+                        {"partner room", PARTNER_ROOM_INDEX, "Spawn Medli/Makar in current room on room reload", true,
+                         &l_partner_room},
                     } {}
 
 DungeonFlagsMenu::~DungeonFlagsMenu() {}
@@ -131,17 +135,19 @@ void DungeonFlagsMenu::draw() {
 
     if (area_id == 6) {
         l_partner = l_medli;
+        l_partner_room = g_medli_room;
     }
 
     if (area_id == 7) {
         l_partner = l_makar;
+        l_partner_room = g_makar_room;
     }
 
     int MAX_MOVE;
     if ((area_id == 6) || (area_id == 7)) {
         MAX_MOVE = LINE_NUM;
     } else {
-        MAX_MOVE = LINE_NUM - 1;
+        MAX_MOVE = LINE_NUM - 2;
     }
 
     switch (cursor.y) {
@@ -188,6 +194,15 @@ void DungeonFlagsMenu::draw() {
                     setEventFlag(0x1604);
                     setEventFlag(0x2910);
                 }
+                break;
+            case PARTNER_ROOM_INDEX:
+                if (area_id == 6) {
+                    g_medli_room = !g_medli_room;
+                }
+                if (area_id == 7) {
+                    g_makar_room = !g_makar_room;
+                }
+                break;
             }
         }
     }
@@ -197,7 +212,7 @@ void DungeonFlagsMenu::draw() {
     lines[MODIFY_KEYS_INDEX].printf(" <%d>", dComIfGs_getSaveKeyNum(area_id));
 
     if ((area_id != 6) && (area_id != 7)) {
-        GZ_drawMenuLines(lines, cursor.y, MENU_LINE_NUM - 1);
+        GZ_drawMenuLines(lines, cursor.y, MENU_LINE_NUM - 2);
     } else {
         GZ_drawMenuLines(lines, cursor.y, MENU_LINE_NUM);
     }

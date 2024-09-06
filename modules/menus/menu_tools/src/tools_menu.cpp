@@ -38,8 +38,8 @@ KEEP_FUNC ToolsMenu::ToolsMenu(Cursor& cursor)
            &g_tools[TIME_DISP_INDEX].active},
           {"teleport", TELEPORT_INDEX, "R+D-pad up to save position. R+D-pad down to load", true,
            &g_tools[TELEPORT_INDEX].active},
-          {"area reload", AREA_RELOAD_INDEX, "Reload the current room by pressing L + R + A + Start", true,
-           &g_tools[AREA_RELOAD_INDEX].active},
+          {"area reload", AREA_RELOAD_INDEX, "Reload stage with L + R + A + Start, may crash/softlock after a void",
+           true, &g_tools[AREA_RELOAD_INDEX].active},
           {"map select", MAP_SELECT_INDEX, "Load map select by holding D-pad down + Y + Z", true,
            &g_tools[MAP_SELECT_INDEX].active},
           {"zombie hover info", ZH_INDEX, "Display A and B button presses per second", true, &g_tools[ZH_INDEX].active},
@@ -55,7 +55,9 @@ KEEP_FUNC ToolsMenu::ToolsMenu(Cursor& cursor)
           {"disable save checks", DISABLE_SVCHECK_INDEX, "Disables save location checks, set used spawn ID in settings",
            true, &g_tools[DISABLE_SVCHECK_INDEX].active},
           {"intro skip", INTRO_SKIP_INDEX, "Skips the intro cutscenes when starting a new file", true,
-           &g_tools[INTRO_SKIP_INDEX].active}} {}
+           &g_tools[INTRO_SKIP_INDEX].active},
+          {"room reload/void out", VOID_INDEX, "Reload room by void out by pressing L + R + B + Start", true,
+           &g_tools[VOID_INDEX].active}} {}
 
 ToolsMenu::~ToolsMenu() {}
 
@@ -83,6 +85,9 @@ void ToolsMenu::draw() {
             case AREA_RELOAD_INDEX:
                 GZCmd_enable(Commands::CMD_AREA_RELOAD);
                 break;
+            case VOID_INDEX:
+                GZCmd_enable(Commands::CMD_VOID);
+                break;
             case INTRO_SKIP_INDEX:
                 *reinterpret_cast<u32*>(INTRO_SKIP_INST0_ADDR) = 0x60000000;  // nop
                 DCFlushRange(reinterpret_cast<u32*>(INTRO_SKIP_INST0_ADDR), sizeof(u32));
@@ -105,6 +110,9 @@ void ToolsMenu::draw() {
                 break;
             case AREA_RELOAD_INDEX:
                 GZCmd_disable(Commands::CMD_AREA_RELOAD);
+                break;
+            case VOID_INDEX:
+                GZCmd_disable(Commands::CMD_VOID);
                 break;
             case INTRO_SKIP_INDEX:
                 *reinterpret_cast<u32*>(INTRO_SKIP_INST0_ADDR) =

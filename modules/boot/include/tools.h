@@ -14,6 +14,7 @@ enum ToolsIndex {
     DEADZONE_CHECKER_INDEX,
     DISABLE_SVCHECK_INDEX,
     INTRO_SKIP_INDEX,
+    VOID_INDEX,
 
     // Entry used as a counter
     TOOLS_COUNT
