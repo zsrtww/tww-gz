@@ -18,6 +18,7 @@
 #include "rels/include/cxx.h"
 #include "rels/include/defines.h"
 #include "menus/menu_settings/include/settings_menu.h"
+#include "libtww/include/d/com/d_com_inf_game.h"
 
 #define HOOK_DEF(rettype, name, params)                                                                                \
     typedef rettype(*tww_##name##_t) params;                                                                           \
@@ -39,10 +40,41 @@ HOOK_DEF(void, dCcS__draw, (dCcS*));
 HOOK_DEF(void, dCcS__MoveAfterCheck, (dCcS*));
 HOOK_DEF(BOOL, dScnLogo_Delete, (void*));
 HOOK_DEF(BOOL, dScnMenu_Draw, (menu_of_scene_class*));
+HOOK_DEF(void, onEventBit, (void*, uint16_t));
+HOOK_DEF(void, offEventBit, (void*, uint16_t));
 
 int spawn_id_input = 0;
+bool g_flagLogEnabled = 0;
 
 namespace Hook {
+
+static char buf[40];
+void onEventBitHook(void* addr, uint16_t pFlag) {
+    if (g_flagLogEnabled) {
+        if (addr == &g_dComIfG_gameInfo.info.mTmp) {
+            snprintf(buf, sizeof(buf), "%s[0x%X] : %X | ON", "Event Tmp", pFlag >> 8, pFlag & 0xFF);
+        } else {
+            snprintf(buf, sizeof(buf), "%s[0x%X] : %X | ON", "Event", pFlag >> 8, pFlag & 0xFF);
+        }
+        FIFOQueue::push(buf, Queue, 0xFFFFFF00);
+    }
+
+    return onEventBitTrampoline(addr, pFlag);
+}
+
+void offEventBitHook(void* addr, uint16_t pFlag) {
+    if (g_flagLogEnabled) {
+        if (addr == &g_dComIfG_gameInfo.info.mTmp) {
+            snprintf(buf, sizeof(buf), "%s[0x%X] : %X | OFF", "Event Tmp", pFlag >> 8, pFlag & 0xFF);
+        } else {
+            snprintf(buf, sizeof(buf), "%s[0x%X] : %X | OFF", "Event", pFlag >> 8, pFlag & 0xFF);
+        }
+        FIFOQueue::push(buf, Queue, 0xFFFFFF00);
+    }
+
+    return offEventBitTrampoline(addr, pFlag);
+}
+
 void gameLoopHook(void) {
     game_loop();
     fapGm_ExecuteTrampoline();
@@ -99,6 +131,9 @@ int dScnPly_DeleteHook(void* i_scene) {
     return dScnPly_DeleteTrampoline(i_scene);
 }
 
+#define f_onEventBit onEventBit__11dSv_event_cFUs
+#define f_offEventBit offEventBit__11dSv_event_cFUs
+
 #ifdef NTSCU
 #define menu_data_path (char*)0x80362DAA
 #endif
@@ -110,6 +145,11 @@ int dScnPly_DeleteHook(void* i_scene) {
 #ifdef PAL
 #define menu_data_path (char*)0x80369919
 #endif
+
+extern "C" {
+void f_onEventBit(void*, uint16_t);
+void f_offEventBit(void*, uint16_t);
+}
 
 f32 g_savedMapSelectTime = 120.0f;
 
@@ -271,6 +311,8 @@ KEEP_FUNC void applyHooks() {
     APPLY_HOOK(dScnLogo_Delete, &dScnLogo_Delete__FP10dScnLogo_c, dScnLogo_DeleteHook);
     APPLY_HOOK(dScnMenu_Draw, &dScnMenu_Draw__FP19menu_of_scene_class, dScnMenu_DrawHook);
 
+    APPLY_HOOK(onEventBit, &f_onEventBit, onEventBitHook);
+    APPLY_HOOK(offEventBit, &f_offEventBit, offEventBitHook);
 #undef APPLY_HOOK
 }
 }  // namespace Hook
