@@ -42,6 +42,7 @@ HOOK_DEF(BOOL, dScnLogo_Delete, (void*));
 HOOK_DEF(BOOL, dScnMenu_Draw, (menu_of_scene_class*));
 HOOK_DEF(void, onEventBit, (void*, uint16_t));
 HOOK_DEF(void, offEventBit, (void*, uint16_t));
+HOOK_DEF(void, onSwitch, (void*, int, int));
 
 int spawn_id_input = 0;
 bool g_flagLogEnabled = 0;
@@ -73,6 +74,26 @@ void offEventBitHook(void* addr, uint16_t pFlag) {
     }
 
     return offEventBitTrampoline(addr, pFlag);
+}
+
+void onSwitchHook(void* addr, int pFlag, int i_roomNo) {
+    int tmp = pFlag;
+    if (g_flagLogEnabled) {
+        if (pFlag < 0x80) {
+            snprintf(buf, sizeof(buf), "%s[%d] : %d | ON", "Memory Switch", tmp >> 5, tmp & 0x1F);
+        } else if (pFlag < 0xC0) {
+            tmp -= 0x80;
+            snprintf(buf, sizeof(buf), "%s[%d] : %d | ON", "Dan Switch", tmp >> 5, tmp & 0x1F);
+        } else if (pFlag < 0xE0) {
+            tmp -= 0xC0;
+            snprintf(buf, sizeof(buf), "%s[%d] : %d | ON", "Zone Switch", tmp >> 5, tmp & 0x1F);
+        } else {
+            tmp -= 0xE0;
+            snprintf(buf, sizeof(buf), "%s[%d] : %d | ON", "Zone OneSwitch", tmp >> 5, tmp & 0x1F);
+        }
+        FIFOQueue::push(buf, Queue, 0xFFFFFF00);
+    }
+    return onSwitchTrampoline(addr, pFlag, i_roomNo);
 }
 
 void gameLoopHook(void) {
@@ -133,6 +154,7 @@ int dScnPly_DeleteHook(void* i_scene) {
 
 #define f_onEventBit onEventBit__11dSv_event_cFUs
 #define f_offEventBit offEventBit__11dSv_event_cFUs
+#define f_onSwitch onSwitch__12dSv_memBit_cFi
 
 #ifdef NTSCU
 #define menu_data_path (char*)0x80362DAA
@@ -149,6 +171,7 @@ int dScnPly_DeleteHook(void* i_scene) {
 extern "C" {
 void f_onEventBit(void*, uint16_t);
 void f_offEventBit(void*, uint16_t);
+void f_onSwitch(void*, int, int);
 }
 
 f32 g_savedMapSelectTime = 120.0f;
@@ -313,6 +336,7 @@ KEEP_FUNC void applyHooks() {
 
     APPLY_HOOK(onEventBit, &f_onEventBit, onEventBitHook);
     APPLY_HOOK(offEventBit, &f_offEventBit, offEventBitHook);
+    APPLY_HOOK(onSwitch, &f_onSwitch, onSwitchHook);
 #undef APPLY_HOOK
 }
 }  // namespace Hook
