@@ -8,7 +8,8 @@ KEEP_FUNC MemoryMenu::MemoryMenu(Cursor& cursor)
     : Menu(cursor), lines{
                         {"watches", WATCHES_INDEX, "Manage memory watches", false},
                         {"memory editor", MEM_EDITOR_INDEX, "View/edit memory", false},
-                        {"flag logger", FLAG_LOGGER_INDEX, "test", false, &g_flagLogEnabled},
+                        {"flag logger", FLAG_LOGGER_INDEX, "Toggle outputting triggered events/switches to screen",
+                         true, &g_flagLogEnabled},
                     } {}
 
 MemoryMenu::~MemoryMenu() {}
