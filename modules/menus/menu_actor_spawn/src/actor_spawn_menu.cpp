@@ -3,6 +3,7 @@
 #include "settings.h"
 #include "libtww/include/d/com/d_com_inf_game.h"
 #include "libtww/include/f_op/f_op_actor_mng.h"
+#include "libtww/include/f_pc/f_pc_stdcreate_req.h"
 #include "libtww/include/m_Do/m_Do_printf.h"
 #include "gz_flags.h"
 #include "pos_settings.h"
@@ -11,7 +12,7 @@
 #include "menus/menu_actor_list/include/actor_list_menu.h"
 #include "global_data.h"
 #include "fs.h"
-#include "actor_loader.h"
+#include "actor_proc_data.h"
 
 #define CONTROL_TEXT "X/Y"
 
@@ -31,9 +32,19 @@ KEEP_FUNC ActorSpawnMenu::ActorSpawnMenu(ActorSpawnData& data)
 
 ActorSpawnMenu::~ActorSpawnMenu() {}
 
-void actorFastCreateAtLink(short id, uint32_t parameters, int8_t subtype) {
-    fopAcM_create(id, parameters, &dComIfGp_getPlayer(0)->current.pos, dComIfGp_getPlayer(0)->current.roomNo,
-                  &dComIfGp_getPlayer(0)->current.angle, nullptr, subtype, nullptr);
+void actorFastCreateAtLink(s16 id, u32 parameters, s8 subtype) {
+    fopAcM_prm_class* appen = fopAcM_CreateAppend();
+    if (appen != NULL) {
+        appen->mParameter = parameters;
+        appen->mPos = dComIfGp_getPlayer(0)->current.pos;
+        appen->mAngle = dComIfGp_getPlayer(0)->current.angle;
+        appen->mEnemyNo = 0xFFFF;
+        appen->mSubtype = subtype;
+        appen->mRoomNo = dComIfGp_getPlayer(0)->current.roomNo;
+
+        layer_class* curLayer = fpcLy_CurrentLayer();
+        fpcSCtRq_Request(curLayer, id, nullptr, nullptr, appen);
+    }
 }
 
 void ActorSpawnMenu::draw() {
