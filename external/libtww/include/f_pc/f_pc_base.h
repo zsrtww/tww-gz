@@ -9,6 +9,8 @@
 #include "f_pc_priority.h"
 #include "f_pc_profile.h"
 
+typedef unsigned int fpc_ProcID;
+
 struct create_request;
 struct profile_method_class;
 

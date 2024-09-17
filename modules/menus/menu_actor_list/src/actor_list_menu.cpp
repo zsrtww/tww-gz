@@ -11,7 +11,7 @@
 #include "menus/utils/menu_mgr.h"
 #include "fs.h"
 #include "global_data.h"
-#include "actor_loader.h"
+#include "actor_proc_data.h"
 
 #define MEM_TEXT "Z"
 #define SLOW_INC_TEXT "X"

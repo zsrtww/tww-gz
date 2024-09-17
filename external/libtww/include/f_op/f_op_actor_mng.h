@@ -71,6 +71,8 @@ LIBTWW_DEFINE_FUNC(fopAcM_getProcNameString__FP10fopAc_ac_c, const char*, fopAcM
 
 LIBTWW_DEFINE_FUNC(fopAcM_create__FsUlP4cXyziP5csXyzP4cXyzScPFPv_i, void, fopAcM_create, (s16, u32, const cXyz*, int, const csXyz*, const cXyz*, s8, createFunc))
 
+LIBTWW_DEFINE_FUNC(fopAcM_CreateAppend__Fv, fopAcM_prm_class* , fopAcM_CreateAppend, (void))
+
 extern "C" {
 extern node_list_class g_fopAcTg_Queue;
 }
