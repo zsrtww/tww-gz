@@ -19,6 +19,7 @@ enum HookIndex {
 };
 
 extern int spawn_id_input;
+extern bool g_flagLogEnabled;
 
 namespace Hook {
 void applyHooks();
