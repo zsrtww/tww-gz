@@ -1234,6 +1234,7 @@ inline void dComIfGp_roomControl_setTimePass(int isPassing) {
 inline dBgS* dComIfG_Bgsp() {
     return &g_dComIfG_gameInfo.play.mBgS;
 }
+LIBTWW_DEFINE_FUNC(getLayerNo__14dComIfG_play_cFi,int, dComIfG_play_c__getLayerNo, (int))
 
 inline dCcS* dComIfG_Ccsp() {
     return &g_dComIfG_gameInfo.play.mCcS;

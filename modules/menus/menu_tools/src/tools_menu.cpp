@@ -36,6 +36,7 @@ KEEP_FUNC ToolsMenu::ToolsMenu(Cursor& cursor)
            &g_tools[DEBUG_INDEX].active},
           {"display time info", TIME_DISP_INDEX, "Display current day, time and moon phase", true,
            &g_tools[TIME_DISP_INDEX].active},
+          {"stage info", STAGE_INFO_INDEX, "show Link's current stage info", true, &g_tools[STAGE_INFO_INDEX].active},
           {"teleport", TELEPORT_INDEX, "R+D-pad up to save position. R+D-pad down to load", true,
            &g_tools[TELEPORT_INDEX].active},
           {"area reload", AREA_RELOAD_INDEX, "Reload stage with L + R + A + Start, may crash/softlock after a void",
