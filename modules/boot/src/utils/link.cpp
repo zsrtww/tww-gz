@@ -172,3 +172,38 @@ KEEP_FUNC void GZ_displayZombieHoverInfo() {
     Font::GZ_drawStr(b_presses_str, g_spriteOffsets[SPR_ZH_INFO_INDEX].x, g_spriteOffsets[SPR_ZH_INFO_INDEX].y + 20.0f,
                      zombieHoverColor(numBPressesPerWindow), g_dropShadows);
 }
+
+KEEP_FUNC void GZ_displayStageInfo() {
+    if (!g_tools[STAGE_INFO_INDEX].active) {
+        return;
+    }
+    Vec2 spriteOffset = g_spriteOffsets[SPR_SPRITES_STAGE_INFO_INDEX];
+    char cur_stage[15];
+    char cur_room[10];
+    char cur_point[11];
+    char cur_layer[10];
+
+    snprintf(cur_stage, sizeof(cur_stage), "Stage: %s", g_dComIfG_gameInfo.play.mStartStage.getName());
+    snprintf(cur_room, sizeof(cur_room), "Room: %d", dStage_roomControl_c__mStayNo);
+    snprintf(cur_point, sizeof(cur_point), "Point: %d", g_dComIfG_gameInfo.play.mStartStage.getPoint());
+    snprintf(cur_layer, sizeof(cur_layer), "Layer: %d", dComIfG_play_c__getLayerNo(0));
+
+    Font::GZ_drawStr(cur_stage, spriteOffset.x, spriteOffset.y + 20.0f, 0xFFFFFFFF, GZ_checkDropShadows());
+    Font::GZ_drawStr(cur_room, spriteOffset.x, spriteOffset.y + 40.0f, 0xFFFFFFFF, GZ_checkDropShadows());
+    Font::GZ_drawStr(cur_point, spriteOffset.x, spriteOffset.y + 60.0f, 0xFFFFFFFF, GZ_checkDropShadows());
+    Font::GZ_drawStr(cur_layer, spriteOffset.x, spriteOffset.y + 80.0f, 0xFFFFFFFF, GZ_checkDropShadows());
+
+    char save_stage[20];
+    char save_room[15];
+    char save_point[16];
+
+    snprintf(save_stage, sizeof(save_stage), "Save Stage: %s",
+             g_dComIfG_gameInfo.info.getPlayer().getPlayerReturnPlace().getName());
+    snprintf(save_room, sizeof(save_room), "Save Room: %d",
+             g_dComIfG_gameInfo.info.getPlayer().getPlayerReturnPlace().getRoomNo());
+    snprintf(save_point, sizeof(save_point), "Save Point: %d",
+             g_dComIfG_gameInfo.info.getPlayer().getPlayerReturnPlace().getPoint());
+    Font::GZ_drawStr(save_stage, spriteOffset.x + 150.0f, spriteOffset.y + 20.0f, 0xFFFFFFFF, GZ_checkDropShadows());
+    Font::GZ_drawStr(save_room, spriteOffset.x + 150.0f, spriteOffset.y + 40.0f, 0xFFFFFFFF, GZ_checkDropShadows());
+    Font::GZ_drawStr(save_point, spriteOffset.x + 150.0f, spriteOffset.y + 60.0f, 0xFFFFFFFF, GZ_checkDropShadows());
+}
