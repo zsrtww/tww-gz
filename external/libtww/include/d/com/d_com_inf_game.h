@@ -1608,7 +1608,7 @@ inline u8 dComIfGs_getChartDeciphered() {
     return g_dComIfG_gameInfo.info.getPlayer().mMap.getChartDeciphered();
 }
 
-LIBTWW_DEFINE_FUNC(dComIfGs_setGameStartStage__Fv,void, setGameStartStage, (void));
+LIBTWW_DEFINE_FUNC(dComIfGs_setGameStartStage__Fv,void, dComIfGs_setGameStartStage, (void));
 
  /*Temporary function to fix bug with collision codes from inline function*/
 inline u16* dComIfGs_getCollision() {

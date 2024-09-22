@@ -199,7 +199,7 @@ KEEP_FUNC void GZ_displayStageInfo() {
     char save_point[16];
 
     if (!g_dComIfG_gameInfo.play.mNextStage.mEnable && !l_fopScnRq_IsUsingOfOverlap) {
-        setGameStartStage();
+        dComIfGs_setGameStartStage();
     }
 
     snprintf(save_stage, sizeof(save_stage), "Save Stage: %s",
