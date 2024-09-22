@@ -12,6 +12,7 @@
 #include "commands.h"
 #include "menus/menu_tools/include/tools_menu.h"
 #include "gz_flags.h"
+#include "libtww/include/f_op/f_op_scene_req.h"
 
 #if defined(NTSCJ) || defined(NTSCU)
 #define FRAME_RATE 29.97
@@ -196,6 +197,10 @@ KEEP_FUNC void GZ_displayStageInfo() {
     char save_stage[20];
     char save_room[15];
     char save_point[16];
+
+    if (!g_dComIfG_gameInfo.play.mNextStage.mEnable && !l_fopScnRq_IsUsingOfOverlap) {
+        setGameStartStage();
+    }
 
     snprintf(save_stage, sizeof(save_stage), "Save Stage: %s",
              g_dComIfG_gameInfo.info.getPlayer().getPlayerReturnPlace().getName());
