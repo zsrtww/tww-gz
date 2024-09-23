@@ -18,15 +18,14 @@ KEEP_FUNC SettingsMenu::SettingsMenu(Cursor& cursor)
           {"cursor color:", CURSOR_COLOR_INDEX, "Change cursor color", false, nullptr, MAX_CURSOR_COLOR_OPTIONS},
           {"font:", FONT_INDEX, "Change font", false, nullptr, FONT_OPTIONS_COUNT},
           {"drop shadows", DROP_SHADOWS_INDEX, "Adds shadows to all font letters", true, &g_dropShadows},
-          {"item equip priorities", ITEM_EQUIP_PRIORITY_INDEX, "Adjust priorities on item equips in practice saves",
-           false},
+          {"equip priority", ITEM_EQUIP_PRIORITY_INDEX, "Adjust priorities on item equips in practice saves", false},
           {"save card", SAVE_CARD_INDEX, "Save settings to memory card"},
           {"load card", LOAD_CARD_INDEX, "Load settings from memory card"},
           {"delete card", DELETE_CARD_INDEX, "Delete settings from memory card"},
           {"menu positions", POS_SETTINGS_MENU_INDEX,
            "Change menu object positions (A to toggle selection, DPad to move)", false},
-          {"fast swimming speed: ", WATER_SPEED_INDEX, "Change max speed of fast movement cheat for swimming"},
-          {"fast running speed: ", LAND_SPEED_INDEX, "Change max speed of Fast Movement cheat for running"},
+          {"fast swim speed:", WATER_SPEED_INDEX, "Change max speed of fast movement cheat for swimming"},
+          {"fast run speed:", LAND_SPEED_INDEX, "Change max speed of Fast Movement cheat for running"},
           {"spawn id: ", SPAWN_ID_INDEX, "Set spawn id for disable save checks tool, invalid id's will crash"},
       } {}
 

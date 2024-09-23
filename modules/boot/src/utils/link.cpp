@@ -193,10 +193,10 @@ KEEP_FUNC void GZ_displayStageInfo() {
         snprintf(cur_point, sizeof(cur_point), "Point: %d", g_dComIfG_gameInfo.play.mStartStage.getPoint());
         snprintf(cur_layer, sizeof(cur_layer), "Layer: %d", dComIfG_play_c__getLayerNo(0));
 
-        Font::GZ_drawStr(cur_stage, spriteOffset.x, spriteOffset.y + 20.0f, 0xFFFFFFFF, GZ_checkDropShadows());
-        Font::GZ_drawStr(cur_room, spriteOffset.x, spriteOffset.y + 40.0f, 0xFFFFFFFF, GZ_checkDropShadows());
-        Font::GZ_drawStr(cur_point, spriteOffset.x, spriteOffset.y + 60.0f, 0xFFFFFFFF, GZ_checkDropShadows());
-        Font::GZ_drawStr(cur_layer, spriteOffset.x, spriteOffset.y + 80.0f, 0xFFFFFFFF, GZ_checkDropShadows());
+        Font::GZ_drawStr(cur_stage, spriteOffset.x, spriteOffset.y, 0xFFFFFFFF, GZ_checkDropShadows());
+        Font::GZ_drawStr(cur_room, spriteOffset.x, spriteOffset.y + 20.0f, 0xFFFFFFFF, GZ_checkDropShadows());
+        Font::GZ_drawStr(cur_point, spriteOffset.x, spriteOffset.y + 40.0f, 0xFFFFFFFF, GZ_checkDropShadows());
+        Font::GZ_drawStr(cur_layer, spriteOffset.x, spriteOffset.y + 60.0f, 0xFFFFFFFF, GZ_checkDropShadows());
 
         char save_stage[20];
         char save_room[15];
@@ -210,10 +210,9 @@ KEEP_FUNC void GZ_displayStageInfo() {
                  g_dComIfG_gameInfo.info.getPlayer().getPlayerReturnPlace().getRoomNo());
         snprintf(save_point, sizeof(save_point), "Save Point: %d",
                  g_dComIfG_gameInfo.info.getPlayer().getPlayerReturnPlace().getPoint());
-        Font::GZ_drawStr(save_stage, spriteOffset.x + 150.0f, spriteOffset.y + 20.0f, 0xFFFFFFFF,
-                         GZ_checkDropShadows());
-        Font::GZ_drawStr(save_room, spriteOffset.x + 150.0f, spriteOffset.y + 40.0f, 0xFFFFFFFF, GZ_checkDropShadows());
-        Font::GZ_drawStr(save_point, spriteOffset.x + 150.0f, spriteOffset.y + 60.0f, 0xFFFFFFFF,
+        Font::GZ_drawStr(save_stage, spriteOffset.x - 180.0f, spriteOffset.y, 0xFFFFFFFF, GZ_checkDropShadows());
+        Font::GZ_drawStr(save_room, spriteOffset.x - 180.0f, spriteOffset.y + 20.0f, 0xFFFFFFFF, GZ_checkDropShadows());
+        Font::GZ_drawStr(save_point, spriteOffset.x - 180.0f, spriteOffset.y + 40.0f, 0xFFFFFFFF,
                          GZ_checkDropShadows());
     }
 }
