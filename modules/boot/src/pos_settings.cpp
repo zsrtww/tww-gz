@@ -11,5 +11,5 @@ KEEP_FUNC void GZ_PosSettings_initDefaults() {
     g_spriteOffsets[SPR_DEBUG_INFO_INDEX] = {450.0f, 195.f};
     g_spriteOffsets[SPR_TIME_DISP_INDEX] = {450.0f, 315.f};
     g_spriteOffsets[SPR_ZH_INFO_INDEX] = {585.0f, 395.f};
-    g_spriteOffsets[SPR_SPRITES_STAGE_INFO_INDEX] = {145.0f, 350.f};
+    g_spriteOffsets[SPR_SPRITES_STAGE_INFO_INDEX] = {425.0f, 30.f};
 }
