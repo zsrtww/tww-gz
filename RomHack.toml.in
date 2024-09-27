@@ -37,6 +37,8 @@ iso = "@TWWGZ_CFG_BLD_ISO@"
 
 # actor info
 "twwgz/procs.bin" = "../res/proc_info/procs.bin"
+# link info 
+"twwgz/procsInit.bin" = "../res/proc_info/procsInit.bin"
 
 # REL modules
 "twwgz/rels" = "modules/rels"

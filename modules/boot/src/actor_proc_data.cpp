@@ -21,3 +21,8 @@ KEEP_FUNC void loadActorName() {
         loadFile("twwgz/procs.bin", &g_procData, sizeof(g_procData), offset);
     }
 }
+
+KEEP_FUNC void loadProcInit(int& i_procName) {
+    int offset = i_procName * 32;
+    loadFile("twwgz/procsInit.bin", &g_procInit, sizeof(g_procInit), offset);
+}

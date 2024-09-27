@@ -13,6 +13,8 @@
 #include "menus/menu_tools/include/tools_menu.h"
 #include "gz_flags.h"
 #include "libtww/include/f_op/f_op_scene_req.h"
+#include "actor_proc_data.h"
+#include "global_data.h"
 
 #if defined(NTSCJ) || defined(NTSCU)
 #define FRAME_RATE 29.97
@@ -28,13 +30,15 @@ KEEP_FUNC void GZ_displayLinkInfo() {
     if (dComIfGp_getPlayer(0)) {
         daPy_py_c* player = (daPy_py_c*)dComIfGp_getPlayer(0);
 
+        loadProcInit(daPy_getPlayerLinkActorClass()->mCurProcID);
+
         char link_angle[22];
         char y_angle[22];
         char link_speed[22];
         char link_x[22];
         char link_y[22];
         char link_z[22];
-        char link_action[22];
+        char link_action[55];
 
         snprintf(link_angle, sizeof(link_angle), "angle: %d", player->shape_angle.y);
         snprintf(y_angle, sizeof(y_angle), "y-angle: %d", player->mBodyAngle.y);
@@ -42,7 +46,7 @@ KEEP_FUNC void GZ_displayLinkInfo() {
         snprintf(link_x, sizeof(link_x), "x-pos: %.4f", player->current.pos.x);
         snprintf(link_y, sizeof(link_y), "y-pos: %.4f", player->current.pos.y);
         snprintf(link_z, sizeof(link_z), "z-pos: %.4f", player->current.pos.z);
-        snprintf(link_action, sizeof(link_action), "action: %d", daPy_getPlayerLinkActorClass()->mCurProcID);
+        snprintf(link_action, sizeof(link_action), "action: %s", g_procInit.procName);
 
         Font::GZ_drawStr(link_angle, g_spriteOffsets[SPR_DEBUG_INFO_INDEX].x,
                          g_spriteOffsets[SPR_DEBUG_INFO_INDEX].y - 20.0f, 0xFFFFFFFF, g_dropShadows);

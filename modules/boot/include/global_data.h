@@ -6,3 +6,4 @@ extern fopAc_ac_c* g_currentActor;
 extern bool g_moveLinkEnabled;
 extern bool g_actorViewEnabled;
 extern procBinData g_procData;
+extern procBinData g_procInit;
