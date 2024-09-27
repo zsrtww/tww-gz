@@ -34,6 +34,7 @@ KEEP_FUNC void GZ_displayLinkInfo() {
         char link_x[22];
         char link_y[22];
         char link_z[22];
+        char link_action[22];
 
         snprintf(link_angle, sizeof(link_angle), "angle: %d", player->shape_angle.y);
         snprintf(y_angle, sizeof(y_angle), "y-angle: %d", player->mBodyAngle.y);
@@ -41,6 +42,7 @@ KEEP_FUNC void GZ_displayLinkInfo() {
         snprintf(link_x, sizeof(link_x), "x-pos: %.4f", player->current.pos.x);
         snprintf(link_y, sizeof(link_y), "y-pos: %.4f", player->current.pos.y);
         snprintf(link_z, sizeof(link_z), "z-pos: %.4f", player->current.pos.z);
+        snprintf(link_action, sizeof(link_action), "action: %d", daPy_getPlayerLinkActorClass()->mCurProcID);
 
         Font::GZ_drawStr(link_angle, g_spriteOffsets[SPR_DEBUG_INFO_INDEX].x,
                          g_spriteOffsets[SPR_DEBUG_INFO_INDEX].y - 20.0f, 0xFFFFFFFF, g_dropShadows);
@@ -54,6 +56,8 @@ KEEP_FUNC void GZ_displayLinkInfo() {
                          g_spriteOffsets[SPR_DEBUG_INFO_INDEX].y + 60.0f, 0xFFFFFFFF, g_dropShadows);
         Font::GZ_drawStr(link_z, g_spriteOffsets[SPR_DEBUG_INFO_INDEX].x,
                          g_spriteOffsets[SPR_DEBUG_INFO_INDEX].y + 80.0f, 0xFFFFFFFF, g_dropShadows);
+        Font::GZ_drawStr(link_action, g_spriteOffsets[SPR_DEBUG_INFO_INDEX].x,
+                         g_spriteOffsets[SPR_DEBUG_INFO_INDEX].y + 100.0f, 0xFFFFFFFF, g_dropShadows);
     }
 }
 
