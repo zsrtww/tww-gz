@@ -9,4 +9,4 @@ struct procBinData {
 
 void loadActorName(s16&);
 void loadActorName();
-void loadProcInit(int&);
+void loadPlayerProc(int&);
