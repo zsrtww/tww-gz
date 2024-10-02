@@ -17,8 +17,8 @@ KEEP_FUNC AnyNoMssSavesMenu::AnyNoMssSavesMenu(Cursor& cursor)
                         {"windfall", WINDFALL, "at windfall island, just finished talking to korl"},
                         {"bombs swim", BOMBS_SWIM, "at dragon roost island, after wind waker cutscene"},
                         {"ropes 2", ROPES_2, "inside pirate ship, about to play ropes 2 minigame"},
-                        {"forest haven swim", O_FH, "at windfall island, about to swim to forest haven"},
-                        {"outside forest haven", FH_SWIM, "scaling outside forest haven, door cancel or tuner"},
+                        {"outside forest haven", FH_SWIM, "at windfall island, about to swim to forest haven"},
+                        {"forest haven swim", O_FH, "scaling outside forest haven with door cancel"},
                         {"lip crush cutscene skip", LIP_CRUSH, "inside forest haven at the top, for lip crush"},
                         {"deku tree chin cutscene skip*", DTCS, "inside forest haven at bottom, for normal dtcs"},
                         {"leaf hover*", LEAF_HOVER, "after normal cutscene skip for inside hover"},
@@ -28,7 +28,9 @@ KEEP_FUNC AnyNoMssSavesMenu::AnyNoMssSavesMenu(Cursor& cursor)
                         {"barrier skip", BARRIER_SKIP, "outside hyrule castle, about to do barrier skip"},
                         {"trials skip", TRIALS_SKIP, "inside ganon's tower, about to do trials skip"},
                         {"puppet ganon fight", PG_FIGHT, "inside ganondorf\'s bedroom, at start of puppet ganon fight"},
-                        {"hover to ganon", GANON_HOVER, "at bottom of ganondorf\'s bedroom for tuner or morth hover"},
+                        {"hover to ganon", GANON_HOVER,
+                         "at the top of the rope in ganondorf\'s bedroom for tuner hover"},
+                        {"morth hover*", MORTH_HOVER, "inside ganondorf\'s bedroom after fight, at top of room"},
                         {"ganondorf", GANONDORF, "on top of ganondorf\'s tower, at start of ganondorf fight"},
                     } {}
 
@@ -42,20 +44,15 @@ void AnyNoMssSavesMenu::draw() {
 
     if (GZ_getButtonTrig(SELECTION_BUTTON)) {
         special AnyNoMssSpecials[] = {
-            special(FOREST_OF_FAIRIES, SaveMngSpecial_SetLayer0),
-            special(ROPES_1, SaveMngSpecial_SetLayer0),
-            special(WINDFALL, SaveMngSpecial_SetLayer0),
-            special(BOMBS_SWIM, SaveMngSpecial_BombsSwim_NoMSS),
-            special(ROPES_2, SaveMngSpecial_SetLayer2),
-            special(FH_SWIM, SaveMngSpecial_SetLayer0),
-            special(DTCS, SaveMngSpecial_DTCS),
-            special(QUIVER_SWIM, SaveMngSpecial_PostLeafHover),
-            special(FF2_SWIM, SaveMngSpecial_ExitThornedFairy),
-            special(HELMAROC_SKIP, SaveMngSpecial_SetLayer3),
-            special(BARRIER_SKIP, SaveMngSpecial_BarrierSkip),
-            special(TRIALS_SKIP, SaveMngSpecial_TrialsSkip),
-            special(PG_FIGHT, SaveMngSpecial_PuppetGanon),
-            special(GANONDORF, SaveMngSpecial_Ganondorf),
+            special(FOREST_OF_FAIRIES, SaveMngSpecial_SetLayer0), special(ROPES_1, SaveMngSpecial_SetLayer0),
+            special(WINDFALL, SaveMngSpecial_SetLayer0),          special(BOMBS_SWIM, SaveMngSpecial_BombsSwim_NoMSS),
+            special(ROPES_2, SaveMngSpecial_SetLayer2),           special(FH_SWIM, SaveMngSpecial_SetLayer0),
+            special(O_FH, SaveMngSpecial_Outside_FH_NoMSS),       special(DTCS, SaveMngSpecial_DTCS),
+            special(LEAF_HOVER, SaveMngSpecial_LeafHover),        special(QUIVER_SWIM, SaveMngSpecial_PostLeafHover),
+            special(FF2_SWIM, SaveMngSpecial_ExitThornedFairy),   special(HELMAROC_SKIP, SaveMngSpecial_Helmaroc),
+            special(BARRIER_SKIP, SaveMngSpecial_BarrierSkip),    special(TRIALS_SKIP, SaveMngSpecial_TrialsSkip),
+            special(PG_FIGHT, SaveMngSpecial_PuppetGanon),        special(GANON_HOVER, SaveMngSpecial_GanonHover),
+            special(MORTH_HOVER, SaveMngSpecial_MorthHover),      special(GANONDORF, SaveMngSpecial_Ganondorf),
         };
 
         SaveManager::triggerLoad(cursor.y, "any_no_mss", AnyNoMssSpecials,

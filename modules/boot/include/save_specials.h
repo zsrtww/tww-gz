@@ -9,6 +9,7 @@ void SaveMngSpecial_DTCS();
 void SaveMngSpecial_LeafHover();
 void SaveMngSpecial_PostLeafHover();
 void SaveMngSpecial_ExitThornedFairy();
+void SaveMngSpecial_Helmaroc();
 void SaveMngSpecial_Hyrule2Skip_AD();
 void SaveMngSpecial_BarrierSkip();
 void SaveMngSpecial_TrialsSkip();
@@ -18,6 +19,8 @@ void SaveMngSpecial_MorthHover();
 void SaveMngSpecial_Ganondorf();
 
 void SaveMngSpecial_BombsSwim_NoMSS();
+void SaveMngSpecial_Outside_FH_NoMSS();
+void SaveMngSpecial_GanonHover();
 
 void SaveMngSpecial_LightArrowSkip_Any();
 void SaveMngSpecial_PGCutsceneSkip_Any();

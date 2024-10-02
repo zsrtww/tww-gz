@@ -11,8 +11,8 @@ enum AnyNoMssSaves {
     WINDFALL,
     BOMBS_SWIM,
     ROPES_2,
-    O_FH,
     FH_SWIM,
+    O_FH,
     LIP_CRUSH,
     DTCS,
     LEAF_HOVER,
@@ -23,6 +23,7 @@ enum AnyNoMssSaves {
     TRIALS_SKIP,
     PG_FIGHT,
     GANON_HOVER,
+    MORTH_HOVER,
     GANONDORF,
 
     ANY_NOMSS_SAVES_COUNT,
