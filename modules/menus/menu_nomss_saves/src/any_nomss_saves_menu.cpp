@@ -12,7 +12,7 @@ KEEP_FUNC AnyNoMssSavesMenu::AnyNoMssSavesMenu(Cursor& cursor)
                         {"forest of fairies", FOREST_OF_FAIRIES, "inside forest of fairies, about to rescue tetra"},
                         {"ropes 1", ROPES_1, "inside pirate ship, about to play ropes 1 minigame"},
                         {"early light cycle", EARLY_LIGHTS, "outside ship, before barrel launch cutscene"},
-                        {"forsaken fortress 1", FF1, "at start of ff1 after gossip trigger"},
+                        {"forsaken fortress 1*", FF1, "at start of ff1 after gossip trigger (no early light cycle)"},
                         {"ff1 interior", FF1_INTERIOR, "ff1 in the rope swing room"},
                         {"windfall", WINDFALL, "at windfall island, just finished talking to korl"},
                         {"bombs swim", BOMBS_SWIM, "at dragon roost island, after wind waker cutscene"},
@@ -28,9 +28,9 @@ KEEP_FUNC AnyNoMssSavesMenu::AnyNoMssSavesMenu(Cursor& cursor)
                         {"barrier skip", BARRIER_SKIP, "outside hyrule castle, about to do barrier skip"},
                         {"trials skip", TRIALS_SKIP, "inside ganon's tower, about to do trials skip"},
                         {"puppet ganon fight", PG_FIGHT, "inside ganondorf\'s bedroom, at start of puppet ganon fight"},
-                        {"hover to ganon", GANON_HOVER,
+                        {"tuner hover to ganon*", GANON_HOVER,
                          "at the top of the rope in ganondorf\'s bedroom for tuner hover"},
-                        {"morth hover*", MORTH_HOVER, "inside ganondorf\'s bedroom after fight, at top of room"},
+                        {"morth hover", MORTH_HOVER, "inside ganondorf\'s bedroom after fight, at top of room"},
                         {"ganondorf", GANONDORF, "on top of ganondorf\'s tower, at start of ganondorf fight"},
                     } {}
 
