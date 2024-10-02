@@ -24,13 +24,15 @@
 
 KEEP_FUNC void GZ_displayLinkInfo() {
     if (!g_tools[DEBUG_INDEX].active || l_fopScnRq_IsUsingOfOverlap) {
+        freePlayerProcData();  // free player proc data if it still exists
         return;
     }
 
+    loadPlayerProcData();  // allocate and load player proc data if it doesnt already exist
+
     if (dComIfGp_getPlayer(0)) {
         daPy_py_c* player = (daPy_py_c*)dComIfGp_getPlayer(0);
-
-        loadPlayerProc(daPy_getPlayerLinkActorClass()->mCurProcID);
+        procBinData* proc = getPlayerProcName(daPy_getPlayerLinkActorClass()->mCurProcID);
 
         char link_angle[22];
         char y_angle[22];
@@ -46,7 +48,7 @@ KEEP_FUNC void GZ_displayLinkInfo() {
         snprintf(link_x, sizeof(link_x), "x-pos: %.4f", player->current.pos.x);
         snprintf(link_y, sizeof(link_y), "y-pos: %.4f", player->current.pos.y);
         snprintf(link_z, sizeof(link_z), "z-pos: %.4f", player->current.pos.z);
-        snprintf(link_action, sizeof(link_action), "action: %s", g_procInit.procName);
+        snprintf(link_action, sizeof(link_action), "action: %s", proc->procName);
 
         Font::GZ_drawStr(link_angle, g_spriteOffsets[SPR_DEBUG_INFO_INDEX].x,
                          g_spriteOffsets[SPR_DEBUG_INFO_INDEX].y - 20.0f, 0xFFFFFFFF, g_dropShadows);
