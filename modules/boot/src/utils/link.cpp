@@ -27,14 +27,13 @@ KEEP_FUNC void GZ_displayLinkInfo() {
         freePlayerProcData();  // free player proc data if it still exists
         return;
     }
-  
+
     loadPlayerProcData();  // allocate and load player proc data if it doesnt already exist
 
     if (dComIfGp_getPlayer(0)) {
         daPy_py_c* player = (daPy_py_c*)dComIfGp_getPlayer(0);
 
         procBinData* proc = getPlayerProcName(daPy_getPlayerLinkActorClass()->mCurProcID);
-
 
         char link_angle[22];
         char y_angle[22];
