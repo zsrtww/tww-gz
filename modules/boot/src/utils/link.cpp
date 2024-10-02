@@ -36,35 +36,29 @@ KEEP_FUNC void GZ_displayLinkInfo() {
         procBinData* proc = getPlayerProcName(daPy_getPlayerLinkActorClass()->mCurProcID);
 
         char link_angle[22];
-        char y_angle[22];
         char link_speed[22];
         char link_x[22];
         char link_y[22];
         char link_z[22];
         char link_action[55];
 
-        snprintf(link_angle, sizeof(link_angle), "angle: %d", player->shape_angle.y);
-        snprintf(y_angle, sizeof(y_angle), "y-angle: %d", player->mBodyAngle.y);
+        snprintf(link_x, sizeof(link_x), "pos x: %.4f", player->current.pos.x);
+        snprintf(link_y, sizeof(link_y), "pos y: %.4f", player->current.pos.y);
+        snprintf(link_z, sizeof(link_z), "pos z: %.4f", player->current.pos.z);
+        snprintf(link_angle, sizeof(link_angle), "rot y: 0x%04X", (u16)player->shape_angle.y);
         snprintf(link_speed, sizeof(link_speed), "speed: %.4f", player->speedF);
-        snprintf(link_x, sizeof(link_x), "x-pos: %.4f", player->current.pos.x);
-        snprintf(link_y, sizeof(link_y), "y-pos: %.4f", player->current.pos.y);
-        snprintf(link_z, sizeof(link_z), "z-pos: %.4f", player->current.pos.z);
         snprintf(link_action, sizeof(link_action), "action: %s", proc->procName);
 
-        Font::GZ_drawStr(link_angle, g_spriteOffsets[SPR_DEBUG_INFO_INDEX].x,
-                         g_spriteOffsets[SPR_DEBUG_INFO_INDEX].y - 20.0f, 0xFFFFFFFF, g_dropShadows);
-        Font::GZ_drawStr(y_angle, g_spriteOffsets[SPR_DEBUG_INFO_INDEX].x, g_spriteOffsets[SPR_DEBUG_INFO_INDEX].y,
-                         0xFFFFFFFF, g_dropShadows);
-        Font::GZ_drawStr(link_speed, g_spriteOffsets[SPR_DEBUG_INFO_INDEX].x,
-                         g_spriteOffsets[SPR_DEBUG_INFO_INDEX].y + 20.0f, 0xFFFFFFFF, g_dropShadows);
-        Font::GZ_drawStr(link_x, g_spriteOffsets[SPR_DEBUG_INFO_INDEX].x,
-                         g_spriteOffsets[SPR_DEBUG_INFO_INDEX].y + 40.0f, 0xFFFFFFFF, g_dropShadows);
-        Font::GZ_drawStr(link_y, g_spriteOffsets[SPR_DEBUG_INFO_INDEX].x,
-                         g_spriteOffsets[SPR_DEBUG_INFO_INDEX].y + 60.0f, 0xFFFFFFFF, g_dropShadows);
-        Font::GZ_drawStr(link_z, g_spriteOffsets[SPR_DEBUG_INFO_INDEX].x,
-                         g_spriteOffsets[SPR_DEBUG_INFO_INDEX].y + 80.0f, 0xFFFFFFFF, g_dropShadows);
-        Font::GZ_drawStr(link_action, g_spriteOffsets[SPR_DEBUG_INFO_INDEX].x,
-                         g_spriteOffsets[SPR_DEBUG_INFO_INDEX].y + 100.0f, 0xFFFFFFFF, g_dropShadows);
+        f32 pos_x = g_spriteOffsets[SPR_DEBUG_INFO_INDEX].x;
+        f32 pos_y = g_spriteOffsets[SPR_DEBUG_INFO_INDEX].y;
+        uint32_t color_white = 0xFFFFFFFF;
+
+        Font::GZ_drawStr(link_x, pos_x, pos_y, color_white, g_dropShadows);
+        Font::GZ_drawStr(link_y, pos_x, pos_y + 20.0f, color_white, g_dropShadows);
+        Font::GZ_drawStr(link_z, pos_x, pos_y + 40.0f, color_white, g_dropShadows);
+        Font::GZ_drawStr(link_angle, pos_x, pos_y + 60.0f, color_white, g_dropShadows);
+        Font::GZ_drawStr(link_speed, pos_x, pos_y + 80.0f, color_white, g_dropShadows);
+        Font::GZ_drawStr(link_action, pos_x, pos_y + 100.0f, color_white, g_dropShadows);
     }
 }
 
