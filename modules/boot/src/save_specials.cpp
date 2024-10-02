@@ -7,6 +7,7 @@
 #include "libtww/include/d/d_procname.h"
 #include "libtww/include/d/a/d_a_player_main.h"
 #include "rels/include/defines.h"
+#include "commands.h"
 
 // =================== UTILITIES ===================
 
@@ -20,13 +21,22 @@ void SaveMngSpecial_SetActorPos(fopAc_ac_c* actor, f32 x, f32 y, f32 z) {
     }
 }
 
+inline void SaveMngSpecial_SetActorYaw(fopAc_ac_c* actor, s16 yRot) {
+    actor->current.angle.y = actor->shape_angle.y = yRot;
+
+    if (actor->mBase.mProcName == PROC_PLAYER) {
+        l_debug_current_angle.y = l_debug_shape_angle.y = yRot;
+    }
+}
+
 inline void SaveMngSpecial_SetActorRot(fopAc_ac_c* actor, s16 xRot, s16 yRot, s16 zRot) {
     actor->current.angle.set(xRot, yRot, zRot);
     actor->shape_angle.set(xRot, yRot, zRot);
-}
 
-inline void SaveMngSpecial_SetActorYaw(fopAc_ac_c* actor, s16 yRot) {
-    actor->current.angle.y = actor->shape_angle.y = yRot;
+    if (actor->mBase.mProcName == PROC_PLAYER) {
+        l_debug_current_angle.set(xRot, yRot, zRot);
+        l_debug_shape_angle.set(xRot, yRot, zRot);
+    }
 }
 
 inline void SaveMngSpecial_SetHealth(u16 health) {
@@ -39,6 +49,16 @@ inline void SaveMngSpecial_SetMagic(u8 magic) {
 
 inline void SaveMngSpecial_SetBombCount(u8 bombs) {
     g_dComIfG_gameInfo.info.getPlayer().getItemRecord().setBombNum(bombs);
+}
+
+inline void SaveMngSpecial_ChestStorage(fopAc_ac_c* actor) {
+    u16* collision_ptr = dComIfGs_getCollision();
+    *collision_ptr = (*collision_ptr & (0xFFFF ^ 0x4000)) | 0x4;
+}
+
+inline void SaveMngSpecial_DoorCancel(fopAc_ac_c* actor) {
+    u16* collision_ptr = dComIfGs_getCollision();
+    *collision_ptr |= 0x4004;
 }
 
 // =================== GENERIC FUNCTIONS ===================
@@ -118,7 +138,7 @@ KEEP_FUNC void SaveMngSpecial_PuppetGanon() {
 KEEP_FUNC void SaveMngSpecial_MorthHover() {
     g_dComIfG_gameInfo.play.mNextStage.setPoint(2);
     SaveMngSpecial_SetLayer1();
-    daArrow_c__m_keep_type = 3;
+    daArrow_c__m_keep_type = 1;
 
     gSaveManager.modifySave([]() {
         SaveMngSpecial_SetHealth(1);
@@ -133,6 +153,15 @@ KEEP_FUNC void SaveMngSpecial_Ganondorf() {
     gSaveManager.modifySave([]() {
         SaveMngSpecial_SetHealth(4);
         SaveMngSpecial_SetBombCount(10);
+    });
+}
+
+KEEP_FUNC void SaveMngSpecial_Helmaroc() {
+    SaveMngSpecial_SetLayer3();
+
+    gSaveManager.modifyActor(PROC_PLAYER, [](fopAc_ac_c* actor) {
+        SaveMngSpecial_SetActorPos(actor, 4258.2119f, 9064.7334f, -4360.8140f);
+        SaveMngSpecial_SetActorYaw(actor, 0xA72A);
     });
 }
 
@@ -173,6 +202,23 @@ KEEP_FUNC void SaveMngSpecial_BombsSwim_NoMSS() {
         SaveMngSpecial_SetActorPos(actor, 196459.0f, 0.0f, -199693.0f);
         SaveMngSpecial_SetActorYaw(actor, 0x623E);
     });
+}
+
+KEEP_FUNC void SaveMngSpecial_Outside_FH_NoMSS() {
+    gSaveManager.modifyActor(PROC_PLAYER, [](fopAc_ac_c* actor) { SaveMngSpecial_DoorCancel(actor); });
+}
+
+KEEP_FUNC void SaveMngSpecial_GanonHover() {
+    gSaveManager.modifyActor(PROC_PLAYER, [](fopAc_ac_c* actor) {
+        SaveMngSpecial_SetActorPos(actor, 546.4542f, 4476.6108f, -1.1532f);
+        SaveMngSpecial_SetActorYaw(actor, 0x3FE1);
+    });
+
+    gSaveManager.modifySave([]() { SaveMngSpecial_SetHealth(1); });
+}
+
+KEEP_FUNC void SaveMngSpecial_EarlyLights_NoMSS() {
+    dComIfGs_offEventBit(0x2D01);
 }
 
 // =================== ALL DUNGEONS FUNCTIONS ===================

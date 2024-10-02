@@ -32,6 +32,7 @@ KEEP_FUNC void GZ_displayLinkInfo() {
 
     if (dComIfGp_getPlayer(0)) {
         daPy_py_c* player = (daPy_py_c*)dComIfGp_getPlayer(0);
+
         procBinData* proc = getPlayerProcName(daPy_getPlayerLinkActorClass()->mCurProcID);
 
         char link_angle[22];
