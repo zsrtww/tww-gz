@@ -35,7 +35,7 @@ KEEP_FUNC void GZ_displayLinkInfo() {
         // Avoid to load loadPlayerProc over and over again
         if (currentProcID != lastProcID) {
             loadPlayerProc(currentProcID);
-            lastProcID = currentProcID;  
+            lastProcID = currentProcID;
         }
 
         char link_angle[22];
