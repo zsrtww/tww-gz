@@ -31,6 +31,7 @@ enum GZSaveIndex {
     SV_EQUIP_PRIORITY_INDEX,
     SV_LANDSPEED_INDEX,
     SV_WATERSPEED_INDEX,
+    SV_ANGLE_CONVERSION_INDEX,
     // ONLY append entries to the end of this enum, unless absolutely necessary
 
     SV_ENTRY_AMNT
@@ -56,6 +57,7 @@ struct GZSaveLayout {
     bool mEquipPriorityEnabled;
     int mLandSpeed;
     int mWaterSpeed;
+    bool mAngleConversion;
 };
 
 struct GZSaveFile {

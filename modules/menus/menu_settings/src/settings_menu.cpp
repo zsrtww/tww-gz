@@ -18,6 +18,7 @@ KEEP_FUNC SettingsMenu::SettingsMenu(Cursor& cursor)
           {"cursor color:", CURSOR_COLOR_INDEX, "Change cursor color", false, nullptr, MAX_CURSOR_COLOR_OPTIONS},
           {"font:", FONT_INDEX, "Change font", false, nullptr, FONT_OPTIONS_COUNT},
           {"drop shadows", DROP_SHADOWS_INDEX, "Adds shadows to all font letters", true, &g_dropShadows},
+          {"angle conversion", ANGLE_INDEX, "convert angle from hex to decimal", true, &g_angle},
           {"equip priority", ITEM_EQUIP_PRIORITY_INDEX, "Adjust priorities on item equips in practice saves", false},
           {"save card", SAVE_CARD_INDEX, "Save settings to memory card"},
           {"load card", LOAD_CARD_INDEX, "Load settings from memory card"},
@@ -43,6 +44,9 @@ void SettingsMenu::draw() {
         switch (cursor.y) {
         case DROP_SHADOWS_INDEX:
             g_dropShadows = !g_dropShadows;
+            break;
+        case ANGLE_INDEX:
+            g_angle = !g_angle;
             break;
         case POS_SETTINGS_MENU_INDEX:
             g_menuMgr->push(MN_POS_SETTINGS_INDEX);

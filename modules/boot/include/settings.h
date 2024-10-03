@@ -10,6 +10,7 @@
 #define LOAD_FILE 1
 
 extern bool g_dropShadows;
+extern bool g_angle;
 extern uint32_t g_fontType;
 extern uint32_t g_cursorColorType;
 extern ListMember g_font_opt[7];
