@@ -36,15 +36,13 @@ void AnyOptimalSavesMenu::draw() {
 
     if (GZ_getButtonTrig(SELECTION_BUTTON)) {
         special AnyOptimalSpecials[] = {
-            special(FH_CLIMB, SaveMngSpecial_Outside_FH_DC),
-            special(HELM_SKIP, SaveMngSpecial_Helmaroc),
-            special(TRIAL_SKIP, SaveMngSpecial_TrialsSkipAny),
-            special(LA_SKIP, SaveMngSpecial_LightArrowSkip_Any),
+            special(FH_CLIMB, SaveMngSpecial_Outside_FH_DC),   special(HELM_SKIP, SaveMngSpecial_Helmaroc),
+            special(TRIAL_SKIP, SaveMngSpecial_TrialsSkipAny), special(LA_SKIP, SaveMngSpecial_LightArrowSkip_Any),
             special(PGS, SaveMngSpecial_PGSkip_Any),
         };
 
-
-        SaveManager::triggerLoad(cursor.y, "any_optimal", AnyOptimalSpecials, sizeof(AnyOptimalSpecials) / sizeof(AnyOptimalSpecials[0]));
+        SaveManager::triggerLoad(cursor.y, "any_optimal", AnyOptimalSpecials,
+                                 sizeof(AnyOptimalSpecials) / sizeof(AnyOptimalSpecials[0]));
         g_menuMgr->hide();
     }
 

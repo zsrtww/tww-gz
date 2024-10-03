@@ -172,9 +172,7 @@ KEEP_FUNC void SaveMngSpecial_Outside_FH_DC() {
 // =================== ANY% FUNCTIONS ===================
 
 KEEP_FUNC void SaveMngSpecial_TrialsSkipAny() {
-    gSaveManager.modifySave([]() {
-        SaveMngSpecial_SetHealth(1);
-    });
+    gSaveManager.modifySave([]() { SaveMngSpecial_SetHealth(1); });
 }
 
 KEEP_FUNC void SaveMngSpecial_LightArrowSkip_Any() {
