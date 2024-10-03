@@ -19,10 +19,11 @@ void SaveMngSpecial_MorthHover();
 void SaveMngSpecial_Ganondorf();
 
 void SaveMngSpecial_BombsSwim_NoMSS();
-void SaveMngSpecial_Outside_FH_NoMSS();
+void SaveMngSpecial_Outside_FH_DC();
 void SaveMngSpecial_GanonHover();
 void SaveMngSpecial_EarlyLights_NoMSS();
 
+void SaveMngSpecial_TrialsSkipAny();
 void SaveMngSpecial_LightArrowSkip_Any();
 void SaveMngSpecial_PGCutsceneSkip_Any();
 void SaveMngSpecial_PGSkip_AD();
@@ -57,3 +58,4 @@ void SaveMngSpecial_WT_AD();
 void SaveMngSpecial_Wizzrobe_AD();
 void SaveMngSpecial_AfterHS_AD();
 void SaveMngSpecial_Swim2FCP_AD();
+void SaveMngSpecial_PGCS_AD();

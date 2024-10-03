@@ -51,6 +51,7 @@ enum MenuIndex {
     MN_MEMORY_EDITOR_INDEX,
 
     // Practice menu's sub menus
+    MN_ANY_OPTIMAL_SAVES_INDEX,
     MN_ANY_SAVES_INDEX,
     MN_ANY_NOMSS_SAVES_INDEX,
     MN_AD_SAVES_INDEX,

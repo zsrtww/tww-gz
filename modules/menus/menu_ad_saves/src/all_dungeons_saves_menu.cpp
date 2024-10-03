@@ -102,6 +102,7 @@ void AllDungeonsSavesMenu::draw() {
             special(AFTER_HS_AD, SaveMngSpecial_AfterHS_AD),
             special(SWIM_2_FCP_AD, SaveMngSpecial_Swim2FCP_AD),
             special(PG_SKIP_AD, SaveMngSpecial_PGSkip_AD),
+            special(PG_CS_AD, SaveMngSpecial_PGCS_AD),
             special(PUPPET_GANON_AD, SaveMngSpecial_PuppetGanon),
         };
 

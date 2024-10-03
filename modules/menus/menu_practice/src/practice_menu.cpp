@@ -5,8 +5,9 @@
 
 KEEP_FUNC PracticeMenu::PracticeMenu(Cursor& cursor)
     : Menu(cursor), lines{
-                        {"any\% no mss", ANY_NO_MSS, "Load an any\% no mss save", false},
+                        {"any\%", ANY_OPTIMAL, "Load an any\% save", false},
                         {"any\% (bombs first, no pg skip)", ANY_PERCENT, "Load an any\% save", false},
+                        {"any\% no mss", ANY_NO_MSS, "Load an any\% no mss save", false},
                         {"all dungeons", ALL_DUNGEONS, "Load an all dungeons save", false},
                     } {}
 
@@ -20,11 +21,14 @@ void PracticeMenu::draw() {
 
     if (GZ_getButtonTrig(SELECTION_BUTTON)) {
         switch (cursor.y) {
-        case ANY_NO_MSS:
-            g_menuMgr->push(MN_ANY_NOMSS_SAVES_INDEX);
+        case ANY_OPTIMAL:
+            g_menuMgr->push(MN_ANY_OPTIMAL_SAVES_INDEX);
             return;
         case ANY_PERCENT:
             g_menuMgr->push(MN_ANY_SAVES_INDEX);
+            return;
+        case ANY_NO_MSS:
+            g_menuMgr->push(MN_ANY_NOMSS_SAVES_INDEX);
             return;
         case ALL_DUNGEONS:
             g_menuMgr->push(MN_AD_SAVES_INDEX);

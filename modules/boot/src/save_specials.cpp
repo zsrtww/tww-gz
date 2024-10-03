@@ -165,12 +165,21 @@ KEEP_FUNC void SaveMngSpecial_Helmaroc() {
     });
 }
 
+KEEP_FUNC void SaveMngSpecial_Outside_FH_DC() {
+    gSaveManager.modifyActor(PROC_PLAYER, [](fopAc_ac_c* actor) { SaveMngSpecial_DoorCancel(actor); });
+}
+
 // =================== ANY% FUNCTIONS ===================
+
+KEEP_FUNC void SaveMngSpecial_TrialsSkipAny() {
+    gSaveManager.modifySave([]() {
+        SaveMngSpecial_SetHealth(1);
+    });
+}
 
 KEEP_FUNC void SaveMngSpecial_LightArrowSkip_Any() {
     gSaveManager.modifySave([]() {
-        SaveMngSpecial_SetBombCount(17);
-        SaveMngSpecial_SetHealth(6);
+        SaveMngSpecial_SetHealth(1);
         SaveMngSpecial_SetMagic(6);
     });
 }
@@ -202,10 +211,6 @@ KEEP_FUNC void SaveMngSpecial_BombsSwim_NoMSS() {
         SaveMngSpecial_SetActorPos(actor, 196459.0f, 0.0f, -199693.0f);
         SaveMngSpecial_SetActorYaw(actor, 0x623E);
     });
-}
-
-KEEP_FUNC void SaveMngSpecial_Outside_FH_NoMSS() {
-    gSaveManager.modifyActor(PROC_PLAYER, [](fopAc_ac_c* actor) { SaveMngSpecial_DoorCancel(actor); });
 }
 
 KEEP_FUNC void SaveMngSpecial_GanonHover() {
@@ -408,4 +413,11 @@ KEEP_FUNC void SaveMngSpecial_TrialsSkip_AD() {
 
 KEEP_FUNC void SaveMngSpecial_PGSkip_AD() {
     g_dComIfG_gameInfo.play.mNextStage.setLayer(8);
+}
+
+KEEP_FUNC void SaveMngSpecial_PGCS_AD() {
+    gSaveManager.modifyActor(PROC_PLAYER, [](fopAc_ac_c* actor) {
+        SaveMngSpecial_SetActorPos(actor, -21.1982f, 5704.6558f, -34951.3789f);
+        SaveMngSpecial_SetActorYaw(actor, 0x821E);
+    });
 }

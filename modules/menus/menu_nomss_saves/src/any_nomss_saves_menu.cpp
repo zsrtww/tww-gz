@@ -50,7 +50,7 @@ void AnyNoMssSavesMenu::draw() {
             special(BOMBS_SWIM, SaveMngSpecial_BombsSwim_NoMSS),
             special(ROPES_2, SaveMngSpecial_SetLayer2),
             special(FH_SWIM, SaveMngSpecial_SetLayer0),
-            special(O_FH, SaveMngSpecial_Outside_FH_NoMSS),
+            special(O_FH, SaveMngSpecial_Outside_FH_DC),
             special(DTCS, SaveMngSpecial_DTCS),
             special(LEAF_HOVER, SaveMngSpecial_LeafHover),
             special(QUIVER_SWIM, SaveMngSpecial_PostLeafHover),
