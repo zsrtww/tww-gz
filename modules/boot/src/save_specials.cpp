@@ -413,9 +413,4 @@ KEEP_FUNC void SaveMngSpecial_PGSkip_AD() {
     g_dComIfG_gameInfo.play.mNextStage.setLayer(8);
 }
 
-KEEP_FUNC void SaveMngSpecial_PGCS_AD() {
-    gSaveManager.modifyActor(PROC_PLAYER, [](fopAc_ac_c* actor) {
-        SaveMngSpecial_SetActorPos(actor, -21.1982f, 5704.6558f, -34951.3789f);
-        SaveMngSpecial_SetActorYaw(actor, 0x821E);
-    });
-}
+

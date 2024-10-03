@@ -58,4 +58,3 @@ void SaveMngSpecial_WT_AD();
 void SaveMngSpecial_Wizzrobe_AD();
 void SaveMngSpecial_AfterHS_AD();
 void SaveMngSpecial_Swim2FCP_AD();
-void SaveMngSpecial_PGCS_AD();
