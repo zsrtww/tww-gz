@@ -412,5 +412,3 @@ KEEP_FUNC void SaveMngSpecial_TrialsSkip_AD() {
 KEEP_FUNC void SaveMngSpecial_PGSkip_AD() {
     g_dComIfG_gameInfo.play.mNextStage.setLayer(8);
 }
-
-
