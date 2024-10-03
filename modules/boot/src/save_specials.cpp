@@ -232,7 +232,7 @@ KEEP_FUNC void SaveMngSpecial_FF1CS_AD() {
 KEEP_FUNC void SaveMngSpecial_EarlyLeafHover_AD() {
     g_dComIfG_gameInfo.play.mNextStage.setPoint(5);
 
-    gSaveManager.modifySave([]() { SaveMngSpecial_SetHealth(4); });
+    gSaveManager.modifySave([]() { SaveMngSpecial_SetHealth(1); });
 }
 
 KEEP_FUNC void SaveMngSpecial_DTCS_AD() {
@@ -297,6 +297,11 @@ KEEP_FUNC void SaveMngSpecial_HyruleEscape_AD() {
     g_dComIfG_gameInfo.play.mNextStage.setName((char*)"Hyroom");
     g_dComIfG_gameInfo.play.mNextStage.setRoomNo(0);
     g_dComIfG_gameInfo.play.mNextStage.setPoint(2);
+
+    gSaveManager.modifyActor(PROC_PLAYER, [](fopAc_ac_c* actor) {
+        SaveMngSpecial_SetActorPos(actor, 349.2255f, -1549.8273f, -1697.4833f);
+        SaveMngSpecial_SetActorYaw(actor, 0xD000);
+    });
 }
 
 KEEP_FUNC void SaveMngSpecial_BarrierSkip_AD() {
@@ -306,15 +311,19 @@ KEEP_FUNC void SaveMngSpecial_BarrierSkip_AD() {
 }
 
 KEEP_FUNC void SaveMngSpecial_BoomerangSkip_AD() {
+    g_dComIfG_gameInfo.play.mNextStage.setName((char*)"GanonM");
+    g_dComIfG_gameInfo.play.mNextStage.setRoomNo(0);
     g_dComIfG_gameInfo.play.mNextStage.setPoint(0);
 }
 
 KEEP_FUNC void SaveMngSpecial_PhantomGanon_AD() {
+    SaveMngSpecial_SetLayer1();
     g_dComIfG_gameInfo.play.mNextStage.setPoint(15);
     gSaveManager.modifySave([]() { SaveMngSpecial_SetHealth(6); });
 }
 
 KEEP_FUNC void SaveMngSpecial_EnterHelmaroc_AD() {
+    SaveMngSpecial_SetLayer1();
     g_dComIfG_gameInfo.play.mNextStage.setPoint(15);
     gSaveManager.modifySave([]() { SaveMngSpecial_SetHealth(2); });
 }
@@ -323,6 +332,11 @@ KEEP_FUNC void SaveMngSpecial_Hyrule2Skip_AD() {
     SaveMngSpecial_SetLayer3();
 
     gSaveManager.modifySave([]() { SaveMngSpecial_SetHealth(2); });
+
+    gSaveManager.modifyActor(PROC_PLAYER, [](fopAc_ac_c* actor) {
+        SaveMngSpecial_SetActorPos(actor, 4258.2119f, 9064.7334f, -4360.8140f);
+        SaveMngSpecial_SetActorYaw(actor, 0xA72A);
+    });
 }
 
 KEEP_FUNC void SaveMngSpecial_FireMountain_AD() {
@@ -361,7 +375,7 @@ KEEP_FUNC void SaveMngSpecial_Makar_AD() {
 }
 
 KEEP_FUNC void SaveMngSpecial_EnterWT_AD() {
-    g_dComIfG_gameInfo.play.mNextStage.setPoint(9);
+    g_dComIfG_gameInfo.play.mNextStage.setPoint(0);
     gSaveManager.modifySave([]() { SaveMngSpecial_SetHealth(1); });
 }
 
@@ -387,6 +401,7 @@ KEEP_FUNC void SaveMngSpecial_Swim2FCP_AD() {
 }
 
 KEEP_FUNC void SaveMngSpecial_TrialsSkip_AD() {
+    g_dComIfG_gameInfo.play.mNextStage.setName((char*)"GanonA");
     g_dComIfG_gameInfo.play.mNextStage.setRoomNo(1);
     g_dComIfG_gameInfo.play.mNextStage.setPoint(0);
 }
