@@ -79,6 +79,10 @@ KEEP_FUNC void SaveMngSpecial_SetLayer3() {
     g_dComIfG_gameInfo.play.mNextStage.setLayer(3);
 }
 
+KEEP_FUNC void SaveMngSpecial_SetLayer8() {
+    g_dComIfG_gameInfo.play.mNextStage.setLayer(8);
+}
+
 // =================== SHARED FUNCTIONS ===================
 
 KEEP_FUNC void SaveMngSpecial_DTCS() {
@@ -191,12 +195,15 @@ KEEP_FUNC void SaveMngSpecial_PGCutsceneSkip_Any() {
 }
 
 KEEP_FUNC void SaveMngSpecial_PGSkip_Any() {
-    g_dComIfG_gameInfo.play.mNextStage.setLayer(8);
+    SaveMngSpecial_SetLayer8();
 
+    gSaveManager.modifySave([]() { SaveMngSpecial_SetHealth(1); });
+}
+
+KEEP_FUNC void SaveMngSpecial_BarrierSkip_Any() {
     gSaveManager.modifySave([]() {
-        SaveMngSpecial_SetBombCount(15);
+        ;
         SaveMngSpecial_SetHealth(1);
-        SaveMngSpecial_SetMagic(13);
     });
 }
 

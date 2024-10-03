@@ -4,6 +4,7 @@ void SaveMngSpecial_SetLayer0();
 void SaveMngSpecial_SetLayer1();
 void SaveMngSpecial_SetLayer2();
 void SaveMngSpecial_SetLayer3();
+void SaveMngSpecial_SetLayer8();
 
 void SaveMngSpecial_DTCS();
 void SaveMngSpecial_LeafHover();
@@ -28,6 +29,7 @@ void SaveMngSpecial_LightArrowSkip_Any();
 void SaveMngSpecial_PGCutsceneSkip_Any();
 void SaveMngSpecial_PGSkip_AD();
 void SaveMngSpecial_PGSkip_Any();
+void SaveMngSpecial_BarrierSkip_Any();
 
 void SaveMngSpecial_FF1CS_AD();
 void SaveMngSpecial_EarlyLeafHover_AD();

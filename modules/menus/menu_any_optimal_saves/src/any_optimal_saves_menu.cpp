@@ -22,7 +22,7 @@ KEEP_FUNC AnyOptimalSavesMenu::AnyOptimalSavesMenu(Cursor& cursor)
                         {"trials skip", TRIAL_SKIP, "inside ganon's tower, in trials room for trials skip"},
                         {"light arrow skip", LA_SKIP, "in phantom ganon room for light arrow skip with tuner"},
                         {"puppet ganon cutscene skip", PGCS, "at grand staircase for puppet ganon cutscene skip"},
-                        {"puppet ganon skip", PGS, "inside ganondorf\'s bedroom on lyaer 8 for pg skip with tuner"},
+                        {"puppet ganon skip", PGS, "inside ganondorf\'s bedroom on layer 8 for pg skip with tuner"},
                         {"ganondorf", GANON, "on top of ganondorf\'s tower, at start of ganondorf fight"},
                     } {}
 
@@ -38,7 +38,7 @@ void AnyOptimalSavesMenu::draw() {
         special AnyOptimalSpecials[] = {
             special(FH_CLIMB, SaveMngSpecial_Outside_FH_DC),   special(HELM_SKIP, SaveMngSpecial_Helmaroc),
             special(TRIAL_SKIP, SaveMngSpecial_TrialsSkipAny), special(LA_SKIP, SaveMngSpecial_LightArrowSkip_Any),
-            special(PGS, SaveMngSpecial_PGSkip_Any),
+            special(PGS, SaveMngSpecial_PGSkip_Any),           special(BARRIER_SKIP, SaveMngSpecial_BarrierSkip_Any),
         };
 
         SaveManager::triggerLoad(cursor.y, "any_optimal", AnyOptimalSpecials,
