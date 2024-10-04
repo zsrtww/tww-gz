@@ -468,12 +468,10 @@ The following categories are supported. Click the dropdown to view a list of eac
 | Poly Edges          | View edges of each polygon
 | Poly Draw Raise     | Amount to raise the drawn polygons by
 | Opcaity             | Transparency amount of collision viewer
+ 
+TODO: Explain more about how Actor List works
 
-Actor List: Display info from actor list, pause/delete actors on list <br>  
-TODO: Explain more about how this works
-
-Actor Spawner: Spawn actors at current position <br> 
-TODO: Explain more about how this works
+TODO: Explain more about how Actor Spawner works
 
 ---
 
