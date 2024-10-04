@@ -52,9 +52,9 @@ enum MenuIndex {
 
     // Practice menu's sub menus
     MN_ANY_OPTIMAL_SAVES_INDEX,
-    MN_ANY_SAVES_INDEX,
     MN_ANY_NOMSS_SAVES_INDEX,
     MN_AD_SAVES_INDEX,
+    MN_ANY_SAVES_INDEX,
 
     // Scene menu's sub menus
     MN_COLLISION_VIEW_INDEX,
