@@ -4,9 +4,9 @@
 
 enum {
     ANY_OPTIMAL,
-    ANY_PERCENT,
     ANY_NO_MSS,
     ALL_DUNGEONS,
+    ANY_PERCENT,
 
     PRACTICE_MENU_NUM,
 };

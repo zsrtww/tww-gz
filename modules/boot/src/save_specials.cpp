@@ -96,12 +96,18 @@ KEEP_FUNC void SaveMngSpecial_DTCS() {
 }
 
 KEEP_FUNC void SaveMngSpecial_LeafHover() {
-    g_dComIfG_gameInfo.play.mNextStage.setPoint(6);
+    g_dComIfG_gameInfo.play.mNextStage.setPoint(5);
 
     gSaveManager.modifySave([]() {
         SaveMngSpecial_SetBombCount(20);
         SaveMngSpecial_SetHealth(1);
     });
+
+    if (g_customSaveSpawns) {
+        gSaveManager.modifyActor(PROC_PLAYER, [](fopAc_ac_c* actor) {
+            SaveMngSpecial_SetActorPosAndYaw(actor, 1182.1243f, 350.0f, 1916.5776f, 0x9A6C);
+        });
+    }
 }
 
 KEEP_FUNC void SaveMngSpecial_PostLeafHover() {

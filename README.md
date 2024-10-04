@@ -91,6 +91,7 @@ Set and unset various flags in the game.
 | map                 | Gives the dungeon map
 | compass             | Gives the dungeon compass
 | partner             | Spawns Medli/Makar (ET/WT Only)
+| partner room        | Spawns Medli/Makar in current room on using void out tool(ET/WT Only)
 </details>
 
 <details>
@@ -286,12 +287,40 @@ TODO: Explain more about how this works
 Memory Editor: Edit values at specific memory locations  
 TODO: Explain more about how this works
 
+Flag Logger: Output triggered events/switches to the bottom left of the screen
+
 ---
 
 ### Practice
 
 The practice menu contains hacked save files which allow you to instantly warp to key points in a speedrun route.
 The following categories are supported. Click the dropdown to view a list of each save:
+
+<details>
+<summary>Any%</summary>
+<br>  
+ 
+| Save                        | Description                                    
+| :--                         | :--                                           
+| Manual Superswim            | Just after the intro, at bottom of watchtower
+| Post Manual Superswim       | After MSS at DRI
+| FF1 Exterior                | At FF1 after leaving jail cell
+| Door Cancel Leaf            | At windfall island, post FF1 cutscene
+| Forest Haven Climb          | Outside forest haven with door cancel
+| Deku Tree Cutscene Skip     | Inside Forest Haven at top entrance, for DTCS
+| Greatfish Cutscene Skip     |At windfall cove after leaf for gfcs  
+| Sail Skip                   | In KorL near Windfall, after Greatfish cutscene skip
+| Ropes 2                     | Inside pirate ship, ropes 2 minigame state
+| Door Cancel FF2             | At windfall docks after bombs for door cancel ff2                  
+| Helmaroc Skip               | Inside FF2 Tower, at start of Helmaroc King fight
+| Barrier Skip                | Outside Hyrule Castle, about to do barrier skip
+| Trials Skip                 | Inside Ganon's Tower, in trials room for trials skip
+| Light Arrow Skip            | In Phantom Ganon's room for light arrow skip with Tuner
+| Puppet Ganon Cutscene Skip  | At bottom Grand Staircase for Puppet Ganon cutscene skip
+| Puppet Ganon Skip           | Bottom of Ganondorf's Bedroom for Puppet Ganon skip with Tuner
+| Ganondorf                   | On top of Ganondorf's Tower, at start of Ganondorf fight
+
+</details>
 
 <details>
 <summary>Any% No MSS</summary>
@@ -303,48 +332,26 @@ The following categories are supported. Click the dropdown to view a list of eac
 | Orca                    | Inside orca's house about to do sword tutorial
 | Forest of Fairies       | Inside forest of fairies about to rescue tetra
 | Ropes 1                 | Inside pirate ship about to play ropes 1 minigame
-| Forsaken Fortress 1     | At start of ff1 before gossip stone cutscene
+| Early Light Cycle       | On Pirate Ship before barrel launch cutscene
+| FF1 [Alt]               | At start of ff1 after gossip stone cutscene
+| FF1 Interior            | Inside FF1 in rope swing room
 | Windfall                | At windfall island just finished talking to korl
 | Bombs Swim              | At dragon roost island just got the wind waker
 | Ropes 2                 | Inside pirate ship about to play ropes 2 minigame
 | Forest Haven Swim       | At windfall island about to swim to forest haven
-| Deku Tree Cutscene Skip | At forest haven about to do dtcs
+| Forest Haven Climb      | Outside forest haven with door cancel or Tuner
+| Lip Crush Cutscene Skip | Inside forest haven at top for lip crush
+| Chin CS Skip [Alt]      | Inside forest haven at bottom for normal dtcs
+| Leaf Hover [Alt]        | Inside Forest Haven, after DTCS with leaf spawned
 | Quiver Swim             | At forest haven about to swim to thorned fairy island
 | FF2 Swim                | At thorned fairy island about to swim to ff2
 | Helmaroc Skip           | Inside ff2 tower at start of helmaroc king fight
 | Barrier Skip            | Outside hyrule castle about to do barrier skip
 | Trials Skip             | Inside ganon's tower about to do trials skip
 | Puppet Ganon Fight      | Inside ganondorf's bedroom at start of puppet ganon fight
+| Tuner Hover [Alt]       | At top of rope in ganondorf's bedroom for Tuner hover
 | Morth Hover             | Inside ganondorf's bedroom after fight at top of room
 | Ganondorf               | On top of ganondorf's tower at start of ganondorf fight
-
-</details>
-
-<details>
-<summary>Any%</summary>
-<br>  
- 
-| Save                        | Description                                    
-| :--                         | :--                                           
-| Manual Superswim            | Just after the intro, at bottom of watchtower
-| Post Manual Superswim       | After MSS at DRI
-| Windfall                    | At Windfall Island, post FF1 cutscene
-| Sail Skip                   | In KorL near Windfall, after Greatfish cutscene skip
-| Ropes 2                     | Inside pirate ship, ropes 2 minigame state
-| Forest Haven Swim           | At Windfall Island post bombs for swim to Forest Haven
-| Deku Tree Cutscene Skip     | Inside Forest Haven for first time, for DTCS
-| Leaf Hover                  | Inside Forest Haven, after DTCS with leaf spawned
-| Post Leaf Swim              | Outside Forest Haven, quiver swim or FF2 PG skip swim
-| FF2 Swim                    | At Thorned Fairy Island, FF2 swim assuming you got quiver
-| Helmaroc Skip               | Inside FF2 Tower, at start of Helmaroc King fight
-| Barrier Skip                | Outside Hyrule Castle, about to do barrier skip
-| Trials Skip                 | Inside Ganon's Tower, in trials room for trials skip
-| Light Arrow Skip            | In Phantom Ganon's room for light arrow skip
-| Puppet Ganon Cutscene Skip  | At bottom Grand Staircase for Puppet Ganon cutscene skip
-| Puppet Ganon Skip           | Bottom of Ganondorf's Bedroom for Puppet Ganon skip
-| Puppet Ganon Fight          | Bottom of Ganondorf's Bedroom, at start of Puppet Ganon fight
-| Morth Hover                 | Inside Ganondorf's Bedroom after fight, at top of room
-| Ganondorf                   | On top of Ganondorf's Tower, at start of Ganondorf fight
 
 </details>
 
@@ -405,6 +412,30 @@ The following categories are supported. Click the dropdown to view a list of eac
 
 </details>
 
+<details>
+<summary>Any% (Bombs First, No PG Skip)</summary>
+<br>  
+ 
+| Save                        | Description                                    
+| :--                         | :--                                           
+| Manual Superswim            | Just after the intro, at bottom of watchtower
+| Post Manual Superswim       | After MSS at DRI
+| Windfall                    | At Windfall Island, post FF1 cutscene
+| Ropes 2                     | Inside pirate ship, ropes 2 minigame state
+| Forest Haven Swim           | At Windfall Island post bombs for swim to Forest Haven
+| Deku Tree Cutscene Skip     | Inside Forest Haven for first time, for DTCS
+| Leaf Hover                  | Inside Forest Haven, after DTCS with leaf spawned
+| Quiver Swim                 | Outside Forest Haven, quiver swim or FF2 PG skip swim
+| FF2 Swim                    | At Thorned Fairy Island, FF2 swim assuming you got quiver
+| Helmaroc Skip               | Inside FF2 Tower, at start of Helmaroc King fight
+| Barrier Skip                | Outside Hyrule Castle, about to do barrier skip
+| Trials Skip                 | Inside Ganon's Tower, in trials room for trials skip
+| Puppet Ganon Fight          | Bottom of Ganondorf's Bedroom, at start of Puppet Ganon fight
+| Morth Hover                 | Inside Ganondorf's Bedroom after fight, at top of room
+| Ganondorf                   | On top of Ganondorf's Tower, at start of Ganondorf fight
+
+</details>
+
 ---
 
 ### Scene
@@ -420,7 +451,10 @@ The following categories are supported. Click the dropdown to view a list of eac
 | Current Hour        | Change current hour
 | Current Minutes     | Change current minute
 | Current Date        | Change current date/moon phase
-  
+| Collision Viewer    | View various types of collision
+| Actor List          | Display info from actor list
+| Actor Spawner       | Spawn actors at current position
+
 #### Collision Viewer - view various types of collision
 
 | Option              | Description                   
@@ -434,6 +468,10 @@ The following categories are supported. Click the dropdown to view a list of eac
 | Poly Edges          | View edges of each polygon
 | Poly Draw Raise     | Amount to raise the drawn polygons by
 | Opcaity             | Transparency amount of collision viewer
+ 
+TODO: Explain more about how Actor List works
+
+TODO: Explain more about how Actor Spawner works
 
 ---
 
@@ -444,10 +482,18 @@ The following categories are supported. Click the dropdown to view a list of eac
 | Cursor Color           | Change cursor color
 | Font                   | Change font
 | Drop Shadows           | Add shadows to all font characters
+| Decimal Angles         | Display angles in decimal instead of hex
+| Custom Save Positions  | Turn on/off custom positions in saves that support them
 | Item Equip Priorities  | Adjust priorities on item equips in practice saves
 | Save Card              | Save settings to memory card
 | Load Card              | Load settings from memory card
 | Delete Card            | Delete settings on memory card
+| Menu Positions         | Change menu object pistions (A tot oggle selection, Dpad to move)
+| Fast Swim Speed        | Change max speed of fast movement cheat for swimming
+| Fast Land Speed        | Change max speed of fast movement cheat on land
+| Spawn ID               | Set spawn ID for disable save checks tool, invalid ID's will crash
+
+Moveable Lists: Main Menu, FIFO Queue, Link Debug Info, Time Display, Input Viewer, Frame Timer, Zombie Hover Info, Stage Info
 
 ---
 
@@ -457,11 +503,16 @@ The following categories are supported. Click the dropdown to view a list of eac
 | :--                    | :--    
 | Link Debug Info        | Display position and angle data for Link
 | Display Time Info      | Display current day, time and moon phase
+| Stage Info             | Display Link's current stage info
 | Teleport               | R+D-pad up to save position. R+D-pad down to load
 | Area Reload            | Reload the current room by pressing L + R + A + Start
 | Map Aelect             | Load Map Select by holding D-pad down + Y + Z
 | Zombie Hover Info      | Display A and B button presses per second
 | Input Viewer           | Show current inputs
+| Timers                 | Toggle timers (frames and seconds) with L + R + D-pad Right, reset with L + R + D-pad Left
+| Frame Advance          | D-pad Down to pause/unpause, D-pad Up to advance frames
 | ESS Checker            | Change input viewer stick color based on distance from perfect ess
 | Deadzone Checker       | Change input viewer stick coor if stick is in deadzone
+| Disable Save Checks    | Disable save location safety checks, set used spawn ID in settings menu
 | Intro Skip             | Skip lore segment of intro on start of new file
+| Room Reload/Void Out   | Reload room by void out with L + R + B + Start

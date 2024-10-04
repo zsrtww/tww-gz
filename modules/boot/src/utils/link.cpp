@@ -57,12 +57,12 @@ KEEP_FUNC void GZ_displayLinkInfo() {
         f32 pos_y = g_spriteOffsets[SPR_DEBUG_INFO_INDEX].y;
         uint32_t color_white = 0xFFFFFFFF;
 
-        Font::GZ_drawStr(link_x, pos_x, pos_y, color_white, g_dropShadows);
-        Font::GZ_drawStr(link_y, pos_x, pos_y + 20.0f, color_white, g_dropShadows);
-        Font::GZ_drawStr(link_z, pos_x, pos_y + 40.0f, color_white, g_dropShadows);
-        Font::GZ_drawStr(link_angle, pos_x, pos_y + 60.0f, color_white, g_dropShadows);
-        Font::GZ_drawStr(link_speed, pos_x, pos_y + 80.0f, color_white, g_dropShadows);
-        Font::GZ_drawStr(link_action, pos_x, pos_y + 100.0f, color_white, g_dropShadows);
+        Font::GZ_drawStr(link_x, pos_x, pos_y - 20.0f, color_white, g_dropShadows);
+        Font::GZ_drawStr(link_y, pos_x, pos_y, color_white, g_dropShadows);
+        Font::GZ_drawStr(link_z, pos_x, pos_y + 20.0f, color_white, g_dropShadows);
+        Font::GZ_drawStr(link_angle, pos_x, pos_y + 40.0f, color_white, g_dropShadows);
+        Font::GZ_drawStr(link_speed, pos_x, pos_y + 60.0f, color_white, g_dropShadows);
+        Font::GZ_drawStr(link_action, pos_x, pos_y + 80.0f, color_white, g_dropShadows);
     }
 }
 

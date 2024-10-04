@@ -16,8 +16,8 @@ const char* g_menuPaths[MN_COUNT] = {
     "treasure_chart", "special_chart",
     "triforce_chart", "watches",
     "memory_editor",  "any_optimal_saves",
-    "any_saves",      "nomss_saves",
-    "ad_saves",       "collision_view",
+    "nomss_saves",    "ad_saves",
+    "any_saves",      "collision_view",
     "actor_list",     "actor_spawn",
     "equip_priority", "pos_settings",
 };

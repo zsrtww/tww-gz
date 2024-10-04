@@ -29,7 +29,7 @@ KEEP_FUNC SettingsMenu::SettingsMenu(Cursor& cursor)
           {"menu positions", POS_SETTINGS_MENU_INDEX,
            "change menu object positions (A to toggle selection, DPad to move)", false},
           {"fast swim speed:", WATER_SPEED_INDEX, "change max speed of fast movement cheat for swimming"},
-          {"fast run speed:", LAND_SPEED_INDEX, "change max speed of Fast Movement cheat for running"},
+          {"fast land speed:", LAND_SPEED_INDEX, "change max speed of Fast Movement cheat on land"},
           {"spawn id: ", SPAWN_ID_INDEX, "set spawn id for disable save checks tool, invalid id's will crash"},
       } {}
 
