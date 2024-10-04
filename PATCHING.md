@@ -23,7 +23,7 @@ This is the preferred method, super streamlined and automated
     - `romhack-vx.x.x-r2-linux-x64-gc.zip` for Linux  
 <br/>
 
-2. Place a TWW ISO in the same folder as the ROM Hack Compiler executeable, and rename it according to the following:  
+2. Place a TWW ISO in the same folder as the ROM Hack Compiler executable, and rename it according to the following:  
     - NTSCJ (JP): `GZLJ01.iso`
     - NTSCU (ENG): `GZLE01.iso`
     - PAL: `GZLP01.iso`  
