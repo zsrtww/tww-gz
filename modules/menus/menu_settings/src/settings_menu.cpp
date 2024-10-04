@@ -20,8 +20,8 @@ KEEP_FUNC SettingsMenu::SettingsMenu(Cursor& cursor)
           {"drop shadows", DROP_SHADOWS_INDEX, "adds shadows to all font letters", true, &g_dropShadows},
           {"decimal angles", ANGLE_DECIMAL_INDEX, "display angles in decimal instead of hex", true,
            &g_angleValuesInDecimal},
-          {"custom save positions", CUSTOM_POSITIONS_INDEX, "turn on/off custom positions in saves that support them", true,
-           &g_custom_positions},
+          {"custom save positions", CUSTOM_POSITIONS_INDEX, "turn on/off custom positions in saves that support them",
+           true, &g_customSaveSpawns},
           {"equip priority", ITEM_EQUIP_PRIORITY_INDEX, "adjust priorities on item equips in practice saves", false},
           {"save card", SAVE_CARD_INDEX, "save settings to memory card"},
           {"load card", LOAD_CARD_INDEX, "load settings from memory card"},
@@ -52,7 +52,7 @@ void SettingsMenu::draw() {
             g_angleValuesInDecimal = !g_angleValuesInDecimal;
             break;
         case CUSTOM_POSITIONS_INDEX:
-            g_custom_positions = !g_custom_positions;
+            g_customSaveSpawns = !g_customSaveSpawns;
             break;
         case POS_SETTINGS_MENU_INDEX:
             g_menuMgr->push(MN_POS_SETTINGS_INDEX);

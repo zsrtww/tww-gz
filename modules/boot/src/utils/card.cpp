@@ -76,7 +76,7 @@ void GZ_storeSaveLayout(GZSaveLayout& save_layout) {
     save_layout.mWaterSpeed = g_waterSpeed;
     save_layout.mLandSpeed = g_landSpeed;
     save_layout.mAngleValuesInDecimal = g_angleValuesInDecimal;
-    save_layout.mCustomPositions = g_custom_positions;
+    save_layout.mCustomPositions = g_customSaveSpawns;
 }
 
 void GZ_loadSaveLayout(GZSaveLayout& save_layout) {
@@ -94,7 +94,7 @@ void GZ_loadSaveLayout(GZSaveLayout& save_layout) {
     g_waterSpeed = save_layout.mWaterSpeed;
     g_landSpeed = save_layout.mLandSpeed;
     g_angleValuesInDecimal = save_layout.mAngleValuesInDecimal;
-    g_custom_positions = save_layout.mCustomPositions;
+    g_customSaveSpawns = save_layout.mCustomPositions;
 }
 
 void GZ_setupSaveFile(GZSaveFile& save_file) {

@@ -7,7 +7,7 @@ KEEP_VAR ListMember g_font_opt[] = {"consola",   "calamity-bold",  "lib-sans",  
 
 KEEP_VAR bool g_dropShadows = true;
 KEEP_VAR bool g_angleValuesInDecimal = false;
-KEEP_VAR bool g_custom_positions = true;
+KEEP_VAR bool g_customSaveSpawns = true;
 KEEP_VAR uint32_t g_fontType = 0;
 KEEP_VAR uint32_t g_cursorColorType;
 

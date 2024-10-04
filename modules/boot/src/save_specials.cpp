@@ -8,7 +8,6 @@
 #include "libtww/include/d/a/d_a_player_main.h"
 #include "rels/include/defines.h"
 #include "commands.h"
-#include "menus/menu_settings/include/settings_menu.h"
 #include "settings.h"
 
 // =================== UTILITIES ===================
@@ -170,7 +169,7 @@ KEEP_FUNC void SaveMngSpecial_Ganondorf() {
 KEEP_FUNC void SaveMngSpecial_Helmaroc() {
     SaveMngSpecial_SetLayer3();
 
-    if (g_custom_positions){
+    if (g_customSaveSpawns) {
         gSaveManager.modifyActor(PROC_PLAYER, [](fopAc_ac_c* actor) {
             SaveMngSpecial_SetActorPosAndYaw(actor, 4258.2119f, 9064.7334f, -4360.8140f, 0xA72A);
         });
@@ -226,7 +225,7 @@ KEEP_FUNC void SaveMngSpecial_BombsSwim_NoMSS() {
 }
 
 KEEP_FUNC void SaveMngSpecial_GanonHover() {
-    if (g_custom_positions){
+    if (g_customSaveSpawns) {
         gSaveManager.modifyActor(PROC_PLAYER, [](fopAc_ac_c* actor) {
             SaveMngSpecial_SetActorPosAndYaw(actor, 546.4542f, 4476.6108f, -1.1532f, 0x3FE1);
         });
@@ -316,7 +315,7 @@ KEEP_FUNC void SaveMngSpecial_HyruleEscape_AD() {
     g_dComIfG_gameInfo.play.mNextStage.setRoomNo(0);
     g_dComIfG_gameInfo.play.mNextStage.setPoint(2);
 
-    if (g_custom_positions){
+    if (g_customSaveSpawns) {
         gSaveManager.modifyActor(PROC_PLAYER, [](fopAc_ac_c* actor) {
             SaveMngSpecial_SetActorPosAndYaw(actor, 349.2255f, -1549.8273f, -1697.4833f, 0xD000);
         });
@@ -352,7 +351,7 @@ KEEP_FUNC void SaveMngSpecial_Hyrule2Skip_AD() {
 
     gSaveManager.modifySave([]() { SaveMngSpecial_SetHealth(2); });
 
-    if (g_custom_positions){
+    if (g_customSaveSpawns) {
         gSaveManager.modifyActor(PROC_PLAYER, [](fopAc_ac_c* actor) {
             SaveMngSpecial_SetActorPosAndYaw(actor, 4258.2119f, 9064.7334f, -4360.8140f, 0xA72A);
         });
