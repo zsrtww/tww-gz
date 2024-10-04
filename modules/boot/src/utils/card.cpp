@@ -75,6 +75,8 @@ void GZ_storeSaveLayout(GZSaveLayout& save_layout) {
     save_layout.mEquipPriorityEnabled = g_equipPriorityEnabled;
     save_layout.mWaterSpeed = g_waterSpeed;
     save_layout.mLandSpeed = g_landSpeed;
+    save_layout.mAngleValuesInDecimal = g_angleValuesInDecimal;
+    save_layout.mCustomPositions = g_customSaveSpawns;
 }
 
 void GZ_loadSaveLayout(GZSaveLayout& save_layout) {
@@ -91,6 +93,8 @@ void GZ_loadSaveLayout(GZSaveLayout& save_layout) {
     g_equipPriorityEnabled = save_layout.mEquipPriorityEnabled;
     g_waterSpeed = save_layout.mWaterSpeed;
     g_landSpeed = save_layout.mLandSpeed;
+    g_angleValuesInDecimal = save_layout.mAngleValuesInDecimal;
+    g_customSaveSpawns = save_layout.mCustomPositions;
 }
 
 void GZ_setupSaveFile(GZSaveFile& save_file) {
@@ -114,6 +118,8 @@ void GZ_setupSaveFile(GZSaveFile& save_file) {
     set_entry(SV_EQUIP_PRIORITY_INDEX, mEquipPriorityEnabled);
     set_entry(SV_WATERSPEED_INDEX, mWaterSpeed);
     set_entry(SV_LANDSPEED_INDEX, mLandSpeed);
+    set_entry(SV_ANGLE_CONVERSION_INDEX, mAngleValuesInDecimal);
+    set_entry(SV_CUSTOM_POSITIONS_INDEX, mCustomPositions);
 #undef set_entry
 }
 
@@ -154,6 +160,10 @@ int32_t GZ_readSaveFile(Storage* storage, GZSaveFile& save_file, int32_t sector_
                       sizeof(save_file.data.mEquipPriorityEnabled));
     assert_read_entry(SV_WATERSPEED_INDEX, &save_file.data.mWaterSpeed, sizeof(save_file.data.mWaterSpeed));
     assert_read_entry(SV_LANDSPEED_INDEX, &save_file.data.mLandSpeed, sizeof(save_file.data.mLandSpeed));
+    assert_read_entry(SV_ANGLE_CONVERSION_INDEX, &save_file.data.mAngleValuesInDecimal,
+                      sizeof(save_file.data.mAngleValuesInDecimal));
+    assert_read_entry(SV_CUSTOM_POSITIONS_INDEX, &save_file.data.mCustomPositions,
+                      sizeof(save_file.data.mCustomPositions));
 #undef assert_read_entry
 #undef assert_result
 

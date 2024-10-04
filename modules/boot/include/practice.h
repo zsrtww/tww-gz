@@ -3,8 +3,9 @@
 // #include "save_manager.h"
 
 enum {
-    ANY_NO_MSS,
+    ANY_OPTIMAL,
     ANY_PERCENT,
+    ANY_NO_MSS,
     ALL_DUNGEONS,
 
     PRACTICE_MENU_NUM,

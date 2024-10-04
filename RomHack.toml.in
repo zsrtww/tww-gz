@@ -20,6 +20,10 @@ iso = "@TWWGZ_CFG_BLD_ISO@"
 # fonts
 "twwgz/fonts" = "../res/fonts"
 
+# any% optimal saves
+"twwgz/save_files/any_optimal.bin" = "../@TWWGZ_CFG_SAVE_ANY_PATH@/any_optimal.bin"
+"twwgz/save_files/any_optimal" = "../@TWWGZ_CFG_SAVE_ANY_PATH@/any_optimal"
+
 # any% saves
 "twwgz/save_files/any_percent.bin" = "../@TWWGZ_CFG_SAVE_ANY_PATH@/any_percent.bin"
 "twwgz/save_files/any_percent" = "../@TWWGZ_CFG_SAVE_ANY_PATH@/any_percent"

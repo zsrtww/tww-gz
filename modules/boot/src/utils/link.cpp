@@ -45,7 +45,11 @@ KEEP_FUNC void GZ_displayLinkInfo() {
         snprintf(link_x, sizeof(link_x), "pos x: %.4f", player->current.pos.x);
         snprintf(link_y, sizeof(link_y), "pos y: %.4f", player->current.pos.y);
         snprintf(link_z, sizeof(link_z), "pos z: %.4f", player->current.pos.z);
-        snprintf(link_angle, sizeof(link_angle), "rot y: 0x%04X", (u16)player->shape_angle.y);
+        if (g_angleValuesInDecimal) {
+            snprintf(link_angle, sizeof(link_angle), "rot y: %d", player->shape_angle.y);
+        } else {
+            snprintf(link_angle, sizeof(link_angle), "rot y: 0x%04X", (u16)player->shape_angle.y);
+        }
         snprintf(link_speed, sizeof(link_speed), "speed: %.4f", player->speedF);
         snprintf(link_action, sizeof(link_action), "action: %s", proc->procName);
 

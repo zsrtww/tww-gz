@@ -8,6 +8,7 @@
 #include "libtww/include/d/a/d_a_player_main.h"
 #include "rels/include/defines.h"
 #include "commands.h"
+#include "settings.h"
 
 // =================== UTILITIES ===================
 
@@ -37,6 +38,11 @@ inline void SaveMngSpecial_SetActorRot(fopAc_ac_c* actor, s16 xRot, s16 yRot, s1
         l_debug_current_angle.set(xRot, yRot, zRot);
         l_debug_shape_angle.set(xRot, yRot, zRot);
     }
+}
+
+inline void SaveMngSpecial_SetActorPosAndYaw(fopAc_ac_c* actor, f32 x, f32 y, f32 z, s16 yRot) {
+    SaveMngSpecial_SetActorPos(actor, x, y, z);
+    SaveMngSpecial_SetActorYaw(actor, yRot);
 }
 
 inline void SaveMngSpecial_SetHealth(u16 health) {
@@ -77,6 +83,10 @@ KEEP_FUNC void SaveMngSpecial_SetLayer2() {
 
 KEEP_FUNC void SaveMngSpecial_SetLayer3() {
     g_dComIfG_gameInfo.play.mNextStage.setLayer(3);
+}
+
+KEEP_FUNC void SaveMngSpecial_SetLayer8() {
+    g_dComIfG_gameInfo.play.mNextStage.setLayer(8);
 }
 
 // =================== SHARED FUNCTIONS ===================
@@ -159,18 +169,26 @@ KEEP_FUNC void SaveMngSpecial_Ganondorf() {
 KEEP_FUNC void SaveMngSpecial_Helmaroc() {
     SaveMngSpecial_SetLayer3();
 
-    gSaveManager.modifyActor(PROC_PLAYER, [](fopAc_ac_c* actor) {
-        SaveMngSpecial_SetActorPos(actor, 4258.2119f, 9064.7334f, -4360.8140f);
-        SaveMngSpecial_SetActorYaw(actor, 0xA72A);
-    });
+    if (g_customSaveSpawns) {
+        gSaveManager.modifyActor(PROC_PLAYER, [](fopAc_ac_c* actor) {
+            SaveMngSpecial_SetActorPosAndYaw(actor, 4258.2119f, 9064.7334f, -4360.8140f, 0xA72A);
+        });
+    }
+}
+
+KEEP_FUNC void SaveMngSpecial_Outside_FH_DC() {
+    gSaveManager.modifyActor(PROC_PLAYER, [](fopAc_ac_c* actor) { SaveMngSpecial_DoorCancel(actor); });
 }
 
 // =================== ANY% FUNCTIONS ===================
 
+KEEP_FUNC void SaveMngSpecial_TrialsSkipAny() {
+    gSaveManager.modifySave([]() { SaveMngSpecial_SetHealth(1); });
+}
+
 KEEP_FUNC void SaveMngSpecial_LightArrowSkip_Any() {
     gSaveManager.modifySave([]() {
-        SaveMngSpecial_SetBombCount(17);
-        SaveMngSpecial_SetHealth(6);
+        SaveMngSpecial_SetHealth(1);
         SaveMngSpecial_SetMagic(6);
     });
 }
@@ -184,12 +202,15 @@ KEEP_FUNC void SaveMngSpecial_PGCutsceneSkip_Any() {
 }
 
 KEEP_FUNC void SaveMngSpecial_PGSkip_Any() {
-    g_dComIfG_gameInfo.play.mNextStage.setLayer(8);
+    SaveMngSpecial_SetLayer8();
 
+    gSaveManager.modifySave([]() { SaveMngSpecial_SetHealth(1); });
+}
+
+KEEP_FUNC void SaveMngSpecial_BarrierSkip_Any() {
     gSaveManager.modifySave([]() {
-        SaveMngSpecial_SetBombCount(15);
+        ;
         SaveMngSpecial_SetHealth(1);
-        SaveMngSpecial_SetMagic(13);
     });
 }
 
@@ -199,20 +220,16 @@ KEEP_FUNC void SaveMngSpecial_BombsSwim_NoMSS() {
     SaveMngSpecial_SetLayer0();
 
     gSaveManager.modifyActor(PROC_SHIP, [](fopAc_ac_c* actor) {
-        SaveMngSpecial_SetActorPos(actor, 196459.0f, 0.0f, -199693.0f);
-        SaveMngSpecial_SetActorYaw(actor, 0x623E);
+        SaveMngSpecial_SetActorPosAndYaw(actor, 196459.0f, 0.0f, -199693.0f, 0x623E);
     });
-}
-
-KEEP_FUNC void SaveMngSpecial_Outside_FH_NoMSS() {
-    gSaveManager.modifyActor(PROC_PLAYER, [](fopAc_ac_c* actor) { SaveMngSpecial_DoorCancel(actor); });
 }
 
 KEEP_FUNC void SaveMngSpecial_GanonHover() {
-    gSaveManager.modifyActor(PROC_PLAYER, [](fopAc_ac_c* actor) {
-        SaveMngSpecial_SetActorPos(actor, 546.4542f, 4476.6108f, -1.1532f);
-        SaveMngSpecial_SetActorYaw(actor, 0x3FE1);
-    });
+    if (g_customSaveSpawns) {
+        gSaveManager.modifyActor(PROC_PLAYER, [](fopAc_ac_c* actor) {
+            SaveMngSpecial_SetActorPosAndYaw(actor, 546.4542f, 4476.6108f, -1.1532f, 0x3FE1);
+        });
+    }
 
     gSaveManager.modifySave([]() { SaveMngSpecial_SetHealth(1); });
 }
@@ -232,7 +249,7 @@ KEEP_FUNC void SaveMngSpecial_FF1CS_AD() {
 KEEP_FUNC void SaveMngSpecial_EarlyLeafHover_AD() {
     g_dComIfG_gameInfo.play.mNextStage.setPoint(5);
 
-    gSaveManager.modifySave([]() { SaveMngSpecial_SetHealth(4); });
+    gSaveManager.modifySave([]() { SaveMngSpecial_SetHealth(1); });
 }
 
 KEEP_FUNC void SaveMngSpecial_DTCS_AD() {
@@ -297,6 +314,12 @@ KEEP_FUNC void SaveMngSpecial_HyruleEscape_AD() {
     g_dComIfG_gameInfo.play.mNextStage.setName((char*)"Hyroom");
     g_dComIfG_gameInfo.play.mNextStage.setRoomNo(0);
     g_dComIfG_gameInfo.play.mNextStage.setPoint(2);
+
+    if (g_customSaveSpawns) {
+        gSaveManager.modifyActor(PROC_PLAYER, [](fopAc_ac_c* actor) {
+            SaveMngSpecial_SetActorPosAndYaw(actor, 349.2255f, -1549.8273f, -1697.4833f, 0xD000);
+        });
+    }
 }
 
 KEEP_FUNC void SaveMngSpecial_BarrierSkip_AD() {
@@ -306,15 +329,19 @@ KEEP_FUNC void SaveMngSpecial_BarrierSkip_AD() {
 }
 
 KEEP_FUNC void SaveMngSpecial_BoomerangSkip_AD() {
+    g_dComIfG_gameInfo.play.mNextStage.setName((char*)"GanonM");
+    g_dComIfG_gameInfo.play.mNextStage.setRoomNo(0);
     g_dComIfG_gameInfo.play.mNextStage.setPoint(0);
 }
 
 KEEP_FUNC void SaveMngSpecial_PhantomGanon_AD() {
+    SaveMngSpecial_SetLayer1();
     g_dComIfG_gameInfo.play.mNextStage.setPoint(15);
     gSaveManager.modifySave([]() { SaveMngSpecial_SetHealth(6); });
 }
 
 KEEP_FUNC void SaveMngSpecial_EnterHelmaroc_AD() {
+    SaveMngSpecial_SetLayer1();
     g_dComIfG_gameInfo.play.mNextStage.setPoint(15);
     gSaveManager.modifySave([]() { SaveMngSpecial_SetHealth(2); });
 }
@@ -323,6 +350,12 @@ KEEP_FUNC void SaveMngSpecial_Hyrule2Skip_AD() {
     SaveMngSpecial_SetLayer3();
 
     gSaveManager.modifySave([]() { SaveMngSpecial_SetHealth(2); });
+
+    if (g_customSaveSpawns) {
+        gSaveManager.modifyActor(PROC_PLAYER, [](fopAc_ac_c* actor) {
+            SaveMngSpecial_SetActorPosAndYaw(actor, 4258.2119f, 9064.7334f, -4360.8140f, 0xA72A);
+        });
+    }
 }
 
 KEEP_FUNC void SaveMngSpecial_FireMountain_AD() {
@@ -361,7 +394,7 @@ KEEP_FUNC void SaveMngSpecial_Makar_AD() {
 }
 
 KEEP_FUNC void SaveMngSpecial_EnterWT_AD() {
-    g_dComIfG_gameInfo.play.mNextStage.setPoint(9);
+    g_dComIfG_gameInfo.play.mNextStage.setPoint(0);
     gSaveManager.modifySave([]() { SaveMngSpecial_SetHealth(1); });
 }
 
@@ -387,6 +420,7 @@ KEEP_FUNC void SaveMngSpecial_Swim2FCP_AD() {
 }
 
 KEEP_FUNC void SaveMngSpecial_TrialsSkip_AD() {
+    g_dComIfG_gameInfo.play.mNextStage.setName((char*)"GanonA");
     g_dComIfG_gameInfo.play.mNextStage.setRoomNo(1);
     g_dComIfG_gameInfo.play.mNextStage.setPoint(0);
 }
