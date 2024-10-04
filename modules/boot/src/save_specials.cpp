@@ -39,6 +39,11 @@ inline void SaveMngSpecial_SetActorRot(fopAc_ac_c* actor, s16 xRot, s16 yRot, s1
     }
 }
 
+inline void SaveMngSpecial_SetActorPosAndYaw(fopAc_ac_c* actor, f32 x, f32 y, f32 z, s16 yRot) {
+    SaveMngSpecial_SetActorPos(actor, x, y, z);
+    SaveMngSpecial_SetActorYaw(actor, yRot);
+}
+
 inline void SaveMngSpecial_SetHealth(u16 health) {
     g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusA().setLife(health);
 }
@@ -164,8 +169,7 @@ KEEP_FUNC void SaveMngSpecial_Helmaroc() {
     SaveMngSpecial_SetLayer3();
 
     gSaveManager.modifyActor(PROC_PLAYER, [](fopAc_ac_c* actor) {
-        SaveMngSpecial_SetActorPos(actor, 4258.2119f, 9064.7334f, -4360.8140f);
-        SaveMngSpecial_SetActorYaw(actor, 0xA72A);
+        SaveMngSpecial_SetActorPosAndYaw(actor, 4258.2119f, 9064.7334f, -4360.8140f, 0xA72A);
     });
 }
 
@@ -213,15 +217,13 @@ KEEP_FUNC void SaveMngSpecial_BombsSwim_NoMSS() {
     SaveMngSpecial_SetLayer0();
 
     gSaveManager.modifyActor(PROC_SHIP, [](fopAc_ac_c* actor) {
-        SaveMngSpecial_SetActorPos(actor, 196459.0f, 0.0f, -199693.0f);
-        SaveMngSpecial_SetActorYaw(actor, 0x623E);
+        SaveMngSpecial_SetActorPosAndYaw(actor, 196459.0f, 0.0f, -199693.0f, 0x623E);
     });
 }
 
 KEEP_FUNC void SaveMngSpecial_GanonHover() {
     gSaveManager.modifyActor(PROC_PLAYER, [](fopAc_ac_c* actor) {
-        SaveMngSpecial_SetActorPos(actor, 546.4542f, 4476.6108f, -1.1532f);
-        SaveMngSpecial_SetActorYaw(actor, 0x3FE1);
+        SaveMngSpecial_SetActorPosAndYaw(actor, 546.4542f, 4476.6108f, -1.1532f, 0x3FE1);
     });
 
     gSaveManager.modifySave([]() { SaveMngSpecial_SetHealth(1); });
@@ -309,8 +311,7 @@ KEEP_FUNC void SaveMngSpecial_HyruleEscape_AD() {
     g_dComIfG_gameInfo.play.mNextStage.setPoint(2);
 
     gSaveManager.modifyActor(PROC_PLAYER, [](fopAc_ac_c* actor) {
-        SaveMngSpecial_SetActorPos(actor, 349.2255f, -1549.8273f, -1697.4833f);
-        SaveMngSpecial_SetActorYaw(actor, 0xD000);
+        SaveMngSpecial_SetActorPosAndYaw(actor, 349.2255f, -1549.8273f, -1697.4833f, 0xD000);
     });
 }
 
@@ -344,8 +345,7 @@ KEEP_FUNC void SaveMngSpecial_Hyrule2Skip_AD() {
     gSaveManager.modifySave([]() { SaveMngSpecial_SetHealth(2); });
 
     gSaveManager.modifyActor(PROC_PLAYER, [](fopAc_ac_c* actor) {
-        SaveMngSpecial_SetActorPos(actor, 4258.2119f, 9064.7334f, -4360.8140f);
-        SaveMngSpecial_SetActorYaw(actor, 0xA72A);
+        SaveMngSpecial_SetActorPosAndYaw(actor, 4258.2119f, 9064.7334f, -4360.8140f, 0xA72A);
     });
 }
 
