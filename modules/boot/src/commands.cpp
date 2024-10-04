@@ -10,6 +10,7 @@
 #include "gz_flags.h"
 #include "rels/include/defines.h"
 #include "libtww/include/d/save/d_save.h"
+#include "utils/hook.h"
 
 bool g_commandStates[COMMANDS_AMNT];
 bool g_timer_reset = false;
@@ -111,8 +112,12 @@ void GZCmd_areaReload() {
     s8 layer = g_dComIfG_gameInfo.play.mStartStage.getLayer();
 
     g_dComIfG_gameInfo.play.mNextStage.setName(stage);
-    g_dComIfG_gameInfo.play.mNextStage.setPoint(entrance);
     g_dComIfG_gameInfo.play.mNextStage.setRoomNo(room);
+    if (entrance == -1) {
+        g_dComIfG_gameInfo.play.mNextStage.setPoint(g_lastValidPoint);
+    } else {
+        g_dComIfG_gameInfo.play.mNextStage.setPoint(entrance);
+    }
     g_dComIfG_gameInfo.play.mNextStage.setLayer(layer);
     g_dComIfG_gameInfo.play.mNextStage.setEnabled(true);
     g_dComIfG_gameInfo.play.mNextStage.setWipe(0);

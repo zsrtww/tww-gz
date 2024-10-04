@@ -46,6 +46,8 @@ HOOK_DEF(void, onSwitch, (void*, int, int));
 
 int spawn_id_input = 0;
 bool g_flagLogEnabled = 0;
+int g_lastValidPoint = 0;
+int point = 0;
 
 namespace Hook {
 
@@ -127,6 +129,11 @@ void putSaveHook(void* addr, int stageNo) {
 
 int dScnPly__phase_1Hook(void* i_scene) {
     SaveManager::loadData();
+
+    point = g_dComIfG_gameInfo.play.mStartStage.getPoint();
+    if (point >= 0) {
+        g_lastValidPoint = point;
+    }
 
     return dScnPly__phase_1Trampoline(i_scene);
 }
