@@ -8,7 +8,7 @@ This is the preferred method, super streamlined and automated
 1. Go to the [ISO Patcher](https://geckopatcher.net/) website
 <br/>
 
-2. Provide your own ISO (NTSC-J,NTSC-E,PAL) as well as the corresponding patch provided with this release.
+2. Provide your own ISO (JP,ENG,PAL) as well as the corresponding patch provided with this release.
 <br/>
 
 3. Press the Patch button and an iso names "output.iso" will appear in your downloads when complete. Rename however you desire.
@@ -16,7 +16,7 @@ This is the preferred method, super streamlined and automated
 
 ## On Personal Computer Using Command Prompt or .bat Script
 
-(Note that stable releases include a .bat script for patching on Windows that automates this process, skipping steps 4 and 5)
+(Note that stable releases include a .bat script for patching on Windows that automates this process, skipping steps 5 and 6)
 1. Download the [ROM Hack Compiler](https://github.com/zsrtp/romhack-compiler/releases)  
   Make sure to download the GameCube version denoted by "gc"
     - `romhack-vx.x.x-r2-windows-x64-gc.zip` for Windows
@@ -24,8 +24,8 @@ This is the preferred method, super streamlined and automated
 <br/>
 
 2. Place a TWW ISO in the same folder as the ROM Hack Compiler executeable, and rename it according to the following:  
-    - NTSCJ: `GZLJ01.iso`
-    - NTSCE: `GZLE01.iso`
+    - NTSCJ (JP): `GZLJ01.iso`
+    - NTSCU (ENG): `GZLE01.iso`
     - PAL: `GZLP01.iso`  
 <br/>
 

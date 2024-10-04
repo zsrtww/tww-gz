@@ -323,6 +323,30 @@ The following categories are supported. Click the dropdown to view a list of eac
 </details>
 
 <details>
+<summary>Any% (Bombs First, No PG Skip)</summary>
+<br>  
+ 
+| Save                        | Description                                    
+| :--                         | :--                                           
+| Manual Superswim            | Just after the intro, at bottom of watchtower
+| Post Manual Superswim       | After MSS at DRI
+| Windfall                    | At Windfall Island, post FF1 cutscene
+| Ropes 2                     | Inside pirate ship, ropes 2 minigame state
+| Forest Haven Swim           | At Windfall Island post bombs for swim to Forest Haven
+| Deku Tree Cutscene Skip     | Inside Forest Haven for first time, for DTCS
+| Leaf Hover                  | Inside Forest Haven, after DTCS with leaf spawned
+| Quiver Swim                 | Outside Forest Haven, quiver swim or FF2 PG skip swim
+| FF2 Swim                    | At Thorned Fairy Island, FF2 swim assuming you got quiver
+| Helmaroc Skip               | Inside FF2 Tower, at start of Helmaroc King fight
+| Barrier Skip                | Outside Hyrule Castle, about to do barrier skip
+| Trials Skip                 | Inside Ganon's Tower, in trials room for trials skip
+| Puppet Ganon Fight          | Bottom of Ganondorf's Bedroom, at start of Puppet Ganon fight
+| Morth Hover                 | Inside Ganondorf's Bedroom after fight, at top of room
+| Ganondorf                   | On top of Ganondorf's Tower, at start of Ganondorf fight
+
+</details>
+
+<details>
 <summary>Any% No MSS</summary>
 <br>  
 
@@ -352,30 +376,6 @@ The following categories are supported. Click the dropdown to view a list of eac
 | Tuner Hover [Alt]       | At top of rope in ganondorf's bedroom for Tuner hover
 | Morth Hover             | Inside ganondorf's bedroom after fight at top of room
 | Ganondorf               | On top of ganondorf's tower at start of ganondorf fight
-
-</details>
-
-<details>
-<summary>Any% (Bombs First, No PG Skip)</summary>
-<br>  
- 
-| Save                        | Description                                    
-| :--                         | :--                                           
-| Manual Superswim            | Just after the intro, at bottom of watchtower
-| Post Manual Superswim       | After MSS at DRI
-| Windfall                    | At Windfall Island, post FF1 cutscene
-| Ropes 2                     | Inside pirate ship, ropes 2 minigame state
-| Forest Haven Swim           | At Windfall Island post bombs for swim to Forest Haven
-| Deku Tree Cutscene Skip     | Inside Forest Haven for first time, for DTCS
-| Leaf Hover                  | Inside Forest Haven, after DTCS with leaf spawned
-| Quiver Swim                 | Outside Forest Haven, quiver swim or FF2 PG skip swim
-| FF2 Swim                    | At Thorned Fairy Island, FF2 swim assuming you got quiver
-| Helmaroc Skip               | Inside FF2 Tower, at start of Helmaroc King fight
-| Barrier Skip                | Outside Hyrule Castle, about to do barrier skip
-| Trials Skip                 | Inside Ganon's Tower, in trials room for trials skip
-| Puppet Ganon Fight          | Bottom of Ganondorf's Bedroom, at start of Puppet Ganon fight
-| Morth Hover                 | Inside Ganondorf's Bedroom after fight, at top of room
-| Ganondorf                   | On top of Ganondorf's Tower, at start of Ganondorf fight
 
 </details>
 
@@ -455,12 +455,6 @@ The following categories are supported. Click the dropdown to view a list of eac
 | Actor List          | Display info from actor list
 | Actor Spawner       | Spawn actors at current position
 
-Actor List: Display info from actor list, pause/delete actors on list
-TODO: Explain more about how this works
-
-Actor Spawner: Spawn actors at current position 
-TODO: Explain more about how this works
-  
 #### Collision Viewer - view various types of collision
 
 | Option              | Description                   
@@ -474,6 +468,12 @@ TODO: Explain more about how this works
 | Poly Edges          | View edges of each polygon
 | Poly Draw Raise     | Amount to raise the drawn polygons by
 | Opcaity             | Transparency amount of collision viewer
+
+Actor List: Display info from actor list, pause/delete actors on list <br>  
+TODO: Explain more about how this works
+
+Actor Spawner: Spawn actors at current position <br> 
+TODO: Explain more about how this works
 
 ---
 
