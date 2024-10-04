@@ -11,6 +11,7 @@
 
 extern bool g_dropShadows;
 extern bool g_angleValuesInDecimal;
+extern bool g_custom_positions;
 extern uint32_t g_fontType;
 extern uint32_t g_cursorColorType;
 extern ListMember g_font_opt[7];
