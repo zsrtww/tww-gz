@@ -57,7 +57,7 @@ struct GZSaveLayout {
     bool mEquipPriorityEnabled;
     int mLandSpeed;
     int mWaterSpeed;
-    bool mAngleConversion;
+    bool mAngleValuesInDecimal;
 };
 
 struct GZSaveFile {

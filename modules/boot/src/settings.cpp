@@ -6,7 +6,7 @@ KEEP_VAR ListMember g_font_opt[] = {"consola",   "calamity-bold",  "lib-sans",  
                                     "lib-serif", "lib-serif-bold", "press-start-2p"};
 
 KEEP_VAR bool g_dropShadows = true;
-KEEP_VAR bool g_angle = false;
+KEEP_VAR bool g_angleValuesInDecimal = false;
 KEEP_VAR uint32_t g_fontType = 0;
 KEEP_VAR uint32_t g_cursorColorType;
 
