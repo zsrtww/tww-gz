@@ -85,6 +85,14 @@ KEEP_FUNC void SaveMngSpecial_SetLayer3() {
     g_dComIfG_gameInfo.play.mNextStage.setLayer(3);
 }
 
+KEEP_FUNC void SaveMngSpecial_SetLayer4() {
+    g_dComIfG_gameInfo.play.mNextStage.setLayer(4);
+}
+
+KEEP_FUNC void SaveMngSpecial_SetLayer5() {
+    g_dComIfG_gameInfo.play.mNextStage.setLayer(5);
+}
+
 KEEP_FUNC void SaveMngSpecial_SetLayer8() {
     g_dComIfG_gameInfo.play.mNextStage.setLayer(8);
 }
@@ -292,6 +300,7 @@ KEEP_FUNC void SaveMngSpecial_DRCBossKeySkip_AD() {
 
 KEEP_FUNC void SaveMngSpecial_NayrusPearl_AD() {
     g_dComIfG_gameInfo.play.mNextStage.setPoint(212);
+    SaveMngSpecial_SetLayer4();
 }
 
 KEEP_FUNC void SaveMngSpecial_EnterTOTG_AD() {

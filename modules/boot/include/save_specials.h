@@ -4,6 +4,8 @@ void SaveMngSpecial_SetLayer0();
 void SaveMngSpecial_SetLayer1();
 void SaveMngSpecial_SetLayer2();
 void SaveMngSpecial_SetLayer3();
+void SaveMngSpecial_SetLayer4();
+void SaveMngSpecial_SetLayer5();
 void SaveMngSpecial_SetLayer8();
 
 void SaveMngSpecial_DTCS();
