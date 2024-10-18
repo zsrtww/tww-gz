@@ -1,4 +1,5 @@
 #include <cstdio>
+#include <numeric>
 #include "utils/card.h"
 #include "libtww/include/MSL_C/math.h"
 #include "libtww/include/MSL_C/string.h"
@@ -61,110 +62,106 @@ int32_t GZ_storageRead(Storage* storage, void* data, int32_t size, int32_t offse
     return result;
 }
 
-void GZ_storeSaveLayout(GZSaveLayout& save_layout) {
-    memcpy(save_layout.mCheats, g_cheats, sizeof(g_cheats));
-    memcpy(save_layout.mItemEquipSettings, g_item_equip_priorities, sizeof(g_item_equip_priorities));
-    memcpy(save_layout.mTools, g_tools, sizeof(g_tools));
-    memcpy(save_layout.mCommandStates, g_commandStates, sizeof(g_commandStates));
-    memcpy(save_layout.mWatches, g_watches, sizeof(g_watches));
-    memcpy(save_layout.mSpriteOffsets, g_spriteOffsets, sizeof(g_spriteOffsets));
-
-    save_layout.mDropShadows = g_dropShadows;
-    save_layout.mCursorColType = g_cursorColorType;
-    save_layout.mFontType = g_fontType;
-    save_layout.mEquipPriorityEnabled = g_equipPriorityEnabled;
-    save_layout.mWaterSpeed = g_waterSpeed;
-    save_layout.mLandSpeed = g_landSpeed;
-    save_layout.mAngleValuesInDecimal = g_angleValuesInDecimal;
-    save_layout.mCustomPositions = g_customSaveSpawns;
+/**
+ * @brief Stores the settings in a new buffer.
+ * @param save_file The save file to fetch the metadata from.
+ * @return The buffer containing the settings.
+ */
+void GZ_storeSettings(GZSaveFile& save_file, void* data) {
+    if (save_file.header.data_size == 0) {
+        return;
+    }
+    uint32_t pos = 0;
+    for (auto& entry : g_settings) {
+        memcpy((void*)((uint32_t)data + pos), &entry->id, sizeof(GZSettingID));
+        pos += sizeof(GZSettingID);
+        memcpy((void*)((uint32_t)data + pos), &entry->size, sizeof(size_t));
+        pos += sizeof(size_t);
+        if (entry->size > 0 && entry->data) {
+            memcpy((void*)((uint32_t)data + pos), entry->data, entry->size);
+        }
+        pos += entry->size;
+    }
 }
 
-void GZ_loadSaveLayout(GZSaveLayout& save_layout) {
-    memcpy(g_cheats, save_layout.mCheats, sizeof(g_cheats));
-    memcpy(g_item_equip_priorities, save_layout.mItemEquipSettings, sizeof(g_item_equip_priorities));
-    memcpy(g_tools, save_layout.mTools, sizeof(g_tools));
-    memcpy(g_commandStates, save_layout.mCommandStates, sizeof(g_commandStates));
-    memcpy(g_watches, save_layout.mWatches, sizeof(g_watches));
-    memcpy(g_spriteOffsets, save_layout.mSpriteOffsets, sizeof(g_spriteOffsets));
-
-    g_dropShadows = save_layout.mDropShadows;
-    g_cursorColorType = save_layout.mCursorColType;
-    g_fontType = save_layout.mFontType;
-    g_equipPriorityEnabled = save_layout.mEquipPriorityEnabled;
-    g_waterSpeed = save_layout.mWaterSpeed;
-    g_landSpeed = save_layout.mLandSpeed;
-    g_angleValuesInDecimal = save_layout.mAngleValuesInDecimal;
-    g_customSaveSpawns = save_layout.mCustomPositions;
+/**
+ * @brief Loads the settings from a buffer.
+ * @param save_file The save file to fetch the metadata from.
+ * @param data The buffer containing the settings.
+ */
+void GZ_loadSettings(GZSaveFile save_file, void* data) {
+    uint32_t pos = 0;
+    for (uint32_t i = 0; i < save_file.header.entries; i++) {
+        GZSettingID id;
+        size_t size;
+        memcpy(&id, (void*)((uint32_t)data + pos), sizeof(GZSettingID));
+        pos += sizeof(GZSettingID);
+        memcpy(&size, (void*)((uint32_t)data + pos), sizeof(size_t));
+        pos += sizeof(size_t);
+        GZSettingEntry* entry = GZStng_get(id);
+        if (entry == nullptr) {
+            entry = new GZSettingEntry{id, size, size > 0 ? new uint8_t[size] : nullptr};
+            g_settings.push_back(entry);
+        } else {
+            void* old_data = entry->data;
+            if (old_data) {
+                delete[] (uint8_t*)old_data;
+            }
+            entry->data = size > 0 ? new uint8_t[size] : nullptr;
+            entry->size = size;
+        }
+        memcpy(entry->data, (void*)((uint32_t)data + pos), size);
+        pos += size;
+    }
 }
 
+/**
+ * @brief Setup the save file header.
+ * @param save_file The save file to setup.
+ */
 void GZ_setupSaveFile(GZSaveFile& save_file) {
     save_file.header.version = GZ_SAVE_VERSION_NUMBER;
-    save_file.header.entries = SV_ENTRY_AMNT;
-    save_file.header.offsetsLoc = offsetof(GZSaveFile, offsets);
-    save_file.header.sizesLoc = offsetof(GZSaveFile, sizes);
-#define set_entry(idx, attr)                                                                                           \
-    save_file.offsets[idx] = offsetof(GZSaveFile, data) + offsetof(GZSaveLayout, attr);                                \
-    save_file.sizes[idx] = sizeof(save_file.data.attr)
-
-    set_entry(SV_CHEATS_INDEX, mCheats);
-    set_entry(SV_ITEM_EQUIP_INDEX, mItemEquipSettings);
-    set_entry(SV_TOOLS_INDEX, mTools);
-    set_entry(SV_WATCHES_INDEX, mWatches);
-    set_entry(SV_COMMANDS, mCommandStates);
-    set_entry(SV_DROP_SHADOW_INDEX, mDropShadows);
-    set_entry(SV_CURSOR_COLOR_INDEX, mCursorColType);
-    set_entry(SV_FONT_INDEX, mFontType);
-    set_entry(SV_SPRITES_INDEX, mSpriteOffsets);
-    set_entry(SV_EQUIP_PRIORITY_INDEX, mEquipPriorityEnabled);
-    set_entry(SV_WATERSPEED_INDEX, mWaterSpeed);
-    set_entry(SV_LANDSPEED_INDEX, mLandSpeed);
-    set_entry(SV_ANGLE_CONVERSION_INDEX, mAngleValuesInDecimal);
-    set_entry(SV_CUSTOM_POSITIONS_INDEX, mCustomPositions);
-#undef set_entry
+    save_file.header.entries = g_settings.size();
+    save_file.header.data_size =
+        std::transform_reduce(g_settings.begin(), g_settings.end(), (size_t)0, std::plus{},
+                              [](GZSettingEntry* entry) { return entry->size; }) +
+        (sizeof(GZSettingID) + sizeof(size_t)) * g_settings.size();
 }
 
 int32_t GZ_readSaveFile(Storage* storage, GZSaveFile& save_file, int32_t sector_size) {
     int32_t result = Ready;
-#define assert_result(stmt)                                                                                            \
-    if ((result = (stmt)) != Ready) {                                                                                  \
-        return result;                                                                                                 \
+#define assert_result(stmt)                                                                        \
+    if ((result = (stmt)) != Ready) {                                                              \
+        return result;                                                                             \
     }
 
     uint32_t pos = 0;
-    assert_result(GZ_storageRead(storage, &save_file.header, sizeof(save_file.header), pos, sector_size));
+    assert_result(
+        GZ_storageRead(storage, &save_file.header, sizeof(save_file.header), pos, sector_size));
     pos += sizeof(save_file.header);
     if (save_file.header.version != GZ_SAVE_VERSION_NUMBER) {
         return -30;  // Custom error code for "Version" (means a mismatch in the version number).
     }
-    assert_result(GZ_storageRead(storage, save_file.offsets, save_file.header.entries * sizeof(save_file.offsets[0]),
-                                 save_file.header.offsetsLoc, sector_size));
-    assert_result(GZ_storageRead(storage, save_file.sizes, save_file.header.entries * sizeof(save_file.sizes[0]),
-                                 save_file.header.sizesLoc, sector_size));
-
-#define assert_read_entry(idx, ptr, size)                                                                              \
-    if (idx < save_file.header.entries) {                                                                              \
-        assert_result(                                                                                                 \
-            GZ_storageRead(storage, ptr, MIN(size, save_file.sizes[idx]), save_file.offsets[idx], sector_size));       \
+    uint8_t* data = nullptr;
+    if (save_file.header.data_size > 0) {
+        data = new uint8_t[save_file.header.data_size];
+        assert_result(GZ_storageRead(storage, data, save_file.header.data_size, pos, sector_size));
     }
-    assert_read_entry(SV_CHEATS_INDEX, save_file.data.mCheats, sizeof(save_file.data.mCheats));
-    assert_read_entry(SV_ITEM_EQUIP_INDEX, save_file.data.mItemEquipSettings,
-                      sizeof(save_file.data.mItemEquipSettings));
-    assert_read_entry(SV_TOOLS_INDEX, save_file.data.mTools, sizeof(save_file.data.mTools));
-    assert_read_entry(SV_WATCHES_INDEX, save_file.data.mWatches, sizeof(save_file.data.mWatches));
-    assert_read_entry(SV_COMMANDS, save_file.data.mCommandStates, sizeof(save_file.data.mCommandStates));
-    assert_read_entry(SV_DROP_SHADOW_INDEX, &save_file.data.mDropShadows, sizeof(save_file.data.mDropShadows));
-    assert_read_entry(SV_CURSOR_COLOR_INDEX, &save_file.data.mCursorColType, sizeof(save_file.data.mCursorColType));
-    assert_read_entry(SV_FONT_INDEX, &save_file.data.mFontType, sizeof(save_file.data.mFontType));
-    assert_read_entry(SV_SPRITES_INDEX, save_file.data.mSpriteOffsets, sizeof(save_file.data.mSpriteOffsets));
-    assert_read_entry(SV_EQUIP_PRIORITY_INDEX, &save_file.data.mEquipPriorityEnabled,
-                      sizeof(save_file.data.mEquipPriorityEnabled));
-    assert_read_entry(SV_WATERSPEED_INDEX, &save_file.data.mWaterSpeed, sizeof(save_file.data.mWaterSpeed));
-    assert_read_entry(SV_LANDSPEED_INDEX, &save_file.data.mLandSpeed, sizeof(save_file.data.mLandSpeed));
-    assert_read_entry(SV_ANGLE_CONVERSION_INDEX, &save_file.data.mAngleValuesInDecimal,
-                      sizeof(save_file.data.mAngleValuesInDecimal));
-    assert_read_entry(SV_CUSTOM_POSITIONS_INDEX, &save_file.data.mCustomPositions,
-                      sizeof(save_file.data.mCustomPositions));
-#undef assert_read_entry
+
+    // Clear the settings before loading the saved ones.
+    for (auto& entry : g_settings) {
+        delete[] (uint8_t*)entry->data;
+        delete entry;
+    }
+
+    g_settings.clear();
+
+    GZ_loadSettings(save_file, data);
+
+    if (data != nullptr) {
+        delete[] data;
+    }
+
 #undef assert_result
 
     return result;
@@ -173,15 +170,19 @@ int32_t GZ_readSaveFile(Storage* storage, GZSaveFile& save_file, int32_t sector_
 KEEP_FUNC void GZ_storeMemCard(Storage& storage) {
     GZSaveFile save_file;
     GZ_setupSaveFile(save_file);
-    GZ_storeSaveLayout(save_file.data);
-    uint32_t file_size =
-        (uint32_t)(ceil((double)sizeof(save_file) / (double)storage.sector_size) * storage.sector_size);
+    uint32_t file_size = sizeof(save_file) + save_file.header.data_size;
+    uint8_t* data = new uint8_t[file_size];
+    memcpy(data, &save_file.header, sizeof(save_file.header));
+    GZ_storeSettings(save_file, &data[sizeof(save_file.header)]);
+    // Align the file size to the sector size.
+    file_size = (uint32_t)(ceil((double)sizeof(save_file) / (double)storage.sector_size) *
+                           storage.sector_size);
     storage.result = StorageDelete(0, storage.file_name_buffer);
     storage.result = StorageCreate(0, storage.file_name_buffer, file_size, &storage.info);
     if (storage.result == Ready || storage.result == Exist) {
         storage.result = StorageOpen(0, storage.file_name_buffer, &storage.info, OPEN_MODE_RW);
         if (storage.result == Ready) {
-            storage.result = GZ_storageWrite(&storage, &save_file, sizeof(save_file), 0, storage.sector_size);
+            storage.result = GZ_storageWrite(&storage, data, file_size, 0, storage.sector_size);
             if (storage.result == Ready) {
                 OSReport("saved card!\n");
                 FIFOQueue::push("saved card!", Queue);
@@ -193,6 +194,9 @@ KEEP_FUNC void GZ_storeMemCard(Storage& storage) {
             }
             storage.result = StorageClose(&storage.info);
         }
+    }
+    if (data != nullptr) {
+        delete[] (uint8_t*)data;
     }
 }
 
@@ -211,11 +215,9 @@ KEEP_FUNC void GZ_loadMemCard(Storage& storage) {
     storage.result = StorageOpen(0, storage.file_name_buffer, &storage.info, OPEN_MODE_RW);
     if (storage.result == Ready) {
         GZSaveFile save_file;
-        GZ_storeSaveLayout(save_file.data);
         storage.result = GZ_readSaveFile(&storage, save_file, storage.sector_size);
         if (storage.result == Ready) {
             FIFOQueue::push("loaded card!", Queue);
-            GZ_loadSaveLayout(save_file.data);
             GZ_initFont();
         } else {
             char buff[32];
@@ -226,15 +228,17 @@ KEEP_FUNC void GZ_loadMemCard(Storage& storage) {
     }
 }
 
+#define FRAME_COUNT 200
 #define FILE_NAME "twwgz01"
 
 KEEP_FUNC void GZ_loadGZSave(bool& card_load) {
-    if (card_load) {
+    uint8_t frame_count = cCt_getFrameCount();
+    if (card_load && frame_count > FRAME_COUNT) {
         static Storage storage;
         storage.file_name = FILE_NAME;
         storage.sector_size = SECTOR_SIZE;
-        snprintf(storage.file_name_buffer, sizeof(storage.file_name_buffer), (char*)storage.file_name);
-
+        snprintf(storage.file_name_buffer, sizeof(storage.file_name_buffer),
+                 (char*)storage.file_name);
         storage.result = CARDProbeEx(0, NULL, &storage.sector_size);
         if (storage.result == Ready) {
             GZ_loadMemCard(storage);

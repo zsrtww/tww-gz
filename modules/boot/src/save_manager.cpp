@@ -124,6 +124,40 @@ KEEP_FUNC void SaveManager::triggerLoad(uint32_t id, const char* category, speci
     s_injectSave = true;
 }
 
+GZSettingID l_mapping[] = {
+    STNG_ITEM_EQUIP_TELESCOPE,
+    STNG_ITEM_EQUIP_SAIL,
+    STNG_ITEM_EQUIP_WIND_WAKER,
+    STNG_ITEM_EQUIP_GRAPPLING_HOOK,
+    STNG_ITEM_EQUIP_BOOMERANG,
+    STNG_ITEM_EQUIP_DEKU_LEAF,
+    STNG_ITEM_EQUIP_TINGLE_TUNER,
+    STNG_ITEM_EQUIP_PROGRESSIVE_PICTO_BOX,
+    STNG_ITEM_EQUIP_IRON_BOOTS,
+    STNG_ITEM_EQUIP_MAGIC_ARMOR,
+    STNG_ITEM_EQUIP_PROGRESSIVE_BOW,
+    STNG_ITEM_EQUIP_BOMBS,
+    STNG_ITEM_EQUIP_HOOKSHOT,
+    STNG_ITEM_EQUIP_SKULL_HAMMER,
+};
+
+static const ItemSlots l_slots[] = {
+    SLOT_TELESCOPE,
+    SLOT_SAIL,
+    SLOT_WIND_WAKER,
+    SLOT_ROPE,
+    SLOT_BOOMERANG,
+    SLOT_DEKU_LEAF,
+    SLOT_TUNER,
+    SLOT_CAMERA,
+    SLOT_IRON_BOOTS,
+    SLOT_MAGIC_ARMOR,
+    SLOT_BOW,
+    SLOT_BOMB,
+    SLOT_HOOKSHOT,
+    SLOT_HAMMER,
+};
+
 // runs at the beginning of phase_1 of dScnPly__phase_1 load sequence
 KEEP_FUNC void SaveManager::loadData() {
     if (s_injectSave) {
@@ -133,17 +167,22 @@ KEEP_FUNC void SaveManager::loadData() {
             gSaveManager.mPracticeFileOpts.inject_options_after_load();
         }
 
-        if (g_equipPriorityEnabled) {
+        if (GZStng_getData<bool>(STNG_EQUIP_PRIORITY, false)) {
             u8 cur_item_x = dComIfGs_getSelectItem(0);
             u8 cur_item_y = dComIfGs_getSelectItem(1);
             u8 cur_item_z = dComIfGs_getSelectItem(2);
 
             u8 new_items[3] = {NO_ITEM, NO_ITEM, NO_ITEM};
 
-            for (int i = 0; i < NUM_EQUIPPABLE_ITEMS; i++) {
-                u8 item_slot = item_enum_to_item_slot(g_item_equip_priorities[i].item_name);
-                u8 highest_priority = g_item_equip_priorities[i].high_priority;
-                u8 medium_priority = g_item_equip_priorities[i].medium_priority;
+            for (int i = 0; i < NUM_ITEM_EQUIPS; i++) {
+                u8 item_slot = l_slots[i];
+                auto stng = GZStng_get(l_mapping[i]);
+                u8 highest_priority = name_X;
+                u8 medium_priority = name_Y;
+                if (stng) {
+                    highest_priority = static_cast<ItemEquipSettings*>(stng->data)->high_priority;
+                    medium_priority = static_cast<ItemEquipSettings*>(stng->data)->medium_priority;
+                }
 
                 if (item_slot == NO_ITEM)
                     continue;

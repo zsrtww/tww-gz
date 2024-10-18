@@ -26,9 +26,6 @@ static Vec sSaveCamTarget = {0.0f, 0.0f, 0.0f}; */
 static int sLastInputs;
 static int sCurInputs;
 
-f32 g_waterSpeed = 1500.0f;
-f32 g_landSpeed = 150.0f;
-
 bool GZCmd_checkTrig(int combo) {
     if (sCurInputs == combo && sLastInputs != combo) {
         return true;
@@ -90,9 +87,9 @@ void GZCmd_fastMovement() {
     if (player_p != nullptr) {
         if (player_p->mCurProcID == daPy_lk_c::PROC_SWIM_UP_e || player_p->mCurProcID == daPy_lk_c::PROC_SWIM_WAIT_e ||
             player_p->mCurProcID == daPy_lk_c::PROC_SWIM_MOVE_e) {
-            player_p->mVelocity = g_waterSpeed;
+            player_p->mVelocity = GZStng_getData<float>(STNG_WATER_SPEED, DEFAULT_WATER_SPEED);
         } else {
-            player_p->mVelocity = g_landSpeed;
+            player_p->mVelocity = GZStng_getData<float>(STNG_LAND_SPEED, DEFAULT_LAND_SPEED);
         }
     }
 }

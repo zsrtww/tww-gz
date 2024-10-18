@@ -115,7 +115,7 @@ uint32_t readControllerHook(uint16_t* p1) {
 }
 
 void dComIfGs_setGameStartStageHook() {
-    if (g_tools[DISABLE_SVCHECK_INDEX].active) {
+    if (GZStng_getData(STNG_TOOLS_DISABLE_SVCHECK, false)) {
         dComIfGs_setReturnPlace(dComIfGp_getStartStageName(), dComIfGp_roomControl_getStayNo(), spawn_id_input);
     } else {
         dComIfGs_setGameStartStageTrampoline();
@@ -184,7 +184,7 @@ f32 g_savedMapSelectTime = 120.0f;
 
 int dScnPly_DrawHook(void* i_this) {
     // if DPAD_DOWN + Y + Z is pressed, change scene to map select
-    if (g_tools[MAP_SELECT_INDEX].active && mPadStatus.button == (CButton::DPAD_DOWN | CButton::Y | CButton::Z)) {
+    if (GZStng_getData(STNG_TOOLS_MAP_SELECT, false) && mPadStatus.button == (CButton::DPAD_DOWN | CButton::Y | CButton::Z)) {
         // overwrite original path with our custom path
         strcpy(menu_data_path, "/twwgz/mn/Menu1.dat");
         fopScnM_ChangeReq(i_this, PROC_MENU_SCENE, 0, 5);

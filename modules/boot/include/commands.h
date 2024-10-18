@@ -2,12 +2,12 @@
 #include "libtww/include/dolphin/gctypes.h"
 
 #define COMMANDS_AMNT 16
+#define DEFAULT_WATER_SPEED 1500.0f
+#define DEFAULT_LAND_SPEED 150.0f
 
 extern bool g_commandStates[COMMANDS_AMNT];
 extern bool g_timer_reset;
 extern bool g_counterToggle;
-extern f32 g_landSpeed;
-extern f32 g_waterSpeed;
 extern bool g_medli_room;
 extern bool g_makar_room;
 

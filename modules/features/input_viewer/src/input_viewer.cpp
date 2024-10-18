@@ -162,7 +162,7 @@ void InputViewer::drawViewer(Vec2 pos, float scale, bool is_shadow, bool wide_sc
     uint32_t col;
     double stickMag;
     stickMag = mPadStatus.stick_x * mPadStatus.stick_x + mPadStatus.stick_y * mPadStatus.stick_y;
-    if ((g_tools[ESS_CHECKER_INDEX].active)) {
+    if ((GZStng_getData(STNG_TOOLS_ESS_CHECKER, false))) {
         if (stickInRectRange(-2, -2, 2, 2)) {
             col = BLACK;
         } else if (stickMag <= 81) {
@@ -176,7 +176,7 @@ void InputViewer::drawViewer(Vec2 pos, float scale, bool is_shadow, bool wide_sc
         } else {
             col = RED;
         }
-    } else if (g_tools[DEADZONE_CHECKER_INDEX].active && stickInRectRange(-2, -2, 2, 2)) {
+    } else if (GZStng_getData(STNG_TOOLS_DEADZONE_CHECKER, false) && stickInRectRange(-2, -2, 2, 2)) {
         col = RED;
     } else {
         col = WHITE;
@@ -229,16 +229,14 @@ void InputViewer::drawViewer(Vec2 pos, float scale, bool is_shadow, bool wide_sc
 }
 
 KEEP_FUNC void InputViewer::draw() {
-    if (!g_tools[INPUT_VIEWER_INDEX].active) {
+    if (!GZStng_getData(STNG_TOOLS_INPUT_VIEWER, false)) {
         return;
     }
-    Vec2 pos = {0.f, 0.f};
-    pos.x += g_spriteOffsets[SPR_VIEWER_INDEX].x;
-    pos.y += g_spriteOffsets[SPR_VIEWER_INDEX].y;
+    Vec2 pos = GZ_getSpriteOffset(STNG_SPRITES_VIEWER);
 
     float scale = 1.0f;
 
-    if (g_dropShadows)
+    if (GZ_checkDropShadows())
         drawViewer({pos.x + 1.f, pos.y + 1.f}, scale, true, false);
     drawViewer(pos, scale, false, false);
 }

@@ -8,4 +8,11 @@ public:
     virtual void draw();
 
     void drawItemEquipLines();
+
+private:
+    int32_t l_selectedLine = -1;
+    int32_t l_selectedCol = -1;
+
+    bool checkItemLineSelected();
+    bool checkLineValSelected();
 };

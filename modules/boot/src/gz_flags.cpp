@@ -32,7 +32,7 @@ KEEP_FUNC void GZ_frameAdvance() {
     static int sAdvHoldCounter = 0;
     static u16 sBufferedInputs;
 
-    if (g_tools[FRAME_ADVANCE_INDEX].active) {
+    if (GZStng_getData(STNG_TOOLS_FRAME_ADVANCE, false)) {
         bool openingMenu = CPad_CHECK_HOLD_R(CONTR_1) && CPad_CHECK_HOLD_L(CONTR_1);
 
         if (!openingMenu && CPad_CHECK_TRIG_DOWN(CONTR_1)) {

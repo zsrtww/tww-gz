@@ -23,12 +23,12 @@ KEEP_FUNC DungeonFlagsMenu::DungeonFlagsMenu(Cursor& cursor)
     : Menu(cursor), lines{
                         {"dungeon", PICK_DUNGEON_INDEX, "Change the dungeon being modified"},
                         {"keys", MODIFY_KEYS_INDEX, "modify the number of small keys"},
-                        {"boss key", BOSS_KEY_INDEX, "get the boss key", true, &l_bosskeyFlag},
-                        {"map", MAP_INDEX, "get the map", true, &l_mapFlag},
-                        {"compass", COMPASS_INDEX, "get the compass", true, &l_compassFlag},
-                        {"partner", PARTNER_INDEX, "Spawn Medli/Makar in ET/WT", true, &l_partner},
+                        {"boss key", BOSS_KEY_INDEX, "get the boss key", true, [](){return l_bosskeyFlag;}},
+                        {"map", MAP_INDEX, "get the map", true, [](){return l_mapFlag;}},
+                        {"compass", COMPASS_INDEX, "get the compass", true, [](){return l_compassFlag;}},
+                        {"partner", PARTNER_INDEX, "Spawn Medli/Makar in ET/WT", true, [](){return l_partner;}},
                         {"partner room", PARTNER_ROOM_INDEX, "Spawn Medli/Makar in current room on room reload", true,
-                         &l_partner_room},
+                         [](){return l_partner_room;}},
                     } {}
 
 DungeonFlagsMenu::~DungeonFlagsMenu() {}

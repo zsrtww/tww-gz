@@ -23,10 +23,6 @@ enum LoopPhase {
     POST_GAME_LOOP
 };
 
-inline bool GZ_checkDropShadows() {
-    return g_dropShadows;
-}
-
 inline void GZ_setFifoVisible(bool visible) {
     g_fifoVisible = visible;
 }

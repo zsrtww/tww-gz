@@ -23,7 +23,7 @@
 #endif
 
 KEEP_FUNC void GZ_displayLinkInfo() {
-    if (!g_tools[DEBUG_INDEX].active || l_fopScnRq_IsUsingOfOverlap) {
+    if (!GZStng_getData(STNG_TOOLS_DEBUG, false) || l_fopScnRq_IsUsingOfOverlap) {
         freePlayerProcData();  // free player proc data if it still exists
         return;
     }
@@ -45,7 +45,7 @@ KEEP_FUNC void GZ_displayLinkInfo() {
         snprintf(link_x, sizeof(link_x), "pos x: %.4f", player->current.pos.x);
         snprintf(link_y, sizeof(link_y), "pos y: %.4f", player->current.pos.y);
         snprintf(link_z, sizeof(link_z), "pos z: %.4f", player->current.pos.z);
-        if (g_angleValuesInDecimal) {
+        if (GZStng_getData<bool>(STNG_ANGLE_VALUES_IN_DECIMAL, false)) {
             snprintf(link_angle, sizeof(link_angle), "rot y: %d", player->shape_angle.y);
         } else {
             snprintf(link_angle, sizeof(link_angle), "rot y: 0x%04X", (u16)player->shape_angle.y);
@@ -53,21 +53,20 @@ KEEP_FUNC void GZ_displayLinkInfo() {
         snprintf(link_speed, sizeof(link_speed), "speed: %.4f", player->speedF);
         snprintf(link_action, sizeof(link_action), "action: %s", proc->procName);
 
-        f32 pos_x = g_spriteOffsets[SPR_DEBUG_INFO_INDEX].x;
-        f32 pos_y = g_spriteOffsets[SPR_DEBUG_INFO_INDEX].y;
+        Vec2 pos_offset = GZ_getSpriteOffset(STNG_SPRITES_DEBUG_INFO);
         uint32_t color_white = 0xFFFFFFFF;
 
-        Font::GZ_drawStr(link_x, pos_x, pos_y - 20.0f, color_white, g_dropShadows);
-        Font::GZ_drawStr(link_y, pos_x, pos_y, color_white, g_dropShadows);
-        Font::GZ_drawStr(link_z, pos_x, pos_y + 20.0f, color_white, g_dropShadows);
-        Font::GZ_drawStr(link_angle, pos_x, pos_y + 40.0f, color_white, g_dropShadows);
-        Font::GZ_drawStr(link_speed, pos_x, pos_y + 60.0f, color_white, g_dropShadows);
-        Font::GZ_drawStr(link_action, pos_x, pos_y + 80.0f, color_white, g_dropShadows);
+        Font::GZ_drawStr(link_x, pos_offset.x, pos_offset.y - 20.0f, color_white, GZ_checkDropShadows());
+        Font::GZ_drawStr(link_y, pos_offset.x, pos_offset.y, color_white, GZ_checkDropShadows());
+        Font::GZ_drawStr(link_z, pos_offset.x, pos_offset.y + 20.0f, color_white, GZ_checkDropShadows());
+        Font::GZ_drawStr(link_angle, pos_offset.x, pos_offset.y + 40.0f, color_white, GZ_checkDropShadows());
+        Font::GZ_drawStr(link_speed, pos_offset.x, pos_offset.y + 60.0f, color_white, GZ_checkDropShadows());
+        Font::GZ_drawStr(link_action, pos_offset.x, pos_offset.y + 80.0f, color_white, GZ_checkDropShadows());
     }
 }
 
 KEEP_FUNC void GZ_displayTimeInfo() {
-    if (!g_tools[TIME_DISP_INDEX].active || l_fopScnRq_IsUsingOfOverlap) {
+    if (!GZStng_getData(STNG_TOOLS_TIME_DISP, false) || l_fopScnRq_IsUsingOfOverlap) {
         return;
     }
 
@@ -90,12 +89,13 @@ KEEP_FUNC void GZ_displayTimeInfo() {
         sprintf(Date, "date: %d", date);
         sprintf(Moon, "moon: %s", moonphases[moonid]);
 
-        Font::GZ_drawStr(Time, g_spriteOffsets[SPR_TIME_DISP_INDEX].x, g_spriteOffsets[SPR_TIME_DISP_INDEX].y,
-                         ColorPalette::WHITE, g_dropShadows);
-        Font::GZ_drawStr(Date, g_spriteOffsets[SPR_TIME_DISP_INDEX].x, g_spriteOffsets[SPR_TIME_DISP_INDEX].y + 20.0f,
-                         ColorPalette::WHITE, g_dropShadows);
-        Font::GZ_drawStr(Moon, g_spriteOffsets[SPR_TIME_DISP_INDEX].x, g_spriteOffsets[SPR_TIME_DISP_INDEX].y + 40.0f,
-                         ColorPalette::WHITE, g_dropShadows);
+        Vec2 time_offset = GZ_getSpriteOffset(STNG_SPRITES_TIME_DISP);
+        Font::GZ_drawStr(Time, time_offset.x, time_offset.y,
+                         ColorPalette::WHITE, GZ_checkDropShadows());
+        Font::GZ_drawStr(Date, time_offset.x, time_offset.y + 20.0f,
+                         ColorPalette::WHITE, GZ_checkDropShadows());
+        Font::GZ_drawStr(Moon, time_offset.x, time_offset.y + 40.0f,
+                         ColorPalette::WHITE, GZ_checkDropShadows());
     }
 }
 
@@ -103,7 +103,7 @@ KEEP_FUNC void GZ_frameCounter() {
     static int l_frameCount = 0;
     static float sTimerSec = 0.0f;
 
-    if (g_counterToggle && g_tools[FRAME_COUNT_INDEX].active && !g_FrameAdvEnabled) {
+    if (g_counterToggle && GZStng_getData(STNG_TOOLS_FRAME_COUNT, false) && !g_FrameAdvEnabled) {
         l_frameCount++;
         sTimerSec = l_frameCount / FRAME_RATE;
     }
@@ -124,14 +124,15 @@ KEEP_FUNC void GZ_frameCounter() {
     char secondcount[8] = {0};
     ;
 
-    if (g_tools[FRAME_COUNT_INDEX].active) {
+    if (GZStng_getData(STNG_TOOLS_FRAME_COUNT, false)) {
         sprintf(framecount, "frames: %d", l_frameCount);
         sprintf(secondcount, "%.2f", sTimerSec);
 
-        Font::GZ_drawStr(framecount, g_spriteOffsets[SPR_COUNT_INDEX].x, g_spriteOffsets[SPR_COUNT_INDEX].y,
-                         ColorPalette::WHITE, g_dropShadows);
-        Font::GZ_drawStr(secondcount, g_spriteOffsets[SPR_COUNT_INDEX].x, g_spriteOffsets[SPR_COUNT_INDEX].y + 20.0f,
-                         ColorPalette::WHITE, g_dropShadows);
+        Vec2 framecount_offset = GZ_getSpriteOffset(STNG_SPRITES_COUNT);
+        Font::GZ_drawStr(framecount, framecount_offset.x, framecount_offset.y,
+                         ColorPalette::WHITE, GZ_checkDropShadows());
+        Font::GZ_drawStr(secondcount, framecount_offset.x, framecount_offset.y + 20.0f,
+                         ColorPalette::WHITE, GZ_checkDropShadows());
     }
 }
 
@@ -165,7 +166,7 @@ int zombieHoverColor(u8 buttonPressesPerWindow) {
 }
 
 KEEP_FUNC void GZ_displayZombieHoverInfo() {
-    if (!g_tools[ZH_INDEX].active) {
+    if (!GZStng_getData(STNG_TOOLS_ZH, false)) {
         return;
     }
 
@@ -179,19 +180,20 @@ KEEP_FUNC void GZ_displayZombieHoverInfo() {
     sprintf(a_presses_str, "A: %d", numAPressesPerWindow);
     sprintf(b_presses_str, "B: %d", numBPressesPerWindow);
 
-    Font::GZ_drawStr(a_presses_str, g_spriteOffsets[SPR_ZH_INFO_INDEX].x, g_spriteOffsets[SPR_ZH_INFO_INDEX].y,
-                     zombieHoverColor(numAPressesPerWindow), g_dropShadows);
-    Font::GZ_drawStr(b_presses_str, g_spriteOffsets[SPR_ZH_INFO_INDEX].x, g_spriteOffsets[SPR_ZH_INFO_INDEX].y + 20.0f,
-                     zombieHoverColor(numBPressesPerWindow), g_dropShadows);
+    Vec2 zh_info_offset = GZ_getSpriteOffset(STNG_SPRITES_ZH_INFO);
+    Font::GZ_drawStr(a_presses_str, zh_info_offset.x, zh_info_offset.y,
+                     zombieHoverColor(numAPressesPerWindow), GZ_checkDropShadows());
+    Font::GZ_drawStr(b_presses_str, zh_info_offset.x, zh_info_offset.y + 20.0f,
+                     zombieHoverColor(numBPressesPerWindow), GZ_checkDropShadows());
 }
 
 KEEP_FUNC void GZ_displayStageInfo() {
-    if (!g_tools[STAGE_INFO_INDEX].active || l_fopScnRq_IsUsingOfOverlap) {
+    if (!GZStng_getData(STNG_TOOLS_STAGE_INFO, false) || l_fopScnRq_IsUsingOfOverlap) {
         return;
     }
 
     if (dComIfGp_getPlayer(0)) {
-        Vec2 spriteOffset = g_spriteOffsets[SPR_SPRITES_STAGE_INFO_INDEX];
+        Vec2 spriteOffset = GZ_getSpriteOffset(STNG_SPRITES_STAGE_INFO);
         char cur_stage[15];
         char cur_room[10];
         char cur_point[11];
