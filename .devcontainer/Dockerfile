@@ -1,11 +1,13 @@
 # See here for image contents: https://github.com/microsoft/vscode-dev-containers/tree/v0.241.1/containers/ubuntu/.devcontainer/base.Dockerfile
 
-ARG VARIANT="jammy"
-FROM mcr.microsoft.com/vscode/devcontainers/base:0-${VARIANT}
-USER vscode
+FROM devkitpro/devkitppc
+ARG USERNAME=vscode
+ARG USER_UID=1000
+ARG USER_GID=$USER_UID
 
 RUN sudo dpkg --add-architecture i386
 RUN sudo apt-get update
+RUN sudo apt-get install -y sudo
 RUN sudo apt-get install -y python3-pip
 RUN sudo apt-get install -y cmake
 RUN sudo apt-get install -y ninja-build
@@ -20,15 +22,22 @@ RUN sudo chmod +x llvm.sh
 RUN sudo ./llvm.sh 14
 RUN sudo apt install -y clang-format-14
 
-RUN python3 -m pip install Pillow
-
 # Install DevkitPPC
-RUN sudo ln -sf /proc/self/mounts /etc/mtab
-WORKDIR /tmp
-COPY install-devkitpro-pacman install-devkitpro-pacman
-RUN sudo chmod +x ./install-devkitpro-pacman
-RUN sudo ./install-devkitpro-pacman
-RUN sudo dkp-pacman -Syu --noconfirm
-WORKDIR /etc
-RUN sudo ln -sf /proc/self/mounts mtab
-RUN sudo dkp-pacman -S --noconfirm gamecube-dev
+# RUN sudo ln -sf /proc/self/mounts /etc/mtab
+# WORKDIR /tmp
+# COPY install-devkitpro-pacman install-devkitpro-pacman
+# RUN sudo chmod +x ./install-devkitpro-pacman
+# RUN sudo ./install-devkitpro-pacman
+# RUN sudo dkp-pacman -Syu --noconfirm
+# WORKDIR /etc
+# RUN sudo ln -sf /proc/self/mounts mtab
+# RUN sudo dkp-pacman -S --noconfirm gamecube-dev
+
+# Setup user
+RUN groupadd --gid $USER_GID $USERNAME
+RUN useradd -s /bin/bash --uid $USER_UID --gid $USER_GID -G sudo -m $USERNAME
+RUN echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME
+RUN chmod 0440 /etc/sudoers.d/$USERNAME
+USER vscode
+
+RUN python3 -m pip install Pillow
