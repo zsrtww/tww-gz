@@ -21,7 +21,7 @@ KEEP_FUNC void GZStng_add(GZSettingID id, void* data, size_t size) {
     } else {
         GZSettingEntry* entry = *it;
         void* old_data = entry->data;
-        delete[] (uint8_t*)old_data;
+        delete[](uint8_t*) old_data;
         entry->data = data;
         entry->size = size;
     }
@@ -37,7 +37,7 @@ KEEP_FUNC void GZStng_remove(GZSettingID id) {
     if (it != g_settings.end()) {
         auto* entry = *it;
         void* data = entry->data;
-        delete[] (uint8_t*)data;
+        delete[](uint8_t*) data;
         g_settings.erase(it);
         delete entry;
     }

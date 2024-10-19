@@ -90,12 +90,9 @@ KEEP_FUNC void GZ_displayTimeInfo() {
         sprintf(Moon, "moon: %s", moonphases[moonid]);
 
         Vec2 time_offset = GZ_getSpriteOffset(STNG_SPRITES_TIME_DISP);
-        Font::GZ_drawStr(Time, time_offset.x, time_offset.y,
-                         ColorPalette::WHITE, GZ_checkDropShadows());
-        Font::GZ_drawStr(Date, time_offset.x, time_offset.y + 20.0f,
-                         ColorPalette::WHITE, GZ_checkDropShadows());
-        Font::GZ_drawStr(Moon, time_offset.x, time_offset.y + 40.0f,
-                         ColorPalette::WHITE, GZ_checkDropShadows());
+        Font::GZ_drawStr(Time, time_offset.x, time_offset.y, ColorPalette::WHITE, GZ_checkDropShadows());
+        Font::GZ_drawStr(Date, time_offset.x, time_offset.y + 20.0f, ColorPalette::WHITE, GZ_checkDropShadows());
+        Font::GZ_drawStr(Moon, time_offset.x, time_offset.y + 40.0f, ColorPalette::WHITE, GZ_checkDropShadows());
     }
 }
 
@@ -129,10 +126,10 @@ KEEP_FUNC void GZ_frameCounter() {
         sprintf(secondcount, "%.2f", sTimerSec);
 
         Vec2 framecount_offset = GZ_getSpriteOffset(STNG_SPRITES_COUNT);
-        Font::GZ_drawStr(framecount, framecount_offset.x, framecount_offset.y,
-                         ColorPalette::WHITE, GZ_checkDropShadows());
-        Font::GZ_drawStr(secondcount, framecount_offset.x, framecount_offset.y + 20.0f,
-                         ColorPalette::WHITE, GZ_checkDropShadows());
+        Font::GZ_drawStr(framecount, framecount_offset.x, framecount_offset.y, ColorPalette::WHITE,
+                         GZ_checkDropShadows());
+        Font::GZ_drawStr(secondcount, framecount_offset.x, framecount_offset.y + 20.0f, ColorPalette::WHITE,
+                         GZ_checkDropShadows());
     }
 }
 
@@ -181,10 +178,10 @@ KEEP_FUNC void GZ_displayZombieHoverInfo() {
     sprintf(b_presses_str, "B: %d", numBPressesPerWindow);
 
     Vec2 zh_info_offset = GZ_getSpriteOffset(STNG_SPRITES_ZH_INFO);
-    Font::GZ_drawStr(a_presses_str, zh_info_offset.x, zh_info_offset.y,
-                     zombieHoverColor(numAPressesPerWindow), GZ_checkDropShadows());
-    Font::GZ_drawStr(b_presses_str, zh_info_offset.x, zh_info_offset.y + 20.0f,
-                     zombieHoverColor(numBPressesPerWindow), GZ_checkDropShadows());
+    Font::GZ_drawStr(a_presses_str, zh_info_offset.x, zh_info_offset.y, zombieHoverColor(numAPressesPerWindow),
+                     GZ_checkDropShadows());
+    Font::GZ_drawStr(b_presses_str, zh_info_offset.x, zh_info_offset.y + 20.0f, zombieHoverColor(numBPressesPerWindow),
+                     GZ_checkDropShadows());
 }
 
 KEEP_FUNC void GZ_displayStageInfo() {

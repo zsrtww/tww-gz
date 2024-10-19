@@ -75,8 +75,7 @@ KEEP_FUNC void Cursor::setMode(uint8_t m) {
 #include "libtww/include/d/com/d_com_inf_game.h"
 #include "geometry_draw.h"
 
-uint32_t l_cursorMapping[] = {0x00CC00FF, 0x0080FFFF, 0xCC0000FF,
-                              0xEE8000FF, 0xFFCC00FF, 0x6600CCFF};
+uint32_t l_cursorMapping[] = {0x00CC00FF, 0x0080FFFF, 0xCC0000FF, 0xEE8000FF, 0xFFCC00FF, 0x6600CCFF};
 
 KEEP_FUNC void GZ_setCursorColor() {
     uint32_t colorId = GZStng_getData(STNG_CURSOR_COLOR, 0);

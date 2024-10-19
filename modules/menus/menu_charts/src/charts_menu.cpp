@@ -11,7 +11,8 @@ KEEP_FUNC ChartMenu::ChartMenu(Cursor& cursor)
     : Menu(cursor), lines{{"treasure charts", TREASURE_CHART_INDEX, "Modify treasure charts"},
                           {"special charts", SPECIAL_CHART_INDEX, "Modify special charts"},
                           {"triforce charts", TRIFORCE_CHART_INDEX, "Modify triforce charts"},
-                          {"all charts", ALL_CHARTS_INDEX, "Add or remove all charts", true, [](){return all_charts;}}} {}
+                          {"all charts", ALL_CHARTS_INDEX, "Add or remove all charts", true,
+                           []() { return all_charts; }}} {}
 
 ChartMenu::~ChartMenu() {}
 

@@ -105,7 +105,7 @@ void GZ_loadSettings(GZSaveFile save_file, void* data) {
         } else {
             void* old_data = entry->data;
             if (old_data) {
-                delete[] (uint8_t*)old_data;
+                delete[](uint8_t*) old_data;
             }
             entry->data = size > 0 ? new uint8_t[size] : nullptr;
             entry->size = size;
@@ -122,22 +122,20 @@ void GZ_loadSettings(GZSaveFile save_file, void* data) {
 void GZ_setupSaveFile(GZSaveFile& save_file) {
     save_file.header.version = GZ_SAVE_VERSION_NUMBER;
     save_file.header.entries = g_settings.size();
-    save_file.header.data_size =
-        std::transform_reduce(g_settings.begin(), g_settings.end(), (size_t)0, std::plus{},
-                              [](GZSettingEntry* entry) { return entry->size; }) +
-        (sizeof(GZSettingID) + sizeof(size_t)) * g_settings.size();
+    save_file.header.data_size = std::transform_reduce(g_settings.begin(), g_settings.end(), (size_t)0, std::plus{},
+                                                       [](GZSettingEntry* entry) { return entry->size; }) +
+                                 (sizeof(GZSettingID) + sizeof(size_t)) * g_settings.size();
 }
 
 int32_t GZ_readSaveFile(Storage* storage, GZSaveFile& save_file, int32_t sector_size) {
     int32_t result = Ready;
-#define assert_result(stmt)                                                                        \
-    if ((result = (stmt)) != Ready) {                                                              \
-        return result;                                                                             \
+#define assert_result(stmt)                                                                                            \
+    if ((result = (stmt)) != Ready) {                                                                                  \
+        return result;                                                                                                 \
     }
 
     uint32_t pos = 0;
-    assert_result(
-        GZ_storageRead(storage, &save_file.header, sizeof(save_file.header), pos, sector_size));
+    assert_result(GZ_storageRead(storage, &save_file.header, sizeof(save_file.header), pos, sector_size));
     pos += sizeof(save_file.header);
     if (save_file.header.version != GZ_SAVE_VERSION_NUMBER) {
         return -30;  // Custom error code for "Version" (means a mismatch in the version number).
@@ -150,7 +148,7 @@ int32_t GZ_readSaveFile(Storage* storage, GZSaveFile& save_file, int32_t sector_
 
     // Clear the settings before loading the saved ones.
     for (auto& entry : g_settings) {
-        delete[] (uint8_t*)entry->data;
+        delete[](uint8_t*) entry->data;
         delete entry;
     }
 
@@ -175,8 +173,7 @@ KEEP_FUNC void GZ_storeMemCard(Storage& storage) {
     memcpy(data, &save_file.header, sizeof(save_file.header));
     GZ_storeSettings(save_file, &data[sizeof(save_file.header)]);
     // Align the file size to the sector size.
-    file_size = (uint32_t)(ceil((double)sizeof(save_file) / (double)storage.sector_size) *
-                           storage.sector_size);
+    file_size = (uint32_t)(ceil((double)sizeof(save_file) / (double)storage.sector_size) * storage.sector_size);
     storage.result = StorageDelete(0, storage.file_name_buffer);
     storage.result = StorageCreate(0, storage.file_name_buffer, file_size, &storage.info);
     if (storage.result == Ready || storage.result == Exist) {
@@ -196,7 +193,7 @@ KEEP_FUNC void GZ_storeMemCard(Storage& storage) {
         }
     }
     if (data != nullptr) {
-        delete[] (uint8_t*)data;
+        delete[](uint8_t*) data;
     }
 }
 
@@ -237,8 +234,7 @@ KEEP_FUNC void GZ_loadGZSave(bool& card_load) {
         static Storage storage;
         storage.file_name = FILE_NAME;
         storage.sector_size = SECTOR_SIZE;
-        snprintf(storage.file_name_buffer, sizeof(storage.file_name_buffer),
-                 (char*)storage.file_name);
+        snprintf(storage.file_name_buffer, sizeof(storage.file_name_buffer), (char*)storage.file_name);
         storage.result = CARDProbeEx(0, NULL, &storage.sector_size);
         if (storage.result == Ready) {
             GZ_loadMemCard(storage);

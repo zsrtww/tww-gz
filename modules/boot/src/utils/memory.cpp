@@ -70,8 +70,7 @@ KEEP_FUNC void GZ_drawWatches() {
                 snprintf(rendered_value, sizeof(rendered_value), format, (char*)address);
                 break;
             }
-            Font::GZ_drawStr(rendered_value, watches[i].x, watches[i].y, 0xFFFFFFFF,
-                             GZ_checkDropShadows());
+            Font::GZ_drawStr(rendered_value, watches[i].x, watches[i].y, 0xFFFFFFFF, GZ_checkDropShadows());
         }
     }
 }

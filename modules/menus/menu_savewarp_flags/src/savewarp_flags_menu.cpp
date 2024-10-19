@@ -8,17 +8,17 @@ KEEP_FUNC SavewarpFlagMenu::SavewarpFlagMenu(Cursor& cursor)
     : Menu(cursor), lines{
                         {"Watched Leaving Outset Cutscene", 0,
                          "Sets savewarp location to Pirate Ship (Overworld Travelling)", true,
-                         [](){return g_flags[LEAVING_OUTSET_CUTSCENE];}},
+                         []() { return g_flags[LEAVING_OUTSET_CUTSCENE]; }},
                         {"Tetra Text After Getting Spoils Bag", 1,
                          "Sets savewarp location to Pirate Ship (At Forsaken Fortress 1)", true,
-                         [](){return g_flags[TETRA_SPOILS_BAG_TEXT];}},
+                         []() { return g_flags[TETRA_SPOILS_BAG_TEXT]; }},
                         {"Barrel Launch Cutscene", 2, "Sets savewarp location to Forsaken Fortress 1", true,
-                         [](){return g_flags[BARREL_LAUNCH_CUTSCENE];}},
+                         []() { return g_flags[BARREL_LAUNCH_CUTSCENE]; }},
                         {"Watched Post FF1 KoRL Cutscene", 3,
                          "Spawns KoRL, sets savewarp to Windfall and FoF to layer 2", true,
-                         [](){return g_flags[POST_FF1_KORL_CUTSCENE];}},
+                         []() { return g_flags[POST_FF1_KORL_CUTSCENE]; }},
                         {"Enter KoRL First Time", 4, "Sets savewarp to most recent loaded area", true,
-                         [](){return g_flags[ENTER_KORL_FIRST_TIME];}},
+                         []() { return g_flags[ENTER_KORL_FIRST_TIME]; }},
                     } {}
 
 SavewarpFlagMenu::~SavewarpFlagMenu() {}

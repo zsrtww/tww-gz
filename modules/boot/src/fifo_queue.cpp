@@ -20,8 +20,7 @@ void FIFOQueue::renderItems(_FIFOQueue& Queue) {
         color |= alpha;
         if (g_fifoVisible) {
             Vec2 fifo_offset = GZ_getSpriteOffset(STNG_SPRITES_FIFO);
-            Font::renderChars(Queue.messages[i].msg, (fifo_offset.x),
-                              offset + (fifo_offset.y), color);
+            Font::renderChars(Queue.messages[i].msg, (fifo_offset.x), offset + (fifo_offset.y), color);
         }
     }
 };

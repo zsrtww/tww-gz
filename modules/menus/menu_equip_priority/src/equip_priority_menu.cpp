@@ -19,37 +19,20 @@ bool ItemEquipPriorityMenu::checkLineValSelected() {
 }
 
 static const GZSettingID l_setting_ids[] = {
-    STNG_ITEM_EQUIP_TELESCOPE,
-    STNG_ITEM_EQUIP_SAIL,
-    STNG_ITEM_EQUIP_WIND_WAKER,
-    STNG_ITEM_EQUIP_GRAPPLING_HOOK,
-    STNG_ITEM_EQUIP_BOOMERANG,
-    STNG_ITEM_EQUIP_DEKU_LEAF,
-    STNG_ITEM_EQUIP_TINGLE_TUNER,
-    STNG_ITEM_EQUIP_PROGRESSIVE_PICTO_BOX,
-    STNG_ITEM_EQUIP_IRON_BOOTS,
-    STNG_ITEM_EQUIP_MAGIC_ARMOR,
-    STNG_ITEM_EQUIP_PROGRESSIVE_BOW,
-    STNG_ITEM_EQUIP_BOMBS,
-    STNG_ITEM_EQUIP_HOOKSHOT,
-    STNG_ITEM_EQUIP_SKULL_HAMMER,
+    STNG_ITEM_EQUIP_TELESCOPE,       STNG_ITEM_EQUIP_SAIL,
+    STNG_ITEM_EQUIP_WIND_WAKER,      STNG_ITEM_EQUIP_GRAPPLING_HOOK,
+    STNG_ITEM_EQUIP_BOOMERANG,       STNG_ITEM_EQUIP_DEKU_LEAF,
+    STNG_ITEM_EQUIP_TINGLE_TUNER,    STNG_ITEM_EQUIP_PROGRESSIVE_PICTO_BOX,
+    STNG_ITEM_EQUIP_IRON_BOOTS,      STNG_ITEM_EQUIP_MAGIC_ARMOR,
+    STNG_ITEM_EQUIP_PROGRESSIVE_BOW, STNG_ITEM_EQUIP_BOMBS,
+    STNG_ITEM_EQUIP_HOOKSHOT,        STNG_ITEM_EQUIP_SKULL_HAMMER,
 };
 
 static const char* l_names[] = {
-    "Telescope",
-    "Sail",
-    "Wind Waker",
-    "Grappling Hook",
-    "Boomerang",
-    "Deku Leaf",
-    "Tingle Tuner",
-    "Progressive Picto Box",
-    "Iron Boots",
-    "Magic Armor",
-    "Progressive Bow",
-    "Bombs",
-    "Hookshot",
-    "Skull Hammer",
+    "Telescope",  "Sail",         "Wind Waker",      "Grappling Hook",
+    "Boomerang",  "Deku Leaf",    "Tingle Tuner",    "Progressive Picto Box",
+    "Iron Boots", "Magic Armor",  "Progressive Bow", "Bombs",
+    "Hookshot",   "Skull Hammer",
 };
 
 static const char l_button_names[] = {
@@ -91,72 +74,85 @@ void ItemEquipPriorityMenu::drawItemEquipLines() {
                 case HighPriority:
                     if (GZ_getButtonRepeat(GZPad::DPAD_RIGHT)) {
                         if (!stng) {
-                            stng = new GZSettingEntry{l_setting_ids[i], sizeof(ItemEquipSettings), new ItemEquipSettings{name_X, name_Y}};
+                            stng = new GZSettingEntry{l_setting_ids[i], sizeof(ItemEquipSettings),
+                                                      new ItemEquipSettings{name_X, name_Y}};
                             g_settings.push_back(stng);
                         }
-                        static_cast<ItemEquipSettings*>(stng->data)->high_priority = static_cast<ButtonNames>((static_cast<ItemEquipSettings*>(stng->data)->high_priority + 1) % 3);
+                        static_cast<ItemEquipSettings*>(stng->data)->high_priority = static_cast<ButtonNames>(
+                            (static_cast<ItemEquipSettings*>(stng->data)->high_priority + 1) % 3);
                         high_priority = (*static_cast<ItemEquipSettings*>(stng->data)).high_priority;
                     }
                     if (GZ_getButtonRepeat(GZPad::DPAD_LEFT)) {
                         if (!stng) {
-                            stng = new GZSettingEntry{l_setting_ids[i], sizeof(ItemEquipSettings), new ItemEquipSettings{name_X, name_Y}};
+                            stng = new GZSettingEntry{l_setting_ids[i], sizeof(ItemEquipSettings),
+                                                      new ItemEquipSettings{name_X, name_Y}};
                             g_settings.push_back(stng);
                         }
-                        static_cast<ItemEquipSettings*>(stng->data)->high_priority = static_cast<ButtonNames>((static_cast<ItemEquipSettings*>(stng->data)->high_priority + 2) % 3);
+                        static_cast<ItemEquipSettings*>(stng->data)->high_priority = static_cast<ButtonNames>(
+                            (static_cast<ItemEquipSettings*>(stng->data)->high_priority + 2) % 3);
                         high_priority = (*static_cast<ItemEquipSettings*>(stng->data)).high_priority;
                     }
                     sprintf(high_priority_str, "<%c>", l_button_names[high_priority]);
                     Font::GZ_drawStr(high_priority_str, item_equip_high_pos_x_offset - 8.0f, line_y_offset, CURSOR_RGBA,
-                                    GZ_checkDropShadows());
+                                     GZ_checkDropShadows());
                     Font::GZ_drawStr(item_name, ITEM_X_OFFSET, line_y_offset, WHITE, GZ_checkDropShadows());
-                    Font::GZ_drawStr(medium_priority_str, item_equip_medium_pos_x_offset, line_y_offset, WHITE, GZ_checkDropShadows());
+                    Font::GZ_drawStr(medium_priority_str, item_equip_medium_pos_x_offset, line_y_offset, WHITE,
+                                     GZ_checkDropShadows());
                     break;
                 case MediumPriority:
                     if (GZ_getButtonRepeat(GZPad::DPAD_RIGHT)) {
                         if (!stng) {
-                            stng = new GZSettingEntry{l_setting_ids[i], sizeof(ItemEquipSettings), new ItemEquipSettings{name_X, name_Y}};
+                            stng = new GZSettingEntry{l_setting_ids[i], sizeof(ItemEquipSettings),
+                                                      new ItemEquipSettings{name_X, name_Y}};
                             g_settings.push_back(stng);
                         }
-                        static_cast<ItemEquipSettings*>(stng->data)->medium_priority = static_cast<ButtonNames>((static_cast<ItemEquipSettings*>(stng->data)->medium_priority + 1) % 3);
+                        static_cast<ItemEquipSettings*>(stng->data)->medium_priority = static_cast<ButtonNames>(
+                            (static_cast<ItemEquipSettings*>(stng->data)->medium_priority + 1) % 3);
                         if (static_cast<ItemEquipSettings*>(stng->data)->medium_priority ==
                             static_cast<ItemEquipSettings*>(stng->data)->high_priority) {
-                            static_cast<ItemEquipSettings*>(stng->data)->medium_priority = static_cast<ButtonNames>((static_cast<ItemEquipSettings*>(stng->data)->medium_priority + 1) % 3);
+                            static_cast<ItemEquipSettings*>(stng->data)->medium_priority = static_cast<ButtonNames>(
+                                (static_cast<ItemEquipSettings*>(stng->data)->medium_priority + 1) % 3);
                         }
                         medium_priority = (*static_cast<ItemEquipSettings*>(stng->data)).medium_priority;
                     }
                     if (GZ_getButtonRepeat(GZPad::DPAD_LEFT)) {
                         if (!stng) {
-                            stng = new GZSettingEntry{l_setting_ids[i], sizeof(ItemEquipSettings), new ItemEquipSettings{name_X, name_Y}};
+                            stng = new GZSettingEntry{l_setting_ids[i], sizeof(ItemEquipSettings),
+                                                      new ItemEquipSettings{name_X, name_Y}};
                             g_settings.push_back(stng);
                         }
-                        static_cast<ItemEquipSettings*>(stng->data)->medium_priority = static_cast<ButtonNames>((static_cast<ItemEquipSettings*>(stng->data)->medium_priority + 2) % 3);
+                        static_cast<ItemEquipSettings*>(stng->data)->medium_priority = static_cast<ButtonNames>(
+                            (static_cast<ItemEquipSettings*>(stng->data)->medium_priority + 2) % 3);
                         if (static_cast<ItemEquipSettings*>(stng->data)->medium_priority ==
                             static_cast<ItemEquipSettings*>(stng->data)->high_priority) {
-                            static_cast<ItemEquipSettings*>(stng->data)->medium_priority = static_cast<ButtonNames>((static_cast<ItemEquipSettings*>(stng->data)->medium_priority + 2) % 3);
+                            static_cast<ItemEquipSettings*>(stng->data)->medium_priority = static_cast<ButtonNames>(
+                                (static_cast<ItemEquipSettings*>(stng->data)->medium_priority + 2) % 3);
                         }
                         medium_priority = (*static_cast<ItemEquipSettings*>(stng->data)).medium_priority;
                     }
                     sprintf(medium_priority_str, "<%c>", l_button_names[medium_priority]);
-                    Font::GZ_drawStr(medium_priority_str, item_equip_medium_pos_x_offset - 8.0f, line_y_offset, CURSOR_RGBA,
-                                    GZ_checkDropShadows());
+                    Font::GZ_drawStr(medium_priority_str, item_equip_medium_pos_x_offset - 8.0f, line_y_offset,
+                                     CURSOR_RGBA, GZ_checkDropShadows());
                     Font::GZ_drawStr(item_name, ITEM_X_OFFSET, line_y_offset, WHITE, GZ_checkDropShadows());
-                    Font::GZ_drawStr(high_priority_str, item_equip_high_pos_x_offset, line_y_offset, WHITE, GZ_checkDropShadows());
+                    Font::GZ_drawStr(high_priority_str, item_equip_high_pos_x_offset, line_y_offset, WHITE,
+                                     GZ_checkDropShadows());
                     break;
                 }
             } else {
                 int y = cursor.y;
                 int x = cursor.x;
                 Font::GZ_drawStr(item_name, ITEM_X_OFFSET, line_y_offset, WHITE, GZ_checkDropShadows());
-                Font::GZ_drawStr(high_priority_str, item_equip_high_pos_x_offset, line_y_offset, (y == i && x == HighPriority ? CURSOR_RGBA : WHITE),
-                                 GZ_checkDropShadows());
+                Font::GZ_drawStr(high_priority_str, item_equip_high_pos_x_offset, line_y_offset,
+                                 (y == i && x == HighPriority ? CURSOR_RGBA : WHITE), GZ_checkDropShadows());
                 Font::GZ_drawStr(medium_priority_str, item_equip_medium_pos_x_offset, line_y_offset,
                                  (y == i && x == MediumPriority ? CURSOR_RGBA : WHITE), GZ_checkDropShadows());
             }
         } else {
             int y = cursor.y;
-            Font::GZ_drawStr(item_name, ITEM_X_OFFSET, line_y_offset, (y == i ? CURSOR_RGBA : WHITE), GZ_checkDropShadows());
-            Font::GZ_drawStr(high_priority_str, item_equip_high_pos_x_offset, line_y_offset, (y == i ? CURSOR_RGBA : WHITE),
+            Font::GZ_drawStr(item_name, ITEM_X_OFFSET, line_y_offset, (y == i ? CURSOR_RGBA : WHITE),
                              GZ_checkDropShadows());
+            Font::GZ_drawStr(high_priority_str, item_equip_high_pos_x_offset, line_y_offset,
+                             (y == i ? CURSOR_RGBA : WHITE), GZ_checkDropShadows());
             Font::GZ_drawStr(medium_priority_str, item_equip_medium_pos_x_offset, line_y_offset,
                              (y == i ? CURSOR_RGBA : WHITE), GZ_checkDropShadows());
         }
@@ -171,8 +167,10 @@ void ItemEquipPriorityMenu::draw() {
             l_selectedCol = -1;
             auto stng = GZStng_get(l_setting_ids[l_selectedLine]);
             if (stng) {
-                if (static_cast<ItemEquipSettings*>(stng->data)->high_priority == static_cast<ItemEquipSettings*>(stng->data)->medium_priority) {
-                    static_cast<ItemEquipSettings*>(stng->data)->medium_priority = static_cast<ButtonNames>((static_cast<ItemEquipSettings*>(stng->data)->medium_priority + 1) % 3);
+                if (static_cast<ItemEquipSettings*>(stng->data)->high_priority ==
+                    static_cast<ItemEquipSettings*>(stng->data)->medium_priority) {
+                    static_cast<ItemEquipSettings*>(stng->data)->medium_priority = static_cast<ButtonNames>(
+                        (static_cast<ItemEquipSettings*>(stng->data)->medium_priority + 1) % 3);
                 }
             }
             cursor.lock_x = false;

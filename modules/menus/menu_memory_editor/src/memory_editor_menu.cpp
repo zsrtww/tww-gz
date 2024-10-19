@@ -64,8 +64,7 @@ void MemoryEditorMenu::drawMemEditor() {
         }
         GZ_drawSelectChar(index, LINE_X_OFFSET, 80.0f, l_idxPlace, 7, WHITE_RGBA);
     } else {
-        GZ_drawText(index, LINE_X_OFFSET, 80.0f, (cursor.y == 0 ? CURSOR_RGBA : WHITE_RGBA),
-                    GZ_checkDropShadows());
+        GZ_drawText(index, LINE_X_OFFSET, 80.0f, (cursor.y == 0 ? CURSOR_RGBA : WHITE_RGBA), GZ_checkDropShadows());
     }
 
     if (cursor.y > 0 && !cursor.lock_x) {
@@ -148,17 +147,15 @@ void MemoryEditorMenu::drawMemEditor() {
             mem_cursor_color = CURSOR_RGBA;
         }
 
-        GZ_drawText(address, LINE_X_OFFSET, y_offset,
-                    (cursor.y == (i + 1) ? CURSOR_RGBA : ADDRESS_RGBA), GZ_checkDropShadows());
+        GZ_drawText(address, LINE_X_OFFSET, y_offset, (cursor.y == (i + 1) ? CURSOR_RGBA : ADDRESS_RGBA),
+                    GZ_checkDropShadows());
         for (uint8_t k = 0; k < line_length; ++k) {
             float middle_offset = k < line_length / 2 ? 0.0f : Font::getCharWidth(' ');
             GZ_drawText(b[k], address_offset + b_offset * k + middle_offset, y_offset,
-                        (l_byteIdx == k && cursor.y == (i + 1) ? mem_cursor_color : WHITE_RGBA),
-                        GZ_checkDropShadows());
+                        (l_byteIdx == k && cursor.y == (i + 1) ? mem_cursor_color : WHITE_RGBA), GZ_checkDropShadows());
             // The text version of it
             GZ_drawText(c[k], chars_offset + c_offset * k + middle_offset, y_offset,
-                        (l_byteIdx == k && cursor.y == (i + 1) ? mem_cursor_color : WHITE_RGBA),
-                        GZ_checkDropShadows());
+                        (l_byteIdx == k && cursor.y == (i + 1) ? mem_cursor_color : WHITE_RGBA), GZ_checkDropShadows());
         }
     }
 }
@@ -201,7 +198,7 @@ void MemoryEditorMenu::draw() {
     }
 
     cursor.move(line_length, 1 + MAX_DISPLAY_LINES);
-    GZ_drawText("DPad to move/modify value, A/B to (de)select value; " LINE_SIZE_TEXT " toggle view", 25.0f, 440.f, WHITE_RGBA,
-                GZ_checkDropShadows());
+    GZ_drawText("DPad to move/modify value, A/B to (de)select value; " LINE_SIZE_TEXT " toggle view", 25.0f, 440.f,
+                WHITE_RGBA, GZ_checkDropShadows());
     drawMemEditor();
 }
