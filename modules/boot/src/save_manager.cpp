@@ -149,8 +149,9 @@ KEEP_FUNC void SaveManager::loadData() {
 
             fetchOrder();
             for (int i = 0; i < NUM_ITEM_EQUIPS; i++) {
-                int16_t idx = std::distance(std::begin(g_item_equipe_order),
-                                            std::find(std::begin(g_item_equipe_order), std::end(g_item_equipe_order), i));
+                int16_t idx =
+                    std::distance(std::begin(g_item_equipe_order),
+                                  std::find(std::begin(g_item_equipe_order), std::end(g_item_equipe_order), i));
                 u8 item_slot = l_slots[idx];
                 auto stng = GZStng_get(g_item_equip_setting_ids[idx]);
                 u8 highest_priority = name_X;

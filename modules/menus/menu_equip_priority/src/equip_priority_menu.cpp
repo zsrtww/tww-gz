@@ -49,7 +49,8 @@ void ItemEquipPriorityMenu::drawItemEquipLines() {
         char item_name[32];
         char high_priority_str[4];
         char medium_priority_str[4];
-        int16_t idx = std::distance(std::begin(g_item_equipe_order), std::find(std::begin(g_item_equipe_order), std::end(g_item_equipe_order), i));
+        int16_t idx = std::distance(std::begin(g_item_equipe_order),
+                                    std::find(std::begin(g_item_equipe_order), std::end(g_item_equipe_order), i));
 
         auto stng = GZStng_get(g_item_equip_setting_ids[idx]);
         ButtonNames high_priority = ButtonNames::name_X;
@@ -205,7 +206,8 @@ void ItemEquipPriorityMenu::draw() {
         // Bring item under cursor to the top (index 0)
         if (cursor.y >= 0) {
             int16_t id =
-                std::distance(std::begin(g_item_equipe_order), std::find(std::begin(g_item_equipe_order), std::end(g_item_equipe_order), cursor.y));
+                std::distance(std::begin(g_item_equipe_order),
+                              std::find(std::begin(g_item_equipe_order), std::end(g_item_equipe_order), cursor.y));
             OSReport("id: %d\n", id);
             auto o = GZStng_getData<ItemEquipSettings>(g_item_equip_setting_ids[id], {name_X, name_Y, -1}).order;
             OSReport("o: %d\n", o);
@@ -223,7 +225,8 @@ void ItemEquipPriorityMenu::draw() {
             }
             auto stng = GZStng_get(g_item_equip_setting_ids[id]);
             if (!stng) {
-                stng = new GZSettingEntry{g_item_equip_setting_ids[id], sizeof(ItemEquipSettings), new ItemEquipSettings};
+                stng =
+                    new GZSettingEntry{g_item_equip_setting_ids[id], sizeof(ItemEquipSettings), new ItemEquipSettings};
                 g_settings.push_back(stng);
             }
             static_cast<ItemEquipSettings*>(stng->data)->order = 0;

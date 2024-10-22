@@ -49,7 +49,8 @@ void fetchOrder() {
     int16_t order = 0;
     for (int i = 0; i < NUM_ITEM_EQUIPS; i++) {
         if (g_item_equipe_order[i] == -1) {
-            while (std::find(std::begin(g_item_equipe_order), std::end(g_item_equipe_order), order) != std::end(g_item_equipe_order)) {
+            while (std::find(std::begin(g_item_equipe_order), std::end(g_item_equipe_order), order) !=
+                   std::end(g_item_equipe_order)) {
                 order++;
             }
             g_item_equipe_order[i] = order;
