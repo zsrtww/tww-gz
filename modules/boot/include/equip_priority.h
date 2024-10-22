@@ -36,4 +36,10 @@ enum ItemEquips {
 struct ItemEquipSettings {
     ButtonNames high_priority = name_X;
     ButtonNames medium_priority = name_Y;
+    int16_t order = 0;
 };
+
+extern int16_t g_item_equipe_order[NUM_ITEM_EQUIPS];
+extern const GZSettingID g_item_equip_setting_ids[NUM_ITEM_EQUIPS];
+
+void fetchOrder();

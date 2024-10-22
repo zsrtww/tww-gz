@@ -1,4 +1,5 @@
 #include <cstdio>
+#include <algorithm>
 #include "fs.h"
 #include "libtww/include/dolphin/os/OSCache.h"
 #include "settings.h"
@@ -124,20 +125,11 @@ KEEP_FUNC void SaveManager::triggerLoad(uint32_t id, const char* category, speci
     s_injectSave = true;
 }
 
-GZSettingID l_mapping[] = {
-    STNG_ITEM_EQUIP_TELESCOPE,       STNG_ITEM_EQUIP_SAIL,
-    STNG_ITEM_EQUIP_WIND_WAKER,      STNG_ITEM_EQUIP_GRAPPLING_HOOK,
-    STNG_ITEM_EQUIP_BOOMERANG,       STNG_ITEM_EQUIP_DEKU_LEAF,
-    STNG_ITEM_EQUIP_TINGLE_TUNER,    STNG_ITEM_EQUIP_PROGRESSIVE_PICTO_BOX,
-    STNG_ITEM_EQUIP_IRON_BOOTS,      STNG_ITEM_EQUIP_MAGIC_ARMOR,
-    STNG_ITEM_EQUIP_PROGRESSIVE_BOW, STNG_ITEM_EQUIP_BOMBS,
-    STNG_ITEM_EQUIP_HOOKSHOT,        STNG_ITEM_EQUIP_SKULL_HAMMER,
-};
-
 static const ItemSlots l_slots[] = {
     SLOT_TELESCOPE, SLOT_SAIL,       SLOT_WIND_WAKER,  SLOT_ROPE, SLOT_BOOMERANG, SLOT_DEKU_LEAF, SLOT_TUNER,
     SLOT_CAMERA,    SLOT_IRON_BOOTS, SLOT_MAGIC_ARMOR, SLOT_BOW,  SLOT_BOMB,      SLOT_HOOKSHOT,  SLOT_HAMMER,
 };
+static_assert(ARRAY_COUNT(l_slots) == NUM_ITEM_EQUIPS, "l_slots size mismatch");
 
 // runs at the beginning of phase_1 of dScnPly__phase_1 load sequence
 KEEP_FUNC void SaveManager::loadData() {
@@ -155,9 +147,12 @@ KEEP_FUNC void SaveManager::loadData() {
 
             u8 new_items[3] = {NO_ITEM, NO_ITEM, NO_ITEM};
 
+            fetchOrder();
             for (int i = 0; i < NUM_ITEM_EQUIPS; i++) {
-                u8 item_slot = l_slots[i];
-                auto stng = GZStng_get(l_mapping[i]);
+                int16_t idx = std::distance(std::begin(g_item_equipe_order),
+                                            std::find(std::begin(g_item_equipe_order), std::end(g_item_equipe_order), i));
+                u8 item_slot = l_slots[idx];
+                auto stng = GZStng_get(g_item_equip_setting_ids[idx]);
                 u8 highest_priority = name_X;
                 u8 medium_priority = name_Y;
                 if (stng) {

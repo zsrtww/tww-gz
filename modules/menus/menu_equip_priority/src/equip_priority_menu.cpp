@@ -1,3 +1,4 @@
+#include <algorithm>
 #include "menus/menu_equip_priority/include/equip_priority_menu.h"
 #include "equip_priority.h"
 #include "gz_flags.h"
@@ -6,7 +7,9 @@
 
 #define ITEM_X_OFFSET 25.0f
 
-KEEP_FUNC ItemEquipPriorityMenu::ItemEquipPriorityMenu(Cursor& cursor) : Menu(cursor) {}
+KEEP_FUNC ItemEquipPriorityMenu::ItemEquipPriorityMenu(Cursor& cursor) : Menu(cursor) {
+    fetchOrder();
+}
 
 ItemEquipPriorityMenu::~ItemEquipPriorityMenu() {}
 
@@ -17,16 +20,6 @@ bool ItemEquipPriorityMenu::checkItemLineSelected() {
 bool ItemEquipPriorityMenu::checkLineValSelected() {
     return l_selectedCol >= 0;
 }
-
-static const GZSettingID l_setting_ids[] = {
-    STNG_ITEM_EQUIP_TELESCOPE,       STNG_ITEM_EQUIP_SAIL,
-    STNG_ITEM_EQUIP_WIND_WAKER,      STNG_ITEM_EQUIP_GRAPPLING_HOOK,
-    STNG_ITEM_EQUIP_BOOMERANG,       STNG_ITEM_EQUIP_DEKU_LEAF,
-    STNG_ITEM_EQUIP_TINGLE_TUNER,    STNG_ITEM_EQUIP_PROGRESSIVE_PICTO_BOX,
-    STNG_ITEM_EQUIP_IRON_BOOTS,      STNG_ITEM_EQUIP_MAGIC_ARMOR,
-    STNG_ITEM_EQUIP_PROGRESSIVE_BOW, STNG_ITEM_EQUIP_BOMBS,
-    STNG_ITEM_EQUIP_HOOKSHOT,        STNG_ITEM_EQUIP_SKULL_HAMMER,
-};
 
 static const char* l_names[] = {
     "Telescope",  "Sail",         "Wind Waker",      "Grappling Hook",
@@ -56,15 +49,16 @@ void ItemEquipPriorityMenu::drawItemEquipLines() {
         char item_name[32];
         char high_priority_str[4];
         char medium_priority_str[4];
+        int16_t idx = std::distance(std::begin(g_item_equipe_order), std::find(std::begin(g_item_equipe_order), std::end(g_item_equipe_order), i));
 
-        auto stng = GZStng_get(l_setting_ids[i]);
+        auto stng = GZStng_get(g_item_equip_setting_ids[idx]);
         ButtonNames high_priority = ButtonNames::name_X;
         ButtonNames medium_priority = ButtonNames::name_Y;
         if (stng != nullptr) {
             high_priority = (*static_cast<ItemEquipSettings*>(stng->data)).high_priority;
             medium_priority = (*static_cast<ItemEquipSettings*>(stng->data)).medium_priority;
         }
-        sprintf(item_name, "%s", l_names[i]);
+        sprintf(item_name, "%s", l_names[idx]);
         sprintf(high_priority_str, "<%c>", l_button_names[(int)high_priority]);
         sprintf(medium_priority_str, "<%c>", l_button_names[(int)medium_priority]);
 
@@ -74,8 +68,8 @@ void ItemEquipPriorityMenu::drawItemEquipLines() {
                 case HighPriority:
                     if (GZ_getButtonRepeat(GZPad::DPAD_RIGHT)) {
                         if (!stng) {
-                            stng = new GZSettingEntry{l_setting_ids[i], sizeof(ItemEquipSettings),
-                                                      new ItemEquipSettings{name_X, name_Y}};
+                            stng = new GZSettingEntry{g_item_equip_setting_ids[idx], sizeof(ItemEquipSettings),
+                                                      new ItemEquipSettings};
                             g_settings.push_back(stng);
                         }
                         static_cast<ItemEquipSettings*>(stng->data)->high_priority = static_cast<ButtonNames>(
@@ -84,8 +78,8 @@ void ItemEquipPriorityMenu::drawItemEquipLines() {
                     }
                     if (GZ_getButtonRepeat(GZPad::DPAD_LEFT)) {
                         if (!stng) {
-                            stng = new GZSettingEntry{l_setting_ids[i], sizeof(ItemEquipSettings),
-                                                      new ItemEquipSettings{name_X, name_Y}};
+                            stng = new GZSettingEntry{g_item_equip_setting_ids[idx], sizeof(ItemEquipSettings),
+                                                      new ItemEquipSettings};
                             g_settings.push_back(stng);
                         }
                         static_cast<ItemEquipSettings*>(stng->data)->high_priority = static_cast<ButtonNames>(
@@ -102,8 +96,8 @@ void ItemEquipPriorityMenu::drawItemEquipLines() {
                 case MediumPriority:
                     if (GZ_getButtonRepeat(GZPad::DPAD_RIGHT)) {
                         if (!stng) {
-                            stng = new GZSettingEntry{l_setting_ids[i], sizeof(ItemEquipSettings),
-                                                      new ItemEquipSettings{name_X, name_Y}};
+                            stng = new GZSettingEntry{g_item_equip_setting_ids[idx], sizeof(ItemEquipSettings),
+                                                      new ItemEquipSettings};
                             g_settings.push_back(stng);
                         }
                         static_cast<ItemEquipSettings*>(stng->data)->medium_priority = static_cast<ButtonNames>(
@@ -117,8 +111,8 @@ void ItemEquipPriorityMenu::drawItemEquipLines() {
                     }
                     if (GZ_getButtonRepeat(GZPad::DPAD_LEFT)) {
                         if (!stng) {
-                            stng = new GZSettingEntry{l_setting_ids[i], sizeof(ItemEquipSettings),
-                                                      new ItemEquipSettings{name_X, name_Y}};
+                            stng = new GZSettingEntry{g_item_equip_setting_ids[idx], sizeof(ItemEquipSettings),
+                                                      new ItemEquipSettings};
                             g_settings.push_back(stng);
                         }
                         static_cast<ItemEquipSettings*>(stng->data)->medium_priority = static_cast<ButtonNames>(
@@ -165,7 +159,7 @@ void ItemEquipPriorityMenu::draw() {
     if (GZ_getButtonTrig(GZPad::B)) {
         if (checkLineValSelected()) {
             l_selectedCol = -1;
-            auto stng = GZStng_get(l_setting_ids[l_selectedLine]);
+            auto stng = GZStng_get(g_item_equip_setting_ids[l_selectedLine]);
             if (stng) {
                 if (static_cast<ItemEquipSettings*>(stng->data)->high_priority ==
                     static_cast<ItemEquipSettings*>(stng->data)->medium_priority) {
@@ -205,6 +199,36 @@ void ItemEquipPriorityMenu::draw() {
             g_settings.push_back(stng);
         }
         *static_cast<bool*>(stng->data) = !*static_cast<bool*>(stng->data);
+    }
+
+    if (GZ_getButtonTrig(GZPad::START)) {
+        // Bring item under cursor to the top (index 0)
+        if (cursor.y >= 0) {
+            int16_t id =
+                std::distance(std::begin(g_item_equipe_order), std::find(std::begin(g_item_equipe_order), std::end(g_item_equipe_order), cursor.y));
+            OSReport("id: %d\n", id);
+            auto o = GZStng_getData<ItemEquipSettings>(g_item_equip_setting_ids[id], {name_X, name_Y, -1}).order;
+            OSReport("o: %d\n", o);
+            for (int i = 0; i < NUM_ITEM_EQUIPS; i++) {
+                auto stng = GZStng_get(g_item_equip_setting_ids[i]);
+                if (stng) {
+                    if (o < 0) {
+                        static_cast<ItemEquipSettings*>(stng->data)->order++;
+                    } else {
+                        if (static_cast<ItemEquipSettings*>(stng->data)->order < o) {
+                            static_cast<ItemEquipSettings*>(stng->data)->order++;
+                        }
+                    }
+                }
+            }
+            auto stng = GZStng_get(g_item_equip_setting_ids[id]);
+            if (!stng) {
+                stng = new GZSettingEntry{g_item_equip_setting_ids[id], sizeof(ItemEquipSettings), new ItemEquipSettings};
+                g_settings.push_back(stng);
+            }
+            static_cast<ItemEquipSettings*>(stng->data)->order = 0;
+            fetchOrder();
+        }
     }
 
     cursor.move(2, NUM_ITEM_EQUIPS);
