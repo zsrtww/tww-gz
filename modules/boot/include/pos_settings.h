@@ -1,5 +1,6 @@
 #pragma once
 
+#include "settings.h"
 #include "libtww/include/dolphin/mtx/vec.h"
 
 enum SpritesIndex {
@@ -15,6 +16,6 @@ enum SpritesIndex {
     SPRITES_AMNT,
 };
 
-extern Vec2 g_spriteOffsets[SPRITES_AMNT];
-
-void GZ_PosSettings_initDefaults();
+inline Vec2 GZ_getSpriteOffset(GZSettingID sprIdx) {
+    return GZStng_getData(sprIdx, Vec2{0.0f, 0.0f});
+}

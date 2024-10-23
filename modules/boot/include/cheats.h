@@ -1,6 +1,8 @@
 #ifndef LIB_TWW_CHEATS
 #define LIB_TWW_CHEATS
 
+#include "settings.h"
+
 #define CHEAT_AMNT 16
 
 enum CheatId {
@@ -29,6 +31,8 @@ struct Cheat {
 
 void GZ_applyCheats();
 
-extern Cheat g_cheats[CHEAT_AMNT];
+inline bool GZ_checkCheat(GZSettingID cheatIdx) {
+    return GZStng_getData(cheatIdx, false);
+}
 
 #endif

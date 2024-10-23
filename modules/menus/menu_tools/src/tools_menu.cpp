@@ -30,37 +30,49 @@
 #endif
 
 KEEP_FUNC ToolsMenu::ToolsMenu(Cursor& cursor)
-    : Menu(cursor),
-      lines{
-          {"link debug info", DEBUG_INDEX, "Display position and angle data for Link", true,
-           &g_tools[DEBUG_INDEX].active},
-          {"display time info", TIME_DISP_INDEX, "Display current day, time and moon phase", true,
-           &g_tools[TIME_DISP_INDEX].active},
-          {"stage info", STAGE_INFO_INDEX, "show Link's current stage info", true, &g_tools[STAGE_INFO_INDEX].active},
-          {"teleport", TELEPORT_INDEX, "R+D-pad up to save position. R+D-pad down to load", true,
-           &g_tools[TELEPORT_INDEX].active},
-          {"area reload", AREA_RELOAD_INDEX, "Reload stage with L + R + A + Start", true,
-           &g_tools[AREA_RELOAD_INDEX].active},
-          {"map select", MAP_SELECT_INDEX, "Load map select by holding D-pad down + Y + Z", true,
-           &g_tools[MAP_SELECT_INDEX].active},
-          {"zombie hover info", ZH_INDEX, "Display A and B button presses per second", true, &g_tools[ZH_INDEX].active},
-          {"input viewer", INPUT_VIEWER_INDEX, "Show current inputs", true, &g_tools[INPUT_VIEWER_INDEX].active},
-          {"timers", FRAME_COUNT_INDEX, "Toggle timers with L+R+D-pad Right, reset with L+R+D-pad Left", true,
-           &g_tools[FRAME_COUNT_INDEX].active},
-          {"frame advance", FRAME_ADVANCE_INDEX, "D-pad Down to pause/unpause, D-pad Up to advance frames", true,
-           &g_tools[FRAME_ADVANCE_INDEX].active},
-          {"ess checker", ESS_CHECKER_INDEX, "Change input stick color based on distance from ideal ESS", true,
-           &g_tools[ESS_CHECKER_INDEX].active},
-          {"deadzone checker", DEADZONE_CHECKER_INDEX, "Change input viewer stick color if stick is in deadzone", true,
-           &g_tools[DEADZONE_CHECKER_INDEX].active},
-          {"disable save checks", DISABLE_SVCHECK_INDEX, "Disables save location checks, set used spawn ID in settings",
-           true, &g_tools[DISABLE_SVCHECK_INDEX].active},
-          {"intro skip", INTRO_SKIP_INDEX, "Skips the intro cutscenes when starting a new file", true,
-           &g_tools[INTRO_SKIP_INDEX].active},
-          {"room reload/void out", VOID_INDEX, "Reload room by void out by pressing L + R + B + Start", true,
-           &g_tools[VOID_INDEX].active}} {}
+    : Menu(cursor), lines{{"link debug info", DEBUG_INDEX, "Display position and angle data for Link", true,
+                           []() { return GZStng_getData(STNG_TOOLS_DEBUG, false); }},
+                          {"display time info", TIME_DISP_INDEX, "Display current day, time and moon phase", true,
+                           []() { return GZStng_getData(STNG_TOOLS_TIME_DISP, false); }},
+                          {"stage info", STAGE_INFO_INDEX, "show Link's current stage info", true,
+                           []() { return GZStng_getData(STNG_TOOLS_STAGE_INFO, false); }},
+                          {"teleport", TELEPORT_INDEX, "R+D-pad up to save position. R+D-pad down to load", true,
+                           []() { return GZStng_getData(STNG_TOOLS_TELEPORT, false); }},
+                          {"area reload", AREA_RELOAD_INDEX, "Reload stage with L + R + A + Start", true,
+                           []() { return GZStng_getData(STNG_TOOLS_AREA_RELOAD, false); }},
+                          {"map select", MAP_SELECT_INDEX, "Load map select by holding D-pad down + Y + Z", true,
+                           []() { return GZStng_getData(STNG_TOOLS_MAP_SELECT, false); }},
+                          {"zombie hover info", ZH_INDEX, "Display A and B button presses per second", true,
+                           []() { return GZStng_getData(STNG_TOOLS_ZH, false); }},
+                          {"input viewer", INPUT_VIEWER_INDEX, "Show current inputs", true,
+                           []() { return GZStng_getData(STNG_TOOLS_INPUT_VIEWER, false); }},
+                          {"timers", FRAME_COUNT_INDEX, "Toggle timers with L+R+D-pad Right, reset with L+R+D-pad Left",
+                           true, []() { return GZStng_getData(STNG_TOOLS_FRAME_COUNT, false); }},
+                          {"frame advance", FRAME_ADVANCE_INDEX,
+                           "D-pad Down to pause/unpause, D-pad Up to advance frames", true,
+                           []() { return GZStng_getData(STNG_TOOLS_FRAME_ADVANCE, false); }},
+                          {"ess checker", ESS_CHECKER_INDEX,
+                           "Change input stick color based on distance from ideal ESS", true,
+                           []() { return GZStng_getData(STNG_TOOLS_ESS_CHECKER, false); }},
+                          {"deadzone checker", DEADZONE_CHECKER_INDEX,
+                           "Change input viewer stick color if stick is in deadzone", true,
+                           []() { return GZStng_getData(STNG_TOOLS_DEADZONE_CHECKER, false); }},
+                          {"disable save checks", DISABLE_SVCHECK_INDEX,
+                           "Disables save location checks, set used spawn ID in settings", true,
+                           []() { return GZStng_getData(STNG_TOOLS_DISABLE_SVCHECK, false); }},
+                          {"intro skip", INTRO_SKIP_INDEX, "Skips the intro cutscenes when starting a new file", true,
+                           []() { return GZStng_getData(STNG_TOOLS_INTRO_SKIP, false); }},
+                          {"room reload/void out", VOID_INDEX, "Reload room by void out by pressing L + R + B + Start",
+                           true, []() { return GZStng_getData(STNG_TOOLS_VOID, false); }}} {}
 
 ToolsMenu::~ToolsMenu() {}
+
+GZSettingID l_mapping[] = {
+    STNG_TOOLS_DEBUG,           STNG_TOOLS_TIME_DISP,     STNG_TOOLS_STAGE_INFO,  STNG_TOOLS_TELEPORT,
+    STNG_TOOLS_AREA_RELOAD,     STNG_TOOLS_MAP_SELECT,    STNG_TOOLS_ZH,          STNG_TOOLS_INPUT_VIEWER,
+    STNG_TOOLS_FRAME_COUNT,     STNG_TOOLS_FRAME_ADVANCE, STNG_TOOLS_ESS_CHECKER, STNG_TOOLS_DEADZONE_CHECKER,
+    STNG_TOOLS_DISABLE_SVCHECK, STNG_TOOLS_INTRO_SKIP,    STNG_TOOLS_VOID,
+};
 
 void ToolsMenu::draw() {
     cursor.move(0, MENU_LINE_NUM);
@@ -71,9 +83,14 @@ void ToolsMenu::draw() {
     }
 
     if (GZ_getButtonTrig(SELECTION_BUTTON)) {
-        g_tools[cursor.y].active = !g_tools[cursor.y].active;
+        auto stng = GZStng_get(l_mapping[cursor.y]);
+        if (!stng) {
+            stng = new GZSettingEntry{l_mapping[cursor.y], sizeof(bool), new bool{false}};
+            g_settings.push_back(stng);
+        }
+        *static_cast<bool*>(stng->data) = !*static_cast<bool*>(stng->data);
 
-        if (g_tools[cursor.y].active) {
+        if (*static_cast<bool*>(stng->data)) {
             switch (cursor.y) {
             case TELEPORT_INDEX:
                 GZCmd_enable(Commands::CMD_STORE_POSITION);

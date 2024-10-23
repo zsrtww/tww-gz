@@ -20,10 +20,3 @@ enum ToolsIndex {
     // Entry used as a counter
     TOOLS_COUNT
 };
-
-struct Tool {
-    enum ToolsIndex id;
-    bool active;
-};
-
-extern Tool g_tools[TOOLS_COUNT];

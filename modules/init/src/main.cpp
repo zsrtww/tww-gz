@@ -3,7 +3,6 @@
 #include "fifo_queue.h"
 #include "font.h"
 #include "menu.h"
-#include "pos_settings.h"
 #include "geometry_draw.h"
 #include "modules.h"
 #include "menus/utils/menu_mgr.h"
@@ -24,6 +23,8 @@
     *reinterpret_cast<u32*>(addr) = 0x60000000;                                                                        \
     DCFlushRange((void*)addr, sizeof(u32));                                                                            \
     ICInvalidateRange((void*)addr, sizeof(u32));
+
+void GZ_PosSettings_initDefaults();
 
 namespace twwgz::modules {
 void main() {
@@ -112,3 +113,14 @@ void main() {
 void exit() {}
 
 }  // namespace twwgz::modules
+
+KEEP_FUNC void GZ_PosSettings_initDefaults() {
+    GZStng_add(STNG_SPRITES_MENU, new Vec2{10.f, 60.f}, sizeof(Vec2));
+    GZStng_add(STNG_SPRITES_FIFO, new Vec2{5.0f, 440.f}, sizeof(Vec2));
+    GZStng_add(STNG_SPRITES_VIEWER, new Vec2{220.f, 380.f}, sizeof(Vec2));
+    GZStng_add(STNG_SPRITES_COUNT, new Vec2{450.f, 395.f}, sizeof(Vec2));
+    GZStng_add(STNG_SPRITES_DEBUG_INFO, new Vec2{450.0f, 195.f}, sizeof(Vec2));
+    GZStng_add(STNG_SPRITES_TIME_DISP, new Vec2{450.0f, 315.f}, sizeof(Vec2));
+    GZStng_add(STNG_SPRITES_ZH_INFO, new Vec2{585.0f, 395.f}, sizeof(Vec2));
+    GZStng_add(STNG_SPRITES_STAGE_INFO, new Vec2{425.0f, 30.f}, sizeof(Vec2));
+}

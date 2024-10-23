@@ -1,11 +1,10 @@
 #pragma once
 
 #include "libtww/include/dolphin/gctypes.h"
-
-#define NUM_EQUIPPABLE_ITEMS 14
+#include "libtww/include/d/save/d_save.h"
+#include "settings.h"
 
 enum ItemEquipColumns {
-    ItemName,
     HighPriority,
     MediumPriority
 };
@@ -14,8 +13,8 @@ enum ButtonNames {
     name_Y,
     name_Z
 };
-enum ItemEquipNames {
-    NO_ITEM_EQUIP,
+enum ItemEquips {
+    NO_ITEM_EQUIP = -1,
     TELESCOPE_EQUIP,
     SAIL_EQUIP,
     WIND_WAKER_EQUIP,
@@ -30,19 +29,17 @@ enum ItemEquipNames {
     BOMBS_EQUIP,
     HOOKSHOT_EQUIP,
     SKULL_HAMMER_EQUIP,
+
+    NUM_ITEM_EQUIPS,
 };
 
 struct ItemEquipSettings {
-    u8 item_name = NO_ITEM_EQUIP;
-    u8 high_priority = name_X;
-    u8 medium_priority = name_Y;
-    bool line_selected = false;
-    bool value_selected = false;
+    ButtonNames high_priority = name_X;
+    ButtonNames medium_priority = name_Y;
+    int16_t order = 0;
 };
 
-u8 item_enum_to_item_slot(u8 item_enum);
-char button_enum_to_name(u8 button_enum, u8 item_enum);
-const char* item_enum_to_name(u8 item_enum);
+extern int16_t g_item_equipe_order[NUM_ITEM_EQUIPS];
+extern const GZSettingID g_item_equip_setting_ids[NUM_ITEM_EQUIPS];
 
-extern bool g_equipPriorityEnabled;
-extern ItemEquipSettings g_item_equip_priorities[NUM_EQUIPPABLE_ITEMS];
+void fetchOrder();

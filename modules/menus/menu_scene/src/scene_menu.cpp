@@ -8,9 +8,9 @@
 KEEP_FUNC SceneMenu::SceneMenu(Cursor& cursor)
     : Menu(cursor), lines{
                         {"disable bg music", MUTE_BGM_INDEX, "Disables background and enemy music", true,
-                         &g_sceneFlags[MUTE_BGM_INDEX].active},
+                         []() { return g_sceneFlags[MUTE_BGM_INDEX].active; }},
                         {"freeze time", FREEZE_TIME_INDEX, "Freezes ingame time", true,
-                         &g_sceneFlags[FREEZE_TIME_INDEX].active},
+                         []() { return g_sceneFlags[FREEZE_TIME_INDEX].active; }},
                         {"wind direction", MODIFY_WIND_INDEX, "Change the current wind direction"},
                         {"chart set", MODIFY_CHART_SET_INDEX, "Change the current chart set"},
                         {"current hour", TIME_HOURS_INDEX, "Change the current hour"},

@@ -1,96 +1,59 @@
 #include "equip_priority.h"
-#include "libtww/include/d/save/d_save.h"
-#include "rels/include/defines.h"
+#include <algorithm>
 
-KEEP_VAR ItemEquipSettings g_item_equip_priorities[NUM_EQUIPPABLE_ITEMS] = {};
-KEEP_VAR bool g_equipPriorityEnabled = false;
+int16_t g_item_equipe_order[NUM_ITEM_EQUIPS] = {0};
 
-KEEP_FUNC char button_enum_to_name(u8 button_enum, u8 item_enum) {
-    if (item_enum == NO_ITEM_EQUIP)
-        return '?';
+const GZSettingID g_item_equip_setting_ids[] = {
+    STNG_ITEM_EQUIP_TELESCOPE,       STNG_ITEM_EQUIP_SAIL,
+    STNG_ITEM_EQUIP_WIND_WAKER,      STNG_ITEM_EQUIP_GRAPPLING_HOOK,
+    STNG_ITEM_EQUIP_BOOMERANG,       STNG_ITEM_EQUIP_DEKU_LEAF,
+    STNG_ITEM_EQUIP_TINGLE_TUNER,    STNG_ITEM_EQUIP_PROGRESSIVE_PICTO_BOX,
+    STNG_ITEM_EQUIP_IRON_BOOTS,      STNG_ITEM_EQUIP_MAGIC_ARMOR,
+    STNG_ITEM_EQUIP_PROGRESSIVE_BOW, STNG_ITEM_EQUIP_BOMBS,
+    STNG_ITEM_EQUIP_HOOKSHOT,        STNG_ITEM_EQUIP_SKULL_HAMMER,
+};
 
-    switch (button_enum) {
-    case name_X:
-        return 'X';
-    case name_Y:
-        return 'Y';
-    case name_Z:
-        return 'Z';
-    default:
-        return 'X';
+/**
+ * @brief Fetches the order of the item equips from the settings and validates them.
+ */
+void fetchOrder() {
+    // First populate the order array with -1 to signify that the item equip has not been set
+    for (int i = 0; i < NUM_ITEM_EQUIPS; i++) {
+        g_item_equipe_order[i] = -1;
     }
-}
-
-KEEP_FUNC const char* item_enum_to_name(u8 item_enum) {
-    switch (item_enum) {
-    case NO_ITEM_EQUIP:
-        return "No Item";
-    case TELESCOPE_EQUIP:
-        return "Telescope";
-    case SAIL_EQUIP:
-        return "Sail";
-    case WIND_WAKER_EQUIP:
-        return "Wind Waker";
-    case GRAPPLING_HOOK_EQUIP:
-        return "Grappling Hook";
-    case BOOMERANG_EQUIP:
-        return "Boomerang";
-    case DEKU_LEAF_EQUIP:
-        return "Deku Leaf";
-    case TINGLE_TUNER_EQUIP:
-        return "Tingle Tuner";
-    case PROGRESSIVE_PICTO_BOX_EQUIP:
-        return "Progressive Picto Box";
-    case IRON_BOOTS_EQUIP:
-        return "Iron Boots";
-    case MAGIC_ARMOR_EQUIP:
-        return "Magic Armor";
-    case PROGRESSIVE_BOW_EQUIP:
-        return "Progressive Bow";
-    case BOMBS_EQUIP:
-        return "Bombs";
-    case HOOKSHOT_EQUIP:
-        return "Hookshot";
-    case SKULL_HAMMER_EQUIP:
-        return "Skull Hammer";
-    default:
-        return "No Item";
+    // Fetch the settings for each item equip
+    for (int i = 0; i < NUM_ITEM_EQUIPS; i++) {
+        auto stng = GZStng_get(g_item_equip_setting_ids[i]);
+        if (stng != nullptr) {
+            g_item_equipe_order[i] = static_cast<ItemEquipSettings*>(stng->data)->order;
+        }
     }
-}
-
-KEEP_FUNC u8 item_enum_to_item_slot(u8 item_enum) {
-    switch (item_enum) {
-    case NO_ITEM_EQUIP:
-        return NO_ITEM;
-    case TELESCOPE_EQUIP:
-        return SLOT_TELESCOPE;
-    case SAIL_EQUIP:
-        return SLOT_SAIL;
-    case WIND_WAKER_EQUIP:
-        return SLOT_WIND_WAKER;
-    case GRAPPLING_HOOK_EQUIP:
-        return SLOT_ROPE;
-    case BOOMERANG_EQUIP:
-        return SLOT_BOOMERANG;
-    case DEKU_LEAF_EQUIP:
-        return SLOT_DEKU_LEAF;
-    case TINGLE_TUNER_EQUIP:
-        return SLOT_TUNER;
-    case PROGRESSIVE_PICTO_BOX_EQUIP:
-        return SLOT_CAMERA;
-    case IRON_BOOTS_EQUIP:
-        return SLOT_IRON_BOOTS;
-    case MAGIC_ARMOR_EQUIP:
-        return SLOT_MAGIC_ARMOR;
-    case PROGRESSIVE_BOW_EQUIP:
-        return SLOT_BOW;
-    case BOMBS_EQUIP:
-        return SLOT_BOMB;
-    case HOOKSHOT_EQUIP:
-        return SLOT_HOOKSHOT;
-    case SKULL_HAMMER_EQUIP:
-        return SLOT_HAMMER;
-    default:
-        return NO_ITEM;
+    // Validate the order array by checking if all values are unique and under NUM_ITEM_EQUIPS
+    for (int i = 0; i < NUM_ITEM_EQUIPS; i++) {
+        if (g_item_equipe_order[i] == -1) {
+            continue;
+        }
+        if (g_item_equipe_order[i] >= NUM_ITEM_EQUIPS) {
+            g_item_equipe_order[i] = -1;
+        }
+        for (int j = i + 1; j < NUM_ITEM_EQUIPS; j++) {
+            if (g_item_equipe_order[j] == -1) {
+                continue;
+            }
+            if (g_item_equipe_order[i] == g_item_equipe_order[j]) {
+                g_item_equipe_order[j] = -1;
+            }
+        }
+    }
+    // Finally, set the order of the item equips that have not been set to the smallest available value not in the array
+    int16_t order = 0;
+    for (int i = 0; i < NUM_ITEM_EQUIPS; i++) {
+        if (g_item_equipe_order[i] == -1) {
+            while (std::find(std::begin(g_item_equipe_order), std::end(g_item_equipe_order), order) !=
+                   std::end(g_item_equipe_order)) {
+                order++;
+            }
+            g_item_equipe_order[i] = order;
+        }
     }
 }
