@@ -107,21 +107,16 @@ KEEP_FUNC void SaveManager::triggerLoad(uint32_t id, const char* category, speci
     // Default to normal arrow. The special callbacks will handle other cases.
     daArrow_c__m_keep_type = 0;
 
-    int state = tww_getLayerNo(save->getPlayer().mReturnPlace.mName, save->getPlayer().mReturnPlace.mRoomNo, 0xFF);
-
     g_dComIfG_gameInfo.play.mNextStage.mRoomNo = save->getPlayer().mReturnPlace.mRoomNo;
     g_dComIfG_gameInfo.play.mNextStage.mPoint = save->getPlayer().mReturnPlace.mPoint;
     strcpy(g_dComIfG_gameInfo.play.mNextStage.mName, save->getPlayer().mReturnPlace.mName);
-    g_dComIfG_gameInfo.play.mNextStage.mLayer = state;
+    g_dComIfG_gameInfo.play.mNextStage.mLayer = -1; // default layer to -1, may get overwritten in special saves
 
     g_dComIfG_gameInfo.info.getRestart().mLastMode = 0;
     g_dComIfG_gameInfo.play.mNextStage.mEnable = true;
 
     // inject options after initial stage set since some options change stage location
     if (gSaveManager.mPracticeFileOpts.inject_options_during_load != nullptr) {
-        // set default layer to -1 for specials
-        // may get overwritten by the special function
-        g_dComIfG_gameInfo.play.mNextStage.mLayer = -1;
         gSaveManager.mPracticeFileOpts.inject_options_during_load();
     }
 
