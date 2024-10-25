@@ -58,8 +58,8 @@ void SaveManager::injectDefault_during() {
 void SaveManager::injectDefault_after() {}
 
 void SaveManager::defaultLoad() {
-    gSaveManager.mPracticeFileOpts.inject_options_during_load = SaveManager::injectDefault_during;
-    gSaveManager.mPracticeFileOpts.inject_options_after_load = SaveManager::injectDefault_after;
+    gSaveManager.mPracticeFileOpts.inject_options_during_load = nullptr;
+    gSaveManager.mPracticeFileOpts.inject_options_after_load = nullptr;
     g_fifoVisible = true;
     g_menuMgr->hide();
 }
@@ -118,7 +118,10 @@ KEEP_FUNC void SaveManager::triggerLoad(uint32_t id, const char* category, speci
     g_dComIfG_gameInfo.play.mNextStage.mEnable = true;
 
     // inject options after initial stage set since some options change stage location
-    if (gSaveManager.mPracticeFileOpts.inject_options_during_load) {
+    if (gSaveManager.mPracticeFileOpts.inject_options_during_load != nullptr) {
+        // set default layer to -1 for specials
+        // may get overwritten by the special function
+        g_dComIfG_gameInfo.play.mNextStage.mLayer = -1;
         gSaveManager.mPracticeFileOpts.inject_options_during_load();
     }
 
@@ -136,7 +139,7 @@ KEEP_FUNC void SaveManager::loadData() {
     if (s_injectSave) {
         SaveManager::injectSave(MEMFILE_BUF);
 
-        if (gSaveManager.mPracticeFileOpts.inject_options_after_load) {
+        if (gSaveManager.mPracticeFileOpts.inject_options_after_load != nullptr) {
             gSaveManager.mPracticeFileOpts.inject_options_after_load();
         }
 
