@@ -70,7 +70,6 @@ void GZCmd_hoverBoots() {
     }
 }
 
-
 /*Temporary functions to fix bug with collision codes from inline function*/
 void GZCmd_normalCollision() {
     u16* collision_ptr = dComIfGs_getCollision();
