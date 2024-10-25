@@ -3,7 +3,7 @@
 
 #include "settings.h"
 
-#define CHEAT_AMNT 16
+#define CHEAT_AMNT 17
 
 enum CheatId {
     InfiniteAir,
@@ -22,6 +22,7 @@ enum CheatId {
     QuarterHeart,
     FastMovement,
     Upcharge,
+    Hoverboots,
 };
 
 struct Cheat {

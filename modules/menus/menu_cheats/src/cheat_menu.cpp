@@ -35,7 +35,9 @@ KEEP_FUNC CheatsMenu::CheatsMenu(Cursor& cursor)
           {"fast movement", FastMovement, "Hold D-pad left to get super speed. Modify the speed in settings.", true,
            ACTIVE_FUNC(STNG_CHEATS_FAST_MOVEMENT)},
           {"upcharge", Upcharge, "Hold X + Z to get negative speed for upcharge", true,
-           ACTIVE_FUNC(STNG_CHEATS_UPCHARGE)}} {}
+           ACTIVE_FUNC(STNG_CHEATS_UPCHARGE)},
+          {"tingle balloon", Hoverboots, "Hold L+ D-pad left to get tingle balloon.", true,
+           ACTIVE_FUNC(STNG_CHEATS_HOVERBOOTS)}} {}
 
 CheatsMenu::~CheatsMenu() {}
 
@@ -44,6 +46,7 @@ GZSettingID l_mapping[] = {
     STNG_CHEATS_REFILL_HEALTH, STNG_CHEATS_INFINITE_MAGIC,  STNG_CHEATS_REFILL_MAGIC,     STNG_CHEATS_INFINITE_RUPEES,
     STNG_CHEATS_MOON_JUMP,     STNG_CHEATS_STORAGE,         STNG_CHEATS_NORMAL_COLLISION, STNG_CHEATS_CHEST_STORAGE,
     STNG_CHEATS_DOOR_CANCEL,   STNG_CHEATS_QUARTER_HEART,   STNG_CHEATS_FAST_MOVEMENT,    STNG_CHEATS_UPCHARGE,
+    STNG_CHEATS_HOVERBOOTS,
 };
 static_assert(ARRAY_COUNT(l_mapping) == CHEAT_AMNT, "l_mapping size does not match CHEAT_AMNT");
 
