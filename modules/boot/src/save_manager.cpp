@@ -37,35 +37,15 @@ void SaveManager::injectSave(void* src) {
     memcpy(&g_dComIfG_gameInfo.info.mSavedata.mPlayer.mConfig, (char*)src + 0x19f, 5);
     memcpy((void*)&g_dComIfG_gameInfo.info.mSavedata.mPlayer.mPriest, (char*)src + 0x1a4, 0x10);
     memcpy(&g_dComIfG_gameInfo.info.mSavedata.mPlayer.mStatusC, (char*)src + 0x1b4, 0x1c0);
-
     memcpy(&g_dComIfG_gameInfo.info.mSavedata.mSave, (char*)src + 0x374, 0x240);
-
     memcpy(&g_dComIfG_gameInfo.info.mSavedata.mOcean, (char*)src + 0x5b4, 0x64);
-
     memcpy(&g_dComIfG_gameInfo.info.mSavedata.mEvent, (char*)src + 0x618, 0x100);
 
     dComIfGs_getSave(g_dComIfG_gameInfo.info.mDan.mStageNo);
 }
 
-void SaveManager::injectDefault_before() {
-    g_dComIfG_gameInfo.play.mNextStage.mWipe = 0;
-}
-
-void SaveManager::injectDefault_during() {
-    g_dComIfG_gameInfo.play.mNextStage.setLayer(-1);
-}
-
-void SaveManager::injectDefault_after() {}
-
-void SaveManager::defaultLoad() {
-    gSaveManager.mPracticeFileOpts.inject_options_during_load = nullptr;
-    gSaveManager.mPracticeFileOpts.inject_options_after_load = nullptr;
-    g_fifoVisible = true;
-    g_menuMgr->hide();
-}
-
 void SaveManager::loadSave(uint32_t id, const char* category, special i_specials[], int size) {
-    SaveManager::injectDefault_before();
+    g_dComIfG_gameInfo.play.mNextStage.mWipe = 0;
 
     // Load the corresponding file path and properties
     snprintf(l_filename, sizeof(l_filename), "twwgz/save_files/%s.bin", category);
@@ -75,8 +55,12 @@ void SaveManager::loadSave(uint32_t id, const char* category, special i_specials
     snprintf(l_filename, sizeof(l_filename), "twwgz/save_files/%s/%s.bin", category,
              gSaveManager.mPracticeSaveInfo.filename);
 
-    SaveManager::defaultLoad();
+    gSaveManager.mPracticeFileOpts.inject_options_during_load = nullptr;
+    gSaveManager.mPracticeFileOpts.inject_options_after_load = nullptr;
+    g_fifoVisible = true;
+    g_menuMgr->hide();
 
+    // TODO: this isnt used, remove relevant pieces
     if (gSaveManager.mPracticeSaveInfo.requirements) {
         gSaveManager.mPracticeFileOpts.inject_options_after_counter = gSaveManager.mPracticeSaveInfo.counter;
     }
