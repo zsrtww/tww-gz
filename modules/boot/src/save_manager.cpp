@@ -110,7 +110,7 @@ KEEP_FUNC void SaveManager::triggerLoad(uint32_t id, const char* category, speci
     g_dComIfG_gameInfo.play.mNextStage.mRoomNo = save->getPlayer().mReturnPlace.mRoomNo;
     g_dComIfG_gameInfo.play.mNextStage.mPoint = save->getPlayer().mReturnPlace.mPoint;
     strcpy(g_dComIfG_gameInfo.play.mNextStage.mName, save->getPlayer().mReturnPlace.mName);
-    g_dComIfG_gameInfo.play.mNextStage.mLayer = -1; // default layer to -1, may get overwritten in special saves
+    g_dComIfG_gameInfo.play.mNextStage.mLayer = -1;  // default layer to -1, may get overwritten in special saves
 
     g_dComIfG_gameInfo.info.getRestart().mLastMode = 0;
     g_dComIfG_gameInfo.play.mNextStage.mEnable = true;
