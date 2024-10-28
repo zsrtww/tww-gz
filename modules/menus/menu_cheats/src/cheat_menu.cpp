@@ -36,7 +36,7 @@ KEEP_FUNC CheatsMenu::CheatsMenu(Cursor& cursor)
            ACTIVE_FUNC(STNG_CHEATS_FAST_MOVEMENT)},
           {"upcharge", Upcharge, "Hold X + Z to get negative speed for upcharge", true,
            ACTIVE_FUNC(STNG_CHEATS_UPCHARGE)},
-          {"tingle balloon", Hoverboots, "Hold L+ D-pad left to get tingle balloon.", true,
+          {"tingle balloon", Hoverboots, "Hold D-pad down to get tingle balloon.", true,
            ACTIVE_FUNC(STNG_CHEATS_HOVERBOOTS)}} {}
 
 CheatsMenu::~CheatsMenu() {}
