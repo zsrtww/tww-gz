@@ -1,7 +1,7 @@
 #pragma once
 #include "libtww/include/dolphin/gctypes.h"
 
-#define COMMANDS_AMNT 16
+#define COMMANDS_AMNT 17
 #define DEFAULT_WATER_SPEED 1500.0f
 #define DEFAULT_LAND_SPEED 150.0f
 
@@ -28,6 +28,7 @@ enum Commands {
     CMD_TOGGLE_TIMER,
     CMD_RESET_TIMER,
     CMD_VOID,
+    CMD_HOVER_BOOTS,
 };
 
 struct Command {
