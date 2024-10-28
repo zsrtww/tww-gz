@@ -24,7 +24,6 @@ void SaveMngSpecial_Ganondorf();
 void SaveMngSpecial_BombsSwim_NoMSS();
 void SaveMngSpecial_Outside_FH_DC();
 void SaveMngSpecial_GanonHover();
-void SaveMngSpecial_EarlyLights_NoMSS();
 
 void SaveMngSpecial_TrialsSkipAny();
 void SaveMngSpecial_LightArrowSkip_Any();

@@ -248,10 +248,6 @@ KEEP_FUNC void SaveMngSpecial_GanonHover() {
     gSaveManager.modifySave([]() { SaveMngSpecial_SetHealth(1); });
 }
 
-KEEP_FUNC void SaveMngSpecial_EarlyLights_NoMSS() {
-    dComIfGs_offEventBit(0x2D01);
-}
-
 // =================== ALL DUNGEONS FUNCTIONS ===================
 
 KEEP_FUNC void SaveMngSpecial_FF1CS_AD() {
