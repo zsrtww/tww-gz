@@ -10,7 +10,7 @@ KEEP_FUNC AnySavesMenu::AnySavesMenu(Cursor& cursor)
                         {"manual superswim", MSS, "just after the intro, at bottom of watchtower"},
                         {"post manual superswim", POST_MSS, "after mss at DRI"},
                         {"ff1 exterior", FF1O, "at FF1 after leaving jail cell"},
-                        {"forsest haven swim", BOMBS_ANY, "at windfall island, post FF1 cutscene"},
+                        {"greatfish cutscene skip", BOMBS_ANY, "at windfall island, post FF1 cutscene"},
                         {"ropes 2", ROPES_2_ANY, "inside pirate ship, ropes 2 minigame state"},
                         {"forest haven swim", FH_SWIM_ANY, "at windfall island post bombs for swim to forest haven"},
                         {"deku tree cutscene skip", DTCS_ANY, "inside forest haven for first time, for dtcs"},
