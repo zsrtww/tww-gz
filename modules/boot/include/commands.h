@@ -1,7 +1,7 @@
 #pragma once
 #include "libtww/include/dolphin/gctypes.h"
 
-#define COMMANDS_AMNT 17
+#define COMMANDS_AMNT 16
 
 extern bool g_commandStates[COMMANDS_AMNT];
 extern bool g_timer_reset;
@@ -28,7 +28,6 @@ enum Commands {
     CMD_TOGGLE_TIMER,
     CMD_RESET_TIMER,
     CMD_VOID,
-    CMD_HOVER_BOOTS,
 };
 
 struct Command {

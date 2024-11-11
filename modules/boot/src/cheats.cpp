@@ -119,9 +119,4 @@ void GZ_applyCheats() {
     } else {
         GZCmd_disable(CMD_REFILL_MAGIC);
     }
-    if (GZ_checkCheat(STNG_CHEATS_HOVERBOOTS)) {
-        GZCmd_enable(CMD_HOVER_BOOTS);
-    } else {
-        GZCmd_disable(CMD_HOVER_BOOTS);
-    }
 }
