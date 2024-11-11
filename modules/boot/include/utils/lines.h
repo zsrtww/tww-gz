@@ -20,10 +20,9 @@ struct Line {
     const uint32_t idx;
     char description[MAX_DESCRIPTION_LENGTH];
     bool toggleable = false;
-    bool (*active)();
+    bool* activation_flag;
     uint8_t max_y_cursor_options;
     char value[sizeof(Line::line)] = {0};
-    bool disabled = false;
 
     template <typename... Args>
     inline int printf(const char* fmt, Args... args) {

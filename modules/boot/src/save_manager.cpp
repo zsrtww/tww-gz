@@ -1,5 +1,4 @@
 #include <cstdio>
-#include <algorithm>
 #include "fs.h"
 #include "libtww/include/dolphin/os/OSCache.h"
 #include "settings.h"
@@ -107,12 +106,6 @@ KEEP_FUNC void SaveManager::triggerLoad(uint32_t id, const char* category, speci
     s_injectSave = true;
 }
 
-static const ItemSlots l_slots[] = {
-    SLOT_TELESCOPE, SLOT_SAIL,       SLOT_WIND_WAKER,  SLOT_ROPE, SLOT_BOOMERANG, SLOT_DEKU_LEAF, SLOT_TUNER,
-    SLOT_CAMERA,    SLOT_IRON_BOOTS, SLOT_MAGIC_ARMOR, SLOT_BOW,  SLOT_BOMB,      SLOT_HOOKSHOT,  SLOT_HAMMER,
-};
-static_assert(ARRAY_COUNT(l_slots) == NUM_ITEM_EQUIPS, "l_slots size mismatch");
-
 // runs at the beginning of phase_1 of dScnPly__phase_1 load sequence
 KEEP_FUNC void SaveManager::loadData() {
     if (s_injectSave) {
@@ -122,26 +115,17 @@ KEEP_FUNC void SaveManager::loadData() {
             gSaveManager.mPracticeFileOpts.inject_options_after_load();
         }
 
-        if (GZStng_getData<bool>(STNG_EQUIP_PRIORITY, false)) {
+        if (g_equipPriorityEnabled) {
             u8 cur_item_x = dComIfGs_getSelectItem(0);
             u8 cur_item_y = dComIfGs_getSelectItem(1);
             u8 cur_item_z = dComIfGs_getSelectItem(2);
 
             u8 new_items[3] = {NO_ITEM, NO_ITEM, NO_ITEM};
 
-            fetchOrder();
-            for (int i = 0; i < NUM_ITEM_EQUIPS; i++) {
-                int16_t idx =
-                    std::distance(std::begin(g_item_equipe_order),
-                                  std::find(std::begin(g_item_equipe_order), std::end(g_item_equipe_order), i));
-                u8 item_slot = l_slots[idx];
-                auto stng = GZStng_get(g_item_equip_setting_ids[idx]);
-                u8 highest_priority = name_X;
-                u8 medium_priority = name_Y;
-                if (stng) {
-                    highest_priority = static_cast<ItemEquipSettings*>(stng->data)->high_priority;
-                    medium_priority = static_cast<ItemEquipSettings*>(stng->data)->medium_priority;
-                }
+            for (int i = 0; i < NUM_EQUIPPABLE_ITEMS; i++) {
+                u8 item_slot = item_enum_to_item_slot(g_item_equip_priorities[i].item_name);
+                u8 highest_priority = g_item_equip_priorities[i].high_priority;
+                u8 medium_priority = g_item_equip_priorities[i].medium_priority;
 
                 if (item_slot == NO_ITEM)
                     continue;

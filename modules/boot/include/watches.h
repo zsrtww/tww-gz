@@ -2,6 +2,8 @@
 
 #include <cstdint>
 
+#define MAX_WATCHES 10
+
 enum MemoryType {
     MEM_TYPE_U8,
     MEM_TYPE_S8,
@@ -34,3 +36,5 @@ struct MemoryWatch {
     bool line_selected = false;
     bool value_selected = false;
 };
+
+extern MemoryWatch g_watches[MAX_WATCHES];

@@ -101,7 +101,7 @@ void ActorSpawnMenu::draw() {
         break;
     }
 
-    auto menu_offset = GZ_getSpriteOffset(STNG_SPRITES_MENU);
+    auto menu_offset = g_spriteOffsets[SPR_MENU_INDEX];
     float param_offset_x = menu_offset.x + Font::getStrWidth("actor params:  ");
     float param_offset_y = menu_offset.y + 20.0f * (float)(int)ACTOR_PARAM_INDEX;
 
