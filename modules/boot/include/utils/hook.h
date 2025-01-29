@@ -21,6 +21,10 @@ enum HookIndex {
 extern int spawn_id_input;
 extern bool g_flagLogEnabled;
 extern int g_lastValidPoint;
+extern const char* g_stageName;
+extern s8 g_roomNo;
+extern BOOL g_save;
+extern s8 g_point;
 
 namespace Hook {
 void applyHooks();

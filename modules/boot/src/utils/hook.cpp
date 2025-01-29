@@ -47,10 +47,15 @@ HOOK_DEF(void, onSwitch, (void*, int, int));
 int spawn_id_input = 0;
 bool g_flagLogEnabled = 0;
 int g_lastValidPoint = 0;
+s8 g_roomNo = 0;
+BOOL g_save = FALSE;
+s8 g_point = 0;
+const char* g_stageName = nullptr;
 
 namespace Hook {
 
 static char buf[40];
+static char g_stageNameBuffer[8];
 void onEventBitHook(void* addr, uint16_t pFlag) {
     if (g_flagLogEnabled) {
         if (addr == &g_dComIfG_gameInfo.info.mTmp) {
@@ -115,7 +120,9 @@ uint32_t readControllerHook(uint16_t* p1) {
 }
 
 void dComIfGs_setGameStartStageHook() {
-    if (GZStng_getData(STNG_TOOLS_DISABLE_SVCHECK, false)) {
+    if (g_save) {
+        dComIfGs_setReturnPlace(g_stageName, g_roomNo, g_point);
+    } else if (GZStng_getData(STNG_TOOLS_DISABLE_SVCHECK, false)) {
         dComIfGs_setReturnPlace(dComIfGp_getStartStageName(), dComIfGp_roomControl_getStayNo(), spawn_id_input);
     } else {
         dComIfGs_setGameStartStageTrampoline();
@@ -132,6 +139,11 @@ int dScnPly__phase_1Hook(void* i_scene) {
     int point = g_dComIfG_gameInfo.play.mStartStage.getPoint();
     if (point >= 0) {
         g_lastValidPoint = point;
+    }
+    s16 scene = fpcM_GetName(i_scene);
+
+    if (scene == PROC_OPENING_SCENE || scene == PROC_OPENING2_SCENE) {
+        g_save = FALSE;
     }
 
     return dScnPly__phase_1Trampoline(i_scene);
@@ -290,6 +302,19 @@ BOOL dScnMenu_DrawHook(menu_of_scene_class* i_this) {
     } else {
         JUTReport(40, 450, "Spawn Point (R/L): %d", i_this->startCode - 1);
     }
+    if (GZ_getButtonTrig(GZPad::Z)) {
+        g_save ^= 1;
+    }
+    if (g_save) {
+        room_inf* room = &i_this->info->stage[l_cursolID].roomPtr[l_groupPoint[l_cursolID]];
+        s16 startCode = (i_this->startCode != 0) ? i_this->startCode - 1 : room->startCode;
+        memcpy(g_stageNameBuffer, room->stageName, sizeof(room->stageName));
+        g_roomNo = room->roomNo;
+        g_point = startCode;
+        g_stageName = g_stageNameBuffer;
+    }
+
+    JUTReport(320, 390, " Set Save Location (Z): %s", g_save ? "ON" : "OFF");
 
     JUTReport(400, 410, "A (Ctrl 3)");
     if (dComIfGs_isEventBit(0x2d01)) {

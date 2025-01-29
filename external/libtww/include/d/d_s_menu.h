@@ -45,6 +45,8 @@ typedef struct menu_of_scene_class {
 
 extern "C" s32 l_timepat;
 extern "C" s16 l_weekpat;
+extern "C" s8* l_groupPoint;
+extern "C" s32 l_cursolID;
 
 #ifdef PAL
 extern "C" u8 l_languageType;
