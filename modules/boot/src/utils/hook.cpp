@@ -141,10 +141,6 @@ int dScnPly__phase_1Hook(void* i_scene) {
     if (point >= 0) {
         g_lastValidPoint = point;
     }
-    s16 scene = fpcM_GetName(i_scene);
-
-    if (scene == PROC_OPENING_SCENE || scene == PROC_OPENING2_SCENE) {
-    }
 
     return dScnPly__phase_1Trampoline(i_scene);
 }
