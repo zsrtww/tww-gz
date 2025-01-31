@@ -327,6 +327,7 @@ BOOL dScnMenu_DrawHook(menu_of_scene_class* i_this) {
 }
 
 int memory_to_cardHook(char* i_cardPtr, int i_dataNum) {
+    // reset selected location in map select when saving
     g_save = false;
     return memory_to_cardTrampoline(i_cardPtr, i_dataNum);
 }
