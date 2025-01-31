@@ -43,13 +43,14 @@ HOOK_DEF(BOOL, dScnMenu_Draw, (menu_of_scene_class*));
 HOOK_DEF(void, onEventBit, (void*, uint16_t));
 HOOK_DEF(void, offEventBit, (void*, uint16_t));
 HOOK_DEF(void, onSwitch, (void*, int, int));
+HOOK_DEF(int, memory_to_card, (char*, int));
 
 int spawn_id_input = 0;
 bool g_flagLogEnabled = 0;
 int g_lastValidPoint = 0;
 s8 g_roomNo = 0;
-BOOL g_save = FALSE;
-s8 g_point = 0;
+bool g_save = false;
+s16 g_point = 0;
 const char* g_stageName = nullptr;
 
 namespace Hook {
@@ -143,7 +144,6 @@ int dScnPly__phase_1Hook(void* i_scene) {
     s16 scene = fpcM_GetName(i_scene);
 
     if (scene == PROC_OPENING_SCENE || scene == PROC_OPENING2_SCENE) {
-        g_save = FALSE;
     }
 
     return dScnPly__phase_1Trampoline(i_scene);
@@ -326,6 +326,11 @@ BOOL dScnMenu_DrawHook(menu_of_scene_class* i_this) {
     return ret;
 }
 
+int memory_to_cardHook(char* i_cardPtr, int i_dataNum) {
+    g_save = false;
+    return memory_to_cardTrampoline(i_cardPtr, i_dataNum);
+}
+
 #define draw_console draw__17JUTConsoleManagerCFv
 #define f_fapGm_Execute fapGm_Execute__Fv
 
@@ -345,6 +350,7 @@ void Draw__4dCcSFv(dCcS*);
 void MoveAfterCheck__4dCcSFv(dCcS*);
 BOOL dScnLogo_Delete__FP10dScnLogo_c(void*);
 BOOL dScnMenu_Draw__FP19menu_of_scene_class(menu_of_scene_class*);
+int memory_to_card__10dSv_info_cFPci(char*, int);
 }
 
 KEEP_FUNC void applyHooks() {
@@ -369,6 +375,7 @@ KEEP_FUNC void applyHooks() {
     APPLY_HOOK(onEventBit, &f_onEventBit, onEventBitHook);
     APPLY_HOOK(offEventBit, &f_offEventBit, offEventBitHook);
     APPLY_HOOK(onSwitch, &f_onSwitch, onSwitchHook);
+    APPLY_HOOK(memory_to_card, &memory_to_card__10dSv_info_cFPci, memory_to_cardHook);
 #undef APPLY_HOOK
 }
 }  // namespace Hook
