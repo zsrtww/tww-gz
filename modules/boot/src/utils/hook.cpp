@@ -297,6 +297,19 @@ BOOL dScnMenu_DrawHook(menu_of_scene_class* i_this) {
     } else {
         JUTReport(40, 450, "Spawn Point (R/L): %d", i_this->startCode - 1);
     }
+    if (GZ_getButtonTrig(GZPad::Z)) {
+        g_save ^= 1;
+    }
+    if (g_save) {
+        room_inf* room = &i_this->info->stage[l_cursolID].roomPtr[l_groupPoint[l_cursolID]];
+        s16 startCode = (i_this->startCode != 0) ? i_this->startCode - 1 : room->startCode;
+        memcpy(g_stageNameBuffer, room->stageName, sizeof(room->stageName));
+        g_roomNo = room->roomNo;
+        g_point = startCode;
+        g_stageName = g_stageNameBuffer;
+    }
+
+    JUTReport(320, 390, " Set Save Location (Z): %s", g_save ? "ON" : "OFF");
 
     if (GZ_getButtonTrig(GZPad::Z)) {
         g_save ^= 1;
