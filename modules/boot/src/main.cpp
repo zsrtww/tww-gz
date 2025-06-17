@@ -138,10 +138,10 @@ KEEP_FUNC void GZ_handleFlags_PostLoop() {
 
 KEEP_FUNC void GZ_renderMenuTitle() {
     if (g_menuMgr->isOpen()) {
-        Font::GZ_drawStr("twwgz v" INTERNAL_GZ_VERSION, GZ_getSpriteOffset(STNG_SPRITES_MENU).x + 35.0f, 25.0f,
-                         g_cursorColor, GZ_checkDropShadows());
+        Font::GZ_drawStr("twwgz v" INTERNAL_GZ_VERSION, g_spriteOffsets[SPR_MENU_INDEX].x + 35.0f, 25.0f, g_cursorColor,
+                         g_dropShadows);
         if (l_gzIconTex.loadCode == TexCode::TEX_OK) {
-            Draw::drawRect(0xFFFFFFFF, {GZ_getSpriteOffset(STNG_SPRITES_MENU).x, 5.0f},
+            Draw::drawRect(0xFFFFFFFF, {g_spriteOffsets[SPR_MENU_INDEX].x, 5.0f},
                            {30 * (isWidescreen ? 0.75f : 1.0f), 30}, &l_gzIconTex._texObj);
         }
     }

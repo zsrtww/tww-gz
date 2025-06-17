@@ -26,6 +26,9 @@ static Vec sSaveCamTarget = {0.0f, 0.0f, 0.0f}; */
 static int sLastInputs;
 static int sCurInputs;
 
+f32 g_waterSpeed = 1500.0f;
+f32 g_landSpeed = 150.0f;
+
 bool GZCmd_checkTrig(int combo) {
     if (sCurInputs == combo && sLastInputs != combo) {
         return true;
@@ -92,9 +95,9 @@ void GZCmd_fastMovement() {
     if (player_p != nullptr) {
         if (player_p->mCurProcID == daPy_lk_c::PROC_SWIM_UP_e || player_p->mCurProcID == daPy_lk_c::PROC_SWIM_WAIT_e ||
             player_p->mCurProcID == daPy_lk_c::PROC_SWIM_MOVE_e) {
-            player_p->mVelocity = GZStng_getData<float>(STNG_WATER_SPEED, DEFAULT_WATER_SPEED);
+            player_p->mVelocity = g_waterSpeed;
         } else {
-            player_p->mVelocity = GZStng_getData<float>(STNG_LAND_SPEED, DEFAULT_LAND_SPEED);
+            player_p->mVelocity = g_landSpeed;
         }
     }
 }
@@ -182,7 +185,7 @@ static Command sCommands[COMMANDS_AMNT] = {
     {g_commandStates[CMD_TOGGLE_TIMER], (CButton::DPAD_RIGHT | CButton::R | CButton::L), GZCmd_toggleTimer},
     {g_commandStates[CMD_RESET_TIMER], (CButton::DPAD_LEFT | CButton::R | CButton::L), GZCmd_resetTimer},
     {g_commandStates[CMD_VOID], (CButton::L | CButton::R | CButton::B | CButton::START), GZCmd_void},
-    {g_commandStates[CMD_HOVER_BOOTS], (CButton::DPAD_DOWN), GZCmd_hoverBoots}
+    {g_commandStates[CMD_HOVER_BOOTS], (CButton::L | CButton::R | CButton::DPAD_UP), GZCmd_hoverBoots}
 
 };
 

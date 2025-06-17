@@ -24,7 +24,7 @@ KEEP_FUNC void GZ_handleModules() {
 }
 
 KEEP_FUNC bool inputViewer_active() {
-    return GZStng_getData(STNG_TOOLS_INPUT_VIEWER, false);
+    return g_tools[INPUT_VIEWER_INDEX].active;
 }
 
 KEEP_FUNC bool actorView_active() {

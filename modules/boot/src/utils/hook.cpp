@@ -123,7 +123,7 @@ uint32_t readControllerHook(uint16_t* p1) {
 void dComIfGs_setGameStartStageHook() {
     if (g_save) {
         dComIfGs_setReturnPlace(g_stageName, g_roomNo, g_point);
-    } else if (GZStng_getData(STNG_TOOLS_DISABLE_SVCHECK, false)) {
+    } else if (g_tools[DISABLE_SVCHECK_INDEX].active) {
         dComIfGs_setReturnPlace(dComIfGp_getStartStageName(), dComIfGp_roomControl_getStayNo(), spawn_id_input);
     } else {
         dComIfGs_setGameStartStageTrampoline();
@@ -192,8 +192,7 @@ f32 g_savedMapSelectTime = 120.0f;
 
 int dScnPly_DrawHook(void* i_this) {
     // if DPAD_DOWN + Y + Z is pressed, change scene to map select
-    if (GZStng_getData(STNG_TOOLS_MAP_SELECT, false) &&
-        mPadStatus.button == (CButton::DPAD_DOWN | CButton::Y | CButton::Z)) {
+    if (g_tools[MAP_SELECT_INDEX].active && mPadStatus.button == (CButton::DPAD_DOWN | CButton::Y | CButton::Z)) {
         // overwrite original path with our custom path
         strcpy(menu_data_path, "/twwgz/mn/Menu1.dat");
         fopScnM_ChangeReq(i_this, PROC_MENU_SCENE, 0, 5);
@@ -298,6 +297,20 @@ BOOL dScnMenu_DrawHook(menu_of_scene_class* i_this) {
     } else {
         JUTReport(40, 450, "Spawn Point (R/L): %d", i_this->startCode - 1);
     }
+    if (GZ_getButtonTrig(GZPad::Z)) {
+        g_save ^= 1;
+    }
+    if (g_save) {
+        room_inf* room = &i_this->info->stage[l_cursolID].roomPtr[l_groupPoint[l_cursolID]];
+        s16 startCode = (i_this->startCode != 0) ? i_this->startCode - 1 : room->startCode;
+        memcpy(g_stageNameBuffer, room->stageName, sizeof(room->stageName));
+        g_roomNo = room->roomNo;
+        g_point = startCode;
+        g_stageName = g_stageNameBuffer;
+    }
+
+    JUTReport(320, 390, " Set Save Location (Z): %s", g_save ? "ON" : "OFF");
+
     if (GZ_getButtonTrig(GZPad::Z)) {
         g_save ^= 1;
     }
