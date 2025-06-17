@@ -67,6 +67,11 @@ void GZCmd_quarterHeart() {
     dComIfGs_setLife(2);
     dComIfGp_setItemLifeCount(-1);
 }
+void GZCmd_hoverBoots() {
+    if (dComIfGp_getPlayer(0)) {
+        daPy_getPlayerLinkActorClass()->setHoverBoots(5 * 30);
+    }
+}
 
 /*Temporary functions to fix bug with collision codes from inline function*/
 void GZCmd_normalCollision() {
@@ -180,6 +185,7 @@ static Command sCommands[COMMANDS_AMNT] = {
     {g_commandStates[CMD_TOGGLE_TIMER], (CButton::DPAD_RIGHT | CButton::R | CButton::L), GZCmd_toggleTimer},
     {g_commandStates[CMD_RESET_TIMER], (CButton::DPAD_LEFT | CButton::R | CButton::L), GZCmd_resetTimer},
     {g_commandStates[CMD_VOID], (CButton::L | CButton::R | CButton::B | CButton::START), GZCmd_void},
+    {g_commandStates[CMD_HOVER_BOOTS], (CButton::DPAD_DOWN), GZCmd_hoverBoots}
 
 };
 
