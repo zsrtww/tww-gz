@@ -11,6 +11,7 @@ Cheat g_cheats[CHEAT_AMNT] = {
     {RefillHealth, false}, {InfiniteMagic, false},  {RefillMagic, false},     {InfiniteRupees, false},
     {MoonJump, false},     {StorageCheat, false},   {NormalCollision, false}, {ChestStorage, false},
     {DoorCancel, false},   {QuarterHeart, false},   {FastMovement, false},    {Upcharge, false},
+    {Hoverboots, false},
 };
 
 inline bool GZ_checkCheat(int cheatIdx) {
@@ -119,7 +120,7 @@ void GZ_applyCheats() {
     } else {
         GZCmd_disable(CMD_REFILL_MAGIC);
     }
-    if (GZ_checkCheat(STNG_CHEATS_HOVERBOOTS)) {
+    if (GZ_checkCheat(Hoverboots)) {
         GZCmd_enable(CMD_HOVER_BOOTS);
     } else {
         GZCmd_disable(CMD_HOVER_BOOTS);

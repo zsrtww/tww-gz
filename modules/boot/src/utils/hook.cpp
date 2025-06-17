@@ -43,14 +43,20 @@ HOOK_DEF(BOOL, dScnMenu_Draw, (menu_of_scene_class*));
 HOOK_DEF(void, onEventBit, (void*, uint16_t));
 HOOK_DEF(void, offEventBit, (void*, uint16_t));
 HOOK_DEF(void, onSwitch, (void*, int, int));
+HOOK_DEF(int, memory_to_card, (char*, int));
 
 int spawn_id_input = 0;
 bool g_flagLogEnabled = 0;
 int g_lastValidPoint = 0;
+s8 g_roomNo = 0;
+bool g_save = false;
+s16 g_point = 0;
+const char* g_stageName = nullptr;
 
 namespace Hook {
 
 static char buf[40];
+static char g_stageNameBuffer[8];
 void onEventBitHook(void* addr, uint16_t pFlag) {
     if (g_flagLogEnabled) {
         if (addr == &g_dComIfG_gameInfo.info.mTmp) {
@@ -115,9 +121,13 @@ uint32_t readControllerHook(uint16_t* p1) {
 }
 
 void dComIfGs_setGameStartStageHook() {
-    if (g_tools[DISABLE_SVCHECK_INDEX].active) {
+    if (g_save) {
+        dComIfGs_setReturnPlace(g_stageName, g_roomNo, g_point);
+    }
+      else if (g_tools[DISABLE_SVCHECK_INDEX].active) {
         dComIfGs_setReturnPlace(dComIfGp_getStartStageName(), dComIfGp_roomControl_getStayNo(), spawn_id_input);
-    } else {
+    } 
+        else {
         dComIfGs_setGameStartStageTrampoline();
     }
 }
@@ -290,6 +300,20 @@ BOOL dScnMenu_DrawHook(menu_of_scene_class* i_this) {
         JUTReport(40, 450, "Spawn Point (R/L): %d", i_this->startCode - 1);
     }
 
+    if (GZ_getButtonTrig(GZPad::Z)) {
+        g_save ^= 1;
+    }
+    if (g_save) {
+        room_inf* room = &i_this->info->stage[l_cursolID].roomPtr[l_groupPoint[l_cursolID]];
+        s16 startCode = (i_this->startCode != 0) ? i_this->startCode - 1 : room->startCode;
+        memcpy(g_stageNameBuffer, room->stageName, sizeof(room->stageName));
+        g_roomNo = room->roomNo;
+        g_point = startCode;
+        g_stageName = g_stageNameBuffer;
+    }
+
+    JUTReport(320, 390, " Set Save Location (Z): %s", g_save ? "ON" : "OFF");
+
     JUTReport(400, 410, "A (Ctrl 3)");
     if (dComIfGs_isEventBit(0x2d01)) {
         JUTReport(400, 430, "FF2 CS Flag: ON");
@@ -299,6 +323,13 @@ BOOL dScnMenu_DrawHook(menu_of_scene_class* i_this) {
 
     return ret;
 }
+
+int memory_to_cardHook(char* i_cardPtr, int i_dataNum) {
+    // reset selected location in map select when saving
+    g_save = false;
+    return memory_to_cardTrampoline(i_cardPtr, i_dataNum);
+}
+
 
 #define draw_console draw__17JUTConsoleManagerCFv
 #define f_fapGm_Execute fapGm_Execute__Fv
@@ -319,6 +350,7 @@ void Draw__4dCcSFv(dCcS*);
 void MoveAfterCheck__4dCcSFv(dCcS*);
 BOOL dScnLogo_Delete__FP10dScnLogo_c(void*);
 BOOL dScnMenu_Draw__FP19menu_of_scene_class(menu_of_scene_class*);
+int memory_to_card__10dSv_info_cFPci(char*, int);
 }
 
 KEEP_FUNC void applyHooks() {
@@ -343,6 +375,7 @@ KEEP_FUNC void applyHooks() {
     APPLY_HOOK(onEventBit, &f_onEventBit, onEventBitHook);
     APPLY_HOOK(offEventBit, &f_offEventBit, offEventBitHook);
     APPLY_HOOK(onSwitch, &f_onSwitch, onSwitchHook);
+    APPLY_HOOK(memory_to_card, &memory_to_card__10dSv_info_cFPci, memory_to_cardHook);
 #undef APPLY_HOOK
 }
 }  // namespace Hook
