@@ -55,7 +55,7 @@ KEEP_FUNC ToolsMenu::ToolsMenu(Cursor& cursor)
            &g_tools[DEADZONE_CHECKER_INDEX].active},
           {"disable save checks", DISABLE_SVCHECK_INDEX, "Disables save location checks, set used spawn ID in settings",
            true, &g_tools[DISABLE_SVCHECK_INDEX].active},
-          {"intro skip", INTRO_SKIP_INDEX, "Skips the intro cutscenes when starting a new file", true,
+          {"intro skip", INTRO_SKIP_INDEX, "Skips intro cutscene on new file (Broken: Need to toggle on launch)", true,
            &g_tools[INTRO_SKIP_INDEX].active},
           {"room reload/void out", VOID_INDEX, "Reload room by void out by pressing L + R + B + Start", true,
            &g_tools[VOID_INDEX].active}} {}
