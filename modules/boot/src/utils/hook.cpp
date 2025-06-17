@@ -123,11 +123,9 @@ uint32_t readControllerHook(uint16_t* p1) {
 void dComIfGs_setGameStartStageHook() {
     if (g_save) {
         dComIfGs_setReturnPlace(g_stageName, g_roomNo, g_point);
-    }
-      else if (g_tools[DISABLE_SVCHECK_INDEX].active) {
+    } else if (g_tools[DISABLE_SVCHECK_INDEX].active) {
         dComIfGs_setReturnPlace(dComIfGp_getStartStageName(), dComIfGp_roomControl_getStayNo(), spawn_id_input);
-    } 
-        else {
+    } else {
         dComIfGs_setGameStartStageTrampoline();
     }
 }
@@ -329,7 +327,6 @@ int memory_to_cardHook(char* i_cardPtr, int i_dataNum) {
     g_save = false;
     return memory_to_cardTrampoline(i_cardPtr, i_dataNum);
 }
-
 
 #define draw_console draw__17JUTConsoleManagerCFv
 #define f_fapGm_Execute fapGm_Execute__Fv

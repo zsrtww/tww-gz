@@ -21,13 +21,18 @@ KEEP_FUNC CheatsMenu::CheatsMenu(Cursor& cursor)
           {"infinite rupees", InfiniteRupees, "Always have infinite rupees", true, &g_cheats[InfiniteRupees].active},
           {"moon jump", MoonJump, "Hold R+A to moon jump", true, &g_cheats[MoonJump].active},
           {"storage", StorageCheat, "Press D-pad right to get storage", true, &g_cheats[StorageCheat].active},
-          {"normal collision", NormalCollision, "Hold L+D-pad down to get normal collision", true, &g_cheats[NormalCollision].active},
-          {"chest storage", ChestStorage, "Hold L+D-pad right to get chest storage", true, &g_cheats[ChestStorage].active},
+          {"normal collision", NormalCollision, "Hold L+D-pad down to get normal collision", true,
+           &g_cheats[NormalCollision].active},
+          {"chest storage", ChestStorage, "Hold L+D-pad right to get chest storage", true,
+           &g_cheats[ChestStorage].active},
           {"door cancel", DoorCancel, "Hold L+D-pad left to get door cancel", true, &g_cheats[DoorCancel].active},
-          {"quarter heart", QuarterHeart, "Hold R+D-pad left to reduce health to quarter heart", true, &g_cheats[QuarterHeart].active},
-          {"fast movement", FastMovement, "Hold D-pad left to get super speed. Modify the speed in settings.", true, &g_cheats[FastMovement].active},
+          {"quarter heart", QuarterHeart, "Hold R+D-pad left to reduce health to quarter heart", true,
+           &g_cheats[QuarterHeart].active},
+          {"fast movement", FastMovement, "Hold D-pad left to get super speed. Modify the speed in settings.", true,
+           &g_cheats[FastMovement].active},
           {"upcharge", Upcharge, "Hold X + Z to get negative speed for upcharge", true, &g_cheats[Upcharge].active},
-          {"tingle balloon", Hoverboots, "Press L+R+D-pad up to activate a tingle balloon", true, &g_cheats[Hoverboots].active}} {}
+          {"tingle balloon", Hoverboots, "Press L+R+D-pad up to activate a tingle balloon", true,
+           &g_cheats[Hoverboots].active}} {}
 
 CheatsMenu::~CheatsMenu() {}
 
