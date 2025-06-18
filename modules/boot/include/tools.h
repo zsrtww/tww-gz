@@ -16,6 +16,7 @@ enum ToolsIndex {
     DISABLE_SVCHECK_INDEX,
     INTRO_SKIP_INDEX,
     VOID_INDEX,
+    ROLL_CLIP_INDEX,
 
     // Entry used as a counter
     TOOLS_COUNT

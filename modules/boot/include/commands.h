@@ -10,6 +10,7 @@ extern f32 g_landSpeed;
 extern f32 g_waterSpeed;
 extern bool g_medli_room;
 extern bool g_makar_room;
+extern bool climbingTrigger;
 
 enum Commands {
     CMD_STORE_POSITION,
@@ -29,6 +30,7 @@ enum Commands {
     CMD_RESET_TIMER,
     CMD_VOID,
     CMD_HOVER_BOOTS,
+    CMD_ROLL_CLIP,
 };
 
 struct Command {

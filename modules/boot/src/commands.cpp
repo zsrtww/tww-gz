@@ -17,6 +17,7 @@ bool g_timer_reset = false;
 bool g_counterToggle = false;
 bool g_medli_room = false;
 bool g_makar_room = false;
+bool climbingTrigger = false;
 
 static Vec sSavePlayerPos = {0.0f, 0.0f, 0.0f};
 static int16_t sSavePlayerAngle = 0;
