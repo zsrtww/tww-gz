@@ -226,69 +226,65 @@ KEEP_FUNC void GZ_displayStageInfo() {
     }
 }
 
-KEEP_FUNC void GZ_rollClipInfo(){
+KEEP_FUNC void GZ_rollClipInfo() {
+    static s8 rollClipFrameCount = -31;
+    static s8 rollClipFrame = 0;
 
     if (!g_tools[ROLL_CLIP_INDEX].active) {
         return;
     }
-
     daPy_lk_c* player_p = (daPy_lk_c*)dComIfGp_getPlayer(0);
-    static int8_t rollClipFrameCount = -31;
-    static int8_t rollClipFrame = 0;
-    int rollClipColor;
-    const char *roll_clip_timing;
-    char roll_clip_str[50];
-    bool isClimbing = false;
-    bool isHanging = false;
 
-    isClimbing = (player_p->mCurProcID == daPy_lk_c::PROC_HANG_CLIMB_e);
-    isHanging = (player_p->mCurProcID == daPy_lk_c::PROC_HANG_START_e || player_p->mCurProcID == daPy_lk_c::PROC_HANG_FALL_START_e);
+    if (player_p) {
+        ColorPalette rollClipColor;
+        const char* roll_clip_timing;
+        char roll_clip_str[50];
+        bool isClimbing = false;
+        bool isHanging = false;
 
-    if (GZ_getButtonTrig(GZPad::A) && climbingTrigger == true) {
-        rollClipFrame = rollClipFrameCount;
-        climbingTrigger = false;
-    }
+        isClimbing = (player_p->mCurProcID == daPy_lk_c::PROC_HANG_CLIMB_e);
+        isHanging = (player_p->mCurProcID == daPy_lk_c::PROC_HANG_START_e ||
+                     player_p->mCurProcID == daPy_lk_c::PROC_HANG_FALL_START_e);
 
-    if (isHanging) {
-        rollClipFrameCount = -31;
-    }
-
-    if (isClimbing && rollClipFrameCount == -31) {
-        climbingTrigger = true;
-    }
-
-    if (climbingTrigger && rollClipFrameCount < 6) {
-        if (!g_FrameAdvEnabled) {
-            rollClipFrameCount++;
+        if (GZ_getButtonTrig(GZPad::A) && climbingTrigger) {
+            rollClipFrame = rollClipFrameCount;
+            climbingTrigger = false;
         }
-        else if (GZ_getButtonTrig(GZPad::DPAD_UP)) {
-            rollClipFrameCount++;
+
+        if (isHanging) {
+            rollClipFrameCount = -31;
         }
-    }
 
-    if (rollClipFrameCount < 0 && rollClipFrame < 0)
-    {
-        rollClipFrame = -1 * rollClipFrame;
-        rollClipColor = ColorPalette::RED;
-        roll_clip_timing = "Frames Early";
-    }
-    else if (rollClipFrameCount > 0)
-    {
-        rollClipColor = ColorPalette::YELLOW;
-        roll_clip_timing = "Frames Late";
-    }
-    else if (rollClipFrame == 0)
-    {
-        rollClipColor = ColorPalette::GREEN;
-        roll_clip_timing = "Good!";
-    }
-    else
-    {
-        rollClipColor = ColorPalette::RED;
-        roll_clip_timing = "Frames Early";
-    }
+        if (isClimbing && rollClipFrameCount == -31) {
+            climbingTrigger = true;
+        }
 
-    sprintf(roll_clip_str, "Roll Clip Timing: %d %s", rollClipFrame, roll_clip_timing);
-    Vec2 roll_clip_info_offset = g_spriteOffsets[SPR_ROLL_CLIP_INDEX];
-    Font::GZ_drawStr(roll_clip_str, roll_clip_info_offset.x, roll_clip_info_offset.y, rollClipColor, GZ_checkDropShadows());
+        if (climbingTrigger && rollClipFrameCount < 6) {
+            if (!g_FrameAdvEnabled) {
+                rollClipFrameCount++;
+            } else if (GZ_getButtonTrig(GZPad::DPAD_UP)) {
+                rollClipFrameCount++;
+            }
+        }
+
+        if (rollClipFrameCount < 0 && rollClipFrame < 0) {
+            rollClipFrame = -1 * rollClipFrame;
+            rollClipColor = ColorPalette::RED;
+            roll_clip_timing = "Frames Early";
+        } else if (rollClipFrameCount > 0) {
+            rollClipColor = ColorPalette::YELLOW;
+            roll_clip_timing = "Frames Late";
+        } else if (rollClipFrame == 0) {
+            rollClipColor = ColorPalette::GREEN;
+            roll_clip_timing = "Good!";
+        } else {
+            rollClipColor = ColorPalette::RED;
+            roll_clip_timing = "Frames Early";
+        }
+
+        sprintf(roll_clip_str, "Roll Clip Timing: %d %s", rollClipFrame, roll_clip_timing);
+        Vec2 roll_clip_info_offset = g_spriteOffsets[SPR_ROLL_CLIP_INDEX];
+        Font::GZ_drawStr(roll_clip_str, roll_clip_info_offset.x, roll_clip_info_offset.y, rollClipColor,
+                         GZ_checkDropShadows());
+    }
 }
