@@ -27,8 +27,8 @@ KEEP_FUNC DungeonFlagsMenu::DungeonFlagsMenu(Cursor& cursor)
                         {"map", MAP_INDEX, "get the map", true, &l_mapFlag},
                         {"compass", COMPASS_INDEX, "get the compass", true, &l_compassFlag},
                         {"partner", PARTNER_INDEX, "Have Medli/Makar spawned in ET/WT", true, &l_partner},
-                        {"partner room", PARTNER_ROOM_INDEX, "Bring partner to current room when using room reload tool", true,
-                         &l_partner_room},
+                        {"partner room", PARTNER_ROOM_INDEX,
+                         "Bring partner to current room when using room reload tool", true, &l_partner_room},
                     } {}
 
 DungeonFlagsMenu::~DungeonFlagsMenu() {}
