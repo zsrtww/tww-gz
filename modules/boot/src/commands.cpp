@@ -17,7 +17,8 @@ bool g_timer_reset = false;
 bool g_counterToggle = false;
 bool g_medli_room = false;
 bool g_makar_room = false;
-bool climbingTrigger = false;
+bool g_climbingTrigger = false;
+int g_trainerTextColor = ColorPalette::WHITE;
 
 static Vec sSavePlayerPos = {0.0f, 0.0f, 0.0f};
 static int16_t sSavePlayerAngle = 0;
@@ -186,7 +187,7 @@ static Command sCommands[COMMANDS_AMNT] = {
     {g_commandStates[CMD_TOGGLE_TIMER], (CButton::DPAD_RIGHT | CButton::R | CButton::L), GZCmd_toggleTimer},
     {g_commandStates[CMD_RESET_TIMER], (CButton::DPAD_LEFT | CButton::R | CButton::L), GZCmd_resetTimer},
     {g_commandStates[CMD_VOID], (CButton::L | CButton::R | CButton::B | CButton::START), GZCmd_void},
-    {g_commandStates[CMD_HOVER_BOOTS], (CButton::L | CButton::R | CButton::DPAD_UP), GZCmd_hoverBoots}
+    {g_commandStates[CMD_HOVER_BOOTS], (CButton::L | CButton::R | CButton::DPAD_UP), GZCmd_hoverBoots},
 
 };
 

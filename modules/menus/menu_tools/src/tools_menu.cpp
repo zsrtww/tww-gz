@@ -100,10 +100,6 @@ void ToolsMenu::draw() {
                 DCFlushRange(reinterpret_cast<u32*>(INTRO_SKIP_INST1_ADDR), sizeof(u32));
                 ICInvalidateRange(reinterpret_cast<u32*>(INTRO_SKIP_INST1_ADDR), sizeof(u32));
                 break;
-            case ROLL_CLIP_INDEX:
-                GZCmd_enable(Commands::CMD_ROLL_CLIP);
-                GZCmd_enable(Commands::CMD_ROLL_CLIP);
-                break;
             }
         } else {
             switch (cursor.y) {
@@ -130,10 +126,6 @@ void ToolsMenu::draw() {
                 *reinterpret_cast<u32*>(INTRO_SKIP_INST1_ADDR) = INTRO_SKIP_ORIG_INST1;  // bne ret
                 DCFlushRange(reinterpret_cast<u32*>(INTRO_SKIP_INST1_ADDR), sizeof(u32));
                 ICInvalidateRange(reinterpret_cast<u32*>(INTRO_SKIP_INST1_ADDR), sizeof(u32));
-                break;
-
-            case ROLL_CLIP_INDEX:
-                GZCmd_disable(Commands::CMD_ROLL_CLIP);
                 break;
             }
         }

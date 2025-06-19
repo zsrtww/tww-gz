@@ -226,29 +226,44 @@ KEEP_FUNC void GZ_displayStageInfo() {
     }
 }
 
+// Probably need to change the way this works, but if we are going to have multiple
+// trainers could be nice to have one function so there is consistency between the trainers
+int trainingToolTextColor(s8 inputFrame) {
+    int setTextColor;
+        if (inputFrame < 0) {
+            setTextColor = ColorPalette::RED;
+        } else if (inputFrame > 0) {
+            setTextColor = ColorPalette::YELLOW;
+        } else if (inputFrame == 0) {
+            setTextColor = ColorPalette::GREEN;
+        } else {
+            setTextColor = ColorPalette::WHITE;
+        }
+    return setTextColor;
+}
 KEEP_FUNC void GZ_rollClipInfo() {
     static s8 rollClipFrameCount = -31;
     static s8 rollClipFrame = 0;
-
+    
     if (!g_tools[ROLL_CLIP_INDEX].active) {
         return;
     }
+    
     daPy_lk_c* player_p = (daPy_lk_c*)dComIfGp_getPlayer(0);
-
-    if (player_p) {
-        ColorPalette rollClipColor;
-        const char* roll_clip_timing;
-        char roll_clip_str[50];
+    
+    if (player_p != nullptr) {
+        char roll_clip_str[35];
         bool isClimbing = false;
         bool isHanging = false;
-
+       
         isClimbing = (player_p->mCurProcID == daPy_lk_c::PROC_HANG_CLIMB_e);
         isHanging = (player_p->mCurProcID == daPy_lk_c::PROC_HANG_START_e ||
                      player_p->mCurProcID == daPy_lk_c::PROC_HANG_FALL_START_e);
 
-        if (GZ_getButtonTrig(GZPad::A) && climbingTrigger) {
+        if (GZ_getButtonTrig(GZPad::A) && g_climbingTrigger) {
             rollClipFrame = rollClipFrameCount;
-            climbingTrigger = false;
+            g_climbingTrigger = false;
+            g_trainerTextColor = trainingToolTextColor(rollClipFrame);
         }
 
         if (isHanging) {
@@ -256,35 +271,29 @@ KEEP_FUNC void GZ_rollClipInfo() {
         }
 
         if (isClimbing && rollClipFrameCount == -31) {
-            climbingTrigger = true;
+            g_climbingTrigger = true;
         }
 
-        if (climbingTrigger && rollClipFrameCount < 6) {
+        if (g_climbingTrigger && rollClipFrameCount < 6) {
             if (!g_FrameAdvEnabled) {
                 rollClipFrameCount++;
-            } else if (GZ_getButtonTrig(GZPad::DPAD_UP)) {
+            }
+             if (g_FrameTriggered) {
                 rollClipFrameCount++;
             }
         }
 
-        if (rollClipFrameCount < 0 && rollClipFrame < 0) {
-            rollClipFrame = -1 * rollClipFrame;
-            rollClipColor = ColorPalette::RED;
-            roll_clip_timing = "Frames Early";
-        } else if (rollClipFrameCount > 0) {
-            rollClipColor = ColorPalette::YELLOW;
-            roll_clip_timing = "Frames Late";
-        } else if (rollClipFrame == 0) {
-            rollClipColor = ColorPalette::GREEN;
-            roll_clip_timing = "Good!";
+        if (g_trainerTextColor == (int)ColorPalette::GREEN){
+            sprintf(roll_clip_str, "Roll Clip Timing: Good!");
+        } else if (g_trainerTextColor == (int)ColorPalette::YELLOW){
+            sprintf(roll_clip_str, "Roll Clip Timing: %d Frames Late", rollClipFrame);
+        } else if (g_trainerTextColor == (int)ColorPalette::RED){
+            sprintf(roll_clip_str, "Roll Clip Timing: %d Frames Early", (rollClipFrame * -1));
         } else {
-            rollClipColor = ColorPalette::RED;
-            roll_clip_timing = "Frames Early";
+            sprintf(roll_clip_str, "Roll Clip Timing: Waiting...");
         }
-
-        sprintf(roll_clip_str, "Roll Clip Timing: %d %s", rollClipFrame, roll_clip_timing);
         Vec2 roll_clip_info_offset = g_spriteOffsets[SPR_ROLL_CLIP_INDEX];
-        Font::GZ_drawStr(roll_clip_str, roll_clip_info_offset.x, roll_clip_info_offset.y, rollClipColor,
+        Font::GZ_drawStr(roll_clip_str, roll_clip_info_offset.x, roll_clip_info_offset.y, g_trainerTextColor,
                          GZ_checkDropShadows());
     }
 }
