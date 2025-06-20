@@ -516,3 +516,4 @@ Moveable Lists: Main Menu, FIFO Queue, Link Debug Info, Time Display, Input View
 | Disable Save Checks    | Disable save location safety checks, set used spawn ID in settings menu
 | Intro Skip             | Skip lore segment of intro on start of new file
 | Room Reload/Void Out   | Reload room by void out with L + R + B + Start
+| Roll Clip Trainer      | Train roll clip timing with an OSD
