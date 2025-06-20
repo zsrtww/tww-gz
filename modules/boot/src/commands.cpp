@@ -17,8 +17,6 @@ bool g_timer_reset = false;
 bool g_counterToggle = false;
 bool g_medli_room = false;
 bool g_makar_room = false;
-bool g_climbingTrigger = false;
-int g_trainerTextColor = ColorPalette::WHITE;
 
 static Vec sSavePlayerPos = {0.0f, 0.0f, 0.0f};
 static int16_t sSavePlayerAngle = 0;

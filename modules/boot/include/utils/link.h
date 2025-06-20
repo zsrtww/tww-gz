@@ -6,5 +6,3 @@ void GZ_displayTimeInfo();
 void GZ_displayZombieHoverInfo();
 void GZ_frameCounter();
 void GZ_displayStageInfo();
-void GZ_rollClipInfo();
-int trainingToolTextColor(s8);
