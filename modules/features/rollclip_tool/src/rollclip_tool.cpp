@@ -21,9 +21,12 @@ bool isHangingShort = false;
 ColorPalette trainerTextColor;
 bool g_climbingTrigger = false;
 bool getApress = false;
-int timeOnScreen = 0;
-int color = 0x00000000;
-int dropColor = DROP_SHADOWS_RGBA;
+bool frameAdvancePreClimb = false;
+bool frameAdvancePostClimb = false;
+bool frameAdvanceWait = false;
+s16 timeOnScreen = 0;
+s32 color = 0x00000000;
+s32 dropColor = DROP_SHADOWS_RGBA;
 
 namespace RollClip {
 
@@ -45,18 +48,24 @@ KEEP_FUNC void GZ_rollClipInfo() {
         if (g_climbingTrigger && rollClipFrameCount < 6) {
             if (!g_FrameAdvEnabled) {
                 rollClipFrameCount++;
-            }
-            if (g_FrameTriggered) {
+                frameAdvancePreClimb = false;
+                frameAdvancePostClimb = false;
+                frameAdvanceWait = false;
+            } else if (g_FrameTriggered) {
                 rollClipFrameCount++;
+                frameAdvancePostClimb = true;
             }
         }
 
-        if (getApress && g_climbingTrigger) {
+        if ((getApress || rollClipFrameCount == 6) && g_climbingTrigger) {
             rollClipFrame = rollClipFrameCount;
             setRollClipText(rollClipFrame);
             timeOnScreen = 200;
             dropColor = DROP_SHADOWS_RGBA;
             g_climbingTrigger = false;
+            frameAdvancePreClimb = false;
+            frameAdvancePostClimb = false;
+            frameAdvanceWait = false;
         }
 
         if (timeOnScreen > 0 && ((color & 255) > 0)) {
@@ -81,35 +90,55 @@ KEEP_FUNC void GZ_rollClipInfo() {
 
         if (isHangingLong) {
             rollClipFrameCount = -31;
+            if (g_FrameAdvEnabled){
+                frameAdvancePreClimb = true;
+            }
         } else if (isHangingShort) {
             rollClipFrameCount = -29;
+            if (g_FrameAdvEnabled){
+                frameAdvancePreClimb = true;
+            }
         }
 
         if (isClimbing && (rollClipFrameCount == -31 || rollClipFrameCount == -29)) {
             g_climbingTrigger = true;
         }
+        if (g_FrameAdvEnabled && (player_p->mCurProcID == daPy_lk_c::PROC_HANG_WAIT_e)) {
+            frameAdvanceWait = true;
+        }
     }
 }
 
 void setRollClipText(s8 inputFrame) {
+    
+    if (g_FrameAdvEnabled) {
+        if ((frameAdvanceWait || frameAdvancePreClimb) && frameAdvancePostClimb) {
+            inputFrame++;
+        } else if (frameAdvancePostClimb) {
+            inputFrame += 3;
+        }
+    }
+
     if (inputFrame < 0) {
-        sprintf(roll_clip_str, "Roll Clip Timing: %d Frames Early", (rollClipFrame * -1));
+        sprintf(roll_clip_str, "Roll Clip Timing: %d Frames Early", (inputFrame * -1));
         trainerTextColor = ColorPalette::RED;
         color = trainerTextColor;
         // FIFOQueue::push(roll_clip_str, Queue, trainerTextColor);
 
-    } else if (inputFrame > 0) {
-        sprintf(roll_clip_str, "Roll Clip Timing: %d Frames Late", rollClipFrame);
-        trainerTextColor = ColorPalette::YELLOW;
-        color = trainerTextColor;
-        // FIFOQueue::push(roll_clip_str, Queue, trainerTextColor);
     } else if (inputFrame == 0) {
         sprintf(roll_clip_str, "Roll Clip Timing: Good!");
         trainerTextColor = ColorPalette::GREEN;
         color = trainerTextColor;
         // FIFOQueue::push(roll_clip_str, Queue, trainerTextColor);
-    } else {
-        sprintf(roll_clip_str, "Roll Clip Timing: Waiting...");
+
+    } else if (inputFrame > 0 && inputFrame < 6) {
+        sprintf(roll_clip_str, "Roll Clip Timing: %d Frames Late", inputFrame);
+        trainerTextColor = ColorPalette::YELLOW;
+        color = trainerTextColor;
+        // FIFOQueue::push(roll_clip_str, Queue, trainerTextColor);
+
+    } else if (inputFrame == 6) {
+        sprintf(roll_clip_str, "Roll Clip Timing: Timeout...");
         trainerTextColor = ColorPalette::WHITE;
         color = trainerTextColor;
         // FIFOQueue::push(roll_clip_str, Queue, trainerTextColor);
