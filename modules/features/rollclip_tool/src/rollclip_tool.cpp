@@ -90,12 +90,12 @@ KEEP_FUNC void GZ_rollClipInfo() {
 
         if (isHangingLong) {
             rollClipFrameCount = -31;
-            if (g_FrameAdvEnabled){
+            if (g_FrameAdvEnabled) {
                 frameAdvancePreClimb = true;
             }
         } else if (isHangingShort) {
             rollClipFrameCount = -29;
-            if (g_FrameAdvEnabled){
+            if (g_FrameAdvEnabled) {
                 frameAdvancePreClimb = true;
             }
         }
@@ -110,7 +110,6 @@ KEEP_FUNC void GZ_rollClipInfo() {
 }
 
 void setRollClipText(s8 inputFrame) {
-    
     if (g_FrameAdvEnabled) {
         if ((frameAdvanceWait || frameAdvancePreClimb) && frameAdvancePostClimb) {
             inputFrame++;
