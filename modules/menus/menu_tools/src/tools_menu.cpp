@@ -58,7 +58,9 @@ KEEP_FUNC ToolsMenu::ToolsMenu(Cursor& cursor)
           {"intro skip", INTRO_SKIP_INDEX, "Skips intro cutscene on new file (Broken: Need to toggle on launch)", true,
            &g_tools[INTRO_SKIP_INDEX].active},
           {"room reload/void out", VOID_INDEX, "Reload room by void out by pressing L + R + B + Start", true,
-           &g_tools[VOID_INDEX].active}} {}
+           &g_tools[VOID_INDEX].active},
+          {"roll clip trainer", ROLL_CLIP_INDEX, "Train roll clip timing with an OSD", true,
+           &g_tools[ROLL_CLIP_INDEX].active}} {}
 
 ToolsMenu::~ToolsMenu() {}
 

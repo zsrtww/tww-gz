@@ -30,3 +30,7 @@ KEEP_FUNC bool inputViewer_active() {
 KEEP_FUNC bool actorView_active() {
     return g_actorViewEnabled;
 }
+
+KEEP_FUNC bool rollClipTool_active() {
+    return g_tools[ROLL_CLIP_INDEX].active;
+}

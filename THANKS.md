@@ -9,6 +9,7 @@ Thank you to all contributors, which include:
 - Macrepeh
 - EJ125
 - Fig
+- GobbityBobbity
 
 Taka deserves a special thanks for starting the project, providing us with the entire framework ported over from [Twilight Princess' Practice Rom](https://tpgz.io). Without Taka's help, and the TPGZ project as a whole, this project would likely have never gotten off the ground. 
 
