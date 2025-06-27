@@ -35,11 +35,16 @@ void AnyOptimalSavesMenu::draw() {
 
     if (GZ_getButtonTrig(SELECTION_BUTTON)) {
         special AnyOptimalSpecials[] = {
-            special(POST_MSS, SaveMngSpecial_Post_MSS),          special(FF1O, SaveMngSpecial_FF1_Exterior),
-            special(DC_LEAF, SaveMngSpecial_Door_Cancel_Leaf),   special(FH_SWIM, SaveMngSpecial_FH_Swim),
-            special(FH_CLIMB, SaveMngSpecial_Outside_FH_DC),     special(FF2_CLIMB, SaveMngSpecial_FF2_Climb),
-            special(HELM_SKIP, SaveMngSpecial_Helmaroc),         special(TRIAL_SKIP, SaveMngSpecial_TrialsSkipAny), 
-            special(LA_SKIP, SaveMngSpecial_LightArrowSkip_Any), special(PGS, SaveMngSpecial_PGSkip_Any), 
+            special(POST_MSS, SaveMngSpecial_Post_MSS),
+            special(FF1O, SaveMngSpecial_FF1_Exterior),
+            special(DC_LEAF, SaveMngSpecial_Door_Cancel_Leaf),
+            special(FH_SWIM, SaveMngSpecial_FH_Swim),
+            special(FH_CLIMB, SaveMngSpecial_Outside_FH_DC),
+            special(FF2_CLIMB, SaveMngSpecial_FF2_Climb),
+            special(HELM_SKIP, SaveMngSpecial_Helmaroc),
+            special(TRIAL_SKIP, SaveMngSpecial_TrialsSkipAny),
+            special(LA_SKIP, SaveMngSpecial_LightArrowSkip_Any),
+            special(PGS, SaveMngSpecial_PGSkip_Any),
             special(BARRIER_SKIP, SaveMngSpecial_BarrierSkip_Any),
         };
 

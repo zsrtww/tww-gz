@@ -247,7 +247,7 @@ KEEP_FUNC void SaveMngSpecial_FH_Swim() {
 }
 
 KEEP_FUNC void SaveMngSpecial_FF2_Climb() {
-        gSaveManager.modifyActor(PROC_PLAYER, [](fopAc_ac_c* actor) { SaveMngSpecial_DoorCancel(actor); });
+    gSaveManager.modifyActor(PROC_PLAYER, [](fopAc_ac_c* actor) { SaveMngSpecial_DoorCancel(actor); });
 }
 // =================== ANY% NO MSS FUNCTIONS ===================
 
