@@ -197,14 +197,11 @@ KEEP_FUNC void SaveMngSpecial_Outside_FH_DC() {
 // =================== ANY% FUNCTIONS ===================
 
 KEEP_FUNC void SaveMngSpecial_TrialsSkipAny() {
-    gSaveManager.modifySave([]() { SaveMngSpecial_SetHealth(1); });
+    gSaveManager.modifySave([]() { SaveMngSpecial_SetHealth(2); });
 }
 
 KEEP_FUNC void SaveMngSpecial_LightArrowSkip_Any() {
-    gSaveManager.modifySave([]() {
-        SaveMngSpecial_SetHealth(1);
-        SaveMngSpecial_SetMagic(6);
-    });
+    gSaveManager.modifySave([]() { SaveMngSpecial_SetHealth(1); });
 }
 
 KEEP_FUNC void SaveMngSpecial_PGCutsceneSkip_Any() {
@@ -222,12 +219,36 @@ KEEP_FUNC void SaveMngSpecial_PGSkip_Any() {
 }
 
 KEEP_FUNC void SaveMngSpecial_BarrierSkip_Any() {
-    gSaveManager.modifySave([]() {
-        ;
-        SaveMngSpecial_SetHealth(1);
-    });
+    gSaveManager.modifySave([]() { SaveMngSpecial_SetHealth(2); });
 }
 
+KEEP_FUNC void SaveMngSpecial_Post_MSS() {
+    gSaveManager.modifySave([]() { SaveMngSpecial_SetHealth(2); });
+}
+
+KEEP_FUNC void SaveMngSpecial_FF1_Exterior() {
+    gSaveManager.modifySave([]() { SaveMngSpecial_SetHealth(2); });
+}
+
+KEEP_FUNC void SaveMngSpecial_Door_Cancel_Leaf() {
+    gSaveManager.modifySave([]() { SaveMngSpecial_SetHealth(8); });
+}
+
+KEEP_FUNC void SaveMngSpecial_FH_Swim() {
+    g_dComIfG_gameInfo.play.mNextStage.setPoint(128);
+
+    gSaveManager.modifyActor(PROC_PLAYER, [](fopAc_ac_c* actor) { SaveMngSpecial_DoorCancel(actor); });
+
+    if (g_customSaveSpawns) {
+        gSaveManager.modifyActor(PROC_PLAYER, [](fopAc_ac_c* actor) {
+            SaveMngSpecial_SetActorPosAndYaw(actor, -3129.5942f, 515.6201f, -198437.8906f, 0xB396);
+        });
+    }
+}
+
+KEEP_FUNC void SaveMngSpecial_FF2_Climb() {
+        gSaveManager.modifyActor(PROC_PLAYER, [](fopAc_ac_c* actor) { SaveMngSpecial_DoorCancel(actor); });
+}
 // =================== ANY% NO MSS FUNCTIONS ===================
 
 KEEP_FUNC void SaveMngSpecial_BombsSwim_NoMSS() {
