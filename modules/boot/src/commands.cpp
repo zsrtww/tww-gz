@@ -11,6 +11,7 @@
 #include "rels/include/defines.h"
 #include "libtww/include/d/save/d_save.h"
 #include "utils/hook.h"
+#include <string.h>
 
 bool g_commandStates[COMMANDS_AMNT];
 bool g_timer_reset = false;
@@ -20,6 +21,7 @@ bool g_makar_room = false;
 
 static Vec sSavePlayerPos = {0.0f, 0.0f, 0.0f};
 static int16_t sSavePlayerAngle = 0;
+static char sSaveStage[15] = "";
 /* static Vec sSaveCamPos = {0.0f, 0.0f, 0.0f};
 static Vec sSaveCamTarget = {0.0f, 0.0f, 0.0f}; */
 
@@ -40,11 +42,12 @@ void GZCmd_storePosition() {
     if (dComIfGp_getPlayer(0)) {
         sSavePlayerPos = dComIfGp_getPlayer(0)->current.pos;
         sSavePlayerAngle = dComIfGp_getPlayer(0)->shape_angle.y;
+        strncpy(sSaveStage, g_dComIfG_gameInfo.play.mStartStage.getName(), 15);
     }
 }
 
 void GZCmd_loadPosition() {
-    if (dComIfGp_getPlayer(0)) {
+    if (dComIfGp_getPlayer(0) && strncmp(sSaveStage, g_dComIfG_gameInfo.play.mStartStage.getName(), 15) == 0) {
         dComIfGp_getPlayer(0)->current.pos = sSavePlayerPos;
         dComIfGp_getPlayer(0)->current.angle.y = sSavePlayerAngle;
         l_debug_keep_pos = sSavePlayerPos;
