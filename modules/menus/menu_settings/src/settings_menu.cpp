@@ -34,7 +34,7 @@ KEEP_FUNC SettingsMenu::SettingsMenu(Cursor& cursor)
             {"fast land speed:", LAND_SPEED_INDEX, "change max speed of Fast Movement cheat on land"},
             {"spawn id: ", SPAWN_ID_INDEX, "set spawn id for disable save checks tool, invalid id's will crash"},
             {"pause buffer input button:", PAUSE_BUFFER_BUTTON_INDEX,
-             "choose the button to train buffering after a pause"}} {}
+             "set the button to train buffering after a pause"}} {}
 
 SettingsMenu::~SettingsMenu() {}
 
