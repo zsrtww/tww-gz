@@ -306,18 +306,17 @@ The following categories are supported. Click the dropdown to view a list of eac
 | Post Manual Superswim       | After MSS at DRI
 | FF1 Exterior                | At FF1 after leaving jail cell
 | Door Cancel Leaf            | At windfall island, post FF1 cutscene
+| Forest Haven Swim           | At windfall, outside bomb shop with door cancel
 | Forest Haven Climb          | Outside forest haven with door cancel
-| Deku Tree Cutscene Skip     | Inside Forest Haven at top entrance, for DTCS
-| Greatfish Cutscene Skip     |At windfall cove after leaf for gfcs  
-| Sail Skip                   | In KorL near Windfall, after Greatfish cutscene skip
-| Ropes 2                     | Inside pirate ship, ropes 2 minigame state
-| Door Cancel FF2             | At windfall docks after bombs for door cancel ff2                  
+| Deku Tree Cutscene Skip     | Inside Forest Haven at top, for DTCS
+| Door Cancel FF2             | At windfall cove after leaf for door cancel ff2  
+| FF2 Climb                   | Outside FF2 near climbing spot with door cancel
 | Helmaroc Skip               | Inside FF2 Tower, at start of Helmaroc King fight
 | Barrier Skip                | Outside Hyrule Castle, about to do barrier skip
 | Trials Skip                 | Inside Ganon's Tower, in trials room for trials skip
 | Light Arrow Skip            | In Phantom Ganon's room for light arrow skip with Tuner
 | Puppet Ganon Cutscene Skip  | At bottom Grand Staircase for Puppet Ganon cutscene skip
-| Puppet Ganon Skip           | Bottom of Ganondorf's Bedroom for Puppet Ganon skip with Tuner
+| Puppet Ganon Skip           | Bottom of Ganondorf's Bedroom on layer 8 for Puppet Ganon skip with Tuner
 | Ganondorf                   | On top of Ganondorf's Tower, at start of Ganondorf fight
 
 </details>
@@ -492,6 +491,7 @@ TODO: Explain more about how Actor Spawner works
 | Fast Swim Speed        | Change max speed of fast movement cheat for swimming
 | Fast Land Speed        | Change max speed of fast movement cheat on land
 | Spawn ID               | Set spawn ID for disable save checks tool, invalid ID's will crash
+| Bomb Push Clip Frame   | Set the frame for the bpc tool. 37 for Barrier Skip, 55 for Early ET
 
 Moveable Lists: Main Menu, FIFO Queue, Link Debug Info, Time Display, Input Viewer, Frame Timer, Zombie Hover Info, Stage Info
 
@@ -517,3 +517,4 @@ Moveable Lists: Main Menu, FIFO Queue, Link Debug Info, Time Display, Input View
 | Intro Skip             | Skip lore segment of intro on start of new file
 | Room Reload/Void Out   | Reload room by void out with L + R + B + Start
 | Roll Clip Trainer      | Train roll clip timing with an OSD
+| Bomb Push Clip Trainer | Train bomb push clip timing with an OSD
