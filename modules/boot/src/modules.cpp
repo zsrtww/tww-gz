@@ -34,3 +34,7 @@ KEEP_FUNC bool actorView_active() {
 KEEP_FUNC bool rollClipTool_active() {
     return g_tools[ROLL_CLIP_INDEX].active;
 }
+
+KEEP_FUNC bool bombPushClipTool_active() {
+    return g_tools[BOMB_PUSH_INDEX].active;
+}

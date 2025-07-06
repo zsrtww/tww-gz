@@ -33,6 +33,7 @@ enum GZSaveIndex {
     SV_WATERSPEED_INDEX,
     SV_ANGLE_CONVERSION_INDEX,
     SV_CUSTOM_POSITIONS_INDEX,
+    SV_BPC_FRAME_INDEX,
     // ONLY append entries to the end of this enum, unless absolutely necessary
 
     SV_ENTRY_AMNT
@@ -60,6 +61,7 @@ struct GZSaveLayout {
     int mWaterSpeed;
     bool mAngleValuesInDecimal;
     bool mCustomPositions;
+    u8 mBPCFrame;
 };
 
 struct GZSaveFile {

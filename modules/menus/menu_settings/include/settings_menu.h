@@ -17,6 +17,7 @@ enum SettingsIndex {
     WATER_SPEED_INDEX,
     LAND_SPEED_INDEX,
     SPAWN_ID_INDEX,
+    BOMB_PUSH_FRAME_INDEX,
 
     SETTINGS_COUNT
 };

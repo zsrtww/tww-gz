@@ -17,6 +17,7 @@ enum ToolsIndex {
     INTRO_SKIP_INDEX,
     VOID_INDEX,
     ROLL_CLIP_INDEX,
+    BOMB_PUSH_INDEX,
 
     // Entry used as a counter
     TOOLS_COUNT

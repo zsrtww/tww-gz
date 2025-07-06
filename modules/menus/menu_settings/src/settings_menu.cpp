@@ -8,30 +8,31 @@
 #include "menus/utils/menu_mgr.h"
 #include "boot/include/commands.h"
 #include "utils/hook.h"
+#include "features/bpc_tool/include/bomb_push_clip_tool.h"
 
 #define MAX_RELOAD_OPTIONS 2
 #define MAX_CURSOR_COLOR_OPTIONS 6
 
 KEEP_FUNC SettingsMenu::SettingsMenu(Cursor& cursor)
     : Menu(cursor),
-      lines{
-          {"cursor color:", CURSOR_COLOR_INDEX, "change cursor color", false, nullptr, MAX_CURSOR_COLOR_OPTIONS},
-          {"font:", FONT_INDEX, "change font", false, nullptr, FONT_OPTIONS_COUNT},
-          {"drop shadows", DROP_SHADOWS_INDEX, "adds shadows to all font letters", true, &g_dropShadows},
-          {"decimal angles", ANGLE_DECIMAL_INDEX, "display angles in decimal instead of hex", true,
-           &g_angleValuesInDecimal},
-          {"custom save positions", CUSTOM_POSITIONS_INDEX, "turn on/off custom positions in saves that support them",
-           true, &g_customSaveSpawns},
-          {"equip priority", ITEM_EQUIP_PRIORITY_INDEX, "adjust priorities on item equips in practice saves", false},
-          {"save card", SAVE_CARD_INDEX, "save settings to memory card"},
-          {"load card", LOAD_CARD_INDEX, "load settings from memory card"},
-          {"delete card", DELETE_CARD_INDEX, "delete settings from memory card"},
-          {"menu positions", POS_SETTINGS_MENU_INDEX,
-           "change menu object positions (A to toggle selection, DPad to move)", false},
-          {"fast swim speed:", WATER_SPEED_INDEX, "change max speed of fast movement cheat for swimming"},
-          {"fast land speed:", LAND_SPEED_INDEX, "change max speed of Fast Movement cheat on land"},
-          {"spawn id: ", SPAWN_ID_INDEX, "set spawn id for disable save checks tool, invalid id's will crash"},
-      } {}
+      lines{{"cursor color:", CURSOR_COLOR_INDEX, "change cursor color", false, nullptr, MAX_CURSOR_COLOR_OPTIONS},
+            {"font:", FONT_INDEX, "change font", false, nullptr, FONT_OPTIONS_COUNT},
+            {"drop shadows", DROP_SHADOWS_INDEX, "adds shadows to all font letters", true, &g_dropShadows},
+            {"decimal angles", ANGLE_DECIMAL_INDEX, "display angles in decimal instead of hex", true,
+             &g_angleValuesInDecimal},
+            {"custom save positions", CUSTOM_POSITIONS_INDEX, "turn on/off custom positions in saves that support them",
+             true, &g_customSaveSpawns},
+            {"equip priority", ITEM_EQUIP_PRIORITY_INDEX, "adjust priorities on item equips in practice saves", false},
+            {"save card", SAVE_CARD_INDEX, "save settings to memory card"},
+            {"load card", LOAD_CARD_INDEX, "load settings from memory card"},
+            {"delete card", DELETE_CARD_INDEX, "delete settings from memory card"},
+            {"menu positions", POS_SETTINGS_MENU_INDEX,
+             "change menu object positions (A to toggle selection, DPad to move)", false},
+            {"fast swim speed:", WATER_SPEED_INDEX, "change max speed of fast movement cheat for swimming"},
+            {"fast land speed:", LAND_SPEED_INDEX, "change max speed of Fast Movement cheat on land"},
+            {"spawn id: ", SPAWN_ID_INDEX, "set spawn id for disable save checks tool, invalid id's will crash"},
+            {"bomb push clip frame", BOMB_PUSH_FRAME_INDEX,
+             "set the frame for the bpc tool. 37 for Barrier Skip, 55 for Early ET"}} {}
 
 SettingsMenu::~SettingsMenu() {}
 
@@ -183,6 +184,23 @@ void SettingsMenu::draw() {
         cursor.move(0, MENU_LINE_NUM);
         break;
     }
+    case BOMB_PUSH_FRAME_INDEX: {
+        Cursor::moveList(g_bpc_frame);
+        if (GZ_getButtonRepeat(GZPad::A)) {
+            g_bpc_frame += 10;
+        }
+        if (GZ_getButtonRepeat(GZPad::R)) {
+            g_bpc_frame -= 10;
+        }
+        if (g_bpc_frame < 0) {
+            g_bpc_frame = 60;
+        }
+        if (g_bpc_frame > 60) {
+            g_bpc_frame = 0;
+        }
+        cursor.move(0, MENU_LINE_NUM);
+        break;
+    }
 
     default:
         cursor.move(0, MENU_LINE_NUM);
@@ -194,6 +212,7 @@ void SettingsMenu::draw() {
     lines[WATER_SPEED_INDEX].printf(" <%4.0f>", g_waterSpeed);
     lines[LAND_SPEED_INDEX].printf(" <%4.0f>", g_landSpeed);
     lines[SPAWN_ID_INDEX].printf(" <%d>", spawn_id_input);
+    lines[BOMB_PUSH_FRAME_INDEX].printf(" <%d>", g_bpc_frame);
 
     GZ_drawMenuLines(lines, cursor.y, MENU_LINE_NUM);
 }
