@@ -12,4 +12,4 @@ enum BPC_Result {
 namespace BombPushClipTool {
 void GZ_BombPushClipTool();
 void setBombPushStr(int result, u8 inputFrame = 0);
-}
+}  // namespace BombPushClipTool

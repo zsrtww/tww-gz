@@ -50,7 +50,8 @@ KEEP_FUNC void GZ_displayLinkInfo() {
         } else {
             snprintf(link_angle, sizeof(link_angle), "rot y: 0x%04X", (u16)player->shape_angle.y);
         }
-        if (((daPy_lk_c*)player)->mCurProcID == daPy_lk_c::PROC_SHIP_PADDLE_e || ((daPy_lk_c*)player)->mCurProcID == daPy_lk_c::PROC_SHIP_STEER_e) {
+        if (((daPy_lk_c*)player)->mCurProcID == daPy_lk_c::PROC_SHIP_PADDLE_e ||
+            ((daPy_lk_c*)player)->mCurProcID == daPy_lk_c::PROC_SHIP_STEER_e) {
             fopAc_ac_c* ship = (fopAc_ac_c*)dComIfGp_getShipActor();
             snprintf(link_speed, sizeof(link_speed), "speed: %.4f", ship->speedF);
         } else {

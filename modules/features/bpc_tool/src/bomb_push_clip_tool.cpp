@@ -27,7 +27,6 @@ KEEP_FUNC void GZ_BombPushClipTool() {
 
     daPy_lk_c* player_p = (daPy_lk_c*)dComIfGp_getPlayer(0);
 
-
     if (player_p != nullptr) {
         isHoldingBomb = (player_p->mCurProcID == daPy_lk_c::PROC_GRAB_WAIT_e);
 
@@ -109,8 +108,7 @@ KEEP_FUNC void GZ_BombPushClipTool() {
 }
 
 void setBombPushStr(int result, u8 inputFrame) {
-    switch (result)
-    {
+    switch (result) {
     case BPC_Result::WRONG:
         sprintf(bomb_push_str, "BPC timing : Bad buffer");
         color = (s32)ColorPalette::YELLOW;
@@ -136,4 +134,4 @@ void setBombPushStr(int result, u8 inputFrame) {
     }
 }
 
-}
+}  // namespace BombPushClipTool
