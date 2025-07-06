@@ -3,10 +3,10 @@
 #include "libtww/include/dolphin/gctypes.h"
 
 enum Buffer_Buttons {
-    A_BUTTON, 
+    A_BUTTON,
     B_BUTTON,
-    X_BUTTON, 
-    Y_BUTTON, 
+    X_BUTTON,
+    Y_BUTTON,
     Z_BUTTON,
     START_BUTTON
 };

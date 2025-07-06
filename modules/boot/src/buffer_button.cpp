@@ -3,9 +3,8 @@
 #include "controller.h"
 #include <string.h>
 
-KEEP_FUNC void Buffer_Buttons_enum_to_str(char* buttonStr, int bufferButton){
-    switch (bufferButton)
-    {
+KEEP_FUNC void Buffer_Buttons_enum_to_str(char* buttonStr, int bufferButton) {
+    switch (bufferButton) {
     case A_BUTTON:
         strncpy(buttonStr, "A", 2);
         break;
@@ -29,9 +28,8 @@ KEEP_FUNC void Buffer_Buttons_enum_to_str(char* buttonStr, int bufferButton){
     }
 }
 
-KEEP_FUNC int Buffer_Buttons_enum_to_GZPad_enum(int bufferButton){
-    switch (bufferButton)
-    {
+KEEP_FUNC int Buffer_Buttons_enum_to_GZPad_enum(int bufferButton) {
+    switch (bufferButton) {
     case A_BUTTON:
         return GZPad::A;
         break;

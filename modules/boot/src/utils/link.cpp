@@ -36,10 +36,9 @@ KEEP_FUNC void GZ_displayLinkInfo() {
         procBinData* proc = getPlayerProcName(daPy_getPlayerLinkActorClass()->mCurProcID);
 
         int link_animation = ((daPy_lk_c*)player)->mCurProcID;
-        bool isOnShip = link_animation == daPy_lk_c::PROC_SHIP_PADDLE_e ||
-            link_animation == daPy_lk_c::PROC_SHIP_STEER_e ||
-            link_animation == daPy_lk_c::PROC_SHIP_CRANE_e ||
-            link_animation == daPy_lk_c::PROC_SHIP_CANNON_e;
+        bool isOnShip =
+            link_animation == daPy_lk_c::PROC_SHIP_PADDLE_e || link_animation == daPy_lk_c::PROC_SHIP_STEER_e ||
+            link_animation == daPy_lk_c::PROC_SHIP_CRANE_e || link_animation == daPy_lk_c::PROC_SHIP_CANNON_e;
         char link_angle[22];
         char link_speed[22];
         char link_x[22];

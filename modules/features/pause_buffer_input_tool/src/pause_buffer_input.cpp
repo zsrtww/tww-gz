@@ -35,17 +35,17 @@ KEEP_FUNC void GZ_PauseBufferInputTool() {
     daPy_lk_c* player_p = (daPy_lk_c*)dComIfGp_getPlayer(0);
 
     if (player_p != nullptr) {
-
         animationFrame = player_p->mFrameCtrlUnder[0].mFrame;
-        animation  = player_p->mCurProcID;
+        animation = player_p->mCurProcID;
         position = player_p->current.pos;
         bufferButton = Buffer_Buttons_enum_to_GZPad_enum(g_buffer_input);
         getButtonPress = GZ_getButtonTrig(bufferButton);
 
         if (!g_FrameAdvEnabled || g_FrameTriggered) {
-
-            // Test if the game is paused by checking if link's position, animation type and animation frame are the same than in the previous frame
-            if (animationFrame == previousFrame && previousAnimation == animation && previousPosition.x == position.x && previousPosition.y == position.y && previousPosition.z && previousPosition.z) {
+            // Test if the game is paused by checking if link's position, animation type and animation frame are the
+            // same than in the previous frame
+            if (animationFrame == previousFrame && previousAnimation == animation && previousPosition.x == position.x &&
+                previousPosition.y == position.y && previousPosition.z && previousPosition.z) {
                 isPaused = true;
                 unpauseFrames = 0;
             } else {
@@ -105,15 +105,13 @@ KEEP_FUNC void GZ_PauseBufferInputTool() {
             // When frame advance is activated and a frame wasn't triggered and B was buffered
         } else if (getButtonPress) {
             isBPressedWithFrameAdvance = true;
-        } 
-        
+        }
     }
 
     // Displays the result
     if (timeOnScreen > 0) {
         Vec2 bomb_push_display_position = g_spriteOffsets[SPR_BUFFER_INPUT_INDEX];
-        Font::GZ_drawStr(result_str, bomb_push_display_position.x, bomb_push_display_position.y, color,
-                         g_dropShadows);
+        Font::GZ_drawStr(result_str, bomb_push_display_position.x, bomb_push_display_position.y, color, g_dropShadows);
         timeOnScreen--;
     }
 }

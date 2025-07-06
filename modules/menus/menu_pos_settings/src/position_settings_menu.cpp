@@ -22,8 +22,8 @@ KEEP_FUNC PosSettingsMenu::PosSettingsMenu(Cursor& cursor, PosSettingsData& data
             {"zombie hover info", SpritesIndex::SPR_ZH_INFO_INDEX, "Change zombie hover info position", false},
             {"stage info", SpritesIndex::SPR_SPRITES_STAGE_INFO_INDEX, "Change stage info position", false},
             {"roll clip trainer", SpritesIndex::SPR_ROLL_CLIP_INDEX, "Change roll clip trainer position", false},
-            {"pause buffer input trainer", SpritesIndex::SPR_BUFFER_INPUT_INDEX, "Change pause buffer input trainer position",
-             false}} {}
+            {"pause buffer input trainer", SpritesIndex::SPR_BUFFER_INPUT_INDEX,
+             "Change pause buffer input trainer position", false}} {}
 
 PosSettingsMenu::~PosSettingsMenu() {}
 
