@@ -61,8 +61,8 @@ KEEP_FUNC ToolsMenu::ToolsMenu(Cursor& cursor)
            &g_tools[VOID_INDEX].active},
           {"roll clip trainer", ROLL_CLIP_INDEX, "Train roll clip timing with an OSD", true,
            &g_tools[ROLL_CLIP_INDEX].active},
-          {"bomb push clip trainer", BOMB_PUSH_INDEX, "Train bomb push clip timing with an OSD", true,
-           &g_tools[BOMB_PUSH_INDEX].active}} {}
+          {"pause buffer input trainer", PAUSE_BUFFER_INPUT_INDEX, "Train pause buffered input timing with an OSD", true,
+           &g_tools[PAUSE_BUFFER_INPUT_INDEX].active}} {}
 
 ToolsMenu::~ToolsMenu() {}
 

@@ -8,10 +8,12 @@
 #include "menus/utils/menu_mgr.h"
 #include "boot/include/commands.h"
 #include "utils/hook.h"
-#include "features/bpc_tool/include/bomb_push_clip_tool.h"
+#include "boot/include/buffer_button.h"
 
 #define MAX_RELOAD_OPTIONS 2
 #define MAX_CURSOR_COLOR_OPTIONS 6
+
+char bufferButtonStr[10];
 
 KEEP_FUNC SettingsMenu::SettingsMenu(Cursor& cursor)
     : Menu(cursor),
@@ -31,8 +33,8 @@ KEEP_FUNC SettingsMenu::SettingsMenu(Cursor& cursor)
             {"fast swim speed:", WATER_SPEED_INDEX, "change max speed of fast movement cheat for swimming"},
             {"fast land speed:", LAND_SPEED_INDEX, "change max speed of Fast Movement cheat on land"},
             {"spawn id: ", SPAWN_ID_INDEX, "set spawn id for disable save checks tool, invalid id's will crash"},
-            {"bomb push clip frame", BOMB_PUSH_FRAME_INDEX,
-             "set the frame for the bpc tool. 37 for Barrier Skip, 55 for Early ET"}} {}
+            {"pause buffer input button:", PAUSE_BUFFER_BUTTON_INDEX,
+             "choose the button to train buffering after a pause"}} {}
 
 SettingsMenu::~SettingsMenu() {}
 
@@ -43,6 +45,8 @@ void SettingsMenu::draw() {
         g_menuMgr->pop();
         return;
     }
+
+    Buffer_Buttons_enum_to_str(bufferButtonStr, g_buffer_input);
 
     if (GZ_getButtonTrig(SELECTION_BUTTON)) {
         switch (cursor.y) {
@@ -184,20 +188,15 @@ void SettingsMenu::draw() {
         cursor.move(0, MENU_LINE_NUM);
         break;
     }
-    case BOMB_PUSH_FRAME_INDEX: {
-        Cursor::moveList(g_bpc_frame);
-        if (GZ_getButtonRepeat(GZPad::A)) {
-            g_bpc_frame += 10;
+    case PAUSE_BUFFER_BUTTON_INDEX: {
+        Cursor::moveListSimple(g_buffer_input);
+        if (g_buffer_input < 0) {
+            g_buffer_input = 5;
         }
-        if (GZ_getButtonRepeat(GZPad::R)) {
-            g_bpc_frame -= 10;
+        if (g_buffer_input > 5) {
+            g_buffer_input = 0;
         }
-        if (g_bpc_frame < 0) {
-            g_bpc_frame = 60;
-        }
-        if (g_bpc_frame > 60) {
-            g_bpc_frame = 0;
-        }
+        Buffer_Buttons_enum_to_str(bufferButtonStr, g_buffer_input);
         cursor.move(0, MENU_LINE_NUM);
         break;
     }
@@ -212,7 +211,7 @@ void SettingsMenu::draw() {
     lines[WATER_SPEED_INDEX].printf(" <%4.0f>", g_waterSpeed);
     lines[LAND_SPEED_INDEX].printf(" <%4.0f>", g_landSpeed);
     lines[SPAWN_ID_INDEX].printf(" <%d>", spawn_id_input);
-    lines[BOMB_PUSH_FRAME_INDEX].printf(" <%d>", g_bpc_frame);
+    lines[PAUSE_BUFFER_BUTTON_INDEX].printf(" <%s>", bufferButtonStr);
 
     GZ_drawMenuLines(lines, cursor.y, MENU_LINE_NUM);
 }
