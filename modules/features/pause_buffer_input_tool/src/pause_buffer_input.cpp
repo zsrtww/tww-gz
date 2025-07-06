@@ -53,6 +53,8 @@ KEEP_FUNC void GZ_PauseBufferInputTool() {
                 unpauseFrames++;
             }
 
+            // These next two conditions are used with frame advance to add a 1 frame delay because frame advance
+            // doesn't have one
             if (frameAdvanceDelay) {
                 getButtonPress = true;
                 frameAdvanceDelay = false;
@@ -62,31 +64,31 @@ KEEP_FUNC void GZ_PauseBufferInputTool() {
                 frameAdvanceDelay = true;
             }
 
-            // When the player did the B input on the wanted frame
+            // When the player did the input on the wanted frame
             if (getButtonPress && unpauseFrames == 1) {
                 setResultStr(SUCCESS);
                 earlyPress = false;
             }
 
-            // When the player did the B input late (less than 7 frames late)
+            // When the player did the input late (less than 7 frames late)
             if (getButtonPress && unpauseFrames > 1 && unpauseFrames < 7) {
                 inputFrame = unpauseFrames - 1;
                 setResultStr(LATE, inputFrame);
                 earlyPress = false;
             }
 
-            // When the player did the B input early. Starts a frame counter.
+            // When the player did the input early. Starts a frame counter.
             if (getButtonPress && isPaused) {
                 inputFrame = 1;
                 earlyPress = true;
             }
 
-            // Increments the frame counter if B was pressed more than two frames early
+            // Increments the frame counter if the button was pressed more than two frames early
             if (earlyPress && !getButtonPress && isPaused) {
                 inputFrame++;
             }
 
-            // Used to prevent the B press used to unpause to be considered as the bomb drop input
+            // Used to prevent the B press used to unpause to be considered as the input
             if (earlyPress && inputFrame > 9) {
                 earlyPress = false;
             }
