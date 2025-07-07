@@ -114,8 +114,10 @@ KEEP_FUNC void GZ_PauseBufferInputTool() {
     // Displays the result
     if (timeOnScreen > 0) {
         Vec2 buffer_input_display_position = g_spriteOffsets[SPR_BUFFER_INPUT_INDEX];
-        Font::GZ_drawStr(toolText, buffer_input_display_position.x, buffer_input_display_position.y, ColorPalette::WHITE, g_dropShadows);
-        Font::GZ_drawStr(result_str, buffer_input_display_position.x + 245, buffer_input_display_position.y, color, g_dropShadows);
+        Font::GZ_drawStr(toolText, buffer_input_display_position.x, buffer_input_display_position.y,
+                         ColorPalette::WHITE, g_dropShadows);
+        Font::GZ_drawStr(result_str, buffer_input_display_position.x + 245, buffer_input_display_position.y, color,
+                         g_dropShadows);
         timeOnScreen--;
     }
 }
