@@ -7,7 +7,8 @@
 #include "pause_buffer_input.h"
 #include "buffer_button.h"
 
-char result_str[50];
+char result_str[20];
+char toolText[] = "Pause Buffer Input timing:";
 f32 animationFrame;
 int bufferButton;
 bool getButtonPress = false;
@@ -112,8 +113,9 @@ KEEP_FUNC void GZ_PauseBufferInputTool() {
 
     // Displays the result
     if (timeOnScreen > 0) {
-        Vec2 bomb_push_display_position = g_spriteOffsets[SPR_BUFFER_INPUT_INDEX];
-        Font::GZ_drawStr(result_str, bomb_push_display_position.x, bomb_push_display_position.y, color, g_dropShadows);
+        Vec2 buffer_input_display_position = g_spriteOffsets[SPR_BUFFER_INPUT_INDEX];
+        Font::GZ_drawStr(toolText, buffer_input_display_position.x, buffer_input_display_position.y, ColorPalette::WHITE, g_dropShadows);
+        Font::GZ_drawStr(result_str, buffer_input_display_position.x + 245, buffer_input_display_position.y, color, g_dropShadows);
         timeOnScreen--;
     }
 }
@@ -121,22 +123,22 @@ KEEP_FUNC void GZ_PauseBufferInputTool() {
 void setResultStr(int result, u8 inputFrame) {
     switch (result) {
     case Buffer_Input_Result::WRONG:
-        sprintf(result_str, "Pause Buffer Input timing : Bad buffer");
+        sprintf(result_str, "Bad buffer");
         color = (s32)ColorPalette::YELLOW;
         timeOnScreen = 20;
         break;
     case Buffer_Input_Result::SUCCESS:
-        sprintf(result_str, "Pause Buffer Input timing : Good !");
+        sprintf(result_str, "Good !");
         color = (s32)ColorPalette::GREEN;
         timeOnScreen = 60;
         break;
     case Buffer_Input_Result::LATE:
-        sprintf(result_str, "Pause Buffer Input timing : %d frames late", inputFrame);
+        sprintf(result_str, "%d Frame%s Late", inputFrame, (inputFrame == 1) ? "" : "s");
         color = (s32)ColorPalette::RED;
         timeOnScreen = 60;
         break;
     case Buffer_Input_Result::EARLY:
-        sprintf(result_str, "Pause Buffer Input timing : %d frames early", inputFrame);
+        sprintf(result_str, "%d Frame%s Early", inputFrame, (inputFrame == 1) ? "" : "s");
         color = (s32)ColorPalette::YELLOW;
         timeOnScreen = 60;
         break;
