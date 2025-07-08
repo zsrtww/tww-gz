@@ -306,18 +306,17 @@ The following categories are supported. Click the dropdown to view a list of eac
 | Post Manual Superswim       | After MSS at DRI
 | FF1 Exterior                | At FF1 after leaving jail cell
 | Door Cancel Leaf            | At windfall island, post FF1 cutscene
+| Forest Haven Swim           | At windfall, outside bomb shop with door cancel
 | Forest Haven Climb          | Outside forest haven with door cancel
-| Deku Tree Cutscene Skip     | Inside Forest Haven at top entrance, for DTCS
-| Greatfish Cutscene Skip     |At windfall cove after leaf for gfcs  
-| Sail Skip                   | In KorL near Windfall, after Greatfish cutscene skip
-| Ropes 2                     | Inside pirate ship, ropes 2 minigame state
-| Door Cancel FF2             | At windfall docks after bombs for door cancel ff2                  
+| Deku Tree Cutscene Skip     | Inside Forest Haven at top, for DTCS
+| Door Cancel FF2             | At windfall cove after leaf for door cancel ff2  
+| FF2 Climb                   | Outside FF2 near climbing spot with door cancel
 | Helmaroc Skip               | Inside FF2 Tower, at start of Helmaroc King fight
 | Barrier Skip                | Outside Hyrule Castle, about to do barrier skip
 | Trials Skip                 | Inside Ganon's Tower, in trials room for trials skip
 | Light Arrow Skip            | In Phantom Ganon's room for light arrow skip with Tuner
 | Puppet Ganon Cutscene Skip  | At bottom Grand Staircase for Puppet Ganon cutscene skip
-| Puppet Ganon Skip           | Bottom of Ganondorf's Bedroom for Puppet Ganon skip with Tuner
+| Puppet Ganon Skip           | Bottom of Ganondorf's Bedroom on layer 8 for Puppet Ganon skip with Tuner
 | Ganondorf                   | On top of Ganondorf's Tower, at start of Ganondorf fight
 
 </details>
@@ -477,21 +476,22 @@ TODO: Explain more about how Actor Spawner works
 
 ### Settings
 
-| Option                 | Description                   
-| :--                    | :--    
-| Cursor Color           | Change cursor color
-| Font                   | Change font
-| Drop Shadows           | Add shadows to all font characters
-| Decimal Angles         | Display angles in decimal instead of hex
-| Custom Save Positions  | Turn on/off custom positions in saves that support them
-| Item Equip Priorities  | Adjust priorities on item equips in practice saves
-| Save Card              | Save settings to memory card
-| Load Card              | Load settings from memory card
-| Delete Card            | Delete settings on memory card
-| Menu Positions         | Change menu object pistions (A tot oggle selection, Dpad to move)
-| Fast Swim Speed        | Change max speed of fast movement cheat for swimming
-| Fast Land Speed        | Change max speed of fast movement cheat on land
-| Spawn ID               | Set spawn ID for disable save checks tool, invalid ID's will crash
+| Option                    | Description                   
+| :--                       | :--    
+| Cursor Color              | Change cursor color
+| Font                      | Change font
+| Drop Shadows              | Add shadows to all font characters
+| Decimal Angles            | Display angles in decimal instead of hex
+| Custom Save Positions     | Turn on/off custom positions in saves that support them
+| Item Equip Priorities     | Adjust priorities on item equips in practice saves
+| Save Card                 | Save settings to memory card
+| Load Card                 | Load settings from memory card
+| Delete Card               | Delete settings on memory card
+| Menu Positions            | Change menu object pistions (A tot oggle selection, Dpad to move)
+| Fast Swim Speed           | Change max speed of fast movement cheat for swimming
+| Fast Land Speed           | Change max speed of fast movement cheat on land
+| Spawn ID                  | Set spawn ID for disable save checks tool, invalid ID's will crash
+| Pause Buffer Input Button | Set the button to train buffering after a pause
 
 Moveable Lists: Main Menu, FIFO Queue, Link Debug Info, Time Display, Input Viewer, Frame Timer, Zombie Hover Info, Stage Info
 
@@ -499,21 +499,22 @@ Moveable Lists: Main Menu, FIFO Queue, Link Debug Info, Time Display, Input View
 
 ### Tools
 
-| Option                 | Description                   
-| :--                    | :--    
-| Link Debug Info        | Display position and angle data for Link
-| Display Time Info      | Display current day, time and moon phase
-| Stage Info             | Display Link's current stage info
-| Teleport               | R+D-pad up to save position. R+D-pad down to load
-| Area Reload            | Reload the current room by pressing L + R + A + Start
-| Map Aelect             | Load Map Select by holding D-pad down + Y + Z
-| Zombie Hover Info      | Display A and B button presses per second
-| Input Viewer           | Show current inputs
-| Timers                 | Toggle timers (frames and seconds) with L + R + D-pad Right, reset with L + R + D-pad Left
-| Frame Advance          | D-pad Down to pause/unpause, D-pad Up to advance frames
-| ESS Checker            | Change input viewer stick color based on distance from perfect ess
-| Deadzone Checker       | Change input viewer stick coor if stick is in deadzone
-| Disable Save Checks    | Disable save location safety checks, set used spawn ID in settings menu
-| Intro Skip             | Skip lore segment of intro on start of new file
-| Room Reload/Void Out   | Reload room by void out with L + R + B + Start
-| Roll Clip Trainer      | Train roll clip timing with an OSD
+| Option                     | Description                   
+| :--                        | :--    
+| Link Debug Info            | Display position and angle data for Link
+| Display Time Info          | Display current day, time and moon phase
+| Stage Info                 | Display Link's current stage info
+| Teleport                   | R+D-pad up to save position. R+D-pad down to load
+| Area Reload                | Reload the current room by pressing L + R + A + Start
+| Map Aelect                 | Load Map Select by holding D-pad down + Y + Z
+| Zombie Hover Info          | Display A and B button presses per second
+| Input Viewer               | Show current inputs
+| Timers                     | Toggle timers (frames and seconds) with L + R + D-pad Right, reset with L + R + D-pad Left
+| Frame Advance              | D-pad Down to pause/unpause, D-pad Up to advance frames
+| ESS Checker                | Change input viewer stick color based on distance from perfect ess
+| Deadzone Checker           | Change input viewer stick coor if stick is in deadzone
+| Disable Save Checks        | Disable save location safety checks, set used spawn ID in settings menu
+| Intro Skip                 | Skip lore segment of intro on start of new file
+| Room Reload/Void Out       | Reload room by void out with L + R + B + Start
+| Roll Clip Trainer          | Train roll clip timing with an OSD
+| Pause Buffer Input Trainer | Train pause buffered input timing with an OSD

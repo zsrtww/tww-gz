@@ -15,3 +15,4 @@ void GZ_handleModules();
 bool inputViewer_active();
 bool actorView_active();
 bool rollClipTool_active();
+bool pauseBufferInputTool_active();

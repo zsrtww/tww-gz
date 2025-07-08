@@ -31,6 +31,11 @@ void SaveMngSpecial_PGCutsceneSkip_Any();
 void SaveMngSpecial_PGSkip_AD();
 void SaveMngSpecial_PGSkip_Any();
 void SaveMngSpecial_BarrierSkip_Any();
+void SaveMngSpecial_Post_MSS();
+void SaveMngSpecial_FF1_Exterior();
+void SaveMngSpecial_Door_Cancel_Leaf();
+void SaveMngSpecial_FH_Swim();
+void SaveMngSpecial_FF2_Climb();
 
 void SaveMngSpecial_FF1CS_AD();
 void SaveMngSpecial_EarlyLeafHover_AD();

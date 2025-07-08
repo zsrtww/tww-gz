@@ -10,6 +10,7 @@ KEEP_VAR bool g_angleValuesInDecimal = false;
 KEEP_VAR bool g_customSaveSpawns = true;
 KEEP_VAR uint32_t g_fontType = 0;
 KEEP_VAR uint32_t g_cursorColorType;
+KEEP_VAR int g_buffer_input = 1;
 
 void GZ_initFont() {
     if (g_fontType >= 0 && g_fontType < FONT_OPTIONS_COUNT) {

@@ -13,6 +13,7 @@
 #include "boot/include/commands.h"
 #include "boot/include/equip_priority.h"
 #include "menus/menu_settings/include/settings_menu.h"
+#include "features/pause_buffer_input_tool/include/pause_buffer_input.h"
 
 /**
  * @brief Like CARDWrite, but allows for arbitrary sizes and offsets.
@@ -77,6 +78,7 @@ void GZ_storeSaveLayout(GZSaveLayout& save_layout) {
     save_layout.mLandSpeed = g_landSpeed;
     save_layout.mAngleValuesInDecimal = g_angleValuesInDecimal;
     save_layout.mCustomPositions = g_customSaveSpawns;
+    save_layout.mBufferInput = g_buffer_input;
 }
 
 void GZ_loadSaveLayout(GZSaveLayout& save_layout) {
@@ -95,6 +97,7 @@ void GZ_loadSaveLayout(GZSaveLayout& save_layout) {
     g_landSpeed = save_layout.mLandSpeed;
     g_angleValuesInDecimal = save_layout.mAngleValuesInDecimal;
     g_customSaveSpawns = save_layout.mCustomPositions;
+    g_buffer_input = save_layout.mBufferInput;
 }
 
 void GZ_setupSaveFile(GZSaveFile& save_file) {
@@ -120,6 +123,7 @@ void GZ_setupSaveFile(GZSaveFile& save_file) {
     set_entry(SV_LANDSPEED_INDEX, mLandSpeed);
     set_entry(SV_ANGLE_CONVERSION_INDEX, mAngleValuesInDecimal);
     set_entry(SV_CUSTOM_POSITIONS_INDEX, mCustomPositions);
+    set_entry(SV_BUFFER_INPUT_INDEX, mBufferInput);
 #undef set_entry
 }
 
@@ -164,6 +168,7 @@ int32_t GZ_readSaveFile(Storage* storage, GZSaveFile& save_file, int32_t sector_
                       sizeof(save_file.data.mAngleValuesInDecimal));
     assert_read_entry(SV_CUSTOM_POSITIONS_INDEX, &save_file.data.mCustomPositions,
                       sizeof(save_file.data.mCustomPositions));
+    assert_read_entry(SV_BUFFER_INPUT_INDEX, &save_file.data.mBufferInput, sizeof(save_file.data.mBufferInput));
 #undef assert_read_entry
 #undef assert_result
 

@@ -35,6 +35,10 @@ KEEP_FUNC void GZ_displayLinkInfo() {
 
         procBinData* proc = getPlayerProcName(daPy_getPlayerLinkActorClass()->mCurProcID);
 
+        int link_animation = ((daPy_lk_c*)player)->mCurProcID;
+        bool isOnShip =
+            link_animation == daPy_lk_c::PROC_SHIP_PADDLE_e || link_animation == daPy_lk_c::PROC_SHIP_STEER_e ||
+            link_animation == daPy_lk_c::PROC_SHIP_CRANE_e || link_animation == daPy_lk_c::PROC_SHIP_CANNON_e;
         char link_angle[22];
         char link_speed[22];
         char link_x[22];
@@ -50,7 +54,12 @@ KEEP_FUNC void GZ_displayLinkInfo() {
         } else {
             snprintf(link_angle, sizeof(link_angle), "rot y: 0x%04X", (u16)player->shape_angle.y);
         }
-        snprintf(link_speed, sizeof(link_speed), "speed: %.4f", player->speedF);
+        if (isOnShip) {
+            fopAc_ac_c* ship = (fopAc_ac_c*)dComIfGp_getShipActor();
+            snprintf(link_speed, sizeof(link_speed), "speed: %.4f", ship->speedF);
+        } else {
+            snprintf(link_speed, sizeof(link_speed), "speed: %.4f", player->speedF);
+        }
         snprintf(link_action, sizeof(link_action), "action: %s", proc->procName);
 
         f32 pos_x = g_spriteOffsets[SPR_DEBUG_INFO_INDEX].x;
