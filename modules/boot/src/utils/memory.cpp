@@ -11,7 +11,7 @@
 KEEP_FUNC void GZ_drawWatches() {
     for (int i = 0; i < MAX_WATCHES; i++) {
         if (g_watches[i].visible) {
-            char rendered_value[9];
+            char rendered_value[13];
             switch (g_watches[i].type) {
             case MEM_TYPE_U32:
                 if (g_watches[i].offset > 0x0000 && *(uint32_t*)g_watches[i].address != 0) {
@@ -75,10 +75,10 @@ KEEP_FUNC void GZ_drawWatches() {
                 break;
             case MEM_TYPE_F32:
                 if (g_watches[i].offset > 0x0000 && *(uint32_t*)g_watches[i].address != 0) {
-                    snprintf(rendered_value, sizeof(rendered_value), "%.2f",
+                    snprintf(rendered_value, sizeof(rendered_value), "%.4f",
                              *(float*)(*(uint32_t*)g_watches[i].address + g_watches[i].offset));
                 } else {
-                    snprintf(rendered_value, sizeof(rendered_value), "%.2f", *(float*)g_watches[i].address);
+                    snprintf(rendered_value, sizeof(rendered_value), "%.4f", *(float*)g_watches[i].address);
                 }
                 Font::GZ_drawStr(rendered_value, g_watches[i].x, g_watches[i].y, 0xFFFFFFFF, g_dropShadows);
                 break;
