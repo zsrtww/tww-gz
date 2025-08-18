@@ -8,6 +8,8 @@ void SaveMngSpecial_SetLayer4();
 void SaveMngSpecial_SetLayer5();
 void SaveMngSpecial_SetLayer8();
 
+void SaveMngSpecial_BombsSwim_FHSwim_NoMSS();
+void SaveMngSpecial_EarlyLeafHover();
 void SaveMngSpecial_DTCS();
 void SaveMngSpecial_LeafHover();
 void SaveMngSpecial_PostLeafHover();
@@ -21,7 +23,6 @@ void SaveMngSpecial_PuppetGanon();
 void SaveMngSpecial_MorthHover();
 void SaveMngSpecial_Ganondorf();
 
-void SaveMngSpecial_BombsSwim_NoMSS();
 void SaveMngSpecial_Outside_FH_DC();
 void SaveMngSpecial_GanonHover();
 
@@ -38,7 +39,6 @@ void SaveMngSpecial_FH_Swim();
 void SaveMngSpecial_FF2_Climb();
 
 void SaveMngSpecial_FF1CS_AD();
-void SaveMngSpecial_EarlyLeafHover_AD();
 void SaveMngSpecial_KalleDemos_AD();
 void SaveMngSpecial_DTCS_AD();
 void SaveMngSpecial_EnterDRC_AD();

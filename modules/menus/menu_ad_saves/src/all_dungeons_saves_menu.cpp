@@ -71,7 +71,7 @@ void AllDungeonsSavesMenu::draw() {
             special(FF1_CS_AD, SaveMngSpecial_FF1CS_AD),
             special(WINDFALL_AD, SaveMngSpecial_SetLayer0),
             special(ROPES_2_AD, SaveMngSpecial_SetLayer2),
-            special(EARLY_LEAF_HOVER_AD, SaveMngSpecial_EarlyLeafHover_AD),
+            special(EARLY_LEAF_HOVER_AD, SaveMngSpecial_EarlyLeafHover),
             special(DEKU_TREE_CS_AD, SaveMngSpecial_DTCS_AD),
             special(KALLE_DEMOS_AD, SaveMngSpecial_KalleDemos_AD),
             special(ENTER_DRC_AD, SaveMngSpecial_EnterDRC_AD),

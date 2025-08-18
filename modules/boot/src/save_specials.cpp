@@ -99,6 +99,20 @@ KEEP_FUNC void SaveMngSpecial_SetLayer8() {
 
 // =================== SHARED FUNCTIONS ===================
 
+KEEP_FUNC void SaveMngSpecial_BombsSwim_FHSwim_NoMSS() {
+    SaveMngSpecial_SetLayer0();
+
+    gSaveManager.modifyActor(PROC_SHIP, [](fopAc_ac_c* actor) {
+        SaveMngSpecial_SetActorPosAndYaw(actor, 196459.0f, 0.0f, -199693.0f, 0x623E);
+    });
+}
+
+KEEP_FUNC void SaveMngSpecial_EarlyLeafHover() {
+    g_dComIfG_gameInfo.play.mNextStage.setPoint(5);
+
+    gSaveManager.modifySave([]() { SaveMngSpecial_SetHealth(1); });
+}
+
 KEEP_FUNC void SaveMngSpecial_DTCS() {
     g_dComIfG_gameInfo.play.mNextStage.setPoint(5);
 }
@@ -154,7 +168,7 @@ KEEP_FUNC void SaveMngSpecial_PuppetGanon() {
     daArrow_c__m_keep_type = 3;
 
     gSaveManager.modifySave([]() {
-        SaveMngSpecial_SetHealth(10);
+        SaveMngSpecial_SetHealth(12);
         SaveMngSpecial_SetBombCount(17);
     });
 }
@@ -183,11 +197,9 @@ KEEP_FUNC void SaveMngSpecial_Ganondorf() {
 KEEP_FUNC void SaveMngSpecial_Helmaroc() {
     SaveMngSpecial_SetLayer3();
 
-    if (g_customSaveSpawns) {
-        gSaveManager.modifyActor(PROC_PLAYER, [](fopAc_ac_c* actor) {
-            SaveMngSpecial_SetActorPosAndYaw(actor, 4258.2119f, 9064.7334f, -4360.8140f, 0xA72A);
-        });
-    }
+    gSaveManager.modifyActor(PROC_PLAYER, [](fopAc_ac_c* actor) {
+        SaveMngSpecial_SetActorPosAndYaw(actor, 4258.2119f, 9064.7334f, -4360.8140f, 0xA72A);
+    });
 }
 
 KEEP_FUNC void SaveMngSpecial_Outside_FH_DC() {
@@ -251,22 +263,8 @@ KEEP_FUNC void SaveMngSpecial_FF2_Climb() {
 }
 // =================== ANY% NO MSS FUNCTIONS ===================
 
-KEEP_FUNC void SaveMngSpecial_BombsSwim_NoMSS() {
-    SaveMngSpecial_SetLayer0();
-
-    gSaveManager.modifyActor(PROC_SHIP, [](fopAc_ac_c* actor) {
-        SaveMngSpecial_SetActorPosAndYaw(actor, 196459.0f, 0.0f, -199693.0f, 0x623E);
-    });
-}
-
 KEEP_FUNC void SaveMngSpecial_GanonHover() {
-    if (g_customSaveSpawns) {
-        gSaveManager.modifyActor(PROC_PLAYER, [](fopAc_ac_c* actor) {
-            SaveMngSpecial_SetActorPosAndYaw(actor, 546.4542f, 4476.6108f, -1.1532f, 0x3FE1);
-        });
-    }
-
-    gSaveManager.modifySave([]() { SaveMngSpecial_SetHealth(1); });
+    gSaveManager.modifySave([]() { SaveMngSpecial_SetHealth(2); });
 }
 
 // =================== ALL DUNGEONS FUNCTIONS ===================
@@ -275,12 +273,6 @@ KEEP_FUNC void SaveMngSpecial_FF1CS_AD() {
     g_dComIfG_gameInfo.play.mNextStage.setName((char*)"majroom");
     g_dComIfG_gameInfo.play.mNextStage.setRoomNo(4);
     g_dComIfG_gameInfo.play.mNextStage.setPoint(5);
-}
-
-KEEP_FUNC void SaveMngSpecial_EarlyLeafHover_AD() {
-    g_dComIfG_gameInfo.play.mNextStage.setPoint(5);
-
-    gSaveManager.modifySave([]() { SaveMngSpecial_SetHealth(1); });
 }
 
 KEEP_FUNC void SaveMngSpecial_DTCS_AD() {
