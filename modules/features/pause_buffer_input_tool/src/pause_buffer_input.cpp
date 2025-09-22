@@ -23,6 +23,8 @@ cXyz previousPosition;
 u8 inputFrame;
 f32 previousFrame;
 u32 unpauseFrames;
+u32 pauseFrames = 0;
+u32 pauseFramesWhenUnpaused = 0;
 u8 timeOnScreen = 0;
 s32 color = 0x00000000;
 
@@ -49,8 +51,13 @@ KEEP_FUNC void GZ_PauseBufferInputTool() {
                 previousPosition.y == position.y && previousPosition.z && previousPosition.z) {
                 isPaused = true;
                 unpauseFrames = 0;
+                pauseFrames++;
             } else {
                 isPaused = false;
+                if (pauseFrames != 0) {
+                    pauseFramesWhenUnpaused = pauseFrames;
+                }
+                pauseFrames = 0;
                 unpauseFrames++;
             }
 
@@ -66,13 +73,13 @@ KEEP_FUNC void GZ_PauseBufferInputTool() {
             }
 
             // When the player did the input on the wanted frame
-            if (getButtonPress && unpauseFrames == 1) {
+            if (getButtonPress && unpauseFrames == 1 && pauseFramesWhenUnpaused > 24) {
                 setResultStr(SUCCESS);
                 earlyPress = false;
             }
 
             // When the player did the input late (less than 7 frames late)
-            if (getButtonPress && unpauseFrames > 1 && unpauseFrames < 7) {
+            if (getButtonPress && unpauseFrames > 1 && unpauseFrames < 7 && pauseFramesWhenUnpaused > 24) {
                 inputFrame = unpauseFrames - 1;
                 setResultStr(LATE, inputFrame);
                 earlyPress = false;
@@ -95,7 +102,7 @@ KEEP_FUNC void GZ_PauseBufferInputTool() {
             }
 
             // Put the amount of counted early frames in a string to be displayed
-            if (earlyPress && !isPaused) {
+            if (earlyPress && !isPaused && pauseFramesWhenUnpaused > 24) {
                 setResultStr(EARLY, inputFrame);
                 earlyPress = false;
             }
