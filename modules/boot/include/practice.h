@@ -6,6 +6,7 @@ enum {
     ANY_OPTIMAL,
     ANY_NO_MSS,
     ALL_DUNGEONS,
+    PST,
     ANY_PERCENT,
 
     PRACTICE_MENU_NUM,

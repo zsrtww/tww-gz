@@ -66,3 +66,12 @@ void SaveMngSpecial_WT_AD();
 void SaveMngSpecial_Wizzrobe_AD();
 void SaveMngSpecial_AfterHS_AD();
 void SaveMngSpecial_Swim2FCP_AD();
+
+void SaveMngSpecial_Greatfish_PST();
+void SaveMngSpecial_ForbiddenWoods_PST();
+void SaveMngSpecial_EnterDRC_PST();
+void SaveMngSpecial_DRC_PST();
+void SaveMngSpecial_Tingle_PST();
+void SaveMngSpecial_EnterHelmaroc_PST();
+void SaveMngSpecial_MirorShield_PST();
+void SaveMngSpecial_SongStoneSkip_PST();

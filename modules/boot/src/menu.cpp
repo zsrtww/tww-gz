@@ -17,9 +17,10 @@ const char* g_menuPaths[MN_COUNT] = {
     "triforce_chart", "watches",
     "memory_editor",  "any_optimal_saves",
     "nomss_saves",    "ad_saves",
-    "any_saves",      "collision_view",
-    "actor_list",     "actor_spawn",
-    "equip_priority", "pos_settings",
+    "pst_saves",      "any_saves",
+    "collision_view", "actor_list",
+    "actor_spawn",    "equip_priority",
+    "pos_settings",
 };
 
 KEEP_FUNC Menu::Menu(Cursor& cursor) : cursor(cursor) {}
