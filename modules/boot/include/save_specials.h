@@ -75,3 +75,10 @@ void SaveMngSpecial_Tingle_PST();
 void SaveMngSpecial_EnterHelmaroc_PST();
 void SaveMngSpecial_MirorShield_PST();
 void SaveMngSpecial_SongStoneSkip_PST();
+
+void SaveMngSpecial_BombIslandPlatform_B();
+void SaveMngSpecial_DeliveryBagSkip_B();
+void SaveMngSpecial_DRCChestStorage_B();
+void SaveMngSpecial_DRCClimb_B();
+void SaveMngSpecial_FWSmallKeySkip_B();
+void SaveMngSpecial_FF2SwimAdvanced();

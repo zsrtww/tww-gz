@@ -264,7 +264,7 @@ KEEP_FUNC void SaveMngSpecial_FF2_Climb() {
 // =================== ANY% NO MSS FUNCTIONS ===================
 
 KEEP_FUNC void SaveMngSpecial_GanonHover() {
-    gSaveManager.modifySave([]() { SaveMngSpecial_SetHealth(2); });
+    gSaveManager.modifySave([]() { SaveMngSpecial_SetHealth(1); });
 }
 
 // =================== ALL DUNGEONS FUNCTIONS ===================
@@ -504,4 +504,43 @@ KEEP_FUNC void SaveMngSpecial_SongStoneSkip_PST() {
     g_dComIfG_gameInfo.play.mNextStage.setName((char*)"M_Dai");
     g_dComIfG_gameInfo.play.mNextStage.setRoomNo(9);
     g_dComIfG_gameInfo.play.mNextStage.setPoint(11);
+}
+
+// =================== BEGINNER ANY% FUNCTIONS ===================
+
+KEEP_FUNC void SaveMngSpecial_BombIslandPlatform_B() {
+    if (g_customSaveSpawns) {
+        gSaveManager.modifyActor(PROC_PLAYER, [](fopAc_ac_c* actor) {
+            SaveMngSpecial_SetActorPosAndYaw(actor, 199523.6f, 1050.0f, 119500.0f, 8192);
+        });
+    }
+}
+
+KEEP_FUNC void SaveMngSpecial_DeliveryBagSkip_B() {
+    gSaveManager.modifyActor(PROC_PLAYER, [](fopAc_ac_c* actor) { SaveMngSpecial_ChestStorage(actor); });
+    if (g_customSaveSpawns) {
+        gSaveManager.modifyActor(PROC_PLAYER, [](fopAc_ac_c* actor) {
+            SaveMngSpecial_SetActorPosAndYaw(actor, 198400.0f, 635.0f, -202400.0f, 13767);
+        });
+    }
+}
+
+KEEP_FUNC void SaveMngSpecial_DRCChestStorage_B() {
+    if (g_customSaveSpawns) {
+        gSaveManager.modifyActor(PROC_PLAYER, [](fopAc_ac_c* actor) {
+            SaveMngSpecial_SetActorPosAndYaw(actor, 3372.0f, 460.0f, 2700.0f, -32524);
+        });
+    }
+}
+
+KEEP_FUNC void SaveMngSpecial_DRCClimb_B() {
+    gSaveManager.modifyActor(PROC_PLAYER, [](fopAc_ac_c* actor) { SaveMngSpecial_ChestStorage(actor); });
+}
+
+KEEP_FUNC void SaveMngSpecial_FWSmallKeySkip_B() {
+    gSaveManager.modifyActor(PROC_PLAYER, [](fopAc_ac_c* actor) { SaveMngSpecial_ChestStorage(actor); });
+}
+
+KEEP_FUNC void SaveMngSpecial_FF2SwimAdvanced() {
+    g_dComIfG_gameInfo.play.mNextStage.setPoint(2);
 }

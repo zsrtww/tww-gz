@@ -40,6 +40,10 @@ iso = "@TWWGZ_CFG_BLD_ISO@"
 "twwgz/save_files/pst.bin" = "../res/save_files/pst.bin"
 "twwgz/save_files/pst" = "../res/save_files/pst"
 
+# Beginner Any% saves
+"twwgz/save_files/beginner.bin" = "../res/save_files/beginner.bin"
+"twwgz/save_files/beginner" = "../res/save_files/beginner"
+
 # menu
 "twwgz/mn/Menu1.dat" = "../res/menu/EN_Menu1.dat"
 
