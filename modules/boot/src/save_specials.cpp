@@ -506,26 +506,26 @@ KEEP_FUNC void SaveMngSpecial_SongStoneSkip_PST() {
     g_dComIfG_gameInfo.play.mNextStage.setPoint(11);
 }
 
-// =================== BEGINNER ANY% FUNCTIONS ===================
+// =================== PMG FUNCTIONS ===================
 
-KEEP_FUNC void SaveMngSpecial_BombIslandPlatform_B() {
+KEEP_FUNC void SaveMngSpecial_SubmarineSwim_PMG() {
     if (g_customSaveSpawns) {
         gSaveManager.modifyActor(PROC_PLAYER, [](fopAc_ac_c* actor) {
-            SaveMngSpecial_SetActorPosAndYaw(actor, 199523.6f, 1050.0f, 119500.0f, 8192);
+            SaveMngSpecial_SetActorPosAndYaw(actor, 201500.0f, 120.0f, -197730.0f, 213);
         });
     }
 }
 
-KEEP_FUNC void SaveMngSpecial_DeliveryBagSkip_B() {
+KEEP_FUNC void SaveMngSpecial_DeliveryBagSkip_PMG() {
     gSaveManager.modifyActor(PROC_PLAYER, [](fopAc_ac_c* actor) { SaveMngSpecial_ChestStorage(actor); });
     if (g_customSaveSpawns) {
         gSaveManager.modifyActor(PROC_PLAYER, [](fopAc_ac_c* actor) {
-            SaveMngSpecial_SetActorPosAndYaw(actor, 198400.0f, 635.0f, -202400.0f, 13767);
+            SaveMngSpecial_SetActorPosAndYaw(actor, 197800.0f, 735.0f, -200371.0f, 19000);
         });
     }
 }
 
-KEEP_FUNC void SaveMngSpecial_DRCChestStorage_B() {
+KEEP_FUNC void SaveMngSpecial_DRCChestStorage_PMG() {
     if (g_customSaveSpawns) {
         gSaveManager.modifyActor(PROC_PLAYER, [](fopAc_ac_c* actor) {
             SaveMngSpecial_SetActorPosAndYaw(actor, 3372.0f, 460.0f, 2700.0f, -32524);
@@ -533,14 +533,11 @@ KEEP_FUNC void SaveMngSpecial_DRCChestStorage_B() {
     }
 }
 
-KEEP_FUNC void SaveMngSpecial_DRCClimb_B() {
+KEEP_FUNC void SaveMngSpecial_DRCClimb_PMG() {
     gSaveManager.modifyActor(PROC_PLAYER, [](fopAc_ac_c* actor) { SaveMngSpecial_ChestStorage(actor); });
 }
 
-KEEP_FUNC void SaveMngSpecial_FWSmallKeySkip_B() {
+KEEP_FUNC void SaveMngSpecial_FWSmallKeySkip_PMG() {
     gSaveManager.modifyActor(PROC_PLAYER, [](fopAc_ac_c* actor) { SaveMngSpecial_ChestStorage(actor); });
 }
 
-KEEP_FUNC void SaveMngSpecial_FF2SwimAdvanced() {
-    g_dComIfG_gameInfo.play.mNextStage.setPoint(2);
-}

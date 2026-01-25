@@ -76,9 +76,8 @@ void SaveMngSpecial_EnterHelmaroc_PST();
 void SaveMngSpecial_MirorShield_PST();
 void SaveMngSpecial_SongStoneSkip_PST();
 
-void SaveMngSpecial_BombIslandPlatform_B();
-void SaveMngSpecial_DeliveryBagSkip_B();
-void SaveMngSpecial_DRCChestStorage_B();
-void SaveMngSpecial_DRCClimb_B();
-void SaveMngSpecial_FWSmallKeySkip_B();
-void SaveMngSpecial_FF2SwimAdvanced();
+void SaveMngSpecial_SubmarineSwim_PMG();
+void SaveMngSpecial_DeliveryBagSkip_PMG();
+void SaveMngSpecial_DRCChestStorage_PMG();
+void SaveMngSpecial_DRCClimb_PMG();
+void SaveMngSpecial_FWSmallKeySkip_PMG();

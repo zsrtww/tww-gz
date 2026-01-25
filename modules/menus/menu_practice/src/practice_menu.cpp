@@ -9,7 +9,7 @@ KEEP_FUNC PracticeMenu::PracticeMenu(Cursor& cursor)
                           {"all dungeons", ALL_DUNGEONS, "Load an all dungeons save", false},
                           {"pst", PST, "Load a pst save", false},
                           {"any\% (bombs first, no pg skip)", ANY_PERCENT, "Load an any\% save", false},
-                          {"beginner any\%", BEGINNER_ANY, "Load a beginner any\% save", false}} {}
+                          {"pmg", PMG, "Load a pmg save", false}} {}
 
 PracticeMenu::~PracticeMenu() {}
 
@@ -36,8 +36,8 @@ void PracticeMenu::draw() {
         case ANY_PERCENT:
             g_menuMgr->push(MN_ANY_SAVES_INDEX);
             return;
-        case BEGINNER_ANY:
-            g_menuMgr->push(MN_BEGINNER_ANY_SAVED_INDEX);
+        case PMG:
+            g_menuMgr->push(MN_PMG_SAVED_INDEX);
             return;
         }
     }

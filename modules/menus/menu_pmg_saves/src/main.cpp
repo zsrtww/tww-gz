@@ -1,5 +1,5 @@
 #include <main.h>
-#include "menus/menu_beginner_saves/include/beginner_saves_menu.h"
+#include "menus/menu_pmg_saves/include/pmg_saves_menu.h"
 #include "events/draw_listener.h"
 #include "menus/utils/menu_mgr.h"
 #include "utils/draw.h"
@@ -10,7 +10,7 @@ void onDraw();
 void onUnload();
 void onDelete();
 
-BeginnerSavesMenu* l_menu;
+PMGSavesMenu* l_menu;
 
 namespace twwgz::modules {
 void main() {
@@ -34,7 +34,7 @@ void onCreate() {
 }
 
 void onLoad() {
-    l_menu = new BeginnerSavesMenu(*g_menuMgr->getPermanentData<Cursor>());
+    l_menu = new PMGSavesMenu(*g_menuMgr->getPermanentData<Cursor>());
     g_drawListener->addListener(onDraw);
 }
 

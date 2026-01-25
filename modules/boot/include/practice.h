@@ -8,7 +8,7 @@ enum {
     ALL_DUNGEONS,
     PST,
     ANY_PERCENT,
-    BEGINNER_ANY,
+    PMG,
 
     PRACTICE_MENU_NUM,
 };
