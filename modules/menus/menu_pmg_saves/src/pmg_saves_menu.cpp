@@ -82,8 +82,7 @@ void PMGSavesMenu::draw() {
             special(GANONDORF_PMG, SaveMngSpecial_Ganondorf),
         };
 
-        SaveManager::triggerLoad(cursor.y, "pmg", PMGSpecials,
-                                 sizeof(PMGSpecials) / sizeof(PMGSpecials[0]));
+        SaveManager::triggerLoad(cursor.y, "pmg", PMGSpecials, sizeof(PMGSpecials) / sizeof(PMGSpecials[0]));
         g_menuMgr->hide();
     }
 

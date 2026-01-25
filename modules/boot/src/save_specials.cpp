@@ -540,4 +540,3 @@ KEEP_FUNC void SaveMngSpecial_DRCClimb_PMG() {
 KEEP_FUNC void SaveMngSpecial_FWSmallKeySkip_PMG() {
     gSaveManager.modifyActor(PROC_PLAYER, [](fopAc_ac_c* actor) { SaveMngSpecial_ChestStorage(actor); });
 }
-
