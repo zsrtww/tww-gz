@@ -264,7 +264,7 @@ KEEP_FUNC void SaveMngSpecial_FF2_Climb() {
 // =================== ANY% NO MSS FUNCTIONS ===================
 
 KEEP_FUNC void SaveMngSpecial_GanonHover() {
-    gSaveManager.modifySave([]() { SaveMngSpecial_SetHealth(2); });
+    gSaveManager.modifySave([]() { SaveMngSpecial_SetHealth(1); });
 }
 
 // =================== ALL DUNGEONS FUNCTIONS ===================
@@ -450,4 +450,93 @@ KEEP_FUNC void SaveMngSpecial_TrialsSkip_AD() {
 
 KEEP_FUNC void SaveMngSpecial_PGSkip_AD() {
     g_dComIfG_gameInfo.play.mNextStage.setLayer(8);
+}
+
+// =================== PST FUNCTIONS ===================
+
+KEEP_FUNC void SaveMngSpecial_Greatfish_PST() {
+    if (g_customSaveSpawns) {
+        gSaveManager.modifyActor(PROC_PLAYER, [](fopAc_ac_c* actor) {
+            SaveMngSpecial_SetActorPosAndYaw(actor, -1031.3890f, 72.2239f, -203357.6406f, 0x17B8);
+        });
+    }
+}
+
+KEEP_FUNC void SaveMngSpecial_ForbiddenWoods_PST() {
+    gSaveManager.modifySave([]() { SaveMngSpecial_SetHealth(10); });
+}
+
+KEEP_FUNC void SaveMngSpecial_EnterDRC_PST() {
+    gSaveManager.modifySave([]() { SaveMngSpecial_SetHealth(4); });
+}
+
+KEEP_FUNC void SaveMngSpecial_DRC_PST() {
+    gSaveManager.modifySave([]() { SaveMngSpecial_SetHealth(6); });
+}
+
+KEEP_FUNC void SaveMngSpecial_Tingle_PST() {
+    if (g_customSaveSpawns) {
+        gSaveManager.modifyActor(PROC_PLAYER, [](fopAc_ac_c* actor) {
+            SaveMngSpecial_SetActorPosAndYaw(actor, -100131.6172f, 1707.4982f, -79776.7734f, 0x0000);
+        });
+    }
+}
+
+KEEP_FUNC void SaveMngSpecial_EnterHelmaroc_PST() {
+    gSaveManager.modifySave([]() { SaveMngSpecial_SetHealth(6); });
+}
+
+KEEP_FUNC void SaveMngSpecial_MirorShield_PST() {
+    gSaveManager.modifyActor(PROC_PLAYER, [](fopAc_ac_c* actor) { SaveMngSpecial_ChestStorage(actor); });
+    g_dComIfG_gameInfo.play.mNextStage.setName((char*)"M_Dai");
+    g_dComIfG_gameInfo.play.mNextStage.setRoomNo(7);
+    g_dComIfG_gameInfo.play.mNextStage.setPoint(8);
+    gSaveManager.modifySave([]() { SaveMngSpecial_SetHealth(1); });
+    if (g_customSaveSpawns) {
+        gSaveManager.modifyActor(PROC_PLAYER, [](fopAc_ac_c* actor) {
+            SaveMngSpecial_SetActorPosAndYaw(actor, 3402.3323f, 1000.0f, 800.6642f, 0x4000);
+        });
+    }
+}
+
+KEEP_FUNC void SaveMngSpecial_SongStoneSkip_PST() {
+    gSaveManager.modifyActor(PROC_PLAYER, [](fopAc_ac_c* actor) { SaveMngSpecial_ChestStorage(actor); });
+    g_dComIfG_gameInfo.play.mNextStage.setName((char*)"M_Dai");
+    g_dComIfG_gameInfo.play.mNextStage.setRoomNo(9);
+    g_dComIfG_gameInfo.play.mNextStage.setPoint(11);
+}
+
+// =================== PMG FUNCTIONS ===================
+
+KEEP_FUNC void SaveMngSpecial_SubmarineSwim_PMG() {
+    if (g_customSaveSpawns) {
+        gSaveManager.modifyActor(PROC_PLAYER, [](fopAc_ac_c* actor) {
+            SaveMngSpecial_SetActorPosAndYaw(actor, 201500.0f, 120.0f, -197730.0f, 213);
+        });
+    }
+}
+
+KEEP_FUNC void SaveMngSpecial_DeliveryBagSkip_PMG() {
+    gSaveManager.modifyActor(PROC_PLAYER, [](fopAc_ac_c* actor) { SaveMngSpecial_ChestStorage(actor); });
+    if (g_customSaveSpawns) {
+        gSaveManager.modifyActor(PROC_PLAYER, [](fopAc_ac_c* actor) {
+            SaveMngSpecial_SetActorPosAndYaw(actor, 197800.0f, 735.0f, -200371.0f, 19000);
+        });
+    }
+}
+
+KEEP_FUNC void SaveMngSpecial_DRCChestStorage_PMG() {
+    if (g_customSaveSpawns) {
+        gSaveManager.modifyActor(PROC_PLAYER, [](fopAc_ac_c* actor) {
+            SaveMngSpecial_SetActorPosAndYaw(actor, 3372.0f, 460.0f, 2700.0f, -32524);
+        });
+    }
+}
+
+KEEP_FUNC void SaveMngSpecial_DRCClimb_PMG() {
+    gSaveManager.modifyActor(PROC_PLAYER, [](fopAc_ac_c* actor) { SaveMngSpecial_ChestStorage(actor); });
+}
+
+KEEP_FUNC void SaveMngSpecial_FWSmallKeySkip_PMG() {
+    gSaveManager.modifyActor(PROC_PLAYER, [](fopAc_ac_c* actor) { SaveMngSpecial_ChestStorage(actor); });
 }

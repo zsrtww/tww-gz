@@ -4,12 +4,12 @@
 #include "menus/utils/menu_mgr.h"
 
 KEEP_FUNC PracticeMenu::PracticeMenu(Cursor& cursor)
-    : Menu(cursor), lines{
-                        {"any\%", ANY_OPTIMAL, "Load an any\% save", false},
-                        {"any\% no mss", ANY_NO_MSS, "Load an any\% no mss save", false},
-                        {"all dungeons", ALL_DUNGEONS, "Load an all dungeons save", false},
-                        {"any\% (bombs first, no pg skip)", ANY_PERCENT, "Load an any\% save", false},
-                    } {}
+    : Menu(cursor), lines{{"any\%", ANY_OPTIMAL, "Load an any\% save", false},
+                          {"any\% no mss", ANY_NO_MSS, "Load an any\% no mss save", false},
+                          {"all dungeons", ALL_DUNGEONS, "Load an all dungeons save", false},
+                          {"pst", PST, "Load a pst save", false},
+                          {"any\% (bombs first, no pg skip)", ANY_PERCENT, "Load an any\% save", false},
+                          {"pmg", PMG, "Load a pmg save", false}} {}
 
 PracticeMenu::~PracticeMenu() {}
 
@@ -30,8 +30,14 @@ void PracticeMenu::draw() {
         case ALL_DUNGEONS:
             g_menuMgr->push(MN_AD_SAVES_INDEX);
             return;
+        case PST:
+            g_menuMgr->push(MN_PST_SAVES_INDEX);
+            return;
         case ANY_PERCENT:
             g_menuMgr->push(MN_ANY_SAVES_INDEX);
+            return;
+        case PMG:
+            g_menuMgr->push(MN_PMG_SAVED_INDEX);
             return;
         }
     }

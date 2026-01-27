@@ -1,0 +1,63 @@
+#include "menu.h"
+
+enum PMGSaves {
+    AFTER_INTRO_PMG,
+    ORCA_PMG,
+    FOREST_OF_FAIRIES_PMG,
+    ROPES_1_PMG,
+    EARLY_LIGHTS_PMG,
+    FF1_PMG,
+    FF1_INTERIOR_PMG,
+    WINDFALL_PMG,
+    ZEPHOS_SKIP_PMG,
+    BOTTLE_SWIM_PMG,
+    DB_SKIP_PMG,
+    DRC_PMG,
+    DRC_CHEST_PMG,
+    DRC_CLIMB_PMG,
+    DRC_MINI_PMG,
+    DRC_BK_SKIP_PMG,
+    GOHMA_PMG,
+    FH_SWIM_PMG,
+    DTCS_PMG,
+    ENTER_FW_PMG,
+    FW_PMG,
+    FW_KEY_SKIP_PMG,
+    FW_MINI_PMG,
+    FW_BK_SKIP_PMG,
+    KALLE_DEMOS_PMG,
+    PEARLS_PMG,
+    IOS_SWIM_PMG,
+    WINDFALL_SWIM_PMG,
+    ROPES_2_PMG,
+    NAYRUS_PEARL_PMG,
+    ENTER_TOTG_PMG,
+    TOTG_PMG,
+    TOTG_STATUE_2_PMG,
+    TOTG_MINI_PMG,
+    TOTG_STATUE_3_PMG,
+    GOHDAN_PMG,
+    PUZZLE_SKIP_PMG,
+    HYRULE_ESCAPE_PMG,
+    FF2_SWIM_PMG,
+    PHANTOM_GANON_PMG,
+    ENTER_HELM_PMG,
+    HELM_PMG,
+    BARRIER_SKIP_PMG,
+    TRIALS_SKIP_PMG,
+    PG_FIGHT_PMG,
+    MORTH_HOVER_PMG,
+    GANONDORF_PMG,
+
+    PMG_SAVES_COUNT,
+};
+
+class PMGSavesMenu : public Menu {
+public:
+    PMGSavesMenu(Cursor& cursor);
+    virtual ~PMGSavesMenu();
+    virtual void draw();
+
+private:
+    Line lines[PMG_SAVES_COUNT];
+};
