@@ -3,6 +3,7 @@
 #include "fifo_queue.h"
 #include "font.h"
 #include "gz_flags.h"
+#include "global_data.h"
 #include "libtww/include/m_Do/m_Do_printf.h"
 #include "menu.h"
 #include "settings.h"
@@ -111,6 +112,7 @@ KEEP_FUNC void GZ_handleMenu() {
 
     if (l_fopScnRq_IsUsingOfOverlap) {
         g_menuMgr->hide();
+        g_moveLinkEnabled = false;
         last_frame_was_loading = true;
     }
 

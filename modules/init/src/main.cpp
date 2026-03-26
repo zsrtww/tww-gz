@@ -66,6 +66,7 @@ void main() {
     // Init the module list
     g_modules.push_back(new Module{inputViewer_active, "/twwgz/rels/features/input_viewer.rel"});
     g_modules.push_back(new Module{actorView_active, "/twwgz/rels/features/actor_view.rel"});
+    g_modules.push_back(new Module{moveLink_active, "/twwgz/rels/features/moveactor.rel"});
     g_modules.push_back(new Module{rollClipTool_active, "/twwgz/rels/features/rollclip_tool.rel"});
     g_modules.push_back(new Module{pauseBufferInputTool_active, "/twwgz/rels/features/pause_buffer_input_tool.rel"});
 

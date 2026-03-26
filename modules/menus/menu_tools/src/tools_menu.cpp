@@ -62,7 +62,9 @@ KEEP_FUNC ToolsMenu::ToolsMenu(Cursor& cursor)
           {"roll clip trainer", ROLL_CLIP_INDEX, "Train roll clip timing with an OSD", true,
            &g_tools[ROLL_CLIP_INDEX].active},
           {"pause buffer input trainer", PAUSE_BUFFER_INPUT_INDEX, "Train pause buffered input timing with an OSD",
-           true, &g_tools[PAUSE_BUFFER_INPUT_INDEX].active}} {}
+           true, &g_tools[PAUSE_BUFFER_INPUT_INDEX].active},
+          {"move link", MOVE_LINK_INDEX, "Move Link around freely by pressing L + R + Y", true,
+           &g_tools[MOVE_LINK_INDEX].active}} {}
 
 ToolsMenu::~ToolsMenu() {}
 
@@ -102,6 +104,9 @@ void ToolsMenu::draw() {
                 DCFlushRange(reinterpret_cast<u32*>(INTRO_SKIP_INST1_ADDR), sizeof(u32));
                 ICInvalidateRange(reinterpret_cast<u32*>(INTRO_SKIP_INST1_ADDR), sizeof(u32));
                 break;
+            case MOVE_LINK_INDEX:
+                GZCmd_enable(Commands::CMD_MOVE_LINK);
+                break;
             }
         } else {
             switch (cursor.y) {
@@ -128,6 +133,10 @@ void ToolsMenu::draw() {
                 *reinterpret_cast<u32*>(INTRO_SKIP_INST1_ADDR) = INTRO_SKIP_ORIG_INST1;  // bne ret
                 DCFlushRange(reinterpret_cast<u32*>(INTRO_SKIP_INST1_ADDR), sizeof(u32));
                 ICInvalidateRange(reinterpret_cast<u32*>(INTRO_SKIP_INST1_ADDR), sizeof(u32));
+                break;
+            case MOVE_LINK_INDEX:
+                GZCmd_disable(Commands::CMD_MOVE_LINK);
+                g_moveLinkEnabled = false;
                 break;
             }
         }

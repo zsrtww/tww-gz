@@ -31,6 +31,10 @@ KEEP_FUNC bool actorView_active() {
     return g_actorViewEnabled;
 }
 
+KEEP_FUNC bool moveLink_active() {
+    return g_tools[MOVE_LINK_INDEX].active;
+}
+
 KEEP_FUNC bool rollClipTool_active() {
     return g_tools[ROLL_CLIP_INDEX].active;
 }
