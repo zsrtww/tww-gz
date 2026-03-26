@@ -130,7 +130,11 @@ KEEP_FUNC void execute() {
         dComIfGp_getPEvtManager()->mCameraPlay = 1;
 
         // Disable all of Link's collisions
-        player_p->mAcch.SetGrndNone();
+        if ((mPadButton.mButton & CButton::A)) {
+            player_p->mAcch.ClrGrndNone();
+        } else {
+            player_p->mAcch.SetGrndNone();
+        }
         player_p->mAcch.SetWallNone();
         player_p->mAcch.SetRoofNone();
         player_p->mAcch.OnLineCheckNone();
