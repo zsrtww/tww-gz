@@ -1,23 +1,17 @@
 #include "features/moveactor/include/moveactor.h"
-#include <cstdio>
-#include "font.h"
 #include "global_data.h"
 #include "libtww/include/MSL_C/math.h"
-#include "settings.h"
 #include "libtww/include/JSystem/JUtility/JUTGamePad.h"
-// #include "libtp_c/include/f_op/f_op_draw_tag.h"
-// #include "libtww/include/m_Do/m_Re_controller_pad.h"
 #include "rels/include/defines.h"
-#include "libtww/include/d/d_meter.h"
-#include "libtww/include/d/d_procname.h"
 #include "libtww/include/d/a/d_a_player_main.h"
+#include "menus/menu_tools/include/tools_menu.h"
 
-#define ROTATION_SPEED (30)
-#define ROTATION_FAST_SPEED (80)
-#define ROTATION_VERY_FAST_SPEED (800)
+#define ROTATION_SPEED (15)
+#define ROTATION_FAST_SPEED (25)
+#define ROTATION_VERY_FAST_SPEED (25)
 #define CAM_SPEED (1.0)
-#define CAM_FAST_SPEED (2.5)
-#define CAM_VERY_FAST_SPEED (10.0)
+#define CAM_FAST_SPEED (4)
+#define CAM_VERY_FAST_SPEED (60.0)
 #define DIST_FROM_ACTOR (600)
 
 #define CONTROL_Y (mPadStatus.stick_y)
@@ -31,17 +25,41 @@
 #define WHITE_RGBA 0xFFFFFFFF
 #define LINE_X_OFFSET 20.0f
 
+// Get 2 vectors at a specific memory address.
+// These CAM_TARGET and CAM_POS vectors are special
+// because changing their values actually affect the camera in the game.
+// There sould be a cleaner way to get these vectors
+// but it is not in the decomp files available in gz
+#ifdef NTSCJ
+#define UNK_POINTER1 *(uintptr_t*)0x803AD380
+#endif
+#ifdef NTSCU
+#define UNK_POINTER1 *(uintptr_t*)0x803B9E80
+#endif
+#ifdef PAL
+#define UNK_POINTER1 *(uintptr_t*)0x803C0B80
+#endif
+
+#define UNK_POINTER2 (uintptr_t*)(UNK_POINTER1 + 0x34)
+#define CAM_TARGET (Vec*)(*UNK_POINTER2 + 0x288);
+#define CAM_POS (Vec*)(*UNK_POINTER2 + 0x294);
+
 namespace MoveActor {
 
 double pitch = 0.0;
 double yaw = 0.0;
 float angle = 0.0f;
-bool event_halt = false;
+bool enabled = false;
 
-void move(fopAc_ac_c* actor) {
+void move(daPy_lk_c* actor) {
+    // Avoid crashing by testing this pointer
+    if ((uintptr_t*)(UNK_POINTER1) == NULL) {
+        return;
+    }
+
     // Fetch the camera position and target
-    Vec& cam_target = g_dComIfG_gameInfo.play.mCameraInfo->mCameraTarget;
-    Vec& cam_pos = g_dComIfG_gameInfo.play.mCameraInfo->mCameraPos;
+    Vec* cam_target = CAM_TARGET;
+    Vec* cam_pos = CAM_POS;
 
     // Fetch the actor position and angles
     cXyz& actor_pos = actor->current.pos;
@@ -50,25 +68,26 @@ void move(fopAc_ac_c* actor) {
 
     // Set Link momentum to 0
     cXyz tmp(0.0f, 0.0f, 0.0f);
-    dComIfGp_getPlayer(0)->speed = tmp;
+    actor->speed = tmp;
+    actor->gravity = 0;
 
     if (!LOCK_CAMERA) {
         angle = (float)actor_horizontal_angle / 65536.f * (2 * M_PI);
     }
 
     // Fix Camera behind link
-    cam_target.x = actor_pos.x;
-    cam_target.y = actor_pos.y + 200.f;
-    cam_target.z = actor_pos.z;
-    cam_pos.z = actor_pos.z - DIST_FROM_ACTOR * cos(angle);
-    cam_pos.x = actor_pos.x - DIST_FROM_ACTOR * sin(angle);
-    cam_pos.y = actor_pos.y + 200.f;
+    cam_target->x = actor_pos.x;
+    cam_target->y = actor_pos.y + 200.f;
+    cam_target->z = actor_pos.z;
+    cam_pos->z = actor_pos.z - DIST_FROM_ACTOR * cos(angle);
+    cam_pos->x = actor_pos.x - DIST_FROM_ACTOR * sin(angle);
+    cam_pos->y = actor_pos.y + 200.f;
 
     // Calculate the pitch and yaw
-    yaw = atan2(cam_target.z - cam_pos.z, cam_target.x - cam_pos.x);
-    double horizontal = sqrtf((cam_target.x - cam_pos.x) * (cam_target.x - cam_pos.x) +
-                              (cam_target.z - cam_pos.z) * (cam_target.z - cam_pos.z));
-    pitch = atan2(cam_target.y - cam_pos.y, horizontal);
+    yaw = atan2(cam_target->z - cam_pos->z, cam_target->x - cam_pos->x);
+    double horizontal = sqrtf((cam_target->x - cam_pos->x) * (cam_target->x - cam_pos->x) +
+                              (cam_target->z - cam_pos->z) * (cam_target->z - cam_pos->z));
+    pitch = atan2(cam_target->y - cam_pos->y, horizontal);
 
     // Calculate the translation
     double dy = LOCK_CAMERA ? 0.0f : VERTICAL_DISPLACEMENT;
@@ -92,48 +111,69 @@ void move(fopAc_ac_c* actor) {
     } else {
         actor_horizontal_angle -= HORIZONTAL_DISPLACEMENT * cam_speed;
     }
+
+    // Apply in game all the changes made
+    l_debug_keep_pos = actor_pos;
+    l_debug_current_angle.x = actor_verticle_angle;
+    l_debug_current_angle.y = actor_horizontal_angle;
+    l_debug_shape_angle.x = actor_verticle_angle;
+    l_debug_shape_angle.y = actor_horizontal_angle;
 }
 
 KEEP_FUNC void execute() {
     daPy_lk_c* player_p = (daPy_lk_c*)dComIfGp_getPlayer(0);
-
-    if (g_actorViewEnabled || g_moveLinkEnabled) {
-        // Hide HUD
-        g_meterHIO.field_0x18 = 0.0f;
-
+    if (!player_p) {
+        return;
+    }
+    if (g_moveLinkEnabled) {
         // Lock the camera to allow for its movement
         dComIfGp_getPEvtManager()->mCameraPlay = 1;
 
-        // Special case for Link (this needs to be refactored to be more generic)
-        if (player_p && (g_moveLinkEnabled || g_currentActor->mBase.mProcName == PROC_PLAYER)) {
-            player_p->mAcch.SetGrndNone();
-            player_p->mAcch.SetRoofNone();
-            player_p->mAcch.OnLineCheckNone();
-
-            g_dComIfG_gameInfo.play.mEvtCtrl.mbEndProc = true;
-            event_halt = true;
-
-            move(dComIfGp_getPlayer(0));
+        // Disable all of Link's collisions
+        if ((mPadButton.mButton & CButton::A)) {
+            player_p->mAcch.ClrGrndNone();
         } else {
-            g_dComIfG_gameInfo.play.mEvtCtrl.mbEndProc = false;
-            event_halt = false;
-
-            move(g_currentActor);
+            player_p->mAcch.SetGrndNone();
         }
+        player_p->mAcch.SetWallNone();
+        player_p->mAcch.SetRoofNone();
+        player_p->mAcch.OnLineCheckNone();
+
+        // Disable voiding by setting the ground height to not -inf and telling the game Link is not midair
+        player_p->mAcch.m_ground_h = -9999999999.0f;
+        player_p->offModeFlg(0x00000002);
+
+        // Disable automatic voiding/crashing in water by setting the wave level to exactly the ground height and
+        // telling the game Link is not swimming
+        player_p->m35D0 = -9999999999.0f;
+        player_p->offModeFlg(0x00040000);
+
+        // Disable drowning
+        g_dComIfG_gameInfo.play.field_0x4928 = false;
+
+        enabled = true;
+
+        move(player_p);
+
+        // Disable the X, Y and Z buttons to avoid using items
+        mPadButton.mButton = mPadButton.mButton | CButton::Z | CButton::X | CButton::Y;
+
     } else {
-        if (event_halt) {
-            if (player_p) {
-                player_p->mAcch.ClrGrndNone();
-                player_p->mAcch.ClrWallNone();
-                player_p->mAcch.ClrRoofNone();
-                player_p->mAcch.OffLineCheckNone();
-            }
+        if (enabled) {
+            // Enable all of Link's collisions back
+            player_p->mAcch.ClrGrndNone();
+            player_p->mAcch.ClrWallNone();
+            player_p->mAcch.ClrRoofNone();
+            player_p->mAcch.OffLineCheckNone();
 
-            g_dComIfG_gameInfo.play.mEvtCtrl.mbEndProc = false;
-            event_halt = false;
+            // Enable voiding by telling the game Link is midair
+            player_p->onModeFlg(0x00000002);
 
+            // Disable fixed camera and bring back gravity
             dComIfGp_getPEvtManager()->mCameraPlay = 0;
-            g_meterHIO.field_0x18 = 0.0f;
+            player_p->gravity = -2.5;
+
+            enabled = false;
         }
     }
 }

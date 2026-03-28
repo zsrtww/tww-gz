@@ -171,6 +171,12 @@ void GZCmd_void() {
     }
 }
 
+void GZCmd_moveLink() {
+    if (GZCmd_checkTrig(CButton::L | CButton::R | CButton::Y)) {
+        g_moveLinkEnabled = !g_moveLinkEnabled;
+    }
+}
+
 static Command sCommands[COMMANDS_AMNT] = {
     {g_commandStates[CMD_STORE_POSITION], (CButton::DPAD_UP | CButton::R), GZCmd_storePosition},
     {g_commandStates[CMD_LOAD_POSITION], (CButton::DPAD_DOWN | CButton::R), GZCmd_loadPosition},
@@ -189,8 +195,7 @@ static Command sCommands[COMMANDS_AMNT] = {
     {g_commandStates[CMD_RESET_TIMER], (CButton::DPAD_LEFT | CButton::R | CButton::L), GZCmd_resetTimer},
     {g_commandStates[CMD_VOID], (CButton::L | CButton::R | CButton::B | CButton::START), GZCmd_void},
     {g_commandStates[CMD_HOVER_BOOTS], (CButton::L | CButton::R | CButton::DPAD_UP), GZCmd_hoverBoots},
-
-};
+    {g_commandStates[CMD_MOVE_LINK], (CButton::L | CButton::R | CButton::Y), GZCmd_moveLink}};
 
 void GZCmd_processInputs() {
     sCurInputs = GZ_getButtonStatus();
